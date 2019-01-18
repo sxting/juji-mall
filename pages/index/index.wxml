@@ -16,7 +16,11 @@
     <image style="width:16rpx;height:10rpx;margin-left:10rpx;" src="../../images/sort-down.png"></image></view>
   </view>
   <view class="toper">
-    <image class="homeBanner" src="../../images/homeBanner.png" mode="widthFix"></image>
+        <swiper autoplay="{{autoplay}}" current="{{current}}" previous-margin="35rpx" next-margin="35rpx" interval="3000" duration="1000" indicator-color="#fff" indicator-active-color="#b55fff" bindchange="swiperChange" circular>
+            <swiper-item wx:for="{{banners}}" wx:key="unique">
+                <image src="{{item}}" class="slide-image  {{nowIdx==index?'img-scale':''}}"  bindload="getHeight"></image>
+            </swiper-item>
+        </swiper>
   </view>
 
   <view class="middleWrap">

@@ -9,7 +9,28 @@ Page({
     curTabIndex: 0,
     businessList: [],
     page:1,
-    leavePage: false
+    leavePage: false,
+    autoplay: false,
+    current: 1,
+    swiperH: '',//swiper高度
+    nowIdx: 1,//当前swiper索引
+    banners: ['../../images/homeBanner.png','../../images/banner1.png', '../../images/freeGet.png'],
+  },
+  //swiper滑动事件
+  swiperChange: function (e) {
+    this.setData({
+      nowIdx: e.detail.current
+    })
+  },
+  //获取swiper高度
+  getHeight: function (e) {
+    var winWid = wx.getSystemInfoSync().windowWidth - 2 * 30;//获取当前屏幕的宽度
+    var imgh = e.detail.height;//图片高度
+    var imgw = e.detail.width;
+    var sH = winWid * imgh / imgw + "px"
+    this.setData({
+      swiperH: sH//设置高度
+    })
   },
   toFujinyh: function() {
     wx.navigateTo({

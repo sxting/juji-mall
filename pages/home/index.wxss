@@ -1,0 +1,22 @@
+page{height: 100%}
+.toper{height: 200rpx;background-color: #9548FA;padding:24rpx 30rpx;margin-bottom: 100rpx;}
+.tablist{height: 60rpx;}
+.addr{width: 90rpx;color: #fff;font-size: 26rpx;height: 40rpx;margin-right: 15rpx;}
+.icon_addr{width: 24rpx;height: 28rpx;margin-right: 8rpx;}
+.verline{height: 24rpx;width: 3rpx;background-color: #ffffff;margin-top: 10rpx;}
+.tablist .tabItem{position: relative;font-size: 26rpx;color: #fff;padding: 0 20rpx;height: 40rpx;line-height: 40rpx;}
+.tablist .tabItem .line{width:28rpx;height:4rpx;background-color: #fff;border-radius: 2rpx;position:absolute;bottom: -5rpx;left: 50%;margin-left: -14rpx;display: none;}
+.tablist .tabItem.on .line{display: block;}
+swiper{display: block;width: 100%;height: 264rpx;border-radius: 10rpx;overflow: hidden;}
+.slide-image{width: 100%;display: block;height: 264rpx;}
+
+.item { box-shadow: 0 0 10rpx #dedede; border-radius: 10rpx; margin-top: 20rpx; position: relative;background-color: #fff}
+.cardImg { width: 170rpx; height: 170rpx;border-radius: 8rpx; }
+.cardTit { font-size: 28rpx; color: #333; }
+.cardDesc { font-size: 24rpx; color: #666; margin-top: 25rpx; }
+.cardRemark { font-size: 28rpx; color: #FF5A1D; margin-top: 28rpx; }
+.cardRemark1{ font-size: 20rpx; color: #999; margin-top: 28rpx; }
+.cardRemark2{font-size: 28rpx; color: #FF5A1D;margin-right: 10rpx;}
+.juli{font-size: 24rpx;color: #999;top: 30rpx;right: 20rpx;position: absolute;}
+
+.conDiv{height: 100%;box-sizing:border-box;}

@@ -1,0 +1,35 @@
+.tablist{height: 100rpx;background-color: #fff}
+.tablist .tabItem{position: relative;font-size: 28rpx;color: #666;padding:0 40rpx;height: 100rpx;line-height: 100rpx;text-align: center;}
+.tablist .tabItem .line{width:30rpx;height: 4rpx;background-color: #9548FA;border-radius: 2rpx;position:absolute;bottom: 20rpx;left: 50%;margin-left: -15rpx;display: none;}
+.tablist .tabItem.on{color:#333;}
+.tablist .tabItem.on .line{display: block;}
+
+.main{padding: 40rpx 50rpx 0;}
+.cardDiv{border-radius: 20rpx;height: 400rpx;background-color: #fff;overflow: hidden;position: relative;margin-bottom: 30rpx;}
+.cardDiv image{width:100%;}
+.cardDiv .name1{font-size: 32rpx;color: #fff;height: 60rpx;position: absolute;top: 16rpx;left: 30rpx;}
+.cardDiv .san{height: 36rpx;width: 36rpx;margin-right:10rpx;display: block;}
+.cardDiv .name2{font-size: 28rpx;color: #fff;line-height: 40rpx;position: absolute;bottom: 24rpx;left: 0;text-align: center;width: 100%;}
+.cardDiv button{font-size: 24rpx;color: #FFFFFF;padding: 0;border:1rpx #fff solid;width: 130rpx;height: 44rpx;border-radius: 22rpx;position: absolute;top: 30rpx;right: 30rpx;background-color: transparent;}
+
+button.readMy{font-size: 28rpx;color: #B55FFF;padding: 0;border:1rpx #fff solid;width: 200rpx;height: 72rpx;border-radius: 44rpx;position: fixed;bottom: 50rpx;right: 30rpx;background-color: #fff;z-index: 9;box-shadow: 0 0 10rpx #dedede;}
+button.readMy:after{border: none}
+
+.cardItem{background-color: #fff;border-radius: 10rpx;padding:20rpx 30rpx;margin-bottom: 30rpx;}
+.iconRight{display: block;width: 12rpx;height: 24rpx; margin-left: 10rpx;}
+.tit{font-size: 28rpx;height: 48rpx;color: #333;}
+.cardImg{width: 32rpx; height: 22rpx;display: block;}
+.cardName{font-size: 24rpx;color: #333;margin-left: 20rpx;}
+.balanceItem{height: 60rpx;}
+.headImg{width: 40rpx;height: 40rpx;border-radius: 50%;display: block;}
+.headName{font-size: 24rpx;color: #333;margin-left: 10rpx;}
+.desc{font-size: 22rpx;color: #FF5A1D;}
+.mb20{margin-bottom: 20rpx}
+
+.cardSlide{transition: all .3s ease;}
+.cardDiv + .cardSlide{overflow: hidden;height: 0}
+.cardDiv.on + .cardSlide{overflow: auto;height: auto;}
+
+.cardDesc{font-size: 24rpx;color: #999;text-align: right;}
+
+.conDiv{height: 100%;box-sizing:border-box;}

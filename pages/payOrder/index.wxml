@@ -1,0 +1,37 @@
+<view class="toper">已成功锁定拼拼折扣，请及时完成支付<text class="rc">{{restTime}}</text></view>
+<view class="plr15">
+    <view class="tradeInfo plr15">
+        <image class="userImg udb" src="{{merchantInfo.merchantLogo}}"></image>
+        <view class="tx-c userTit">{{merchantInfo.name}}</view>
+        <view class="tx-c userAmount">￥{{totalPay}}</view>
+        <view class="h20"></view>
+        <!-- <view class="ub ub-ac ub-pj mt30 btc nimingDiv">
+            <view class="itemTit">匿名支付</view>
+            <switch checked="{{isChecked}}" color="#B45FFF" bindchange="switchChange"/>
+        </view> -->
+    </view>
+    <view class="tradeInfo1">
+        <view class="ub ub-ac ub-pj item">
+            <view class="itemTit ub ub-ac">商品原价</view>
+            <view class="discountAmount">￥{{payInfo.originalValue}}</view>
+        </view>
+        <view class="ub ub-ac ub-pj item">
+            <view class="itemTit ub ub-ac">拼拼折扣</view>
+            <view class="discountAmount1">节省￥{{payInfo.saveValue}}</view>
+        </view>
+        <view class="ub ub-ac ub-pj item">
+            <view class="itemTit ub ub-ac">仅需支付</view>
+            <view class="discountAmount">￥{{totalPay}}</view>
+        </view>
+        <!-- <view class="ub ub-ac ub-pj item" wx:if="{{payInfo.wxpay==0}}">
+            <view class="itemTit ub ub-ac">{{merchantInfo.cardDto.name}}<image class="haved" src="../../images/haved.png"></image></view>
+            <view class="discountAmount">-￥{{totalPay}}</view>
+        </view> -->
+    </view>
+    <!-- <view class="tx-c remark">*此笔交易使用拼友的共享卡，款项将返还给TA</view> -->
+</view>
+
+<view class="mt50 plr15">
+    <button class="btn_common {{disabled?'disabled':''}}" bindtap="toPay">确认支付</button>
+</view>
+<confirmBox isShowConfirmModal="{{isShowConfirmModal}}" confirmBoxTitle="{{confirmTitle}}" confirmBoxContent="{{confirmContent}}"></confirmBox>

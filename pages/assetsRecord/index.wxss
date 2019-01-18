@@ -1,0 +1,9 @@
+page{padding:30rpx;height: 100%}
+.item {height: 110rpx;position: relative;border-bottom: 1rpx #eee solid;}
+.plr10 .item:last-child{border-bottom: none;}
+.itemDesc{height: 60rpx;}
+.itemtit{font-size: 26rpx;color: #333;}
+.number1{font-size: 24rpx;color: #ff6000;}
+.number2{font-size: 24rpx;color: #f00;}
+
+.h40{height: 40rpx;line-height: 40rpx;font-size: 24rpx;color: #999;}

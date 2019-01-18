@@ -1,0 +1,7 @@
+{
+  "navigationBarBackgroundColor": "#9548FA",
+  "navigationBarTextStyle": "#fff",
+  "usingComponents": {
+    "loginBox": "../../components/loginBox/loginBox"
+  }
+}

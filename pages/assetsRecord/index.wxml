@@ -1,0 +1,16 @@
+<wxs module="filter" src="../../utils/numFr.wxs"></wxs>
+<view hidden="{{isShowNodata}}" class="plr10 bgb">
+    <view class="item" wx:for="{{recordList}}" wx:key="unique">
+	    <view class="itemDesc ub ub-ac">
+	        <view class="itemtit ub-f1">{{item.type==1?'粉丝用卡':'提现'}}</view>
+	        <!-- <view class="ub-f1 number"></view> -->
+	        <view class="number1" wx:if="{{item.type==1}}">+{{item.pay}}</view>
+	        <view class="number2" wx:else>-{{item.pay}}</view>
+	    </view>
+	    <view class="h40">{{item.dateCreated}}</view>
+    </view>
+</view>
+<view hidden="{{!isShowNodata}}" class="nodataDiv ub ub-ac ub-pc ub-ver">
+    <image class="nodataImg" mode="widthFix" src="../../images/noRecord.png"></image>
+    <view class="nodataTxt">您还没有进行账户操作~</view>
+</view>

@@ -1,0 +1,19 @@
+<!--pages/businessDetails/components/buyCardRadio/buyCardRadio.wxml-->
+<view class="HycardItem">
+  <view class="radioWrap">
+    <!-- <icon class="iconfont icon-dianzan"></icon> -->
+    <image src="../../../../images/radioChecked.png" wx:if="{{checkedId===itemData.id}}" class="radio"></image>
+    <image src="../../../../images/radioUnChecked.png" wx:else class="radio"></image>
+  </view>
+  <view class="rightbox">
+    <view class="HycardName">{{itemData.name}}</view>
+    <view class="Hycardprice">￥ {{itemData.price}}</view>
+  </view>
+
+  <view class="numPickerWrap">
+    <view class="reduce" catchtap="_buyCardsNumReduce">-</view>
+    <view class="num-result">{{num}}</view>
+    <view class="plus" catchtap="_buyCardsNumPlus">+</view>
+  </view>
+
+</view>

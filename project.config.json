@@ -1,0 +1,62 @@
+{
+	"description": "项目配置文件",
+	"packOptions": {
+		"ignore": []
+	},
+	"setting": {
+		"urlCheck": true,
+		"es6": true,
+		"postcss": true,
+		"minified": true,
+		"newFeature": true
+	},
+	"compileType": "miniprogram",
+	"libVersion": "2.3.0",
+	"appid": "wxb03b0ab93bb60ecc",
+	"projectname": "juji_mall",
+	"debugOptions": {
+		"hidedInDevtools": []
+	},
+	"isGameTourist": false,
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
+		"game": {
+			"currentL": -1,
+			"list": []
+		},
+		"miniprogram": {
+			"current": 2,
+			"list": [
+				{
+					"id": 0,
+					"name": "商户页面",
+					"pathName": "pages/businessDetails/index",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "我的圈子",
+					"pathName": "pages/myCircle/index",
+					"query": ""
+				},
+				{
+					"id": 2,
+					"name": "评论详情",
+					"pathName": "pages/commentDetail/index",
+					"query": ""
+				}
+			]
+		}
+	}
+}

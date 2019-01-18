@@ -1,0 +1,8 @@
+{
+    "navigationBarBackgroundColor": "#9548FA",
+    "navigationBarTextStyle": "#fff",
+    "enablePullDownRefresh": true,
+    "usingComponents": {
+      "loginBox": "../../components/loginBox/loginBox"
+    }
+}

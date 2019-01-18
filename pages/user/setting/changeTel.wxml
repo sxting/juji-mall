@@ -1,0 +1,13 @@
+<view class="oldTel">当前手机号是：18000000000</view>
+<view class="main">
+    <view class="item ub ub-ac">
+		<input type="number" class="ub-f1" name="tel" bindinput="dataChange1" maxlength="11" placeholder="请输入新手机号" />
+    </view>
+    <view class="item ub ub-ac mt15">
+		<input type="text" class="ub-f1" name="pwd" bindinput="dataChange2" placeholder="请输入验证码" />
+        <view class="getBtn" hidden="{{showTime}}" bindtap="getCode">获取验证码</view>
+        <view class="getBtn" hidden="{{!showTime}}">{{count}}秒</view>
+    </view>
+</view>
+
+<view class="btn_common" bindtap="submit">提交</view>

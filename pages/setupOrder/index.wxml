@@ -1,0 +1,38 @@
+<view class="userInfo ub ub-ac">
+    <image class="userImg" src="{{merchantInfo.merchantLogo}}" style="border-radius:50%;"></image>
+    <view class="ub-f1">
+        <view class="userName">{{merchantInfo.name}}</view>
+        <view class="balance">可用次数:{{merchantInfo.times}}次</view>
+    </view>
+    <view class="addrSelect ub ub-ac" bindtap="selectArea">
+        {{shopName}}<image class="icon_drop" src="../../images/icon_drop.png"></image>
+    </view>
+</view>
+<view class="inputBox ub ub-ac ub-pj">
+    <view class="inputTit">{{merchantInfo.cardDto.name}}</view>
+    <view class="numberCtrl ub ub-ac">
+        <image class="ctlbtn" src="../../images/ion-del.png" bindtap="delNumber"></image>
+        <view class="num uds">{{amount}}</view>
+        <image class="ctlbtn" src="../../images/ion-add.png" bindtap="addNumber"></image>
+    </view>
+</view>
+
+<view class="inputBox ub ub-ac ub-pj h40">
+    <view class="inputTit ub ub-ac">消耗银票<image class="desBtn" src="../../images/desBtn.png" bindtap="showTips"></image></view>
+    <view class="inputTit">9</view>
+</view>
+<!-- <view class="tx-l remark">*折扣金额仅供参考，请以实际下单结果为准！</view> -->
+<!-- <view class="tx-l remark">使用提示：买单成功后，请将核验码告知营业员进行核验。</view> -->
+<view class="mt100 plr15">
+    <view class="btn_common" bindtap="saveOrder" disabled="{{isDisabled}}">立即下单</view>
+</view>
+<view class="modal" hidden="{{isShowModal}}" bindtap="closeSelectArea">
+    <view class="shopDiv">
+        <image class="icon_close" src="../../images/icon_close.png" bindtap="closeSelectArea"></image>
+        <view class="shopHeader">选择门店</view>
+        <view class="shopList">
+            <view class="{{shopact===index?'on':''}}" data-shopname="{{item.name}}" data-shopid="{{item.id}}" data-actindex="{{index}}" wx:for="{{shopsNearby}}" bindtap="changeShop" wx:key="unique">{{item.name}}</view>
+        </view>
+    </view>
+</view>
+<confirmBox isShowConfirmModal="{{isShowConfirmModal}}" confirmBoxTitle="{{confirmTitle}}" confirmBoxContent="{{confirmContent}}"></confirmBox>

@@ -1,0 +1,14 @@
+<view class="tit">当前城市</view>
+
+<view class="curItem ub ub-ac ub-pc">
+	<image class="icon_addr1" src="../../images/icon_addr1.png"></image>{{curCity}}
+</view>
+
+<view class="tit">热门城市</view>
+
+<view class="main">
+    <view class="item ub ub-ac ub-pc" wx:for="{{citylist}}" wx:key="unique" bindtap="selectCity" data-name="{{item.name}}" data-id="{{item.id}}" style="width:{{imageWidth}}">
+        {{item.name}}
+    </view>
+    <view class="clear"></view>
+</view>

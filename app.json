@@ -1,0 +1,74 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/user/index",
+    "pages/myBusinesscard/index",
+    "pages/myTicket/index",
+    "pages/myTrade/index",
+    "pages/tradeDetail/index",
+    "pages/commentDetail/index",
+    "pages/home/index",
+    "pages/getUser/index",
+    "pages/assets/index",
+    "pages/assetsRoad/index",
+    "pages/assetsRecord/index",
+    "pages/assetsWithdraw/index",
+    "pages/freeGet/index",
+    "pages/cardlist/index",
+    "pages/myCard/index",
+    "pages/myCardRecord/index",
+    "pages/citylist/index",
+    "pages/user/setting/index",
+    "pages/user/setting/changeTel",
+    "pages/setupOrder/index",
+    "pages/myCircle/index",
+    "pages/balanceSrc/index",
+    "pages/fans/index",
+    "pages/attents/index",
+    "pages/businessDetails/index",
+    "pages/createOrder/index",
+    "pages/payOrder/index",
+    "pages/tradeSuccess/index",
+    "pages/shareCard/index",
+    "pages/logs/logs",
+    "pages/createReply/index",
+    "pages/commentList/index"
+  ],
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于小程序位置接口的效果展示"
+    }
+  },
+  "window": {
+    "backgroundTextStyle":"dark",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "桔集商城",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "color": "#BBBBBB",
+    "selectedColor": "#9548FA",
+    "borderStyle": "white",
+    "backgroundColor": "#FFFFFF",
+    "list": [
+      {
+        "text": "享说",
+        "pagePath": "pages/index/index",
+        "iconPath": "images/home_sy2.png",
+        "selectedIconPath": "images/home_sy1.png"
+      },
+      {
+        "text": "银票",
+        "pagePath": "pages/myTicket/index",
+        "iconPath": "images/home_qb2.png",
+        "selectedIconPath": "images/home_qb1.png"
+      },
+      {
+        "text": "我的",
+        "pagePath": "pages/user/index",
+        "iconPath": "images/home_wd2.png",
+        "selectedIconPath": "images/home_wd1.png"
+      }
+    ]
+  }
+}

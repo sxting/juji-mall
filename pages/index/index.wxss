@@ -1,0 +1,464 @@
+@import '../../style/iconfont.wxss';
+@import '../../app.wxss';
+page {
+  height: 100%;
+}
+
+.iconfont {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.toper {
+  height: 200rpx;
+  background-color: #9548fa;
+  padding: 0 30rpx;
+  margin-bottom: 90rpx;
+}
+
+.tabListWrap {
+  padding: 24rpx 30rpx 0 30rpx;
+  background-color: #9548fa;
+}
+
+.tablist {
+  height: 60rpx;
+}
+
+.addr {
+  width: 108rpx;
+  border-right: 2rpx #f1f1f1 solid;
+  color: #fff;
+  font-size: 26rpx;
+  height: 26rpx;
+  margin-right: 30rpx;
+}
+
+.icon_addr {
+  width: 24rpx;
+  height: 28rpx;
+  margin-right: 8rpx;
+}
+
+.tablist .tabItem {
+  position: relative;
+  font-size: 26rpx;
+  color: #fff;
+  height: 26rpx;
+  line-height: 26rpx;
+}
+
+.tablist .tabItem .line {
+  width: 28rpx;
+  height: 4rpx;
+  background-color: #fff;
+  border-radius: 2rpx;
+  position: absolute;
+  bottom: -16rpx;
+  left: 50%;
+  margin-left: -14rpx;
+  display: none;
+}
+
+.tablist .tabItem.on .line {
+  display: block;
+}
+
+.homeBanner {
+  display: block;
+  width: 100%;
+  /* height: 264rpx; */
+}
+
+.item {
+  box-shadow: 0 0 10rpx #dedede;
+  border-radius: 10rpx;
+  margin-top: 20rpx;
+  position: relative;
+  background-color: #fff;
+}
+
+.cardImg {
+  width: 170rpx;
+  height: 170rpx;
+}
+
+.cardTit {
+  font-size: 32rpx;
+  color: #000;
+}
+
+.cardDesc {
+  font-size: 24rpx;
+  color: #666;
+  margin-top: 25rpx;
+}
+
+.cardRemark {
+  font-size: 30rpx;
+  color: #ff5a1d;
+  margin-top: 25rpx;
+}
+
+.juli {
+  font-size: 24rpx;
+  color: #999;
+  top: 30rpx;
+  right: 20rpx;
+  position: absolute;
+}
+
+.tabwrap {
+  width: 230rpx;
+}
+
+.middleWrap {
+  padding: 0 30rpx;
+}
+
+.mBgWrap {
+  width: 100%;
+  box-sizing: border-box;
+  background: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 34rpx 60rpx 26rpx 60rpx;
+  border-radius: 10rpx;
+  box-shadow: 0 0 3px 0 #f8f0ff;
+}
+
+.mBtnWrap {
+  display: flex;
+  /* flex-direction: column; */
+  justify-content: center;
+  align-items: center;
+}
+
+.mBtnText {
+  margin-left: 10rpx;
+  font-size: 14px;
+  color: #666;
+}
+
+.mLine {
+  width: 1px;
+  height: 50rpx;
+  background: #dedede;
+}
+
+.pubu {
+  width: 100%;
+  padding: 0 20rpx;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  margin-top: 10rpx;
+}
+
+.pubuItem {
+  width: 50%;
+  margin-bottom: 20rpx;
+  display: flex;
+  flex-direction: column;
+}
+
+.padr10 {
+  padding-right: 10rpx;
+}
+
+.padl10 {
+  padding-left: 10rpx;
+}
+
+.pubuItem .card {
+  width: 100%;
+  box-shadow: 0 0 3px 0 #f8f0ff;
+  border-radius: 5px;
+  background: #fff;
+  box-sizing: border-box;
+  margin-top: 20rpx;
+}
+
+.pubuItem .plimg {
+  width: 100%;
+  border-top-left-radius: 10rpx;
+  border-top-right-radius: 10rpx;
+}
+
+.pubupl {
+  width: 100%;
+  font-size: 12px;
+  color: #333;
+  padding: 0 16rpx;
+  box-sizing: border-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.boxWrap image {
+  width: 40rpx;
+  height: 40rpx;
+}
+
+.username {
+  font-size: 11px;
+  color: #333;
+}
+
+.boxWrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16rpx;
+}
+
+.headWrap {
+  display: flex;
+  align-items: center;
+}
+
+.username {
+  margin-left: 10rpx;
+}
+
+.zanWrap {
+  display: flex;
+  align-items: center;
+  font-size: 11px;
+  color: #999;
+}
+
+.zanWrap .icon-dianzan {
+  margin-right: 4rpx;
+}
+
+.zanWrap .yizan {
+  color: #ff5a1d;
+}
+
+.yongkaxuzhi-wrap {
+  padding: 0 30rpx;
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: 30rpx;
+}
+
+.yongkaxuzhi {
+  background-color: #fff;
+  border-radius: 20rpx;
+  width: 100%;
+  padding: 34rpx 30rpx;
+  box-sizing: border-box;
+}
+
+.yongkaxuzhi .title {
+  font-size: 14px;
+  color: #333;
+}
+
+.xuzhi {
+  font-size: 12px;
+  color: #999;
+}
+
+.headimg-row {
+  display: flex;
+  align-items: center;
+}
+
+.headimg-row image {
+  width: 70rpx;
+  height: 70rpx;
+}
+
+.desp {
+  font-size: 12px;
+  color: #999;
+  line-height: 24px;
+}
+
+.showAll {
+  height: 40rpx;
+  line-height: 40rpx;
+  font-size: 12px;
+  color: #999;
+  display: flex;
+  align-items: center;
+}
+
+.icon-right {
+  margin-left: 10rpx;
+  color: #999;
+  line-height: 24rpx;
+  height: 24rpx;
+  font-size: 14px;
+}
+
+.inner-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nickname-wrap {
+  display: flex;
+  align-items: center;
+}
+
+.nickname-wrap image {
+  width: 60rpx;
+  height: 60rpx;
+}
+
+.nickname {
+  font-size: 15px;
+  color: #333;
+  margin-left: 20rpx;
+}
+
+.sharetypedes {
+  font-size: 10px;
+  color: #999;
+}
+
+.focus {
+  width: 96rpx;
+  height: 44rpx;
+  border: 1px solid #b55fff;
+  border-radius: 22rpx;
+  font-size: 12px;
+  color: #b55fff;
+  text-align: center;
+  line-height: 44rpx;
+}
+
+.pinglun {
+  font-size: 12px;
+  color: #4f4e4e;
+  letter-spacing: 0;
+  line-height: 20px;
+}
+
+.card-wrap {
+  width: 100%;
+  background: #f8f9fa;
+  margin-top: 16rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24rpx 20rpx;
+  box-sizing: border-box;
+}
+
+.card-desp {
+  display: flex;
+  align-items: center;
+}
+
+.card-name {
+  font-size: 11px;
+  color: #333;
+  margin-right: 10rpx;
+}
+
+.card-zhekou {
+  color: #fd6b34;
+  font-size: 11px;
+}
+
+.card-master {
+  font-size: 11px;
+  color: #a5a5a5;
+}
+
+.vline {
+  width: 1px;
+  height: 20rpx;
+  background: #999;
+  margin: 0 10rpx;
+}
+
+.gongxiang {
+  border: 1px solid #dedede;
+  border-radius: 4rpx;
+  font-size: 10px;
+  color: #999;
+  padding: 6rpx 10rpx;
+}
+
+.btnBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 30rpx;
+}
+
+.plTime {
+  font-size: 11px;
+  color: #999;
+  line-height: 11px;
+}
+
+.btnBox {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 200rpx;
+}
+
+.plPinglun {
+  display: flex;
+  align-items: center;
+  font-size: 11px;
+  color: #999;
+}
+
+.zan {
+  display: flex;
+  align-items: center;
+  font-size: 11px;
+  color: #999;
+}
+
+.pjimgs {
+  width: 100%;
+  height: 428rpx;
+  margin-top: 16rpx;
+}
+
+.mendianimg {
+  width: 80rpx;
+  height: 80rpx;
+}
+
+.mendianinfowrap {
+  width: 100%;
+  margin-left: 20rpx;
+}
+
+.mendianname {
+  font-size: 12px;
+  color: #333;
+}
+
+.mdinfowrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20rpx;
+}
+
+.mdtype {
+  font-size: 10px;
+  color: #999;
+}
+
+.zhekou {
+  font-size: 11px;
+  color: #ff5a1d;
+}

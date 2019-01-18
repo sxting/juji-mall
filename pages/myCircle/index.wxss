@@ -1,0 +1,90 @@
+.ubtn::after{
+  border: 0;
+}
+.iconfont { display: flex; align-items: center; justify-content: center; }
+.toper { background-color: #9548fa; padding: 1rpx 30rpx 40rpx; box-sizing: border-box; }
+.toper .userImg { width: 120rpx; height: 120rpx; border-radius: 50%; border: 2rpx #fff solid; background-color: #fff; margin: 20rpx auto; display: block; }
+.txt2 { color: #fff; font-size: 24rpx; margin-top: 10rpx; }
+.fansnum { margin: 0 30rpx; }
+.btnlist { text-align: center; margin-top: 20rpx; }
+.btnlist button { font-size: 12px; color: #fff; border-radius: 23rpx; width: 150rpx; height: 46rpx; border: 1px #fff solid; background-color: #9548fa; padding: 0; line-height: 44rpx; box-sizing: border-box;}
+.ml40 { margin-left: 80rpx; }
+.tablist { height: 100rpx; background-color: #fff; }
+.tablist .tabItem { position: relative; font-size: 28rpx; color: #666; padding: 0 40rpx; height: 100rpx; line-height: 100rpx; text-align: center;}
+.tablist .tabItem .line { width: 30rpx; height: 4rpx; background-color: #9548fa; border-radius: 2rpx; position: absolute; bottom: 20rpx; left: 50%; margin-left: -15rpx; display: none; }
+.tablist .tabItem.on { color: #333; }
+.tablist .tabItem.on .line { display: block; }
+.ion_compile{display:inline-block;width: 22rpx;height: 22rpx;vertical-align: middle;}
+.signature{color: #fff; font-size: 22rpx;line-height: 50rpx;}
+.signatrueWrap{height: 50rpx;margin-top: 16rpx;}
+.signatrueWrap input{height: 50rpx!important;line-height: 50rpx!important}
+/*共享卡*/
+.cardWrap{padding:0 30rpx 30rpx;}
+.cardDiv{border-radius: 20rpx;background-color: #fff;overflow: hidden;position: relative;margin-top: 40rpx;}
+.cardDiv image{width:100%;}
+.cardDiv .name1{font-size: 32rpx;color: #fff;height: 60rpx;position: absolute;top: 16rpx;left: 30rpx;}
+.cardDiv .san{height: 36rpx;width: 36rpx;margin-right:10rpx;display: block;}
+.cardDiv .name2{font-size: 28rpx;color: #fff;line-height: 40rpx;position: absolute;bottom: 28rpx;left: 0;text-align: center;width: 100%;}
+.cardDiv text{font-size: 24rpx;color: #fff;line-height: 40rpx;position: absolute;top: 0rpx;right: 25rpx;}
+
+/*评论*/
+.yongkaxuzhi-wrap { padding: 0 30rpx; width: 100%; box-sizing: border-box; margin-top: 30rpx; }
+.yongkaxuzhi { background-color: #fff; border-radius: 20rpx; width: 100%; padding: 34rpx 30rpx; box-sizing: border-box; }
+.yongkaxuzhi .title { font-size: 14px; color: #333; }
+.xuzhi { font-size: 12px; color: #999; }
+.headimg-row { display: flex; align-items: center; }
+.headimg-row image { width: 70rpx; height: 70rpx; }
+.desp { font-size: 12px; color: #999; line-height: 24px; }
+.showAll { height: 40rpx; line-height: 40rpx; font-size: 12px; color: #999; display: flex; align-items: center; }
+.icon-right { margin-left: 10rpx; color: #999; line-height: 24rpx; height: 24rpx; font-size: 14px; }
+.nickname-wrap { display: flex; align-items: center; }
+.nickname-wrap image { width: 60rpx; height: 60rpx; }
+.nickname { font-size: 15px; color: #333; margin-left: 20rpx; }
+.focus { width: 96rpx; height: 44rpx; border: 1px solid #b55fff; border-radius: 22rpx; font-size: 12px; color: #b55fff; text-align: center; line-height: 44rpx; }
+.pinglun { font-size: 12px; color: #4f4e4e; letter-spacing: 0; line-height: 20px;text-align: justify;}
+
+.compics-wrap {
+  display: flex;
+  align-items: center;
+  padding-top: 20rpx;
+}
+
+.compics {
+  width:30%;
+  height: 140rpx;
+  margin-right: 20rpx;
+}
+.card-wrap { width: 100%; background: #f8f9fa; margin-top: 16rpx; display: flex; justify-content: space-between; align-items: center; padding: 24rpx 20rpx; box-sizing: border-box; }
+.card-desp { display: flex; align-items: center; }
+.card-name { font-size: 11px; color: #333; margin-right: 10rpx; }
+.card-zhekou { color: #fd6b34; font-size: 11px; }
+.card-master { font-size: 11px; color: #a5a5a5; }
+.vline { width: 1px; height: 20rpx; background: #999; margin: 0 10rpx; }
+.gongxiang { border: 1px solid #dedede; border-radius: 4rpx; font-size: 10px; color: #999; padding: 6rpx 10rpx; }
+.btnBar { display: flex; justify-content: space-between; align-items: center; margin-top: 30rpx; }
+.plTime { font-size: 11px; color: #999; line-height: 11px; }
+.btnBox { display: flex; justify-content: space-around; align-items: center; width: 200rpx; }
+.plPinglun { display: flex; align-items: center; font-size: 11px; color: #999; }
+.zan { display: flex; align-items: center; font-size: 11px; color: #999; }
+.pjimgs { width: 100%; height: 428rpx; margin-top: 16rpx; }
+.mendianimg { width: 80rpx; height: 80rpx;display: block;border-radius: 4rpx; }
+.mendianinfowrap {margin-left: 20rpx; }
+.mendianname { font-size: 12px; color: #333; }
+.mdinfowrap { display: flex; justify-content: space-between; align-items: center; margin-top: 20rpx; }
+.mdtype { font-size: 10px; color: #999; }
+.zhekou { font-size: 11px; color: #ff5a1d; }
+
+/*留言板*/
+.p15 { padding: 30rpx; }
+.item { box-shadow: 0 0 10rpx #dedede; border-radius: 10rpx; margin-top: 30rpx; position: relative; height: 240rpx; box-sizing: border-box; background: #fff; }
+.user { font-size: 28rpx; color: #000; }
+.userImg { width: 60rpx; height: 60rpx; border-radius: 50%; margin-right: 20rpx; }
+.subItem { margin-top: 30rpx; height: 40rpx; padding-left: 90rpx; padding-right: 20rpx; }
+.subrow { margin-top: 30rpx; height: 40rpx; padding-right: 20rpx; }
+.subItem2 { margin-top: 16rpx; height: 40rpx; padding-left: 90rpx; padding-right: 20rpx; }
+.txt { font-size: 22rpx; color: #999; }
+
+.cardWrap{height: 100%;box-sizing:border-box;}
+.conDiv{height: 100%;box-sizing:border-box;}
+.pj{height: 100%;box-sizing:border-box;padding-bottom: 30rpx;}
+.red{color: #f00!important;}

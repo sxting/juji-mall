@@ -1,0 +1,415 @@
+.iconfont {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.swiper-wrap {
+  position: relative;
+  width: 100%;
+  height: auto;
+}
+
+.img-wrap {
+  width: 100%;
+}
+
+.img-wrap image {
+  width: 100%;
+  height: 100%;
+}
+
+.fxbtn {
+  background: transparent;
+  padding: 0;
+}
+
+.fxbtn::after {
+  border: 0;
+}
+
+.yongkaxuzhi-wrap {
+  padding: 0 30rpx;
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: 30rpx;
+}
+
+.yongkaxuzhi {
+  background-color: #fff;
+  width: 100%;
+  padding: 34rpx 30rpx 140rpx 30rpx;
+  box-sizing: border-box;
+}
+
+.inner-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.yongkaxuzhi .title {
+  font-size: 15px;
+  color: #333;
+}
+
+.xuzhi {
+  font-size: 12px;
+  color: #999;
+}
+
+.headimg-row {
+  display: flex;
+  align-items: center;
+}
+
+.headimg-row image {
+  width: 70rpx;
+  height: 70rpx;
+}
+
+.desp {
+  font-size: 12px;
+  color: #999;
+  line-height: 24px;
+}
+
+.showAll {
+  height: 40rpx;
+  line-height: 40rpx;
+  font-size: 12px;
+  color: #999;
+  display: flex;
+  align-items: center;
+}
+
+.icon-right {
+  margin-left: 10rpx;
+  color: #999;
+  line-height: 24rpx;
+  height: 24rpx;
+  font-size: 14px;
+}
+
+.nickname-wrap {
+  display: flex;
+  align-items: center;
+}
+
+.nickname-wrap image {
+  width: 60rpx;
+  height: 60rpx;
+}
+
+.nickname {
+  font-size: 15px;
+  color: #333;
+  margin-left: 20rpx;
+}
+
+.unfocus {
+  width: 96rpx;
+  height: 44rpx;
+  border: 1px solid #b55fff;
+  border-radius: 22rpx;
+  font-size: 12px;
+  color: #b55fff;
+  text-align: center;
+  line-height: 44rpx;
+}
+
+.focus {
+  border: 1px solid #999;
+  color: #999;
+}
+
+.pinglun {
+  font-size: 12px;
+  color: #4f4e4e;
+  line-height: 20px;
+}
+
+.card-wrap {
+  width: 100%;
+  background: #f8f9fa;
+  margin-top: 16rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24rpx 20rpx;
+  box-sizing: border-box;
+}
+
+.card-desp {
+  display: flex;
+  align-items: center;
+}
+
+.card-name {
+  font-size: 11px;
+  color: #333;
+  margin-right: 10rpx;
+}
+
+.card-zhekou {
+  color: #fd6b34;
+  font-size: 11px;
+}
+
+.card-master {
+  font-size: 11px;
+  color: #a5a5a5;
+}
+
+.vline {
+  width: 1px;
+  height: 20rpx;
+  background: #999;
+  margin: 0 10rpx;
+}
+
+.gongxiang {
+  border: 1px solid #dedede;
+  border-radius: 4rpx;
+  font-size: 10px;
+  color: #999;
+  padding: 6rpx 10rpx;
+}
+
+.btnBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 30rpx;
+}
+
+.plTime {
+  font-size: 11px;
+  color: #999;
+  line-height: 11px;
+}
+
+.btnBox {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 200rpx;
+}
+
+.plPinglun {
+  display: flex;
+  align-items: center;
+  font-size: 11px;
+  color: #999;
+}
+
+.zan {
+  display: flex;
+  align-items: center;
+  font-size: 11px;
+  color: #999;
+}
+
+.pjimgs {
+  width: 100%;
+  height: 428rpx;
+  margin-top: 16rpx;
+}
+
+.mendianimg {
+  width: 96rpx;
+  height: 80rpx;
+}
+
+.mendianinfowrap {
+  width: 100%;
+  margin-left: 20rpx;
+}
+
+.mendianname {
+  font-size: 12px;
+  color: #333;
+}
+
+.mdinfowrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20rpx;
+}
+
+.mdtype {
+  font-size: 10px;
+  color: #999;
+}
+
+.zhekou {
+  font-size: 11px;
+  color: #ff5a1d;
+}
+
+.line {
+  width: 100%;
+  height: 1rpx;
+  background: #dedede;
+  margin: 30rpx 0;
+}
+
+.subComWrap {
+  margin-bottom: 40rpx;
+}
+
+.comDate {
+  font-size: 11px;
+  color: #999;
+}
+
+.subCom {
+  display: flex;
+  align-items: center;
+  margin-top: 10rpx;
+}
+
+.subULine {
+  width: 1rpx;
+  height: 20rpx;
+  margin-right: 10rpx;
+  background: #979797;
+}
+
+.subComUser, .subComDetail {
+  font-size: 11px;
+  color: #999;
+  letter-spacing: 0;
+  line-height: 20px;
+}
+
+.mt10 {
+  margin-top: 20rpx;
+}
+
+.doComWrap {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: #f8f9fa;
+  border-top: 1rpx solid #dedede;
+  box-sizing: border-box;
+  padding: 20rpx 30rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.doComWrap input {
+  width: 550rpx;
+  height: 66rpx;
+  background: #fff;
+  border: 1rpx solid #dedede;
+  border-radius: 33rpx;
+  padding-left: 30rpx;
+  box-sizing: border-box;
+  font-size: 12px;
+}
+
+.doComBtns {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.icon-dianzan {
+  color: #d4d4d4;
+  height: 36rpx;
+  font-size: 20px;
+  margin-left: 30rpx;
+}
+
+.yizan {
+  color: #ff5a1d;
+}
+
+.icon-fenxiang {
+  color: #d4d4d4;
+  height: 36rpx;
+  font-size: 20px;
+}
+
+.inputPh {
+  font-size: 12px;
+  color: #999;
+  letter-spacing: 0;
+}
+
+.modal {
+  position: fixed;
+  width: 100%;
+  left: 0;
+  top: 0;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 1;
+}
+
+.gxbox {
+  width: 80%;
+  padding-bottom: 50rpx;
+  background: #fff;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -262rpx;
+  margin-left: -40%;
+  border-radius: 10rpx;
+}
+
+.gxbox .title {
+  position: relative;
+  font-size: 15px;
+  color: #333;
+  padding: 40rpx 0;
+  text-align: center;
+}
+
+.closeModal {
+  position: absolute;
+  right: 30rpx;
+  top: 30rpx;
+  font-size: 25px;
+  color: #333;
+}
+
+.gxdetail {
+  font-size: 14px;
+  line-height: 60rpx;
+  color: #666;
+  padding: 0 40rpx;
+}
+
+.gxboxBtnWrap {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 50rpx;
+}
+
+.gxboxBtn {
+  width: 280rpx;
+  height: 80rpx;
+  background-image: linear-gradient(-180deg, #b45fff 4%, #9649fa 99%);
+  box-shadow: 0 0 2px 1px #dcb9fb;
+  border-radius: 40rpx;
+  font-size: 14px;
+  color: #fff;
+  text-align: center;
+  line-height: 80rpx;
+}
+
+.fasongbtn {
+  height: 100%;
+  box-sizing: border-box;
+  padding-right: 40rpx;
+  color: #9548fa;
+  font-size: 16px;
+}

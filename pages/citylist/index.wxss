@@ -1,0 +1,9 @@
+page { padding: 0rpx 30rpx; box-sizing: border-box; }
+.main { flex-wrap: wrap; margin-right: -30rpx; }
+.tit { font-size: 24rpx; color: #999; line-height:90rpx; }
+.curItem { height: 100rpx; font-size: 28rpx; color: #333; line-height: 100rpx; position: relative; width: 210rpx; border: 1rpx solid #eee; background-color: #fff }
+.item { height: 100rpx; font-size: 28rpx; color: #333; line-height: 100rpx; position: relative; border: 1rpx solid #eee; font-size: 28rpx; margin-bottom: 20rpx; background-color: #fff; margin-right: 30rpx; float: left; box-sizing: border-box; }
+.item text { font-size: 28rpx }
+.clear { clear: both }
+
+.icon_addr1{width: 24rpx;height: 28rpx;margin-right: 8rpx;}

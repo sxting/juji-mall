@@ -1,0 +1,11 @@
+page{padding:24rpx;box-sizing:border-box;height: 100%;background-color: #f1f1f1}
+.replyInfo{padding-bottom: 30rpx;background-color: #fff;border-radius: 10rpx; padding-top: 1rpx;position:relative;background-color: #fff;padding: 20rpx;}
+.replyDiv{width: 100%;min-height: 200rpx;font-size: 26rpx;color: #333;line-height: 52rpx;}
+.uploadImglist{flex-wrap:wrap;margin-right: -20rpx;margin-bottom: -20rpx;}
+.uploadImg{width: 140rpx;height: 140rpx;margin-right: 20rpx;margin-bottom: 20rpx;position: relative;}
+.uploadImg image{width: 140rpx;height: 140rpx;border-radius: 10rpx;}
+.uploadImg .tx-c{position: absolute;width: 100%;top: 74rpx;left: 0;font-size: 22rpx;color: #999}
+.uploadImg .ion_del{width: 28rpx;height: 28rpx;top: -10rpx;right: -10rpx;position: absolute;}
+.mt100{margin-top: 160rpx;}
+
+.btn_common{background-image: linear-gradient(-180deg, #B45FFF 4%, #9649FA 99%);box-shadow: 0 0 2px 1px #DCB9FB;border-radius: 100px;height: 88rpx;text-align: center;line-height: 88rpx;font-size: 32rpx;color: #fff;}

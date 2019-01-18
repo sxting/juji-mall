@@ -1,0 +1,59 @@
+/* @import '../../style/iconfont.wxss'; */
+/* @import '../../app.wxss'; */
+.toper{height: 300rpx;background-color: #9548FA;padding:10rpx 30rpx 30rpx;margin-bottom: 120rpx;box-sizing:border-box;}
+
+.ml10{margin-left: 20rpx;}
+.userDiv{height: 160rpx;margin-right: -30rpx;}
+.userImg { width: 120rpx; height: 120rpx; border-radius: 50%;border:4rpx #fff solid;background-color: #fff }
+.username {font-size: 30rpx;color: #fff }
+.desc{color: #fff;font-size:24rpx;margin-top: 20rpx;}
+.desc .line{color: #fff;font-size:24rpx;margin-left: 10rpx;margin-right: 10rpx;}
+.userDiv .btn{background-color: #fff;width: 180rpx;height:60rpx;border-radius: 30rpx 0 0 30rpx;padding: 0}
+.userDiv .btn text{font-size: 24rpx;color: #B55FFF;}
+.loginBtn{width: 120rpx;height: 50rpx;line-height: 50rpx;font-size: 26rpx;text-align: center;color: #fff;border:1rpx #fff solid;border-radius: 8rpx;}
+.cardDiv{height: 300rpx;background-color: #fff;border-radius: 8rpx;margin-top: 20rpx;padding: 10rpx 30rpx;}
+.cardTxt1{font-size: 28rpx;line-height: 60rpx;color: #333}
+.cardTxt2{font-size: 24rpx;line-height: 60rpx;color: #999}
+
+.cardlist{overflow-x:auto;margin-top: 5rpx;}
+.cardlist .item{margin-right: 26rpx;position: relative;}
+.cardlist .item .img{width: 178rpx;height: 112rpx;border-radius: 8rpx;display: block;}
+.cardDiv .name{font-size: 12rpx;color: #fff;height: 20rpx;position: absolute;top: 5rpx;left: 8rpx;}
+.cardDiv .name .san{height: 14rpx;width: 14rpx;margin-right:4rpx;display: block;}
+.cardlist .item .tit{font-size: 24rpx;line-height:50rpx;color: #666666;text-align: center;margin-top: 7rpx;margin-bottom: 3rpx;}
+.cardlist .item button::after{border: 0;}
+.cardlist .item button{padding: 0;border:#B55FFF 1px solid;width: 80rpx;height: 36rpx;border-radius: 20rpx;font-size: 22rpx;color: #B55FFF;background-color: #fff;line-height: 34rpx;text-align: center;}
+.iconCircle{width: 24rpx;height: 24rpx;margin-right: 8rpx}
+.main{margin-top: 230rpx;padding:0 30rpx;}
+.coinDiv{border-radius: 10rpx;background-color: #fff;overflow: hidden;position: relative;}
+.coinDiv image{width:100vw;}
+.coinDiv .con{position: absolute;width: 100%;height: 100%;left: 0;top: 0;z-index: 1;box-sizing:border-box;padding:20rpx 200rpx;}
+.coinDiv .con .txt1{font-size: 26rpx;color: #333;line-height: 60rpx;}
+.coinDiv .con .txt2{font-size: 24rpx;color: #999;line-height: 50rpx;}
+
+.kefu {background: #fff; color: #333;padding:0 20rpx;border:#fff 1rpx solid;height: 100rpx;line-height: 100rpx;}
+.kefu::after {border: 0;}
+
+.ml05{margin-left: 10rpx;}
+
+.main .navlist{border-radius: 10rpx;padding-top: 10rpx;padding-bottom: 10rpx;margin-top: 20rpx;}
+.main .item {height: 88rpx;font-size: 28rpx;color: #333;line-height: 88rpx;position: relative;}
+.main .item view{font-size: 28rpx;color: #333;}
+.iconNav{display: block;width: 28rpx;height: 28rpx;margin-right: 10rpx;}
+.main .item .icon-right{position: absolute;right: 20rpx;top: 0rpx;color: #999}
+
+.iconc{color:#B25DFF;margin-right: 12rpx;}
+
+.modal{position: fixed;width: 100%;left: 0;top: 0;height: 100%;background-color: rgba(0,0,0,0.3);z-index: 1}
+.shopDiv{position: fixed;width: 100%;left: 0;bottom: 0;background-color: #fff;border-radius: 20rpx 20rpx 0 0;z-index: 2}
+.shopHeader{text-align: center;line-height: 100rpx;font-size: 30rpx;color: #000;}
+.shopList{padding: 30rpx;background-color: #f5f5f5;}
+.shopList view.item {background-color: #fff;padding:20rpx 30rpx;border-radius: 10rpx;}
+.shopList view.item view .cardType {font-size: 28rpx;color: #333 }
+.shopList view.item view .desc{color: #FF5A1D;font-size:24rpx;margin-top: 15rpx;}
+.shopList view .usebtn{background-color: #fff;border: 1rpx solid #B55FFF;font-size: 24rpx;border-radius: 22rpx;height: 44rpx;width: 144rpx;color: #B55FFF;padding: 0}
+
+
+.conDiv{height: 100%;box-sizing:border-box;}
+.nodataImg1{display: block;width: 185rpx;height: 130rpx}
+.nodataTxt1{text-align: center;font-size: 24rpx;margin-top: 16rpx;color: #666;}

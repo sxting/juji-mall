@@ -1,0 +1,147 @@
+<loginBox></loginBox>
+<view class="tabListWrap">
+  <view hidden="true" class="tablist ub ub-pc">
+    <view class="tabwrap ub ub-pj">
+      <view wx:for="{{tablist}}" wx:key="{{index}}" class="tabItem {{curTabIndex==index?'on':''}}" bindtap="switchTab" data-index="{{index}}">{{item}}
+        <view class="line"></view>
+      </view>
+    </view>
+  </view>
+</view>
+
+<view class="homeTabPage" wx:if="{{curTabIndex===0}}">
+  <view class="toper">
+    <image class="homeBanner" src="../../images/homeBanner.png" mode="widthFix"></image>
+  </view>
+
+  <!-- 3个按钮时候的情况 -->
+
+  <!-- <view class="middleWrap">
+    <view class="mBtnWrap" bindtap="toFujinyh">
+      <image src="../../images/fjyh.png" style="width:96rpx;height:80rpx;"></image>
+      <view class="mBtnText">附近优惠</view>
+    </view>
+    <view class="mBtnWrap" bindtap="toFreeGet">
+      <image src="../../images/mfl.png" style="width:80rpx;height:80rpx;"></image>
+      <view class="mBtnText">0元免费领</view>
+    </view>
+    <view class="mBtnWrap" bindtap="toMyTicket">
+      <image src="../../images/qdzyp.png" style="width:80rpx;height:80rpx;"></image>
+      <view class="mBtnText">签到赚银票</view>
+    </view>
+  </view> -->
+
+  <view class="middleWrap">
+    <view class="mBgWrap">
+      <view class="mBtnWrap" bindtap="toFujinyh">
+        <image src="../../images/fjyh.png" style="width:96rpx;height:80rpx;"></image>
+        <view class="mBtnText">附近优惠</view>
+      </view>
+      <view class="mLine"></view>
+      <view class="mBtnWrap" bindtap="toMyTicket">
+        <image src="../../images/qdzyp.png" style="width:80rpx;height:80rpx;"></image>
+        <view class="mBtnText">签到赚银票</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="pubu">
+    <view class="pubuItem">
+      <view class="cardWrap padr10">
+        <view class="card" wx:for="{{businessList}}" wx:key="{{item.id}}" wx:if="{{index%2 == 0}}" data-comid="{{item.id}}" bindtap="goCommentDetail">
+          <image src="{{item.pics[0]}}" mode="widthFix" class="plimg"></image>
+          <view class="pubupl">{{item.content}}</view>
+          <view class="boxWrap">
+            <view class="headWrap">
+              <image src="{{item.userDto.headImg}}" style="border-radius:50%;" data-userid="{{item.userDto.id}}" catchtap="toUserCircle"></image>
+              <view class="username">{{item.userDto.name}}</view>
+            </view>
+            <view class="zanWrap" data-comid="{{item.id}}" data-maker="{{index}}" data-status="{{item.praise}}" catchtap="toPraise">
+              <view class="iconfont icon-dianzan {{item.praise==1?'yizan':''}}"></view> {{item.praiseCount}}
+            </view>
+          </view>
+        </view>
+      </view>
+
+    </view>
+    <view class="pubuItem">
+      <view class="cardWrap padl10">
+        <view class="card" wx:for="{{businessList}}" wx:key="{{item.id}}" wx:if="{{index%2!=0}}" data-comid="{{item.id}}" bindtap="goCommentDetail">
+          <image src="{{item.pics[0]}}" mode="widthFix" class="plimg"></image>
+          <view class="pubupl">{{item.content}}</view>
+          <view class="boxWrap">
+            <view class="headWrap">
+              <image src="{{item.userDto.headImg}}" style="border-radius:50%;" data-userid="{{item.userDto.id}}" catchtap="toUserCircle"></image>
+              <view class="username">{{item.userDto.name}}</view>
+            </view>
+            <view class="zanWrap" data-comid="{{item.id}}" data-maker="{{index}}" data-status="{{item.praise}}" catchtap="toPraise">
+              <view class="iconfont icon-dianzan {{item.praise==1?'yizan':''}}"></view> {{item.praiseCount}}
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+<!-- 关注 -->
+<view class="focusTabPage" wx:if="{{curTabIndex===1}}">
+  <view class="yongkaxuzhi-wrap">
+    <view class="yongkaxuzhi">
+      <view class="inner-row">
+        <view class="nickname-wrap">
+          <image src="../../images/pinglunuser.png"></image>
+          <view class="nickname">松鼠</view>
+        </view>
+        <view class="sharetypedes">发表了一条评论</view>
+      </view>
+
+      <view class="pinglun mt10">
+        好喝，奶茶美味，清茶心香气沁人心脾，下次一定还要买而且很便宜一万个赞哟，耐思
+      </view>
+
+      <image class="pjimgs" src="../../images/bdBanner.png"></image>
+
+      <view class="card-wrap">
+        <image class="mendianimg" src="../../images/mendianimg.png"></image>
+        <view class="mendianinfowrap">
+          <view class="mendianname">仙踪林</view>
+          <view class="mdinfowrap">
+            <view class="mdtype">美食/休闲</view>
+            <view class="zhekou">8.3折</view>
+          </view>
+        </view>
+
+      </view>
+
+      <view class="btnBar">
+        <view class="plTime">2018.02.15 19:40:45</view>
+        <view class="btnBox">
+          <view class="plShare">
+            <icon class="iconfont"></icon>
+          </view>
+          <view class="plPinglun">
+            <icon class="iconfont icon-pinglun" style="margin-right:4rpx;"></icon>0</view>
+          <view class="zan">
+            <icon class="iconfont icon-dianzan" style="margin-right:4rpx;"></icon>3</view>
+        </view>
+      </view>
+
+    </view>
+  </view>
+</view>
+
+
+
+  <!-- <view class="modal" hidden="{{hasUserInfo}}">
+    <view class="gxbox">
+      <view class="title">
+        请登录
+      </view>
+      <view class="focusSuccess ub ub-pc">您必须登录才能继续以后的操作</view>
+      <view class="gxboxBtnWrap">
+        <button open-type="getUserInfo" bindgetuserinfo="getLoginInfo" lang="zh_CN" class="ub ub-ac ub-pc gxboxBtn">微信登录</button>
+      </view>
+    </view>
+  </view> -->
+
+  

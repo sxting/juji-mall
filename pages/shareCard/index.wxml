@@ -1,0 +1,17 @@
+<view class="plr15">
+  <view class="p10 item" wx:for="{{cardList}}" wx:key="unique">
+    <view class="user ub ub-ac">
+      <image class="userImg udb" src="{{item.userDto.headImg}}" data-userid="{{item.userDto.id}}" bindtap="toUserCircle"></image>{{item.userDto.name}}
+    </view>
+    <view class="subItem ub ub-pj">
+      <!-- <view class="rmb" wx:if="{{item.cardDto.cardType==1}}">￥</view> -->
+      <view class="txt">{{item.cardDto.name}}</view>
+      <view class="txt" wx:if="{{item.cardDto.cardType==1}}">拼拼专享：约{{item.cardDto.discount}}折</view>
+      <view class="txt" wx:else>拼拼专享：{{item.cardDto.eachCostAfter}}元/次</view>
+    </view>
+    <!-- <view class="subItem2 ub ub-pj">
+			<view class="txt">¥1090.00</view>
+			<view class="txt">拼拼专享：约8.4折</view>
+		</view> -->
+  </view>
+</view>

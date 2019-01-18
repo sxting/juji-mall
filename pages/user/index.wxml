@@ -1,0 +1,101 @@
+<wxs module="filter" src="../../utils/numFr.wxs"></wxs>
+<view class="toper">
+    <view class="userDiv ub ub-ac">
+        <block wx:if="{{hasUserInfo}}">
+            <image class="userImg" src="{{userInfo.headImg}}" bindtap="toCircle"></image>
+            <view class="ub-f1 ml10">
+                <view class="username">{{userInfo.name}}</view>
+                <view class="desc">
+                    <text class="uds" bindtap="toPath" data-page="/pages/assets/index">钱包 {{filter.toFix(userInfo.balance)}}</text>
+                    <text class="line">|</text>
+                    <text class="uds" bindtap="toPath" data-page="/pages/fans/index?isSelf=1&id={{userInfo.id}}">粉丝 {{userInfo.fansCount}}</text>
+                </view>
+            </view>
+            <view class="btn ub ub-ac ub-pc" bindtap="toCircle">
+                <image class="iconCircle" src="../../images/icon_circle.png"></image>
+                <text class="uds">我的圈子</text>
+            </view>
+        </block>
+        <block wx:else>
+            <image class="userImg" src="../../images/user.png"></image>
+            <view class="ub-f1 ml10">
+                <view class="loginBtn" bindtap="toPath" data-page="/pages/getUser/index">登 录</view>
+            </view>
+        </block>
+    </view>
+    <view class="cardDiv ub ub-ver">
+        <view class="ub ub-ac ub-pj" bindtap="toPath" data-page="/pages/cardlist/index">
+            <view class="cardTxt1 ub ub-ac">
+                <image class="iconNav" src="../../images/icon_card.png"></image>
+                <text class="uds">卡包 ({{userInfo.cardPackageCount}})</text>
+            </view>
+            <view class="cardTxt2">
+                <text class="uds">进入卡包</text>
+                <icon class="iconfont icon-right"></icon>
+            </view>
+        </view>
+        <view class="cardlist ub-f1 ub ub-ac" hidden="{{isShowNodata}}">
+            <view class="item" wx:for="{{cardList}}" wx:key="unique">
+                <image class="img" src="../../images/card.png" bindtap="toPath" data-page="/pages/cardlist/index"></image>
+                <view class="name ub ub-ac"><image class="san" src="../../images/san.png"></image>{{item.merchantName}}</view>
+                <view class="tit" bindtap="toPath" data-page="/pages/cardlist/index">{{item.name}}</view>
+                <button bindtap="useCard" data-cardid="{{item.cardDto.id}}" data-id="{{item.merchantId}}" data-type="{{item.cardType}}">使用</button>
+            </view>
+        </view>
+        <view class="ub-f1 ub ub-ac ub-pc ub-ver" hidden="{{!isShowNodata}}">
+            <image class="nodataImg1" src="../../images/noCard.png"></image>
+            <view class="nodataTxt1">你与小伙伴还没购卡呢~</view>
+        </view>
+    </view>
+</view>
+<view class="main">
+    <view class="coinDiv" bindtap="toTicket">
+        <image class="udb" src="../../images/coin.png" style="width:100%" mode="widthFix"></image>
+        <view class="con">
+            <view class="txt1">我的银票<text class="rc ml05">{{userInfo.coin}}张</text></view>
+            <view class="txt2">马上做任务获取更多银票</view>
+        </view>
+    </view>
+    <view class="bgb navlist">
+        <view class="plr10 item ub ub-ac" bindtap="toPath" data-page="/pages/myTrade/index">
+            <image class="iconNav" src="../../images/icon_trade.png"></image>
+            <view class="">我的交易</view>
+            <icon class="iconfont icon-right"></icon>
+        </view>
+        <!-- <button class="item ub ub-ac kefu" open-type='contact' session-from='weapp'>
+            <image class="iconNav" src="../../images/icon_kefu.png"></image>
+            <view class="">客服</view>
+            <icon class="iconfont icon-right"></icon>
+        </button> -->
+        <view class="plr10 item ub ub-ac" bindtap="toPath" data-page="/pages/user/setting/index">
+            <image class="iconNav" src="../../images/icon_set.png"></image>
+            <view class="">设置</view>
+            <icon class="iconfont icon-right"></icon>
+        </view>
+    </view>
+</view>
+<view class="modal" hidden="{{isShowModal}}">
+    <view class="shopDiv">
+        <image class="icon_close" src="../../images/icon_close.png" bindtap="closeModal"></image>
+        <view class="shopHeader">请选择买单方式</view>
+        <view class="shopList">
+            <view class="item ub ub-ac">
+                <view class="ub-f1 ml10">
+                    <view class="cardType">免费体验卡</view>
+                    <view class="desc">0元/次</view>
+                </view>
+                <button class="usebtn ub ub-ac ub-pc">立即使用</button>
+            </view>
+            <view class="item ub ub-ac mt15">
+                <view class="ub-f1 ml10">
+                    <view class="cardType">直接消费</view>
+                    <view class="desc">1折</view>
+                </view>
+                <button class="usebtn ub ub-ac ub-pc">立即使用</button>
+            </view>
+        </view>
+    </view>
+</view>
+  <loginBox></loginBox>
+<import src="../../components/toast/toast.wxml" />
+<template is="toast" data="{{..._toast_ }}" />

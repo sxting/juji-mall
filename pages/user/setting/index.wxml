@@ -1,0 +1,19 @@
+<view class="main bgb plr15">
+    <!-- <view class="item ub ub-ac ub-pj bbc" bindtap="changeTel">
+        <text>修改手机号</text>
+        <image class="arrow-right" src="../../../images/arrow-right.png"></image>
+    </view> -->
+    <view class="item ub ub-ac ub-pj" bindtap="openModal">
+        <text>更新微信资料</text>
+        <image class="arrow-right" src="../../../images/arrow-right.png"></image>
+    </view>
+</view>
+<view class="modal" hidden="{{isShowModal}}"> 
+    <view class="modalCon">
+        <view class="content">您确定要更新资料？</view>
+        <view class="btnGroup ub">
+            <button class="ub-f1 ub ub-ac ub-pc" bindtap="closeModal">取消</button>
+            <button class="ub-f1 ub ub-ac ub-pc blc" open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="getUserInfo">确定</button>
+        </view>
+    </view>
+</view>

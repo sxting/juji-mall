@@ -1,0 +1,27 @@
+@import '../../style/iconfont.wxss';
+@import '../../app.wxss';
+page{height: 100%}
+.toper{position: relative;height: 450rpx;}
+.ticketBanner{display: block;width: 100%;height: 450rpx;}
+.circle{position: absolute;width: 240rpx;height:240rpx;top: 50%;left: 50%;margin-top: -140rpx;margin-left: -120rpx; }
+.signImg{position: absolute;width: 240rpx;height:240rpx;top: 0;left: 0;z-index: 0}
+.circle view.txt1{font-size: 28rpx;color: #EE8936;position: relative;z-index: 1}
+.circle view.txt2{color: #EE8936;font-size: 32rpx;position: relative;z-index: 1;font-weight: bold;line-height: 42rpx;height: 48rpx}
+.circle view.txt3{color: #EE8936;font-size: 28rpx;position: relative;z-index: 1;font-weight: bold;line-height: 40rpx;height: 48rpx}
+.tablist{height: 100rpx;background-color: #fff}
+.tablist .tabItem{position: relative;font-size: 28rpx;color: #999;margin:0 40rpx;height: 100rpx;line-height: 100rpx;}
+.tablist .tabItem .line{width:28rpx;height: 4rpx;background-color: #888;border-radius: 2rpx;position:absolute;bottom: 22rpx;left: 50%;margin-left: -14rpx;display: none;}
+.tablist .tabItem.on{color:#333;}
+.tablist .tabItem.on .line{display: block;}
+
+.main{padding:0 30rpx 20rpx;background-color: #f5f5f5;}
+.main view.item {background-color: #fff;padding:20rpx 30rpx;border-radius: 10rpx;margin-top: 20rpx;}
+.main view.item view .cardType {font-size: 24rpx;color: #333;}
+.main view.item view .desc1{color: #FF5A1D;font-size:24rpx;margin-top: 15rpx;}
+.main view.item view .desc2{color: #999;font-size:24rpx;margin-top: 15rpx;}
+.number1{font-size: 24rpx;color: #ff6000;}
+.number2{font-size: 24rpx;color: #f00;}
+
+.icon_ticket{width: 23rpx;height: 24rpx;display: inline-block;vertical-align: middle;margin-right: 8rpx;}
+
+.conDiv{height: 100%;box-sizing:border-box;}

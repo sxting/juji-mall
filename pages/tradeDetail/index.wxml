@@ -1,0 +1,46 @@
+<view class="tradeDiv plr15">
+    <view class="userInfo ub ub-ac">
+        <image class="userImg" src="../../images/user.png"></image>
+        <view class="ub-f1">
+            <view class="userName">门店名</view>
+            <view class="balance">2018-10-09 15:03:35</view>
+        </view>
+    </view>
+    <view class="tradeInfo">
+        <view class="ub ub-pj mt15">
+            <view class="itemTit">核销码</view>
+            <view class="itemCon">525323</view>
+        </view>
+        <view class="ub ub-pj mt15">
+            <view class="itemTit">交易详情</view>
+            <view class="itemCon">免费体检一次</view>
+        </view>
+        <view class="ub ub-pj mt15">
+            <view class="itemTit">交易门店</view>
+            <view class="itemCon">交易门店</view>
+        </view>
+        <view class="ub ub-pj mt15">
+            <view class="itemTit">订单编号</view>
+            <view class="itemCon">111111111</view>
+        </view>
+        <view class="line"></view>
+        <view class="ub ub-pj mt15">
+            <view class="itemTit">消耗银票</view>
+            <view class="itemCon">12</view>
+        </view>
+        <view class="ub ub-pj mt15">
+            <view class="itemTit">实际支付</view>
+            <view class="itemCon">￥50</view>
+        </view>
+    </view>
+    <view class="payWays">
+        <view class="ub ub-ac ub-pj item">
+            <view class="itemTit">使用账户余额</view>
+            <view class="itemCon">￥12</view>
+        </view>
+        <view class="ub ub-ac ub-pj item">
+            <view class="itemTit">使用微信支付</view>
+            <view class="itemCon">￥50</view>
+        </view>
+    </view>
+</view>

@@ -19,12 +19,12 @@ Component({
   pageLifetimes: {
     // 组件所在页面的生命周期函数
     show: function() {
-      var timer = setInterval(() => {
-        if (wx.getStorageSync('accessToken')) {
-          clearInterval(timer);
-        }
-        this.getMyInfo();
-      }, 50);
+      // var timer = setInterval(() => {
+      //   if (wx.getStorageSync('accessToken')) {
+      //     clearInterval(timer);
+      //   }
+      //   this.getMyInfo();
+      // }, 50);
     }
   },
 

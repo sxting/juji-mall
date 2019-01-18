@@ -10,37 +10,25 @@
 </view> -->
 
 <view class="homeTabPage" wx:if="{{curTabIndex===0}}">
+  <view class="locationWrap">
+    <view class="title">桔集</view>
+    <view class="location">北京
+    <image style="width:16rpx;height:10rpx;margin-left:10rpx;" src="../../images/sort-down.png"></image></view>
+  </view>
   <view class="toper">
     <image class="homeBanner" src="../../images/homeBanner.png" mode="widthFix"></image>
   </view>
 
-  <!-- 3个按钮时候的情况 -->
-
-  <!-- <view class="middleWrap">
-    <view class="mBtnWrap" bindtap="toFujinyh">
-      <image src="../../images/fjyh.png" style="width:96rpx;height:80rpx;"></image>
-      <view class="mBtnText">附近优惠</view>
-    </view>
-    <view class="mBtnWrap" bindtap="toFreeGet">
-      <image src="../../images/mfl.png" style="width:80rpx;height:80rpx;"></image>
-      <view class="mBtnText">0元免费领</view>
-    </view>
-    <view class="mBtnWrap" bindtap="toMyTicket">
-      <image src="../../images/qdzyp.png" style="width:80rpx;height:80rpx;"></image>
-      <view class="mBtnText">签到赚银票</view>
-    </view>
-  </view> -->
-
   <view class="middleWrap">
     <view class="mBgWrap">
       <view class="mBtnWrap" bindtap="toFujinyh">
-        <image src="../../images/fjyh.png" style="width:96rpx;height:80rpx;"></image>
-        <view class="mBtnText">附近优惠</view>
+        <image src="../../images/kanjia.png" style="width:66rpx;height:66rpx;margin-bottom:20rpx;"></image>
+        <view class="mBtnText">超值砍价</view>
       </view>
       <view class="mLine"></view>
       <view class="mBtnWrap" bindtap="toMyTicket">
-        <image src="../../images/qdzyp.png" style="width:80rpx;height:80rpx;"></image>
-        <view class="mBtnText">签到赚银票</view>
+        <image src="../../images/huanli.png" style="width:66rpx;height:66rpx;margin-bottom:20rpx;"></image>
+        <view class="mBtnText">桔子换礼</view>
       </view>
     </view>
   </view>

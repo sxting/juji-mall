@@ -158,23 +158,23 @@ Page({
         wx.setStorageSync('curLatitude', res.latitude);
         wx.setStorageSync('curLongitude', res.longitude);
         console.log('--------位置调用成功--------');
-        // let obj = {
-        //   lng: res.longitude,
-        //   lat: res.latitude,
-        //   page: 1
-        // };
-        // that.getNearCommentsData(obj);
-        // qqmapsdk.reverseGeocoder({
-        //   location: {
-        //     latitude: res.latitude,
-        //     longitude: res.longitude
-        //   },
-        //   success: function(res) {
-        //     var city = res.result.address_component.city.substring(0, 2);
-        //     wx.setStorageSync('curCity', city);
-        //     console.log(res.result.formatted_addresses.recommend);
-        //   }
-        // })
+        let obj = {
+          lng: res.longitude,
+          lat: res.latitude,
+          page: 1
+        };
+        that.getNearCommentsData(obj);
+        qqmapsdk.reverseGeocoder({
+          location: {
+            latitude: res.latitude,
+            longitude: res.longitude
+          },
+          success: function(res) {
+            var city = res.result.address_component.city.substring(0, 2);
+            wx.setStorageSync('curCity', city);
+            console.log(res.result.formatted_addresses.recommend);
+          }
+        })
       },
       fail: function(err) {
         console.log('---------位置调用失败或是被拒绝--------');
@@ -183,7 +183,7 @@ Page({
         let obj = {
           page: 1
         };
-        // that.getNearCommentsData(obj);
+        that.getNearCommentsData(obj);
       }
     })
   },
@@ -216,29 +216,29 @@ Page({
     console.log('--------------index-onLoad-------------');
     wx.setNavigationBarTitle({title: ''});
     if(options.page){
-      // var timer = setInterval(()=>{
-      //   if(wx.getStorageSync('accessToken')){
-      //     clearInterval(timer);
-      //     // 如果从分享的页面进来，分享来自圈子
-      //     if (options.page == 'circle') {
-      //       wx.navigateTo({
-      //         url: '/pages/myCircle/index?id=' + options.id
-      //       });
-      //     }
-      //     // 如果从分享的页面进来，分享来自商户详情
-      //     if (options.page == 'business') {
-      //       wx.navigateTo({
-      //         url: '/pages/businessDetails/index?id=' + options.id + '&cardType' + options.cardType
-      //       });
-      //     }
-      //     // 如果从分享的页面进来，分享来自评论详情
-      //     if (options.page == 'commentDetail') {
-      //       wx.navigateTo({
-      //         url: '/pages/commentDetail/index?id=' + options.id
-      //       });
-      //     }
-      //   }
-      // },50);
+      var timer = setInterval(()=>{
+        if(wx.getStorageSync('accessToken')){
+          clearInterval(timer);
+          // 如果从分享的页面进来，分享来自圈子
+          if (options.page == 'circle') {
+            wx.navigateTo({
+              url: '/pages/myCircle/index?id=' + options.id
+            });
+          }
+          // 如果从分享的页面进来，分享来自商户详情
+          if (options.page == 'business') {
+            wx.navigateTo({
+              url: '/pages/businessDetails/index?id=' + options.id + '&cardType' + options.cardType
+            });
+          }
+          // 如果从分享的页面进来，分享来自评论详情
+          if (options.page == 'commentDetail') {
+            wx.navigateTo({
+              url: '/pages/commentDetail/index?id=' + options.id
+            });
+          }
+        }
+      },50);
     }
     this.getCurLocation();
   }

@@ -9,29 +9,29 @@ App({
         logs.unshift(Date.now())
         wx.setStorageSync('logs', logs)
         // 登录
-        // wx.login({
-        //     success: res => {
-        //         wx.request({
-        //             url: 'https://w.juniuo.com/xppWxapp/login.json',
-        //             method: 'POST',
-        //             data: {
-        //                 code: res.code,
-        //                 appid: constant.APPID,
-        //                 tplid: constant.TPLID,
-        //                 fromUserId:options.query.userId||''
-        //             },
-        //             header: {
-        //                 'Content-Type': 'application/x-www-form-urlencoded'
-        //             },
-        //             success: (res) => {
-        //                 if (res.data.success) {
-        //                     wx.setStorageSync('accessToken', res.data.data);
-        //                     this.getMyInfo();
-        //                 }
-        //             }
-        //         })
-        //     }
-        // });
+        wx.login({
+            success: res => {
+                wx.request({
+                    url: 'https://w.juniuo.com/xppWxapp/login.json',
+                    method: 'POST',
+                    data: {
+                        code: res.code,
+                        appid: constant.APPID,
+                        tplid: constant.TPLID,
+                        fromUserId:options.query.userId||''
+                    },
+                    header: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    success: (res) => {
+                        if (res.data.success) {
+                            wx.setStorageSync('accessToken', res.data.data);
+                            this.getMyInfo();
+                        }
+                    }
+                })
+            }
+        });
     },
     getMyInfo: function() {
         service.getMyInfo().subscribe({

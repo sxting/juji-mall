@@ -1,14 +1,14 @@
 <wxs module="filter" src="../../utils/numFr.wxs"></wxs>
 <view class="fullScreen ub ub-ver">
     <view class="toper">
-        <view class="tablist ub">
+        <!-- <view class="tablist ub">
             <view class="addr ub ub-ac" bindtap="toCitylist">
                 <image class="icon_addr" src="../../images/icon_addr.png"></image>{{curCity}}
             </view>
             <view class="verline"></view>
             <view wx:for="{{tablist}}" wx:key="unique" class="tabItem {{curTabIndex==index?'on':''}}" bindtap="switchTab" data-type="{{index}}" data-index="{{index}}">{{item}}<view class="line"></view>
             </view>
-        </view>
+        </view> -->
         <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="3000" duration="1000" indicator-color="#fff" indicator-active-color="#b55fff" circular>
             <swiper-item wx:for="{{banners}}" wx:key="unique">
                 <image src="{{item}}" class="slide-image"></image>

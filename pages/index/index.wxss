@@ -12,7 +12,7 @@ page {
 
 .toper {
   height: 200rpx;
-  background-color: #9548fa;
+  background-color: #ffffff;
   padding: 0 30rpx;
   margin-bottom: 90rpx;
 }

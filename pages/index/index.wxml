@@ -1,5 +1,5 @@
 <loginBox></loginBox>
-<view class="tabListWrap">
+<!-- <view class="tabListWrap">
   <view hidden="true" class="tablist ub ub-pc">
     <view class="tabwrap ub ub-pj">
       <view wx:for="{{tablist}}" wx:key="{{index}}" class="tabItem {{curTabIndex==index?'on':''}}" bindtap="switchTab" data-index="{{index}}">{{item}}
@@ -7,7 +7,7 @@
       </view>
     </view>
   </view>
-</view>
+</view> -->
 
 <view class="homeTabPage" wx:if="{{curTabIndex===0}}">
   <view class="toper">

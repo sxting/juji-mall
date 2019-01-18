@@ -52,13 +52,13 @@
     "backgroundColor": "#FFFFFF",
     "list": [
       {
-        "text": "享说",
+        "text": "首页",
         "pagePath": "pages/index/index",
         "iconPath": "images/home_sy2.png",
         "selectedIconPath": "images/home_sy1.png"
       },
       {
-        "text": "银票",
+        "text": "桔子",
         "pagePath": "pages/myTicket/index",
         "iconPath": "images/home_qb2.png",
         "selectedIconPath": "images/home_qb1.png"

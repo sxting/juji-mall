@@ -1,5 +1,5 @@
 page{height: 100%}
-.toper{height: 200rpx;background-color: #9548FA;padding:24rpx 30rpx;margin-bottom: 100rpx;}
+.toper{height: 200rpx;background-color: #fff;padding:24rpx 30rpx;margin-bottom: 100rpx;}
 .tablist{height: 60rpx;}
 .addr{width: 90rpx;color: #fff;font-size: 26rpx;height: 40rpx;margin-right: 15rpx;}
 .icon_addr{width: 24rpx;height: 28rpx;margin-right: 8rpx;}

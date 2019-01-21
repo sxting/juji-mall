@@ -32,7 +32,8 @@
     "pages/shareCard/index",
     "pages/logs/logs",
     "pages/createReply/index",
-    "pages/commentList/index"
+    "pages/commentList/index",
+    "pages/juzihl/index"
   ],
   "permission": {
     "scope.userLocation": {
@@ -40,7 +41,7 @@
     }
   },
   "window": {
-    "backgroundTextStyle":"dark",
+    "backgroundTextStyle": "dark",
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "桔集商城",
     "navigationBarTextStyle": "black"

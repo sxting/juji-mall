@@ -1,0 +1,86 @@
+<!--pages/juzihl/index.wxml-->
+<view>
+
+  <view class="juzihl-wrap">
+    <view style="display:flex;justify-content: space-between;align-item:center;">
+      <view class="mtitle">桔子换礼</view>
+      <view class="location">北京
+        <image style="width:16rpx;height:10rpx;margin-left:10rpx;" src="../../images/sort-down.png"></image>
+      </view>
+    </view>
+    
+    <view class="subtitle" style="margin-top:10rpx;">让生活“换”然一新</view>
+    <view class="labels-wrap">
+      <view class="label label-active">综合</view>
+      <view class="label">买得起</view>
+      <view class="label">橘子</view>
+      <view class="label">橘子</view>
+      <view class="label">价格</view>
+      <view class="label">距离</view>
+      <view class="label">销量</view>
+    </view>
+    <view class="jingxuanlist">
+      <image style="width:100%;height:330rpx;margin-top:30rpx;" src="../../images/homeBanner.png"></image>
+      <view class="dis-wrap jc-sb">
+        <view class="from">北京故宫售票中心</view>
+        <view class="dis">距你130m</view>
+      </view>
+      <view class="pro-name">【北京故宫一日游】故宫文化传承，1日尽收眼里</view>
+      <view class="price-wrap jc-sb">
+        <view class="p-wrap">
+          <view class="now-price">¥ 20.00</view>
+          <view class="old-price">¥ 88.00</view>
+        </view>
+        <view class="count">已售20件</view>
+      </view>
+    </view>
+
+    <view class="jingxuanlist">
+      <image style="width:100%;height:330rpx;margin-top:30rpx;" src="../../images/homeBanner.png"></image>
+      <view class="dis-wrap jc-sb">
+        <view class="from">北京故宫售票中心</view>
+        <view class="dis">距你130m</view>
+      </view>
+      <view class="pro-name">【北京故宫一日游】故宫文化传承，1日尽收眼里</view>
+      <view class="price-wrap jc-sb">
+        <view class="p-wrap">
+          <view class="now-price">¥ 20.00</view>
+          <view class="old-price">¥ 88.00</view>
+        </view>
+        <view class="count">已售20件</view>
+      </view>
+    </view>
+
+    <view class="jingxuanlist">
+      <image style="width:100%;height:330rpx;margin-top:30rpx;" src="../../images/homeBanner.png"></image>
+      <view class="dis-wrap jc-sb">
+        <view class="from">北京故宫售票中心</view>
+        <view class="dis">距你130m</view>
+      </view>
+      <view class="pro-name">【北京故宫一日游】故宫文化传承，1日尽收眼里</view>
+      <view class="price-wrap jc-sb">
+        <view class="p-wrap">
+          <view class="now-price">¥ 20.00</view>
+          <view class="old-price">¥ 88.00</view>
+        </view>
+        <view class="count">已售20件</view>
+      </view>
+    </view>
+
+    <view class="jingxuanlist">
+      <image style="width:100%;height:330rpx;margin-top:30rpx;" src="../../images/homeBanner.png"></image>
+      <view class="dis-wrap jc-sb">
+        <view class="from">北京故宫售票中心</view>
+        <view class="dis">距你130m</view>
+      </view>
+      <view class="pro-name">【北京故宫一日游】故宫文化传承，1日尽收眼里</view>
+      <view class="price-wrap jc-sb">
+        <view class="p-wrap">
+          <view class="now-price">¥ 20.00</view>
+          <view class="old-price">¥ 88.00</view>
+        </view>
+        <view class="count">已售20件</view>
+      </view>
+    </view>
+  </view>
+</view>

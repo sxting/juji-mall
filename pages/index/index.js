@@ -233,7 +233,37 @@ Page({
       url: '/pages/myCircle/index?id=' + event.currentTarget.dataset.userid
     });
   },
+  getPreOrder:function(){
+    var obj = {
+      choosenType: 'thirdpay',
+      givingMoney: 0,
+      orderPay: '0.01',
+      pay: '0.01',
+      prepayRuleId: '',
+      storeId: '111542352778150444'
+    };
+    service.preOrder(obj).subscribe({
+      next: res => {
+        wx.requestPayment({
+          timeStamp: res.data.data.timeStamp,
+          nonceStr: res.data.data.nonceStr,
+          package: res.data.data.package,
+          signType: res.data.data.signType,
+          paySign: res.data.data.paySign,
+          success(res) { 
+            alert('支付成功');
+          },
+          fail(res) { 
+            alert('支付失败');
+          }
+        })
+      },
+      error: err => console.log(err),
+      complete: () => wx.hideToast()
+    });
+  },
   onLoad: function(options) {
+    this.getPreOrder();
     console.log('--------------index-onLoad-------------');
     wx.setNavigationBarTitle({title: ''});
     if(options.page){

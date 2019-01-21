@@ -6,6 +6,11 @@ import {
 } from 'utils/http';
 let service = {};
 let api = constant.apiUrl;
+//预下单 微信支付
+service.preOrder = (data) => {
+  let apiUrl = api + '/customer/order/preOrder.json';
+  return http.post(apiUrl, data);
+}
 // --------------------------------------------merchant-----------------------------------
 /*获取Banner列表*/
 service.listBanners = (data) => {

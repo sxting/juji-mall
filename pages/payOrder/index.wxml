@@ -1,37 +1,23 @@
-<view class="toper">已成功锁定拼拼折扣，请及时完成支付<text class="rc">{{restTime}}</text></view>
-<view class="plr15">
-    <view class="tradeInfo plr15">
-        <image class="userImg udb" src="{{merchantInfo.merchantLogo}}"></image>
-        <view class="tx-c userTit">{{merchantInfo.name}}</view>
-        <view class="tx-c userAmount">￥{{totalPay}}</view>
-        <view class="h20"></view>
-        <!-- <view class="ub ub-ac ub-pj mt30 btc nimingDiv">
-            <view class="itemTit">匿名支付</view>
-            <switch checked="{{isChecked}}" color="#B45FFF" bindchange="switchChange"/>
-        </view> -->
+<view>
+    <view class="tradeInfo plr15 ub ub-ac">
+        <image class="goodImg udb" src="../../images/mendianimg.png"></image>
+        <view class="ub-f1 goodMsg">
+            <view class="goodTit">兰溪小馆团购套餐</view>
+            <view class="storeName">兰溪小馆香山店</view>
+            <view class="goodAmount">20桔子<text>￥88.00</text></view>
+        </view>
     </view>
-    <view class="tradeInfo1">
-        <view class="ub ub-ac ub-pj item">
-            <view class="itemTit ub ub-ac">商品原价</view>
-            <view class="discountAmount">￥{{payInfo.originalValue}}</view>
-        </view>
-        <view class="ub ub-ac ub-pj item">
-            <view class="itemTit ub ub-ac">拼拼折扣</view>
-            <view class="discountAmount1">节省￥{{payInfo.saveValue}}</view>
-        </view>
-        <view class="ub ub-ac ub-pj item">
-            <view class="itemTit ub ub-ac">仅需支付</view>
-            <view class="discountAmount">￥{{totalPay}}</view>
-        </view>
-        <!-- <view class="ub ub-ac ub-pj item" wx:if="{{payInfo.wxpay==0}}">
-            <view class="itemTit ub ub-ac">{{merchantInfo.cardDto.name}}<image class="haved" src="../../images/haved.png"></image></view>
-            <view class="discountAmount">-￥{{totalPay}}</view>
-        </view> -->
+    <view class="ub ub-ac ub-pj item plr15">
+        <view class="itemTit ub ub-ac">购买数量</view>
+        <view class="discountAmount"></view>
     </view>
-    <!-- <view class="tx-c remark">*此笔交易使用拼友的共享卡，款项将返还给TA</view> -->
+    <view class="ub ub-ac ub-pj item plr15">
+        <view class="itemTit ub ub-ac">使用桔子</view>
+        <view class="discountAmount"></view>
+    </view>
 </view>
 
-<view class="mt50 plr15">
-    <button class="btn_common {{disabled?'disabled':''}}" bindtap="toPay">确认支付</button>
+<view class="btn_bottom ub ub-ac plr15">
+    <view class="ub-f1">金额：¥0.00</view>
+    <button class="btn_common ub-f1 ub ub-ac ub-pc {{disabled?'disabled':''}}" bindtap="toPay">确认兑换</button>
 </view>
-<confirmBox isShowConfirmModal="{{isShowConfirmModal}}" confirmBoxTitle="{{confirmTitle}}" confirmBoxContent="{{confirmContent}}"></confirmBox>

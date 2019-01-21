@@ -1,72 +1,17 @@
-<view class="yongkaxuzhi">
-
-  <view class="combox" wx:for="{{merListComments}}" wx:key="{{index}}" data-comid="{{item.id}}" bindtap="toCommentDetail">
-    <view class="inner-row mt15">
-      <view class="nickname-wrap">
-        <image src="{{item.userDto.headImg}}" style="border-radius:50%;" data-userid="{{item.userDto.id}}" catchtap="toUserCircle"></image>
-        <view class="nickname">{{item.userDto.name}}</view>
-      </view>
-      <block wx:if="{{userinfo.id!=item.userDto.id}}">
-      <view class="unfocus focus" wx:if="{{item.userDto.attent==1}}" data-index="{{index}}" data-atuserid="{{item.userDto.id}}" data-attent="{{item.userDto.attent}}" catchtap="toAttent">已关注</view>
-      <view class="unfocus" wx:else data-index="{{index}}" data-atuserid="{{item.userDto.id}}" data-attent="{{item.userDto.attent}}" catchtap="toAttent">关注</view>
-      </block>
-      <block wx:else></block>
+<view class="main">
+  <view class="item" wx:for="{{commentlist}}" wx:key="{{index}}" data-comid="{{item.id}}" bindtap="toCommentDetail">
+    <view class="nickMsg ub ub-ac">
+      <image class="userImg" src="../../images/headimg.png"></image>
+      <view class="nickname ub-f1">小仙女</view>
+      <view class="times">2018-01-01 01:00:00</view>
     </view>
-
-    <view class="pinglun mt10">{{item.content}}</view>
-
-    <view class="compics-wrap" wx:if="{{item.pics.length>0}}">
-      <image wx:for="{{item.pics}}" wx:key="{{index}}" class="compics" src="{{item}}" mode="widthFix"></image>
-    </view>
-
-    <view class="card-wrap">
-      <view class="card-desp">
-        <view class="card-name">{{item.cardDto.name}}</view>
-        <view class="card-zhekou" wx:if="{{item.cardDto.cardType==1}}">{{item.cardDto.discount}}折</view>
-        <view class="card-zhekou" wx:if="{{item.cardDto.cardType==2}}">拼拼价￥{{item.cardDto.eachCostAfter}}</view>
-        <view class="vline"></view>
-        <view class="card-master">来自@{{item.cardUserDto.name}}</view>
-      </view>
-<!-- 如果评论者用的是自己的卡 -->
-          <block wx:if="{{item.cardUserDto.id==userinfo.id}}">
-                 <view class="yigongxiang" data-ftype="2" data-index="{{index}}" data-atuserid="{{item.cardUserDto.id}}" catchtap="toCreateOrder">
-            立即下单</view>   
-            </block>
-          <!-- 如果评论者用的不是自己的卡 -->
-          <block wx:else>
-      <view wx:if="{{item.cardUserDto.attent==1}}" class="yigongxiang" data-ftype="2" data-index="{{index}}" data-cardtype="{{item.cardDto.cardType}}" data-atuserid="{{item.cardUserDto.id}}" catchtap="toCreateOrder">
-        立即下单</view>
-      <view wx:else class="gongxiang" data-ftype="2" data-index="{{index}}" data-atuserid="{{item.cardUserDto.id}}" catchtap="toAttent">
-        共享TA的卡</view>
-        </block>
-    </view>
-
-    <view class="btnBar">
-      <view class="plTime">{{item.dateCreated}}</view>
-      <view class="btnBox">
-        <view class="plShare">
-          <icon class="iconfont"></icon>
-        </view>
-        <view class="plPinglun">
-          <icon class="iconfont icon-pinglun" style="margin-right:4rpx;"></icon>{{item.replyCount}}</view>
-        <view class="zan" data-comid="{{item.id}}" data-maker="{{index}}" data-status="{{item.praise}}" catchtap="toPraise">
-          <icon class="iconfont icon-dianzan {{item.praise==1?'yizan':''}}" style="margin-right:4rpx;"></icon>{{item.praiseCount}}</view>
-      </view>
+    <view class="content">评价内容评价内容评价内容评价内容评价内容评价内容</view>
+    <view class="imglist">
+      <image src="../../images/mendianimg.png"></image>
+      <image src="../../images/mendianimg.png"></image>
+      <image src="../../images/mendianimg.png"></image>
+      <image src="../../images/mendianimg.png"></image>
+      <image src="../../images/mendianimg.png"></image>
     </view>
   </view>
-
-  <view class="modal" hidden="{{isShowFocusModal}}" catchtap="closeFocusModal">
-    <view class="gxbox" catchtap="tapWin">
-      <view class="title">
-        <view class="closeModal" catchtap="closeFocusModal">×</view>
-      </view>
-      <view class="focusSuccess ub ub-pc" wx:if="{{focusBoxMaker}}">关注成功</view>
-      <view class="focusSuccess ub ub-pc" wx:else>已取消关注</view>
-      <view class="gxdetail ub ub-pc" wx:if="{{focusBoxMaker}}">已共享TA的会员卡</view>
-      <view class="gxboxBtnWrap">
-        <view class="gxboxBtn" catchtap="closeFocusModal">确定</view>
-      </view>
-    </view>
-  </view>
-
 </view>

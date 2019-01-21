@@ -17,12 +17,12 @@
 
   <view class="middleWrap">
     <view class="mBgWrap">
-      <view class="mBtnWrap" bindtap="toFujinyh">
+      <view class="mBtnWrap" bindtap="toChaozhikj">
         <image src="../../images/kanjia.png" style="width:66rpx;height:66rpx;margin-bottom:20rpx;"></image>
         <view class="mBtnText">超值砍价</view>
       </view>
       <view class="mLine"></view>
-      <view class="mBtnWrap" bindtap="toMyTicket">
+      <view class="mBtnWrap" bindtap="toJuzihl">
         <image src="../../images/huanli.png" style="width:66rpx;height:66rpx;margin-bottom:20rpx;"></image>
         <view class="mBtnText">桔子换礼</view>
       </view>

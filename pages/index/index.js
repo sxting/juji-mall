@@ -42,9 +42,9 @@ Page({
       url: '../freeGet/index'
     });
   },
-  toMyTicket: function() {
-    wx.switchTab({
-      url: '/pages/myTicket/index'
+  toJuzihl: function () {
+    wx.navigateTo({
+      url: '../juzihl/index'
     });
   },
   switchTab: function(event) {

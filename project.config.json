@@ -36,7 +36,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 2,
+			"current": 4,
 			"list": [
 				{
 					"id": 0,
@@ -51,9 +51,21 @@
 					"query": ""
 				},
 				{
-					"id": 2,
-					"name": "评论详情",
-					"pathName": "pages/commentDetail/index",
+					"id": 3,
+					"name": "商品详情",
+					"pathName": "pages/comDetail/index",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "订单",
+					"pathName": "pages/payOrder/index",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "评论列表",
+					"pathName": "pages/commentList/index",
 					"query": ""
 				}
 			]

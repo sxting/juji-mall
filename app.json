@@ -33,7 +33,8 @@
     "pages/logs/logs",
     "pages/createReply/index",
     "pages/commentList/index",
-    "pages/juzihl/index"
+    "pages/juzihl/index",
+    "pages/comDetail/index"
   ],
   "permission": {
     "scope.userLocation": {

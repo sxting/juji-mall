@@ -1,0 +1,675 @@
+.container {
+  width: 100%;
+  height: auto;
+  background: #f8f9fa;
+  padding: 0;
+  overflow: hidden;
+  padding-bottom: 128rpx;
+}
+
+.swiper-wrap {
+  position: relative;
+  width: 100%;
+  height: auto;
+}
+
+.img-wrap {
+  width: 100%;
+}
+
+.img-wrap image {
+  width: 100%;
+  height: 100%;
+}
+
+.businessInfo-wrap {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.businessInfo {
+  background-color: #fff;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 32rpx 28rpx;
+}
+
+.businessInfo .title {
+  font-size: 15px;
+  color: #333;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+}
+
+.jc-sb {
+  justify-content: space-between;
+}
+
+.line {
+  width: 100%;
+  height: 1px;
+  background-color: #dedede;
+  transform: scaleY(0.5);
+}
+
+.addressWrap {
+  display: flex;
+  align-content: center;
+  margin-top: 40rpx;
+}
+
+.address {
+  font-size: 12px;
+  color: #333;
+}
+
+.ml10 {
+  margin-left: 10rpx;
+}
+
+.dis {
+  font-size: 12px;
+  color: #999;
+  margin-left: 20rpx;
+}
+
+.address-detail {
+  font-size: 12px;
+  color: #999;
+  margin-top: 20rpx;
+}
+
+.tongyong {
+  font-size: 12px;
+  color: #333;
+  margin-top: 24rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.pos-xiangxia {
+  position: absolute;
+  right: 0;
+  top: 30rpx;
+}
+
+.huiyuanCard-wrap {
+  margin-top: 330rpx;
+  padding: 0 30rpx;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.huiyuanCard {
+  background-color: #fff;
+  border-radius: 20rpx;
+  width: 100%;
+  height: 100%;
+  padding: 34rpx 30rpx;
+  box-sizing: border-box;
+  box-shadow: 0 1px 3px 1px #f7f2fc;
+}
+
+.huiyuanCard .title {
+  font-size: 14px;
+  color: #333;
+  display: flex;
+  align-items: center;
+}
+
+.huiyuan-item {
+  position: relative;
+}
+
+.desBtn {
+  width: 28rpx;
+  height: 28rpx;
+  margin-left: 20rpx;
+}
+
+.inner-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cardtitle-wrap {
+  display: flex;
+  align-items: center;
+}
+
+.card-label {
+  width: 28rpx;
+  height: 20rpx;
+}
+
+.cardtitle {
+  margin-left: 20rpx;
+  font-size: 13px;
+  color: #333;
+}
+
+.card-amount {
+  font-size: 13px;
+  color: #ff5a1d;
+}
+
+.zhekou {
+  font-size: 12px;
+  color: #ff5a1d;
+}
+
+.yuanjia {
+  font-size: 11px;
+  color: #999;
+  text-decoration: line-through;
+}
+
+.card-tiaojian {
+  margin-top: 20rpx;
+  padding: 20rpx;
+  background: #f8f9fa;
+  font-size: 12px;
+  color: #666;
+}
+
+.yongkaxuzhi-wrap {
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: 30rpx;
+}
+
+.yongkaxuzhi {
+  background-color: #fff;
+  width: 100%;
+  padding: 34rpx 30rpx;
+  box-sizing: border-box;
+}
+
+.yongkaxuzhi .title {
+  font-size: 14px;
+  color: #333;
+}
+
+.xuzhi {
+  font-size: 12px;
+  color: #999;
+}
+
+.headimg-row {
+  display: flex;
+  align-items: center;
+}
+
+.headimg-row image {
+  width: 70rpx;
+  height: 70rpx;
+  margin-right: 40rpx;
+}
+
+.headimg-row image:last-child {
+  margin-right: 0;
+}
+
+.desp {
+  font-size: 12px;
+  color: #999;
+  line-height: 24px;
+}
+
+.showAll {
+  height: 40rpx;
+  line-height: 40rpx;
+  font-size: 12px;
+  color: #999;
+  display: flex;
+  align-items: center;
+}
+
+.icon-right {
+  margin-left: 10rpx;
+  color: #999;
+  line-height: 24rpx;
+  height: 24rpx;
+  font-size: 14px;
+}
+
+.nickname-wrap {
+  display: flex;
+  align-items: center;
+}
+
+.nickname-wrap image {
+  width: 60rpx;
+  height: 60rpx;
+}
+
+.nickname {
+  font-size: 15px;
+  color: #333;
+  margin-left: 20rpx;
+}
+
+.unfocus {
+  width: 96rpx;
+  height: 44rpx;
+  border: 1px solid #b55fff;
+  border-radius: 22rpx;
+  font-size: 12px;
+  color: #b55fff;
+  text-align: center;
+  line-height: 44rpx;
+}
+
+.focus {
+  border: 1px solid #999;
+  color: #999;
+}
+
+.pinglun {
+  font-size: 12px;
+  color: #4f4e4e;
+  line-height: 20px;
+}
+
+.yizan {
+  color: #ff5a1d;
+}
+
+.compics-wrap {
+  display: flex;
+  align-items: center;
+  padding-top: 20rpx;
+}
+
+.compics {
+  width: 30%;
+  height: 140rpx;
+  margin-right: 20rpx;
+}
+
+.card-wrap {
+  width: 100%;
+  height: 80rpx;
+  background: #f8f9fa;
+  margin-top: 20rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24rpx 20rpx;
+  box-sizing: border-box;
+}
+
+.card-desp {
+  display: flex;
+  align-items: center;
+}
+
+.card-name {
+  font-size: 11px;
+  color: #333;
+  margin-right: 10rpx;
+}
+
+.card-zhekou {
+  color: #fd6b34;
+  font-size: 11px;
+}
+
+.card-master {
+  font-size: 11px;
+  color: #a5a5a5;
+}
+
+.vline {
+  width: 1px;
+  height: 20rpx;
+  background: #999;
+  margin: 0 10rpx;
+}
+
+.gongxiang {
+  border: 1px solid #ff5a1d;
+  border-radius: 4rpx;
+  font-size: 10px;
+  color: #ff5a1d;
+  padding: 6rpx 10rpx;
+}
+
+.yigongxiang {
+  border: 1px solid #b55fff;
+  color: #b55fff;
+  border-radius: 18rpx;
+  font-size: 10px;
+  padding: 3rpx 14rpx;
+}
+
+.btnBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 30rpx;
+}
+
+.plTime {
+  font-size: 11px;
+  color: #999;
+  line-height: 11px;
+}
+
+.btnBox {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 200rpx;
+}
+
+.plPinglun {
+  display: flex;
+  align-items: center;
+  font-size: 11px;
+  color: #999;
+}
+
+.zan {
+  display: flex;
+  align-items: center;
+  font-size: 11px;
+  color: #999;
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 108rpx;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  padding: 15rpx 30rpx;
+}
+
+.footerBtnWrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.homeWrap {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.icon-home {
+  color: #b25dff;
+  line-height: 36rpx;
+  height: 36rpx;
+  font-size: 20px;
+}
+
+.home {
+  font-size: 24rpx;
+  line-height: 24rpx;
+  color: #333;
+  margin-top: 10rpx;
+}
+
+.gokaBtn {
+  width: 230rpx;
+  height: 88rpx;
+  background: #333;
+  border-radius: 20px 0 0 20px;
+  font-size: 14px;
+  color: #fff;
+  line-height: 80rpx;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.xiadan {
+  width: 230rpx;
+  height: 88rpx;
+  background-image: linear-gradient(-269deg, #ffdc00 0%, #fcbf0a 100%);
+  border-radius: 0 20px 20px 0;
+  color: #333;
+  line-height: 80rpx;
+  text-align: center;
+  margin-left: 2px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal {
+  position: fixed;
+  width: 100%;
+  left: 0;
+  top: 0;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 1;
+}
+
+.gxbox {
+  width: 80%;
+  padding-bottom: 50rpx;
+  background: #fff;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -262rpx;
+  margin-left: -40%;
+  border-radius: 10rpx;
+}
+
+.gxbox .title {
+  position: relative;
+  font-size: 15px;
+  color: #333;
+  padding: 40rpx 0;
+  text-align: center;
+}
+
+.closeModal {
+  position: absolute;
+  right: 30rpx;
+  top: 30rpx;
+  font-size: 25px;
+  color: #333;
+}
+
+.gxdetail {
+  font-size: 14px;
+  line-height: 60rpx;
+  color: #666;
+  padding: 0 40rpx;
+}
+
+.gxboxBtnWrap {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 50rpx;
+}
+
+.gxboxBtn {
+  width: 280rpx;
+  height: 80rpx;
+  background-image: linear-gradient(-180deg, #b45fff 4%, #9649fa 99%);
+  box-shadow: 0 0 2px 1px #dcb9fb;
+  border-radius: 40rpx;
+  font-size: 14px;
+  color: #fff;
+  text-align: center;
+  line-height: 80rpx;
+}
+
+.shopDiv {
+  position: fixed;
+  width: 100%;
+  left: 0;
+  bottom: 0;
+  background-color: #fff;
+  border-radius: 20rpx 20rpx 0 0;
+  z-index: 2;
+  padding: 0 32rpx;
+  box-sizing: border-box;
+}
+
+.icon_close {
+  width: 24rpx;
+  height: 24rpx;
+  position: absolute;
+  top: 40rpx;
+  right: 30rpx;
+}
+
+.shopHeader {
+  text-align: center;
+  line-height: 100rpx;
+  font-size: 30rpx;
+  color: #000;
+}
+
+.shopList {
+  height: 700rpx;
+  overflow: scroll;
+  box-sizing: border-box;
+}
+
+.shopItem {
+  padding: 36rpx 0;
+  border-bottom: 1rpx solid #dedede;
+}
+
+.xuandianline {
+  width: 100%;
+  height: 1px;
+  background-color: #dedede;
+  transform: scaleY(0.5);
+}
+
+.shoplist-address {
+  font-size: 12px;
+  color: #999;
+  margin-left: 50rpx;
+  margin-top: 20rpx;
+}
+
+.shoplist-tel {
+  font-size: 12px;
+  color: #999;
+  margin-left: 50rpx;
+  margin-top: 10rpx;
+}
+
+.shopitemname {
+  font-size: 14px;
+  color: #333;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.shopitemdis {
+  font-size: 12px;
+  color: #999;
+}
+
+.icon-dingwei {
+  color: #999;
+  height: 28rpx;
+  line-height: 28rpx;
+  margin-right: 20rpx;
+}
+
+.sitembtn {
+  margin-bottom: 40rpx;
+  background-image: linear-gradient(-180deg, #b45fff 4%, #9649fa 99%);
+  box-shadow: 0 0 2px 1px #dcb9fb;
+  border-radius: 100px;
+  font-size: 14px;
+  color: #fff;
+  height: 88rpx;
+  width: 100%;
+  box-sizing: border-box;
+  text-align: center;
+  line-height: 88rpx;
+}
+
+.HycardView {
+  position: fixed;
+  width: 100%;
+  left: 0;
+  bottom: 0;
+  background: #f8f9fa;
+  border-radius: 20rpx 20rpx 0 0;
+  z-index: 2;
+  box-sizing: border-box;
+}
+
+.HycardsWrap {
+  margin-top: 14rpx;
+  padding: 0 32rpx;
+}
+
+.focusSuccess {
+  font-size: 14px;
+  color: #333;
+}
+.tuiItem{
+  padding:30rpx 0;
+}
+.b-b-1px{
+  border-bottom: 1rpx solid #eeeeee;
+}
+.huanliBtn {
+  width: 130rpx;
+  height: 60rpx;
+  background: #fcbf0a;
+  border-radius: 4px;
+  font-size: 24rpx;
+  color: #333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.tuiRow{
+  width:75%;
+}
+.tuiName {
+  font-size: 28rpx;
+  color: #333;
+}
+
+.tuiExe {
+  font-size: 26rpx;
+  color: #e83221;
+}
+
+.tuiCount {
+  font-size: 22rpx;
+  color: #999;
+  text-decoration: line-through;
+}
+
+.tuiPrice {
+  font-size: 24rpx;
+  color: #999;
+}
+.mt10{
+  margin-top:10rpx;
+}

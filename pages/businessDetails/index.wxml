@@ -1,4 +1,3 @@
-<loginBox></loginBox>
 <view class="container">
   <view class="swiper-wrap">
     <swiper class="img-wrap" autoplay="true" interval="2000">

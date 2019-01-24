@@ -12,7 +12,7 @@ App({
         wx.login({
             success: res => {
                 wx.request({
-                    url: 'https://w.juniuo.com/xppWxapp/login.json',
+                    url: 'https://w-dev.juniuo.com/xppWxapp/login2.json',
                     method: 'POST',
                     data: {
                         code: res.code,
@@ -24,8 +24,9 @@ App({
                         'Content-Type': 'application/x-www-form-urlencoded'
                     },
                     success: (res) => {
+                      console.log(res.data.data.openid);
                         if (res.data.success) {
-                            wx.setStorageSync('accessToken', res.data.data);
+                            wx.setStorageSync('accessToken', res.data.data.openid);
                             this.getMyInfo();
                         }
                     }

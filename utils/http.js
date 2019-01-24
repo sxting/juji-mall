@@ -13,7 +13,7 @@ http.get = (url, data = {}, header = { 'content-type': 'application/json','Acces
   return http_request(url, 'GET', data, header)
 }
 //'application/x-www-form-urlencoded' 'application/json'
-http.post = (url, data = {}, header = { 'content-type': 'application/json','Access-Token':wx.getStorageSync('accessToken') }) => {
+http.post = (url, data = {}, header = { 'content-type': 'application/x-www-form-urlencoded','Access-Token':wx.getStorageSync('accessToken') }) => {
   for (let objName in data) {
     if (data[objName] === undefined || data[objName] === 'undefined') {
       data[objName] = '';

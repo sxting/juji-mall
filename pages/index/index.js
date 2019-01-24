@@ -235,21 +235,18 @@ Page({
   },
   getPreOrder:function(){
     var obj = {
-      choosenType: 'thirdpay',
-      givingMoney: 0,
-      orderPay: '0.01',
-      pay: '0.01',
-      prepayRuleId: '',
-      storeId: '111542352778150444'
+      openid: wx.getStorageSync('accessToken')
     };
-    service.preOrder(obj).subscribe({
+    // var obj = wx.getStorageSync('accessToken');
+    service.testPreOrder(obj).subscribe({
       next: res => {
+        console.log(res);
         wx.requestPayment({
-          timeStamp: res.data.data.timeStamp,
-          nonceStr: res.data.data.nonceStr,
-          package: res.data.data.package,
-          signType: res.data.data.signType,
-          paySign: res.data.data.paySign,
+          timeStamp: res.timeStamp,
+          nonceStr: res.nonceStr,
+          package: res.package,
+          signType: res.signType,
+          paySign: res.paySign,
           success(res) { 
             alert('支付成功');
           },

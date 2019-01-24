@@ -6,6 +6,11 @@ import {
 } from 'utils/http';
 let service = {};
 let api = constant.apiUrl;
+//测试预下单 微信支付
+service.testPreOrder = (data) => {
+  let apiUrl = 'https://juji.juniuo.com/customer/order/testPreOrder.json';
+  return http.post(apiUrl, data);
+}
 //预下单 微信支付
 service.preOrder = (data) => {
   let apiUrl = api + '/customer/order/preOrder.json';

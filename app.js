@@ -27,7 +27,7 @@ App({
                       console.log(res.data.data.openid);
                         if (res.data.success) {
                             wx.setStorageSync('accessToken', res.data.data.openid);
-                            this.getMyInfo();
+                            // this.getMyInfo();
                         }
                     }
                 })

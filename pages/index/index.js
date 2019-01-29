@@ -184,7 +184,7 @@ Page({
           lat: res.latitude,
           page: 1
         };
-        that.getNearCommentsData(obj);
+        // that.getNearCommentsData(obj);
         qqmapsdk.reverseGeocoder({
           location: {
             latitude: res.latitude,
@@ -204,7 +204,7 @@ Page({
         let obj = {
           page: 1
         };
-        that.getNearCommentsData(obj);
+        // that.getNearCommentsData(obj);
       }
     })
   },
@@ -248,10 +248,10 @@ Page({
           signType: res.signType,
           paySign: res.paySign,
           success(res) { 
-            alert('支付成功');
+            // alert('支付成功');
           },
           fail(res) { 
-            alert('支付失败');
+            // alert('支付失败');
           }
         })
       },
@@ -288,6 +288,6 @@ Page({
         }
       },50);
     }
-    this.getCurLocation();
+    // this.getCurLocation();
   }
 })

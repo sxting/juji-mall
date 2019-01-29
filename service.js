@@ -16,6 +16,46 @@ service.preOrder = (data) => {
   let apiUrl = api + '/customer/order/preOrder.json';
   return http.post(apiUrl, data);
 }
+
+// -------------------------------------橘子商城部分接口------------------------------------------
+
+service.getAuthCode = (data) => {
+  let apiUrl = api + '/user/getAuthCode.json';//描述:获取验证码
+  return http.get(apiUrl, data);
+}
+service.bindPhone = (data) => {
+  let apiUrl = api + '/user/bindPhone.json';//描述:绑定手机号 注册 参数手机号 和 验证码
+  return http.get(apiUrl, data);
+}
+service.login = (data) => {
+  let apiUrl = api + '/user/login.json';//小程序登录
+  return http.get(apiUrl, data);
+}
+service.getIndexData = (data) => {
+  let apiUrl = api + '/index.json';//首页轮播图和桔子换礼2个
+  return http.get(apiUrl, data);
+}
+
+service.getRecommendPage = (data) => {
+  let apiUrl = api + '/index/recommendPage.json';//描述:首页精选推荐 sortField排序分为：IDX,PRICE,DISTANCE,SOLDNUM,CHEAP； sortOrder顺序：ASC，DESC；type商品类型：PRODUCT POINT；
+  return http.get(apiUrl, data);
+}
+
+service.getHotData = (data) => {
+  let apiUrl = api + '/loc/hot.json';//描述:查询热门开通城市
+  return http.get(apiUrl, data);
+}
+
+service.getCurrentLoc = (data) => {
+  let apiUrl = api + '/loc/currentLoc.json';//描述:当前城市 参数经纬度
+  return http.get(apiUrl, data);
+}
+
+service.getSelectHotCity = (data) => {
+  let apiUrl = api + '/selectHotCity.json';//描述:选择省市县确认服务商信息 （根据上面开通城市 ）
+  return http.get(apiUrl, data);
+}
+
 // --------------------------------------------merchant-----------------------------------
 /*获取Banner列表*/
 service.listBanners = (data) => {

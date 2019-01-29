@@ -233,6 +233,9 @@ Page({
       url: '/pages/myCircle/index?id=' + event.currentTarget.dataset.userid
     });
   },
+  getIndexImages(){
+    consolel.log('');
+  },
   getPreOrder:function(){
     var obj = {
       openid: wx.getStorageSync('accessToken')
@@ -260,34 +263,35 @@ Page({
     });
   },
   onLoad: function(options) {
-    this.getPreOrder();
+    // this.getPreOrder();
     console.log('--------------index-onLoad-------------');
     wx.setNavigationBarTitle({title: ''});
-    if(options.page){
-      var timer = setInterval(()=>{
-        if(wx.getStorageSync('accessToken')){
-          clearInterval(timer);
-          // 如果从分享的页面进来，分享来自圈子
-          if (options.page == 'circle') {
-            wx.navigateTo({
-              url: '/pages/myCircle/index?id=' + options.id
-            });
-          }
-          // 如果从分享的页面进来，分享来自商户详情
-          if (options.page == 'business') {
-            wx.navigateTo({
-              url: '/pages/businessDetails/index?id=' + options.id + '&cardType' + options.cardType
-            });
-          }
-          // 如果从分享的页面进来，分享来自评论详情
-          if (options.page == 'commentDetail') {
-            wx.navigateTo({
-              url: '/pages/commentDetail/index?id=' + options.id
-            });
-          }
-        }
-      },50);
-    }
+    this.getIndexImages();
+    // if(options.page){
+    //   var timer = setInterval(()=>{
+    //     if(wx.getStorageSync('accessToken')){
+    //       clearInterval(timer);
+    //       // 如果从分享的页面进来，分享来自圈子
+    //       if (options.page == 'circle') {
+    //         wx.navigateTo({
+    //           url: '/pages/myCircle/index?id=' + options.id
+    //         });
+    //       }
+    //       // 如果从分享的页面进来，分享来自商户详情
+    //       if (options.page == 'business') {
+    //         wx.navigateTo({
+    //           url: '/pages/businessDetails/index?id=' + options.id + '&cardType' + options.cardType
+    //         });
+    //       }
+    //       // 如果从分享的页面进来，分享来自评论详情
+    //       if (options.page == 'commentDetail') {
+    //         wx.navigateTo({
+    //           url: '/pages/commentDetail/index?id=' + options.id
+    //         });
+    //       }
+    //     }
+    //   },50);
+    // }
     // this.getCurLocation();
   }
 })

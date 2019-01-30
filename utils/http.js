@@ -4,7 +4,7 @@ import { loading } from 'util';
 
 let http = {}
 
-http.get = (url, data = {}, header = { 'content-type': 'application/json','Access-Token':wx.getStorageSync('accessToken') }) => {
+http.get = (url, data = {}, header = { 'content-type': 'application/json','token':wx.getStorageSync('token') }) => {
   for (let objName in data) {
     if (data[objName] === undefined || data[objName] === 'undefined') {
       data[objName] = '';
@@ -13,7 +13,7 @@ http.get = (url, data = {}, header = { 'content-type': 'application/json','Acces
   return http_request(url, 'GET', data, header)
 }
 //'application/x-www-form-urlencoded' 'application/json'
-http.post = (url, data = {}, header = { 'content-type': 'application/x-www-form-urlencoded','Access-Token':wx.getStorageSync('accessToken') }) => {
+http.post = (url, data = {}, header = { 'content-type': 'application/x-www-form-urlencoded','token':wx.getStorageSync('token') }) => {
   for (let objName in data) {
     if (data[objName] === undefined || data[objName] === 'undefined') {
       data[objName] = '';
@@ -35,13 +35,13 @@ function http_request(
         header: header,
         method: method,
         success: res => {
-          if (res.data.errorCode === '0') {
+          if (res.data.errorCode === '200') {
             return listener.next(res.data.data);
           } else {
             return listener.error(res.data.errorInfo);
           }
         },
-        fail: res => listener.error(res.data.errorInfo),
+        fail: res => listener.error(res.errMsg),
         complete: () => listener.complete()
       })
     },

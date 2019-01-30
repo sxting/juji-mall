@@ -41,15 +41,15 @@
     <view class="pubu">
       <view class="pubuItem">
         <view class="cardWrap padr10">
-        <view class="card">
+        <view class="card" wx:for="{{pointProductList}}" wx:key="{{item.productId}}" wx:if="{{index%2 == 0}}" data-comid="{{item.productId}}">
           <image src="../../images/mendianimg.png" mode="widthFix" class="plimg"></image>
-          <view class="pubuname">大悦城豪华自助晚餐</view>
+          <view class="pubuname">{{item.productName}}</view>
           <view class="pububox">
             <view class="ex-juzi">
-            <view style="font-size: 28rpx;color: #E83221;">20</view>
+            <view style="font-size: 28rpx;color: #E83221;">{{item.point}}</view>
             <view style="font-size: 22rpx;color: #E83221;">桔子</view>
             </view>
-            <view class="old-price">¥ 88.00</view>
+            <view class="old-price">¥ {{item.originalPrice}}</view>
           </view>
         </view>
         </view>
@@ -57,15 +57,15 @@
 
       <view class="pubuItem">
         <view class="cardWrap padl10">
-        <view class="card">
+        <view class="card" wx:for="{{pointProductList}}" wx:key="{{item.productId}}" wx:if="{{index%2!=0}}" data-comid="{{item.productId}}">
           <image src="../../images/mendianimg.png" mode="widthFix" class="plimg"></image>
-          <view class="pubuname">北京欢乐谷一日游</view>
+          <view class="pubuname">{{item.productName}}</view>
           <view class="pububox">
             <view class="ex-juzi">
-            <view style="font-size: 28rpx;color: #E83221;">20</view>
-            <view style="font-size: 22rpx;color: #E83221;">桔子+¥ 20.00</view>
+            <view style="font-size: 28rpx;color: #E83221;">{{item.point}}</view>
+            <view style="font-size: 22rpx;color: #E83221;">桔子</view>
             </view>
-            <view class="old-price">¥ 88.00</view>
+            <view class="old-price">¥ {{item.originalPrice}}</view>
           </view>
         </view>
         </view>
@@ -83,37 +83,22 @@
       <view class="label">距离</view>
       <view class="label">销量</view>
     </view>
-    <view class="jingxuanlist">
+    <view class="jingxuanlist" wx:for="{{recommendPage}}" wx:key="{{index}}">
       <image style="width:100%;height:330rpx;margin-top:30rpx;" src="../../images/freeGet.png"></image>
       <view class="dis-wrap jc-sb">
-        <view class="from">北京故宫售票中心</view>
-        <view class="dis">距你130m</view>
+        <view class="from">{{item.providerName}}</view>
+        <view class="dis">距你{{item.nearDist}}m</view>
       </view>
-      <view class="pro-name">【北京故宫一日游】故宫文化传承，1日尽收眼里</view>
+      <view class="pro-name">{{item.productName}}</view>
       <view class="price-wrap jc-sb">
         <view class="p-wrap">
-          <view class="now-price">¥ 20.00</view>
-          <view class="old-price">¥ 88.00</view>
+          <view class="now-price">¥ {{item.price}}</view>
+          <view class="old-price">¥ {{item.originalPrice}}</view>
         </view>
-        <view class="count">已售20件</view>
+        <view class="count">已售{{item.soldNum}}件</view>
       </view>
     </view>
 
-    <view class="jingxuanlist">
-      <image style="width:100%;height:330rpx;margin-top:30rpx;" src="../../images/homeBanner.png"></image>
-      <view class="dis-wrap jc-sb">
-        <view class="from">北京故宫售票中心</view>
-        <view class="dis">距你130m</view>
-      </view>
-      <view class="pro-name">【北京故宫一日游】故宫文化传承，1日尽收眼里</view>
-      <view class="price-wrap jc-sb">
-        <view class="p-wrap">
-          <view class="now-price">¥ 20.00</view>
-          <view class="old-price">¥ 88.00</view>
-        </view>
-        <view class="count">已售20件</view>
-      </view>
-    </view>
   </view>
 </view>
 <!-- <view class="pubu">
@@ -154,63 +139,3 @@
     </view>
   </view>
 </view> -->
-<!-- 关注 -->
-<!-- <view class="focusTabPage" wx:if="{{curTabIndex===1}}">
-  <view class="yongkaxuzhi-wrap">
-    <view class="yongkaxuzhi">
-      <view class="inner-row">
-        <view class="nickname-wrap">
-          <image src="../../images/pinglunuser.png"></image>
-          <view class="nickname">松鼠</view>
-        </view>
-        <view class="sharetypedes">发表了一条评论</view>
-      </view>
-
-      <view class="pinglun mt10">
-        好喝，奶茶美味，清茶心香气沁人心脾，下次一定还要买而且很便宜一万个赞哟，耐思
-      </view>
-
-      <image class="pjimgs" src="../../images/bdBanner.png"></image>
-
-      <view class="card-wrap">
-        <image class="mendianimg" src="../../images/mendianimg.png"></image>
-        <view class="mendianinfowrap">
-          <view class="mendianname">仙踪林</view>
-          <view class="mdinfowrap">
-            <view class="mdtype">美食/休闲</view>
-            <view class="zhekou">8.3折</view>
-          </view>
-        </view>
-
-      </view>
-
-      <view class="btnBar">
-        <view class="plTime">2018.02.15 19:40:45</view>
-        <view class="btnBox">
-          <view class="plShare">
-            <icon class="iconfont"></icon>
-          </view>
-          <view class="plPinglun">
-            <icon class="iconfont icon-pinglun" style="margin-right:4rpx;"></icon>0</view>
-          <view class="zan">
-            <icon class="iconfont icon-dianzan" style="margin-right:4rpx;"></icon>3</view>
-        </view>
-      </view>
-
-    </view>
-  </view> -->
-
-
-
-
-<!-- <view class="modal" hidden="{{hasUserInfo}}">
-    <view class="gxbox">
-      <view class="title">
-        请登录
-      </view>
-      <view class="focusSuccess ub ub-pc">您必须登录才能继续以后的操作</view>
-      <view class="gxboxBtnWrap">
-        <button open-type="getUserInfo" bindgetuserinfo="getLoginInfo" lang="zh_CN" class="ub ub-ac ub-pc gxboxBtn">微信登录</button>
-      </view>
-    </view>
-  </view> -->

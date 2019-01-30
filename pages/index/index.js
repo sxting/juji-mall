@@ -8,28 +8,31 @@ Page({
     tablist: ['发现'], //['发现', '关注']
     curTabIndex: 0,
     businessList: [],
-    page:1,
+    page: 1,
     leavePage: false,
     autoplay: false,
     current: 1,
-    swiperH: '',//swiper高度
-    nowIdx: 1,//当前swiper索引
-    banners: ['../../images/homeBanner.png','../../images/banner1.png', '../../images/freeGet.png'],
+    swiperH: '', //swiper高度
+    nowIdx: 1, //当前swiper索引
+    banners: ['../../images/homeBanner.png', '../../images/banner1.png', '../../images/freeGet.png'],
+    slideShowList:[],
+    pointProductList:[],
+    recommendPage:[]
   },
   //swiper滑动事件
-  swiperChange: function (e) {
+  swiperChange: function(e) {
     this.setData({
       nowIdx: e.detail.current
     })
   },
   //获取swiper高度
-  getHeight: function (e) {
-    var winWid = wx.getSystemInfoSync().windowWidth - 2 * 30;//获取当前屏幕的宽度
-    var imgh = e.detail.height;//图片高度
+  getHeight: function(e) {
+    var winWid = wx.getSystemInfoSync().windowWidth - 2 * 30; //获取当前屏幕的宽度
+    var imgh = e.detail.height; //图片高度
     var imgw = e.detail.width;
     var sH = winWid * imgh / imgw + "px"
     this.setData({
-      swiperH: sH//设置高度
+      swiperH: sH //设置高度
     })
   },
   toFujinyh: function() {
@@ -42,7 +45,7 @@ Page({
       url: '../freeGet/index'
     });
   },
-  toJuzihl: function () {
+  toJuzihl: function() {
     wx.navigateTo({
       url: '../juzihl/index'
     });
@@ -54,23 +57,25 @@ Page({
     });
   },
   //上拉加载
-  onReachBottom(){
+  onReachBottom() {
     let that = this;
     let obj = {};
     wx.getStorageSync('curLongitude') ? obj.lng = wx.getStorageSync('curLongitude') : obj = {};
     wx.getStorageSync('curLatitude') ? obj.lat = wx.getStorageSync('curLatitude') : obj = {};
     let p = ++this.data.page;
-    console.log('page:'+p);
+    console.log('page:' + p);
     obj.page = p;
     service.listCommentsNearBy(obj).subscribe({
       next: res => {
         console.log('--------上拉加载更多附近的商户评价--------');
-        if (res.length===0){
+        if (res.length === 0) {
           --p;
         }
-        that.setData({ page: p });
-        res.forEach(function (item, index, arr) {
-          item.pics.forEach(function (it, i, a) {
+        that.setData({
+          page: p
+        });
+        res.forEach(function(item, index, arr) {
+          item.pics.forEach(function(it, i, a) {
             item.pics[i] = 'https://upic.juniuo.com/file/picture/' + it + '/resize_200_0/mode_fill';
           })
         });
@@ -92,7 +97,9 @@ Page({
     wx.getStorageSync('curLongitude') ? obj.lng = wx.getStorageSync('curLongitude') : obj = {};
     wx.getStorageSync('curLatitude') ? obj.lat = wx.getStorageSync('curLatitude') : obj = {};
     obj.page = 1;
-    this.setData({page:1});
+    this.setData({
+      page: 1
+    });
     service.listCommentsNearBy(obj).subscribe({
       next: res => {
         console.log('--------首页附近商户评价--------');
@@ -208,13 +215,13 @@ Page({
       }
     })
   },
-  getNearCommentsData:function(obj){
+  getNearCommentsData: function(obj) {
     let that = this;
     service.listCommentsNearBy(obj).subscribe({
       next: res => {
         console.log('--------返回附近评价列表--------');
-        res.forEach(function (item, index, arr) {
-          item.pics.forEach(function (it, i, a) {
+        res.forEach(function(item, index, arr) {
+          item.pics.forEach(function(it, i, a) {
             item.pics[i] = 'https://upic.juniuo.com/file/picture/' + it + '/resize_200_0/mode_fill';
           })
         });
@@ -227,16 +234,16 @@ Page({
       complete: () => wx.hideToast()
     });
   },
-  toUserCircle: function (event) {
+  toUserCircle: function(event) {
     console.log(event.currentTarget.dataset.userid);
     wx.navigateTo({
       url: '/pages/myCircle/index?id=' + event.currentTarget.dataset.userid
     });
   },
-  getIndexImages(){
+  getIndexImages() {
     consolel.log('');
   },
-  getPreOrder:function(){
+  getPreOrder: function() {
     var obj = {
       openid: wx.getStorageSync('accessToken')
     };
@@ -250,10 +257,10 @@ Page({
           package: res.package,
           signType: res.signType,
           paySign: res.paySign,
-          success(res) { 
+          success(res) {
             // alert('支付成功');
           },
-          fail(res) { 
+          fail(res) {
             // alert('支付失败');
           }
         })
@@ -262,36 +269,46 @@ Page({
       complete: () => wx.hideToast()
     });
   },
+  getIndexData:function(){
+    service.getIndexData({ providerId:'1215422531428605'}).subscribe({
+      next: res => { 
+        console.log(res);
+        this.setData({
+          slideShowList: res.slideShowList,
+          pointProductList: res.pointProductList
+        })
+      },
+      error: err => console.log(err),
+      complete: () => wx.hideToast()
+    });
+  },
+  getRecommendPage:function(){
+    service.getRecommendPage({
+      providerId: '1215422531428605',
+      type:'PRODUCT',
+      sortField:'IDX',
+      sortOrder:'ASC',
+      pageNo:1,
+      pageSize:10,
+      longitude:'116.470959',
+      latitude:'39.992368'}).subscribe({
+      next: res => {
+        console.log(res);
+        this.setData({
+          recommendPage:res.list
+        });
+      },
+      error: err => console.log(err),
+      complete: () => wx.hideToast()
+    });
+  },
   onLoad: function(options) {
     // this.getPreOrder();
     console.log('--------------index-onLoad-------------');
-    wx.setNavigationBarTitle({title: ''});
-    this.getIndexImages();
-    // if(options.page){
-    //   var timer = setInterval(()=>{
-    //     if(wx.getStorageSync('accessToken')){
-    //       clearInterval(timer);
-    //       // 如果从分享的页面进来，分享来自圈子
-    //       if (options.page == 'circle') {
-    //         wx.navigateTo({
-    //           url: '/pages/myCircle/index?id=' + options.id
-    //         });
-    //       }
-    //       // 如果从分享的页面进来，分享来自商户详情
-    //       if (options.page == 'business') {
-    //         wx.navigateTo({
-    //           url: '/pages/businessDetails/index?id=' + options.id + '&cardType' + options.cardType
-    //         });
-    //       }
-    //       // 如果从分享的页面进来，分享来自评论详情
-    //       if (options.page == 'commentDetail') {
-    //         wx.navigateTo({
-    //           url: '/pages/commentDetail/index?id=' + options.id
-    //         });
-    //       }
-    //     }
-    //   },50);
-    // }
-    // this.getCurLocation();
+    wx.setNavigationBarTitle({
+      title: ''
+    });
+    this.getIndexData();
+    this.getRecommendPage();
   }
 })

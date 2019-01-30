@@ -1,0 +1,56 @@
+.toper {
+  height: 268rpx;
+  background: #FCBF0A;
+}
+
+.userInfo {
+  padding: 30rpx 30rpx 40rpx 30rpx;
+}
+
+.qd-title {
+  font-family: PingFangSC-Semibold;
+  font-size: 44rpx;
+  line-height: 44rpx;
+  color: #333;
+}
+
+.qd-text {
+  font-size: 24rpx;
+  line-height: 24rpx;
+  color: #333;
+  margin-top: 20rpx;
+}
+
+.vline {
+  width: 2rpx;
+  height: 60rpx;
+  background: #eee;
+  margin: 0 20rpx;
+}
+
+.qtitle {
+  font-family: PingFangSC-Medium;
+  font-size: 30rpx;
+  color: #333;
+}
+
+.point-text-wrap {
+  width: 600rpx;
+  margin-top: 30rpx;
+}
+
+.point-text {
+  font-size: 20rpx;
+  color: #666;
+}
+
+.point-wrap {
+  width: 600rpx;
+  margin-top: 20rpx;
+  box-sizing: border-box;
+}
+
+.point {
+  width: 30rpx;
+  height: 30rpx;
+}

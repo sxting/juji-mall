@@ -34,7 +34,9 @@
     "pages/createReply/index",
     "pages/commentList/index",
     "pages/juzihl/index",
-    "pages/comDetail/index"
+    "pages/comDetail/index",
+    "pages/juzi/index",
+    "pages/bindPhone/index"
   ],
   "permission": {
     "scope.userLocation": {
@@ -61,7 +63,7 @@
       },
       {
         "text": "桔子",
-        "pagePath": "pages/myTicket/index",
+        "pagePath": "pages/juzi/index",
         "iconPath": "images/juzi.png",
         "selectedIconPath": "images/juzi_selected.png"
       },

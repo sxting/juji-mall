@@ -36,20 +36,8 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 4,
+			"current": 5,
 			"list": [
-				{
-					"id": 0,
-					"name": "商户页面",
-					"pathName": "pages/businessDetails/index",
-					"query": ""
-				},
-				{
-					"id": -1,
-					"name": "我的圈子",
-					"pathName": "pages/myCircle/index",
-					"query": ""
-				},
 				{
 					"id": 3,
 					"name": "商品详情",
@@ -67,6 +55,27 @@
 					"name": "评论列表",
 					"pathName": "pages/commentList/index",
 					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "tab2桔子",
+					"pathName": "pages/juzi/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "绑定手机号",
+					"pathName": "pages/bindPhone/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "tab3我的",
+					"pathName": "pages/user/index",
+					"query": "",
+					"scene": null
 				}
 			]
 		}

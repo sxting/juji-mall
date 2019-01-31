@@ -27,8 +27,8 @@
       <view class="pro-name">{{item.productName}}</view>
       <view class="price-wrap jc-sb">
         <view class="p-wrap">
-          <view class="now-price">¥ {{item.price}}</view>
-          <view class="old-price">¥ {{item.originalPrice}}</view>
+          <view class="now-price">{{item.price}}元</view>
+          <view class="old-price">{{item.originalPrice}}元</view>
         </view>
         <view class="count">已售{{item.soldNum}}件</view>
       </view>

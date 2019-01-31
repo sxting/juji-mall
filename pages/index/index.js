@@ -17,7 +17,13 @@ Page({
     banners: ['../../images/homeBanner.png', '../../images/banner1.png', '../../images/freeGet.png'],
     slideShowList:[],
     pointProductList:[],
-    recommendPage:[]
+    recommendPage:[],
+    sortIndex:1,
+    type: 'PRODUCT',
+    sortField: 'IDX',
+    pageNo: 1,
+    pageSize: 10,
+    sortArray:['','ASC','ASC','']
   },
   //swiper滑动事件
   swiperChange: function(e) {
@@ -35,15 +41,81 @@ Page({
       swiperH: sH //设置高度
     })
   },
-  toFujinyh: function() {
-    wx.navigateTo({
-      url: '../home/index'
+  toggleLabel: function (event){
+    let sortIndex = event.currentTarget.dataset['label'];
+    console.log(sortIndex);
+    if (sortIndex != 1 && sortIndex != 4){
+      if (this.data.sortIndex == sortIndex) {//两次相同 切换排序规则
+        let arr = this.data.sortArray;
+        console.log(arr);
+        if (arr[Number(sortIndex)-1]=='ASC'){
+          arr[Number(sortIndex)-1] = 'DESC';
+        }else{
+          arr[Number(sortIndex)-1] = 'ASC';
+        }
+        console.log(arr);
+        this.setData({
+          sortArray: arr
+        });
+      }
+    }
+    this.setData({
+      sortIndex: sortIndex
     });
-  },
-  toFreeGet: function() {
-    wx.navigateTo({
-      url: '../freeGet/index'
-    });
+    console.log(this.data.sortIndex);
+    let obj = {};
+    switch (sortIndex){
+      case '1':
+        obj = {
+          providerId: '1215422531428605',
+          type: 'PRODUCT',
+          sortField: 'IDX',
+          sortOrder: 'ASC',
+          pageNo: this.data.pageNo,
+          pageSize: this.data.pageSize,
+          longitude: '116.470959',
+          latitude: '39.992368'
+        };
+      break;
+      case '2':
+        obj = {
+          providerId: '1215422531428605',
+          type: 'PRODUCT',
+          sortField: 'PRICE',
+          sortOrder: this.data.sortArray[Number(sortIndex)-1],
+          pageNo: this.data.pageNo,
+          pageSize: this.data.pageSize,
+          longitude: '116.470959',
+          latitude: '39.992368'
+        };
+      break;
+      case '3':
+        obj = {
+          providerId: '1215422531428605',
+          type: 'PRODUCT',
+          sortField: 'DISTANCE',
+          sortOrder: this.data.sortArray[Number(sortIndex) - 1],
+          pageNo: this.data.pageNo,
+          pageSize: this.data.pageSize,
+          longitude: '116.470959',
+          latitude: '39.992368'
+        };
+      break;
+      case '4':
+        obj = {
+          providerId: '1215422531428605',
+          type: 'PRODUCT',
+          sortField: 'SOLDNUM',
+          sortOrder: 'ASC',
+          pageNo: this.data.pageNo,
+          pageSize: this.data.pageSize,
+          longitude: '116.470959',
+          latitude: '39.992368'
+        };
+      break;
+    }
+    console.log(obj);
+    this.getRecommendPage(obj);
   },
   toJuzihl: function() {
     wx.navigateTo({
@@ -282,16 +354,9 @@ Page({
       complete: () => wx.hideToast()
     });
   },
-  getRecommendPage:function(){
-    service.getRecommendPage({
-      providerId: '1215422531428605',
-      type:'PRODUCT',
-      sortField:'IDX',
-      sortOrder:'ASC',
-      pageNo:1,
-      pageSize:10,
-      longitude:'116.470959',
-      latitude:'39.992368'}).subscribe({
+  getRecommendPage:function(obj){
+    console.log(obj);
+    service.getRecommendPage(obj).subscribe({
       next: res => {
         console.log(res);
         this.setData({
@@ -309,6 +374,16 @@ Page({
       title: ''
     });
     this.getIndexData();
-    this.getRecommendPage();
+    let obj = {
+      providerId: '1215422531428605',
+      type: 'PRODUCT',
+      sortField: 'IDX',
+      sortOrder: 'ASC',
+      pageNo: this.pageNo,
+      pageSize: this.pageSize,
+      longitude: '116.470959',
+      latitude: '39.992368'
+    };
+    this.getRecommendPage(obj);
   }
 })

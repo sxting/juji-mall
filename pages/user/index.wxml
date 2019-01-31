@@ -3,16 +3,20 @@
     <view style="padding:30rpx;" class="userinfo ub ub-ac">
       <image src="../../images/mendianimg.png" style="width:130rpx;height:130rpx;border-radius:65rpx;margin-right:30rpx;"></image>
       <view class="">
-        <view style="font-size: 34rpx;color: #000000;">小仙女</view>
-        <view class="ub ub-ac" style="margin-top:10rpx;">
+        <view style="font-size: 34rpx;color: #000000;">{{nickName}}</view>
+
+        <view class="ub ub-ac" style="margin-top:10rpx;" wx:if="{{phoneNum}}">
+          <view style="font-size: 28rpx;color: #000000;margin-right:20rpx;">{{phoneNum}}</view>
+        </view>
+        <view class="ub ub-ac" style="margin-top:10rpx;" wx:else>
           <view style="font-size: 28rpx;color: #000000;margin-right:20rpx;">绑定手机号</view>
           <view style="color:#333333;font-size:28rpx;">></view>
         </view>
       </view>
     </view>
-    <view class="qdBtn">签到领桔子</view>
+    <view class="qdBtn" bindtap="toJuzi">签到领桔子</view>
     <view style="height:140rpx;margin-top:10rpx;" class="userBox">
-      <view class="ub ub-ac ub-pj" style="padding:30rpx;">
+      <view class="ub ub-ac ub-pj" style="padding:30rpx;" bindtap="toJuzi">
         <view class="ub ub-ac">
           <image style="width:110rpx;height:75rpx;margin-right:40rpx;" src="../../images/user_rwzx.png"></image>
           <view>
@@ -37,7 +41,7 @@
       </view>
     </view>
     <view style="padding:0 30rpx;">
-      <view style="height:1rpx;background:#eeeeee;"></view>
+      <view style="height:2rpx;background:#eeeeee;"></view>
     </view>
     <view class="ub ub-ac ub-pj" style="padding: 30rpx 40rpx;">
       <view class="ub ub-ver ub-ac ub-pc">
@@ -52,6 +56,20 @@
         <image style="width:49rpx;height:44rpx;" src="../../images/user_dpj.png"></image>
         <text class="orderBtnsText">待评价</text>
       </view>
+    </view>
+  </view>
+
+  <view style="margin-top:20rpx;" class="userBox">
+    <view class="ub ub-ac ub-pj" style="padding:30rpx;">
+      <view style="font-family: PingFangSC-Regular;font-size: 30rpx;color: #333333;">评价</view>
+      <image src="../../images/arrow-right.png" style="width:12rpx;height:22rpx;"></image>
+    </view>
+    <view style="padding:0 30rpx;">
+      <view style="height:2rpx;background:#eeeeee;"></view>
+    </view>
+    <view class="ub ub-ac ub-pj" style="padding:30rpx;">
+      <view style="font-family: PingFangSC-Regular;font-size: 30rpx;color: #333333;">客服</view>
+      <image src="../../images/arrow-right.png" style="width:12rpx;height:22rpx;"></image>
     </view>
   </view>
 </view>

@@ -1,7 +1,6 @@
 /* pages/juzihl/index.wxss */
 
 .juzihl-wrap {
-  margin-top: 20rpx;
   background: #fff;
   padding: 30rpx;
 }

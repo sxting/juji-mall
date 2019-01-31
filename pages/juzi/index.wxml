@@ -11,7 +11,7 @@
 
         </view>
       </view>
-      <view style="width:160rpx;height:60rpx;text-align:center;line-height:60rpx;font-size:28rpx;color:#ffffff;background-image: linear-gradient(-90deg, #494849 0%, #2D2D2D 100%);border-radius: 31rpx;">桔子规则</view>
+      <view style="width:160rpx;height:60rpx;text-align:center;line-height:60rpx;font-size:28rpx;color:#ffffff;background-image: linear-gradient(-90deg, #494849 0%, #2D2D2D 100%);border-radius: 31rpx;" bindtap="juzigzModal">桔子规则</view>
     </view>
 
     <view class="ub ub-ac ub-pj1" style="margin:0 30rpx;padding:30rpx 40rpx;box-sizing:border-box;height:164rpx;background: #FFFFFF;box-shadow: 0 0 5rpx 0 rgba(228,228,228,0.50);border-radius: 10rpx;">
@@ -55,21 +55,102 @@
 
       <view class="point-wrap ub ub-ac ub-pj">
         <image class="point" src="../../images/yqd.png"></image>
+        <view class="pline"></view>
         <image class="point" src="../../images/yqd.png"></image>
+        <view class="pline"></view>
         <image class="point" src="../../images/yqd.png"></image>
+        <view class="pline"></view>
         <image class="point" src="../../images/yqd.png"></image>
+        <view class="pline"></view>
         <image class="point" src="../../images/wqd.png"></image>
+        <view class="pline"></view>
         <image class="point" src="../../images/wqd.png"></image>
+        <view class="pline"></view>
         <image class="point" src="../../images/wqd.png"></image>
       </view>
 
       <view style="font-size: 24rpx;color: #666666;text-align:center;margin-top:60rpx;">连续签到一周可得28个桔子</view>
 
-      <view style="width:560rpx;height:88rpx;border-radius:44rpx;background: #FCBF0A;border-radius: 44px;line-height:88rpx;text-align:center;margin-top:20rpx;font-family: PingFangSC-Medium;">签到</view>
+      <view style="width:560rpx;height:88rpx;border-radius:44rpx;background: #FCBF0A;border-radius: 44px;line-height:88rpx;text-align:center;margin-top:20rpx;font-family: PingFangSC-Medium;" bindtap="signIn">签到</view>
     </view>
   </view>
 
-  <view style="margin:30rpx 30rpx 0 30rpx;padding:30rpx 40rpx;box-sizing:border-box;height:712rpx;background: #FFFFFF;box-shadow: 0 0 5rpx 0 rgba(228,228,228,0.50);border-radius: 10rpx;">
+  <view style="margin:30rpx 30rpx 0 30rpx;padding:30rpx 30rpx 10rpx 40rpx;box-sizing:border-box;background: #FFFFFF;box-shadow: 0 0 5rpx 0 rgba(228,228,228,0.50);border-radius: 10rpx;">
     <view class="qtitle ub ub-ac">做任务赚桔子</view>
+
+    <view class="taskItem ub ub-ac ub-pj">
+      <view class="ub ub-ac ub-aj">
+        <image src="../../images/task1.png" style="width:80rpx;height:80rpx;margin-right:30rpx;"></image>
+
+        <view>
+          <view style="font-size: 28rpx;color: #333333;">分享桔子换礼商品赚5桔子</view>
+          <view style="margin-top:10rpx;font-size: 24rpx;color: #999999;">分享到不同群每天最多得25个桔子</view>
+        </view>
+      </view>
+      <view class="taskBtn">赚桔子</view>
+    </view>
+    <view class="taskItem ub ub-ac ub-pj">
+      <view class="ub ub-ac ub-aj">
+        <image src="../../images/task2.png" style="width:80rpx;height:80rpx;margin-right:30rpx;"></image>
+
+        <view>
+          <view style="font-size: 28rpx;color: #333333;">分享普通商品赚5桔子</view>
+          <view style="margin-top:10rpx;font-size: 24rpx;color: #999999;">分享到不同群每天最多得25个桔子</view>
+        </view>
+      </view>
+      <view class="taskBtn">赚桔子</view>
+    </view>
+
+    <view class="taskItem ub ub-ac ub-pj">
+      <view class="ub ub-ac ub-aj">
+        <image src="../../images/task3.png" style="width:80rpx;height:80rpx;margin-right:30rpx;"></image>
+
+        <view>
+          <view style="font-size: 28rpx;color: #333333;">分享桔集小程序赚5桔子</view>
+          <view style="margin-top:10rpx;font-size: 24rpx;color: #999999;">分享到不同群每天最多得25个桔子</view>
+        </view>
+      </view>
+      <view class="taskBtn">赚桔子</view>
+    </view>
+
+    <view class="taskItem ub ub-ac ub-pj">
+      <view class="ub ub-ac ub-aj">
+        <image src="../../images/task4.png" style="width:80rpx;height:80rpx;margin-right:30rpx;"></image>
+
+        <view>
+          <view style="font-size: 28rpx;color: #333333;">消费后评价最多赚20桔子</view>
+          <view style="margin-top:10rpx;font-size: 24rpx;color: #999999;">分享到不同群每天最多得25个桔子</view>
+        </view>
+      </view>
+      <view class="taskBtn">赚桔子</view>
+    </view>
+
+  </view>
+
+  <view class="juzigzWrap" hidden="{{!showjuzigz}}" bindtap="closejuzigzModal">
+    <view class="juzigz">
+      <view style="font-size: 30rpx;color: #333333;padding:40rpx 30rpx;">桔子规则</view>
+      <view style="padding: 0 30rpx;">
+        <view style="display:flex;align-items:center;">
+          <view style="width:10rpx;height:10rpx;border-radius:50%;background: #FCBF0A;margin-right:20rpx;"></view>
+          <view style="font-size: 28rpx;color: #666666;">桔子消耗规则</view>
+        </view>
+        <view style="display:flex;align-items:center;margin-top:10rpx;">
+          <view style="width:10rpx;height:10rpx;border-radius:50%;background: #999999;margin-right:20rpx;"></view>
+          <view style="font-size: 24rpx;color: #999999;">最早获得的桔子最先消耗</view>
+        </view>
+        <view style="display:flex;align-items:center;margin-top:10rpx;">
+          <view style="width:10rpx;height:10rpx;border-radius:50%;background: #FCBF0A;margin-right:20rpx;"></view>
+          <view style="font-size: 28rpx;color: #666666;">每月到期规则</view>
+        </view>
+        <view style="display:flex;align-items:flex-start;margin-top:10rpx;">
+          <view style="width:10rpx;height:10rpx;border-radius:50%;background: #999999;margin-right:20rpx;margin-top:10rpx;"></view>
+          <view style="width:90%;font-size: 24rpx;color: #999999;">每个月的月底资自动消除上一年份同期当月获得 且未消耗的桔子，例如2019年1月31自动消除2018年1月获得且未消耗的桔子。
+          </view>
+        </view>
+      </view>
+      <view class="line"></view>
+      <view style="position:absolute;bottom:0;left:0;width:100%;height:94rpx;display:flex;align-items:center;justify-content:center;font-size: 30rpx;color: #333333;" bindtap="closejuzigzModal">确定</view>
+    </view>
   </view>
 </view>

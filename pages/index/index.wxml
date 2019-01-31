@@ -15,7 +15,7 @@
     </swiper>
   </view>
 
-  <view class="middleWrap">
+  <view class="middleWrap" wx:if="{{false}}">
     <view class="mBgWrap">
       <view class="mBtnWrap" bindtap="toChaozhikj">
         <image src="../../images/kanjia.png" style="width:66rpx;height:66rpx;margin-bottom:20rpx;"></image>
@@ -33,7 +33,7 @@
     <view class="mtitle">桔子换礼</view>
     <view class="mRow jc-sb" style="margin-top:5rpx;">
       <view class="subtitle">让生活“换”然一新</view>
-      <view class="moreWrap">
+      <view class="moreWrap"  bindtap="toJuzihl">
         <view class="more">更多</view>
         <image src="../../images/arrow-right.png" style="width:10rpx;height:18rpx;"></image>
       </view>
@@ -49,7 +49,7 @@
             <view style="font-size: 28rpx;color: #E83221;">{{item.point}}</view>
             <view style="font-size: 22rpx;color: #E83221;">桔子</view>
             </view>
-            <view class="old-price">¥ {{item.originalPrice}}</view>
+            <view class="old-price">{{item.originalPrice}}元</view>
           </view>
         </view>
         </view>
@@ -65,7 +65,7 @@
             <view style="font-size: 28rpx;color: #E83221;">{{item.point}}</view>
             <view style="font-size: 22rpx;color: #E83221;">桔子</view>
             </view>
-            <view class="old-price">¥ {{item.originalPrice}}</view>
+            <view class="old-price">{{item.originalPrice}}元</view>
           </view>
         </view>
         </view>
@@ -78,10 +78,10 @@
     <view class="mtitle">精选推荐</view>
     <view class="subtitle" style="margin-top:10rpx;">精选好物，先到先得</view>
     <view class="labels-wrap">
-      <view class="label label-active">综合</view>
-      <view class="label">价格</view>
-      <view class="label">距离</view>
-      <view class="label">销量</view>
+      <view class="label {{sortIndex==1?'label-active':''}}" data-label="1" bindtap="toggleLabel">综合</view>
+      <view class="label {{sortIndex==2?'label-active':''}}" data-label="2" bindtap="toggleLabel">价格</view>
+      <view class="label {{sortIndex==3?'label-active':''}}" data-label="3" bindtap="toggleLabel">距离</view>
+      <view class="label {{sortIndex==4?'label-active':''}}" data-label="4" bindtap="toggleLabel">销量</view>
     </view>
     <view class="jingxuanlist" wx:for="{{recommendPage}}" wx:key="{{index}}">
       <image style="width:100%;height:330rpx;margin-top:30rpx;" src="../../images/freeGet.png"></image>
@@ -92,8 +92,8 @@
       <view class="pro-name">{{item.productName}}</view>
       <view class="price-wrap jc-sb">
         <view class="p-wrap">
-          <view class="now-price">¥ {{item.price}}</view>
-          <view class="old-price">¥ {{item.originalPrice}}</view>
+          <view class="now-price">{{item.price}}元</view>
+          <view class="old-price">{{item.originalPrice}}元</view>
         </view>
         <view class="count">已售{{item.soldNum}}件</view>
       </view>

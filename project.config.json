@@ -36,7 +36,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 8,
+			"current": 7,
 			"list": [
 				{
 					"id": 3,
@@ -79,20 +79,17 @@
 				},
 				{
 					"id": -1,
-					"name": "订单确认",
-					"pathName": "pages/payOrder/index",
-					"query": ""
+					"name": "橘子换礼",
+					"pathName": "pages/juzihl/index",
+					"query": "",
+					"scene": null
 				},
 				{
 					"id": -1,
-					"name": "订单管理",
-					"pathName": "pages/orderlist/index",
-					"query": ""
-				},
-				{
-					"id": -1,
-					"name": "明细",
-					"pathName": "pages/myTrade/index"
+					"name": "选择城市",
+					"pathName": "pages/citylist/index",
+					"query": "",
+					"scene": null
 				}
 			]
 		}

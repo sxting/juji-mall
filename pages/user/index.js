@@ -5,14 +5,27 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    nickName:'',
+    phoneNum:''
+  },
+  toJuzi:function(){
+    console.log('juzi');
+    wx.switchTab({
+      url: '../juzi/index'
+    });
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    if (wx.getStorageSync('userinfo')){
+      let userinfo = JSON.parse(wx.getStorageSync('userinfo'));
+      this.setData({
+        nickName: userinfo.nickName,
+        phoneNum: userinfo.phone
+      });
+    }
   },
 
   /**

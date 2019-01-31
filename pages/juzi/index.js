@@ -1,4 +1,6 @@
-// pages/juzi/index.js
+import {
+  service
+} from '../../service';
 Page({
 
   /**
@@ -7,12 +9,25 @@ Page({
   data: {
     showjuzigz: false
   },
-
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-
+    this.currentPoint();
+  },
+  signIn:function(){
+    service.signIn().subscribe({
+      next: res => {
+        console.log(res);
+      }
+    });
+  },
+  currentPoint: function () {
+    service.currentPoint().subscribe({
+      next: res => {
+        console.log(res);
+      }
+    });
   },
   closejuzigzModal: function() {
     this.setData({

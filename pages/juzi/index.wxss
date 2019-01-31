@@ -95,3 +95,22 @@
   height: 1rpx;
   background: #dedede;
 }
+.taskItem{
+  padding:40rpx 0;
+  border-bottom: 1rpx solid #EEEEEE;
+}
+.taskItem:last-child{
+  border-bottom: 0;
+}
+.taskBtn{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width:130rpx;
+  height:50rpx;
+  box-sizing: border-box;
+  border: 2rpx solid #CE463F;
+border-radius: 25px;
+font-size: 28rpx;
+color: #CE463F;
+}

@@ -19,8 +19,6 @@ Page({
     pointProductList:[],
     recommendPage:[],
     sortIndex:1,
-    type: 'PRODUCT',
-    sortField: 'IDX',
     pageNo: 1,
     pageSize: 10,
     sortArray:['','ASC','ASC','']

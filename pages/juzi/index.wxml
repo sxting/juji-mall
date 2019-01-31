@@ -85,19 +85,20 @@
 <view style="padding: 0 30rpx;">
         <view style="display:flex;align-items:center;">
           <view style="width:10rpx;height:10rpx;border-radius:50%;background: #FCBF0A;margin-right:20rpx;"></view>
-          <view style="font-size: 28rpx;color: #666666;">有效期</view>
+          <view style="font-size: 28rpx;color: #666666;">桔子消耗规则</view>
         </view>
         <view style="display:flex;align-items:center;margin-top:10rpx;">
           <view style="width:10rpx;height:10rpx;border-radius:50%;background: #999999;margin-right:20rpx;"></view>
-          <view style="font-size: 24rpx;color: #999999;">购买3个月内有效</view>
+          <view style="font-size: 24rpx;color: #999999;">最早获得的桔子最先消耗</view>
         </view>
         <view style="display:flex;align-items:center;margin-top:10rpx;">
           <view style="width:10rpx;height:10rpx;border-radius:50%;background: #FCBF0A;margin-right:20rpx;"></view>
-          <view style="font-size: 28rpx;color: #666666;">使用时段</view>
+          <view style="font-size: 28rpx;color: #666666;">每月到期规则</view>
         </view>
-        <view style="display:flex;align-items:center;margin-top:10rpx;">
-          <view style="width:10rpx;height:10rpx;border-radius:50%;background: #999999;margin-right:20rpx;"></view>
-          <view style="font-size: 24rpx;color: #999999;">周一到周日 09:30-23:00</view>
+        <view style="display:flex;align-items:flex-start;margin-top:10rpx;">
+          <view style="width:10rpx;height:10rpx;border-radius:50%;background: #999999;margin-right:20rpx;margin-top:10rpx;"></view>
+          <view style="width:90%;font-size: 24rpx;color: #999999;">每个月的月底资自动消除上一年份同期当月获得
+          且未消耗的桔子，例如2019年1月31自动消除2018年1月获得且未消耗的桔子。</view>
         </view>
       </view>
       <view class="line"></view>

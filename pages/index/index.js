@@ -127,67 +127,71 @@ Page({
   },
   //上拉加载
   onReachBottom() {
-    let that = this;
-    let obj = {};
-    wx.getStorageSync('curLongitude') ? obj.lng = wx.getStorageSync('curLongitude') : obj = {};
-    wx.getStorageSync('curLatitude') ? obj.lat = wx.getStorageSync('curLatitude') : obj = {};
     let p = ++this.data.page;
     console.log('page:' + p);
-    obj.page = p;
-    service.listCommentsNearBy(obj).subscribe({
+
+    let obj = {
+      providerId: '1215422531428605',
+      type: 'PRODUCT',
+      sortField: 'IDX',
+      sortOrder: 'ASC',
+      pageNo: p,
+      pageSize: this.pageSize,
+      longitude: '116.470959',
+      latitude: '39.992368'
+    };
+
+    service.getRecommendPage(obj).subscribe({
       next: res => {
-        console.log('--------上拉加载更多附近的商户评价--------');
-        if (res.length === 0) {
-          --p;
-        }
-        that.setData({
-          page: p
-        });
-        res.forEach(function(item, index, arr) {
-          item.pics.forEach(function(it, i, a) {
-            item.pics[i] = 'https://upic.juniuo.com/file/picture/' + it + '/resize_200_0/mode_fill';
-          })
-        });
         console.log(res);
         //缓存之前两页的总数据
-        wx.setStorageSync('indexPageData', that.data.businessList);
-        that.setData({
-          businessList: that.data.businessList.concat(res)
+        wx.setStorageSync('indexPageData', this.data.recommendPage);
+        this.setData({
+          recommendPage: this.data.recommendPage.concat(res.list)
         });
       },
       error: err => console.log(err),
       complete: () => wx.hideToast()
     });
+    
   },
   //下拉刷新
   onPullDownRefresh() {
-    let that = this;
-    let obj = {};
-    wx.getStorageSync('curLongitude') ? obj.lng = wx.getStorageSync('curLongitude') : obj = {};
-    wx.getStorageSync('curLatitude') ? obj.lat = wx.getStorageSync('curLatitude') : obj = {};
-    obj.page = 1;
-    this.setData({
-      page: 1
-    });
-    service.listCommentsNearBy(obj).subscribe({
+
+    service.getIndexData({ providerId: '1215422531428605' }).subscribe({
       next: res => {
-        console.log('--------首页附近商户评价--------');
-        res.forEach(function(item, index, arr) {
-          item.pics.forEach(function(it, i, a) {
-            item.pics[i] = 'https://upic.juniuo.com/file/picture/' + it + '/resize_200_0/mode_fill';
-          })
-        });
         console.log(res);
-        that.setData({
-          businessList: res
+        this.setData({
+          slideShowList: res.slideShowList,
+          pointProductList: res.pointProductList
         });
+
+        let obj = {
+          providerId: '1215422531428605',
+          type: 'PRODUCT',
+          sortField: 'IDX',
+          sortOrder: 'ASC',
+          pageNo: this.pageNo,
+          pageSize: this.pageSize,
+          longitude: '116.470959',
+          latitude: '39.992368'
+        };
+
+        service.getRecommendPage(obj).subscribe({
+          next: res => {
+            console.log(res);
+            this.setData({
+              recommendPage: res.list
+            });
+            wx.stopPullDownRefresh();
+          },
+          error: err => console.log(err),
+          complete: () => wx.hideToast()
+        });
+
       },
       error: err => console.log(err),
-      complete: () => {
-        wx.hideToast();
-        // 数据成功后，停止下拉刷新
-        wx.stopPullDownRefresh();
-      }
+      complete: () => wx.hideToast()
     });
   },
   getCurLocation: function() {
@@ -263,7 +267,7 @@ Page({
         this.setData({
           slideShowList: res.slideShowList,
           pointProductList: res.pointProductList
-        })
+        });
       },
       error: err => console.log(err),
       complete: () => wx.hideToast()

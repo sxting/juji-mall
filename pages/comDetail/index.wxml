@@ -80,7 +80,7 @@
 
   <view class="yongkaxuzhi-wrap" style="margin-top:20rpx;">
     <view class="yongkaxuzhi row jc-sb">
-      <view style="font-size: 30rpx;color: #333333;font-weight: bolder;">走心评价(10)</view>
+      <view style="font-size: 30rpx;color: #333333;font-weight: bolder;">走心评价(0)</view>
       <view class="row">
         <view style="font-size:24rpx;color:#999999;">查看全部</view>
         <image style="margin-left:20rpx;width:14rpx;height:26rpx;" src="../../images/arrow-right.png"></image>
@@ -88,7 +88,7 @@
     </view>
   </view>
 
-  <view class="yongkaxuzhi-wrap" style="margin-top:20rpx;">
+  <view class="yongkaxuzhi-wrap" style="margin-top:20rpx;" wx:if="{{false}}">
     <view class="yongkaxuzhi">
       <view style="font-size: 30rpx;color: #333333;font-weight: bolder;">详细信息</view>
       <image style="height:420rpx;"></image>
@@ -104,7 +104,7 @@
           <view class="tuiRow">
             <view class="row jc-sb">
               <view class="tuiName">兰溪小馆三人餐</view>
-              <view class="tuiExe">20桔子+20/元</view>
+              <view class="tuiExe">20桔子+20元</view>
             </view>
             <view class="row jc-sb mt10">
               <view class="tuiCount">已售20件</view>
@@ -118,7 +118,7 @@
           <view class="tuiRow">
             <view class="row jc-sb">
               <view class="tuiName">兰溪小馆三人餐</view>
-              <view class="tuiExe">20桔子+20/元</view>
+              <view class="tuiExe">20桔子+20元</view>
             </view>
             <view class="row jc-sb mt10">
               <view class="tuiCount">已售20件</view>

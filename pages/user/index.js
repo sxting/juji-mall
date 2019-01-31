@@ -5,6 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    nickName:'',
     phoneNum:''
   },
   toJuzi:function(){
@@ -21,6 +22,7 @@ Page({
     if (wx.getStorageSync('userinfo')){
       let userinfo = JSON.parse(wx.getStorageSync('userinfo'));
       this.setData({
+        nickName: userinfo.nickName,
         phoneNum: userinfo.phone
       });
     }

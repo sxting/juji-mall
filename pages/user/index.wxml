@@ -3,7 +3,7 @@
     <view style="padding:30rpx;" class="userinfo ub ub-ac">
       <image src="../../images/mendianimg.png" style="width:130rpx;height:130rpx;border-radius:65rpx;margin-right:30rpx;"></image>
       <view class="">
-        <view style="font-size: 34rpx;color: #000000;">小仙女</view>
+        <view style="font-size: 34rpx;color: #000000;">{{nickName}}</view>
         
         <view class="ub ub-ac" style="margin-top:10rpx;" wx:if="{{phoneNum}}">
           <view style="font-size: 28rpx;color: #000000;margin-right:20rpx;">{{phoneNum}}</view>

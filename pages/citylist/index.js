@@ -24,10 +24,12 @@ Page({
     wx.navigateBack({ delta: 1 });
   },
   onLoad: function(options) {
-    wx.setNavigationBarTitle({title: '选择地区'});
+    wx.setNavigationBarTitle({
+      title: '选择城市'
+    });
     var imageWidth = (wx.getSystemInfoSync().windowWidth-66)/3;
     this.setData({imageWidth: imageWidth+'px'});
-    this.getCitylist();
+    // this.getCitylist();
     var curCity = wx.getStorageSync('curCity')||'北京';
     this.setData({'curCity':curCity});
   }

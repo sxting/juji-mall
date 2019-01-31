@@ -120,10 +120,9 @@ Page({
       url: '../juzihl/index'
     });
   },
-  switchTab: function(event) {
-    var thisIndex = event.currentTarget.dataset['index'];
-    this.setData({
-      curTabIndex: thisIndex
+  toCityList:function(){
+    wx.navigateTo({
+      url: '../citylist/index'
     });
   },
   //上拉加载
@@ -191,60 +190,6 @@ Page({
       }
     });
   },
-  //点赞
-  toPraise: function(event) {
-    // wx.showLoading({
-    //   title: '请稍候',
-    // });
-    console.log(event);
-    console.log(event.currentTarget.dataset.maker);
-    let that = this;
-    let commentId = event.currentTarget.dataset.comid;
-    let status = event.currentTarget.dataset.status;
-    status == 1 ? status = 0 : status = 1;
-    service.praise({
-      commentId: commentId,
-      status: status
-    }).subscribe({
-      next: res => {
-        console.log('-----------点赞返回结果---------');
-        console.log(res);
-        let arr = that.data.businessList;
-        for (let i = 0; i < arr.length; i++) {
-          if (arr[i].id == commentId) {
-            arr[i].praise = status;
-            let praiseCount = arr[i].praiseCount;
-
-            if (status == 1) {
-              arr[i].praiseCount = ++praiseCount;
-            } else {
-              arr[i].praiseCount = --praiseCount;
-            }
-          }
-        }
-
-        that.setData({
-          businessList: arr
-        });
-        console.log(that.data.businessList);
-
-        // wx.hideLoading();
-      },
-      error: err => console.log(err),
-      complete: () => wx.hideToast()
-    });
-  },
-  goCommentDetail: function(event) {
-    this.setData({
-      leavePage: true
-    });
-    console.log(event);
-    let comid = event.currentTarget.dataset.comid;
-    console.log(comid);
-    wx.navigateTo({
-      url: '/pages/commentDetail/index?id=' + comid
-    });
-  },
   getCurLocation: function() {
     var that = this;
     var qqmapsdk = new QQMapWX({
@@ -284,34 +229,6 @@ Page({
         // that.getNearCommentsData(obj);
       }
     })
-  },
-  getNearCommentsData: function(obj) {
-    let that = this;
-    service.listCommentsNearBy(obj).subscribe({
-      next: res => {
-        console.log('--------返回附近评价列表--------');
-        res.forEach(function(item, index, arr) {
-          item.pics.forEach(function(it, i, a) {
-            item.pics[i] = 'https://upic.juniuo.com/file/picture/' + it + '/resize_200_0/mode_fill';
-          })
-        });
-        console.log(res);
-        that.setData({
-          businessList: res
-        });
-      },
-      error: err => console.log(err),
-      complete: () => wx.hideToast()
-    });
-  },
-  toUserCircle: function(event) {
-    console.log(event.currentTarget.dataset.userid);
-    wx.navigateTo({
-      url: '/pages/myCircle/index?id=' + event.currentTarget.dataset.userid
-    });
-  },
-  getIndexImages() {
-    consolel.log('');
   },
   getPreOrder: function() {
     var obj = {
@@ -371,6 +288,7 @@ Page({
     wx.setNavigationBarTitle({
       title: ''
     });
+    // this.getCurLocation();
     this.getIndexData();
     let obj = {
       providerId: '1215422531428605',

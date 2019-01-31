@@ -1,22 +1,27 @@
 <view>
-    <view class="tradeInfo plr15 ub ub-ac">
-        <image class="goodImg udb" src="../../images/mendianimg.png"></image>
-        <view class="ub-f1 goodMsg">
-            <view class="goodTit">兰溪小馆团购套餐</view>
-            <view class="storeName">兰溪小馆香山店</view>
-            <view class="goodAmount">20桔子<text>￥88.00</text></view>
+    <view class="tradeInfo p10">
+        <view class="p10 ub ub-ac info">
+            <image class="goodImg udb" src="../../images/mendianimg.png"></image>
+            <view class="ub-f1 goodMsg">
+                <view class="goodTit">兰溪小馆团购套餐</view>
+                <view class="storeName">兰溪小馆香山店</view>
+                <view class="goodAmount">20桔子<text>￥88.00</text></view>
+            </view>
         </view>
     </view>
     <view class="ub ub-ac ub-pj item plr15">
         <view class="itemTit ub ub-ac">购买数量</view>
-        <view class="discountAmount"></view>
+        <view class="numberCtrl ub ub-ac">
+            <image class="ctlbtn" src="../../images/ion-del.png" bindtap="delNumber"></image>
+            <view class="num uds">{{amount}}</view>
+            <image class="ctlbtn" src="../../images/ion-add.png" bindtap="addNumber"></image>
+        </view>
     </view>
     <view class="ub ub-ac ub-pj item plr15">
         <view class="itemTit ub ub-ac">使用桔子</view>
-        <view class="discountAmount"></view>
+        <view class="discountAmount">-40桔子</view>
     </view>
 </view>
-
 <view class="btn_bottom ub ub-ac plr15">
     <view class="ub-f1">金额：¥0.00</view>
     <button class="btn_common ub-f1 ub ub-ac ub-pc {{disabled?'disabled':''}}" bindtap="toPay">确认兑换</button>

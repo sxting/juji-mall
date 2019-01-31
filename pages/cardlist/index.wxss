@@ -1,6 +1,6 @@
 .tablist{height: 100rpx;background-color: #fff}
 .tablist .tabItem{position: relative;font-size: 28rpx;color: #666;padding:0 40rpx;height: 100rpx;line-height: 100rpx;text-align: center;}
-.tablist .tabItem .line{width:30rpx;height: 4rpx;background-color: #9548FA;border-radius: 2rpx;position:absolute;bottom: 20rpx;left: 50%;margin-left: -15rpx;display: none;}
+.tablist .tabItem .line{width:30rpx;height: 4rpx;background-color: #FFDC00;border-radius: 2rpx;position:absolute;bottom: 20rpx;left: 50%;margin-left: -15rpx;display: none;}
 .tablist .tabItem.on{color:#333;}
 .tablist .tabItem.on .line{display: block;}
 

@@ -9,45 +9,32 @@
     <view class="main ub-f1">
         <view class="conDiv" hidden="{{curTabIndex!=0}}">
             <view class="udb" wx:if="{{!isShowNodata1}}">
-                <view class="item" wx:for="{{consumeRecord}}" wx:key="unique">
-                    <view class="ub ub-ac">
-                        <image class="userImg" bindtap="toBusinessDetail" data-id="{{item.cardDto.merchantId}}" data-type="{{item.cardDto.cardType}}" src="{{constant.basePicUrl}}{{item.cardDto.logo}}/resize_100_0/mode_fill"></image>
-                        <view class="ub-f1 ml10">
-                            <view class="username">{{item.cardDto.merchantName}}</view>
-                            <view class="desc">{{item.dateCreated}}</view>
-                        </view>
-                        <button class="replyBtn ub ub-ac ub-pc" bindtap="toComment" data-id="{{item.id}}" wx:if="{{item.comment==0}}">评 价</button>
+                <view class="item ub ub-ac" wx:for="{{inputlist}}" wx:key="unique">
+                    <view class="ub-f1">
+                        <view class="name">{{item.name}}</view>
+                        <view class="time">{{item.time}}</view>
                     </view>
-                    <view class="ub ub-ac ub-pj elseTxt">
-                        <text class="txt1">{{item.cardDto.name}}</text>
-                        <text class="txt1">实付 ¥{{item.totalFee}}</text>
-                    </view>
+                    <view class="ub ub-ac ub-pj amount">+{{item.amount}}</view>
                 </view>
             </view>
             <view class="conDiv ub ub-ac ub-pc ub-ver" wx:else>
-                <image class="nodataImg" mode="widthFix" src="../../images/noRecord.png"></image>
-                <view class="nodataTxt">你还没有过消费哦~</view>
+                <image class="nodataImg" mode="widthFix" src="../../images/null.png"></image>
+                <view class="nodataTxt">你还没有收入哦~</view>
             </view>
         </view>
         <view class="conDiv" hidden="{{curTabIndex!=1}}">
             <view class="udb" wx:if="{{!isShowNodata2}}">
-                <view class="item" wx:for="{{buyRecord}}" wx:key="unique">
-                    <view class="ub ub-ac">
-                        <image class="userImg" bindtap="toBusinessDetail" data-id="{{item.cardDto.merchantId}}" data-type="{{item.cardDto.cardType}}" src="{{constant.basePicUrl}}{{item.cardDto.logo}}/resize_100_0/mode_fill"></image>
-                        <view class="ub-f1 ml10">
-                            <view class="username">{{item.cardDto.merchantName}}</view>
-                            <view class="desc">{{item.dateCreated}}</view>
-                        </view>
+                <view class="item ub ub-ac" wx:for="{{outputlist}}" wx:key="unique">
+                    <view class="ub-f1">
+                        <view class="name">{{item.name}}</view>
+                        <view class="time">{{item.time}}</view>
                     </view>
-                    <view class="ub ub-ac ub-pj elseTxt">
-                        <text class="txt1">{{item.cardDto.name}}</text>
-                        <text class="txt1">实付 ¥{{item.pay}}</text>
-                    </view>
+                    <view class="ub ub-ac ub-pj amount">-{{item.amount}}</view>
                 </view>
             </view>
             <view class="conDiv ub ub-ac ub-pc ub-ver" wx:else>
-                <image class="nodataImg" mode="widthFix" src="../../images/noCard.png"></image>
-                <view class="nodataTxt">你还没有购买卡哦~</view>
+                <image class="nodataImg" mode="widthFix" src="../../images/null.png"></image>
+                <view class="nodataTxt">你还没有支出哦~</view>
             </view>
         </view>
     </view>

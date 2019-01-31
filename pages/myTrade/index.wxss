@@ -1,19 +1,15 @@
 page{height: 100%}
 .tablist{height: 100rpx;background-color: #fff}
-.tablist .tabItem{position: relative;font-size: 28rpx;color: #666;padding:0 100rpx;height: 100rpx;line-height: 100rpx;text-align: center;}
-.tablist .tabItem .line{width:30rpx;height: 4rpx;background-color: #9548FA;border-radius: 2rpx;position:absolute;bottom: 20rpx;left: 50%;margin-left: -15rpx;display: none;}
+.tablist .tabItem{position: relative;font-size: 28rpx;color: #666;padding:0 40rpx;height: 100rpx;line-height: 100rpx;text-align: center;}
+.tablist .tabItem .line{width:50rpx;height: 4rpx;background-color: #FFDC00;border-radius: 2rpx;position:absolute;bottom: 20rpx;left: 50%;margin-left: -25rpx;display: none;}
 .tablist .tabItem.on{color:#333;}
 .tablist .tabItem.on .line{display: block;}
 
 .main{padding: 30rpx;}
 .ml10{margin-left: 20rpx;}
 .tit{line-height: 64rpx;font-size: 28rpx;color: #333;}
-.item{ padding: 30rpx;background-color: #fff;border-radius: 10rpx;margin-bottom: 30rpx;}
-.userImg { width: 100rpx; height: 100rpx; border-radius: 50%;border:4rpx #fff solid;background-color: #fff }
-.username {font-size: 28rpx;color: #333 }
-.desc{color: #999;font-size:22rpx;margin-top: 16rpx;}
-.replyBtn{background-color: #fff;border: 1px solid #72BE96;font-size: 24rpx;border-radius: 22rpx;height: 44rpx;width: 120rpx;color: #72BE96;padding: 0}
-.elseTxt{padding-left: 130rpx;margin-top: 15rpx;}
-.txt1{font-size: 24rpx;color: #333;line-height: 40rpx;}
-.txt2{font-size: 26rpx;color: #333;line-height: 40rpx;}
+.item{ padding: 30rpx 30rpx;background-color: #fff;border-radius: 10rpx;margin-bottom: 30rpx;}
+.name {font-size: 28rpx;color: #333 }
+.time{color: #999;font-size:22rpx;margin-top: 16rpx;}
+.amount{font-size: 28rpx;color: #333}
 .conDiv{height: 100%;box-sizing:border-box;}

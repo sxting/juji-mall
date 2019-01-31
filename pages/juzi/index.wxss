@@ -40,17 +40,25 @@
 }
 
 .point-text {
+  width:62rpx;
   font-size: 20rpx;
   color: #666;
+  text-align: center;
 }
 
 .point-wrap {
   width: 600rpx;
   margin-top: 20rpx;
   box-sizing: border-box;
+  padding:0 16rpx;
 }
 
 .point {
   width: 30rpx;
   height: 30rpx;
+}
+.pline{
+  width:40rpx;
+  height:2rpx;
+  background: #DEDEDE;
 }

@@ -55,11 +55,17 @@
 
       <view class="point-wrap ub ub-ac ub-pj">
         <image class="point" src="../../images/yqd.png"></image>
+        <view class="pline"></view>
         <image class="point" src="../../images/yqd.png"></image>
+        <view class="pline"></view>
         <image class="point" src="../../images/yqd.png"></image>
+        <view class="pline"></view>
         <image class="point" src="../../images/yqd.png"></image>
+        <view class="pline"></view>
         <image class="point" src="../../images/wqd.png"></image>
+        <view class="pline"></view>
         <image class="point" src="../../images/wqd.png"></image>
+        <view class="pline"></view>
         <image class="point" src="../../images/wqd.png"></image>
       </view>
 

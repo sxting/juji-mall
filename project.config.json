@@ -36,7 +36,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 10,
+			"current": -1,
 			"list": [
 				{
 					"id": 0,
@@ -102,13 +102,6 @@
 					"name": "订单列表",
 					"pathName": "pages/orderlist/index",
 					"query": ""
-				},
-				{
-					"id": -1,
-					"name": "confirm组件",
-					"pathName": "components/confirm/confirm",
-					"query": "",
-					"scene": null
 				}
 			]
 		}

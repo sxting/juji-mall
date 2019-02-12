@@ -5,7 +5,7 @@ import {
 var app = getApp();
 Page({
   data: {
-    locationCode:'',
+    locationCode: '',
     locationName: '',
     curTabIndex: 0,
     businessList: [],
@@ -23,7 +23,7 @@ Page({
     pageNo: 1,
     pageSize: 10,
     sortArray: ['', 'ASC', 'ASC', ''],
-    providerId:''
+    providerId: ''
   },
   //swiper滑动事件
   swiperChange: function(e) {
@@ -168,7 +168,7 @@ Page({
   onPullDownRefresh() {
 
     service.getIndexData({
-      providerId: '1215422531428605'
+      providerId: this.data.providerId
     }).subscribe({
       next: res => {
         console.log(res);
@@ -281,20 +281,20 @@ Page({
                   title: '提示',
                   content: '是否切换到' + res.parentLocation.locationName + '?',
                   success: function(res1) {
-                    if (res1.confirm){
+                    if (res1.confirm) {
                       wx.setStorageSync('locationName', res.locationName.replace('市', ''));
                       wx.setStorageSync('locationCode', res.locationCode);
                       that.setData({
                         locationName: res.locationName.replace('市', ''),
                         locationCode: res.locationCode
                       });
-                    }else if (res1.cancel){
+                    } else if (res1.cancel) {
                       that.setData({
                         locationName: wx.getStorageSync('locationName'),
                         locationCode: wx.getStorageSync('locationCode')
                       });
                     }
-                    
+
                   },
                   fail: function() {
                     that.setData({
@@ -372,15 +372,15 @@ Page({
       complete: () => wx.hideToast()
     });
   },
-  getDataByCity:function(){
+  getDataByCity: function() {
     var that = this;
     var obj = {
       provinceCode: this.data.locationCode,
       cityCode: this.data.locationCode,
-      areaCode:'',
+      areaCode: '',
     };
     service.getSelectHotCity(obj).subscribe({
-      next: res => { 
+      next: res => {
         console.log(res);
         that.setData({
           providerId: res.id
@@ -391,24 +391,29 @@ Page({
       complete: () => wx.hideToast()
     });
   },
-  onShow:function(){
-    if (this.data.locationCode != wx.getStorageSync('locationCode')){
-      //如果城市更换了 需要重新加载页面
-      this.getDataByCity();
+  onShow: function() {
+    if (this.data.locationName) {
+      if (this.data.locationName != wx.getStorageSync('locationName')) {
+        //如果城市更换了 需要重新加载页面
+        this.setData({
+          locationCode: wx.getStorageSync('locationCode'),
+          locationName: wx.getStorageSync('locationName')
+        });
+        this.getDataByCity();
+      }
+      
     }
-    this.setData({
-      locationCode: wx.getStorageSync('locationCode'),
-      locationName: wx.getStorageSync('locationName')
-    });
+
   },
   onLoad: function(options) {
+    console.log(options);
     // this.getPreOrder();
     console.log('--------------index-onLoad-------------');
     wx.setNavigationBarTitle({
       title: ''
     });
-    this.getCurLocation();//用户位置
-    
+    this.getCurLocation(); //用户位置
+
     let obj = {
       providerId: '1215422531428605',
       type: 'PRODUCT',

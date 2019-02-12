@@ -1,13 +1,2 @@
-<view class="item" wx:for="{{balanceSrcArr}}" wx:key="unique">
-    <view class="ub ub-ac">
-        <image class="userImg" bindtap="toHisCircle" data-id="{{item.userDto.id}}" src="{{item.userDto.headImg}}"></image>
-        <view class="ub-f1 ml10">
-            <view class="username">{{item.userDto.name}}</view>
-            <view class="desc ub ub-ac ub-pj">
-                <text class="bc1">{{item.userDto.signature}}</text>
-                <text class="rc" wx:if="{{cardType==2}}">{{item.times}}次</text>
-                <text class="rc" wx:else>{{item.balance}}元</text>
-            </view>
-        </view>
-    </view>
-</view>
+<!--pages/balanceSrc/index.wxml-->
+<text>pages/balanceSrc/index.wxml</text>

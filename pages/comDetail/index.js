@@ -14,6 +14,7 @@ Page({
     isShowConfirmModal: true,
     confirmTitle: '',
     confirmContent: '',
+    productId:'',
     merchantId: '',
     merchantInfo: {},
     shopsNearby: [],
@@ -32,118 +33,24 @@ Page({
     showPics: ['../../images/homeBanner.png', '../../images/banner1.png', '../../images/freeGet.png']
   },
   onLoad: function (option) {
-    this.setData({
-      userinfo: app.globalData.userInfo
-    });
+    // this.setData({
+    //   userinfo: app.globalData.userInfo
+    // });
     console.log(option);
     console.log(wx.getStorageSync('curLatitude'));
     console.log(wx.getStorageSync('curLongitude'));
     let lat = wx.getStorageSync('curLatitude');
     let lng = wx.getStorageSync('curLongitude');
     this.setData({
-      constant: constant,
-      merchantId: option.id,
-      cardType: option.cardType
+      productId: option.id
     });
     // 查询商户信息
-    service.merchantDetail({
-      id: option.id,
-      lng: lng,
-      lat: lat
-    }).subscribe({
-      next: res => {
-        console.log('-------商户信息--------');
-        console.log(res);
-        res.showPic = 'https://upic.juniuo.com/file/picture/' + res.showPic + '/resize_407_200/mode_fill';
-        this.setData({
-          merchantInfo: res
-        })
-        wx.setNavigationBarTitle({
-          title: this.data.merchantInfo.name
-        });
-      },
-      error: err => console.log(err),
-      complete: () => wx.hideToast()
-    })
+    
     // 附近门店列表
-    service.listShops({
-      merchantId: option.id,
-      lng: lng,
-      lat: lat
-    }).subscribe({
-      next: res => {
-        console.log('-------附近门店列表-------');
-        console.log(res);
-        let that = this;
-        for (let i = 0; i < res.length; i++) {
-          res[i].distance ? res[i].distance = res[i].distance.toFixed(2) : res[i].distance = null;
-        }
-        this.setData({
-          shopsNearby: res
-        });
-        this.setData({
-          merPhoneNum: that.data.shopsNearby[0].tel ? that.data.shopsNearby[0].tel : ''
-        });
-      },
-      error: err => console.log(err),
-      complete: () => wx.hideToast()
-    })
-    /*查询卡列表*/
-    service.listCards({
-      merchantId: option.id
-    }).subscribe({
-      next: res => {
-        console.log('-------商户卡列表-------');
-        console.log(res);
-        let arr = [];
-        for (let i = 0; i < res; i++) {
-          arr[i] = 0;
-        }
-        this.setData({
-          huiyuancards: res,
-          gxcobj: arr
-        })
-      },
-      error: err => console.log(err),
-      complete: () => wx.hideToast()
-    });
-    /*共享该商户的卡列表*/
-    service.listShareCards({
-      merchantId: option.id
-    }).subscribe({
-      next: res => {
-        console.log('-----------共享该商户的卡列表---------');
-        console.log(res);
-        this.setData({
-          listShareCards: res,
-          listShareCardsMax6: res.slice(0, 6)
-        })
-      },
-      error: err => console.log(err),
-      complete: () => wx.hideToast()
-    });
+    
   },
   onShow: function () {
-    service.merListComments({
-      merchantId: this.data.merchantId,
-      page: 1
-    }).subscribe({
-      next: res => {
-        console.log('-----------获取商户评价---------');
-        console.log(res);
-        res.forEach(function (item, index, arr) {
-          item.pics.slice(0, 3).forEach(function (it, i, a) {
-            item.pics[i] = 'https://upic.juniuo.com/file/picture/' + it + '/resize_120_0/mode_fill';
-          })
-        });
-        this.setData({
-          merListComments: res,
-          merListCommentsMin: res.slice(0, 2)
-        })
-      },
-      error: err => console.log(err),
-      complete: () => wx.hideToast()
-    });
+    //评论列表
   },
   showPreBuyCardModal: function (event) {
     console.log('显示购卡成功确认框触发');

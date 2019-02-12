@@ -5,7 +5,7 @@ import {
 var app = getApp();
 Page({
   data: {
-    curCity:'北京',
+    locationName: '',
     curTabIndex: 0,
     businessList: [],
     page: 1,
@@ -201,32 +201,67 @@ Page({
   },
   getCurLocation: function() {
     var that = this;
-    var qqmapsdk = new QQMapWX({
-      key: 'WW6BZ-WDS3F-WIVJN-JHT4U-5LDQ6-CYBPY'
-    });
     wx.getLocation({
       type: 'wgs84',
       success: function(res) {
         wx.setStorageSync('curLatitude', res.latitude);
         wx.setStorageSync('curLongitude', res.longitude);
         console.log('--------位置调用成功--------');
-        let obj = {
-          lng: res.longitude,
-          lat: res.latitude,
-          page: 1
-        };
-        qqmapsdk.reverseGeocoder({
-          location: {
-            latitude: res.latitude,
-            longitude: res.longitude
+        var obj = {
+          latitude: res.latitude,
+          longitude: res.longitude
+        }
+        service.getCurrentLoc(obj).subscribe({
+          next: res => {
+            console.log(res);
+            if (res.locationType != 'CITY') {
+              if (res.parentLocation.locationType == 'CITY') {
+                var oldcitycode = wx.getStorageSync('locationCode');
+                if (oldcitycode != res.locationCode) {
+                  //询问是否切换到当前城市
+
+                  if (true) {
+                    wx.setStorageSync('locationName', res.locationName.replace('市', ''));
+                    wx.setStorageSync('locationCode', res.locationCode);
+                    that.setData({
+                      locationName: res.parentLocation.locationName.replace('市', ''),
+                      locationCode: res.parentLocation.locationCode
+                    });
+                  } else {
+                    that.setData({
+                      locationName: wx.getStorageSync('locationName'),
+                      locationCode: oldcitycode
+                    });
+                  }
+
+                }
+              }
+            } else {
+              var oldcitycode = wx.getStorageSync('locationCode');
+              if (oldcitycode != res.locationCode){
+                //询问是否切换到当前城市
+
+                if(true){
+                  wx.setStorageSync('locationName', res.locationName.replace('市', ''));
+                  wx.setStorageSync('locationCode', res.locationCode);
+                  that.setData({
+                    locationName: res.locationName.replace('市', ''),
+                    locationCode: res.locationCode
+                  });
+                }else{
+                  that.setData({
+                    locationName: wx.getStorageSync('locationName'),
+                    locationCode: oldcitycode
+                  });
+                }
+                
+              }
+            }
+
           },
-          success: function(res) {
-            var city = res.result.address_component.city.substring(0, 2);
-            wx.setStorageSync('curCity', city);
-            that.setData({ curCity: city});
-            console.log(res.result.formatted_addresses.recommend);
-          }
-        })
+          error: err => errDialog(err),
+          complete: () => wx.hideToast()
+        });
       },
       fail: function(err) {
         console.log('---------位置调用失败或是被拒绝--------');
@@ -292,7 +327,7 @@ Page({
     wx.setNavigationBarTitle({
       title: ''
     });
-    // this.getCurLocation();
+    this.getCurLocation();
     this.getIndexData();
     let obj = {
       providerId: '1215422531428605',

@@ -1,14 +1,14 @@
 <view class="tit">当前城市</view>
 
-<view class="curItem ub ub-ac ub-pc">
-	<image class="icon_addr1" src="../../images/position.png"></image>{{curCity}}
+<view class="curItem ub ub-ac ub-pc" bindtap="selectCity" data-name="{{locationName}}" data-code="{{locationCode}}">
+	<image class="icon_addr1" src="../../images/position.png"></image>{{locationName}}
 </view>
 
 <view class="tit" style="margin-top:30rpx;">热门城市</view>
 
 <view class="main">
-    <view class="item ub ub-ac ub-pc" wx:for="{{citylist}}" wx:key="unique" bindtap="selectCity" data-name="{{item.name}}" data-id="{{item.id}}" style="width:{{imageWidth}}">
-        {{item.name}}
+    <view class="item ub ub-ac ub-pc" wx:for="{{citylist}}" wx:key="unique" bindtap="selectCity" data-name="{{item.locationName}}" data-code="{{item.locationCode}}" style="width:{{imageWidth}}">
+        {{item.locationName}}
     </view>
     <view class="clear"></view>
 </view>

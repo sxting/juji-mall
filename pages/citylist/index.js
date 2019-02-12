@@ -1,36 +1,77 @@
-import { errDialog, loading } from '../../utils/util'
-import { constant } from '../../utils/constant';
-import { service } from '../../service';
+import {
+  errDialog,
+  loading
+} from '../../utils/util'
+import {
+  constant
+} from '../../utils/constant';
+import {
+  service
+} from '../../service';
 Page({
   data: {
-    curCity:"",
-    citylist:[],
-    imageWidth:'200px',
+    curCity: "",
+    citylist: [],
+    imageWidth: '200px',
+    locationName:'',
+    locationCode:''
+
   },
-  getCitylist:function(){
-    service.listCities().subscribe({
+  getCitylist: function() {
+    service.getHotData().subscribe({
       next: res => {
-        this.setData({citylist:res});
+        console.log(res);
+        this.setData({
+          citylist: res
+        });
       },
       error: err => errDialog(err),
       complete: () => wx.hideToast()
     })
   },
-  selectCity:function(e){
-    var cityName=e.currentTarget.dataset['name'];
-    var cityId=e.currentTarget.dataset['id'];
-    wx.setStorageSync('curCity', cityName);
-    wx.setStorageSync('cityId', cityId);
-    wx.navigateBack({ delta: 1 });
+  selectCity: function(e) {
+    var locationName = e.currentTarget.dataset['name'];
+    var locationCode = e.currentTarget.dataset['code'];
+    wx.setStorageSync('locationName', locationName.replace('市',''));
+    wx.setStorageSync('locationCode', locationCode);
+    wx.navigateBack({
+      delta: 1
+    });
   },
   onLoad: function(options) {
     wx.setNavigationBarTitle({
       title: '选择城市'
     });
-    var imageWidth = (wx.getSystemInfoSync().windowWidth-66)/3;
-    this.setData({imageWidth: imageWidth+'px'});
-    // this.getCitylist();
-    var curCity = wx.getStorageSync('curCity')||'北京';
-    this.setData({'curCity':curCity});
+    var imageWidth = (wx.getSystemInfoSync().windowWidth - 66) / 3;
+    this.setData({
+      imageWidth: imageWidth + 'px'
+    });
+    this.getCitylist();
+    var obj = {
+      latitude: wx.getStorageSync('curLatitude'),
+      longitude: wx.getStorageSync('curLongitude')
+    }
+    service.getCurrentLoc(obj).subscribe({
+      next: res => {
+        console.log(res);
+        if (res.locationType != 'CITY') {
+          if (res.parentLocation.locationType == 'CITY') {
+            this.setData({
+              locationName: res.parentLocation.locationName.replace('市', ''),
+              locationCode: res.parentLocation.locationCode
+            });
+          }
+        }else{
+          this.setData({
+            locationName: res.locationName.replace('市', ''),
+            locationCode: res.locationCode
+          });
+        }
+
+      },
+      error: err => errDialog(err),
+      complete: () => wx.hideToast()
+    })
+    // this.setData({'curCity':curCity});
   }
 })

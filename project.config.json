@@ -36,17 +36,17 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 7,
+			"current": 9,
 			"list": [
 				{
-					"id": 3,
+					"id": 0,
 					"name": "商品详情",
 					"pathName": "pages/comDetail/index",
 					"query": ""
 				},
 				{
 					"id": -1,
-					"name": "订单",
+					"name": "订单确认",
 					"pathName": "pages/payOrder/index",
 					"query": ""
 				},
@@ -90,6 +90,18 @@
 					"pathName": "pages/citylist/index",
 					"query": "",
 					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "我的评论",
+					"pathName": "pages/myComment/index",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "订单列表",
+					"pathName": "pages/orderlist/index",
+					"query": ""
 				}
 			]
 		}

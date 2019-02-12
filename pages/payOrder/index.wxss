@@ -16,4 +16,4 @@ page{box-sizing:border-box;height: 100%;background-color: #f5f5f5}
 .discountAmount{font-size: 26rpx;color: #333}
 .btn_bottom{height: 100rpx;position: fixed;bottom: 0;left: 0;width: 100%;box-sizing:border-box;}
 .btn_bottom view{font-size: 30rpx;}
-.btn_common{background-color: #E83221;height: 80rpx;border-radius: 44rpx;color: #fff;font-size: 28rpx;width: }
+.btn_common{background-color: #FCBF0A;height: 80rpx;border-radius: 44rpx;color: #000;font-size: 28rpx;width: }

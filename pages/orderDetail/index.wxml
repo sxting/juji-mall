@@ -1,0 +1,30 @@
+<view class="main">
+    <view class="orderInfo1 p10">
+        <view class="ub ub-ac info">
+            <image class="goodImg udb" src="../../images/mendianimg.png"></image>
+            <view class="ub-f1 goodMsg">
+                <view class="goodTit">兰溪小馆团购套餐</view>
+                <view class="storeName">兰溪小馆香山店</view>
+                <view class="goodAmount">20桔子</view>
+            </view>
+        </view>
+        <view class="tx-r total">合计：￥20.00</view>
+    </view>
+    <view class="ctrl plr15 ub ub-ac ub-pj">
+        <view class="status">待使用</view>
+        <view class="btn">立即评价</view>
+    </view>
+    <view class="orderInfo2">
+        <view class="tx-c">888888888888888888888</view>
+        <image class="udb" src="../../images/erwm.jpg"></image>
+        <view class="div ub ub ub-ac ub-pj">
+            <view class="txt">剩余有效期：90天</view>
+            <view class="txt">可核销1次，已核销0次</view>
+        </view>
+    </view>
+    <view class="orderInfo3 plr15 mt10">
+        <view class="tit">订单信息</view>
+        <view class="txt">订单编号：278389273981237192</view>
+        <view class="txt">下单时间：2018-02-27 17:30:30</view>
+    </view>
+</view>

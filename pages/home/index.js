@@ -23,7 +23,7 @@ Page({
     var cardtype = e.currentTarget.dataset.type;
     var merchantId = e.currentTarget.dataset.id;
     this.data.nextPage = 'business';
-    wx.navigateTo({ url: '../businessDetails/index?cardType=' + cardtype + '&id=' + merchantId});
+    wx.navigateTo({ url: '/pages/comDetail/index?cardType=' + cardtype + '&id=' + merchantId});
   },
   switchTab: function(e) {
     var thisIndex = e.currentTarget.dataset.index;

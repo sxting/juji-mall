@@ -5,7 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    nickName:'',
+    nickName:'微信名字',
     phoneNum:''
   },
   toJuzi:function(){
@@ -14,15 +14,15 @@ Page({
       url: '../juzi/index'
     });
   },
-  toBindPhoneNum:function(){
-    wx.navigateTo({
-      url: '../bindPhone/index'
-    });
+  toPage: function(e) {
+      var page=e.currentTarget.dataset.page;
+      wx.navigateTo({url: page});
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    wx.setNavigationBarTitle({ title: '我的' });
     if (wx.getStorageSync('userinfo')){
       let userinfo = JSON.parse(wx.getStorageSync('userinfo'));
       this.setData({

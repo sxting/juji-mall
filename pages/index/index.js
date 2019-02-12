@@ -5,6 +5,7 @@ import {
 var app = getApp();
 Page({
   data: {
+    locationCode:'',
     locationName: '',
     curTabIndex: 0,
     businessList: [],
@@ -21,7 +22,8 @@ Page({
     sortIndex: 1,
     pageNo: 1,
     pageSize: 10,
-    sortArray: ['', 'ASC', 'ASC', '']
+    sortArray: ['', 'ASC', 'ASC', ''],
+    providerId:''
   },
   //swiper滑动事件
   swiperChange: function(e) {
@@ -215,6 +217,18 @@ Page({
           latitude: res.latitude,
           longitude: res.longitude
         }
+        //获取用户当地服务商信息
+        service.getSelectProviderByLoc(obj).subscribe({
+          next: res => {
+            console.log('----------服务商信息---------');
+            console.log(res);
+            that.setData({
+              providerId: res.id
+            });
+            that.getIndexData();
+          }
+        });
+        //获取用户当前城市信息
         service.getCurrentLoc(obj).subscribe({
           next: res => {
             console.log(res);
@@ -332,7 +346,7 @@ Page({
   },
   getIndexData: function() {
     service.getIndexData({
-      providerId: '1215422531428605'
+      providerId: this.data.providerId
     }).subscribe({
       next: res => {
         console.log(res);
@@ -358,9 +372,33 @@ Page({
       complete: () => wx.hideToast()
     });
   },
+  getDataByCity:function(){
+    var that = this;
+    var obj = {
+      provinceCode: this.data.locationCode,
+      cityCode: this.data.locationCode,
+      areaCode:'',
+    };
+    service.getSelectHotCity(obj).subscribe({
+      next: res => { 
+        console.log(res);
+        that.setData({
+          providerId: res.id
+        });
+        that.getIndexData();
+      },
+      error: err => console.log(err),
+      complete: () => wx.hideToast()
+    });
+  },
   onShow:function(){
+    if (this.data.locationCode != wx.getStorageSync('locationCode')){
+      //如果城市更换了 需要重新加载页面
+      this.getDataByCity();
+    }
     this.setData({
-      locationName:wx.getStorageSync('locationName')
+      locationCode: wx.getStorageSync('locationCode'),
+      locationName: wx.getStorageSync('locationName')
     });
   },
   onLoad: function(options) {
@@ -369,8 +407,8 @@ Page({
     wx.setNavigationBarTitle({
       title: ''
     });
-    this.getCurLocation();
-    this.getIndexData();
+    this.getCurLocation();//用户位置
+    
     let obj = {
       providerId: '1215422531428605',
       type: 'PRODUCT',

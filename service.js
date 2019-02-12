@@ -52,8 +52,8 @@ service.getSelectHotCity = (data) => {
   return http.get(apiUrl, data);
 }
 
-service.currentPoint = (data) => {
-  let apiUrl = api + '/point/currentPoint.json';//描述:查询桔子主页信息
+service.getSelectProviderByLoc = (data) => {
+  let apiUrl = api + '/selectProviderByLoc.json';//描述:通过用户位置获取服务商信息
   return http.get(apiUrl, data);
 }
 service.signIn = (data) => {

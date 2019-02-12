@@ -11,7 +11,7 @@
                 <view class="status">待使用</view>
                 <view class="restTime">剩余有效期90天</view>
             </view> 
-            <view class="ub ub-ac info">
+            <view class="ub ub-ac info" bindtap="toDetail">
                 <image class="goodImg udb" src="../../images/mendianimg.png"></image>
                 <view class="ub-f1 goodMsg">
                     <view class="goodTit">兰溪小馆团购套餐</view>
@@ -22,7 +22,7 @@
             <view class="tx-r total">合计：￥20.00</view>
             <view class="ctrl plr15 ub ub-ac ub-pj">
                 <view class="left">您已成功付款，请到店展示消费码消费</view>
-                <view class="right">立即评价</view>
+                <view class="right" bindtap="toDetail">立即评价</view>
             </view>
         </view>
         <view class="conDiv ub ub-ac ub-pc ub-ver" hidden="{{!isShowNodata}}">

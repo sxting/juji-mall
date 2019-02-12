@@ -207,7 +207,7 @@ Page({
   },
   toCommentList: function () {
     wx.navigateTo({
-      url: '/pages/commentList/index?merchantId=' + this.data.merchantId + '&cardId=' + this.data.huiyuancards[0].id
+      url: '/pages/commentList/index'
     });
   },
   toShareCard: function () {

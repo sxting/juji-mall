@@ -81,7 +81,7 @@
   <view class="yongkaxuzhi-wrap" style="margin-top:20rpx;">
     <view class="yongkaxuzhi row jc-sb">
       <view style="font-size: 30rpx;color: #333333;font-weight: bolder;">走心评价(0)</view>
-      <view class="row">
+      <view class="row" bindtap="toCommentList" data-id="">
         <view style="font-size:24rpx;color:#999999;">查看全部</view>
         <image style="margin-left:20rpx;width:14rpx;height:26rpx;" src="../../images/arrow-right.png"></image>
       </view>

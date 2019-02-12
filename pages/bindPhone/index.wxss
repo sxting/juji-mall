@@ -19,9 +19,10 @@
 .bindInput {
   width: 470rpx;
   height: 88rpx;
-  padding: 24rpx 30rpx;
+  line-height: 88rpx;
+  padding-left: 30rpx;
   background: #f5f5f5;
-  border-radius: 44px;
+  border-radius: 100rpx;
   box-sizing: border-box;
   font-size:28rpx;
 }

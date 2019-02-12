@@ -29,6 +29,11 @@ Page({
       nowIdx: e.detail.current
     })
   },
+  toComDetail: function(e) {
+    var id = e.currentTarget.dataset.id;
+    wx.navigateTo({ url: '/pages/comDetail/index?&id=' + id});
+  },
+
   //获取swiper高度
   getHeight: function(e) {
     var winWid = wx.getSystemInfoSync().windowWidth - 2 * 30; //获取当前屏幕的宽度

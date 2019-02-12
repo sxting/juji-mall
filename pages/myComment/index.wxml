@@ -18,5 +18,13 @@
       <image src="../../images/mendianimg.png"></image>
       <image src="../../images/mendianimg.png"></image>
     </view>
+      <view class="p10 ub ub-ac info mt10">
+          <image class="goodImg udb" src="../../images/mendianimg.png"></image>
+          <view class="ub-f1 goodMsg">
+              <view class="goodTit">兰溪小馆团购套餐</view>
+              <view class="storeName">兰溪小馆香山店</view>
+              <view class="goodAmount">20桔子<text>￥88.00</text></view>
+          </view>
+      </view>
   </view>
 </view>

@@ -1,29 +1,29 @@
-import {service} from '../../service';
+import { service } from '../../service';
 var app = getApp();
 Page({
-  data: {
-    commentlist: [{},{}]
-  },
+    data: {
+        commentlist: [{}, {}]
+    },
 
-  getComments:function(obj){
+    getComments: function(obj) {
 
-  },
+    },
 
-  toCommentDetail:function(){
+    toCommentDetail: function() {
 
-  },
+    },
 
-  //下拉刷新
-  onPullDownRefresh() {
+    //下拉刷新
+    onPullDownRefresh() {
 
-  },
+    },
 
-  //上拉加载
-  onReachBottom() {
+    //上拉加载
+    onReachBottom() {
 
-  },
+    },
 
-  onLoad: function(options) {
-      wx.setNavigationBarTitle({ title: '全部评价', });
-  }
+    onLoad: function(options) {
+        wx.setNavigationBarTitle({ title: '我的评价', });
+    }
 })

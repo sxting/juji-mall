@@ -15,13 +15,13 @@ Page({
     swiperH: '', //swiper高度
     nowIdx: 1, //当前swiper索引
     banners: ['../../images/homeBanner.png', '../../images/banner1.png', '../../images/freeGet.png'],
-    slideShowList:[],
-    pointProductList:[],
-    recommendPage:[],
-    sortIndex:1,
+    slideShowList: [],
+    pointProductList: [],
+    recommendPage: [],
+    sortIndex: 1,
     pageNo: 1,
     pageSize: 10,
-    sortArray:['','ASC','ASC','']
+    sortArray: ['', 'ASC', 'ASC', '']
   },
   //swiper滑动事件
   swiperChange: function(e) {
@@ -31,7 +31,9 @@ Page({
   },
   toComDetail: function(e) {
     var id = e.currentTarget.dataset.id;
-    wx.navigateTo({ url: '/pages/comDetail/index?&id=' + id});
+    wx.navigateTo({
+      url: '/pages/comDetail/index?&id=' + id
+    });
   },
 
   //获取swiper高度
@@ -44,17 +46,17 @@ Page({
       swiperH: sH //设置高度
     })
   },
-  toggleLabel: function (event){
+  toggleLabel: function(event) {
     let sortIndex = event.currentTarget.dataset['label'];
     console.log(sortIndex);
-    if (sortIndex != 1 && sortIndex != 4){
-      if (this.data.sortIndex == sortIndex) {//两次相同 切换排序规则
+    if (sortIndex != 1 && sortIndex != 4) {
+      if (this.data.sortIndex == sortIndex) { //两次相同 切换排序规则
         let arr = this.data.sortArray;
         console.log(arr);
-        if (arr[Number(sortIndex)-1]=='ASC'){
-          arr[Number(sortIndex)-1] = 'DESC';
-        }else{
-          arr[Number(sortIndex)-1] = 'ASC';
+        if (arr[Number(sortIndex) - 1] == 'ASC') {
+          arr[Number(sortIndex) - 1] = 'DESC';
+        } else {
+          arr[Number(sortIndex) - 1] = 'ASC';
         }
         console.log(arr);
         this.setData({
@@ -67,7 +69,7 @@ Page({
     });
     console.log(this.data.sortIndex);
     let obj = {};
-    switch (sortIndex){
+    switch (sortIndex) {
       case '1':
         obj = {
           providerId: '1215422531428605',
@@ -79,19 +81,19 @@ Page({
           longitude: '116.470959',
           latitude: '39.992368'
         };
-      break;
+        break;
       case '2':
         obj = {
           providerId: '1215422531428605',
           type: 'PRODUCT',
           sortField: 'PRICE',
-          sortOrder: this.data.sortArray[Number(sortIndex)-1],
+          sortOrder: this.data.sortArray[Number(sortIndex) - 1],
           pageNo: this.data.pageNo,
           pageSize: this.data.pageSize,
           longitude: '116.470959',
           latitude: '39.992368'
         };
-      break;
+        break;
       case '3':
         obj = {
           providerId: '1215422531428605',
@@ -103,7 +105,7 @@ Page({
           longitude: '116.470959',
           latitude: '39.992368'
         };
-      break;
+        break;
       case '4':
         obj = {
           providerId: '1215422531428605',
@@ -115,7 +117,7 @@ Page({
           longitude: '116.470959',
           latitude: '39.992368'
         };
-      break;
+        break;
     }
     console.log(obj);
     this.getRecommendPage(obj);
@@ -125,7 +127,7 @@ Page({
       url: '../juzihl/index'
     });
   },
-  toCityList:function(){
+  toCityList: function() {
     wx.navigateTo({
       url: '../citylist/index'
     });
@@ -158,12 +160,14 @@ Page({
       error: err => console.log(err),
       complete: () => wx.hideToast()
     });
-    
+
   },
   //下拉刷新
   onPullDownRefresh() {
 
-    service.getIndexData({ providerId: '1215422531428605' }).subscribe({
+    service.getIndexData({
+      providerId: '1215422531428605'
+    }).subscribe({
       next: res => {
         console.log(res);
         this.setData({
@@ -217,44 +221,75 @@ Page({
             if (res.locationType != 'CITY') {
               if (res.parentLocation.locationType == 'CITY') {
                 var oldcitycode = wx.getStorageSync('locationCode');
-                if (oldcitycode != res.locationCode) {
+                console.log(oldcitycode);
+                console.log(res.parentLocation.locationCode);
+                if (oldcitycode != res.parentLocation.locationCode) {
                   //询问是否切换到当前城市
+                  wx.showModal({
+                    title: '提示',
+                    content: '是否切换到' + res.parentLocation.locationName + '?',
+                    success: function(res1) {
+                      if (res1.confirm) {
+                        wx.setStorageSync('locationName', res.parentLocation.locationName.replace('市', ''));
+                        wx.setStorageSync('locationCode', res.parentLocation.locationCode);
+                        that.setData({
+                          locationName: res.parentLocation.locationName.replace('市', ''),
+                          locationCode: res.parentLocation.locationCode
+                        });
+                      } else if (res1.cancel) {
+                        that.setData({
+                          locationName: wx.getStorageSync('locationName'),
+                          locationCode: wx.getStorageSync('locationCode')
+                        });
+                      }
 
-                  if (true) {
-                    wx.setStorageSync('locationName', res.locationName.replace('市', ''));
-                    wx.setStorageSync('locationCode', res.locationCode);
-                    that.setData({
-                      locationName: res.parentLocation.locationName.replace('市', ''),
-                      locationCode: res.parentLocation.locationCode
-                    });
-                  } else {
-                    that.setData({
-                      locationName: wx.getStorageSync('locationName'),
-                      locationCode: oldcitycode
-                    });
-                  }
+                    },
+                    fail: function() {
+                      that.setData({
+                        locationName: wx.getStorageSync('locationName'),
+                        locationCode: wx.getStorageSync('locationCode')
+                      });
+                    }
+                  });
 
+                } else {
+                  that.setData({
+                    locationName: wx.getStorageSync('locationName'),
+                    locationCode: wx.getStorageSync('locationCode')
+                  });
                 }
               }
             } else {
               var oldcitycode = wx.getStorageSync('locationCode');
-              if (oldcitycode != res.locationCode){
+              if (oldcitycode != res.locationCode) {
                 //询问是否切换到当前城市
+                wx.showModal({
+                  title: '提示',
+                  content: '是否切换到' + res.parentLocation.locationName + '?',
+                  success: function(res1) {
+                    if (res1.confirm){
+                      wx.setStorageSync('locationName', res.locationName.replace('市', ''));
+                      wx.setStorageSync('locationCode', res.locationCode);
+                      that.setData({
+                        locationName: res.locationName.replace('市', ''),
+                        locationCode: res.locationCode
+                      });
+                    }else if (res1.cancel){
+                      that.setData({
+                        locationName: wx.getStorageSync('locationName'),
+                        locationCode: wx.getStorageSync('locationCode')
+                      });
+                    }
+                    
+                  },
+                  fail: function() {
+                    that.setData({
+                      locationName: wx.getStorageSync('locationName'),
+                      locationCode: wx.getStorageSync('locationCode')
+                    });
+                  }
+                });
 
-                if(true){
-                  wx.setStorageSync('locationName', res.locationName.replace('市', ''));
-                  wx.setStorageSync('locationCode', res.locationCode);
-                  that.setData({
-                    locationName: res.locationName.replace('市', ''),
-                    locationCode: res.locationCode
-                  });
-                }else{
-                  that.setData({
-                    locationName: wx.getStorageSync('locationName'),
-                    locationCode: oldcitycode
-                  });
-                }
-                
               }
             }
 
@@ -295,9 +330,11 @@ Page({
       complete: () => wx.hideToast()
     });
   },
-  getIndexData:function(){
-    service.getIndexData({ providerId:'1215422531428605'}).subscribe({
-      next: res => { 
+  getIndexData: function() {
+    service.getIndexData({
+      providerId: '1215422531428605'
+    }).subscribe({
+      next: res => {
         console.log(res);
         this.setData({
           slideShowList: res.slideShowList,
@@ -308,17 +345,22 @@ Page({
       complete: () => wx.hideToast()
     });
   },
-  getRecommendPage:function(obj){
+  getRecommendPage: function(obj) {
     console.log(obj);
     service.getRecommendPage(obj).subscribe({
       next: res => {
         console.log(res);
         this.setData({
-          recommendPage:res.list
+          recommendPage: res.list
         });
       },
       error: err => console.log(err),
       complete: () => wx.hideToast()
+    });
+  },
+  onShow:function(){
+    this.setData({
+      locationName:wx.getStorageSync('locationName')
     });
   },
   onLoad: function(options) {

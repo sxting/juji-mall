@@ -1,11 +1,11 @@
 <view style="height:100%;background:#ffffff;padding:30rpx;">
   <view class="ub ub-ac ub-pj">
-    <input type="text" placeholder="请输入手机号" placeholder-style="color:#999999;font-size:28rpx;" class="bindInput" />
-    <view style="width:200rpx;height:88rpx;" class="bindphoneBtn active">授权手机号</view>
+    <input type="number" placeholder="请输入手机号" placeholder-style="color:#999999;font-size:28rpx;" class="bindInput" maxlength="11" focus="true" bindinput="inphonenum"/>
+    <view style="width:200rpx;height:88rpx;" class="bindphoneBtn active" wx:if="{{false}}">授权手机号</view>
   </view>
   <view class="ub ub-ac ub-pj" style="margin-top:30rpx;">
-    <input type="text" placeholder="请输入验证码"  placeholder-style="color:#999999;font-size:28rpx;" class="bindInput" />
-    <view style="width:200rpx;height:88rpx;" class="bindphoneBtn active">获取验证码</view>
+    <input type="number" placeholder="请输入验证码"  placeholder-style="color:#999999;font-size:28rpx;" class="bindInput" maxlength="6" bindinput="incode"/>
+    <view style="width:200rpx;height:88rpx;" class="bindphoneBtn {{phoneValue?'active':''}}" bindtap="getCode">获取验证码</view>
   </view>
-  <view style="height:88rpx;background: #F5F5F5;border-radius: 44rpx;font-size: 34rpx;color: #999999;display:flex;justify-content:center;align-items:center;margin-top:160rpx;" class="active">确认绑定</view>
+  <view class="normal {{intextReady?'active':''}}">确认绑定</view>
 </view>

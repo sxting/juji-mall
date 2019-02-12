@@ -27,10 +27,6 @@ service.bindPhone = (data) => {
   let apiUrl = api + '/user/bindPhone.json';//描述:绑定手机号 注册 参数手机号 和 验证码
   return http.get(apiUrl, data);
 }
-service.login = (data) => {
-  let apiUrl = api + '/user/login.json';//小程序登录
-  return http.get(apiUrl, data);
-}
 service.getIndexData = (data) => {
   let apiUrl = api + '/index.json';//首页轮播图和桔子换礼2个
   return http.get(apiUrl, data);

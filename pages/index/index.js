@@ -33,8 +33,10 @@ Page({
   },
   toComDetail: function(e) {
     var id = e.currentTarget.dataset.id;
+    var storeid = e.currentTarget.dataset.storeid;
+    console.log(id);
     wx.navigateTo({
-      url: '/pages/comDetail/index?&id=' + id
+      url: '/pages/comDetail/index?id=' + id + '&storeid=' + storeid
     });
   },
 

@@ -82,7 +82,7 @@
       <view class="label {{sortIndex==3?'label-active':''}}" data-label="3" bindtap="toggleLabel">距离</view>
       <view class="label {{sortIndex==4?'label-active':''}}" data-label="4" bindtap="toggleLabel">销量</view>
     </view>
-    <view class="jingxuanlist" wx:for="{{recommendPage}}" wx:key="unique" bindtap="toComDetail" data-id="{{item.id}}">
+    <view class="jingxuanlist" wx:for="{{recommendPage}}" wx:key="unique" bindtap="toComDetail" data-id="{{item.productId}}" data-storeid="{{item.nearStore.id}}">
       <image style="width:100%;height:330rpx;margin-top:30rpx;" src="../../images/freeGet.png"></image>
       <view class="dis-wrap jc-sb">
         <view class="from">{{item.providerName}}</view>

@@ -60,6 +60,10 @@ service.signIn = (data) => {
   let apiUrl = api + '/point/signIn.json';//描述:用户签到
   return http.get(apiUrl, data);
 }
+service.getItemInfo = (data) => {
+  let apiUrl = api + '/product/item.json';//描述:项目详情
+  return http.get(apiUrl, data);
+}
 // --------------------------------------------merchant-----------------------------------
 /*获取Banner列表*/
 service.listBanners = (data) => {

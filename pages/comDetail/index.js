@@ -8,29 +8,16 @@ import {
 var app = getApp();
 Page({
   data: {
-    userinfo: {},
-    constant: {},
-    cardType: '',
-    isShowConfirmModal: true,
-    confirmTitle: '',
-    confirmContent: '',
     productId:'',
-    merchantId: '',
-    merchantInfo: {},
-    shopsNearby: [],
-    huiyuancards: [],
-    merListComments: [],
-    merListCommentsMin: [],
-    isShowGxModal: true,
-    isShowFocusModal: true,
-    isShowMendianModal: true,
-    isShowHycardModal: true,
-    merPhoneNum: '',
-    listShareCards: [],
-    listShareCardsMax6: [],
-    focusBoxMaker: true,
-    gxcobj: [], //共享会员卡列表卡片详情展开标记
-    showPics: ['../../images/homeBanner.png', '../../images/banner1.png', '../../images/freeGet.png']
+    storeId:'',
+    showPics: ['../../images/homeBanner.png', '../../images/banner1.png', '../../images/freeGet.png'],
+    commentList:[],
+    shortCommentList:[],
+    productInfo:{},
+    recommendList:[],
+    store:{},
+    commentCount:0,
+    recommendCount:0
   },
   onLoad: function (option) {
     // this.setData({
@@ -42,15 +29,40 @@ Page({
     let lat = wx.getStorageSync('curLatitude');
     let lng = wx.getStorageSync('curLongitude');
     this.setData({
-      productId: option.id
+      productId: option.id,
+      storeId: option.storeid
     });
-    // 查询商户信息
-    
-    // 附近门店列表
+    this.getItemInfo();
     
   },
   onShow: function () {
     //评论列表
+  },
+  call:function(){
+    wx.makePhoneCall({
+      phoneNumber: this.data.store.phone// 仅为示例，并非真实的电话号码
+    })
+  },
+  getItemInfo:function(){
+    service.getItemInfo({
+      productId: this.data.productId,
+      storeId: this.data.storeId
+    }).subscribe({
+      next: res => { 
+        console.log(res);
+        this.setData({
+          commentList: res.commentList,
+          shortCommentList: res.commentList.slice(0,1),
+          productInfo: res.product,
+          recommendList: res.recommendList,
+          store: res.store,
+          commentCount: res.commentList.length,
+          recommendCount: res.recommendList.length
+        });
+      },
+      error: err => console.log(err),
+      complete: () => wx.hideToast()
+    })
   },
   showPreBuyCardModal: function (event) {
     console.log('显示购卡成功确认框触发');

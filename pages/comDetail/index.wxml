@@ -1,3 +1,4 @@
+<wxs module="filter" src="../../utils/numFr.wxs"></wxs>
 <view class="container">
   <view class="swiper-wrap">
     <swiper class="img-wrap" autoplay="true" interval="2000">
@@ -13,7 +14,7 @@
     <view class="businessInfo">
       <view style="display:flex;justify-content: space-between;align-items: center;">
         <view class="title">
-          兰溪小馆团购餐
+          {{productInfo.productName}}
         </view>
 
         <view style="display:flex;align-items: center;font-size: 24rpx;color: #E83221;">
@@ -23,12 +24,21 @@
       </view>
       <view class="row jc-sb" style="margin-top:10rpx;">
         <view class="row">
-          <view style="font-size:34rpx;color: #E83221;">20</view>
-          <view style="font-size:28rpx;color: #E83221;">桔子</view>
-          <view style="font-size: 24rpx;color: #999999;text-decoration:line-through;margin-left:25rpx;">88.00 元</view>
+          <view class="row" wx:if="{{productInfo.type=='POINT'}}">
+            <view style="font-size:34rpx;color: #E83221;">{{productInfo.point}}</view>
+            <view style="font-size:28rpx;color: #E83221;">桔子</view>
+          </view>
+          <view class="row" wx:else>
+            <view style="font-size:34rpx;color: #E83221;">{{productInfo.point}}</view>
+            <view style="font-size:28rpx;color: #E83221;">桔子</view>
+            <view style="font-size:34rpx;color: #E83221;">+</view>
+            <view style="font-size:34rpx;color: #E83221;">{{filter.toFix(productInfo.price)}}</view>
+            <view style="font-size:28rpx;color: #E83221;">元</view>
+          </view>
+          <view style="font-size: 24rpx;color: #999999;text-decoration:line-through;margin-left:25rpx;">{{filter.toFix(productInfo.originalPrice)}} 元</view>
         </view>
 
-        <view style="font-size: 24rpx;color: #999999;">已售20件</view>
+        <view style="font-size: 24rpx;color: #999999;">已售{{productInfo.soldNum}}件</view>
       </view>
 
     </view>
@@ -61,9 +71,9 @@
     <view class="yongkaxuzhi">
       <view style="font-size: 30rpx;color: #333333;font-weight: bolder;">门店信息</view>
       <view class="row jc-sb" style="margin-top:30rpx;">
-        <view style="font-size: 28rpx;color:#333333;">兰溪小馆香山店</view>
+        <view style="font-size: 28rpx;color:#333333;">{{store.name}}</view>
         <view class="row">
-          <view style="font-size: 24rpx;color: #999999;">适用3家门店</view>
+          <view style="font-size: 24rpx;color: #999999;">适用1家门店</view>
           <image style="width:14rpx;height:26rpx;margin-left:20rpx;" src="../../images/arrow-right.png"></image>
         </view>
       </view>
@@ -71,21 +81,36 @@
       <view class="row jc-sb" style="margin-top:26rpx;">
         <view class="row">
           <image style="width:20rpx;height:23rpx;margin-right:10rpx;" src="../../images/position.png"></image>
-          <view style="font-size: 24rpx;color: #666666;">海淀区学院路8号写字楼D座C512</view>
+          <view style="font-size: 24rpx;color: #666666;">{{store.address}}</view>
         </view>
-        <image style="width:30rpx;height:30rpx;" src="../../images/call.png"></image>
+        <image bindtap="call" style="width:30rpx;height:30rpx;" src="../../images/call.png"></image>
       </view>
     </view>
   </view>
 
   <view class="yongkaxuzhi-wrap" style="margin-top:20rpx;">
     <view class="yongkaxuzhi row jc-sb">
-      <view style="font-size: 30rpx;color: #333333;font-weight: bolder;">走心评价(0)</view>
-      <view class="row" bindtap="toCommentList" data-id="">
+      <view style="font-size: 30rpx;color: #333333;font-weight: bolder;">走心评价({{commentCount}})</view>
+      <view class="row" bindtap="toCommentList" wx:if="{{commentCount>2}}">
         <view style="font-size:24rpx;color:#999999;">查看全部</view>
         <image style="margin-left:20rpx;width:14rpx;height:26rpx;" src="../../images/arrow-right.png"></image>
       </view>
     </view>
+
+      <view class="item" wx:for="{{shortCommentList}}" wx:key="{{index}}" data-comid="{{item.id}}" bindtap="toCommentDetail">
+        <view class="nickMsg ub ub-ac">
+          <image class="userImg" src="../../images/headimg.png"></image>
+          <view class="nickname">{{item.nickName}}</view>
+          <view class="ub ub-f1 ub-ac ml10">
+            <image class="icon_ping" src="../../images/icon_ping.png" wx:for="{{item.score}}"></image>
+          </view>
+          <view class="times" hidden="{{true}}">2018-01-01 01:00:00</view>
+        </view>
+        <view class="content">{{item.content}}</view>
+        <view class="imglist" hidden="{{true}}">
+          <image src="../../images/mendianimg.png"></image>
+        </view>
+      </view>
   </view>
 
   <view class="yongkaxuzhi-wrap" style="margin-top:20rpx;" wx:if="{{false}}">
@@ -96,37 +121,26 @@
     </view>
   </view>
 
-  <view class="yongkaxuzhi-wrap" style="margin-top:20rpx;">
+  <view class="yongkaxuzhi-wrap" style="margin-top:20rpx;" wx:if="{{recommendCount>0}}">
     <view class="yongkaxuzhi">
       <view style="font-size: 30rpx;color: #333333;font-weight: bolder;">同店推荐</view>
       <view class="tuiList">
-        <view class="tuiItem row jc-sb b-b-1px">
+        <view class="tuiItem row jc-sb b-b-1px" wx:for="{{recommendList}}">
           <view class="tuiRow">
             <view class="row jc-sb">
-              <view class="tuiName">兰溪小馆三人餐</view>
-              <view class="tuiExe">20桔子+20元</view>
+              <view class="tuiName">{{item.productName}}</view>
+              <view class="tuiExe" wx:if="{{item.type=='POINT'}}">{{item.point}}桔子</view>
+              <view class="tuiExe" wx:else>{{item.point}}桔子+{{item.price}}元</view>
             </view>
             <view class="row jc-sb mt10">
-              <view class="tuiCount">已售20件</view>
-              <view class="tuiPrice">88.00 元</view>
+              <view class="tuiPrice">已售{{item.soldNum}}件</view>
+              <view class="tuiCount">{{filter.toFix(item.originalPrice)}} 元</view>
             </view>
           </view>
-          <view class="huanliBtn">桔子换礼</view>
+          <view class="huanliBtn" wx:if="{{item.type=='POINT'}}" data-id="item.productId" bindtap="toComDetail">桔子换礼</view>
+          <view class="huanliBtn" wx:else data-id="item.productId" bindtap="toComDetail">桔集精品</view>
         </view>
 
-        <view class="tuiItem row jc-sb">
-          <view class="tuiRow">
-            <view class="row jc-sb">
-              <view class="tuiName">兰溪小馆三人餐</view>
-              <view class="tuiExe">20桔子+20元</view>
-            </view>
-            <view class="row jc-sb mt10">
-              <view class="tuiCount">已售20件</view>
-              <view class="tuiPrice">88.00 元</view>
-            </view>
-          </view>
-          <view class="huanliBtn">桔子换礼</view>
-        </view>
       </view>
     </view>
   </view>
@@ -143,7 +157,7 @@
     <view class="footerBtnWrap">
       <view class="gokaBtn" bindtap="showHycardModal">
         <view>
-          <view style="font-size: 28rpx;line-height:34rpx;">88.00 元</view>
+          <view style="font-size: 28rpx;line-height:34rpx;">{{filter.toFix(productInfo.price)}} 元</view>
           <view style="font-size: 18rpx;line-height:22rpx;">原价购买</view>
         </view>
       </view>

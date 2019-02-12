@@ -5,7 +5,7 @@ import {
 var app = getApp();
 Page({
   data: {
-    tablist: ['发现'], //['发现', '关注']
+    curCity:'北京',
     curTabIndex: 0,
     businessList: [],
     page: 1,
@@ -215,7 +215,6 @@ Page({
           lat: res.latitude,
           page: 1
         };
-        // that.getNearCommentsData(obj);
         qqmapsdk.reverseGeocoder({
           location: {
             latitude: res.latitude,
@@ -224,6 +223,7 @@ Page({
           success: function(res) {
             var city = res.result.address_component.city.substring(0, 2);
             wx.setStorageSync('curCity', city);
+            that.setData({ curCity: city});
             console.log(res.result.formatted_addresses.recommend);
           }
         })
@@ -231,11 +231,6 @@ Page({
       fail: function(err) {
         console.log('---------位置调用失败或是被拒绝--------');
         console.log(err);
-        console.log('--------不传输坐标获取默认商户评价--------');
-        let obj = {
-          page: 1
-        };
-        // that.getNearCommentsData(obj);
       }
     })
   },

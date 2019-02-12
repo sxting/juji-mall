@@ -3,7 +3,7 @@
 <view class="homeTabPage" wx:if="{{curTabIndex===0}}">
   <view class="locationWrap">
     <view class="title">桔集</view>
-    <view class="location">北京
+    <view class="location" bindtap="toCityList">{{curCity}}
       <image style="width:16rpx;height:10rpx;margin-left:10rpx;" src="../../images/sort-down.png"></image>
     </view>
   </view>

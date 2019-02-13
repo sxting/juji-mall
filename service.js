@@ -72,6 +72,22 @@ service.getPointBalance = (data) => {
 
 // -------------------------------------------order-----------------------------------
 
+//订单列表
+service.orderlist = (data) => {
+  let apiUrl = api + '/order/orderList.json';
+  return http.get(apiUrl, data);
+}
+//订单详情
+service.orderInfo = (data) => {
+  let apiUrl = api + '/order/info.json';
+  return http.get(apiUrl, data);
+}
+//手机号解密
+service.decodeUserPhone = (data) => {
+  let apiUrl = api + '/user/decodeUserPhone.json';
+  return http.get(apiUrl, data);
+}
+
 service.getPre = (data) => {
   let apiUrl = api + '/order/pre.json';//描述:下单前数据校验
   return http.get(apiUrl, data);
@@ -91,7 +107,7 @@ service.currentPoint = (data) => {
 // --------------------------------------------usr-----------------------------------
 /*获取会员信息*/
 service.userInfo = (data) => {
-  let apiUrl = api + '/usr/info.json';
+  let apiUrl = api + '/user/userInfo.json';
   return http.get(apiUrl, data);
 }
 

@@ -1,18 +1,21 @@
+<wxs src="../../utils/numFr.wxs" module="format" />
 <view class="main">
     <view class="orderInfo1 p10">
-        <view class="ub ub-ac info">
+        <view class="ub ub-ac info" wx:for="{{orderInfo.orderItemList}}">
             <image class="goodImg udb" src="../../images/mendianimg.png"></image>
             <view class="ub-f1 goodMsg">
-                <view class="goodTit">兰溪小馆团购套餐</view>
-                <view class="storeName">兰溪小馆香山店</view>
-                <view class="goodAmount">20桔子</view>
+                <view class="goodTit">{{item.productName}}</view>
+                <view class="storeName">{{item.merchantName}}</view>
+                <view class="goodAmount">{{item.point}}桔子 <text wx:if="it.price!=0">({{item.price}}元)</text></view>
             </view>
         </view>
         <view class="tx-r total">合计：￥20.00</view>
     </view>
     <view class="ctrl plr15 ub ub-ac ub-pj">
-        <view class="status">待使用</view>
-        <view class="btn">立即评价</view>
+        <view class="status">{{format.formatStatus(orderInfo.status)}}</view>
+        <view wx:if="{{orderInfo.status=='PAID'}}" class="btn" bindtap="toDetail" data-id="{{item.orderId}}">立即使用</view>
+        <view wx:if="{{orderInfo.status=='CREATED'}}" class="btn" bindtap="toDetail" data-id="{{item.orderId}}">立即付款</view>
+        <view wx:if="{{orderInfo.status=='CONSUME'}}" class="btn" bindtap="toDetail" data-id="{{item.orderId}}">立即评价</view>
     </view>
     <view class="orderInfo2">
         <view class="tx-c">888888888888888888888</view>
@@ -24,7 +27,7 @@
     </view>
     <view class="orderInfo3 plr15 mt10">
         <view class="tit">订单信息</view>
-        <view class="txt">订单编号：278389273981237192</view>
-        <view class="txt">下单时间：2018-02-27 17:30:30</view>
+        <view class="txt">订单编号：{{orderInfo.orderId}}</view>
+        <view class="txt">下单时间：{{orderInfo.dateCreated}}</view>
     </view>
 </view>

@@ -3,29 +3,42 @@ import { constant } from '../../utils/constant';
 var app = getApp();
 Page({
     data: {
-        tablist: ['全部', '待付款', '待使用', '待评价'],
+        tablist: [{ name: '全部', status: 'ALL' }, { name: '待付款', status: 'CREATED' }, { name: '待使用', status: 'PAID' }, { name: '待评价', status: 'CONSUME' }],
         curTabIndex: 0,
         isShowNodata: false,
-        orderlist:['','',''],
+        orderlist: [],
         amount: 0
     },
     onLoad: function(options) {
-        wx.setNavigationBarTitle({ title: '我的订单', });
+        wx.setNavigationBarTitle({ title: '我的订单' });
+        this.getData(options.status);
+        this.setData({ curTabIndex: options.index });
     },
-    toDetail:function(e){
-      var page=e.currentTarget.dataset.id;
-      wx.navigateTo({url: "/pages/orderDetail/index"});
+    toDetail: function(e) {
+        var id = e.currentTarget.dataset.id;
+        wx.navigateTo({ url: "/pages/orderDetail/index?id="+id });
     },
     switchTab: function(event) {
         var thisIndex = event.currentTarget.dataset['index'];
-        var thisType = event.currentTarget.dataset['type'];
+        var thisStatus = event.currentTarget.dataset['status'];
+        console.log(thisIndex);
         this.setData({ curTabIndex: thisIndex });
-        // if (thisType == 0) {
-        //     this.setData({ orderlist: this.data.cardListAll });
-        // } else {
-        //     this.setData({ orderlist: this.getCardListByType(thisType) });
-        // }
-        this.setData({ isShowNodata: this.data.orderlist.length == 0 });
+        this.getData(thisStatus);
+    },
+    getData: function(status) {
+        var obj = {
+            status: status,
+            pageNo: 1,
+            pageSize: 50
+        }
+        service.orderlist(obj).subscribe({
+            next: res => {
+                this.setData({ orderlist: res.content });
+                this.setData({ isShowNodata: this.data.orderlist.length == 0 });
+            },
+            error: err => errDialog(err),
+            complete: () => wx.hideToast()
+        })
     },
     toPay: function() {
         var payInfo = this.data.payInfo;

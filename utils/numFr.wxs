@@ -10,8 +10,30 @@ var filters = {
   }
 }
 
+var formatStatus = function (status) {
+  if(status=='PAID'){
+  	return '待使用'
+  }
+  if(status=='CREATED'){
+  	return '待付款'
+  }
+  if(status=='CLOSE'){
+  	return '已关闭'
+  }
+  if(status=='CONSUME'){
+  	return '待评价'
+  }
+  if(status=='FINISH'){
+  	return '已完成'
+  }
+  if(status=='REFUND'){
+  	return '已退款'
+  }
+}
+
 module.exports = {
   toFix: filters.toFix,
+  formatStatus:formatStatus
   toInt: filters.toInt,
   toDis: filters.toDis
 }

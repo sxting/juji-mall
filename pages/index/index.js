@@ -432,7 +432,7 @@ Page({
                 console.log('code: ' + res.code);
                 console.log(constant.APPID);
                 wx.request({
-                  url: 'https://shopping.juniuo.com/user/login.json',
+                  url: 'https://shopping.jujipay.com/user/login.json',
                   method: 'GET',
                   data: {
                     code: res.code,
@@ -475,7 +475,7 @@ Page({
               }
             });
 
-          }else{//如果不存在
+          }else{//如果不存在rowData
 
           }
           

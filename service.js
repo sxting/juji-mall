@@ -81,6 +81,12 @@ service.saveOrder = (data) => {
   let apiUrl = api + '/order/saveOrder.json';//描述:下单接口
   return http.post(apiUrl, data);
 }
+// -------------------------------------------juzi-----------------------------------
+
+service.currentPoint = (data) => {
+  let apiUrl = api + '/point/currentPoint.json';//描述:下单接口
+  return http.post(apiUrl, data);
+}
 
 // --------------------------------------------usr-----------------------------------
 /*获取会员信息*/

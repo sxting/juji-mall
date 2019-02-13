@@ -159,7 +159,7 @@
 
     <!-- 如果是桔子和人民币组合购买 -->
     <view class="footerBtnWrap" wx:if="{{productInfo.type=='PRODUCT'&&productInfo.point>0&&productInfo.price>0}}">
-      <view class="gokaBtn" bindtap="toCreateOrder">
+      <view class="gokaBtn" bindtap="toCreateOrderByRmb">
         <view>
           <view style="font-size: 28rpx;line-height:34rpx;">{{filter.toFix(productInfo.originalPrice)}} 元</view>
           <view style="font-size: 18rpx;line-height:22rpx;">原价购买</view>
@@ -173,7 +173,7 @@
         </view>
       </view>
       <!-- 如果不需要人民币 并且 桔子充足 -->
-      <view class="xiadan" bindtap="toCreateOrder" wx:if="{{productInfo.price==0&&pointBalance>0}}">
+      <view class="xiadan" bindtap="toCreateOrderByPoint" wx:if="{{productInfo.price==0&&pointBalance>0}}">
         <view>
           <view style="font-size: 28rpx;line-height:34rpx;">{{productInfo.point}}桔子</view>
           <view style="font-size: 18rpx;line-height:22rpx;">立即兑换</view>
@@ -190,7 +190,7 @@
 
     <!-- 如果是只能原价购买的商品 -->
     <view class="footerBtnWrap" wx:if="{{productInfo.type=='PRODUCT'&&productInfo.point==0&&productInfo.price>0}}">
-      <view class="yuanjia-xiadan" bindtap="toCreateOrder">
+      <view class="yuanjia-xiadan" bindtap="toCreateOrderByRmb">
         <view>
           <view style="font-size: 28rpx;line-height:34rpx;font-weight:bolder;">{{filter.toFix(productInfo.price)}}元</view>
           <view style="font-size: 18rpx;line-height:22rpx;">立即购买</view>
@@ -201,7 +201,7 @@
     <!-- 如果是桔子换礼商品 -->
     <view class="footerBtnWrap" wx:if="{{productInfo.type=='POINT'}}">
     <!-- 如果桔子充足 -->
-      <view class="yuanjia-xiadan" bindtap="toCreateOrder" wx:if="{{pointBalance>0}}">
+      <view class="yuanjia-xiadan" bindtap="toCreateOrderByPoint" wx:if="{{pointBalance>0}}">
         <view>
           <view style="font-size: 28rpx;line-height:34rpx;font-weight:bolder;">{{productInfo.point}} 桔子</view>
           <view style="font-size: 18rpx;line-height:22rpx;">立即兑换</view>

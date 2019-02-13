@@ -6,9 +6,19 @@
       <view class="ub-f1 goodMsg">
         <view class="goodTit">{{productInfo.productName}}</view>
         <view class="storeName">{{store.name}}</view>
-        <view class="goodAmount">{{productInfo.point}}
+        <view class="goodAmount" wx:if="{{paytype==1}}">{{productInfo.point}}
+          <text style="font-family: PingFangSC-Medium;font-size:28rpx;">桔子</text>+
+          {{filter.toFix(productInfo.price)}}
+          <text style="font-family: PingFangSC-Medium;font-size:28rpx;">元</text>
+          <text style="margin-left: 10rpx;font-size: 24rpx;color: #999999;text-decoration:line-through">{{filter.toFix(productInfo.originalPrice)}}元</text>
+        </view>
+
+        <view class="goodAmount" wx:if="{{paytype==2}}">{{productInfo.point}}
           <text style="font-family: PingFangSC-Medium;font-size:28rpx;">桔子</text>
-          <text style="margin-left: 10rpx;font-size: 24rpx;color: #999999;text-decoration:line-through">￥{{filter.toFix(productInfo.originalPrice)}}</text>
+        </view>
+
+        <view class="goodAmount" wx:if="{{paytype==3}}">{{filter.toFix(productInfo.originalPrice)}}
+          <text style="font-family: PingFangSC-Medium;font-size:28rpx;">元</text>
         </view>
       </view>
     </view>
@@ -23,16 +33,16 @@
         <image class="ctlbtn" src="../../images/ion-add.png" bindtap="addNumber"></image>
       </view>
     </view>
-    <view class="line"></view>
+    <view class="line" wx:if="{{paytype==1||paytype==2}}"></view>
   </view>
-  <view class="plr15" style="background:#fff;padding-top:30rpx;">
-    <view class="ub ub-ac ub-pj" wx:if="{{paytype==1||paytype==2}}">
+  <view class="plr15" style="background:#fff;padding-top:30rpx;" wx:if="{{paytype==1||paytype==2}}">
+    <view class="ub ub-ac ub-pj">
       <view class="itemTit ub ub-ac">使用桔子</view>
       <view class="discountAmount">-{{point*count}}
         <text style="font-family: PingFangSC-Medium;font-size: 24rpx;color: #151515;">桔子</text>
       </view>
     </view>
-    <view style="padding:20rpx 0 30rpx 0;font-family: PingFangSC-Regular;font-size: 24rpx;color: #999999;">你有30个桔子</view>
+    <view style="padding:20rpx 0 30rpx 0;font-family: PingFangSC-Regular;font-size: 24rpx;color: #999999;">你有{{pointBalance}}个桔子</view>
   </view>
 </view>
 <view class="btn_bottom ub ub-ac plr15">

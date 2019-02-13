@@ -38,7 +38,7 @@ App({
                 console.log(res1); 
                 if(res1.data.errorCode=='200'){
                   wx.setStorageSync('token', res1.data.data.token);
-                  wx.setStorageSync('openid', res1.data.data.openid);
+                  wx.setStorageSync('openid', res1.data.data.openId);
                   wx.setStorageSync('userinfo', JSON.stringify(res1.data.data));
                 }else{
 

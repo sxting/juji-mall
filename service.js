@@ -77,6 +77,11 @@ service.getPre = (data) => {
   return http.get(apiUrl, data);
 }
 
+service.saveOrder = (data) => {
+  let apiUrl = api + '/order/saveOrder.json';//描述:下单接口
+  return http.post(apiUrl, data);
+}
+
 // --------------------------------------------usr-----------------------------------
 /*获取会员信息*/
 service.userInfo = (data) => {

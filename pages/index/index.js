@@ -322,9 +322,8 @@ Page({
   },
   getPreOrder: function() {
     var obj = {
-      openid: wx.getStorageSync('accessToken')
+      openid: wx.getStorageSync('openid')
     };
-    // var obj = wx.getStorageSync('accessToken');
     service.testPreOrder(obj).subscribe({
       next: res => {
         console.log(res);

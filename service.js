@@ -154,9 +154,19 @@ service.reply = (data) => {
 
 // -------------------------------------------order-----------------------------------
 
-//买卡
-service.buyCard = (data) => {
-  let apiUrl = api + '/order/preBuyCard.json';
+//订单列表
+service.orderlist = (data) => {
+  let apiUrl = api + '/order/orderList.json';
+  return http.get(apiUrl, data);
+}
+//订单详情
+service.orderInfo = (data) => {
+  let apiUrl = api + '/order/info.json';
+  return http.get(apiUrl, data);
+}
+
+service.decodeUserPhone = (data) => {
+  let apiUrl = api + '/user/decodeUserPhone.json';
   return http.get(apiUrl, data);
 }
 
@@ -175,7 +185,7 @@ service.confirmOrder = (data) => {
 // --------------------------------------------usr-----------------------------------
 /*获取会员信息*/
 service.userInfo = (data) => {
-  let apiUrl = api + '/usr/info.json';
+  let apiUrl = api + '/user/userInfo.json';
   return http.get(apiUrl, data);
 }
 

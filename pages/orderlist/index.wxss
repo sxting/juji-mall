@@ -17,7 +17,6 @@ page{box-sizing:border-box;height: 100%;background-color: #fbfbfb}
 .goodTit{font-size: 30rpx;}
 .storeName{font-size: 24rpx;margin-top: 10rpx;color: #999;}
 .goodAmount{font-size: 30rpx; margin-top: 48rpx;color: #333;}
-.goodAmount text{margin-left: 10rpx;font-size: 24rpx;color: #666;text-decoration:line-through}
 .orderItem .ctrl{height: 88rpx;border-top: 1rpx #eee solid;}
 .orderItem .ctrl .left{font-size: 24rpx;color: #999;}
 .orderItem .ctrl .right{border: 1rpx solid #999999;border-radius: 50rpx;width: 160rpx;height: 50rpx;text-align: center;line-height: 50rpx;font-size: 24rpx;color: #333;}
@@ -26,3 +25,4 @@ page{box-sizing:border-box;height: 100%;background-color: #fbfbfb}
 .itemTit{font-size: 28rpx;}
 .numberCtrl .ctlbtn{color: #999;width: 40rpx;height: 40rpx;display: block;background-color: #f5f5f5;}
 .numberCtrl .num{width: 60rpx;height:40rpx;text-align: center;font-size: 24rpx;color: #333;background-color: #f5f5f5;line-height: 40rpx;margin: 0 10rpx;}
+

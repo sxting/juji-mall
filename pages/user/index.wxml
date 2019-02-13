@@ -1,15 +1,15 @@
 <view class="wrap">
   <view class="toper">
     <view style="padding:30rpx;" class="userinfo ub ub-ac">
-      <image src="../../images/mendianimg.png" style="width:130rpx;height:130rpx;border-radius:65rpx;margin-right:30rpx;"></image>
+      <image wx:if="{{avatar}}" src="{{avatar}}" class="headImg"></image>
+      <image wx:else src="../../images/user.png" class="headImg"></image>
       <view class="">
         <view style="font-size: 34rpx;color: #000000;">{{nickName}}</view>
         <view class="ub ub-ac" style="margin-top:10rpx;" wx:if="{{phoneNum}}">
-          <view style="font-size: 28rpx;color: #000000;margin-right:20rpx;">{{phoneNum}}</view>
+          <view class="phoneTxt">{{phoneNum}}</view>
         </view>
-
         <view class="ub ub-ac" style="margin-top:10rpx;" wx:else bindtap="toPage" data-page="/pages/bindPhone/index">
-          <view style="font-size: 28rpx;color: #000000;margin-right:10rpx;">绑定手机号</view>
+          <view class="phoneTxt">绑定手机号</view>
           <image style="width:12rpx;height:22rpx;" src="../../images/arrow-r.png"></image>
         </view>
       </view>
@@ -35,7 +35,7 @@
   <view style="margin-top:90rpx;" class="userBox">
     <view class="ub ub-ac ub-pj" style="padding:30rpx;">
       <view style="font-size: 30rpx;color: #333333;">我的订单</view>
-      <view class="ub ub-ac" bindtap="toPage" data-page="/pages/orderlist/index">
+      <view class="ub ub-ac" bindtap="toPage" data-page="/pages/orderlist/index?index=0&status=ALL">
         <view style="font-size: 24rpx;color: #999999;">查看全部订单</view>
         <image src="../../images/arrow-right.png" style="width:12rpx;height:22rpx;margin-left:10rpx;"></image>
       </view>
@@ -44,15 +44,15 @@
       <view style="height:2rpx;background:#eeeeee;"></view>
     </view>
     <view class="ub ub-ac ub-pj" style="padding: 30rpx 40rpx;">
-      <view class="ub ub-ver ub-ac ub-pc" bindtap="toPage" data-page="/pages/orderlist/index">
+      <view class="ub ub-ver ub-ac ub-pc" bindtap="toPage" data-page="/pages/orderlist/index?index=1&status=CREATED">
         <image style="width:47rpx;height:43rpx;" src="../../images/user_dfk.png"></image>
         <text class="orderBtnsText">待付款</text>
       </view>
-      <view class="ub ub-ver ub-ac ub-pc" bindtap="toPage" data-page="/pages/orderlist/index">
+      <view class="ub ub-ver ub-ac ub-pc" bindtap="toPage" data-page="/pages/orderlist/index?index=2&status=PAID">
         <image style="width:45rpx;height:42rpx;" src="../../images/user_dsy.png"></image>
         <text class="orderBtnsText">待使用</text>
       </view>
-      <view class="ub ub-ver ub-ac ub-pc" bindtap="toPage" data-page="/pages/orderlist/index">
+      <view class="ub ub-ver ub-ac ub-pc" bindtap="toPage" data-page="/pages/orderlist/index?index=3&status=CONSUME">
         <image style="width:49rpx;height:44rpx;" src="../../images/user_dpj.png"></image>
         <text class="orderBtnsText">待评价</text>
       </view>

@@ -1,4 +1,4 @@
-// pages/user/index.js
+var app = getApp();
 Page({
 
   /**
@@ -15,7 +15,7 @@ Page({
     });
   },
   toPage: function(e) {
-      var page=e.currentTarget.dataset.page;
+      var page = e.currentTarget.dataset.page;
       wx.navigateTo({url: page});
   },
   /**
@@ -23,11 +23,12 @@ Page({
    */
   onLoad: function (options) {
     wx.setNavigationBarTitle({ title: '我的' });
-    if (wx.getStorageSync('userinfo')){
-      let userinfo = JSON.parse(wx.getStorageSync('userinfo'));
+    if (app.globalData.userInfo){
+      let userinfo = app.globalData.userInfo;
       this.setData({
         nickName: userinfo.nickName,
-        phoneNum: userinfo.phone
+        phoneNum: userinfo.phone,
+        avatar:userinfo.avatar
       });
     }
   },
@@ -36,7 +37,6 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
   },
 
   /**
@@ -44,6 +44,18 @@ Page({
    */
   onShow: function () {
 
+  },
+
+  getInfo:function(){
+    service.userInfo({openId:wx.getStorageSync('openId')}).subscribe({
+      next: res => {
+        this.setData({
+
+        });
+      },
+      error: err => errDialog(err),
+      complete: () => wx.hideToast()
+    })
   },
 
   /**
@@ -54,30 +66,9 @@ Page({
   },
 
   /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
 
   }
-})
+});

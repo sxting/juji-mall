@@ -3,18 +3,26 @@ import { constant } from '../../utils/constant';
 var app = getApp();
 Page({
     data: {
-        orderInfo:['','',''],
+        orderInfo:{},
         amount: 0
     },
     onLoad: function(options) {
         wx.setNavigationBarTitle({ title: '订单详情', });
+        this.getData(options.id);
     },
     switchTab: function(event) {
-        var thisIndex = event.currentTarget.dataset['index'];
         var thisType = event.currentTarget.dataset['type'];
-        this.setData({ curTabIndex: thisIndex });
         this.setData({ isShowNodata: this.data.orderlist.length == 0 });
     },
+    getData:function(orderId){
+        service.orderInfo({orderId:orderId}).subscribe({
+          next: res => {
+            this.setData({orderInfo:res});
+          },
+          error: err => errDialog(err),
+          complete: () => wx.hideToast()
+        })
+      },
     toPay: function() {
         var payInfo = this.data.payInfo;
         if (payInfo.wxpay == 0) {

@@ -4,3 +4,6 @@
 .orderBtnsText { font-family: PingFangSC-Regular; font-size: 26rpx; color: #333; margin-top: 20rpx; }
 .kefu { background: #fff; color: #333; padding: 0; border: #fff 1rpx solid; height: 100rpx; line-height: 100rpx; }
 .kefu::after { border: 0; }
+
+.headImg{width:130rpx;height:130rpx;border-radius:65rpx;margin-right:30rpx;background-color: #fff}
+.phoneTxt{font-size: 28rpx;color: #000000;margin-right:10rpx;}

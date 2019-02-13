@@ -150,7 +150,7 @@ Page({
       sortField: 'IDX',
       sortOrder: 'ASC',
       pageNo: p,
-      pageSize: this.pageSize,
+      pageSize: this.data.pageSize,
       longitude: '116.470959',
       latitude: '39.992368'
     };
@@ -187,8 +187,8 @@ Page({
           type: 'PRODUCT',
           sortField: 'IDX',
           sortOrder: 'ASC',
-          pageNo: this.pageNo,
-          pageSize: this.pageSize,
+          pageNo: 1,
+          pageSize: this.data.pageSize,
           longitude: '116.470959',
           latitude: '39.992368'
         };
@@ -224,13 +224,34 @@ Page({
         }
         //获取用户当地服务商信息
         service.getSelectProviderByLoc(obj).subscribe({
-          next: res => {
+          next: res1 => {
             console.log('----------服务商信息---------');
-            console.log(res);
-            that.setData({
-              providerId: res.id
-            });
-            that.getIndexData();
+            console.log(res1);
+            if (res1.id) { //如果存在服务商
+              that.setData({
+                providerId: res1.id
+              });
+              //必须有providerId，才能获取首页数据
+              that.getIndexData();
+              //根据位置查询附近精选
+              var obj = {
+                providerId: res1.id,
+                type: 'PRODUCT',
+                sortField: 'IDX',
+                sortOrder: 'ASC',
+                pageNo: that.data.pageNo,
+                pageSize: that.data.pageSize,
+                longitude: res.longitude,
+                latitude: res.latitude
+              };
+              that.getRecommendPage(obj);
+            } else { //如果不存在服务商
+              wx.showToast({
+                title: '当前位置不存在服务商',
+                icon: 'none'
+              })
+            }
+
           }
         });
         //获取用户当前城市信息
@@ -242,41 +263,53 @@ Page({
                 var oldcitycode = wx.getStorageSync('locationCode');
                 console.log(oldcitycode);
                 console.log(res.parentLocation.locationCode);
-                if (oldcitycode != res.parentLocation.locationCode) {
-                  //询问是否切换到当前城市
-                  wx.showModal({
-                    title: '提示',
-                    content: '是否切换到' + res.parentLocation.locationName + '?',
-                    success: function(res1) {
-                      if (res1.confirm) {
-                        wx.setStorageSync('locationName', res.parentLocation.locationName.replace('市', ''));
-                        wx.setStorageSync('locationCode', res.parentLocation.locationCode);
-                        that.setData({
-                          locationName: res.parentLocation.locationName.replace('市', ''),
-                          locationCode: res.parentLocation.locationCode
-                        });
-                      } else if (res1.cancel) {
+                if (!oldcitycode) {
+                  //如果是第一次获取位置，不询问
+                  wx.setStorageSync('locationName', res.parentLocation.locationName.replace('市', ''));
+                  wx.setStorageSync('locationCode', res.parentLocation.locationCode);
+                  that.setData({
+                    locationName: res.parentLocation.locationName.replace('市', ''),
+                    locationCode: res.parentLocation.locationCode
+                  });
+                } else {
+                  if (oldcitycode != res.parentLocation.locationCode) {
+                    //询问是否切换到当前城市
+                    wx.showModal({
+                      title: '提示',
+                      content: '是否切换到' + res.parentLocation.locationName + '?',
+                      success: function(res1) {
+                        if (res1.confirm) {
+                          wx.setStorageSync('locationName', res.parentLocation.locationName.replace('市', ''));
+                          wx.setStorageSync('locationCode', res.parentLocation.locationCode);
+                          that.setData({
+                            locationName: res.parentLocation.locationName.replace('市', ''),
+                            locationCode: res.parentLocation.locationCode
+                          });
+                        } else if (res1.cancel) {
+                          that.setData({
+                            locationName: wx.getStorageSync('locationName'),
+                            locationCode: wx.getStorageSync('locationCode')
+                          });
+                        }
+
+                      },
+                      fail: function() {
                         that.setData({
                           locationName: wx.getStorageSync('locationName'),
                           locationCode: wx.getStorageSync('locationCode')
                         });
                       }
+                    });
 
-                    },
-                    fail: function() {
-                      that.setData({
-                        locationName: wx.getStorageSync('locationName'),
-                        locationCode: wx.getStorageSync('locationCode')
-                      });
-                    }
-                  });
-
-                } else {
-                  that.setData({
-                    locationName: wx.getStorageSync('locationName'),
-                    locationCode: wx.getStorageSync('locationCode')
-                  });
+                  } else {
+                    that.setData({
+                      locationName: wx.getStorageSync('locationName'),
+                      locationCode: wx.getStorageSync('locationCode')
+                    });
+                  }
                 }
+
+
               }
             } else {
               var oldcitycode = wx.getStorageSync('locationCode');
@@ -383,12 +416,15 @@ Page({
       cityCode: this.data.locationCode,
       areaCode: '',
     };
+    //选择省市县确认服务商信息
     service.getSelectHotCity(obj).subscribe({
       next: res => {
+        console.log('--------选择省市县确认服务商信息---------');
         console.log(res);
         that.setData({
           providerId: res.id
         });
+        console.log('--------选择省市县确认服务商信息后重新加载首页数据---------');
         that.getIndexData();
       },
       error: err => console.log(err),
@@ -405,7 +441,7 @@ Page({
         });
         this.getDataByCity();
       }
-      
+
     }
 
   },
@@ -414,7 +450,7 @@ Page({
     wx.setNavigationBarTitle({
       title: ''
     });
-    
+
 
     wx.getSetting({
       success: (res) => {
@@ -423,9 +459,9 @@ Page({
           wx.reLaunch({
             url: '/pages/login/index'
           });
-        }else{//如果已经授权
+        } else { //如果已经授权
           //判断rowData是否存在
-          if(wx.getStorageSync('rawData')){//如果存在
+          if (wx.getStorageSync('rawData')) { //如果存在
 
             wx.login({
               success: res => {
@@ -451,21 +487,10 @@ Page({
                       wx.setStorageSync('userinfo', JSON.stringify(res1.data.data));
                       this.getCurLocation(); //用户位置
 
-                      //根据位置查询附近精选
-                      let obj = {
-                        providerId: '1215422531428605',
-                        type: 'PRODUCT',
-                        sortField: 'IDX',
-                        sortOrder: 'ASC',
-                        pageNo: this.pageNo,
-                        pageSize: this.pageSize,
-                        longitude: '116.470959',
-                        latitude: '39.992368'
-                      };
-                      this.getRecommendPage(obj);
+
                     } else {
                       wx.showToast({
-                        title: '登录失败，错误码:' + res1.data.errorCode+' 返回错误: ' + res1.data.errorInfo,
+                        title: '登录失败，错误码:' + res1.data.errorCode + ' 返回错误: ' + res1.data.errorInfo,
                         icon: 'none',
                         duration: 3000
                       })
@@ -475,21 +500,21 @@ Page({
               }
             });
 
-          }else{//如果不存在rowData
+          } else { //如果不存在rowData
 
           }
-          
+
         }
       }
     });
-    
+
 
 
     // this.getPreOrder();
     console.log('--------------index-onLoad-------------');
-    
-    
 
-    
+
+
+
   }
 })

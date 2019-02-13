@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/login/index",
     "pages/user/index",
     "pages/myBusinesscard/index",
     "pages/myTicket/index",

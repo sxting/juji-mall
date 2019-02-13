@@ -1,11 +1,15 @@
 var QQMapWX = require('../../lib/qqmap-wx-jssdk.min.js');
 import {
+  constant
+} from '../../utils/constant';
+import {
   service
 } from '../../service';
 var app = getApp();
 Page({
   data: {
-    tablist: ['发现'], //['发现', '关注']
+    locationCode: '',
+    locationName: '',
     curTabIndex: 0,
     businessList: [],
     page: 1,
@@ -15,13 +19,14 @@ Page({
     swiperH: '', //swiper高度
     nowIdx: 1, //当前swiper索引
     banners: ['../../images/homeBanner.png', '../../images/banner1.png', '../../images/freeGet.png'],
-    slideShowList:[],
-    pointProductList:[],
-    recommendPage:[],
-    sortIndex:1,
+    slideShowList: [],
+    pointProductList: [],
+    recommendPage: [],
+    sortIndex: 1,
     pageNo: 1,
     pageSize: 10,
-    sortArray:['','ASC','ASC','']
+    sortArray: ['', 'ASC', 'ASC', ''],
+    providerId: ''
   },
   //swiper滑动事件
   swiperChange: function(e) {
@@ -31,7 +36,11 @@ Page({
   },
   toComDetail: function(e) {
     var id = e.currentTarget.dataset.id;
-    wx.navigateTo({ url: '/pages/comDetail/index?&id=' + id});
+    var storeid = e.currentTarget.dataset.storeid;
+    console.log(id);
+    wx.navigateTo({
+      url: '/pages/comDetail/index?id=' + id + '&storeid=' + storeid
+    });
   },
 
   //获取swiper高度
@@ -44,17 +53,17 @@ Page({
       swiperH: sH //设置高度
     })
   },
-  toggleLabel: function (event){
+  toggleLabel: function(event) {
     let sortIndex = event.currentTarget.dataset['label'];
     console.log(sortIndex);
-    if (sortIndex != 1 && sortIndex != 4){
-      if (this.data.sortIndex == sortIndex) {//两次相同 切换排序规则
+    if (sortIndex != 1 && sortIndex != 4) {
+      if (this.data.sortIndex == sortIndex) { //两次相同 切换排序规则
         let arr = this.data.sortArray;
         console.log(arr);
-        if (arr[Number(sortIndex)-1]=='ASC'){
-          arr[Number(sortIndex)-1] = 'DESC';
-        }else{
-          arr[Number(sortIndex)-1] = 'ASC';
+        if (arr[Number(sortIndex) - 1] == 'ASC') {
+          arr[Number(sortIndex) - 1] = 'DESC';
+        } else {
+          arr[Number(sortIndex) - 1] = 'ASC';
         }
         console.log(arr);
         this.setData({
@@ -67,7 +76,7 @@ Page({
     });
     console.log(this.data.sortIndex);
     let obj = {};
-    switch (sortIndex){
+    switch (sortIndex) {
       case '1':
         obj = {
           providerId: '1215422531428605',
@@ -79,19 +88,19 @@ Page({
           longitude: '116.470959',
           latitude: '39.992368'
         };
-      break;
+        break;
       case '2':
         obj = {
           providerId: '1215422531428605',
           type: 'PRODUCT',
           sortField: 'PRICE',
-          sortOrder: this.data.sortArray[Number(sortIndex)-1],
+          sortOrder: this.data.sortArray[Number(sortIndex) - 1],
           pageNo: this.data.pageNo,
           pageSize: this.data.pageSize,
           longitude: '116.470959',
           latitude: '39.992368'
         };
-      break;
+        break;
       case '3':
         obj = {
           providerId: '1215422531428605',
@@ -103,7 +112,7 @@ Page({
           longitude: '116.470959',
           latitude: '39.992368'
         };
-      break;
+        break;
       case '4':
         obj = {
           providerId: '1215422531428605',
@@ -115,7 +124,7 @@ Page({
           longitude: '116.470959',
           latitude: '39.992368'
         };
-      break;
+        break;
     }
     console.log(obj);
     this.getRecommendPage(obj);
@@ -125,7 +134,7 @@ Page({
       url: '../juzihl/index'
     });
   },
-  toCityList:function(){
+  toCityList: function() {
     wx.navigateTo({
       url: '../citylist/index'
     });
@@ -158,12 +167,14 @@ Page({
       error: err => console.log(err),
       complete: () => wx.hideToast()
     });
-    
+
   },
   //下拉刷新
   onPullDownRefresh() {
 
-    service.getIndexData({ providerId: '1215422531428605' }).subscribe({
+    service.getIndexData({
+      providerId: this.data.providerId
+    }).subscribe({
       next: res => {
         console.log(res);
         this.setData({
@@ -201,49 +212,121 @@ Page({
   },
   getCurLocation: function() {
     var that = this;
-    var qqmapsdk = new QQMapWX({
-      key: 'WW6BZ-WDS3F-WIVJN-JHT4U-5LDQ6-CYBPY'
-    });
     wx.getLocation({
       type: 'wgs84',
       success: function(res) {
         wx.setStorageSync('curLatitude', res.latitude);
         wx.setStorageSync('curLongitude', res.longitude);
         console.log('--------位置调用成功--------');
-        let obj = {
-          lng: res.longitude,
-          lat: res.latitude,
-          page: 1
-        };
-        // that.getNearCommentsData(obj);
-        qqmapsdk.reverseGeocoder({
-          location: {
-            latitude: res.latitude,
-            longitude: res.longitude
-          },
-          success: function(res) {
-            var city = res.result.address_component.city.substring(0, 2);
-            wx.setStorageSync('curCity', city);
-            console.log(res.result.formatted_addresses.recommend);
+        var obj = {
+          latitude: res.latitude,
+          longitude: res.longitude
+        }
+        //获取用户当地服务商信息
+        service.getSelectProviderByLoc(obj).subscribe({
+          next: res => {
+            console.log('----------服务商信息---------');
+            console.log(res);
+            that.setData({
+              providerId: res.id
+            });
+            that.getIndexData();
           }
-        })
+        });
+        //获取用户当前城市信息
+        service.getCurrentLoc(obj).subscribe({
+          next: res => {
+            console.log(res);
+            if (res.locationType != 'CITY') {
+              if (res.parentLocation.locationType == 'CITY') {
+                var oldcitycode = wx.getStorageSync('locationCode');
+                console.log(oldcitycode);
+                console.log(res.parentLocation.locationCode);
+                if (oldcitycode != res.parentLocation.locationCode) {
+                  //询问是否切换到当前城市
+                  wx.showModal({
+                    title: '提示',
+                    content: '是否切换到' + res.parentLocation.locationName + '?',
+                    success: function(res1) {
+                      if (res1.confirm) {
+                        wx.setStorageSync('locationName', res.parentLocation.locationName.replace('市', ''));
+                        wx.setStorageSync('locationCode', res.parentLocation.locationCode);
+                        that.setData({
+                          locationName: res.parentLocation.locationName.replace('市', ''),
+                          locationCode: res.parentLocation.locationCode
+                        });
+                      } else if (res1.cancel) {
+                        that.setData({
+                          locationName: wx.getStorageSync('locationName'),
+                          locationCode: wx.getStorageSync('locationCode')
+                        });
+                      }
+
+                    },
+                    fail: function() {
+                      that.setData({
+                        locationName: wx.getStorageSync('locationName'),
+                        locationCode: wx.getStorageSync('locationCode')
+                      });
+                    }
+                  });
+
+                } else {
+                  that.setData({
+                    locationName: wx.getStorageSync('locationName'),
+                    locationCode: wx.getStorageSync('locationCode')
+                  });
+                }
+              }
+            } else {
+              var oldcitycode = wx.getStorageSync('locationCode');
+              if (oldcitycode != res.locationCode) {
+                //询问是否切换到当前城市
+                wx.showModal({
+                  title: '提示',
+                  content: '是否切换到' + res.parentLocation.locationName + '?',
+                  success: function(res1) {
+                    if (res1.confirm) {
+                      wx.setStorageSync('locationName', res.locationName.replace('市', ''));
+                      wx.setStorageSync('locationCode', res.locationCode);
+                      that.setData({
+                        locationName: res.locationName.replace('市', ''),
+                        locationCode: res.locationCode
+                      });
+                    } else if (res1.cancel) {
+                      that.setData({
+                        locationName: wx.getStorageSync('locationName'),
+                        locationCode: wx.getStorageSync('locationCode')
+                      });
+                    }
+
+                  },
+                  fail: function() {
+                    that.setData({
+                      locationName: wx.getStorageSync('locationName'),
+                      locationCode: wx.getStorageSync('locationCode')
+                    });
+                  }
+                });
+
+              }
+            }
+
+          },
+          error: err => errDialog(err),
+          complete: () => wx.hideToast()
+        });
       },
       fail: function(err) {
         console.log('---------位置调用失败或是被拒绝--------');
         console.log(err);
-        console.log('--------不传输坐标获取默认商户评价--------');
-        let obj = {
-          page: 1
-        };
-        // that.getNearCommentsData(obj);
       }
     })
   },
   getPreOrder: function() {
     var obj = {
-      openid: wx.getStorageSync('accessToken')
+      openid: wx.getStorageSync('openid')
     };
-    // var obj = wx.getStorageSync('accessToken');
     service.testPreOrder(obj).subscribe({
       next: res => {
         console.log(res);
@@ -265,9 +348,11 @@ Page({
       complete: () => wx.hideToast()
     });
   },
-  getIndexData:function(){
-    service.getIndexData({ providerId:'1215422531428605'}).subscribe({
-      next: res => { 
+  getIndexData: function() {
+    service.getIndexData({
+      providerId: this.data.providerId
+    }).subscribe({
+      next: res => {
         console.log(res);
         this.setData({
           slideShowList: res.slideShowList,
@@ -278,37 +363,133 @@ Page({
       complete: () => wx.hideToast()
     });
   },
-  getRecommendPage:function(obj){
+  getRecommendPage: function(obj) {
     console.log(obj);
     service.getRecommendPage(obj).subscribe({
       next: res => {
         console.log(res);
         this.setData({
-          recommendPage:res.list
+          recommendPage: res.list
         });
       },
       error: err => console.log(err),
       complete: () => wx.hideToast()
     });
   },
+  getDataByCity: function() {
+    var that = this;
+    var obj = {
+      provinceCode: this.data.locationCode,
+      cityCode: this.data.locationCode,
+      areaCode: '',
+    };
+    service.getSelectHotCity(obj).subscribe({
+      next: res => {
+        console.log(res);
+        that.setData({
+          providerId: res.id
+        });
+        that.getIndexData();
+      },
+      error: err => console.log(err),
+      complete: () => wx.hideToast()
+    });
+  },
+  onShow: function() {
+    if (this.data.locationName) {
+      if (this.data.locationName != wx.getStorageSync('locationName')) {
+        //如果城市更换了 需要重新加载页面
+        this.setData({
+          locationCode: wx.getStorageSync('locationCode'),
+          locationName: wx.getStorageSync('locationName')
+        });
+        this.getDataByCity();
+      }
+      
+    }
+
+  },
   onLoad: function(options) {
-    // this.getPreOrder();
-    console.log('--------------index-onLoad-------------');
+    console.log(options);
     wx.setNavigationBarTitle({
       title: ''
     });
-    // this.getCurLocation();
-    this.getIndexData();
-    let obj = {
-      providerId: '1215422531428605',
-      type: 'PRODUCT',
-      sortField: 'IDX',
-      sortOrder: 'ASC',
-      pageNo: this.pageNo,
-      pageSize: this.pageSize,
-      longitude: '116.470959',
-      latitude: '39.992368'
-    };
-    this.getRecommendPage(obj);
+    
+
+    wx.getSetting({
+      success: (res) => {
+        console.log(res.authSetting['scope.userInfo']);
+        if (!res.authSetting['scope.userInfo']) {
+          wx.reLaunch({
+            url: '/pages/login/index'
+          });
+        }else{//如果已经授权
+          //判断rowData是否存在
+          if(wx.getStorageSync('rawData')){//如果存在
+
+            wx.login({
+              success: res => {
+                console.log('code: ' + res.code);
+                console.log(constant.APPID);
+                wx.request({
+                  url: 'https://shopping.juniuo.com/user/login.json',
+                  method: 'GET',
+                  data: {
+                    code: res.code,
+                    appId: constant.APPID,
+                    isMock: false, //测试标记
+                    rawData: wx.getStorageSync('rawData')
+                  },
+                  header: {
+                    'content-type': 'application/json',
+                  },
+                  success: (res1) => {
+                    console.log(res1);
+                    if (res1.data.errorCode == '200') {
+                      wx.setStorageSync('token', res1.data.data.token);
+                      wx.setStorageSync('openid', res1.data.data.openId);
+                      wx.setStorageSync('userinfo', JSON.stringify(res1.data.data));
+                      this.getCurLocation(); //用户位置
+
+                      //根据位置查询附近精选
+                      let obj = {
+                        providerId: '1215422531428605',
+                        type: 'PRODUCT',
+                        sortField: 'IDX',
+                        sortOrder: 'ASC',
+                        pageNo: this.pageNo,
+                        pageSize: this.pageSize,
+                        longitude: '116.470959',
+                        latitude: '39.992368'
+                      };
+                      this.getRecommendPage(obj);
+                    } else {
+                      wx.showToast({
+                        title: '登录失败，错误码:' + res1.data.errorCode+' 返回错误: ' + res1.data.errorInfo,
+                        icon: 'none',
+                        duration: 3000
+                      })
+                    }
+                  }
+                });
+              }
+            });
+
+          }else{//如果不存在
+
+          }
+          
+        }
+      }
+    });
+    
+
+
+    // this.getPreOrder();
+    console.log('--------------index-onLoad-------------');
+    
+    
+
+    
   }
 })

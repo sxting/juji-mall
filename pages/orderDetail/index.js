@@ -14,6 +14,13 @@ Page({
         var thisType = event.currentTarget.dataset['type'];
         this.setData({ isShowNodata: this.data.orderlist.length == 0 });
     },
+    toComment:function(){
+        var id = event.currentTarget.dataset['id'];
+        wx.navigateTo({url: "/pages/createReply/index?id="+id});
+    },
+    toPay(){
+        
+    },
     getData:function(orderId){
         service.orderInfo({orderId:orderId}).subscribe({
           next: res => {

@@ -89,6 +89,15 @@ Page({
       count: thisNum
     });
   },
+  saveOrder:function(obj){
+    service.saveOrder(obj).subscribe({
+      next: res => {
+        console.log('--------创建订单返回-------');
+        console.log(res);
+      },
+      error: err => console.log(err)
+    });
+  },
   toPay: function() {
     var that = this;
     if (this.data.count > this.data.productInfo.limitPerOrderNum) {
@@ -106,23 +115,37 @@ Page({
           console.log('--------下单前数据校验1-------');
           console.log(res);
           if (res.pointBalance > this.data.product.point) {
-            if (res.totalAll > 0) {
-              if (res.totalToday > 0) {
-
-              } else {
-                wx.showToast({
-                  title: '来晚了，商品今天买完了，请明天再来吧',
-                  icon: 'none',
-                  duration: 2000
-                });
-              }
-            } else {
-              wx.showToast({
-                title: '商品库存不足了，请看看别的商品吧',
-                icon: 'none',
-                duration: 2000
-              });
-            }
+            //创建订单
+            var orderObj = {
+              itemRequests: [{
+                merchantId: that.data.productInfo.merchantId,
+                merchantName: that.data.productInfo.merchantName,
+                num: that.data.count,
+                originalPrice: that.data.productInfo.originalPrice,
+                payAmount: that.data.productInfo.price * that.data.count,
+                payPoint: that.data.productInfo.point * that.data.count,
+                picId: that.data.productInfo.picId,
+                point: that.data.productInfo.point,
+                price: that.data.productInfo.price,
+                productId: that.data.productInfo.productId,
+                productName: that.data.productInfo.productName,
+                type: that.data.productInfo.type
+              }],
+              openId: wx.getStorageSync('openid'),
+              originAmount: that.data.productInfo.originalPrice * that.data.count,
+              payAmount: that.data.productInfo.price * that.data.count,
+              payPoint: that.data.productInfo.point * that.data.count,
+              payType: 'MIX',
+              providerId: that.data.productInfo.providerId,
+              providerName: that.data.productInfo.providerName
+            };
+            service.saveOrder(orderObj).subscribe({
+              next: res1 => {
+                console.log('--------创建订单返回1-------');
+                console.log(res1);
+              },
+              error: err => console.log(err)
+            });
           } else {
             wx.showToast({
               title: '当前桔子余额不足，请多赚些桔子吧',
@@ -141,23 +164,37 @@ Page({
           console.log('--------下单前数据校验2-------');
           console.log(res);
           if (res.pointBalance > this.data.product.point) {
-            if (res.totalAll > 0) {
-              if (res.totalToday > 0) {
-
-              } else {
-                wx.showToast({
-                  title: '来晚了，商品今天买完了，请明天再来吧',
-                  icon: 'none',
-                  duration: 2000
-                });
-              }
-            } else {
-              wx.showToast({
-                title: '商品库存不足了，请看看别的商品吧',
-                icon: 'none',
-                duration: 2000
-              });
-            }
+            //创建订单
+            var orderObj = {
+              itemRequests: [{
+                merchantId: that.data.productInfo.merchantId,
+                merchantName: that.data.productInfo.merchantName,
+                num: that.data.count,
+                originalPrice: that.data.productInfo.originalPrice,
+                payAmount: 0,
+                payPoint: that.data.productInfo.point * that.data.count,
+                picId: that.data.productInfo.picId,
+                point: that.data.productInfo.point,
+                price: that.data.productInfo.price,
+                productId: that.data.productInfo.productId,
+                productName: that.data.productInfo.productName,
+                type: that.data.productInfo.type
+              }],
+              openId: wx.getStorageSync('openid'),
+              originAmount: that.data.productInfo.originalPrice * that.data.count,
+              payAmount: 0,
+              payPoint: that.data.productInfo.point * that.data.count,
+              payType: 'POINT',
+              providerId: that.data.productInfo.providerId,
+              providerName: that.data.productInfo.providerName
+            };
+            service.saveOrder(orderObj).subscribe({
+              next: res1 => {
+                console.log('--------创建订单返回2-------');
+                console.log(res1);
+              },
+              error: err => console.log(err)
+            });
           } else {
             wx.showToast({
               title: '当前桔子余额不足，请多赚些桔子吧',
@@ -204,7 +241,7 @@ Page({
           };
           service.saveOrder(orderObj).subscribe({
             next: res1 => {
-              console.log('--------创建订单返回-------');
+              console.log('--------创建订单返回3-------');
               console.log(res1);
             },
             error: err => console.log(err)

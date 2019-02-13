@@ -1,5 +1,8 @@
 var QQMapWX = require('../../lib/qqmap-wx-jssdk.min.js');
 import {
+  constant
+} from '../../utils/constant';
+import {
   service
 } from '../../service';
 var app = getApp();
@@ -408,23 +411,85 @@ Page({
   },
   onLoad: function(options) {
     console.log(options);
-    // this.getPreOrder();
-    console.log('--------------index-onLoad-------------');
     wx.setNavigationBarTitle({
       title: ''
     });
-    this.getCurLocation(); //用户位置
+    
 
-    let obj = {
-      providerId: '1215422531428605',
-      type: 'PRODUCT',
-      sortField: 'IDX',
-      sortOrder: 'ASC',
-      pageNo: this.pageNo,
-      pageSize: this.pageSize,
-      longitude: '116.470959',
-      latitude: '39.992368'
-    };
-    this.getRecommendPage(obj);
+    wx.getSetting({
+      success: (res) => {
+        console.log(res.authSetting['scope.userInfo']);
+        if (!res.authSetting['scope.userInfo']) {
+          wx.reLaunch({
+            url: '/pages/login/index'
+          });
+        }else{//如果已经授权
+          //判断rowData是否存在
+          if(wx.getStorageSync('rawData')){//如果存在
+
+            wx.login({
+              success: res => {
+                console.log('code: ' + res.code);
+                console.log(constant.APPID);
+                wx.request({
+                  url: 'https://shopping.juniuo.com/user/login.json',
+                  method: 'GET',
+                  data: {
+                    code: res.code,
+                    appId: constant.APPID,
+                    isMock: false, //测试标记
+                    rawData: wx.getStorageSync('rawData')
+                  },
+                  header: {
+                    'content-type': 'application/json',
+                  },
+                  success: (res1) => {
+                    console.log(res1);
+                    if (res1.data.errorCode == '200') {
+                      wx.setStorageSync('token', res1.data.data.token);
+                      wx.setStorageSync('openid', res1.data.data.openId);
+                      wx.setStorageSync('userinfo', JSON.stringify(res1.data.data));
+                      this.getCurLocation(); //用户位置
+
+                      //根据位置查询附近精选
+                      let obj = {
+                        providerId: '1215422531428605',
+                        type: 'PRODUCT',
+                        sortField: 'IDX',
+                        sortOrder: 'ASC',
+                        pageNo: this.pageNo,
+                        pageSize: this.pageSize,
+                        longitude: '116.470959',
+                        latitude: '39.992368'
+                      };
+                      this.getRecommendPage(obj);
+                    } else {
+                      wx.showToast({
+                        title: '登录失败，错误码:' + res1.data.errorCode+' 返回错误: ' + res1.data.errorInfo,
+                        icon: 'none',
+                        duration: 3000
+                      })
+                    }
+                  }
+                });
+              }
+            });
+
+          }else{//如果不存在
+
+          }
+          
+        }
+      }
+    });
+    
+
+
+    // this.getPreOrder();
+    console.log('--------------index-onLoad-------------');
+    
+    
+
+    
   }
 })

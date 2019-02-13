@@ -56,10 +56,7 @@ service.getSelectProviderByLoc = (data) => {
   let apiUrl = api + '/selectProviderByLoc.json';//描述:通过用户位置获取服务商信息
   return http.get(apiUrl, data);
 }
-service.signIn = (data) => {
-  let apiUrl = api + '/point/signIn.json';//描述:用户签到
-  return http.get(apiUrl, data);
-}
+
 service.getItemInfo = (data) => {
   let apiUrl = api + '/product/item.json';//描述:项目详情
   return http.get(apiUrl, data);
@@ -102,6 +99,10 @@ service.saveOrder = (data) => {
 service.currentPoint = (data) => {
   let apiUrl = api + '/point/currentPoint.json';//描述:下单接口
   return http.post(apiUrl, data);
+}
+service.signIn = (data) => {
+  let apiUrl = api + '/point/signIn.json';//描述:用户签到
+  return http.get(apiUrl, data);
 }
 
 // --------------------------------------------usr-----------------------------------

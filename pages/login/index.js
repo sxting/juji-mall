@@ -40,7 +40,6 @@ Page({
     console.log(e);
     if (e.detail.userInfo) {
       wx.setStorageSync('rawData', e.detail.rawData);
-      wx.setStorageSync('wxUserInfo', e.detail.userInfo);
       console.log(app.globalData);
       wx.reLaunch({
         url: '/pages/index/index',

@@ -17,7 +17,8 @@ Page({
     recommendList:[],
     store:{},
     commentCount:0,
-    recommendCount:0
+    recommendCount:0,
+    pointBalance:0
   },
   onLoad: function (option) {
     // this.setData({
@@ -33,7 +34,36 @@ Page({
       storeId: option.storeid
     });
     this.getItemInfo();
+    //查询用户橘子
+    this.getPointBalance();
     
+  },
+  toGetPoint: function (){
+    wx.switchTab({
+      url: '../juzi/index'
+    });
+  },
+  getPointBalance: function(){
+
+    service.getPointBalance().subscribe({
+        next: res => { 
+          console.log('--------查询桔子余额-------');
+          console.log(res);
+          this.setData({
+            pointBalance: res
+          });
+        },
+        error: err => console.log(err),
+        complete: () => wx.hideToast()
+      })
+  },
+  toComDetail: function (e) {
+    var id = e.currentTarget.dataset.id;
+    var storeid = e.currentTarget.dataset.storeid;
+    console.log(id);
+    wx.navigateTo({
+      url: '/pages/comDetail/index?id=' + id + '&storeid=' + storeid
+    });
   },
   onShow: function () {
     //评论列表

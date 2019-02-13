@@ -189,6 +189,21 @@
   justify-content: center;
 }
 
+.yuanjia-xiadan{
+  width: 380rpx;
+  height: 88rpx;
+  background-image: linear-gradient(-269deg, #ffdc00 0%, #fcbf0a 100%);
+  border-radius: 20px;
+  color: #333;
+  line-height: 80rpx;
+  text-align: center;
+  margin-left: 2px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
 .modal {
   position: fixed;
   width: 100%;

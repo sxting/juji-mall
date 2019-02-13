@@ -8,22 +8,19 @@ import {
 var app = getApp();
 Page({
   data: {
-    productId:'',
-    storeId:'',
+    productId: '',
+    storeId: '',
     showPics: ['../../images/homeBanner.png', '../../images/banner1.png', '../../images/freeGet.png'],
-    commentList:[],
-    shortCommentList:[],
-    productInfo:{},
-    recommendList:[],
-    store:{},
-    commentCount:0,
-    recommendCount:0,
-    pointBalance:0
+    commentList: [],
+    shortCommentList: [],
+    productInfo: {},
+    recommendList: [],
+    store: {},
+    commentCount: 0,
+    recommendCount: 0,
+    pointBalance: 0
   },
-  onLoad: function (option) {
-    // this.setData({
-    //   userinfo: app.globalData.userInfo
-    // });
+  onLoad: function(option) {
     console.log(option);
     console.log(wx.getStorageSync('curLatitude'));
     console.log(wx.getStorageSync('curLongitude'));
@@ -36,28 +33,43 @@ Page({
     this.getItemInfo();
     //查询用户橘子
     this.getPointBalance();
-    
+
   },
-  toGetPoint: function (){
+  toCreateOrder: function() { //跳转订单确认 桔子和人民币组合订单
+    wx.navigateTo({
+      url: '/pages/payOrder/index?paytype=1&id=' + this.data.productId + '&storeid=' + this.data.storeId
+    });
+  },
+  toCreateOrderByPoint: function() { //只用桔子下单
+    wx.navigateTo({
+      url: '/pages/payOrder/index?paytype=2&id=' + this.data.productId + '&storeid=' + this.data.storeId
+    });
+  },
+  toCreateOrderByRmb: function() { //只用人民币下单
+    wx.navigateTo({
+      url: '/pages/payOrder/index?paytype=3&id=' + this.data.productId + '&storeid=' + this.data.storeId
+    });
+  },
+  toGetPoint: function() { //跳转到任务页面赚桔子
     wx.switchTab({
       url: '../juzi/index'
     });
   },
-  getPointBalance: function(){
+  getPointBalance: function() {
 
     service.getPointBalance().subscribe({
-        next: res => { 
-          console.log('--------查询桔子余额-------');
-          console.log(res);
-          this.setData({
-            pointBalance: res
-          });
-        },
-        error: err => console.log(err),
-        complete: () => wx.hideToast()
-      })
+      next: res => {
+        console.log('--------查询桔子余额-------');
+        console.log(res);
+        this.setData({
+          pointBalance: res
+        });
+      },
+      error: err => console.log(err),
+      complete: () => wx.hideToast()
+    })
   },
-  toComDetail: function (e) {
+  toComDetail: function(e) {
     var id = e.currentTarget.dataset.id;
     var storeid = e.currentTarget.dataset.storeid;
     console.log(id);
@@ -65,24 +77,24 @@ Page({
       url: '/pages/comDetail/index?id=' + id + '&storeid=' + storeid
     });
   },
-  onShow: function () {
+  onShow: function() {
     //评论列表
   },
-  call:function(){
+  call: function() {
     wx.makePhoneCall({
-      phoneNumber: this.data.store.phone// 仅为示例，并非真实的电话号码
+      phoneNumber: this.data.store.phone // 仅为示例，并非真实的电话号码
     })
   },
-  getItemInfo:function(){
+  getItemInfo: function() {
     service.getItemInfo({
       productId: this.data.productId,
       storeId: this.data.storeId
     }).subscribe({
-      next: res => { 
+      next: res => {
         console.log(res);
         this.setData({
           commentList: res.commentList,
-          shortCommentList: res.commentList.slice(0,1),
+          shortCommentList: res.commentList.slice(0, 1),
           productInfo: res.product,
           recommendList: res.recommendList,
           store: res.store,
@@ -94,57 +106,7 @@ Page({
       complete: () => wx.hideToast()
     })
   },
-  showPreBuyCardModal: function (event) {
-    console.log('显示购卡成功确认框触发');
-    console.log(event);
-    this.setData({
-      isShowConfirmModal: false,
-      confirmTitle: event.detail.confirmTitle,
-      confirmContent: event.detail.confirmContent
-    });
-  },
-  showcardtiaojian: function (event) {
-    console.log(event);
-    console.log(event.currentTarget.dataset.maker);
-    let arr = this.data.gxcobj;
-    arr[event.currentTarget.dataset.maker] == 1 ? arr[event.currentTarget.dataset.maker] = 0 : arr[event.currentTarget.dataset.maker] = 1;
-    this.setData({
-      gxcobj: arr
-    })
-
-  },
-  showGxModal: function () {
-    this.setData({
-      isShowGxModal: false
-    });
-  },
-  closeModal: function () {
-    this.setData({
-      isShowGxModal: true
-    });
-  },
-  closeMendianModal: function () {
-    this.setData({
-      isShowMendianModal: true
-    });
-  },
-  showMendian: function () {
-    this.setData({
-      isShowMendianModal: false
-    });
-  },
-  showHycardModal: function () {
-    console.log('showHycardModal');
-    this.setData({
-      isShowHycardModal: false
-    });
-  },
-  closeHycardModal: function () {
-    this.setData({
-      isShowHycardModal: true
-    });
-  },
-  gohomepage: function () {
+  gohomepage: function() {
     wx.switchTab({
       url: '/pages/index/index'
     });
@@ -154,178 +116,28 @@ Page({
     //   url: '/pages/index/index'
     // });
   },
-  toCommentList: function () {
+  toCommentList: function() {
     wx.navigateTo({
       url: '/pages/commentList/index'
     });
   },
-  toShareCard: function () {
+  toShareCard: function() {
     wx.navigateTo({
       url: '/pages/shareCard/index?merchantId=' + this.data.merchantId
-    });
-  },
-  closeFocusModal: function () {
-    this.setData({
-      isShowFocusModal: true
-    });
-  },
-  toAttent: function (event) {
-    console.log(event);
-    wx.showLoading({
-      title: '关注中'
-    });
-    let id = '',
-      attent = 0,
-      index = 0,
-      that = this,
-      ftype;
-    id = event.target.dataset.atuserid;
-    event.target.dataset.attent != 1 ? attent = 1 : attent = 0;
-    // index = event.target.dataset.index;
-    ftype = event.target.dataset.ftype;
-    console.log('ftype: ' + ftype);
-    service.attent({
-      attentionUserId: id,
-      attent: attent
-    }).subscribe({
-      next: res => {
-        console.log('-----------关注返回结果---------');
-        console.log(res);
-        let comListCopy = this.data.merListCommentsMin;
-
-        for (let i = 0; i < comListCopy.length; i++) {
-          if (ftype == 2) { //评论用户使用的卡的用户
-            if (comListCopy[i].cardUserDto.id == id) {
-              comListCopy[i].cardUserDto.attent = attent;
-              //如果这个卡的人就是评论的这个人，userDto的关注状态也要改变，显示"已关注"按钮
-              if (comListCopy[i].userDto.id == id) {
-                comListCopy[i].userDto.attent = attent;
-              }
-            }
-          } else { //关注评论者 
-            if (comListCopy[i].userDto.id == id) {
-              comListCopy[i].userDto.attent = attent;
-              //如果这个评论的人用的是自己的卡，cardUserDto的关注状态也要改变，显示“立即下单”按钮
-              if (comListCopy[i].cardUserDto.id == id) {
-                comListCopy[i].cardUserDto.attent = attent;
-              }
-            }
-          }
-        }
-
-        this.setData({
-          merListCommentsMin: comListCopy
-        });
-
-        console.log(this.data.merListCommentsMin);
-        if (attent === 1) {
-          this.setData({
-            isShowFocusModal: false,
-            focusBoxMaker: true
-          });
-        } else {
-          this.setData({
-            isShowFocusModal: false,
-            focusBoxMaker: false
-          });
-        }
-
-        wx.hideLoading();
-
-      },
-      error: err => console.log(err),
-      complete: () => wx.hideToast()
-    });
-  },
-  attentUserCard: function (event) {
-    console.log(event);
-  },
-  //点赞
-  toPraise: function (event) {
-    // wx.showLoading({
-    //   title: '请稍候'
-    // });
-    console.log(event);
-    console.log(event.currentTarget.dataset.maker);
-    let that = this;
-    let commentId = event.currentTarget.dataset.comid;
-    let status = event.currentTarget.dataset.status;
-    status == 1 ? status = 0 : status = 1;
-    service.praise({
-      commentId: commentId,
-      status: status
-    }).subscribe({
-      next: res => {
-        console.log('-----------点赞返回结果---------');
-        console.log(res);
-        let arr = that.data.merListCommentsMin;
-        for (let i = 0; i < arr.length; i++) {
-          if (arr[i].id == commentId) {
-            arr[i].praise = status;
-            let praiseCount = arr[i].praiseCount;
-
-            if (status == 1) {
-              arr[i].praiseCount = ++praiseCount;
-            } else {
-              arr[i].praiseCount = --praiseCount;
-            }
-          }
-        }
-
-        that.setData({
-          merListCommentsMin: arr
-        });
-        console.log(that.data.merListCommentsMin);
-
-        // wx.hideLoading();
-      },
-      error: err => console.log(err),
-      complete: () => wx.hideToast()
     });
   },
   /**
    * 用户点击右上角分享或页面中的分享
    */
-  onShareAppMessage: function (res) {
+  onShareAppMessage: function(res) {
     return {
-      title: '[' + this.data.merchantInfo.name + ']' + '正在享拼拼上特价优惠，快来参加吧！',
-      path: '/pages/index/index?page=business&id=' + this.data.merchantId + '&cardType=' + this.data.cardType + '&userId=' + app.globalData.userInfo.id
+      title: '朋友给你分享了优惠商品，快来看看吧！',
+      path: '/pages/index/index'
     }
   },
-  toCommentDetail: function (event) {
+  toCommentDetail: function(event) {
     wx.navigateTo({
       url: '/pages/commentDetail/index?id=' + event.currentTarget.dataset.comid
     });
-  },
-  tapWin: function () {
-    console.log('点击了边框部分');
-  },
-  _closeEvent: function () {
-    console.log('触发模态窗口关闭');
-    this.setData({
-      isShowHycardModal: true
-    });
-  },
-  /*打电话给商户*/
-  callMer: function () {
-    wx.makePhoneCall({
-      phoneNumber: this.data.merPhoneNum
-    })
-  },
-  toUserCircle: function (event) {
-    wx.navigateTo({
-      url: '/pages/myCircle/index?id=' + event.currentTarget.dataset.userid
-    });
-  },
-  toCreateOrder: function () {
-    if (this.data.cardType == 1) {
-      wx.navigateTo({
-        url: '/pages/createOrder/index?cardid=' + this.data.huiyuancards[0].id + '&id=' + this.data.merchantId
-      });
-    } else {
-      wx.navigateTo({
-        url: '/pages/setupOrder/index?cardid=' + this.data.huiyuancards[0].id + '&id=' + this.data.merchantId
-      });
-    }
   }
 })

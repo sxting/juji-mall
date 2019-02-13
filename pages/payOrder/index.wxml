@@ -1,28 +1,45 @@
+<wxs module="filter" src="../../utils/numFr.wxs"></wxs>
 <view>
-    <view class="tradeInfo p10">
-        <view class="p10 ub ub-ac info">
-            <image class="goodImg udb" src="../../images/mendianimg.png"></image>
-            <view class="ub-f1 goodMsg">
-                <view class="goodTit">兰溪小馆团购套餐</view>
-                <view class="storeName">兰溪小馆香山店</view>
-                <view class="goodAmount">20桔子<text>￥88.00</text></view>
-            </view>
+  <view class="tradeInfo" style="padding:20rpx 30rpx;">
+    <view class="p10 ub ub-ac info">
+      <image class="goodImg udb" src="../../images/mendianimg.png" mode="widthFix"></image>
+      <view class="ub-f1 goodMsg">
+        <view class="goodTit">{{productInfo.productName}}</view>
+        <view class="storeName">{{store.name}}</view>
+        <view class="goodAmount">{{productInfo.point}}
+          <text style="font-family: PingFangSC-Medium;font-size:28rpx;">桔子</text>
+          <text style="margin-left: 10rpx;font-size: 24rpx;color: #999999;text-decoration:line-through">￥{{filter.toFix(productInfo.originalPrice)}}</text>
         </view>
+      </view>
     </view>
-    <view class="ub ub-ac ub-pj item plr15">
-        <view class="itemTit ub ub-ac">购买数量</view>
-        <view class="numberCtrl ub ub-ac">
-            <image class="ctlbtn" src="../../images/ion-del.png" bindtap="delNumber"></image>
-            <view class="num uds">{{amount}}</view>
-            <image class="ctlbtn" src="../../images/ion-add.png" bindtap="addNumber"></image>
-        </view>
+  </view>
+
+  <view class="plr15" style="background:#fff;">
+    <view class="ub ub-ac ub-pj item">
+      <view class="itemTit ub ub-ac">购买数量</view>
+      <view class="numberCtrl ub ub-ac">
+        <image class="ctlbtn" src="../../images/ion-del.png" bindtap="delNumber"></image>
+        <view class="num uds">{{count}}</view>
+        <image class="ctlbtn" src="../../images/ion-add.png" bindtap="addNumber"></image>
+      </view>
     </view>
-    <view class="ub ub-ac ub-pj item plr15">
-        <view class="itemTit ub ub-ac">使用桔子</view>
-        <view class="discountAmount">-40桔子</view>
+    <view class="line"></view>
+  </view>
+  <view class="plr15" style="background:#fff;padding-top:30rpx;">
+    <view class="ub ub-ac ub-pj" wx:if="{{paytype==1||paytype==2}}">
+      <view class="itemTit ub ub-ac">使用桔子</view>
+      <view class="discountAmount">-{{point*count}}
+        <text style="font-family: PingFangSC-Medium;font-size: 24rpx;color: #151515;">桔子</text>
+      </view>
     </view>
+    <view style="padding:20rpx 0 30rpx 0;font-family: PingFangSC-Regular;font-size: 24rpx;color: #999999;">你有30个桔子</view>
+  </view>
 </view>
 <view class="btn_bottom ub ub-ac plr15">
-    <view class="ub-f1">金额：¥0.00</view>
-    <button class="btn_common ub-f1 ub ub-ac ub-pc {{disabled?'disabled':''}}" bindtap="toPay">确认兑换</button>
+  <view class="ub-f1" style="font-family: PingFangSC-Medium;font-size: 30rpx;">金额：
+    <text style="font-size: 30rpx;color: #E83121;">{{filter.toFix(price*count)}}元</text>
+  </view>
+  <button class="btn_common ub-f1 ub ub-ac ub-pc" wx:if="{{paytype==1||paytype==3}}" bindtap="toPay">确认支付</button>
+  <!-- 如果是桔子换礼类型显示兑换 -->
+  <button class="btn_common ub-f1 ub ub-ac ub-pc" wx:if="{{paytype==2}}" bindtap="toPay">确认兑换</button>
 </view>

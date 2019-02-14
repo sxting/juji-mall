@@ -235,7 +235,8 @@ Page({
               that.getIndexData();
               //根据位置查询附近精选
               var obj = {
-                providerId: res1.id,
+                // providerId: res1.id,
+                providerId:'1215422531428605',
                 type: 'PRODUCT',
                 sortField: 'IDX',
                 sortOrder: 'ASC',

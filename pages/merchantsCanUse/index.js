@@ -7,7 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    merchantsList: [{}, {}, {}]
+    merchantsList: []
   },
 
   /**
@@ -34,6 +34,9 @@ Page({
       next: res => {
         console.log('------适用门店列表------');
         console.log(res);
+        this.setData({
+          merchantsList:res
+        })
       },
       error: err => console.log(err),
       complete: () => wx.hideToast()

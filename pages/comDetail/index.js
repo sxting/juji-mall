@@ -18,7 +18,8 @@ Page({
     store: {},
     commentCount: 0,
     recommendCount: 0,
-    pointBalance: 0
+    pointBalance: 0,
+    note:[]
   },
   onLoad: function(option) {
     console.log(option);
@@ -114,7 +115,8 @@ Page({
           recommendList: res.recommendList,
           store: res.store,
           commentCount: res.commentList.length,
-          recommendCount: res.recommendList.length
+          recommendCount: res.recommendList.length,
+          note: JSON.parse(res.product.note)
         });
       },
       error: err => console.log(err),

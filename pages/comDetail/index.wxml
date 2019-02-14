@@ -48,22 +48,16 @@
   <view class="yongkaxuzhi-wrap" style="margin-top:20rpx;">
     <view class="yongkaxuzhi">
       <view style="font-size: 30rpx;color: #333333;font-weight: bolder;">购买须知</view>
-      <view style="background: #FBFBFB;border-radius: 10px;padding:30rpx;margin-top:30rpx;">
-        <view style="display:flex;align-items:center;">
-          <view style="width:10rpx;height:10rpx;border-radius:50%;background: #FCBF0A;margin-right:20rpx;"></view>
-          <view style="font-size: 28rpx;color: #666666;">有效期</view>
-        </view>
-        <view style="display:flex;align-items:center;margin-top:10rpx;">
-          <view style="width:10rpx;height:10rpx;border-radius:50%;background: #999999;margin-right:20rpx;"></view>
-          <view style="font-size: 24rpx;color: #999999;">购买3个月内有效</view>
-        </view>
-        <view style="display:flex;align-items:center;margin-top:10rpx;">
-          <view style="width:10rpx;height:10rpx;border-radius:50%;background: #FCBF0A;margin-right:20rpx;"></view>
-          <view style="font-size: 28rpx;color: #666666;">使用时段</view>
-        </view>
-        <view style="display:flex;align-items:center;margin-top:10rpx;">
-          <view style="width:10rpx;height:10rpx;border-radius:50%;background: #999999;margin-right:20rpx;"></view>
-          <view style="font-size: 24rpx;color: #999999;">周一到周日 09:30-23:00</view>
+      <view style="background: #FBFBFB;border-radius: 10px;padding:30rpx 30rpx 10rpx 30rpx;margin-top:30rpx;">
+        <view style="margin-bottom: 20rpx;" wx:for="{{note}}" wx:key="{{index}}">
+          <view style="display:flex;align-items:center;">
+            <view style="width:10rpx;height:10rpx;border-radius:50%;background: #FCBF0A;margin-right:20rpx;"></view>
+            <view style="font-size: 28rpx;color: #666666;">{{item.title}}</view>
+          </view>
+          <view wx:for="{{item.content}}"  wx:key="{{index}}" style="display:flex;align-items:center;margin-top:10rpx;">
+            <view style="width:10rpx;height:10rpx;border-radius:50%;background: #999999;margin-right:20rpx;"></view>
+            <view style="font-size: 24rpx;color: #999999;">{{item}}</view>
+          </view>
         </view>
       </view>
 
@@ -99,20 +93,20 @@
       </view>
     </view>
 
-      <view class="item" wx:for="{{shortCommentList}}" wx:key="{{index}}" data-comid="{{item.id}}" bindtap="toCommentDetail">
-        <view class="nickMsg ub ub-ac">
-          <image class="userImg" src="../../images/headimg.png"></image>
-          <view class="nickname">{{item.nickName}}</view>
-          <view class="ub ub-f1 ub-ac ml10">
-            <image class="icon_ping" src="../../images/icon_ping.png" wx:for="{{item.score}}"  wx:key="{{index}}"></image>
-          </view>
-          <view class="times" hidden="{{true}}">2018-01-01 01:00:00</view>
+    <view class="item" wx:for="{{shortCommentList}}" wx:key="{{index}}" data-comid="{{item.id}}" bindtap="toCommentDetail">
+      <view class="nickMsg ub ub-ac">
+        <image class="userImg" src="../../images/headimg.png"></image>
+        <view class="nickname">{{item.nickName}}</view>
+        <view class="ub ub-f1 ub-ac ml10">
+          <image class="icon_ping" src="../../images/icon_ping.png" wx:for="{{item.score}}" wx:key="{{index}}"></image>
         </view>
-        <view class="content">{{item.content}}</view>
-        <view class="imglist" hidden="{{true}}">
-          <image src="../../images/mendianimg.png"></image>
-        </view>
+        <view class="times" hidden="{{true}}">2018-01-01 01:00:00</view>
       </view>
+      <view class="content">{{item.content}}</view>
+      <view class="imglist" hidden="{{true}}">
+        <image src="../../images/mendianimg.png"></image>
+      </view>
+    </view>
   </view>
 
   <view class="yongkaxuzhi-wrap" style="margin-top:20rpx;" wx:if="{{false}}">
@@ -202,7 +196,7 @@
 
     <!-- 如果是桔子换礼商品 -->
     <view class="footerBtnWrap" wx:if="{{productInfo.type=='POINT'}}">
-    <!-- 如果桔子充足 -->
+      <!-- 如果桔子充足 -->
       <view class="yuanjia-xiadan" bindtap="toCreateOrderByPoint" wx:if="{{pointBalance>0}}">
         <view>
           <view style="font-size: 28rpx;line-height:34rpx;font-weight:bolder;">{{productInfo.point}} 桔子</view>

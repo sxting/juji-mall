@@ -163,7 +163,7 @@ Page({
         next: res => {
           console.log('--------下单前数据校验2-------');
           console.log(res);
-          if (res.pointBalance > this.data.product.point) {
+          if (res.pointBalance > that.data.productInfo.point) {
             //创建订单
             var orderObj = {
               itemRequests: [{
@@ -192,6 +192,10 @@ Page({
               next: res1 => {
                 console.log('--------创建订单返回2-------');
                 console.log(res1);
+                //兑换成功什么都不返回
+                wx.navigateTo({
+                  url: '/pages/orderDetail/index?id=' + res1.orderId,
+                })
               },
               error: err => console.log(err)
             });

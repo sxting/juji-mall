@@ -1,4 +1,4 @@
-import { errDialog, loading} from '../../utils/util'
+import { errDialog, loading,barcode} from '../../utils/util'
 import {
   service
 } from '../../service';
@@ -15,7 +15,7 @@ Page({
     wx.setNavigationBarTitle({
       title: '订单详情',
     });
-
+    barcode('barcode', '1234567890123456789', 680, 200);
     if (options.id) {
       this.getData(options.id);
     } else {
@@ -23,9 +23,7 @@ Page({
         title: '发生错误，未找到订单id',
         icon: 'none'
       })
-      wx.navigateBack({
-        delta: 1
-      });
+      wx.navigateBack({delta: 1});
       return;
     }
   },
@@ -60,3 +58,5 @@ Page({
     }
   }
 });
+
+

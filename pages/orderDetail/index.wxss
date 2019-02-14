@@ -10,6 +10,7 @@ page{box-sizing:border-box;height:100%;background-color:#fbfbfb}
 /*.goodAmount text{margin-left:10rpx;font-size:24rpx;color:#666;text-decoration:line-through}*/
 .ctrl{height:88rpx;background-color:#fff;margin-top:20rpx;}
 .ctrl .status{font-size:28rpx;color:#333;}
+.ctrl .txt{font-size:24rpx;color:#999;}
 .ctrl .btn{border:1rpx solid #999999;border-radius:50rpx;width:160rpx;height:50rpx;text-align:center;line-height:50rpx;font-size:24rpx;color:#333;}
 .item{height:100rpx;background-color:#fff;border-bottom:1rpx #eee solid;}
 .itemTit{font-size:28rpx;}

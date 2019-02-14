@@ -1,3 +1,4 @@
+var barcode = require('./barcode');
 const formatTime = date => {
     const year = date.getFullYear()
     const month = date.getMonth() + 1
@@ -88,6 +89,14 @@ function delBlank(value) {
     return String(value).replace(/(^\s*)|(\s*$)/g, "");
 }
 
+function convert_length(length) {
+    return Math.round(wx.getSystemInfoSync().windowWidth * length / 750);
+}
+
+function barc(id, code, width, height) {
+    barcode.code128(wx.createCanvasContext(id), code, convert_length(width), convert_length(height))
+}
+
 module.exports = {
     getCurrentPageUrl: getCurrentPageUrl,
     getCurrentPageUrlWithArgs: getCurrentPageUrlWithArgs,
@@ -96,5 +105,6 @@ module.exports = {
     errDialog:errDialog,
     getUrlParma:getUrlParma,
     checkMobile:checkMobile,
+    barcode: barc,
     delBlank:delBlank
 }

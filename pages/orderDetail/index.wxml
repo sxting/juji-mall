@@ -15,10 +15,11 @@
         <view class="status">{{format.formatStatus(orderInfo.status)}}</view>
         <view wx:if="{{orderInfo.status=='CREATED'}}" class="btn" bindtap="toPay" data-id="{{item.orderId}}">立即支付</view>
         <view wx:if="{{orderInfo.status=='CONSUME'}}" class="btn" bindtap="toComment" data-id="{{item.orderId}}">立即评价</view>
+        <view class="txt" wx:if="{{orderInfo.status=='PAID'}}">您已成功付款，请到店展示消费码消费</view>
     </view>
     <view class="orderInfo2">
-        <view class="tx-c">888888888888888888888</view>
-        <image class="udb" src="../../images/erwm.jpg"></image>
+        <view class="tx-c">{{orderInfo.vouchers[0].voucherCode}}</view>
+        <canvas class="udb" canvas-id="barcode" />
         <view class="div ub ub ub-ac ub-pj">
             <view class="txt">剩余有效期：90天</view>
             <view class="txt">可核销1次，已核销0次</view>

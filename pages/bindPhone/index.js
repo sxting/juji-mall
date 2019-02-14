@@ -71,22 +71,18 @@ Page({
                     title:"绑定成功",
                     icon:"success"
                 });
-                wx.navigateTo({ url: '../user/index' });
+                wx.navigateBack({ delta: 1 });
             },
             error: err => errDialog(err),
             complete: () => wx.hideToast()
         })
     },
     getUserPhoneNumber: function(e) {
-        let encryptedData = e.detail.encryptedData;
-        let iv = e.detail.iv;
-        let data = {
-            encryptData: encryptedData,
-            iv: iv
-        }
-        service.decodeUserPhone(data).subscribe({ 
+        console.log(JSON.stringify(e.detail));
+        let data = {encryptData: e.detail.encryptedData,iv: e.detail.iv}
+        service.decodeUserPhone(data).subscribe({
             next: res => {
-                this.setData({phone: res.phoneNumber})
+                this.setData({phone: res.phoneNumber});
             },
             error: err => errDialog(err),
             complete: () => wx.hideToast()

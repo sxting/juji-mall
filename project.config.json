@@ -8,7 +8,8 @@
 		"es6": true,
 		"postcss": true,
 		"minified": true,
-		"newFeature": true
+		"newFeature": true,
+		"autoAudits": false
 	},
 	"compileType": "miniprogram",
 	"libVersion": "2.3.0",
@@ -17,7 +18,7 @@
 	"debugOptions": {
 		"hidedInDevtools": []
 	},
-	"isGameTourist": false,
+	"scripts": {},
 	"condition": {
 		"search": {
 			"current": -1,
@@ -32,11 +33,10 @@
 			"list": []
 		},
 		"game": {
-			"currentL": -1,
 			"list": []
 		},
 		"miniprogram": {
-			"current": 14,
+			"current": 12,
 			"list": [
 				{
 					"id": 0,
@@ -114,39 +114,13 @@
 					"id": -1,
 					"name": "发表评论",
 					"pathName": "pages/comment/index",
-				},{
-					"id": 11,
-					"name": "订单确认",
-					"pathName": "pages/payOrder/index",
 					"query": "",
 					"scene": null
 				},
 				{
 					"id": -1,
-					"name": "商品详情",
-					"pathName": "pages/comDetail/index",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": 13,
-					"name": "支付完成查看票",
-					"pathName": "pages/orderDetail/index",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": 14,
-					"name": "桔子明细",
-					"pathName": "pages/myTrade/index",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "适用门店",
-					"pathName": "pages/merchantsCanUse/index",
-					"query": "",
+					"name": "获取手机号",
+					"pathName": "pages/bindPhone/index",
 					"scene": null
 				}
 			]

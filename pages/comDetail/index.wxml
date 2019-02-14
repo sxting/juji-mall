@@ -8,6 +8,8 @@
         </swiper-item>
       </block>
     </swiper>
+
+    <view class="typePop" wx:if="{{productInfo.type=='POINT'}}">桔子换礼</view>
   </view>
 
   <view class="businessInfo-wrap">

@@ -36,7 +36,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 10,
+			"current": 12,
 			"list": [
 				{
 					"id": 0,
@@ -107,6 +107,20 @@
 					"id": -1,
 					"name": "授权",
 					"pathName": "pages/login/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 11,
+					"name": "订单确认",
+					"pathName": "pages/payOrder/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "商品详情",
+					"pathName": "pages/comDetail/index",
 					"query": "",
 					"scene": null
 				}

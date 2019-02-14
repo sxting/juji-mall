@@ -13,6 +13,22 @@
   height: auto;
 }
 
+.typePop {
+  width: 140rpx;
+  height: 60rpx;
+  background: #fcbf0a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: PingFangSC-Regular;
+  font-size: 26rpx;
+  color: #333;
+  border-radius: 0 30rpx 30rpx 0;
+  position: absolute;
+  top:0;
+  left:0;
+}
+
 .img-wrap {
   width: 100%;
 }
@@ -189,7 +205,7 @@
   justify-content: center;
 }
 
-.yuanjia-xiadan{
+.yuanjia-xiadan {
   width: 380rpx;
   height: 88rpx;
   background-image: linear-gradient(-269deg, #ffdc00 0%, #fcbf0a 100%);
@@ -268,12 +284,14 @@
   line-height: 80rpx;
 }
 
-.tuiItem{
-  padding:30rpx 0;
+.tuiItem {
+  padding: 30rpx 0;
 }
-.b-b-1px{
-  border-bottom: 1rpx solid #eeeeee;
+
+.b-b-1px {
+  border-bottom: 1rpx solid #eee;
 }
+
 .huanliBtn {
   width: 130rpx;
   height: 60rpx;
@@ -285,9 +303,11 @@
   justify-content: center;
   align-items: center;
 }
-.tuiRow{
-  width:75%;
+
+.tuiRow {
+  width: 75%;
 }
+
 .tuiName {
   font-size: 28rpx;
   color: #333;
@@ -308,17 +328,54 @@
   font-size: 24rpx;
   color: #999;
 }
-.mt10{
-  margin-top:10rpx;
+
+.mt10 {
+  margin-top: 10rpx;
 }
 
-.item{background:#fff;padding:0 30rpx;}
-.nickMsg .userImg{width: 60rpx; height: 60rpx;border-radius: 50%;}
-.nickMsg .nickname{font-size: 28rpx;color: #333;margin-left: 10rpx;}
-.nickMsg .times{font-size: 20rpx;color: #999;}
+.item {
+  background: #fff;
+  padding: 0 30rpx;
+}
 
-.content{line-height: 48rpx;font-size: 24rpx;text-align: justify;color: #333;margin-top:10rpx;}
-.imglist{margin-top: 10rpx;}
-.imglist image{width: 120rpx;height: 120rpx;margin-right: 20rpx;}
+.nickMsg .userImg {
+  width: 60rpx;
+  height: 60rpx;
+  border-radius: 50%;
+}
 
-.icon_ping{width: 30rpx;height: 29rpx;display: block;margin-right: 10rpx;}
+.nickMsg .nickname {
+  font-size: 28rpx;
+  color: #333;
+  margin-left: 10rpx;
+}
+
+.nickMsg .times {
+  font-size: 20rpx;
+  color: #999;
+}
+
+.content {
+  line-height: 48rpx;
+  font-size: 24rpx;
+  text-align: justify;
+  color: #333;
+  margin-top: 10rpx;
+}
+
+.imglist {
+  margin-top: 10rpx;
+}
+
+.imglist image {
+  width: 120rpx;
+  height: 120rpx;
+  margin-right: 20rpx;
+}
+
+.icon_ping {
+  width: 30rpx;
+  height: 29rpx;
+  display: block;
+  margin-right: 10rpx;
+}

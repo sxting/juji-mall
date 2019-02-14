@@ -130,12 +130,27 @@ Page({
   onReachBottom: function() {
 
   },
+  share: function (obj) {
+
+    service.share(obj).subscribe({
+      next: res => {
+        console.log('---------分享返回--------');
+        console.log(res);
+      },
+      error: err => console.log(err),
+      complete: () => wx.hideToast()
+    })
+  },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function (res) {
-    
+  onShareAppMessage: function () {
+    var obj = {
+      type:'SHARE_PROGRAM',
+      sharePath: '/pages/index/index'
+    };
+    this.share(obj);
     return {
       title: '朋友给你分享了桔集生活，快来看看吧！',
       path: '/pages/index/index'

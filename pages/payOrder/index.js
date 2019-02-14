@@ -89,7 +89,7 @@ Page({
       count: thisNum
     });
   },
-  saveOrder:function(obj){
+  saveOrder: function(obj) {
     service.saveOrder(obj).subscribe({
       next: res => {
         console.log('--------创建订单返回-------');
@@ -114,7 +114,7 @@ Page({
         next: res => {
           console.log('--------下单前数据校验1-------');
           console.log(res);
-          if (res.pointBalance > that.data.productInfo.point) {
+          if (res.pointBalance >= that.data.productInfo.point) {
             //创建订单
             var orderObj = {
               itemRequests: [{
@@ -143,6 +143,29 @@ Page({
               next: res1 => {
                 console.log('--------创建订单返回1-------');
                 console.log(res1);
+                var payInfo = JSON.parse(res1.payInfo);
+                wx.requestPayment({
+                  timeStamp: payInfo.timeStamp,
+                  nonceStr: payInfo.nonceStr,
+                  package: payInfo.package,
+                  signType: payInfo.signType,
+                  paySign: payInfo.paySign,
+                  success(res2) {
+                    console.log(res2);
+                    wx.navigateTo({
+                      url: '/pages/orderDetail/index?id=' + res1.orderId,
+                    })
+                  },
+                  fail(res2) {
+                    console.log(res2);
+                    if (res2.errMsg == 'requestPayment:fail cancel') {
+                      wx.showToast({
+                        title: '用户取消支付',
+                        icon: 'none'
+                      })
+                    }
+                  }
+                });
               },
               error: err => console.log(err)
             });
@@ -163,7 +186,7 @@ Page({
         next: res => {
           console.log('--------下单前数据校验2-------');
           console.log(res);
-          if (res.pointBalance > that.data.productInfo.point) {
+          if (res.pointBalance >= that.data.productInfo.point) {
             //创建订单
             var orderObj = {
               itemRequests: [{
@@ -257,25 +280,25 @@ Page({
                 success(res2) {
                   console.log(res2);
                   wx.navigateTo({
-                    url: '/pages/orderDetail/index?id='+res1.orderId,
+                    url: '/pages/orderDetail/index?id=' + res1.orderId,
                   })
                 },
                 fail(res2) {
                   console.log(res2);
-                  if (res2.errMsg =='requestPayment:fail cancel'){
+                  if (res2.errMsg == 'requestPayment:fail cancel') {
                     wx.showToast({
                       title: '用户取消支付',
                       icon: 'none'
                     })
                   }
-                  
+
                 }
               });
             },
             error: err => console.log(err)
           });
 
-          
+
 
 
           //   } else {

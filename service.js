@@ -66,6 +66,12 @@ service.getPointBalance = (data) => {
   let apiUrl = api + '/point/pointBalance.json';//描述:查询桔子余额
   return http.get(apiUrl, data);
 }
+// -------------------------------------------comment-----------------------------------
+
+service.commentPage = (data) => {
+  let apiUrl = api + '/product/commentPage.json';//描述:获取商品所有评价
+  return http.get(apiUrl, data);
+}
 
 // -------------------------------------------order-----------------------------------
 
@@ -93,6 +99,11 @@ service.getPre = (data) => {
 service.saveOrder = (data) => {
   let apiUrl = api + '/order/saveOrder.json';//描述:下单接口
   return http.post(apiUrl, data);
+}
+
+service.applyStoreList = (data) => {
+  let apiUrl = api + '/product/applyStoreList.json';//描述:商品适用门店列表
+  return http.get(apiUrl, data);
 }
 // -------------------------------------------juzi-----------------------------------
 

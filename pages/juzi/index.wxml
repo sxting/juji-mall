@@ -96,7 +96,7 @@
           <view style="margin-top:10rpx;font-size: 24rpx;color: #999999;">分享到不同群每天最多得{{currentPointObj.shareExchangeTask.dayNum}}个桔子</view>
         </view>
       </view>
-      <view class="taskBtn">赚桔子</view>
+      <button class="taskBtn" bindtap="toJuzihl">赚桔子</button>
     </view>
     <view class="taskItem ub ub-ac ub-pj">
       <view class="ub ub-ac ub-aj">
@@ -107,7 +107,7 @@
           <view style="margin-top:10rpx;font-size: 24rpx;color: #999999;">分享到不同群每天最多得{{currentPointObj.shareProductTask.dayNum}}个桔子</view>
         </view>
       </view>
-      <view class="taskBtn">赚桔子</view>
+      <button class="taskBtn" bindtap="toIndex">赚桔子</button>
     </view>
 
     <view class="taskItem ub ub-ac ub-pj">
@@ -119,7 +119,7 @@
           <view style="margin-top:10rpx;font-size: 24rpx;color: #999999;">分享到不同群每天最多得{{currentPointObj.shareProgramTask.dayNum}}个桔子</view>
         </view>
       </view>
-      <view class="taskBtn">赚桔子</view>
+      <button class="taskBtn" open-type="share">赚桔子</button>
     </view>
 
     <view class="taskItem ub ub-ac ub-pj">
@@ -131,7 +131,7 @@
           <view style="margin-top:10rpx;font-size: 24rpx;color: #999999;">消费后评价每天最多得{{currentPointObj.commentTask.dayNum}}个桔子</view>
         </view>
       </view>
-      <view class="taskBtn">赚桔子</view>
+      <button class="taskBtn" bindtap="toMyOrder">赚桔子</button>
     </view>
 
   </view>

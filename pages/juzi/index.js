@@ -19,6 +19,17 @@ Page({
     this.currentPoint();
     this.getInfo();
   },
+  toJuzihl: function () {
+    wx.navigateTo({
+      url: '../juzihl/index'
+    });
+  },
+  toIndex: function () {
+    wx.switchTab({ url: '../index/index' });
+  },
+  toMyOrder: function () {
+    wx.navigateTo({ url: '/pages/orderlist/index?index=3&status=CONSUME'});
+  },
   getInfo: function () {
     service.userInfo({ openId: wx.getStorageSync('openid') }).subscribe({
       next: res => {
@@ -121,7 +132,10 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function() {
-
+  onShareAppMessage: function (res) {
+    return {
+      title: '朋友给你分享了桔集生活，快来看看吧！',
+      path: '/pages/index/index'
+    }
   }
 })

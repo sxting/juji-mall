@@ -161,6 +161,14 @@
   align-items: center;
 }
 
+.toBg{
+  padding:0;
+  margin:0;
+  box-sizing: border-box;
+  border:0;
+  background: transparent;
+}
+
 .icon-home {
   color: #b25dff;
   line-height: 36rpx;

@@ -18,6 +18,8 @@ Page({
   onLoad: function(options) {
     this.currentPoint();
     this.getInfo();
+    //查询新用户见面礼
+
   },
   toJuzihl: function () {
     wx.navigateTo({
@@ -133,6 +135,7 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function (res) {
+    
     return {
       title: '朋友给你分享了桔集生活，快来看看吧！',
       path: '/pages/index/index'

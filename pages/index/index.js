@@ -171,44 +171,44 @@ Page({
   },
   //下拉刷新
   onPullDownRefresh() {
+    this.getCurLocation();
+    // service.getIndexData({
+    //   providerId: this.data.providerId
+    // }).subscribe({
+    //   next: res => {
+    //     console.log(res);
+    //     this.setData({
+    //       slideShowList: res.slideShowList,
+    //       pointProductList: res.pointProductList
+    //     });
 
-    service.getIndexData({
-      providerId: this.data.providerId
-    }).subscribe({
-      next: res => {
-        console.log(res);
-        this.setData({
-          slideShowList: res.slideShowList,
-          pointProductList: res.pointProductList
-        });
+    //     let obj = {
+    //       providerId: '1215422531428605',
+    //       type: 'PRODUCT',
+    //       sortField: 'IDX',
+    //       sortOrder: 'ASC',
+    //       pageNo: 1,
+    //       pageSize: this.data.pageSize,
+    //       longitude: '116.470959',
+    //       latitude: '39.992368'
+    //     };
 
-        let obj = {
-          providerId: '1215422531428605',
-          type: 'PRODUCT',
-          sortField: 'IDX',
-          sortOrder: 'ASC',
-          pageNo: 1,
-          pageSize: this.data.pageSize,
-          longitude: '116.470959',
-          latitude: '39.992368'
-        };
+    //     service.getRecommendPage(obj).subscribe({
+    //       next: res => {
+    //         console.log(res);
+    //         this.setData({
+    //           recommendPage: res.list
+    //         });
+    //         wx.stopPullDownRefresh();
+    //       },
+    //       error: err => console.log(err),
+    //       complete: () => wx.hideToast()
+    //     });
 
-        service.getRecommendPage(obj).subscribe({
-          next: res => {
-            console.log(res);
-            this.setData({
-              recommendPage: res.list
-            });
-            wx.stopPullDownRefresh();
-          },
-          error: err => console.log(err),
-          complete: () => wx.hideToast()
-        });
-
-      },
-      error: err => console.log(err),
-      complete: () => wx.hideToast()
-    });
+    //   },
+    //   error: err => console.log(err),
+    //   complete: () => wx.hideToast()
+    // });
   },
   getCurLocation: function() {
     var that = this;
@@ -236,7 +236,7 @@ Page({
               //根据位置查询附近精选
               var obj = {
                 // providerId: res1.id,
-                providerId:'1215422531428605',
+                providerId: '1215422531428605',
                 type: 'PRODUCT',
                 sortField: 'IDX',
                 sortOrder: 'ASC',
@@ -273,41 +273,51 @@ Page({
                     locationCode: res.parentLocation.locationCode
                   });
                 } else {
-                  if (oldcitycode != res.parentLocation.locationCode) {
-                    //询问是否切换到当前城市
-                    wx.showModal({
-                      title: '提示',
-                      content: '是否切换到' + res.parentLocation.locationName + '?',
-                      success: function(res1) {
-                        if (res1.confirm) {
-                          wx.setStorageSync('locationName', res.parentLocation.locationName.replace('市', ''));
-                          wx.setStorageSync('locationCode', res.parentLocation.locationCode);
-                          that.setData({
-                            locationName: res.parentLocation.locationName.replace('市', ''),
-                            locationCode: res.parentLocation.locationCode
-                          });
-                        } else if (res1.cancel) {
+
+                  if (app.globalData.locationName) { //存在用户自己选了其他城市不询问
+                    that.setData({
+                      locationName: wx.getStorageSync('locationName'),
+                      locationCode: wx.getStorageSync('locationCode')
+                    });
+                  } else { //不存在 用户没选
+                    if (oldcitycode != res.parentLocation.locationCode) {
+                      //询问是否切换到当前城市
+                      wx.showModal({
+                        title: '提示',
+                        content: '是否切换到' + res.parentLocation.locationName + '?',
+                        success: function(res1) {
+                          if (res1.confirm) {
+                            wx.setStorageSync('locationName', res.parentLocation.locationName.replace('市', ''));
+                            wx.setStorageSync('locationCode', res.parentLocation.locationCode);
+                            that.setData({
+                              locationName: res.parentLocation.locationName.replace('市', ''),
+                              locationCode: res.parentLocation.locationCode
+                            });
+                          } else if (res1.cancel) {
+                            that.setData({
+                              locationName: wx.getStorageSync('locationName'),
+                              locationCode: wx.getStorageSync('locationCode')
+                            });
+                          }
+
+                        },
+                        fail: function() {
                           that.setData({
                             locationName: wx.getStorageSync('locationName'),
                             locationCode: wx.getStorageSync('locationCode')
                           });
                         }
+                      });
 
-                      },
-                      fail: function() {
-                        that.setData({
-                          locationName: wx.getStorageSync('locationName'),
-                          locationCode: wx.getStorageSync('locationCode')
-                        });
-                      }
-                    });
-
-                  } else {
-                    that.setData({
-                      locationName: wx.getStorageSync('locationName'),
-                      locationCode: wx.getStorageSync('locationCode')
-                    });
+                    } else {
+                      that.setData({
+                        locationName: wx.getStorageSync('locationName'),
+                        locationCode: wx.getStorageSync('locationCode')
+                      });
+                    }
                   }
+
+
                 }
 
 
@@ -347,13 +357,17 @@ Page({
             }
 
           },
-          error: err => errDialog(err),
+          error: err => console.log(err),
           complete: () => wx.hideToast()
         });
       },
       fail: function(err) {
         console.log('---------位置调用失败或是被拒绝--------');
         console.log(err);
+        wx.showModal({
+          title: '无法获取地理位置',
+          content: '无法获取附近的优惠信息，您可以在小程序设置界面（「右上角」 - 「关于」 - 「右上角」 - 「设置」）中设置对该小程序的授权状态，并在授权之后重启小程序。'
+        })
       }
     })
   },
@@ -445,15 +459,6 @@ Page({
       }
 
     }
-
-  },
-  onLoad: function(options) {
-    console.log(options);
-    wx.setNavigationBarTitle({
-      title: ''
-    });
-
-
     wx.getSetting({
       success: (res) => {
         console.log(res.authSetting['scope.userInfo']);
@@ -501,22 +506,22 @@ Page({
                 });
               }
             });
-
           } else { //如果不存在rowData
-
+            wx.showToast({
+              title: '授权之后未能获取到用户信息',
+            });
           }
-
         }
       }
     });
 
-
-
+  },
+  onLoad: function(options) {
+    console.log(options);
+    wx.setNavigationBarTitle({
+      title: ''
+    });
     // this.getPreOrder();
     console.log('--------------index-onLoad-------------');
-
-
-
-
   }
 })

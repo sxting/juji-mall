@@ -3,7 +3,7 @@
   <view class="locationWrap">
     <view class="title">桔集</view>
     <view class="location" bindtap="toCityList">{{locationName}}
-      <image style="width:16rpx;height:10rpx;margin-left:10rpx;" src="../../images/sort-down.png"></image>
+      <image style="width:16rpx;height:10rpx;margin-left:10rpx;" src="../../images/sort-down.png" wx:if="{{locationName}}"></image>
     </view>
   </view>
   <view class="toper">

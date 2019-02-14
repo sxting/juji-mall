@@ -143,13 +143,34 @@ Page({
       url: '/pages/shareCard/index?merchantId=' + this.data.merchantId
     });
   },
+  share: function (obj){
+    
+    service.share(obj).subscribe({
+      next: res=>{
+        console.log('---------分享返回--------');
+        console.log(res);
+      },
+      error: err => console.log(err),
+      complete: () => wx.hideToast()
+    })
+  },
   /**
    * 用户点击右上角分享或页面中的分享
    */
   onShareAppMessage: function(res) {
+    console.log(res);
+    var type = this.data.productInfo.type;
+    var obj = {};
+    if (type == 'POINT') {
+      obj.type = 'SHARE_EXCHANGE';
+    } else {
+      obj.type = 'SHARE_PRODUCT';
+    }
+    obj.sharePath = '/pages/comDetail/index?id=' + this.data.productId + '&storeid=' + this.data.storeId;
+    this.share(obj);
     return {
       title: '朋友给你分享了优惠商品，快来看看吧！',
-      path: '/pages/index/index'
+      path: '/pages/comDetail/index?id=' + this.data.productId + '&storeid=' + this.data.storeId
     }
   },
   toCommentDetail: function(event) {

@@ -17,7 +17,17 @@ App({
     // var logs = wx.getStorageSync('logs') || []
     // logs.unshift(Date.now())
     // wx.setStorageSync('logs', logs)
+    wx.showShareMenu({
+      withShareTicket: true
+    });
     console.log('app');
+    console.log(options);
+    if (options.shareTicket) {
+      wx.getShareInfo({
+        shareTicket: options.shareTicket,
+        success: function (res) { }
+      });
+    }
     
   },
   getMyInfo: function() {
@@ -32,9 +42,10 @@ App({
     })
   },
   globalData: {
+    locationName: null,
     userInfo: null,
     rawData: null,
     iv: null,
-    signature:null
+    signature: null
   }
 })

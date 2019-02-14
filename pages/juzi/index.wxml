@@ -5,8 +5,9 @@
         <image style="width:100rpx;height:100rpx;margin-right:30rpx;border-radius:50%;" src="../../images/mendianimg.png"></image>
         <view>
           <view style="font-size:28rpx;color:#333333;">当前桔子</view>
-          <view class="ub ub-ac">
+          <view class="ub ub-ac" bindtap="toMyTrade">
             <view style="font-family: PingFangSC-Semibold;font-size:54rpx;color:#333333;line-heght:54rpx;">{{currentPointObj.pointBalance}}</view>
+            <image src="../../images/toPointList.png" style="width:12rpx;height:17rpx;margin-left:20rpx;"></image>
           </view>
 
         </view>

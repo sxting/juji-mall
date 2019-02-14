@@ -1,5 +1,6 @@
 import { service } from '../../service';
 import { constant } from '../../utils/constant';
+import { errDialog, loading} from '../../utils/util';
 var app = getApp();
 Page({
     data: {
@@ -17,6 +18,10 @@ Page({
     toDetail: function(e) {
         var id = e.currentTarget.dataset.id;
         wx.navigateTo({ url: "/pages/orderDetail/index?id="+id });
+    },
+    toComment: function(e) {
+        var id = e.currentTarget.dataset.id;
+        wx.navigateTo({ url: "/pages/comment/index?id="+id });
     },
     switchTab: function(event) {
         var thisIndex = event.currentTarget.dataset['index'];

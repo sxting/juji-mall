@@ -32,7 +32,7 @@
     "pages/tradeSuccess/index",
     "pages/shareCard/index",
     "pages/logs/logs",
-    "pages/createReply/index",
+    "pages/comment/index",
     "pages/commentList/index",
     "pages/juzihl/index",
     "pages/comDetail/index",

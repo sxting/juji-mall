@@ -1,3 +1,4 @@
+import { errDialog, loading} from '../../utils/util'
 import {
   service
 } from '../../service';
@@ -31,7 +32,7 @@ Page({
   toComment: function() {
     var id = event.currentTarget.dataset['id'];
     wx.navigateTo({
-      url: "/pages/createReply/index?id=" + id
+      url: "/pages/comment/index?id=" + id
     });
   },
   toPay() {

@@ -111,6 +111,10 @@
 					"scene": null
 				},
 				{
+					"id": -1,
+					"name": "发表评论",
+					"pathName": "pages/comment/index",
+				},{
 					"id": 11,
 					"name": "订单确认",
 					"pathName": "pages/payOrder/index",

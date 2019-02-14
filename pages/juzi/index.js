@@ -7,7 +7,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-    showjuzigz: false
+    showjuzigz: false,
+    currentPointObj: {},
+    canSignIn: true
   },
   /**
    * 生命周期函数--监听页面加载
@@ -26,6 +28,10 @@ Page({
     service.currentPoint().subscribe({
       next: res => {
         console.log(res);
+        this.setData({
+          currentPointObj:res,
+          canSignIn: res.canSignIn
+        });
       }
     });
   },

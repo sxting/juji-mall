@@ -98,7 +98,7 @@ service.saveOrder = (data) => {
 
 service.currentPoint = (data) => {
   let apiUrl = api + '/point/currentPoint.json';//描述:下单接口
-  return http.post(apiUrl, data);
+  return http.get(apiUrl, data);
 }
 service.signIn = (data) => {
   let apiUrl = api + '/point/signIn.json';//描述:用户签到

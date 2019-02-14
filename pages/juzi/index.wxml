@@ -6,7 +6,7 @@
         <view>
           <view style="font-size:28rpx;color:#333333;">当前桔子</view>
           <view class="ub ub-ac">
-            <view style="font-family: PingFangSC-Semibold;font-size:54rpx;color:#333333;line-heght:54rpx;">20</view>
+            <view style="font-family: PingFangSC-Semibold;font-size:54rpx;color:#333333;line-heght:54rpx;">{{currentPointObj.pointBalance}}</view>
           </view>
 
         </view>
@@ -16,41 +16,40 @@
 
     <view class="ub ub-ac ub-pj1" style="margin:0 30rpx;padding:30rpx 40rpx;box-sizing:border-box;height:164rpx;background: #FFFFFF;box-shadow: 0 0 5rpx 0 rgba(228,228,228,0.50);border-radius: 10rpx;">
       <view class="ub ub-ver ub-ac ub-pc">
-        <view class="qd-title">20</view>
+        <view class="qd-title">{{currentPointObj.todayPoint}}</view>
         <view class="qd-text">今日桔子</view>
       </view>
 
       <view class="vline"></view>
 
       <view class="ub ub-ver ub-ac ub-pc">
-        <view class="qd-title">15</view>
+        <view class="qd-title">{{currentPointObj.todayShare}}</view>
         <view class="qd-text">今日分享</view>
       </view>
 
       <view class="vline"></view>
 
       <view class="ub ub-ver ub-ac ub-pc">
-        <view class="qd-title">5</view>
+        <view class="qd-title">{{currentPointObj.todayTask}}</view>
         <view class="qd-text">今日任务</view>
       </view>
     </view>
   </view>
 
   <view style="margin:112rpx 30rpx 0 30rpx;padding:30rpx 40rpx;box-sizing:border-box;height:420rpx;background: #FFFFFF;box-shadow: 0 0 5rpx 0 rgba(228,228,228,0.50);border-radius: 10rpx;">
-    <view class="qtitle ub ub-ac">连续签到
-      <view style="font-size: 30rpx;color: #CE463F;">3</view>
-      天</view>
-
+    <view class="qtitle ub ub-ac">连续签到 
+      <view style="font-size: 30rpx;color: #CE463F;padding:0 10rpx;">{{currentPointObj.signInDays}}</view>
+       天</view>
     <view>
 
       <view class="point-text-wrap ub ub-ac ub-pj">
-        <view class="point-text">5桔子</view>
-        <view class="point-text">5桔子</view>
-        <view class="point-text">5桔子</view>
-        <view class="point-text">5桔子</view>
-        <view class="point-text">10桔子</view>
-        <view class="point-text">10桔子</view>
-        <view class="point-text">10桔子</view>
+        <view class="point-text">{{currentPointObj.signInList[0].awardNum}}桔子</view>
+        <view class="point-text">{{currentPointObj.signInList[1].awardNum}}桔子</view>
+        <view class="point-text">{{currentPointObj.signInList[2].awardNum}}桔子</view>
+        <view class="point-text">{{currentPointObj.signInList[3].awardNum}}桔子</view>
+        <view class="point-text">{{currentPointObj.signInList[4].awardNum}}桔子</view>
+        <view class="point-text">{{currentPointObj.signInList[5].awardNum}}桔子</view>
+        <view class="point-text">{{currentPointObj.signInList[6].awardNum}}桔子</view>
       </view>
 
       <view class="point-wrap ub ub-ac ub-pj">
@@ -76,9 +75,10 @@
         <image class="point" src="../../images/wqd.png"></image>
       </view>
 
-      <view style="font-size: 24rpx;color: #666666;text-align:center;margin-top:60rpx;">连续签到一周可得28个桔子</view>
+      <view style="font-size: 24rpx;color: #666666;text-align:center;margin-top:60rpx;">连续签到一周可得{{currentPointObj.signInMax}}个桔子</view>
 
-      <view style="width:560rpx;height:88rpx;border-radius:44rpx;background: #FCBF0A;border-radius: 44px;line-height:88rpx;text-align:center;margin-top:20rpx;font-family: PingFangSC-Medium;" bindtap="signIn">签到</view>
+      <view class="normalBtn" bindtap="signIn" hidden="{{!canSignIn}}">签到</view>
+      <view class="normalBtn" bindtap="signIn" hidden="{{canSignIn}}">已签到</view>
     </view>
   </view>
 
@@ -89,9 +89,9 @@
       <view class="ub ub-ac ub-aj">
         <image src="../../images/task1.png" style="width:80rpx;height:80rpx;margin-right:30rpx;"></image>
 
-        <view>
-          <view style="font-size: 28rpx;color: #333333;">分享桔子换礼商品赚5桔子</view>
-          <view style="margin-top:10rpx;font-size: 24rpx;color: #999999;">分享到不同群每天最多得25个桔子</view>
+        <view style="width:76%;">
+          <view style="font-size: 28rpx;color: #333333;">分享桔子换礼商品赚{{currentPointObj.shareExchangeTask.onceNum}}桔子</view>
+          <view style="margin-top:10rpx;font-size: 24rpx;color: #999999;">分享到不同群每天最多得{{currentPointObj.shareExchangeTask.dayNum}}个桔子</view>
         </view>
       </view>
       <view class="taskBtn">赚桔子</view>
@@ -100,9 +100,9 @@
       <view class="ub ub-ac ub-aj">
         <image src="../../images/task2.png" style="width:80rpx;height:80rpx;margin-right:30rpx;"></image>
 
-        <view>
-          <view style="font-size: 28rpx;color: #333333;">分享普通商品赚5桔子</view>
-          <view style="margin-top:10rpx;font-size: 24rpx;color: #999999;">分享到不同群每天最多得25个桔子</view>
+        <view style="width:76%;">
+          <view style="font-size: 28rpx;color: #333333;">分享普通商品赚{{currentPointObj.shareProductTask.onceNum}}桔子</view>
+          <view style="margin-top:10rpx;font-size: 24rpx;color: #999999;">分享到不同群每天最多得{{currentPointObj.shareProductTask.dayNum}}个桔子</view>
         </view>
       </view>
       <view class="taskBtn">赚桔子</view>
@@ -112,9 +112,9 @@
       <view class="ub ub-ac ub-aj">
         <image src="../../images/task3.png" style="width:80rpx;height:80rpx;margin-right:30rpx;"></image>
 
-        <view>
-          <view style="font-size: 28rpx;color: #333333;">分享桔集小程序赚5桔子</view>
-          <view style="margin-top:10rpx;font-size: 24rpx;color: #999999;">分享到不同群每天最多得25个桔子</view>
+        <view style="width:76%;">
+          <view style="font-size: 28rpx;color: #333333;">分享桔集小程序赚{{currentPointObj.shareProgramTask.onceNum}}桔子</view>
+          <view style="margin-top:10rpx;font-size: 24rpx;color: #999999;">分享到不同群每天最多得{{currentPointObj.shareProgramTask.dayNum}}个桔子</view>
         </view>
       </view>
       <view class="taskBtn">赚桔子</view>
@@ -124,9 +124,9 @@
       <view class="ub ub-ac ub-aj">
         <image src="../../images/task4.png" style="width:80rpx;height:80rpx;margin-right:30rpx;"></image>
 
-        <view>
-          <view style="font-size: 28rpx;color: #333333;">消费后评价最多赚20桔子</view>
-          <view style="margin-top:10rpx;font-size: 24rpx;color: #999999;">分享到不同群每天最多得25个桔子</view>
+        <view style="width:76%;">
+          <view style="font-size: 28rpx;color: #333333;">消费后评价赚{{currentPointObj.commentTask.onceNum}}桔子</view>
+          <view style="margin-top:10rpx;font-size: 24rpx;color: #999999;">消费后评价每天最多得{{currentPointObj.commentTask.dayNum}}个桔子</view>
         </view>
       </view>
       <view class="taskBtn">赚桔子</view>

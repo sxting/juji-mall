@@ -40,7 +40,7 @@
 }
 
 .point-text {
-  width: 62rpx;
+  width: 64rpx;
   font-size: 20rpx;
   color: #666;
   text-align: center;
@@ -95,22 +95,36 @@
   height: 1rpx;
   background: #dedede;
 }
-.taskItem{
-  padding:40rpx 0;
-  border-bottom: 1rpx solid #EEEEEE;
+
+.taskItem {
+  padding: 40rpx 0;
+  border-bottom: 1rpx solid #eee;
 }
-.taskItem:last-child{
+
+.taskItem:last-child {
   border-bottom: 0;
 }
-.taskBtn{
+
+.taskBtn {
   display: flex;
   justify-content: center;
   align-items: center;
-  width:130rpx;
-  height:50rpx;
+  width: 130rpx;
+  height: 50rpx;
   box-sizing: border-box;
-  border: 2rpx solid #CE463F;
-border-radius: 25px;
-font-size: 28rpx;
-color: #CE463F;
+  border: 2rpx solid #ce463f;
+  border-radius: 25px;
+  font-size: 28rpx;
+  color: #ce463f;
+}
+
+.normalBtn {
+  width: 560rpx;
+  height: 88rpx;
+  border-radius: 44rpx;
+  background: #fcbf0a;
+  line-height: 88rpx;
+  text-align: center;
+  margin-top: 20rpx;
+  font-family: PingFangSC-Medium;
 }

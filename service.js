@@ -121,6 +121,10 @@ service.signIn = (data) => {
   return http.get(apiUrl, data);
 }
 
+service.pointDetails = (data) => {
+  let apiUrl = api + '/point/pointDetails.json';//查询桔子明细
+  return http.get(apiUrl, data);
+}
 // --------------------------------------------usr-----------------------------------
 /*获取会员信息*/
 service.userInfo = (data) => {

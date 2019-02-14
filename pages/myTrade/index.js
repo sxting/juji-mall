@@ -8,6 +8,8 @@ Page({
         curTabIndex: 0,
         isShowNodata1:false,
         isShowNodata2:false,
+      pageNo:1,
+      pageSize:10,
         inputlist:[{
             name:"收入名字",
             time:"2018-02-01",
@@ -30,22 +32,31 @@ Page({
     switchTab: function(e) {
         var thisIndex = e.currentTarget.dataset.index;
         this.setData({ curTabIndex: thisIndex });
+        this.getData();
     },
     getData: function() {
-        // wx.showLoading({title:'加载中'});
-        // service.payRecord().subscribe({
-        //     next: res => {
-        //       console.log('----------交易记录数据--------');
-        //       console.log(res);
-        //         this.setData({isShowNodata1:res.length==0})
-        //         for (let i = 0; i < res.length; i++) {
-        //             res[i].totalFee ? res[i].totalFee = res[i].totalFee.toFixed(2) : res[i].totalFee = '0.00';
-        //         }
-        //         this.setData({ consumeRecord: res });
-        //     },
-        //     error: err => errDialog(err),
-        //     complete: () => wx.hideLoading()
-        // });
+        service.pointDetails({
+          inOrOut: this.data.curTabIndex==0?'IN':'OUT',
+          pageNo: this.data.pageNo,
+          pageSize: this.data.pageSize
+        }).subscribe({
+            next: res => {
+              console.log('----------交易记录数据--------');
+              console.log(res);
+              if (this.data.curTabIndex == 0){
+                if(res.length==0){
+                  this.setData({ isShowNodata1: true });
+                }
+              }else{
+                if (res.length == 0) {
+                  this.setData({ isShowNodata2: true });
+                }
+              }
+              this.setData({ inputlist: res});
+            },
+            error: err => errDialog(err),
+            complete: () => wx.hideLoading()
+        });
     },
     onShow: function() {
         this.getData();

@@ -11,10 +11,10 @@
             <view class="udb" wx:if="{{!isShowNodata1}}">
                 <view class="item ub ub-ac" wx:for="{{inputlist}}" wx:key="unique">
                     <view class="ub-f1">
-                        <view class="name">{{item.name}}</view>
+                        <view class="name">{{item.recordTypeName}}</view>
                         <view class="time">{{item.time}}</view>
                     </view>
-                    <view class="ub ub-ac ub-pj amount">+{{item.amount}}</view>
+                    <view class="ub ub-ac ub-pj amount">+{{item.num}}</view>
                 </view>
             </view>
             <view class="conDiv ub ub-ac ub-pc ub-ver" wx:else>
@@ -24,12 +24,12 @@
         </view>
         <view class="conDiv" hidden="{{curTabIndex!=1}}">
             <view class="udb" wx:if="{{!isShowNodata2}}">
-                <view class="item ub ub-ac" wx:for="{{outputlist}}" wx:key="unique">
+                <view class="item ub ub-ac" wx:for="{{inputlist}}" wx:key="unique">
                     <view class="ub-f1">
-                        <view class="name">{{item.name}}</view>
+                        <view class="name">{{item.recordTypeName}}</view>
                         <view class="time">{{item.time}}</view>
                     </view>
-                    <view class="ub ub-ac ub-pj amount">-{{item.amount}}</view>
+                    <view class="ub ub-ac ub-pj amount">{{item.num}}</view>
                 </view>
             </view>
             <view class="conDiv ub ub-ac ub-pc ub-ver" wx:else>

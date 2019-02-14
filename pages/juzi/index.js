@@ -16,7 +16,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    this.currentPoint();
+    
     this.getInfo();
     //查询新用户见面礼
 
@@ -100,7 +100,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-
+    this.currentPoint();
   },
 
   /**
@@ -136,6 +136,9 @@ Page({
       next: res => {
         console.log('---------分享返回--------');
         console.log(res);
+        if (res) {
+          this.currentPoint();
+        }
       },
       error: err => console.log(err),
       complete: () => wx.hideToast()

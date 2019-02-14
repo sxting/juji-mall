@@ -9,13 +9,26 @@ Page({
   data: {
     showjuzigz: false,
     currentPointObj: {},
-    canSignIn: true
+    canSignIn: true,
+    avatar: ''
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
     this.currentPoint();
+    this.getInfo();
+  },
+  getInfo: function () {
+    service.userInfo({ openId: wx.getStorageSync('openid') }).subscribe({
+      next: res => {
+        this.setData({
+          avatar: res.avatar
+        });
+      },
+      error: err => errDialog(err),
+      complete: () => wx.hideToast()
+    })
   },
   toMyTrade: function(){
     wx.navigateTo({

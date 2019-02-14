@@ -114,7 +114,7 @@ Page({
         next: res => {
           console.log('--------下单前数据校验1-------');
           console.log(res);
-          if (res.pointBalance > this.data.product.point) {
+          if (res.pointBalance > that.data.productInfo.point) {
             //创建订单
             var orderObj = {
               itemRequests: [{

@@ -36,7 +36,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 10,
+			"current": 11,
 			"list": [
 				{
 					"id": 0,
@@ -108,6 +108,12 @@
 					"name": "授权",
 					"pathName": "pages/login/index",
 					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "发表评论",
+					"pathName": "pages/comment/index",
 					"scene": null
 				}
 			]

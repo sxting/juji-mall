@@ -84,6 +84,11 @@ service.decodeUserPhone = (data) => {
   let apiUrl = api + '/user/decodeUserPhone.json';
   return http.get(apiUrl, data);
 }
+//订单评论
+service.commentOrder = (data) => {
+  let apiUrl = api + '/product/comment.json';
+  return http.get(apiUrl, data);
+}
 
 service.getPre = (data) => {
   let apiUrl = api + '/order/pre.json';//描述:下单前数据校验

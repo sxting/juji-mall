@@ -4,12 +4,35 @@ import { service } from '../../service';
 var app = getApp();
 Page({
     data: {
+        pinglist1:[],
+        pinglist2:['','','','',''],
         orderId: '',
         content: '',
         imglist: [],
         pics: [],
         lastPage:"",
-        isDisbaled: false
+        productId:'',
+        isDisbaled: false,
+        score:0,
+    },
+    clickPing1:function(e){
+        var index = e.currentTarget.dataset['index'];
+        var pingLen = index+1;
+        this.setData({pinglist1:this.initArr(pingLen),pinglist2:this.initArr(5-pingLen)});
+        this.setData({score:pingLen});
+    },
+    clickPing2:function(e){
+        var index = e.currentTarget.dataset['index'];
+        var pingLen = index+1+this.data.pinglist1.length;
+        this.setData({pinglist1:this.initArr(pingLen),pinglist2:this.initArr(5-pingLen)});
+        this.setData({score:pingLen});
+    },
+    initArr:function(len){
+        var newArr = [];
+        for(var i=0;i<len;i++){
+            newArr.push('');
+        }
+        return newArr;
     },
     openActionSheet: function(e) {
         if (this.data.imglist.length >= 3) {
@@ -40,8 +63,10 @@ Page({
         this.setData({ "isDisbaled": true });
         service.commentOrder({
             content: this.data.content,
-            pics: this.data.pics,
-            orderPayId: this.data.orderId
+            imgIds: this.data.pics,
+            productId:this.data.productId,
+            orderId: this.data.orderId,
+            score:this.data.score
         }).subscribe({
             next: res => {
                 this.showToast("评论成功！");

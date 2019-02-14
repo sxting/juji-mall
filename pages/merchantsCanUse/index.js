@@ -7,57 +7,38 @@ Page({
    * 页面的初始数据
    */
   data: {
-    showjuzigz: false,
-    currentPointObj: {},
-    canSignIn: true
+    merchantsList: [{}, {}, {}]
   },
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    this.currentPoint();
-  },
-  signIn:function(){
-    service.signIn().subscribe({
-      next: res => {
-        console.log(res);
-        if(res){
-          this.setData({
-            canSignIn: false
-          });
-          this.currentPoint();
-        }
-      }
-    });
-  },
-  currentPoint: function () {
-    service.currentPoint().subscribe({
-      next: res => {
-        console.log(res);
-        this.setData({
-          currentPointObj:res,
-          canSignIn: res.canSignIn
-        });
-      }
-    });
-  },
-  closejuzigzModal: function() {
-    this.setData({
-      showjuzigz: false
-    });
-  },
-  juzigzModal: function() {
-    if (this.data.showjuzigz) {
-      this.setData({
-        showjuzigz: false
-      });
+    if (options.id) {
+      this.applyStoreList(options.id)
     } else {
-      this.setData({
-        showjuzigz: true
+      wx.showToast({
+        title: '发生错误，未找到商品id',
+        icon: 'none'
+      })
+      wx.navigateBack({
+        delta: 1
       });
+      return;
     }
   },
-
+  applyStoreList: function(id) {
+    service.applyStoreList({
+      productId: id
+    }).subscribe({
+      next: res => {
+        console.log('------适用门店列表------');
+        console.log(res);
+      },
+      error: err => console.log(err),
+      complete: () => wx.hideToast()
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

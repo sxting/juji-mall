@@ -22,6 +22,16 @@ Page({
   },
   onLoad: function(option) {
     console.log(option);
+    if (!option.id || !option.storeid) {
+      wx.showToast({
+        title: '发生错误，未找到商品id',
+        icon: 'none'
+      })
+      wx.navigateBack({
+        delta: 1
+      });
+      return ;
+    } 
     console.log(wx.getStorageSync('curLatitude'));
     console.log(wx.getStorageSync('curLongitude'));
     let lat = wx.getStorageSync('curLatitude');
@@ -34,6 +44,11 @@ Page({
     //查询用户橘子
     this.getPointBalance();
 
+  },
+  toMerchantsList:function(){
+    wx.navigateTo({
+      url: '/pages/merchantsCanUse/index?id=' + this.data.productId 
+    });
   },
   toCreateOrder: function() { //跳转订单确认 桔子和人民币组合订单
     wx.navigateTo({
@@ -118,7 +133,7 @@ Page({
   },
   toCommentList: function() {
     wx.navigateTo({
-      url: '/pages/commentList/index'
+      url: '/pages/commentList/index?id=' + this.data.productId
     });
   },
   toShareCard: function() {

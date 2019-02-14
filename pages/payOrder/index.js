@@ -243,33 +243,35 @@ Page({
             next: res1 => {
               console.log('--------创建订单返回3-------');
               console.log(res1);
+              var payInfo = JSON.parse(res1.payInfo);
+              wx.requestPayment({
+                timeStamp: payInfo.timeStamp,
+                nonceStr: payInfo.nonceStr,
+                package: payInfo.package,
+                signType: payInfo.signType,
+                paySign: payInfo.paySign,
+                success(res2) {
+                  console.log(res2);
+                  wx.navigateTo({
+                    url: '/pages/orderDetail/index?id='+res1.orderId,
+                  })
+                },
+                fail(res2) {
+                  console.log(res2);
+                  if (res2.errMsg =='requestPayment:fail cancel'){
+                    wx.showToast({
+                      title: '用户取消支付',
+                      icon: 'none'
+                    })
+                  }
+                  
+                }
+              });
             },
             error: err => console.log(err)
           });
 
-          //测试 拉起支付
-          // var obj = {
-          //   openid: wx.getStorageSync('openid')
-          // };
-          // service.testPreOrder(obj).subscribe({
-          //   next: res2 => {
-          //     console.log(res2);
-          //     wx.requestPayment({
-          //       timeStamp: res2.timeStamp,
-          //       nonceStr: res2.nonceStr,
-          //       package: res2.package,
-          //       signType: res2.signType,
-          //       paySign: res2.paySign,
-          //       success(res3) {
-          //         // alert('支付成功');
-          //       },
-          //       fail(res3) {
-          //         // alert('支付失败');
-          //       }
-          //     })
-          //   },
-          //   error: err => console.log(err)
-          // });
+          
 
 
           //   } else {

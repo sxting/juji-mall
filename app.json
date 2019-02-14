@@ -37,7 +37,8 @@
     "pages/juzihl/index",
     "pages/comDetail/index",
     "pages/juzi/index",
-    "pages/bindPhone/index"
+    "pages/bindPhone/index",
+    "pages/merchantsCanUse/index"
   ],
   "permission": {
     "scope.userLocation": {

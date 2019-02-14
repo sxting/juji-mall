@@ -50,7 +50,7 @@
   width: 600rpx;
   margin-top: 20rpx;
   box-sizing: border-box;
-  padding: 0 16rpx;
+  padding: 0 14rpx;
 }
 
 .point {

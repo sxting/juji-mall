@@ -53,32 +53,32 @@
       </view>
 
       <view class="point-wrap ub ub-ac ub-pj">
-        <image class="point" wx:if="{{false}}" src="../../images/yqd.png"></image>
-        <image class="point" src="../../images/wqd.png"></image>
+        <image class="point" hidden="{{!currentPointObj.signInList[0].signInStatus}}" src="../../images/yqd.png"></image>
+        <image class="point" hidden="{{currentPointObj.signInList[0].signInStatus}}" src="../../images/wqd.png"></image>
         <view class="pline"></view>
-        <image class="point" wx:if="{{false}}" src="../../images/yqd.png"></image>
-        <image class="point" src="../../images/wqd.png"></image>
+        <image class="point" hidden="{{!currentPointObj.signInList[1].signInStatus}}" src="../../images/yqd.png"></image>
+        <image class="point" hidden="{{currentPointObj.signInList[1].signInStatus}}" src="../../images/wqd.png"></image>
         <view class="pline"></view>
-        <image class="point" wx:if="{{false}}" src="../../images/yqd.png"></image>
-        <image class="point" src="../../images/wqd.png"></image>
+        <image class="point" hidden="{{!currentPointObj.signInList[2].signInStatus}}" src="../../images/yqd.png"></image>
+        <image class="point" hidden="{{currentPointObj.signInList[2].signInStatus}}" src="../../images/wqd.png"></image>
         <view class="pline"></view>
-        <image class="point" wx:if="{{false}}" src="../../images/yqd.png"></image>
-        <image class="point" src="../../images/wqd.png"></image>
+        <image class="point" hidden="{{!currentPointObj.signInList[3].signInStatus}}" src="../../images/yqd.png"></image>
+        <image class="point" hidden="{{currentPointObj.signInList[3].signInStatus}}" src="../../images/wqd.png"></image>
         <view class="pline"></view>
-        <image class="point" wx:if="{{false}}" src="../../images/yqd.png"></image>
-        <image class="point" src="../../images/wqd.png"></image>
+        <image class="point" hidden="{{!currentPointObj.signInList[4].signInStatus}}" src="../../images/yqd.png"></image>
+        <image class="point" hidden="{{currentPointObj.signInList[4].signInStatus}}" src="../../images/wqd.png"></image>
         <view class="pline"></view>
-        <image class="point" wx:if="{{false}}" src="../../images/yqd.png"></image>
-        <image class="point" src="../../images/wqd.png"></image>
+        <image class="point" hidden="{{!currentPointObj.signInList[5].signInStatus}}" src="../../images/yqd.png"></image>
+        <image class="point" hidden="{{currentPointObj.signInList[5].signInStatus}}" src="../../images/wqd.png"></image>
         <view class="pline"></view>
-        <image class="point" wx:if="{{false}}" src="../../images/yqd.png"></image>
-        <image class="point" src="../../images/wqd.png"></image>
+        <image class="point" hidden="{{!currentPointObj.signInList[6].signInStatus}}" src="../../images/yqd.png"></image>
+        <image class="point" hidden="{{currentPointObj.signInList[6].signInStatus}}" src="../../images/wqd.png"></image>
       </view>
 
       <view style="font-size: 24rpx;color: #666666;text-align:center;margin-top:60rpx;">连续签到一周可得{{currentPointObj.signInMax}}个桔子</view>
 
       <view class="normalBtn" bindtap="signIn" hidden="{{!canSignIn}}">签到</view>
-      <view class="normalBtn" bindtap="signIn" hidden="{{canSignIn}}">已签到</view>
+      <view class="normalBtn" hidden="{{canSignIn}}">已签到</view>
     </view>
   </view>
 

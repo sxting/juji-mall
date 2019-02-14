@@ -21,6 +21,12 @@ Page({
     service.signIn().subscribe({
       next: res => {
         console.log(res);
+        if(res){
+          this.setData({
+            canSignIn: false
+          });
+          this.currentPoint();
+        }
       }
     });
   },

@@ -17,6 +17,11 @@ Page({
   onLoad: function(options) {
     this.currentPoint();
   },
+  toMyTrade: function(){
+    wx.navigateTo({
+      url: '/pages/myTrade/index'
+    });
+  },
   signIn:function(){
     service.signIn().subscribe({
       next: res => {

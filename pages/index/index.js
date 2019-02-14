@@ -384,7 +384,8 @@ Page({
   },
   getIndexData: function() {
     service.getIndexData({
-      providerId: this.data.providerId
+      // providerId: this.data.providerId
+      providerId: '1215422531428605'
     }).subscribe({
       next: res => {
         console.log(res);

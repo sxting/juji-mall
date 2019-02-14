@@ -22,17 +22,27 @@ Page({
   },
   onLoad: function(option) {
     console.log(option);
-    console.log(wx.getStorageSync('curLatitude'));
-    console.log(wx.getStorageSync('curLongitude'));
-    let lat = wx.getStorageSync('curLatitude');
-    let lng = wx.getStorageSync('curLongitude');
-    this.setData({
-      productId: option.id,
-      storeId: option.storeid
-    });
-    this.getItemInfo();
-    //查询用户橘子
-    this.getPointBalance();
+    if (option.id && option.storeid) {
+      console.log(wx.getStorageSync('curLatitude'));
+      console.log(wx.getStorageSync('curLongitude'));
+      let lat = wx.getStorageSync('curLatitude');
+      let lng = wx.getStorageSync('curLongitude');
+      this.setData({
+        productId: option.id,
+        storeId: option.storeid
+      });
+      this.getItemInfo();
+      //查询用户橘子
+      this.getPointBalance();
+    } else {
+      wx.showToast({
+        title:'发生错误，未找到商品id',
+        icon:'none'
+      })
+      wx.navigateBack({
+        delta: 1
+      });
+    }
 
   },
   toCreateOrder: function() { //跳转订单确认 桔子和人民币组合订单

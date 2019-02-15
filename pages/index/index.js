@@ -583,7 +583,7 @@ Page({
         console.log('--------选择省市县确认服务商信息后重新加载首页数据---------');
         that.getIndexData();
         var obj = {
-          providerId: res1.id,
+          providerId: res.id,
           type: 'PRODUCT',
           sortField: 'IDX',
           sortOrder: 'ASC',

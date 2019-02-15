@@ -13,8 +13,9 @@ Page({
     recommendPage: [],
     sortIndex: 1,
     pageNo: 1,
-    pageSize: 10,
-    sortArray: ['', '', '', 'ASC', 'ASC', '']
+    pageSize: 2,
+    sortArray: ['', '', '', 'ASC', 'ASC', ''],
+    providerId:''
   },
   getDataByCity: function () {
     var that = this;
@@ -28,30 +29,22 @@ Page({
       next: res => {
         console.log('--------选择省市县确认服务商信息---------');
         console.log(res);
-        if(res.id){
-          that.setData({
-            providerId: res.id
-          });
-          // 根据位置查询附近精选
-          var obj = {
-            // providerId: res1.id,
-            providerId: '1215422531428605',
-            type: 'PRODUCT',
-            sortField: 'IDX',
-            sortOrder: 'ASC',
-            pageNo: that.data.pageNo,
-            pageSize: that.data.pageSize,
-            longitude: wx.setStorageSync('curLongitude'),
-            latitude: wx.setStorageSync('curLatitude')
-          };
-          console.log('--------选择省市县确认服务商信息后重新加载桔子换礼数据---------');
-          that.getRecommendPage(obj);
-        }else{
-          wx.showToast({
-            title: '当前位置不存在服务商',
-            icon: 'none'
-          })
-        }
+        that.setData({
+          providerId: res.id,
+          pageNo: 1
+        });
+        console.log('--------选择省市县确认服务商信息后重新加载首页数据---------');
+        var obj = {
+          providerId: res.id,
+          type: 'PRODUCT',
+          sortField: 'IDX',
+          sortOrder: 'ASC',
+          pageNo: that.data.pageNo,
+          pageSize: that.data.pageSize,
+          longitude: wx.getStorageSync('curLongitude'),
+          latitude: wx.getStorageSync('curLatitude')
+        };
+        that.getRecommendPage(obj);
       },
       error: err => console.log(err),
       complete: () => wx.hideToast()
@@ -80,8 +73,7 @@ Page({
               });
               //根据位置查询附近精选
               var obj = {
-                // providerId: res1.id,
-                providerId: '1215422531428605',
+                providerId: res1.id,
                 type: 'PRODUCT',
                 sortField: 'IDX',
                 sortOrder: 'ASC',
@@ -235,14 +227,16 @@ Page({
       }
     }
     this.setData({
-      sortIndex: sortIndex
+      sortIndex: sortIndex,
+      pageNo: 1
     });
     console.log(this.data.sortIndex);
     let obj = {};
     switch (sortIndex) {
       case '1':
         obj = {
-          providerId: '1215422531428605',
+          // providerId: '1215422531428605',
+          providerId: this.data.providerId,
           type: 'PRODUCT',
           sortField: 'IDX',
           sortOrder: 'ASC',
@@ -254,7 +248,7 @@ Page({
         break;
       case '2':
         obj = {
-          providerId: '1215422531428605',
+          providerId: this.data.providerId,
           type: 'PRODUCT',
           sortField: 'IDX',
           sortOrder: 'ASC',
@@ -266,7 +260,7 @@ Page({
         break;
       case '3':
         obj = {
-          providerId: '1215422531428605',
+          providerId: this.data.providerId,
           type: 'PRODUCT',
           sortField: 'IDX',
           sortOrder: 'ASC',
@@ -278,7 +272,7 @@ Page({
         break;
       case '4':
         obj = {
-          providerId: '1215422531428605',
+          providerId: this.data.providerId,
           type: 'PRODUCT',
           sortField: 'PRICE',
           sortOrder: this.data.sortArray[Number(sortIndex) - 1],
@@ -290,7 +284,7 @@ Page({
         break;
       case '5':
         obj = {
-          providerId: '1215422531428605',
+          providerId: this.data.providerId,
           type: 'PRODUCT',
           sortField: 'DISTANCE',
           sortOrder: this.data.sortArray[Number(sortIndex) - 1],
@@ -302,7 +296,7 @@ Page({
         break;
       case '6':
         obj = {
-          providerId: '1215422531428605',
+          providerId: this.data.providerId,
           type: 'PRODUCT',
           sortField: 'SOLDNUM',
           sortOrder: 'ASC',
@@ -342,17 +336,7 @@ Page({
     wx.setNavigationBarTitle({
       title: ''
     });
-    let obj = {
-      providerId: '1215422531428605',
-      type: 'PRODUCT',
-      sortField: 'IDX',
-      sortOrder: 'ASC',
-      pageNo: this.pageNo,
-      pageSize: this.pageSize,
-      longitude: '116.470959',
-      latitude: '39.992368'
-    };
-    this.getRecommendPage(obj);
+    this.getCurLocation(); //用户位置+位置名称
   },
 
   /**
@@ -365,19 +349,117 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
+
   onShow: function () {
-    if (this.data.locationName) {
+    var that = this;
+    if (this.data.locationName) { //已经定位了且位置名称存在
       if (this.data.locationName != wx.getStorageSync('locationName')) {
-        //如果城市更换了 需要重新加载页面
+        //如果城市更换了 需要通过用户选择的城市编号code重新加载页面
+        console.log('用户更换城市为：' + wx.getStorageSync('locationName'));
         this.setData({
           locationCode: wx.getStorageSync('locationCode'),
           locationName: wx.getStorageSync('locationName')
         });
-        this.getDataByCity();
-      }
+        this.getDataByCity(); //首页数据已经更新
+        //如果用getDataByCity更新了数据 就不能用getSelectProviderByLoc再获取 否则数据会覆盖
+      } else { //如果没有更换城市
+        var curLatitude = wx.getStorageSync('curLatitude'),
+          curLongitude = wx.getStorageSync('curLongitude');
+        console.log();
+        if (curLatitude && curLongitude) { //已经定位了并且有经纬度的情况
+          var obj = {
+            latitude: curLatitude,
+            longitude: curLongitude
+          }
+          //获取用户当地服务商信息
+          service.getSelectProviderByLoc(obj).subscribe({
+            next: res1 => {
+              console.log('----------服务商信息---------');
+              console.log(res1);
+              if (res1.id) { //如果存在服务商
+                that.setData({
+                  providerId: res1.id,
+                  pageNo: 1
+                });
+                //根据位置查询附近精选
+                var obj = {
+                  // providerId: res1.id,
+                  providerId: that.data.providerId,
+                  type: 'PRODUCT',
+                  sortField: 'IDX',
+                  sortOrder: 'ASC',
+                  pageNo: that.data.pageNo,
+                  pageSize: that.data.pageSize,
+                  longitude: wx.getStorageSync('curLongitude'),
+                  latitude: wx.getStorageSync('curLatitude')
+                };
+                that.getRecommendPage(obj);
+              } else { //如果不存在服务商
+                wx.showToast({
+                  title: '当前位置不存在服务商',
+                  icon: 'none'
+                })
+              }
+            }
+          });
+        } else { //如果一开始没有获取到经纬度
+          console.log('一开始没有获取到经纬度');
+          clearInterval(that.userLocationInterval);
+          this.userLocationInterval = setInterval(function () {
+            //判断是否有获取定位的权限
+            wx.getSetting({
+              success: (res) => {
+                console.log('是否具有定位权限：' + res.authSetting['scope.userLocation']);
+                if (res.authSetting['scope.userLocation']) { //如果已经授权
+                  wx.getLocation({
+                    type: 'wgs84',
+                    success: function (res) {
+                      wx.setStorageSync('curLatitude', res.latitude);
+                      wx.setStorageSync('curLongitude', res.longitude);
+                      console.log('--------位置调用成功--------');
 
+                      //获取用户当前城市信息
+                      service.getCurrentLoc({
+                        latitude: res.latitude,
+                        longitude: res.longitude
+                      }).subscribe({
+                        next: res => {
+                          console.log('---------获取用户当前城市信息-------');
+                          console.log(res);
+                          wx.setStorageSync('locationName', res.parentLocation.locationName.replace('市', ''));
+                          wx.setStorageSync('locationCode', res.parentLocation.locationCode);
+                          that.setData({
+                            locationName: res.parentLocation.locationName.replace('市', ''),
+                            locationCode: res.parentLocation.locationCode
+                          });
+                        }
+                      });
+                      //根据位置查询附近精选
+                      var obj = {
+                        // providerId: res1.id,
+                        providerId: that.data.providerId,
+                        type: 'PRODUCT',
+                        sortField: 'IDX',
+                        sortOrder: 'ASC',
+                        pageNo: that.data.pageNo,
+                        pageSize: that.data.pageSize,
+                        longitude: wx.getStorageSync('curLongitude'),
+                        latitude: wx.getStorageSync('curLatitude')
+                      };
+                      that.getRecommendPage(obj);
+                    }
+                  });
+                  clearInterval(that.userLocationInterval);
+                }
+              }
+            });
+          }, 1000);
+        }
+      }
+      //如果相同的位置名称 首页数据不用更新
+    } else { //不存在 还没有进行定位 => 没有根据定位获取城市信息
+      //
     }
-    this.getCurLocation(); //用户位置
 
   },
 
@@ -399,14 +481,53 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function() {
-    this.getCurLocation();
+    let that = this;
+    this.setData({
+      pageNo: 1
+    });
+    //根据位置查询附近精选
+    var obj = {
+      // providerId: res1.id,
+      providerId: that.data.providerId,
+      type: 'PRODUCT',
+      sortField: 'IDX',
+      sortOrder: 'ASC',
+      pageNo: that.data.pageNo,
+      pageSize: that.data.pageSize,
+      longitude: wx.getStorageSync('curLongitude'),
+      latitude: wx.getStorageSync('curLatitude')
+    };
+    this.getRecommendPage(obj);
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function() {
+    let p = ++this.data.pageNo;
+    console.log('page:' + p);
 
+    let obj = {
+      providerId: this.data.providerId,
+      type: 'PRODUCT',
+      sortField: 'IDX',
+      sortOrder: 'ASC',
+      pageNo: p,
+      pageSize: this.data.pageSize,
+      longitude: '116.470959',
+      latitude: '39.992368'
+    };
+
+    service.getRecommendPage(obj).subscribe({
+      next: res => {
+        console.log(res);
+        this.setData({
+          recommendPage: this.data.recommendPage.concat(res.list)
+        });
+      },
+      error: err => console.log(err),
+      complete: () => wx.hideToast()
+    });
   },
 
   /**

@@ -324,3 +324,9 @@ color: #E83221;}
 color: #999999;margin-left: 20rpx;text-decoration:line-through;}
 .count{font-size: 22rpx;
 color: #999999;}
+.xIcon{
+  transition: all .3 ease;
+}
+.rotate{
+  transform: rotate(180deg);
+}

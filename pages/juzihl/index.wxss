@@ -123,3 +123,10 @@
   align-items: center;
   font-size: 28rpx;
 }
+
+.xIcon{
+  transition: all .3 ease;
+}
+.rotate{
+  transform: rotate(180deg);
+}

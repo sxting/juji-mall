@@ -220,7 +220,7 @@ Page({
   toggleLabel: function(event) {
     let sortIndex = event.currentTarget.dataset['label'];
     console.log(sortIndex);
-    if (sortIndex != 1 && sortIndex != 2 && sortIndex != 3 && sortIndex != 6) {
+    if (sortIndex != 1 && sortIndex != 2 && sortIndex != 3 && sortIndex != 7) {
       if (this.data.sortIndex == sortIndex) { //两次相同 切换排序规则
         let arr = this.data.sortArray;
         console.log(arr);
@@ -272,7 +272,7 @@ Page({
         obj = {
           providerId: this.data.providerId,
           type: 'PRODUCT',
-          sortField: 'IDX',
+          sortField: 'CHEAP',
           sortOrder: 'ASC',
           pageNo: this.data.pageNo,
           pageSize: this.data.pageSize,
@@ -283,9 +283,9 @@ Page({
       case '4':
         obj = {
           providerId: this.data.providerId,
-          type: 'PRODUCT',
+          type: 'POINT',
           sortField: 'IDX',
-          sortOrder: 'ASC',
+          sortOrder: this.data.sortArray[Number(sortIndex) - 1],
           pageNo: this.data.pageNo,
           pageSize: this.data.pageSize,
           longitude: longitude,

@@ -7,6 +7,7 @@ Page({
     orderId:'',
     orderInfo: {},
     amount: 0,
+    preOrderStr:'',
     constant: constant,
     voucherInfo:{}
   },
@@ -53,6 +54,7 @@ Page({
     service.orderInfo({orderId: orderId}).subscribe({
       next: res => {
         this.setData({orderInfo: res});
+        this.setData({preOrderStr:res.preOrderStr});
         if(res.status=='PAID'){
           barcode('barcode', res.vouchers[0].voucherCode, 680, 200);
           this.getListVoucher(res.vouchers[0].voucherCode);
@@ -76,12 +78,25 @@ Page({
     })
   },
   toPay: function() {
-    var payInfo = this.data.payInfo;
-    if (payInfo.wxpay == 0) {
-
-    } else {
-
-    }
+    var payInfo = JSON.parse(this.data.preOrderStr);
+    wx.requestPayment({
+      timeStamp: payInfo.timeStamp,
+      nonceStr: payInfo.nonceStr,
+      package: payInfo.package,
+      signType: payInfo.signType,
+      paySign: payInfo.paySign,
+      success(res2) {
+        this.getData(this.data.orderId);
+      },
+      fail(res2) {
+        if (res2.errMsg == 'requestPayment:fail cancel') {
+          wx.showToast({
+            title: '用户取消支付',
+            icon: 'none'
+          });
+        }
+      }
+    });
   }
 });
 

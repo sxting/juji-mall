@@ -1,6 +1,6 @@
 import { service } from '../../service';
 import { constant } from '../../utils/constant';
-import { errDialog, loading} from '../../utils/util';
+import { errDialog, loading } from '../../utils/util';
 var app = getApp();
 Page({
     data: {
@@ -19,13 +19,13 @@ Page({
     toDetail: function(e) {
         var id = e.currentTarget.dataset.id;
         var status = e.currentTarget.dataset.status;
-        wx.navigateTo({ url: "/pages/orderDetail/index?id="+id });
+        wx.navigateTo({ url: "/pages/orderDetail/index?id=" + id });
         // if(status=="CREATED"||status=="CONSUME"||status=="PAID"){}
     },
     toComment: function(e) {
         var id = e.currentTarget.dataset['id'];
         var pid = e.currentTarget.dataset['pid'];
-        wx.navigateTo({url: "/pages/comment/index?id="+id+"&pid=" + pid});
+        wx.navigateTo({ url: "/pages/comment/index?id=" + id + "&pid=" + pid });
     },
     switchTab: function(event) {
         var thisIndex = event.currentTarget.dataset['index'];
@@ -49,12 +49,25 @@ Page({
             complete: () => wx.hideToast()
         })
     },
-    toPay: function() {
-        var payInfo = this.data.payInfo;
-        if (payInfo.wxpay == 0) {
-
-        } else {
-
-        }
+    toPay: function(e) {
+        var payInfo = JSON.parse(e.currentTarget.dataset['pre']);
+        wx.requestPayment({
+            timeStamp: payInfo.timeStamp,
+            nonceStr: payInfo.nonceStr,
+            package: payInfo.package,
+            signType: payInfo.signType,
+            paySign: payInfo.paySign,
+            success(res2) {
+                wx.navigateTo({ url: "/pages/orderDetail/index?id=" + e.currentTarget.dataset['id'] });
+            },
+            fail(res2) {
+                if (res2.errMsg == 'requestPayment:fail cancel') {
+                    wx.showToast({
+                        title: '用户取消支付',
+                        icon: 'none'
+                    });
+                }
+            }
+        });
     }
 });

@@ -29,7 +29,7 @@
                 <view wx:if="{{item.status=='PAID'}}" class="left">您已成功付款，请到店展示消费码消费</view>
                 <view wx:if="{{item.status=='CREATED'}}" class="left">请在下单后5分钟内付款，超时将自动关闭</view>
                 <view wx:if="{{item.status=='CONSUME'}}" class="left">您已成功消费，老铁给个评价再走呗～</view>
-                <view wx:if="{{item.status=='CREATED'}}" class="right pay" bindtap="toPay" data-id="{{item.orderId}}">立即付款</view>
+                <view wx:if="{{item.status=='CREATED'}}" class="right pay" bindtap="toPay" data-id="{{item.orderId}}" data-pre="{{item.preOrderStr}}">立即付款</view>
                 <view wx:if="{{item.status=='CONSUME'}}" class="right" bindtap="toComment" data-id="{{item.orderId}}" data-pid="{{item.orderItemList[0].productId}}">立即评价</view>
             </view>
         </view>

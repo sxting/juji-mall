@@ -6,9 +6,9 @@ Page({
   data: {
     commentlist: [{},{},{}],
     constant:constant,
+    isShowNodata: false,
     scorelist:[]
   },
-
   getComments:function(){
     var obj = {pageNo: 1,pageSize: 50}
     service.myComment(obj).subscribe({
@@ -20,9 +20,9 @@ Page({
             res.list[i].imgIds = [];
           }
         }
-        this.setData({
-          commentlist:res.list
-        });
+        this.setData({ commentlist: res.list });
+        this.setData({ commentlist: [] });
+        this.setData({ isShowNodata: this.data.commentlist.length == 0 });
       },
       error: err => errDialog(err),
       complete: () => wx.hideToast()

@@ -1,6 +1,6 @@
 <wxs src="../../utils/numFr.wxs" module="format" />
 <view class="main">
-    <view class="item" wx:for="{{commentlist}}" wx:key="{{index}}" data-comid="{{item.id}}">
+    <view class="item" wx:for="{{commentlist}}" wx:key="{{index}}" data-comid="{{item.id}}" hidden="{{isShowNodata}}">
         <view class="nickMsg ub ub-ac">
             <image class="userImg" src="{{item.avatar}}"></image>
             <view class="nickname">{{item.nickName}}</view>
@@ -21,5 +21,9 @@
                 <view class="goodAmount">{{it.point}}桔子<text>￥{{it.price}}</text></view>
             </view>
         </view>
+    </view>
+    <view class="nodataDiv ub ub-ac ub-pc ub-ver" hidden="{{!isShowNodata}}">
+        <image class="nodataImg" src="../../images/null1.png"></image>
+        <view class="nodataTxt">评论为空~</view>
     </view>
 </view>

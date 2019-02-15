@@ -14,7 +14,7 @@ Page({
     sortIndex: 1,
     pageNo: 1,
     pageSize: 2,
-    sortArray: ['', '', '', '', 'ASC', 'ASC', ''],
+    sortArray: ['', '', '', 'ASC', 'ASC', 'ASC', ''],
     providerId:''
   },
   getDataByCity: function () {

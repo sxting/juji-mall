@@ -31,9 +31,18 @@ var formatStatus = function (status) {
   }
 }
 
+var initArr = function(len){
+    var newArr = [];
+    for(var i=0;i<len;i++){
+        newArr.push('');
+    }
+    return newArr;
+}
+
 module.exports = {
   toFix: filters.toFix,
-  formatStatus:formatStatus
+  formatStatus:formatStatus,
   toInt: filters.toInt,
-  toDis: filters.toDis
+  toDis: filters.toDis,
+  initArr: initArr
 }

@@ -95,6 +95,11 @@ service.commentOrder = (data) => {
   let apiUrl = api + '/product/comment.json';
   return http.post(apiUrl, data);
 }
+//我的评论
+service.myComment = (data) => {
+  let apiUrl = api + '/user/commentPage.json';
+  return http.get(apiUrl, data);
+}
 //订单退款
 service.refund = (data) => {
   let apiUrl = api + '/order/refund.json';

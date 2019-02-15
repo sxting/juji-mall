@@ -1,23 +1,26 @@
+<wxs src="../../utils/numFr.wxs" module="format" />
 <view class="main">
   <view class="item" wx:for="{{commentlist}}" wx:key="{{index}}" data-comid="{{item.id}}" bindtap="toCommentDetail">
     <view class="nickMsg ub ub-ac">
-      <image class="userImg" src="../../images/headimg.png"></image>
-      <view class="nickname">小仙女</view>
+      <image class="userImg" src="{{item.avatar}}"></image>
+      <view class="nickname">{{item.nickName}}</view>
       <view class="ub ub-f1 ub-ac ml10">
-        <image class="icon_ping" src="../../images/icon_ped.png"></image>
+        <image class="icon_ping" wx:for="{{format.initArr(item.score)}}" src="../../images/icon_ped.png" wx:key="unique"></image>
       </view>
-      <view class="times">2018-01-01</view>
+      <view class="times">{{item.dateCreated}}</view>
     </view>
-    <view class="content">评价内容评价内容评价内容评价内容评价内容评价内容</view>
-    <view class="imglist">
-      <image src="../../images/mendianimg.png"></image>
+    <view class="content">{{item.content}}</view>
+
+    <view class="imglist" wx:if="{{item.imgIds.length>0}}">
+       <image wx:for="{{item.imgIds}}" wx:for-item='it' wx:key="unique" src="{{constant.basePicUrl}}{{it}}{{constant.basePicFix1}}"></image>
     </view>
-      <view class="p10 ub ub-ac info mt10">
-          <image class="goodImg udb" src="../../images/mendianimg.png"></image>
+
+      <view class="p10 ub ub-ac info mt10" wx:for="{{item.orders.orderItemList}}" wx:for-item='it' wx:key="unique">
+          <image class="goodImg udb" src="{{constant.basePicUrl}}{{it.picId}}{{constant.basePicFix1}}"></image>
           <view class="ub-f1 goodMsg">
-              <view class="goodTit">兰溪小馆团购套餐</view>
-              <view class="storeName">兰溪小馆香山店</view>
-              <view class="goodAmount">20桔子<text>￥88.00</text></view>
+              <view class="goodTit">{{it.productName}}</view>
+              <view class="storeName">{{it.merchantName}}</view>
+              <view class="goodAmount">{{it.point}}桔子<text>￥{{it.price}}</text></view>
           </view>
       </view>
   </view>

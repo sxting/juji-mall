@@ -42,6 +42,9 @@ Page({
     }
 
   },
+  toMyOrder: function () {
+    wx.redirectTo({ url: '/pages/orderlist/index?index=1&status=CREATED' });
+  },
   getPointBalance: function() {
 
     service.getPointBalance().subscribe({
@@ -162,7 +165,9 @@ Page({
                       wx.showToast({
                         title: '用户取消支付',
                         icon: 'none'
-                      })
+                      });
+                      //跳转到待支付列表
+                      that.toMyOrder();
                     }
                   }
                 });
@@ -289,7 +294,9 @@ Page({
                     wx.showToast({
                       title: '用户取消支付',
                       icon: 'none'
-                    })
+                    });
+                    //跳转到待支付列表
+                    that.toMyOrder();
                   }
 
                 }

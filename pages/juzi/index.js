@@ -16,10 +16,11 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    
+    wx.setNavigationBarTitle({
+      title: ''
+    });
     this.getInfo();
     //查询新用户见面礼
-
   },
   toJuzihl: function () {
     wx.navigateTo({

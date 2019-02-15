@@ -164,7 +164,7 @@
       <!-- 如果需要人民币 并且 桔子充足 -->
       <view class="xiadan" bindtap="toCreateOrder" wx:if="{{productInfo.price>0&&pointBalance>0}}">
         <view>
-          <view style="font-size: 28rpx;line-height:34rpx;">{{productInfo.point}}桔子+{{filter.toFix(productInfo.price)}}元</view>
+          <view style="font-size: 28rpx;line-height:34rpx;width:180rpx;">{{productInfo.point}}桔子+{{filter.toFix(productInfo.price)}}元</view>
           <view style="font-size: 18rpx;line-height:22rpx;">立即兑换</view>
         </view>
       </view>

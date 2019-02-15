@@ -4,18 +4,12 @@
       <image class="userImg" src="../../images/headimg.png"></image>
       <view class="nickname">小仙女</view>
       <view class="ub ub-f1 ub-ac ml10">
-        <image class="icon_ping" src="../../images/icon_ping.png"></image>
-        <image class="icon_ping" src="../../images/icon_ping.png"></image>
-        <image class="icon_ping" src="../../images/icon_ping.png"></image>
+        <image class="icon_ping" src="../../images/icon_ped.png"></image>
       </view>
-      <view class="times">2018-01-01 01:00:00</view>
+      <view class="times">2018-01-01</view>
     </view>
     <view class="content">评价内容评价内容评价内容评价内容评价内容评价内容</view>
     <view class="imglist">
-      <image src="../../images/mendianimg.png"></image>
-      <image src="../../images/mendianimg.png"></image>
-      <image src="../../images/mendianimg.png"></image>
-      <image src="../../images/mendianimg.png"></image>
       <image src="../../images/mendianimg.png"></image>
     </view>
       <view class="p10 ub ub-ac info mt10">

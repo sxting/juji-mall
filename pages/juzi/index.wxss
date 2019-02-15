@@ -111,11 +111,13 @@
   align-items: center;
   width: 130rpx;
   height: 50rpx;
+  font-size: 28rpx;
+  padding:0;
   box-sizing: border-box;
   border: 2rpx solid #ce463f;
   border-radius: 25px;
-  font-size: 28rpx;
   color: #ce463f;
+  background: transparent;
 }
 
 .normalBtn {

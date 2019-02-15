@@ -121,6 +121,24 @@ service.signIn = (data) => {
   return http.get(apiUrl, data);
 }
 
+service.pointDetails = (data) => {
+  let apiUrl = api + '/point/pointDetails.json';//查询桔子明细
+  return http.get(apiUrl, data);
+}
+
+service.isNewer = (data) => {
+  let apiUrl = api + '/point/isNewer.json';//是否可以新用户见面礼
+  return http.get(apiUrl, data);
+}
+
+service.newerGet = (data) => {
+  let apiUrl = api + '/point/newerGet.json';//领取新用户见面礼
+  return http.get(apiUrl, data);
+}
+service.share = (data) => {
+  let apiUrl = api + '/point/share.json';//用户分享
+  return http.get(apiUrl, data);
+}  
 // --------------------------------------------usr-----------------------------------
 /*获取会员信息*/
 service.userInfo = (data) => {

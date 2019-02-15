@@ -2,7 +2,8 @@
   <view class="toper">
     <view class="userInfo ub ub-ac ub-pj">
       <view class="ub ub-ac">
-        <image style="width:100rpx;height:100rpx;margin-right:30rpx;border-radius:50%;" src="../../images/mendianimg.png"></image>
+        <image wx:if="{{avatar}}" src="{{avatar}}" style="width:100rpx;height:100rpx;margin-right:30rpx;border-radius:50%;"></image>
+        <image wx:else src="../../images/user.png" style="width:100rpx;height:100rpx;margin-right:30rpx;border-radius:50%;"></image>
         <view>
           <view style="font-size:28rpx;color:#333333;">当前桔子</view>
           <view class="ub ub-ac" bindtap="toMyTrade">
@@ -95,7 +96,7 @@
           <view style="margin-top:10rpx;font-size: 24rpx;color: #999999;">分享到不同群每天最多得{{currentPointObj.shareExchangeTask.dayNum}}个桔子</view>
         </view>
       </view>
-      <view class="taskBtn">赚桔子</view>
+      <button class="taskBtn" bindtap="toJuzihl">赚桔子</button>
     </view>
     <view class="taskItem ub ub-ac ub-pj">
       <view class="ub ub-ac ub-aj">
@@ -106,7 +107,7 @@
           <view style="margin-top:10rpx;font-size: 24rpx;color: #999999;">分享到不同群每天最多得{{currentPointObj.shareProductTask.dayNum}}个桔子</view>
         </view>
       </view>
-      <view class="taskBtn">赚桔子</view>
+      <button class="taskBtn" bindtap="toIndex">赚桔子</button>
     </view>
 
     <view class="taskItem ub ub-ac ub-pj">
@@ -118,7 +119,7 @@
           <view style="margin-top:10rpx;font-size: 24rpx;color: #999999;">分享到不同群每天最多得{{currentPointObj.shareProgramTask.dayNum}}个桔子</view>
         </view>
       </view>
-      <view class="taskBtn">赚桔子</view>
+      <button class="taskBtn" open-type="share">赚桔子</button>
     </view>
 
     <view class="taskItem ub ub-ac ub-pj">
@@ -130,7 +131,7 @@
           <view style="margin-top:10rpx;font-size: 24rpx;color: #999999;">消费后评价每天最多得{{currentPointObj.commentTask.dayNum}}个桔子</view>
         </view>
       </view>
-      <view class="taskBtn">赚桔子</view>
+      <button class="taskBtn" bindtap="toMyOrder">赚桔子</button>
     </view>
 
   </view>

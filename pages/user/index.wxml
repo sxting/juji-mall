@@ -61,7 +61,7 @@
 
   <view style="margin-top:20rpx;" class="userBox">
     <view class="ub ub-ac ub-pj" style="padding:30rpx;" bindtap="toPage" data-page="/pages/myComment/index">
-      <view class="itemTxt">评价</view>
+      <view class="itemTxt">我的评价</view>
       <image src="../../images/arrow-right.png" style="width:12rpx;height:22rpx;"></image>
     </view>
     <view style="padding:0 30rpx;">

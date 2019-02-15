@@ -8,6 +8,7 @@ import {
 import {
   service
 } from '../../service';
+var app = getApp();
 Page({
   data: {
     curCity: "",
@@ -30,10 +31,11 @@ Page({
     })
   },
   selectCity: function(e) {
-    var locationName = e.currentTarget.dataset['name'];
+    var locationName = e.currentTarget.dataset['name'].replace('市', '');
     var locationCode = e.currentTarget.dataset['code'];
-    wx.setStorageSync('locationName', locationName.replace('市',''));
+    wx.setStorageSync('locationName', locationName);
     wx.setStorageSync('locationCode', locationCode);
+    app.globalData.locationName = locationName;
     wx.navigateBack({
       delta: 1
     });

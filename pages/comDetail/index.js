@@ -22,6 +22,9 @@ Page({
     note:[]
   },
   onLoad: function(option) {
+    wx.setNavigationBarTitle({
+      title: '商品详情'
+    });
     console.log(option);
     if (!option.id) {
       wx.showToast({

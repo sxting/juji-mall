@@ -16,8 +16,12 @@ Page({
       var page = e.currentTarget.dataset.page;
       wx.navigateTo({url: page});
   },
+  onLoad:function(){
+    wx.setNavigationBarTitle({
+      title: ''
+    });
+  },
   onShow: function () {
-    wx.setNavigationBarTitle({ title: '我的' });
     this.getInfo();
   },
 

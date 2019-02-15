@@ -115,7 +115,8 @@ Page({
               console.log(res1);
               if (res1.id) { //如果存在服务商
                 that.setData({
-                  providerId: res1.id
+                  providerId: res1.id,
+                  pageNo: 1
                 });
                 that.getIndexData();
                 //根据位置查询附近精选

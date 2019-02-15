@@ -14,7 +14,7 @@ Page({
     sortIndex: 1,
     pageNo: 1,
     pageSize: 2,
-    sortArray: ['', '', '', 'ASC', 'ASC', ''],
+    sortArray: ['', '', '', '', 'ASC', 'ASC', ''],
     providerId:''
   },
   getDataByCity: function () {
@@ -208,6 +208,15 @@ Page({
       }
     })
   },
+  //跳转到商品详情
+  toComDetail: function (e) {
+    var id = e.currentTarget.dataset.id;
+    var storeid = e.currentTarget.dataset.storeid;
+    console.log(id);
+    wx.navigateTo({
+      url: '/pages/comDetail/index?id=' + id + '&storeid=' + storeid
+    });
+  },
   toggleLabel: function(event) {
     let sortIndex = event.currentTarget.dataset['label'];
     console.log(sortIndex);
@@ -231,6 +240,7 @@ Page({
       pageNo: 1
     });
     console.log(this.data.sortIndex);
+    let longitude = wx.getStorageSync('curLongitude'), latitude = wx.getStorageSync('curLatitude');
     let obj = {};
     switch (sortIndex) {
       case '1':
@@ -242,20 +252,20 @@ Page({
           sortOrder: 'ASC',
           pageNo: this.data.pageNo,
           pageSize: this.data.pageSize,
-          longitude: '116.470959',
-          latitude: '39.992368'
+          longitude: longitude,
+          latitude: latitude
         };
         break;
       case '2':
         obj = {
           providerId: this.data.providerId,
-          type: 'PRODUCT',
+          type: 'POINT',
           sortField: 'IDX',
           sortOrder: 'ASC',
           pageNo: this.data.pageNo,
           pageSize: this.data.pageSize,
-          longitude: '116.470959',
-          latitude: '39.992368'
+          longitude: longitude,
+          latitude: latitude
         };
         break;
       case '3':
@@ -266,11 +276,23 @@ Page({
           sortOrder: 'ASC',
           pageNo: this.data.pageNo,
           pageSize: this.data.pageSize,
-          longitude: '116.470959',
-          latitude: '39.992368'
+          longitude: longitude,
+          latitude: latitude
         };
         break;
       case '4':
+        obj = {
+          providerId: this.data.providerId,
+          type: 'PRODUCT',
+          sortField: 'IDX',
+          sortOrder: 'ASC',
+          pageNo: this.data.pageNo,
+          pageSize: this.data.pageSize,
+          longitude: longitude,
+          latitude: latitude
+        };
+        break;
+      case '5':
         obj = {
           providerId: this.data.providerId,
           type: 'PRODUCT',
@@ -278,11 +300,11 @@ Page({
           sortOrder: this.data.sortArray[Number(sortIndex) - 1],
           pageNo: this.data.pageNo,
           pageSize: this.data.pageSize,
-          longitude: '116.470959',
-          latitude: '39.992368'
+          longitude: longitude,
+          latitude: latitude
         };
         break;
-      case '5':
+      case '6':
         obj = {
           providerId: this.data.providerId,
           type: 'PRODUCT',
@@ -290,11 +312,11 @@ Page({
           sortOrder: this.data.sortArray[Number(sortIndex) - 1],
           pageNo: this.data.pageNo,
           pageSize: this.data.pageSize,
-          longitude: '116.470959',
-          latitude: '39.992368'
+          longitude: longitude,
+          latitude: latitude
         };
         break;
-      case '6':
+      case '7':
         obj = {
           providerId: this.data.providerId,
           type: 'PRODUCT',
@@ -302,8 +324,8 @@ Page({
           sortOrder: 'ASC',
           pageNo: this.data.pageNo,
           pageSize: this.data.pageSize,
-          longitude: '116.470959',
-          latitude: '39.992368'
+          longitude: longitude,
+          latitude: latitude
         };
         break;
     }

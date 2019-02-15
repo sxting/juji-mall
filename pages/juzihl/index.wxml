@@ -11,21 +11,22 @@
     <view class="subtitle" style="margin-top:10rpx;">让生活“换”然一新</view>
     <view class="labels-wrap">
       <view class="label {{sortIndex==1?'label-active':''}}" data-label="1" bindtap="toggleLabel">综合</view>
-      <view class="label {{sortIndex==2?'label-active':''}}" data-label="2" bindtap="toggleLabel">买得起</view>
-      <view class="label {{sortIndex==3?'label-active':''}}" data-label="3" bindtap="toggleLabel">桔子
-      <image src="{{sortIndex==3?'../../images/sort_top_active.png':'../../images/sort_top.png'}}" style="width:13rpx;height:18rpx;margin-left:10rpx;"></image>
-      </view>
-      <view class="label {{sortIndex==4?'label-active':''}}" data-label="4" bindtap="toggleLabel">价格
+      <view class="label {{sortIndex==2?'label-active':''}}" data-label="2" bindtap="toggleLabel">桔子换</view>
+      <view class="label {{sortIndex==3?'label-active':''}}" data-label="3" bindtap="toggleLabel">买得起</view>
+      <view class="label {{sortIndex==4?'label-active':''}}" data-label="4" bindtap="toggleLabel">桔子
       <image src="{{sortIndex==4?'../../images/sort_top_active.png':'../../images/sort_top.png'}}" style="width:13rpx;height:18rpx;margin-left:10rpx;"></image>
       </view>
-      <view class="label {{sortIndex==5?'label-active':''}}" data-label="5" bindtap="toggleLabel">距离
-      <image src="{{sortIndex==5?'../../images/sort_top_active.png':'../../images/sort_top.png'}}"  style="width:13rpx;height:18rpx;margin-left:10rpx;"></image>
+      <view class="label {{sortIndex==5?'label-active':''}}" data-label="5" bindtap="toggleLabel">价格
+      <image src="{{sortIndex==5?'../../images/sort_top_active.png':'../../images/sort_top.png'}}" style="width:13rpx;height:18rpx;margin-left:10rpx;"></image>
       </view>
-      <view class="label {{sortIndex==6?'label-active':''}}" data-label="6" bindtap="toggleLabel">销量
-      <image src="{{sortIndex==6?'../../images/label_xl_active.png':'../../images/label_xl.png'}}"  style="width:15rpx;height:16rpx;margin-left:10rpx;"></image>
+      <view class="label {{sortIndex==6?'label-active':''}}" data-label="6" bindtap="toggleLabel">距离
+      <image src="{{sortIndex==6?'../../images/sort_top_active.png':'../../images/sort_top.png'}}"  style="width:13rpx;height:18rpx;margin-left:10rpx;"></image>
+      </view>
+      <view class="label {{sortIndex==7?'label-active':''}}" data-label="7" bindtap="toggleLabel">销量
+      <image src="{{sortIndex==7?'../../images/label_xl_active.png':'../../images/label_xl.png'}}"  style="width:15rpx;height:16rpx;margin-left:10rpx;"></image>
       </view>
     </view>
-    <view class="jingxuanlist" wx:for="{{recommendPage}}" wx:key="{{index}}">
+    <view class="jingxuanlist" wx:for="{{recommendPage}}" wx:key="{{index}}" bindtap="toComDetail" data-id="{{item.productId}}" data-storeid="{{item.nearStore.id}}">
       <image style="width:100%;height:330rpx;margin-top:30rpx;" src="../../images/homeBanner.png"></image>
       <view class="dis-wrap jc-sb">
         <view class="from">{{item.providerName}}</view>

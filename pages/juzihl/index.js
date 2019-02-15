@@ -374,6 +374,12 @@ Page({
 
   onShow: function () {
     var that = this;
+    //每次进到该页面重置筛选条件
+    this.setData({
+      sortIndex: 1,
+      pageNo: 1,
+      sortArray: ['', '', '', '', 'ASC', 'ASC', ''],
+    });
     if (this.data.locationName) { //已经定位了且位置名称存在
       if (this.data.locationName != wx.getStorageSync('locationName')) {
         //如果城市更换了 需要通过用户选择的城市编号code重新加载页面

@@ -23,7 +23,7 @@ Page({
   },
   onLoad: function(option) {
     console.log(option);
-    if (!option.id || !option.storeid) {
+    if (!option.id) {
       wx.showToast({
         title: '发生错误，未找到商品id',
         icon: 'none'

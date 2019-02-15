@@ -136,9 +136,6 @@ Page({
       next: res => {
         console.log('---------分享返回--------');
         console.log(res);
-        if (res) {
-          this.currentPoint();
-        }
       },
       error: err => console.log(err),
       complete: () => wx.hideToast()

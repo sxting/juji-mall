@@ -24,9 +24,157 @@ Page({
     recommendPage: [],
     sortIndex: 1,
     pageNo: 1,
-    pageSize: 10,
+    pageSize: 2,
     sortArray: ['', 'ASC', 'ASC', ''],
     providerId: ''
+  },
+  onLoad: function (options) {
+    console.log(options);
+    wx.setNavigationBarTitle({
+      title: ''
+    });
+    // this.getPreOrder();
+    console.log('--------------index-onLoad-------------');
+    wx.getSetting({
+      success: (res) => {
+        console.log(res.authSetting['scope.userInfo']);
+        if (!res.authSetting['scope.userInfo']) {
+          wx.reLaunch({
+            url: '/pages/login/index'
+          });
+        } else { //如果已经授权
+          //判断rowData是否存在
+          if (wx.getStorageSync('rawData')) { //如果存在
+
+            wx.login({
+              success: res => {
+                console.log('code: ' + res.code);
+                console.log(constant.APPID);
+                wx.request({
+                  url: 'https://c.juniuo.com/shopping/user/login.json',
+                  method: 'GET',
+                  data: {
+                    code: res.code,
+                    appId: constant.APPID,
+                    isMock: false, //测试标记
+                    rawData: wx.getStorageSync('rawData')
+                  },
+                  header: {
+                    'content-type': 'application/json',
+                  },
+                  success: (res1) => {
+                    console.log(res1);
+                    if (res1.data.errorCode == '200') {
+                      wx.setStorageSync('token', res1.data.data.token);
+                      wx.setStorageSync('openid', res1.data.data.openId);
+                      wx.setStorageSync('userinfo', JSON.stringify(res1.data.data));
+                      this.getCurLocation(); //用户位置
+                    } else {
+                      wx.showToast({
+                        title: '登录失败，错误码:' + res1.data.errorCode + ' 返回错误: ' + res1.data.errorInfo,
+                        icon: 'none',
+                        duration: 3000
+                      })
+                    }
+                  }
+                });
+              }
+            });
+          } else { //如果不存在rowData
+            wx.showToast({
+              title: '授权之后未能获取到用户信息',
+            });
+          }
+        }
+      }
+    });
+  },
+  onShow: function () {
+    var that = this;
+    if (this.data.locationName) {//位置名称存在
+      if (this.data.locationName != wx.getStorageSync('locationName')) {
+        //如果城市更换了 需要重新加载页面
+        console.log('用户更换城市为：' + wx.getStorageSync('locationName'));
+        this.setData({
+          locationCode: wx.getStorageSync('locationCode'),
+          locationName: wx.getStorageSync('locationName')
+        });
+        this.getDataByCity();//首页数据已经更新
+      }
+      //如果相同的位置名称 首页数据不用更新
+    } else {//不存在 还没有进行定位 => 没有根据定位获取城市信息
+
+    }
+
+    /**
+     * 这里是第一次进入时候地理位置还没有授权的情况
+     */
+    var curLatitude = wx.getStorageSync('curLatitude'),
+      curLongitude = wx.getStorageSync('curLongitude');
+    console.log();
+    if (curLatitude && curLongitude) {
+      // var obj = {
+      //   latitude: curLatitude,
+      //   longitude: curLongitude
+      // }
+      // //获取用户当地服务商信息
+      // service.getSelectProviderByLoc(obj).subscribe({
+      //   next: res1 => {
+      //     console.log('----------服务商信息---------');
+      //     console.log(res1);
+      //     if (res1.id) { //如果存在服务商
+      //       that.setData({
+      //         providerId: res1.id
+      //       });
+      //       that.getMainData();
+      //     } else { //如果不存在服务商
+      //       wx.showToast({
+      //         title: '当前位置不存在服务商',
+      //         icon: 'none'
+      //       })
+      //     }
+      //   }
+      // });
+    } else { //如果一开始没有获取到经纬度
+      console.log('一开始没有获取到经纬度');
+      clearInterval(that.userLocationInterval);
+      this.userLocationInterval = setInterval(function () {
+        //判断是否有获取定位的权限
+        wx.getSetting({
+          success: (res) => {
+            console.log('是否具有定位权限：' + res.authSetting['scope.userLocation']);
+            if (res.authSetting['scope.userLocation']) { //如果已经授权
+              wx.getLocation({
+                type: 'wgs84',
+                success: function (res) {
+                  wx.setStorageSync('curLatitude', res.latitude);
+                  wx.setStorageSync('curLongitude', res.longitude);
+                  console.log('--------位置调用成功--------');
+
+                  //获取用户当前城市信息
+                  service.getCurrentLoc({
+                    latitude: res.latitude,
+                    longitude: res.longitude
+                  }).subscribe({
+                    next: res => {
+                      console.log(res);
+                      wx.setStorageSync('locationName', res.parentLocation.locationName.replace('市', ''));
+                      wx.setStorageSync('locationCode', res.parentLocation.locationCode);
+                      that.setData({
+                        locationName: res.parentLocation.locationName.replace('市', ''),
+                        locationCode: res.parentLocation.locationCode
+                      });
+                    }
+                  });
+                  that.getMainData();
+                }
+              });
+              clearInterval(that.userLocationInterval);
+            }
+          }
+        });
+      }, 1000);
+    }
   },
   //swiper滑动事件
   swiperChange: function(e) {
@@ -34,6 +182,7 @@ Page({
       nowIdx: e.detail.current
     })
   },
+  //跳转到商品详情
   toComDetail: function(e) {
     var id = e.currentTarget.dataset.id;
     var storeid = e.currentTarget.dataset.storeid;
@@ -42,7 +191,6 @@ Page({
       url: '/pages/comDetail/index?id=' + id + '&storeid=' + storeid
     });
   },
-
   //获取swiper高度
   getHeight: function(e) {
     var winWid = wx.getSystemInfoSync().windowWidth - 2 * 30; //获取当前屏幕的宽度
@@ -53,6 +201,7 @@ Page({
       swiperH: sH //设置高度
     })
   },
+  //切换筛选的升序和降序
   toggleLabel: function(event) {
     let sortIndex = event.currentTarget.dataset['label'];
     console.log(sortIndex);
@@ -129,11 +278,13 @@ Page({
     console.log(obj);
     this.getRecommendPage(obj);
   },
+  //点击更多 跳转到桔子换礼列表页
   toJuzihl: function() {
     wx.navigateTo({
       url: '../juzihl/index'
     });
   },
+  //跳转选择城市
   toCityList: function() {
     wx.navigateTo({
       url: '../citylist/index'
@@ -171,45 +322,9 @@ Page({
   },
   //下拉刷新
   onPullDownRefresh() {
-    this.getCurLocation();
-    // service.getIndexData({
-    //   providerId: this.data.providerId
-    // }).subscribe({
-    //   next: res => {
-    //     console.log(res);
-    //     this.setData({
-    //       slideShowList: res.slideShowList,
-    //       pointProductList: res.pointProductList
-    //     });
-
-    //     let obj = {
-    //       providerId: '1215422531428605',
-    //       type: 'PRODUCT',
-    //       sortField: 'IDX',
-    //       sortOrder: 'ASC',
-    //       pageNo: 1,
-    //       pageSize: this.data.pageSize,
-    //       longitude: '116.470959',
-    //       latitude: '39.992368'
-    //     };
-
-    //     service.getRecommendPage(obj).subscribe({
-    //       next: res => {
-    //         console.log(res);
-    //         this.setData({
-    //           recommendPage: res.list
-    //         });
-    //         wx.stopPullDownRefresh();
-    //       },
-    //       error: err => console.log(err),
-    //       complete: () => wx.hideToast()
-    //     });
-
-    //   },
-    //   error: err => console.log(err),
-    //   complete: () => wx.hideToast()
-    // });
+    this.getMainData();
   },
+  //获取位置的经纬度，然后根据经纬度获取用户所在城市名称和编号
   getCurLocation: function() {
     var that = this;
     wx.getLocation({
@@ -218,45 +333,12 @@ Page({
         wx.setStorageSync('curLatitude', res.latitude);
         wx.setStorageSync('curLongitude', res.longitude);
         console.log('--------位置调用成功--------');
-        var obj = {
+
+        //获取用户当前城市信息
+        service.getCurrentLoc({
           latitude: res.latitude,
           longitude: res.longitude
-        }
-        //获取用户当地服务商信息
-        service.getSelectProviderByLoc(obj).subscribe({
-          next: res1 => {
-            console.log('----------服务商信息---------');
-            console.log(res1);
-            if (res1.id) { //如果存在服务商
-              that.setData({
-                providerId: res1.id
-              });
-              //必须有providerId，才能获取首页数据
-              that.getIndexData();
-              //根据位置查询附近精选
-              var obj = {
-                // providerId: res1.id,
-                providerId: '1215422531428605',
-                type: 'PRODUCT',
-                sortField: 'IDX',
-                sortOrder: 'ASC',
-                pageNo: that.data.pageNo,
-                pageSize: that.data.pageSize,
-                longitude: res.longitude,
-                latitude: res.latitude
-              };
-              that.getRecommendPage(obj);
-            } else { //如果不存在服务商
-              wx.showToast({
-                title: '当前位置不存在服务商',
-                icon: 'none'
-              })
-            }
-
-          }
-        });
-        //获取用户当前城市信息
-        service.getCurrentLoc(obj).subscribe({
+        }).subscribe({
           next: res => {
             console.log(res);
             if (res.locationType != 'CITY') {
@@ -371,31 +453,7 @@ Page({
       }
     })
   },
-  getPreOrder: function() {
-    var obj = {
-      openid: wx.getStorageSync('openid')
-    };
-    service.testPreOrder(obj).subscribe({
-      next: res => {
-        console.log(res);
-        wx.requestPayment({
-          timeStamp: res.timeStamp,
-          nonceStr: res.nonceStr,
-          package: res.package,
-          signType: res.signType,
-          paySign: res.paySign,
-          success(res) {
-            // alert('支付成功');
-          },
-          fail(res) {
-            // alert('支付失败');
-          }
-        })
-      },
-      error: err => console.log(err),
-      complete: () => wx.hideToast()
-    });
-  },
+  //根据服务商id（providerId）获取首页轮播图地址和桔子换礼的推荐
   getIndexData: function() {
     service.getIndexData({
       // providerId: this.data.providerId
@@ -412,6 +470,7 @@ Page({
       complete: () => wx.hideToast()
     });
   },
+  //获取所有商品，以分页列表形式展示
   getRecommendPage: function(obj) {
     console.log(obj);
     service.getRecommendPage(obj).subscribe({
@@ -425,6 +484,7 @@ Page({
       complete: () => wx.hideToast()
     });
   },
+  //已知省市代码，获取该地点的服务商信息，然后更新首页数据
   getDataByCity: function() {
     var that = this;
     var obj = {
@@ -442,86 +502,41 @@ Page({
         });
         console.log('--------选择省市县确认服务商信息后重新加载首页数据---------');
         that.getIndexData();
+        var obj = {
+          // providerId: res1.id,
+          providerId: '1215422531428605',
+          type: 'PRODUCT',
+          sortField: 'IDX',
+          sortOrder: 'ASC',
+          pageNo: that.data.pageNo,
+          pageSize: that.data.pageSize,
+          longitude: wx.setStorageSync('curLongitude'),
+          latitude: wx.setStorageSync('curLatitude')
+        };
+        that.getRecommendPage(obj);
       },
       error: err => console.log(err),
       complete: () => wx.hideToast()
     });
   },
-  onShow: function() {
-    if (this.data.locationName) {
-      if (this.data.locationName != wx.getStorageSync('locationName')) {
-        //如果城市更换了 需要重新加载页面
-        this.setData({
-          locationCode: wx.getStorageSync('locationCode'),
-          locationName: wx.getStorageSync('locationName')
-        });
-        this.getDataByCity();
-      }
-
-    }
-    wx.getSetting({
-      success: (res) => {
-        console.log(res.authSetting['scope.userInfo']);
-        if (!res.authSetting['scope.userInfo']) {
-          wx.reLaunch({
-            url: '/pages/login/index'
-          });
-        } else { //如果已经授权
-          //判断rowData是否存在
-          if (wx.getStorageSync('rawData')) { //如果存在
-
-            wx.login({
-              success: res => {
-                console.log('code: ' + res.code);
-                console.log(constant.APPID);
-                wx.request({
-                  url: 'https://c.juniuo.com/shopping/user/login.json',
-                  method: 'GET',
-                  data: {
-                    code: res.code,
-                    appId: constant.APPID,
-                    isMock: false, //测试标记
-                    rawData: wx.getStorageSync('rawData')
-                  },
-                  header: {
-                    'content-type': 'application/json',
-                  },
-                  success: (res1) => {
-                    console.log(res1);
-                    if (res1.data.errorCode == '200') {
-                      wx.setStorageSync('token', res1.data.data.token);
-                      wx.setStorageSync('openid', res1.data.data.openId);
-                      wx.setStorageSync('userinfo', JSON.stringify(res1.data.data));
-                      this.getCurLocation(); //用户位置
-
-
-                    } else {
-                      wx.showToast({
-                        title: '登录失败，错误码:' + res1.data.errorCode + ' 返回错误: ' + res1.data.errorInfo,
-                        icon: 'none',
-                        duration: 3000
-                      })
-                    }
-                  }
-                });
-              }
-            });
-          } else { //如果不存在rowData
-            wx.showToast({
-              title: '授权之后未能获取到用户信息',
-            });
-          }
-        }
-      }
-    });
-
-  },
-  onLoad: function(options) {
-    console.log(options);
-    wx.setNavigationBarTitle({
-      title: ''
-    });
-    // this.getPreOrder();
-    console.log('--------------index-onLoad-------------');
+  //已知服务商id 的情况下获取首页 + 普通商品列表数据
+  getMainData: function() {
+    let that = this;
+    //必须有providerId，才能获取首页数据
+    this.getIndexData();
+    //根据位置查询附近精选
+    var obj = {
+      // providerId: res1.id,
+      providerId: that.data.providerId,
+      type: 'PRODUCT',
+      sortField: 'IDX',
+      sortOrder: 'ASC',
+      pageNo: that.data.pageNo,
+      pageSize: that.data.pageSize,
+      longitude: wx.getStorageSync('curLongitude'),
+      latitude: wx.getStorageSync('curLatitude')
+    };
+    this.getRecommendPage(obj);
   }
+  
 })

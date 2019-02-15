@@ -153,7 +153,7 @@ Page({
     onLoad: function(options) {
         new app.ToastPannel();
         wx.setNavigationBarTitle({ title: '发表评价' });
-        this.setData({ orderId: options.orderId });
+        this.setData({ orderId: options.id,productId:options.pid });
         if(options.page=='trade'){
             this.setData({lastPage:'trade'})
         }

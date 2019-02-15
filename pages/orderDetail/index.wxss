@@ -1,13 +1,14 @@
 page{box-sizing:border-box;height:100%;background-color:#fbfbfb}
-.orderInfo1{background-color:#fff;position:relative;overflow:hidden;margin-bottom:20rpx;}
+.orderInfo1{background-color:#fff;position:relative;overflow:hidden;margin-bottom:20rpx;padding-bottom: 0!important}
 .orderInfo1 .info{padding:20rpx;background-color:#fbfbfb}
 .orderInfo1 .total{font-size:24rpx;color:#333;height:72rpx;line-height:72rpx;padding-right:30rpx}
 .goodImg{width:180rpx;height:180rpx;border-radius:8rpx;border:1rpx #eee solid;}
-.goodMsg{margin-left:20rpx;}
+.goodMsg{margin-left:20rpx;position: relative;}
 .goodTit{font-size:30rpx;}
 .storeName{font-size:24rpx;margin-top:10rpx;color:#999;}
-.goodAmount{font-size:30rpx;margin-top:48rpx;color:#333;}
-/*.goodAmount text{margin-left:10rpx;font-size:24rpx;color:#666;text-decoration:line-through}*/
+.goodAmount{font-size:30rpx;margin-top:48rpx;color:#E83221;}
+.goodAmount text{margin-left:10rpx;font-size:24rpx;color:#999;text-decoration:line-through}
+.goodMsg .num{position: absolute;bottom: 0rpx;right: 10rpx;color: #999;font-size: 22rpx;}
 .ctrl{height:88rpx;background-color:#fff;margin-top:20rpx;}
 .ctrl .status{font-size:28rpx;color:#333;}
 .ctrl .txt{font-size:24rpx;color:#999;}
@@ -21,6 +22,11 @@ page{box-sizing:border-box;height:100%;background-color:#fbfbfb}
 .orderInfo2 .udb{width:520rpx;height:188rpx;margin: 0 auto;}
 .orderInfo2 .div{width: 520rpx;margin: 0 auto;}
 .orderInfo2 .txt{font-size: 22rpx;color: #999999;line-height: 72rpx;}
+
+.tkDiv{height:96rpx;background-color: #fff;}
+.tkDiv .udb{width: 28rpx;height: 28rpx;margin-right: 10rpx;}
+.tkDiv .txt{font-size: 24rpx;color: #999999;}
+.tkDiv .btn{width: 86rpx;height: 40rpx;font-size: 20rpx;color: #FCBF0A;border: 2rpx solid #FCBF0A;border-radius: 8rpx;}
 
 .orderInfo3{background-color:#fff;padding-bottom:20rpx;padding-top: 10rpx;}
 .orderInfo3 .tit{line-height:50rpx;color:#333;font-size:28rpx;}

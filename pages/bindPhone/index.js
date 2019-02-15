@@ -7,14 +7,15 @@ Page({
         phone: "",
         timer: null,
         showTime: false,
+        isHavePhone:false,
         count: 60,
         authCode: "",
         indexReady:false
     },
     dataChange1: function(e) {
         this.data.phone = e.detail.value;
+        this.setData({isHavePhone:this.data.phone!=""&&this.data.phone.length==11});
         if(this.data.phone!=""&&this.data.authCode!=""){
-            console.log("111");
             this.setData({indexReady:true});
         }else{
             this.setData({indexReady:false});
@@ -23,7 +24,6 @@ Page({
     dataChange2: function(e) {
         this.data.authCode = e.detail.value;
         if(this.data.phone!=""&&this.data.authCode!=""){
-            console.log("111");
             this.setData({indexReady:true});
         }else{
             this.setData({indexReady:false});
@@ -78,11 +78,11 @@ Page({
         })
     },
     getUserPhoneNumber: function(e) {
-        console.log(JSON.stringify(e.detail));
         let data = {encryptData: e.detail.encryptedData,iv: e.detail.iv}
         service.decodeUserPhone(data).subscribe({
             next: res => {
                 this.setData({phone: res.phoneNumber});
+                this.setData({isHavePhone:this.data.phone!=""&&this.data.phone.length==11});
             },
             error: err => errDialog(err),
             complete: () => wx.hideToast()

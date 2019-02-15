@@ -6,6 +6,7 @@ Page({
     data: {
         tablist: [{ name: '全部', status: 'ALL' }, { name: '待付款', status: 'CREATED' }, { name: '待使用', status: 'PAID' }, { name: '待评价', status: 'CONSUME' }],
         curTabIndex: 0,
+        constant: constant,
         isShowNodata: false,
         orderlist: [],
         amount: 0
@@ -17,7 +18,9 @@ Page({
     },
     toDetail: function(e) {
         var id = e.currentTarget.dataset.id;
+        var status = e.currentTarget.dataset.status;
         wx.navigateTo({ url: "/pages/orderDetail/index?id="+id });
+        // if(status=="CREATED"||status=="CONSUME"||status=="PAID"){}
     },
     toComment: function(e) {
         var id = e.currentTarget.dataset.id;

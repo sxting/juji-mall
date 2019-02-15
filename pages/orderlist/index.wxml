@@ -10,17 +10,18 @@
         <view class="orderItem" wx:for="{{orderlist}}" wx:for-item="item" wx:key="unique">
             <view class="ub ub-ac ub-pj top">
                 <view class="status">{{ format.formatStatus(item.status)}}</view>
-                <view class="restTime">剩余有效期90天</view>
+                <!-- <view class="restTime" wx:if="{{item.status=='PAID'}}">有效期至{{item.vouchers}}</view> -->
             </view> 
-            <view class="ub ub-ac info" bindtap="toDetail" data-id="{{item.orderId}}" wx:for="{{item.orderItemList}}" wx:for-item='it'>
-                <image class="goodImg udb" src="../../images/mendianimg.png"></image>
+            <view class="ub ub-ac info" bindtap="toDetail" data-id="{{item.orderId}}" data-status="{{item.status}}" wx:for="{{item.orderItemList}}" wx:for-item='it' wx:key="unique">
+                <image class="goodImg udb" src="{{constant.basePicUrl}}{{it.picId}}{{constant.basePicFix1}}"></image>
                 <view class="ub-f1 goodMsg">
                     <view class="goodTit">{{it.productName}}</view>
                     <view class="storeName">{{it.merchantName}}</view>
-                    <view class="goodAmount">{{it.point}}桔子 <text wx:if="it.price!=0">({{it.price}}元)</text></view>
+                    <view class="goodAmount">{{it.point}}桔子+{{it.price}}元 <text>￥88.00</text></view>
+                    <view class="num">×{{it.num}}</view>
                 </view>
             </view>
-            <view class="tx-r total">合计：￥20.00</view>
+            <view class="tx-r total">合计：￥{{item.paidAmount}}<text wx:if="{{item.paidPoint}}">+{{item.paidPoint}}桔子</text></view>
             <view class="ctrl plr15 ub ub-ac ub-pj" hidden="{{item.status=='REFUND'||item.status=='CLOSE'}}">
                 <view wx:if="{{item.status=='PAID'}}" class="left">您已成功付款，请到店展示消费码消费</view>
                 <view wx:if="{{item.status=='CREATED'}}" class="left">请在下单后5分钟内付款，超时将自动关闭</view>

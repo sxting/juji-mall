@@ -378,7 +378,7 @@ Page({
     this.setData({
       sortIndex: 1,
       pageNo: 1,
-      sortArray: ['', '', '', '', 'ASC', 'ASC', ''],
+      sortArray: ['', '', '', 'ASC', 'ASC', 'ASC', ''],
     });
     if (this.data.locationName) { //已经定位了且位置名称存在
       if (this.data.locationName != wx.getStorageSync('locationName')) {

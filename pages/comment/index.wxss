@@ -2,7 +2,7 @@ page{box-sizing:border-box;height: 100%;background-color: #f1f1f1}
 
 .merchantInfo{height: 160rpx;background-color: #fff;padding: 20rpx 20rpx 0;}
 .merchantDiv{height:100%;background-color: #fbfbfb;padding-left: 20rpx; }
-.merchantImg{width: 120rpx;height: 120rpx;margin-right: 20rpx;}
+.merchantImg{width: 120rpx;height: 120rpx;margin-right: 20rpx;background-color: #fff;border-radius: 8rpx;}
 .merchantDiv .txt{font-size: 28rpx;color: #333;}
 .replyBox{padding: 24rpx;}
 .pingDiv{height: 100rpx;background-color: #fff;}

@@ -7,7 +7,9 @@ Page({
         pinglist1:[],
         pinglist2:['','','','',''],
         orderId: '',
+        constant:constant,
         content: '',
+        productInfo:{},
         imglist: [],
         pics: [],
         lastPage:"",
@@ -56,6 +58,20 @@ Page({
     dataChange: function(e) {
         this.data.content = e.detail.value;
     },
+    getProductInfo: function() {
+        service.getItemInfo({
+          productId: this.data.productId
+        }).subscribe({
+          next: res => {
+            console.log(res);
+            this.setData({
+              productInfo: res.product
+            });
+          },
+          error: err => console.log(err),
+          complete: () => wx.hideToast()
+        })
+    },
     submit: function() {
         if (delBlank(this.data.content) == "") {
             this.showToast("你还没填写任何评论呢~");return;
@@ -63,7 +79,7 @@ Page({
         this.setData({ "isDisbaled": true });
         service.commentOrder({
             content: this.data.content,
-            imgIds: this.data.pics,
+            imgIds: this.data.pics.join(','),
             productId:this.data.productId,
             orderId: this.data.orderId,
             score:this.data.score
@@ -104,12 +120,12 @@ Page({
     upLoadImg: function(url,len1,len2) {
         wx.showLoading({ title: '正在上传',mask:true});
         wx.uploadFile({
-            url: constant.apiUrl + '/upload/image.json',
+            url: constant.uploadUrl + '/upload/image.json',
             filePath: url,
             name: 'multipartFile',
             header: {
                 'Content-Type': 'multipart/form-data',
-                'Access-Token': wx.getStorageSync('accessToken')
+                'Access-Token': wx.getStorageSync('token')
             },
             formData: {},
             success: (res) => {
@@ -153,7 +169,10 @@ Page({
     onLoad: function(options) {
         new app.ToastPannel();
         wx.setNavigationBarTitle({ title: '发表评价' });
-        this.setData({ orderId: options.id,productId:options.pid });
+        this.setData({productId:options.pid });
+        this.setData({ orderId: options.id});
+        console.log(this.data.orderId);
+        this.getProductInfo();
         if(options.page=='trade'){
             this.setData({lastPage:'trade'})
         }

@@ -93,6 +93,16 @@ service.decodeUserPhone = (data) => {
 //订单评论
 service.commentOrder = (data) => {
   let apiUrl = api + '/product/comment.json';
+  return http.post(apiUrl, data);
+}
+//订单退款
+service.refund = (data) => {
+  let apiUrl = api + '/order/refund.json';
+  return http.get(apiUrl, data);
+}
+//查询核销码数据
+service.listVouchers = (data) => {
+  let apiUrl = api + '/voucher/listVouchers.json';
   return http.get(apiUrl, data);
 }
 

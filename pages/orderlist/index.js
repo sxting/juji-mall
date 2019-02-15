@@ -13,8 +13,8 @@ Page({
     },
     onLoad: function(options) {
         wx.setNavigationBarTitle({ title: '我的订单' });
-        this.getData(options.status);
         this.setData({ curTabIndex: options.index });
+        this.getData(options.status);
     },
     toDetail: function(e) {
         var id = e.currentTarget.dataset.id;
@@ -23,8 +23,9 @@ Page({
         // if(status=="CREATED"||status=="CONSUME"||status=="PAID"){}
     },
     toComment: function(e) {
-        var id = e.currentTarget.dataset.id;
-        wx.navigateTo({ url: "/pages/comment/index?id="+id });
+        var id = e.currentTarget.dataset['id'];
+        var pid = e.currentTarget.dataset['pid'];
+        wx.navigateTo({url: "/pages/comment/index?id="+id+"&pid=" + pid});
     },
     switchTab: function(event) {
         var thisIndex = event.currentTarget.dataset['index'];

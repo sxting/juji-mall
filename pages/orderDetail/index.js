@@ -4,28 +4,25 @@ import { constant} from '../../utils/constant';
 var app = getApp();
 Page({
   data: {
+    orderId:'',
     orderInfo: {},
     amount: 0,
     constant: constant,
-    validEndTime:''
+    voucherInfo:{}
   },
   onLoad: function(options) {
     wx.setNavigationBarTitle({title: '订单详情'});
     this.getData(options.id);
+    this.setData({orderId: options.id});
   },
   toComDetail:function(e){
     var id = e.currentTarget.dataset['id'];
-    var storeid = e.currentTarget.dataset['id'];
-    wx.navigateTo({
-      url: "/pages/comDetail/index?id=" + id+"&storeid=" + storeid
-    });
+    wx.navigateTo({url: "/pages/comDetail/index?id=" + id});
   },
   toComment: function(e) {
     var id = e.currentTarget.dataset['id'];
     var pid = e.currentTarget.dataset['pid'];
-    wx.navigateTo({
-      url: "/pages/comment/index?id=" + id+"&pid=" + pid
-    });
+    wx.navigateTo({url: "/pages/comment/index?id="+id+"&pid=" + pid});
   },
   reFund:function(){
     wx.showModal({
@@ -34,23 +31,45 @@ Page({
       showCancel:true,
       cancelColor:'#999999',
       confirmColor:'#333333',
-      success(res) {
+      success:(res) => {
         if (res.confirm) {
-          console.log('用户点击确定')
+          service.refund({orderId: this.data.orderId}).subscribe({
+            next: res => {
+                wx.showToast({
+                    title:"退款成功",
+                    icon:"success"
+                });
+            },
+            error: err => console.log(err),
+            complete: () => wx.hideToast()
+          })
         } else if (res.cancel) {
-          console.log('用户点击取消')
+          console.log('用户点击取消');
         }
       }
     })
   },
   getData: function(orderId) {
-    service.orderInfo({
-      orderId: orderId
-    }).subscribe({
+    service.orderInfo({orderId: orderId}).subscribe({
       next: res => {
         this.setData({orderInfo: res});
-        barcode('barcode', res.vouchers[0].voucherCode, 680, 200);
-        this.setData({validEndTime:res.vouchers[0].validEndTime.split(' ')[0]})
+        if(res.status=='PAID'){
+          barcode('barcode', res.vouchers[0].voucherCode, 680, 200);
+          this.getListVoucher(res.vouchers[0].voucherCode);
+        }
+      },
+      error: err => console.log(err),
+      complete: () => wx.hideToast()
+    })
+  },
+  getListVoucher(code){
+    var obj = {
+      code:code,
+      openId:wx.getStorageSync('openid')
+    }
+    service.listVouchers(obj).subscribe({
+      next: res => {
+        this.setData({voucherInfo: res[0]});
       },
       error: err => console.log(err),
       complete: () => wx.hideToast()

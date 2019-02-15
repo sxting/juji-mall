@@ -1,7 +1,7 @@
 <view class="merchantInfo">
     <view class="merchantDiv ub ub-ac">
-        <image src="../../images/mendianimg.png" class="merchantImg"></image>
-        <view class="txt">欢乐谷1日游玩</view>
+        <image src="{{constant.basePicUrl}}{{productInfo.picId}}{{constant.basePicFix1}}" class="merchantImg"></image>
+        <view class="txt">{{productInfo.productName}}</view>
     </view>
 </view>
 <view class="ub ub-ac pingDiv plr15">

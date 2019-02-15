@@ -115,7 +115,8 @@ Page({
               console.log(res1);
               if (res1.id) { //如果存在服务商
                 that.setData({
-                  providerId: res1.id
+                  providerId: res1.id,
+                  pageNo: 1
                 });
                 that.getIndexData();
                 //根据位置查询附近精选
@@ -582,7 +583,7 @@ Page({
         console.log('--------选择省市县确认服务商信息后重新加载首页数据---------');
         that.getIndexData();
         var obj = {
-          providerId: res1.id,
+          providerId: res.id,
           type: 'PRODUCT',
           sortField: 'IDX',
           sortOrder: 'ASC',

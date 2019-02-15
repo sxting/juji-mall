@@ -28,8 +28,9 @@ Page({
       complete: () => wx.hideToast()
     })
   },
-  toCommentDetail:function(){
-
+  toComDetail:function(e){
+    var id = e.currentTarget.dataset['id'];
+    wx.navigateTo({url: "/pages/comDetail/index?id=" + id});
   },
 
   //下拉刷新

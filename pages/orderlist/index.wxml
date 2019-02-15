@@ -17,11 +17,14 @@
                 <view class="ub-f1 goodMsg">
                     <view class="goodTit">{{it.productName}}</view>
                     <view class="storeName">{{it.merchantName}}</view>
-                    <view class="goodAmount">{{it.point}}桔子+{{format.toFix(it.price)}}元 <text>￥{{format.toFix(it.originalPrice)}}</text></view>
+                    <view class="goodAmount">
+                        <text wx:if="{{it.point>0}}">{{it.point}}桔子</text><text wx:if="{{it.point>0&&it.price>0}}">+</text><text wx:if="{{it.price>0}}">{{format.toFix(it.price)}}元</text>
+                        <text class="origin">￥{{format.toFix(it.originalPrice)}}</text>
+                    </view>
                     <view class="num">×{{it.num}}</view>
                 </view>
             </view>
-            <view class="tx-r total">合计：￥{{format.toFix(item.paidAmount)}}<text wx:if="{{item.paidPoint}}">+{{item.paidPoint}}桔子</text></view>
+            <view class="tx-r total">合计：<text wx:if="{{item.amount>0}}">￥{{format.toFix(item.amount)}}</text><text wx:if="{{item.point>0&&item.amount>0}}">+</text><text wx:if="{{item.point>0}}">{{item.point}}桔子</text></view>
             <view class="ctrl plr15 ub ub-ac ub-pj" hidden="{{item.status=='REFUND'||item.status=='CLOSE'}}">
                 <view wx:if="{{item.status=='PAID'}}" class="left">您已成功付款，请到店展示消费码消费</view>
                 <view wx:if="{{item.status=='CREATED'}}" class="left">请在下单后5分钟内付款，超时将自动关闭</view>

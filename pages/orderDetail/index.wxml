@@ -6,11 +6,14 @@
             <view class="ub-f1 goodMsg">
                 <view class="goodTit">{{item.productName}}</view>
                 <view class="storeName">{{item.merchantName}}</view>
-                <view class="goodAmount">{{item.point}}桔子+{{format.toFix(item.price)}}元 <text>￥{{format.toFix(item.originalPrice)}}</text></view>
+                <view class="goodAmount">
+                    <text wx:if="{{item.point>0}}">{{item.point}}桔子</text><text wx:if="{{item.point>0&&item.price>0}}">+</text><text wx:if="{{item.price>0}}">{{format.toFix(item.price)}}元</text>
+                    <text class="origin">￥{{format.toFix(item.originalPrice)}}</text>
+                </view>
                 <view class="num">×{{item.num}}</view>
             </view>
         </view>
-        <view class="tx-r total">合计：￥{{format.toFix(orderInfo.paidAmount)}}<text wx:if="{{orderInfo.paidPoint}}">+{{orderInfo.paidPoint}}桔子</text></view>
+        <view class="tx-r total">合计：<text wx:if="{{orderInfo.amount>0}}">￥{{format.toFix(orderInfo.amount)}}</text><text wx:if="{{orderInfo.point>0&&orderInfo.amount>0}}">+</text><text wx:if="{{orderInfo.point>0}}">{{orderInfo.point}}桔子</text></view>
     </view>
     <view class="ctrl plr15 ub ub-ac ub-pj">
         <view class="status">{{format.formatStatus(orderInfo.status)}}</view>

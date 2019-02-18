@@ -11,9 +11,10 @@
         <image wx:for="{{pinglist2}}" wx:key="unique" class="icon_ping" bindtap="clickPing2" data-index="{{index}}" src="../../images/icon_ping.png"></image>
     </view>
 </view>
+<view class="h20"></view>
 <view class="replyBox">
     <view class="replyInfo">
-        <textarea class="replyDiv" auto-height placeholder="10字评价奖励10个桔子，带图评价可再得10个桔子哦～" bindinput="dataChange"></textarea>
+        <textarea class="replyDiv" auto-height placeholder="10字评价奖励10个桔子，带图评价可再得10个桔子哦～" bindinput="dataChange" placeholder-style=""></textarea>
         <view class="ub ub-ac uploadImglist">
             <view class="uploadImg" wx:for="{{imglist}}" wx:key="unique">
                 <image src="{{item}}" bindtap="preReadImg" data-src="{{item}}"></image>

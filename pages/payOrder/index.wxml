@@ -1,8 +1,8 @@
 <wxs module="filter" src="../../utils/numFr.wxs"></wxs>
 <view>
   <view class="tradeInfo" style="padding:20rpx 30rpx;">
-    <view class="p10 ub ub-ac info">
-      <image class="goodImg udb" src="../../images/mendianimg.png" mode="widthFix"></image>
+    <view class="p15 ub ub-ac info">
+      <image class="goodImg udb" src="../../images/mendianimg.png"></image>
       <view class="ub-f1 goodMsg">
         <view class="goodTit">{{productInfo.productName}}</view>
         <view class="storeName">{{store.name}}</view>
@@ -46,7 +46,7 @@
   </view>
 </view>
 <view class="btn_bottom ub ub-ac plr15">
-  <view class="ub-f1" style="font-family: PingFangSC-Medium;font-size: 30rpx;">金额：
+  <view class="ub-f1" style="font-family: PingFangSC-Medium;font-size: 30rpx;font-weight:bold">金额：
     <text style="font-size: 30rpx;color: #E83121;">{{filter.toFix(price*count)}}元</text>
   </view>
   <button class="btn_common ub-f1 ub ub-ac ub-pc" wx:if="{{paytype==1||paytype==3}}" bindtap="toPay">确认支付</button>

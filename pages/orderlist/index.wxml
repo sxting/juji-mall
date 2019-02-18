@@ -19,21 +19,21 @@
                     <view class="storeName">{{it.merchantName}}</view>
                     <view class="goodAmount">
                         <text wx:if="{{it.point>0}}">{{it.point}}桔子</text><text wx:if="{{it.point>0&&it.price>0}}">+</text><text wx:if="{{it.price>0}}">{{format.toFix(it.price)}}元</text>
-                        <text class="origin">￥{{format.toFix(it.originalPrice)}}</text>
+                        <text class="origin">{{format.toFix(it.originalPrice)}}元</text>
                     </view>
                     <view class="num">×{{it.num}}</view>
                 </view>
             </view>
-            <view class="tx-r total">合计：<text wx:if="{{item.amount>0}}">￥{{format.toFix(item.amount)}}</text><text wx:if="{{item.point>0&&item.amount>0}}">+</text><text wx:if="{{item.point>0}}">{{item.point}}桔子</text></view>
+            <view class="tx-r total">合计：<text wx:if="{{item.amount>0}}">{{format.toFix(item.amount)}}元</text><text wx:if="{{item.point>0&&item.amount>0}}">+</text><text wx:if="{{item.point>0}}">{{item.point}}桔子</text></view>
             <view class="ctrl plr15 ub ub-ac ub-pj" hidden="{{item.status=='REFUND'||item.status=='CLOSE'}}">
                 <view wx:if="{{item.status=='PAID'}}" class="left">您已成功付款，请到店展示消费码消费</view>
                 <view wx:if="{{item.status=='CREATED'}}" class="left">请在下单后5分钟内付款，超时将自动关闭</view>
                 <view wx:if="{{item.status=='CONSUME'}}" class="left">您已成功消费，老铁给个评价再走呗～</view>
-                <view wx:if="{{item.status=='CREATED'}}" class="right pay" bindtap="toPay" data-id="{{item.orderId}}" data-pre="{{item.preOrderStr}}">立即付款</view>
+                <view wx:if="{{item.status=='CREATED'}}" class="pay" bindtap="toPay" data-id="{{item.orderId}}" data-pre="{{item.preOrderStr}}">立即付款</view>
                 <view wx:if="{{item.status=='CONSUME'}}" class="right" bindtap="toComment" data-id="{{item.orderId}}" data-pid="{{item.orderItemList[0].productId}}">立即评价</view>
             </view>
         </view>
-        <view class="nodataDiv ub ub-ac ub-pc ub-ver" hidden="{{!isShowNodata}}">
+        <view class="nodataDiv ub ub-ac ub-ver" hidden="{{!isShowNodata}}">
             <image class="nodataImg" src="../../images/null2.png"></image>
             <view class="nodataTxt">订单为空~</view>
         </view>

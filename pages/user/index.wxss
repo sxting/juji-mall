@@ -5,5 +5,5 @@
 .kefu { background: #fff; color: #333333; padding: 0; border: #fff 1rpx solid; height: 100rpx; line-height: 100rpx;font-size: 30rpx;}
 .kefu::after { border: 0; }
 .itemTxt{font-size: 30rpx;color: #333333;font-size: 30rpx;}
-.headImg{width:130rpx;height:130rpx;border-radius:65rpx;margin-right:30rpx;background-color: #fff}
+.headImg{width:130rpx;height:130rpx;border-radius:65rpx;margin-right:30rpx;background-color: #fff;border: 4rpx #fff solid;}
 .phoneTxt{font-size: 28rpx;color: #000000;margin-right:10rpx;}

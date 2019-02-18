@@ -9,18 +9,20 @@ Page({
         constant: constant,
         isShowNodata: false,
         orderlist: [],
+        pageNo:1,
+        status:'',
+        isFinall:false,
         amount: 0
     },
     onLoad: function(options) {
         wx.setNavigationBarTitle({ title: '我的订单' });
-        this.setData({ curTabIndex: options.index });
-        this.getData(options.status);
+        this.setData({ curTabIndex: options.index,status:options.status });
+        this.getData(options.status,1);
     },
     toDetail: function(e) {
         var id = e.currentTarget.dataset.id;
         var status = e.currentTarget.dataset.status;
         wx.navigateTo({ url: "/pages/orderDetail/index?id=" + id });
-        // if(status=="CREATED"||status=="CONSUME"||status=="PAID"){}
     },
     toComment: function(e) {
         var id = e.currentTarget.dataset['id'];
@@ -30,25 +32,46 @@ Page({
     switchTab: function(event) {
         var thisIndex = event.currentTarget.dataset['index'];
         var thisStatus = event.currentTarget.dataset['status'];
-        console.log(thisIndex);
         this.setData({ curTabIndex: thisIndex });
-        this.getData(thisStatus);
+        this.getData(thisStatus,1);
     },
-    getData: function(status) {
+    getData: function(status,pageNo) {
         var obj = {
             status: status,
-            pageNo: 1,
-            pageSize: 50
+            pageNo: pageNo,
+            pageSize: 10
         }
         service.orderlist(obj).subscribe({
             next: res => {
-                this.setData({ orderlist: res.content });
+                if(res.content.length<20){
+                  this.setData({isFinall:true});
+                }else{
+                  this.setData({isFinall:false});
+                }
+                if(pageNo==1){
+                  this.setData({ orderlist:res.content});
+                }else{
+                  this.setData({ orderlist: this.data.orderlist.concat(res.content)});
+                }
                 this.setData({ isShowNodata: this.data.orderlist.length == 0 });
             },
             error: err => errDialog(err),
             complete: () => wx.hideToast()
         })
     },
+    //下拉刷新
+    onPullDownRefresh() {
+        this.setData({ pageNo: 1 });
+        this.getData(this.data.status,1);
+    },
+
+    //上拉加载
+    onReachBottom() {
+        var pageNo = this.data.pageNo+1;
+        this.setData({pageNo:pageNo});
+        this.getData(this.data.status,pageNo);
+    },
+
     toPay: function(e) {
         var payInfo = JSON.parse(e.currentTarget.dataset['pre']);
         wx.requestPayment({

@@ -1,5 +1,5 @@
 .main{height: 100%;background-color: #f5f5f5;}
-.item{border-bottom: 1rpx #eee solid; padding:0 30rpx 20rpx;margin-bottom: 20rpx;background-color: #fff}
+.item{border-bottom: 1rpx #eee solid; padding:0 30rpx 40rpx;margin-bottom: 20rpx;background-color: #fff}
 .nickMsg{height: 80rpx;}
 .nickMsg .userImg{width: 60rpx; height: 60rpx;border-radius: 50%;}
 .nickMsg .nickname{font-size: 28rpx;color: #333;margin-left: 10rpx;}

@@ -4,7 +4,7 @@
     <swiper class="img-wrap" autoplay="true" interval="3000">
       <block wx:for="{{showPics}}" wx:key="{{index}}">
         <swiper-item>
-          <image src="{{item}}" class="slide-image" />
+          <image src="{{item}}" class="slide-image" lazy-load="true" mode="aspectFit"/>
         </swiper-item>
       </block>
     </swiper>
@@ -14,12 +14,12 @@
 
   <view class="businessInfo-wrap">
     <view class="businessInfo">
-      <view style="display:flex;justify-content: space-between;align-items: center;">
+      <view style="display:flex;justify-content: space-between;align-items: flex-start;">
         <view class="title">
           {{productInfo.productName}}
         </view>
 
-        <view style="display:flex;align-items: center;font-size: 24rpx;color: #E83221;" bindtap="toGetPoint">
+        <view class="moreJuzi" bindtap="toGetPoint" wx:if="{{false}}">
           做任务赚桔子
           <image src="../../images/arrow-right.png" style="width:14rpx;height:26rpx;margin-left:20rpx;"></image>
         </view>
@@ -109,11 +109,13 @@
     </view>
   </view>
 
-  <view class="yongkaxuzhi-wrap" style="margin-top:20rpx;" wx:if="{{false}}">
+  <view class="yongkaxuzhi-wrap" style="margin-top:20rpx;">
     <view class="yongkaxuzhi">
       <view style="font-size: 30rpx;color: #333333;font-weight: bolder;">详细信息</view>
-      <image style="height:420rpx;"></image>
-      <view style="font-size: 24rpx;color: #666666;margin-top:30rpx;">兰溪小馆位置位于北京市香山是由浙江人开的一家浙江菜馆，菜品丰富，整个店铺的装修风格是文艺淡雅的，环境优雅适合谈工作和朋友聚会</view>
+      <view style="margin-top:30rpx;" wx:for="{{description}}" wx:key="{{index}}">
+        <image style="width:100%;height:{{despImgHeightValues[(index+1)*(index1+1)-1]}}rpx;" wx:for="{{item.picIds}}" wx:for-item="item1" wx:for-index="index1" wx:key="{{index1}}" src="https://upic.juniuo.com/file/picture/{{item1}}/resize_0_0/mode_fill" bindload="desImgLoad" lazy-load="true"></image>
+        <view wx:if="item.content.length>0" wx:for="{{item.content}}" wx:for-item="item2" wx:for-index="index2" wx:key="{{index2}}" style="font-size: 24rpx;color: #666666;margin-top:30rpx;">{{item2}}</view>
+      </view>
     </view>
   </view>
 
@@ -121,7 +123,7 @@
     <view class="yongkaxuzhi">
       <view style="font-size: 30rpx;color: #333333;font-weight: bolder;">同店推荐</view>
       <view class="tuiList">
-        <view class="tuiItem row jc-sb {{index==0?'':'b-b-1px'}}" wx:for="{{recommendList}}" wx:key="{{index}}">
+        <view class="tuiItem row jc-sb {{index==recommendList.length-1?'':'b-b-1px'}}" wx:for="{{recommendList}}" wx:key="{{index}}">
           <view class="tuiRow">
             <view class="ub jc-sb" style="align-items:flex-start;">
               <view class="tuiName">{{item.productName}}</view>
@@ -157,29 +159,29 @@
     <view class="footerBtnWrap" wx:if="{{productInfo.type=='PRODUCT'&&productInfo.point>0&&productInfo.price>0}}">
       <view class="gokaBtn" bindtap="toCreateOrderByRmb">
         <view>
-          <view style="font-size: 28rpx;line-height:34rpx;">{{filter.toFix(productInfo.originalPrice)}} 元</view>
+          <view style="font-size: 24rpx;font-weight:bold;line-height:34rpx;">{{filter.toFix(productInfo.originalPrice)}} 元</view>
           <view style="font-size: 18rpx;line-height:22rpx;">原价购买</view>
         </view>
       </view>
       <!-- 如果需要人民币 并且 桔子充足 -->
       <view class="xiadan" bindtap="toCreateOrder" wx:if="{{productInfo.price>0&&pointBalance>0}}">
         <view>
-          <view style="font-size: 28rpx;line-height:34rpx;width:180rpx;">{{productInfo.point}}桔子+{{filter.toFix(productInfo.price)}}元</view>
-          <view style="font-size: 18rpx;line-height:22rpx;">立即兑换</view>
+          <view style="font-size: 24rpx;font-weight:bold;line-height:34rpx;width:180rpx;">{{productInfo.point}}桔子+{{filter.toFix(productInfo.price)}}元</view>
+          <view style="font-size: 18rpx;line-height:22rpx;text-align:center;">立即兑换</view>
         </view>
       </view>
       <!-- 如果不需要人民币 并且 桔子充足 -->
       <view class="xiadan" bindtap="toCreateOrderByPoint" wx:if="{{productInfo.price==0&&pointBalance>0}}">
         <view>
-          <view style="font-size: 28rpx;line-height:34rpx;">{{productInfo.point}}桔子</view>
-          <view style="font-size: 18rpx;line-height:22rpx;">立即兑换</view>
+          <view style="font-size: 24rpx;font-weight:bold;line-height:34rpx;">{{productInfo.point}}桔子</view>
+          <view style="font-size: 18rpx;line-height:22rpx;text-align:center;">立即兑换</view>
         </view>
       </view>
       <!-- 如果桔子不足 跳转到任务 -->
       <view class="xiadan" bindtap="toGetPoint" wx:if="{{pointBalance==0||!pointBalance}}">
         <view>
-          <view style="font-size: 28rpx;line-height:34rpx;">桔子不足</view>
-          <view style="font-size: 18rpx;line-height:22rpx;">赚桔子</view>
+          <view style="font-size: 24rpx;font-weight:bold;line-height:34rpx;">桔子不足</view>
+          <view style="font-size: 18rpx;line-height:22rpx;text-align:center;">赚桔子</view>
         </view>
       </view>
     </view>
@@ -188,8 +190,8 @@
     <view class="footerBtnWrap" wx:if="{{productInfo.type=='PRODUCT'&&productInfo.point==0&&productInfo.price>0}}">
       <view class="yuanjia-xiadan" bindtap="toCreateOrderByRmb">
         <view>
-          <view style="font-size: 28rpx;line-height:34rpx;font-weight:bolder;">{{filter.toFix(productInfo.price)}}元</view>
-          <view style="font-size: 18rpx;line-height:22rpx;">立即购买</view>
+          <view style="font-size: 24rpx;font-weight:bold;line-height:34rpx;font-weight:bolder;">{{filter.toFix(productInfo.price)}}元</view>
+          <view style="font-size: 18rpx;line-height:22rpx;text-align:center;">立即购买</view>
         </view>
       </view>
     </view>
@@ -199,14 +201,14 @@
       <!-- 如果桔子充足 -->
       <view class="yuanjia-xiadan" bindtap="toCreateOrderByPoint" wx:if="{{pointBalance>0}}">
         <view>
-          <view style="font-size: 28rpx;line-height:34rpx;font-weight:bolder;">{{productInfo.point}} 桔子</view>
-          <view style="font-size: 18rpx;line-height:22rpx;">立即兑换</view>
+          <view style="font-size: 24rpx;font-weight:bold;line-height:34rpx;font-weight:bolder;">{{productInfo.point}} 桔子</view>
+          <view style="font-size: 18rpx;line-height:22rpx;text-align:center;">立即兑换</view>
         </view>
       </view>
       <!-- 如果桔子不足 跳转到任务 -->
       <view class="yuanjia-xiadan" bindtap="toGetPoint" wx:if="{{pointBalance==0||!pointBalance}}">
         <view>
-          <view style="font-size: 28rpx;line-height:34rpx;font-weight:bolder;">桔子不足</view>
+          <view style="font-size: 24rpx;font-weight:bold;line-height:34rpx;font-weight:bolder;">桔子不足</view>
           <view style="font-size: 18rpx;line-height:22rpx;">赚桔子</view>
         </view>
       </view>

@@ -10,7 +10,8 @@
 .swiper-wrap {
   position: relative;
   width: 100%;
-  height: auto;
+  /*如果高度自动则height：auto;*/
+  height: 420rpx;
 }
 
 .typePop {
@@ -31,13 +32,21 @@
 
 .img-wrap {
   width: 100%;
+  /*如果高度自动则不加height*/
+  height:100%;
 }
 
 .img-wrap image {
   width: 100%;
   height: 100%;
 }
-
+.moreJuzi{
+  display:flex;
+  align-items: center;
+  font-size: 24rpx;
+  color: #666;
+  margin-top:4rpx;
+}
 .businessInfo-wrap {
   width: 100%;
   box-sizing: border-box;
@@ -51,8 +60,8 @@
 }
 
 .businessInfo .title {
-  width:70%;
-  font-size: 15px;
+  width:100%;
+  font-size: 28rpx;
   color: #333;
 }
 
@@ -67,9 +76,8 @@
 
 .line {
   width: 100%;
-  height: 1px;
-  background-color: #dedede;
-  transform: scaleY(0.5);
+  height: 1rpx;
+  background-color: #eeeeee;
 }
 
 .ml10 {
@@ -140,7 +148,7 @@
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 108rpx;
+  height: 120rpx;
   background: #fff;
   display: flex;
   align-items: center;
@@ -185,10 +193,10 @@
 }
 
 .gokaBtn {
-  width: 230rpx;
+  width: 240rpx;
   height: 88rpx;
   background: #333;
-  border-radius: 20px 0 0 20px;
+  border-radius: 44rpx 0 0 44rpx;
   font-size: 14px;
   color: #fff;
   line-height: 80rpx;
@@ -200,25 +208,23 @@
 }
 
 .xiadan {
-  width: 230rpx;
+  width: 240rpx;
   height: 88rpx;
   background-image: linear-gradient(-269deg, #ffdc00 0%, #fcbf0a 100%);
-  border-radius: 0 20px 20px 0;
+  border-radius: 0 44rpx 44rpx 0;
   color: #333;
-  line-height: 80rpx;
-  text-align: center;
-  margin-left: 2px;
+  line-height: 88rpx;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
 }
 
 .yuanjia-xiadan {
   width: 380rpx;
   height: 88rpx;
   background-image: linear-gradient(-269deg, #ffdc00 0%, #fcbf0a 100%);
-  border-radius: 20px;
+  border-radius: 44px;
   color: #333;
   line-height: 80rpx;
   text-align: center;

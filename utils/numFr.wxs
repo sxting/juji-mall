@@ -6,7 +6,7 @@ var filters = {
     return parseInt(value);
   },
   toDis: function (value){
-    return Number(value/100).toFixed(2);
+    return Number(value/1000).toFixed(2);
   }
 }
 

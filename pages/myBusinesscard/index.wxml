@@ -1,7 +1,0 @@
-<canvas canvas-id="myCanvas"></canvas>
-
-<view class="plr15 mt15">
-    <button class="btn_common {{disabled?'disabled':''}}" bindtap="savePic" disabled="{{disabled}}">保存图片</button>
-</view>
-
-<loading hidden="{{hidden}}">加载中...</loading>

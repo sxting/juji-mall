@@ -1,6 +1,0 @@
-{
-  "usingComponents": {
-    "register": "../../components/register/index",
-    "loginBox": "../../components/loginBox/loginBox"
-  }
-}

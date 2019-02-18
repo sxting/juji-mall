@@ -1,7 +1,0 @@
-{
-  "usingComponents": {
-    "confirmBox": "../../components/confirmBox/confirmBox",
-    "loginBox": "../../components/loginBox/loginBox",
-    "BuyCardRadioGroup": "components/BuyCardRadioGroup/buyCardRadioGroup"
-  }
-}

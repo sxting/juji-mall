@@ -1,4 +1,0 @@
-<view class="item plr10 ub ub-ac ub-pj">
-    <view class="text">当前在涂金额</view>
-    <view class="number">0.00{{number}}</view>
-</view>

@@ -1,3 +1,0 @@
-.main{height: 282rpx;width: 300rpx;position: absolute;top: 42%;left: 50%;margin-top: -150rpx;margin-left: -141rpx;}
-.logo{width: 150rpx; height: 150rpx;margin-left:67rpx;}
-button{background-color: #fff;color: #B55FFF;font-size: 28rpx;padding: 0;margin-top: 60rpx;width: 300rpx;height: 72rpx;display: block;border:1rpx solid #B55FFF;}

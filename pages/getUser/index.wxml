@@ -1,4 +1,0 @@
-<view class="main">
-	<image class="logo" src="../../images/logo.png"></image>
-    <button open-type="getUserInfo" bindgetuserinfo="getMyInfo" lang="zh_CN" class="ub ub-ac ub-pc">微信登录</button>
-</view>

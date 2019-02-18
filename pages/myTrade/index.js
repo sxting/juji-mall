@@ -8,32 +8,49 @@ Page({
         curTabIndex: 0,
         isShowNodata1:false,
         isShowNodata2:false,
-      pageNo:1,
-      pageSize:10,
-        inputlist:[{
-            name:"收入名字",
-            time:"2018-02-01",
-            amount:"100"
-        },{
-            name:"收入名字",
-            time:"2018-02-01",
-            amount:"100"
-        }],
-        outputlist:[{
-            name:"支出名字",
-            time:"2018-02-01",
-            amount:"100"
-        },{
-            name:"支出名字",
-            time:"2018-02-01",
-            amount:"100"
-        }]
+        pageNo:1,
+        pageSize:10,
+        inputlist:[]
     },
     switchTab: function(e) {
         var thisIndex = e.currentTarget.dataset.index;
         this.setData({ curTabIndex: thisIndex });
         this.getData();
     },
+  //下拉刷新
+  onPullDownRefresh() {
+    this.setData({
+      pageNo: 1
+    });
+    this.getData();
+  },
+  //上拉加载
+  onReachBottom() {
+    let p = ++this.data.pageNo;
+    console.log('page:' + p);
+    let obj = {
+      inOrOut: this.data.curTabIndex == 0 ? 'IN' : 'OUT',
+      pageNo: p,
+      pageSize: this.data.pageSize
+    }
+
+    service.pointDetails({
+      inOrOut: this.data.curTabIndex == 0 ? 'IN' : 'OUT',
+      pageNo: this.data.pageNo,
+      pageSize: this.data.pageSize
+    }).subscribe({
+      next: res => {
+        console.log('----------交易记录数据--------');
+        console.log(res);
+        this.setData({ 
+          inputlist: this.data.inputlist.concat(res) 
+        });
+      },
+      error: err => errDialog(err),
+      complete: () => wx.hideLoading()
+    });
+
+  },
     getData: function() {
         service.pointDetails({
           inOrOut: this.data.curTabIndex==0?'IN':'OUT',

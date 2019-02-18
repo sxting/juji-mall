@@ -1,6 +1,0 @@
-.item { box-shadow: 0 0 10rpx #dedede; border-radius: 20rpx; margin-top: 20rpx; position: relative;box-sizing: border-box;background: #FFFFFF;}
-.user { font-size: 28rpx; color: #000; }
-.userImg { width: 60rpx; height: 60rpx;border-radius:50%;margin-right: 20rpx;}
-.subItem{margin-top: 30rpx;height: 40rpx;padding-left: 90rpx;padding-right: 20rpx;}
-.subItem2{margin-top: 16rpx;height: 40rpx;padding-left: 90rpx;padding-right: 20rpx;}
-.txt{font-size: 22rpx;color: #999;}

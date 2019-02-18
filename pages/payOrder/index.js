@@ -155,7 +155,7 @@ Page({
                   paySign: payInfo.paySign,
                   success(res2) {
                     console.log(res2);
-                    wx.navigateTo({
+                    wx.redirectTo({
                       url: '/pages/orderDetail/index?id=' + res1.orderId,
                     })
                   },
@@ -221,7 +221,7 @@ Page({
                 console.log('--------创建订单返回2-------');
                 console.log(res1);
                 //兑换成功什么都不返回
-                wx.navigateTo({
+                wx.redirectTo({
                   url: '/pages/orderDetail/index?id=' + res1.orderId,
                 })
               },
@@ -284,7 +284,7 @@ Page({
                 paySign: payInfo.paySign,
                 success(res2) {
                   console.log(res2);
-                  wx.navigateTo({
+                  wx.redirectTo({
                     url: '/pages/orderDetail/index?id=' + res1.orderId,
                   })
                 },

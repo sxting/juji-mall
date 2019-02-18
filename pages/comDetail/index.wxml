@@ -1,7 +1,7 @@
 <wxs module="filter" src="../../utils/numFr.wxs"></wxs>
 <view class="container">
   <view class="swiper-wrap">
-    <swiper class="img-wrap" autoplay="true" interval="2000">
+    <swiper class="img-wrap" autoplay="true" interval="3000">
       <block wx:for="{{showPics}}" wx:key="{{index}}">
         <swiper-item>
           <image src="{{item}}" class="slide-image" />
@@ -123,7 +123,7 @@
       <view class="tuiList">
         <view class="tuiItem row jc-sb {{index==0?'':'b-b-1px'}}" wx:for="{{recommendList}}" wx:key="{{index}}">
           <view class="tuiRow">
-            <view class="row jc-sb">
+            <view class="ub jc-sb" style="align-items:flex-start;">
               <view class="tuiName">{{item.productName}}</view>
               <view class="tuiExe" wx:if="{{item.type=='POINT'}}">{{item.point}}桔子</view>
               <view class="tuiExe" wx:else>{{item.point}}桔子+{{item.price}}元</view>

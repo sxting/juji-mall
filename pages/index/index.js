@@ -23,7 +23,7 @@ Page({
     recommendPage: [],
     sortIndex: 1,
     pageNo: 1,
-    pageSize: 2,
+    pageSize: 5,
     sortArray: ['', 'ASC', 'ASC', ''],
     providerId: ''
   },

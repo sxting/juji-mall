@@ -10,7 +10,7 @@ Page({
   data: {
     productId: '',
     storeId: '',
-    showPics: ['../../images/homeBanner.png', '../../images/banner1.png', '../../images/freeGet.png'],
+    showPics: [],
     commentList: [],
     shortCommentList: [],
     productInfo: {},
@@ -111,6 +111,10 @@ Page({
     }).subscribe({
       next: res => {
         console.log(res);
+        var picsStrArr = res.product.picIds.split(',');
+        picsStrArr.forEach(function(item,index){
+          picsStrArr[index] = constant.basePicUrl + item + '/resize_690_0/mode_fill'
+        });
         this.setData({
           commentList: res.commentList,
           shortCommentList: res.commentList.slice(0, 1),
@@ -119,7 +123,8 @@ Page({
           store: res.store,
           commentCount: res.commentList.length,
           recommendCount: res.recommendList.length,
-          note: JSON.parse(res.product.note)
+          note: JSON.parse(res.product.note),
+          showPics: picsStrArr
         });
       },
       error: err => console.log(err),

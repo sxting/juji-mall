@@ -14,12 +14,14 @@ Page({
     commentList: [],
     shortCommentList: [],
     productInfo: {},
+    description:[],
     recommendList: [],
     store: {},
     commentCount: 0,
     recommendCount: 0,
     pointBalance: 0,
-    note:[]
+    note:[],
+    despImgHeightValues:[]
   },
   onLoad: function(option) {
     wx.setNavigationBarTitle({
@@ -113,12 +115,13 @@ Page({
         console.log(res);
         var picsStrArr = res.product.picIds.split(',');
         picsStrArr.forEach(function(item,index){
-          picsStrArr[index] = constant.basePicUrl + item + '/resize_690_0/mode_fill'
+          picsStrArr[index] = constant.basePicUrl + item + '/resize_0_0/mode_fill'
         });
         this.setData({
           commentList: res.commentList,
           shortCommentList: res.commentList.slice(0, 1),
           productInfo: res.product,
+          description: JSON.parse(res.product.description),
           recommendList: res.recommendList,
           store: res.store,
           commentCount: res.commentList.length,
@@ -130,6 +133,14 @@ Page({
       error: err => console.log(err),
       complete: () => wx.hideToast()
     })
+  },
+  desImgLoad: function (event){
+    console.log(event.detail);
+    var arr = this.data.despImgHeightValues;
+    arr.push(event.detail.height * 690 / event.detail.width);
+    this.setData({
+      despImgHeightValues: arr
+    });
   },
   gohomepage: function() {
     wx.switchTab({

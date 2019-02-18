@@ -2,7 +2,7 @@ page{height: 100%}
 .tablist{height: 100rpx;background-color: #fff}
 .tablist .tabItem{position: relative;font-size: 28rpx;color: #666;padding:0 40rpx;height: 100rpx;line-height: 100rpx;text-align: center;}
 .tablist .tabItem .line{width:50rpx;height: 4rpx;background-color: #FFDC00;border-radius: 2rpx;position:absolute;bottom: 20rpx;left: 50%;margin-left: -25rpx;display: none;}
-.tablist .tabItem.on{color:#333;}
+.tablist .tabItem.on{color:#333;font-size: 30rpx;font-weight: bold;}
 .tablist .tabItem.on .line{display: block;}
 
 .main{padding: 30rpx;}

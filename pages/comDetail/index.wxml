@@ -4,7 +4,7 @@
     <swiper class="img-wrap" autoplay="true" interval="3000">
       <block wx:for="{{showPics}}" wx:key="{{index}}">
         <swiper-item>
-          <image src="{{item}}" class="slide-image" />
+          <image src="{{item}}" class="slide-image" mode="aspectFit"/>
         </swiper-item>
       </block>
     </swiper>
@@ -19,7 +19,7 @@
           {{productInfo.productName}}
         </view>
 
-        <view style="display:flex;align-items: center;font-size: 24rpx;color: #666;margin-top:4rpx;" bindtap="toGetPoint">
+        <view class="moreJuzi" bindtap="toGetPoint" wx:if="{{false}}">
           做任务赚桔子
           <image src="../../images/arrow-right.png" style="width:14rpx;height:26rpx;margin-left:20rpx;"></image>
         </view>
@@ -109,11 +109,13 @@
     </view>
   </view>
 
-  <view class="yongkaxuzhi-wrap" style="margin-top:20rpx;" wx:if="{{false}}">
+  <view class="yongkaxuzhi-wrap" style="margin-top:20rpx;">
     <view class="yongkaxuzhi">
       <view style="font-size: 30rpx;color: #333333;font-weight: bolder;">详细信息</view>
-      <image style="height:420rpx;"></image>
-      <view style="font-size: 24rpx;color: #666666;margin-top:30rpx;">兰溪小馆位置位于北京市香山是由浙江人开的一家浙江菜馆，菜品丰富，整个店铺的装修风格是文艺淡雅的，环境优雅适合谈工作和朋友聚会</view>
+      <view style="margin-top:30rpx;" wx:for="{{description}}" wx:key="{{index}}">
+        <image style="width:100%;height:{{despImgHeightValues[(index+1)*(index1+1)-1]}}rpx;" wx:for="{{item.picIds}}" wx:for-item="item1" wx:for-index="index1" wx:key="{{index1}}" src="https://upic.juniuo.com/file/picture/{{item1}}/resize_0_0/mode_fill" bindload="desImgLoad" lazy-load="true"></image>
+        <view wx:if="item.content.length>0" wx:for="{{item.content}}" wx:for-item="item2" wx:for-index="index2" wx:key="{{index2}}" style="font-size: 24rpx;color: #666666;margin-top:30rpx;">{{item2}}</view>
+      </view>
     </view>
   </view>
 
@@ -121,7 +123,7 @@
     <view class="yongkaxuzhi">
       <view style="font-size: 30rpx;color: #333333;font-weight: bolder;">同店推荐</view>
       <view class="tuiList">
-        <view class="tuiItem row jc-sb {{index==0?'':'b-b-1px'}}" wx:for="{{recommendList}}" wx:key="{{index}}">
+        <view class="tuiItem row jc-sb {{index==recommendList.length-1?'':'b-b-1px'}}" wx:for="{{recommendList}}" wx:key="{{index}}">
           <view class="tuiRow">
             <view class="ub jc-sb" style="align-items:flex-start;">
               <view class="tuiName">{{item.productName}}</view>

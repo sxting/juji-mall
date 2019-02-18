@@ -9,7 +9,7 @@
   <view class="toper">
     <swiper autoplay="{{autoplay}}" current="{{current}}" previous-margin="35rpx" next-margin="35rpx" interval="3000" duration="1000" indicator-color="#fff" indicator-active-color="#b55fff" bindchange="swiperChange" circular>
       <swiper-item wx:for="{{banners}}" wx:key="unique">
-        <image src="{{item}}" class="slide-image  {{nowIdx==index?'img-scale':''}}" bindload="getHeight" mode="aspectFit"></image>
+        <image src="{{item}}" class="slide-image  {{nowIdx==index?'img-scale':''}}" bindload="getHeight" mode="aspectFill"></image>
       </swiper-item>
     </swiper>
   </view>
@@ -73,7 +73,7 @@
     </view>
   </view>
 
-  <view class="juzihl-wrap">
+  <view class="juzihl-wrap" style="margin-top:20rpx;">
     <view class="mtitle">精选推荐</view>
     <view class="subtitle" style="margin-top:10rpx;">精选好物，先到先得</view>
     <view class="labels-wrap">

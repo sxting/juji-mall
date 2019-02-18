@@ -10,7 +10,8 @@
 .swiper-wrap {
   position: relative;
   width: 100%;
-  height: auto;
+  /*如果高度自动则height：auto;*/
+  height: 420rpx;
 }
 
 .typePop {
@@ -31,13 +32,21 @@
 
 .img-wrap {
   width: 100%;
+  /*如果高度自动则不加height*/
+  height:100%;
 }
 
 .img-wrap image {
   width: 100%;
   height: 100%;
 }
-
+.moreJuzi{
+  display:flex;
+  align-items: center;
+  font-size: 24rpx;
+  color: #666;
+  margin-top:4rpx;
+}
 .businessInfo-wrap {
   width: 100%;
   box-sizing: border-box;
@@ -51,7 +60,7 @@
 }
 
 .businessInfo .title {
-  width:70%;
+  width:100%;
   font-size: 28rpx;
   color: #333;
 }

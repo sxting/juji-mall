@@ -3,7 +3,7 @@ page{box-sizing:border-box;height: 100%;background-color: #fbfbfb}
 .tablist{height: 100rpx;background-color: #fff}
 .tablist .tabItem{position: relative;font-size: 28rpx;color: #333;padding:0 40rpx;height: 100rpx;line-height: 100rpx;text-align: center;}
 .tablist .tabItem .line{width:72rpx;height: 4rpx;background-color: #FFDC00;border-radius: 2rpx;position:absolute;bottom: 16rpx;left: 50%;margin-left: -36rpx;display: none;}
-.tablist .tabItem.on{color:#333;font-size: 34rpx;}
+.tablist .tabItem.on{color:#333;font-size: 30rpx;font-weight: bold;}
 .tablist .tabItem.on .line{display: block;}
 
 .orderItem{background-color: #fff;position:relative;border-radius: 8rpx;overflow: hidden;margin-bottom: 20rpx;}
@@ -16,7 +16,7 @@ page{box-sizing:border-box;height: 100%;background-color: #fbfbfb}
 .goodMsg{margin-left: 20rpx;}
 .goodTit{font-size: 28rpx;}
 .storeName{font-size: 24rpx;margin-top: 10rpx;color: #999;}
-.goodAmount{font-size:30rpx;margin-top:48rpx;color:#333;}
+.goodAmount{font-size:28rpx;margin-top:48rpx;color:#333;}
 .goodAmount text.origin{margin-left:10rpx;font-size:24rpx;color:#999;text-decoration:line-through}
 .goodMsg .num{position: absolute;bottom: 10rpx;right: 20rpx;color: #999;font-size: 22rpx;}
 .orderItem .ctrl{height: 106rpx;border-top: 1rpx #eee solid;}

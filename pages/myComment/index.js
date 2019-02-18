@@ -21,7 +21,6 @@ Page({
           }
         }
         this.setData({ commentlist: res.list });
-        this.setData({ commentlist: [] });
         this.setData({ isShowNodata: this.data.commentlist.length == 0 });
       },
       error: err => errDialog(err),

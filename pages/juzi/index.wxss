@@ -1,3 +1,6 @@
+.wrap{
+  padding-bottom:40rpx;
+}
 .toper {
   height: 268rpx;
   background: #fcbf0a;

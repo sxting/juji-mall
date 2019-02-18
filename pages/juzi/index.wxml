@@ -38,11 +38,11 @@
     </view>
   </view>
 
-  <view style="margin:112rpx 30rpx 0 30rpx;padding:30rpx 40rpx;box-sizing:border-box;height:420rpx;background: #FFFFFF;box-shadow: 0 0 5rpx 0 rgba(228,228,228,0.50);border-radius: 10rpx;">
+  <view style="height:auto;overflow:hidden;margin:112rpx 30rpx 0 30rpx;padding:30rpx 40rpx;box-sizing:border-box;background: #FFFFFF;box-shadow: 0 0 5rpx 0 rgba(228,228,228,0.50);border-radius: 10rpx;">
     <view class="qtitle ub ub-ac">连续签到 
       <view style="font-size: 30rpx;color: #CE463F;padding:0 10rpx;">{{currentPointObj.signInDays}}</view>
        天</view>
-    <view>
+    <view style="overflow:hidden;">
 
       <view class="point-text-wrap ub ub-ac ub-pj">
         <view class="point-text">{{currentPointObj.signInList[0].awardNum}}桔子</view>
@@ -138,7 +138,7 @@
 
   <view class="juzigzWrap" hidden="{{!showjuzigz}}" bindtap="closejuzigzModal">
     <view class="juzigz">
-      <view style="font-size: 30rpx;color: #333333;padding:40rpx 30rpx;">桔子规则</view>
+      <view style="font-size: 30rpx;color: #333333;padding:40rpx 30rpx;font-weight:bold;">桔子规则</view>
       <view style="padding: 0 30rpx;">
         <view style="display:flex;align-items:center;">
           <view style="width:10rpx;height:10rpx;border-radius:50%;background: #FCBF0A;margin-right:20rpx;"></view>
@@ -154,7 +154,7 @@
         </view>
         <view style="display:flex;align-items:flex-start;margin-top:10rpx;">
           <view style="width:10rpx;height:10rpx;border-radius:50%;background: #999999;margin-right:20rpx;margin-top:10rpx;"></view>
-          <view style="width:90%;font-size: 24rpx;color: #999999;">每个月的月底资自动消除上一年份同期当月获得 且未消耗的桔子，例如2019年1月31自动消除2018年1月获得且未消耗的桔子。
+          <view style="width:90%;font-size: 24rpx;color: #999999;">每个月的月底自动消除上一年份同期当月获得且未消耗的桔子，例如2019年1月31自动消除2018年1月获得且未消耗的桔子。
           </view>
         </view>
       </view>

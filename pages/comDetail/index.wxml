@@ -14,12 +14,12 @@
 
   <view class="businessInfo-wrap">
     <view class="businessInfo">
-      <view style="display:flex;justify-content: space-between;align-items: center;">
+      <view style="display:flex;justify-content: space-between;align-items: flex-start;">
         <view class="title">
           {{productInfo.productName}}
         </view>
 
-        <view style="display:flex;align-items: center;font-size: 24rpx;color: #E83221;" bindtap="toGetPoint">
+        <view style="display:flex;align-items: center;font-size: 24rpx;color: #666;margin-top:4rpx;" bindtap="toGetPoint">
           做任务赚桔子
           <image src="../../images/arrow-right.png" style="width:14rpx;height:26rpx;margin-left:20rpx;"></image>
         </view>
@@ -157,29 +157,29 @@
     <view class="footerBtnWrap" wx:if="{{productInfo.type=='PRODUCT'&&productInfo.point>0&&productInfo.price>0}}">
       <view class="gokaBtn" bindtap="toCreateOrderByRmb">
         <view>
-          <view style="font-size: 28rpx;line-height:34rpx;">{{filter.toFix(productInfo.originalPrice)}} 元</view>
+          <view style="font-size: 24rpx;font-weight:bold;line-height:34rpx;">{{filter.toFix(productInfo.originalPrice)}} 元</view>
           <view style="font-size: 18rpx;line-height:22rpx;">原价购买</view>
         </view>
       </view>
       <!-- 如果需要人民币 并且 桔子充足 -->
       <view class="xiadan" bindtap="toCreateOrder" wx:if="{{productInfo.price>0&&pointBalance>0}}">
         <view>
-          <view style="font-size: 28rpx;line-height:34rpx;width:180rpx;">{{productInfo.point}}桔子+{{filter.toFix(productInfo.price)}}元</view>
-          <view style="font-size: 18rpx;line-height:22rpx;">立即兑换</view>
+          <view style="font-size: 24rpx;font-weight:bold;line-height:34rpx;width:180rpx;">{{productInfo.point}}桔子+{{filter.toFix(productInfo.price)}}元</view>
+          <view style="font-size: 18rpx;line-height:22rpx;text-align:center;">立即兑换</view>
         </view>
       </view>
       <!-- 如果不需要人民币 并且 桔子充足 -->
       <view class="xiadan" bindtap="toCreateOrderByPoint" wx:if="{{productInfo.price==0&&pointBalance>0}}">
         <view>
-          <view style="font-size: 28rpx;line-height:34rpx;">{{productInfo.point}}桔子</view>
-          <view style="font-size: 18rpx;line-height:22rpx;">立即兑换</view>
+          <view style="font-size: 24rpx;font-weight:bold;line-height:34rpx;">{{productInfo.point}}桔子</view>
+          <view style="font-size: 18rpx;line-height:22rpx;text-align:center;">立即兑换</view>
         </view>
       </view>
       <!-- 如果桔子不足 跳转到任务 -->
       <view class="xiadan" bindtap="toGetPoint" wx:if="{{pointBalance==0||!pointBalance}}">
         <view>
-          <view style="font-size: 28rpx;line-height:34rpx;">桔子不足</view>
-          <view style="font-size: 18rpx;line-height:22rpx;">赚桔子</view>
+          <view style="font-size: 24rpx;font-weight:bold;line-height:34rpx;">桔子不足</view>
+          <view style="font-size: 18rpx;line-height:22rpx;text-align:center;">赚桔子</view>
         </view>
       </view>
     </view>
@@ -188,8 +188,8 @@
     <view class="footerBtnWrap" wx:if="{{productInfo.type=='PRODUCT'&&productInfo.point==0&&productInfo.price>0}}">
       <view class="yuanjia-xiadan" bindtap="toCreateOrderByRmb">
         <view>
-          <view style="font-size: 28rpx;line-height:34rpx;font-weight:bolder;">{{filter.toFix(productInfo.price)}}元</view>
-          <view style="font-size: 18rpx;line-height:22rpx;">立即购买</view>
+          <view style="font-size: 24rpx;font-weight:bold;line-height:34rpx;font-weight:bolder;">{{filter.toFix(productInfo.price)}}元</view>
+          <view style="font-size: 18rpx;line-height:22rpx;text-align:center;">立即购买</view>
         </view>
       </view>
     </view>
@@ -199,14 +199,14 @@
       <!-- 如果桔子充足 -->
       <view class="yuanjia-xiadan" bindtap="toCreateOrderByPoint" wx:if="{{pointBalance>0}}">
         <view>
-          <view style="font-size: 28rpx;line-height:34rpx;font-weight:bolder;">{{productInfo.point}} 桔子</view>
-          <view style="font-size: 18rpx;line-height:22rpx;">立即兑换</view>
+          <view style="font-size: 24rpx;font-weight:bold;line-height:34rpx;font-weight:bolder;">{{productInfo.point}} 桔子</view>
+          <view style="font-size: 18rpx;line-height:22rpx;text-align:center;">立即兑换</view>
         </view>
       </view>
       <!-- 如果桔子不足 跳转到任务 -->
       <view class="yuanjia-xiadan" bindtap="toGetPoint" wx:if="{{pointBalance==0||!pointBalance}}">
         <view>
-          <view style="font-size: 28rpx;line-height:34rpx;font-weight:bolder;">桔子不足</view>
+          <view style="font-size: 24rpx;font-weight:bold;line-height:34rpx;font-weight:bolder;">桔子不足</view>
           <view style="font-size: 18rpx;line-height:22rpx;">赚桔子</view>
         </view>
       </view>

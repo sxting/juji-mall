@@ -332,6 +332,12 @@ Page({
         this.getDataByCity(); //首页数据已经更新
         //如果用getDataByCity更新了数据 就不能用getSelectProviderByLoc再获取 否则数据会覆盖
       } else { //如果没有更换城市 定位获取
+        console.log('没有更换城市');
+        this.setData({
+          locationCode: wx.getStorageSync('locationCode'),
+          locationPcode: wx.getStorageSync('locationPcode'),
+          locationName: wx.getStorageSync('locationName')
+        });
         var curLatitude = wx.getStorageSync('curLatitude'),
           curLongitude = wx.getStorageSync('curLongitude');
         if (curLatitude && curLongitude) { //已经定位了并且有经纬度的情况

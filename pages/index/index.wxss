@@ -28,8 +28,8 @@ page {
 
 .title {
   font-size: 40rpx;
-color: #333333;
-font-weight: bold;
+  color: #333;
+  font-weight: bold;
 }
 
 .toper {
@@ -218,20 +218,23 @@ swiper {
 
 .pubuItem .plimg {
   width: 100%;
-  height:330rpx;
+  height: 330rpx;
   border-radius: 10rpx;
 }
-.pubuname{
+
+.pubuname {
   font-size: 28rpx;
-  color: #333333;
+  color: #333;
 }
-.pububox{
+
+.pububox {
   display: flex;
   align-items: center;
 }
-.ex-juzi{
+
+.ex-juzi {
   display: flex;
-  align-items:center;
+  align-items: center;
 }
 
 /*************juzi****************/
@@ -244,7 +247,7 @@ swiper {
 .mtitle {
   font-size: 40rpx;
   color: #333;
-  font-weight:bold;
+  font-weight: bold;
 }
 
 .subtitle {
@@ -276,7 +279,7 @@ swiper {
 .labels-wrap {
   display: flex;
   align-items: center;
-  margin-top:20rpx;
+  margin-top: 20rpx;
 }
 
 .label {
@@ -296,37 +299,101 @@ swiper {
   background: #fcbf0a;
   color: #333;
 }
-.dis-wrap{
+
+.dis-wrap {
   display: flex;
   align-items: center;
-  margin-top:5rpx;
+  margin-top: 5rpx;
 }
-.from{
+
+.from {
   font-size: 22rpx;
-color: #999999;
+  color: #999;
 }
-.dis{font-size: 22rpx;
-color: #999999;}
-.pro-name{font-size: 28rpx;
-color: #333333;margin-top:15rpx;}
-.price-wrap{
+
+.dis {
+  font-size: 22rpx;
+  color: #999;
+}
+
+.pro-name {
+  font-size: 28rpx;
+  color: #333;
+  margin-top: 15rpx;
+}
+
+.price-wrap {
   display: flex;
   align-items: center;
-  margin-top:10rpx;
+  margin-top: 10rpx;
 }
-.p-wrap{
+
+.p-wrap {
   display: flex;
   align-items: center;
 }
-.now-price{font-size: 28rpx;
-color: #E83221;}
-.old-price{font-size: 24rpx;
-color: #999999;margin-left: 20rpx;text-decoration:line-through;}
-.count{font-size: 22rpx;
-color: #999999;}
-.xIcon{
-  transition: all .3 ease;
+
+.now-price {
+  font-size: 28rpx;
+  color: #e83221;
 }
-.rotate{
+
+.old-price {
+  font-size: 24rpx;
+  color: #999;
+  margin-left: 20rpx;
+  text-decoration: line-through;
+}
+
+.count {
+  font-size: 22rpx;
+  color: #999;
+}
+
+.xIcon {
+  transition: all 0.3 ease;
+}
+
+.rotate {
   transform: rotate(180deg);
 }
+
+.newerGetModalWrap {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+}
+.newerGetModal{
+  width:680rpx;
+  height:735rpx;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -367rpx;
+  margin-left: -320rpx;
+}
+.newerGetBtn {
+  width: 424rpx;
+  height: 83rpx;
+  position: absolute;
+  bottom: 110rpx;
+  left: 50%;
+  margin-left: -232rpx;
+}
+.newerGetClose{
+  width: 60rpx;
+  height: 60rpx;
+  position: absolute;
+  bottom: -50rpx;
+  left: 50%;
+  margin-left: -50rpx;
+}
+.noscroll {
+  height: 100%;
+  overflow: hidden;
+} 

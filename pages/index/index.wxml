@@ -1,5 +1,5 @@
 <wxs module="filter" src="../../utils/numFr.wxs"></wxs>
-<view class="homeTabPage" wx:if="{{curTabIndex===0}}">
+<view class="homeTabPage {{isShowNewerGet?'noscroll':''}}" wx:if="{{curTabIndex===0}}">
   <view class="locationWrap">
     <view class="title">桔集</view>
     <view class="location" bindtap="toCityList">{{locationName}}
@@ -109,7 +109,14 @@
         <view class="count">已售{{item.soldNum}}件</view>
       </view>
     </view>
+  </view>
 
+  <view class="newerGetModalWrap" wx:if="{{isShowNewerGet}}">
+    <view class="newerGetModal">
+      <image src="../../images/newerGetBg.png" style="width:680rpx;height:735rpx;"></image>
+      <image src="../../images/newerGetBtn.png" class="newerGetBtn" bindtap="getNewer"></image>
+      <image src="../../images/newerGetClose.png" class="newerGetClose" bindtap="closeGetNewer"></image>
+    </view>
   </view>
 </view>
 <!-- <view class="pubu">

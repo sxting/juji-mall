@@ -20,7 +20,7 @@ Page({
       title: ''
     });
     this.getInfo();
-    //查询新用户见面礼
+    
   },
   toJuzihl: function () {
     wx.navigateTo({
@@ -56,6 +56,10 @@ Page({
         if(res){
           this.setData({
             canSignIn: false
+          });
+          wx.showToast({
+            title: '签到成功！',
+            icon: 'none'
           });
           this.currentPoint();
         }

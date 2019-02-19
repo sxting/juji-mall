@@ -320,18 +320,18 @@ Page({
       pageNo: 1,
       sortArray: ['', 'ASC', 'ASC', '']
     });
-    if (this.data.locationName) { //已经定位了且位置名称存在
-      if (this.data.locationName != wx.getStorageSync('locationName')) {
+    if (wx.getStorageSync('selectCode')){//存在 说明用户选过异地城市
+      if (wx.getStorageSync('locationCode') != wx.getStorageSync('selectCode')) {
         //如果城市更换了 需要通过用户选择的城市编号code重新加载页面
-        console.log('用户更换城市为：' + wx.getStorageSync('locationName'));
+        console.log('用户更换城市为：' + wx.getStorageSync('selectName'));
         this.setData({
-          locationCode: wx.getStorageSync('locationCode'),
-          locationPcode: wx.getStorageSync('locationPcode'),
-          locationName: wx.getStorageSync('locationName')
+          locationCode: wx.getStorageSync('selectCode'),
+          locationPcode: wx.getStorageSync('selectPcode'),
+          locationName: wx.getStorageSync('selectName')
         });
         this.getDataByCity(); //首页数据已经更新
         //如果用getDataByCity更新了数据 就不能用getSelectProviderByLoc再获取 否则数据会覆盖
-      } else { //如果没有更换城市
+      } else { //如果没有更换城市 定位获取
         var curLatitude = wx.getStorageSync('curLatitude'),
           curLongitude = wx.getStorageSync('curLongitude');
         if (curLatitude && curLongitude) { //已经定位了并且有经纬度的情况
@@ -374,7 +374,7 @@ Page({
         } else { //如果一开始没有获取到经纬度
           console.log('一开始没有获取到经纬度');
           clearInterval(that.userLocationInterval);
-          this.userLocationInterval = setInterval(function() {
+          this.userLocationInterval = setInterval(function () {
             //判断是否有获取定位的权限
             wx.getSetting({
               success: (res) => {
@@ -382,7 +382,7 @@ Page({
                 if (res.authSetting['scope.userLocation']) { //如果已经授权
                   wx.getLocation({
                     type: 'wgs84',
-                    success: function(res) {
+                    success: function (res) {
                       wx.setStorageSync('curLatitude', res.latitude);
                       wx.setStorageSync('curLongitude', res.longitude);
                       console.log('--------位置调用成功--------');
@@ -397,13 +397,14 @@ Page({
                           console.log(res);
                           wx.setStorageSync('locationName', res.parentLocation.locationName.replace('市', ''));
                           wx.setStorageSync('locationCode', res.parentLocation.locationCode);
+                          wx.setStorageSync('locationPcode', res.parentLocation.parentLocation.locationCode);
                           that.setData({
                             locationName: res.parentLocation.locationName.replace('市', ''),
-                            locationCode: res.parentLocation.locationCode
+                            locationCode: res.parentLocation.locationCode,
+                            locationPcode: res.parentLocation.parentLocation.locationCode
                           });
                         }
                       });
-
 
                       that.getIndexData();
                       //根据位置查询附近精选
@@ -428,9 +429,8 @@ Page({
           }, 1000);
         }
       }
-      //如果相同的位置名称 首页数据不用更新
-    } else { //不存在 还没有进行定位 => 没有根据定位获取城市信息
-      //
+    }else{//不存在 定位获取
+
     }
 
   },

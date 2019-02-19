@@ -51,10 +51,9 @@ Page({
 
   //上拉加载
   onReachBottom() {
-    if(this.data.isFinall){
-      var pageNo = this.data.pageNo+1;
-      this.getComments(pageNo);
-    }
+    if(this.data.isFinall){return;}
+    var pageNo = this.data.pageNo+1;
+    this.getComments(pageNo);
   },
 
   onLoad: function(options) {

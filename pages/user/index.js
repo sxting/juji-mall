@@ -17,14 +17,11 @@ Page({
       wx.navigateTo({url: page});
   },
   onLoad:function(){
-    wx.setNavigationBarTitle({
-      title: ''
-    });
+    wx.setNavigationBarTitle({title: '我的'});
   },
   onShow: function () {
     this.getInfo();
   },
-
   getInfo:function(){
     service.userInfo({openId:wx.getStorageSync('openid')}).subscribe({
       next: res => {

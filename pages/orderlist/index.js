@@ -34,6 +34,8 @@ Page({
         var thisStatus = event.currentTarget.dataset['status'];
         this.setData({ curTabIndex: thisIndex });
         this.getData(thisStatus,1);
+        this.setData({isFinall:false});
+        this.setData({ pageNo: 1 });
     },
     getData: function(status,pageNo) {
         var obj = {
@@ -43,7 +45,8 @@ Page({
         }
         service.orderlist(obj).subscribe({
             next: res => {
-                if(res.content.length<20){
+                if(res.content.length<10){
+                  console.log("到底了");
                   this.setData({isFinall:true});
                 }else{
                   this.setData({isFinall:false});
@@ -67,8 +70,10 @@ Page({
 
     //上拉加载
     onReachBottom() {
+        if(this.data.isFinall){
+            return;
+        }
         var pageNo = this.data.pageNo+1;
-        this.setData({pageNo:pageNo});
         this.getData(this.data.status,pageNo);
     },
 

@@ -101,7 +101,9 @@
       <view class="pro-name">{{item.productName}}</view>
       <view class="price-wrap jc-sb">
         <view class="p-wrap">
-          <view class="now-price">{{item.price}}元</view>
+          <view class="now-price" wx:if="{{item.point>0}}">{{item.point}}桔子</view>
+          <view class="now-price" wx:if="{{item.point>0&&item.price>0}}">+</view>
+          <view class="now-price" wx:if="{{item.price>0}}">{{item.price}}元</view>
           <view class="old-price">{{item.originalPrice}}元</view>
         </view>
         <view class="count">已售{{item.soldNum}}件</view>

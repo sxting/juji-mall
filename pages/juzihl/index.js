@@ -14,7 +14,7 @@ Page({
     sortIndex: 1,
     pageNo: 1,
     pageSize: 2,
-    sortArray: ['', '', '', 'ASC', 'ASC', 'ASC', ''],
+    sortArray: ['', '', 'ASC', 'ASC', 'ASC', ''],
     providerId:''
   },
   getDataByCity: function () {
@@ -36,7 +36,7 @@ Page({
         console.log('--------选择省市县确认服务商信息后重新加载首页数据---------');
         var obj = {
           providerId: res.id,
-          type: 'PRODUCT',
+          type: 'POINT',
           sortField: 'IDX',
           sortOrder: 'ASC',
           pageNo: that.data.pageNo,
@@ -74,7 +74,7 @@ Page({
               //根据位置查询附近精选
               var obj = {
                 providerId: res1.id,
-                type: 'PRODUCT',
+                type: 'POINT',
                 sortField: 'IDX',
                 sortOrder: 'ASC',
                 pageNo: that.data.pageNo,
@@ -220,7 +220,7 @@ Page({
   toggleLabel: function(event) {
     let sortIndex = event.currentTarget.dataset['label'];
     console.log(sortIndex);
-    if (sortIndex != 1 && sortIndex != 2 && sortIndex != 3 && sortIndex != 7) {
+    if (sortIndex != 1 && sortIndex != 2 && sortIndex != 6) {
       if (this.data.sortIndex == sortIndex) { //两次相同 切换排序规则
         let arr = this.data.sortArray;
         console.log(arr);
@@ -247,7 +247,7 @@ Page({
         obj = {
           // providerId: '1215422531428605',
           providerId: this.data.providerId,
-          type: 'PRODUCT',
+          type: 'POINT',
           sortField: 'IDX',
           sortOrder: 'ASC',
           pageNo: this.data.pageNo,
@@ -260,18 +260,6 @@ Page({
         obj = {
           providerId: this.data.providerId,
           type: 'POINT',
-          sortField: 'IDX',
-          sortOrder: 'ASC',
-          pageNo: this.data.pageNo,
-          pageSize: this.data.pageSize,
-          longitude: longitude,
-          latitude: latitude
-        };
-        break;
-      case '3':
-        obj = {
-          providerId: this.data.providerId,
-          type: 'PRODUCT',
           sortField: 'CHEAP',
           sortOrder: 'ASC',
           pageNo: this.data.pageNo,
@@ -280,7 +268,7 @@ Page({
           latitude: latitude
         };
         break;
-      case '4':
+      case '3':
         obj = {
           providerId: this.data.providerId,
           type: 'POINT',
@@ -292,11 +280,23 @@ Page({
           latitude: latitude
         };
         break;
+      case '4':
+        obj = {
+          providerId: this.data.providerId,
+          type: 'POINT',
+          sortField: 'PRICE',
+          sortOrder: this.data.sortArray[Number(sortIndex) - 1],
+          pageNo: this.data.pageNo,
+          pageSize: this.data.pageSize,
+          longitude: longitude,
+          latitude: latitude
+        };
+        break;
       case '5':
         obj = {
           providerId: this.data.providerId,
-          type: 'PRODUCT',
-          sortField: 'PRICE',
+          type: 'POINT',
+          sortField: 'DISTANCE',
           sortOrder: this.data.sortArray[Number(sortIndex) - 1],
           pageNo: this.data.pageNo,
           pageSize: this.data.pageSize,
@@ -307,19 +307,7 @@ Page({
       case '6':
         obj = {
           providerId: this.data.providerId,
-          type: 'PRODUCT',
-          sortField: 'DISTANCE',
-          sortOrder: this.data.sortArray[Number(sortIndex) - 1],
-          pageNo: this.data.pageNo,
-          pageSize: this.data.pageSize,
-          longitude: longitude,
-          latitude: latitude
-        };
-        break;
-      case '7':
-        obj = {
-          providerId: this.data.providerId,
-          type: 'PRODUCT',
+          type: 'POINT',
           sortField: 'SOLDNUM',
           sortOrder: 'ASC',
           pageNo: this.data.pageNo,
@@ -378,7 +366,7 @@ Page({
     this.setData({
       sortIndex: 1,
       pageNo: 1,
-      sortArray: ['', '', '', 'ASC', 'ASC', 'ASC', ''],
+      sortArray: ['', '', 'ASC', 'ASC', 'ASC', ''],
     });
     if (this.data.locationName) { //已经定位了且位置名称存在
       if (this.data.locationName != wx.getStorageSync('locationName')) {
@@ -413,7 +401,7 @@ Page({
                 var obj = {
                   // providerId: res1.id,
                   providerId: that.data.providerId,
-                  type: 'PRODUCT',
+                  type: 'POINT',
                   sortField: 'IDX',
                   sortOrder: 'ASC',
                   pageNo: that.data.pageNo,
@@ -466,7 +454,7 @@ Page({
                       var obj = {
                         // providerId: res1.id,
                         providerId: that.data.providerId,
-                        type: 'PRODUCT',
+                        type: 'POINT',
                         sortField: 'IDX',
                         sortOrder: 'ASC',
                         pageNo: that.data.pageNo,
@@ -511,13 +499,15 @@ Page({
   onPullDownRefresh: function() {
     let that = this;
     this.setData({
-      pageNo: 1
+      pageNo: 1,
+      sortIndex:1,
+      sortArray: ['', '', 'ASC', 'ASC', 'ASC', '']
     });
     //根据位置查询附近精选
     var obj = {
       // providerId: res1.id,
       providerId: that.data.providerId,
-      type: 'PRODUCT',
+      type: 'POINT',
       sortField: 'IDX',
       sortOrder: 'ASC',
       pageNo: that.data.pageNo,
@@ -537,7 +527,7 @@ Page({
 
     let obj = {
       providerId: this.data.providerId,
-      type: 'PRODUCT',
+      type: 'POINT',
       sortField: 'IDX',
       sortOrder: 'ASC',
       pageNo: p,

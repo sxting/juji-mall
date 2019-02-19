@@ -64,7 +64,15 @@ Page({
       complete: () => wx.hideToast()
     })
   },
-  getListVoucher(code){
+  copyBtn: function (e) {
+    wx.setClipboardData({
+      data: this.data.orderInfo.orderId,
+      success: (res) => {
+        wx.showToast({title: '复制成功'});
+      }
+    });
+  },
+  getListVoucher:function(code){
     var obj = {
       code:code,
       openId:wx.getStorageSync('openid')

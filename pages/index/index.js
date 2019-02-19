@@ -25,7 +25,8 @@ Page({
     pageNo: 1,
     pageSize: 5,
     sortArray: ['', 'ASC', 'ASC', ''],
-    providerId: ''
+    providerId: '',
+    isShowNewerGet:false
   },
   onLoad: function(options) {
     console.log(options);
@@ -85,6 +86,41 @@ Page({
           }
         }
       }
+    });
+    //查询新用户见面礼
+    service.isNewer().subscribe({
+      next: res =>{
+        console.log(res)
+        if(res){
+          this.setData({
+            isShowNewerGet: true
+          });
+        }
+        
+      },
+      error: err => console.log(err)
+    })
+  },
+  closeGetNewer:function(){
+    this.setData({
+      isShowNewerGet: false
+    });
+  },
+  //领取桔集见面礼
+  getNewer:function(){
+    service.newerGet().subscribe({
+      next: res => {
+        console.log(res);
+        
+        this.setData({
+          isShowNewerGet: false
+        });
+        wx.showToast({
+          title: '领取成功！',
+          icon: 'none'
+        });
+      },
+      error: err => wx.showToast({ title: err})
     });
   },
   onShow: function() {
@@ -372,7 +408,20 @@ Page({
       longitude: wx.getStorageSync('curLongitude'),
       latitude: wx.getStorageSync('curLatitude')
     };
-    this.getRecommendPage(obj);
+    service.getRecommendPage(obj).subscribe({
+      next: res => {
+        console.log(res);
+        this.setData({
+          recommendPage: res.list
+        });
+      },
+      error: err => console.log(err),
+      complete: () => {
+        setTimeout(() => {
+          wx.stopPullDownRefresh()
+        }, 1000);
+      }
+    });
   },
   //获取位置的经纬度，然后根据经纬度获取用户所在城市名称和编号
   getCurLocation: function() {

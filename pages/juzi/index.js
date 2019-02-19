@@ -20,7 +20,7 @@ Page({
       title: ''
     });
     this.getInfo();
-    //查询新用户见面礼
+    
   },
   toJuzihl: function () {
     wx.navigateTo({
@@ -56,6 +56,10 @@ Page({
         if(res){
           this.setData({
             canSignIn: false
+          });
+          wx.showToast({
+            title: '签到成功！',
+            icon: 'none'
           });
           this.currentPoint();
         }
@@ -122,7 +126,21 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function() {
-    this.currentPoint();
+    service.currentPoint().subscribe({
+      next: res => {
+        console.log(res);
+        this.setData({
+          currentPointObj: res,
+          canSignIn: res.canSignIn
+        });
+      },
+      error: err => console.log(err),
+      complete: () => {
+        setTimeout(() => {
+          wx.stopPullDownRefresh()
+        }, 1000);
+      }
+    });
   },
 
   /**

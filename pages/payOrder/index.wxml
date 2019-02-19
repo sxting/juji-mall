@@ -2,7 +2,7 @@
 <view>
   <view class="tradeInfo" style="padding:20rpx 30rpx;">
     <view class="p15 ub ub-ac info">
-      <image class="goodImg udb" src="https://upic.juniuo.com/file/picture/{{productInfo.picId}}/resize_220_200/mode_fill" mode="widthFix"></image>
+      <image class="goodImg udb" src="{{productInfo.picId?'https://upic.juniuo.com/file/picture/'+productInfo.picId+'/resize_220_200/mode_fill':''}}" lazy-load="true" mode="widthFix"></image>
       <view class="ub-f1 goodMsg">
         <view class="goodTit">{{productInfo.productName}}</view>
         <view class="storeName">{{store.name}}</view>

@@ -6,16 +6,6 @@ import {
 } from 'utils/http';
 let service = {};
 let api = constant.apiUrl;
-//测试预下单 微信支付
-service.testPreOrder = (data) => {
-  let apiUrl = 'https://juji.juniuo.com/customer/order/testPreOrder.json';
-  return http.post(apiUrl, data);
-}
-//预下单 微信支付
-service.preOrder = (data) => {
-  let apiUrl = api + '/customer/order/preOrder.json';
-  return http.post(apiUrl, data);
-}
 
 // -------------------------------------橘子商城部分接口------------------------------------------
 
@@ -166,38 +156,6 @@ service.regist = () => {
   let apiUrl = api + '/usr/regist.json';
   return http.post(apiUrl);
 }
-
-/*会员关注*/
-service.attent = (data) => {
-  let apiUrl = api + '/usr/attent.json';
-  return http.post(apiUrl, data);
-}
-
-service.fanList = (data) => {
-  let apiUrl = api + '/usr/fans.json';
-  return http.get(apiUrl,data);
-}
-
-service.focus = (data) => {
-  let apiUrl = api + '/usr/focus.json';
-  return http.get(apiUrl,data);
-}
-
-service.userUpdate = (data) => {
-  let apiUrl = api + '/usr/update.json';
-  return http.post(apiUrl, data);
-}
-// --我的交易--
-service.payRecord = () => {
-  let apiUrl = api + '/usr/payRecord.json';
-  return http.post(apiUrl);
-}
-
-service.buyCardRecord = () => {
-  let apiUrl = api + '/usr/buyCardRecord.json';
-  return http.post(apiUrl);
-}
-
 
 module.exports = {
   service: service

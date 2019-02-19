@@ -18,7 +18,7 @@
                 </view>
             </view>
             <view class="conDiv ub ub-ac ub-pc ub-ver" wx:else>
-                <image class="nodataImg" mode="widthFix" src="../../images/null.png"></image>
+                <image class="nodataImg" mode="widthFix" src="../../images/null3.png"></image>
                 <view class="nodataTxt">你还没有收入哦~</view>
             </view>
         </view>
@@ -33,7 +33,7 @@
                 </view>
             </view>
             <view class="conDiv ub ub-ac ub-pc ub-ver" wx:else>
-                <image class="nodataImg" mode="widthFix" src="../../images/null.png"></image>
+                <image class="nodataImg" mode="widthFix" src="../../images/null3.png"></image>
                 <view class="nodataTxt">你还没有支出哦~</view>
             </view>
         </view>

@@ -122,7 +122,21 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function() {
-    this.currentPoint();
+    service.currentPoint().subscribe({
+      next: res => {
+        console.log(res);
+        this.setData({
+          currentPointObj: res,
+          canSignIn: res.canSignIn
+        });
+      },
+      error: err => console.log(err),
+      complete: () => {
+        setTimeout(() => {
+          wx.stopPullDownRefresh()
+        }, 1000);
+      }
+    });
   },
 
   /**

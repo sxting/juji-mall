@@ -515,7 +515,20 @@ Page({
       longitude: wx.getStorageSync('curLongitude'),
       latitude: wx.getStorageSync('curLatitude')
     };
-    this.getRecommendPage(obj);
+    service.getRecommendPage(obj).subscribe({
+      next: res => {
+        console.log(res);
+        this.setData({
+          recommendPage: res.list
+        });
+      },
+      error: err => console.log(err),
+      complete: () => {
+        setTimeout(() => {
+          wx.stopPullDownRefresh()
+        }, 1000);
+      }
+    });
   },
 
   /**

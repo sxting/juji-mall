@@ -2,13 +2,13 @@
   <view class="item" wx:for="{{commentlist}}" wx:key="{{index}}" data-comid="{{item.id}}" bindtap="toCommentDetail">
     <view class="nickMsg ub ub-ac">
       <image class="userImg" src="../../images/headimg.png"></image>
-      <view class="nickname">小仙女</view>
+      <view class="nickname">{{item.nickname}}</view>
       <view class="ub ub-f1 ub-ac ml10">
         <image class="icon_ping" src="../../images/icon_ped.png"></image>
       </view>
-      <view class="times">2018-01-01</view>
+      <view class="times">{{item.time}}</view>
     </view>
-    <view class="content">评价内容评价内容评价内容评价内容评价内容评价内容</view>
+    <view class="content">{{item.content}}</view>
     <view class="imglist">
       <image src="../../images/mendianimg.png"></image>
     </view>

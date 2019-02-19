@@ -48,7 +48,7 @@
     </view>
     <view class="orderInfo3 plr15 mt10">
         <view class="tit">订单信息</view>
-        <view class="txt" style="position:relative">订单编号：{{orderInfo.orderId}} <view class="btn ub ub-ac ub-pc">复制</view></view>
+        <view class="txt" style="position:relative">订单编号：{{orderInfo.orderId}} <view class="btn ub ub-ac ub-pc" bindtap="copyBtn">复制</view></view>
         <view class="txt">下单时间：{{orderInfo.dateCreated}}</view>
     </view>
 </view>

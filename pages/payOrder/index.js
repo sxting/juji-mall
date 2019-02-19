@@ -172,7 +172,12 @@ Page({
                   }
                 });
               },
-              error: err => console.log(err)
+              error: err => 
+                wx.showModal({
+                title: '错误',
+                content: err,
+              })
+              
             });
           } else {
             wx.showToast({
@@ -182,7 +187,10 @@ Page({
             });
           }
         },
-        error: err => console.log(err)
+        error: err => wx.showModal({
+          title: '错误',
+          content: err,
+        })
       })
     } else if (this.data.paytype == 2) {
       service.getPre({
@@ -225,7 +233,10 @@ Page({
                   url: '/pages/orderDetail/index?id=' + res1.orderId,
                 })
               },
-              error: err => console.log(err)
+              error: err => wx.showModal({
+                title: '错误',
+                content: err,
+              })
             });
           } else {
             wx.showToast({
@@ -235,7 +246,10 @@ Page({
             });
           }
         },
-        error: err => console.log(err)
+        error: err => wx.showModal({
+          title: '错误',
+          content: err,
+        })
       })
     } else {
       service.getPre({
@@ -302,7 +316,10 @@ Page({
                 }
               });
             },
-            error: err => console.log(err)
+            error: err => wx.showModal({
+              title: '错误',
+              content: err,
+            })
           });
 
 
@@ -323,7 +340,10 @@ Page({
           //   });
           // }
         },
-        error: err => console.log(err)
+        error: err => wx.showModal({
+          title: '错误',
+          content: err,
+        })
       })
     }
 

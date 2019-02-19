@@ -15,7 +15,8 @@ Page({
     citylist: [],
     imageWidth: '200px',
     locationName:'',
-    locationCode:''
+    locationCode:'',
+    locationPcode:''
 
   },
   getCitylist: function() {
@@ -31,11 +32,13 @@ Page({
     })
   },
   selectCity: function(e) {
-    var locationName = e.currentTarget.dataset['name'].replace('市', '');
-    var locationCode = e.currentTarget.dataset['code'];
-    wx.setStorageSync('locationName', locationName);
-    wx.setStorageSync('locationCode', locationCode);
-    app.globalData.locationName = locationName;
+    var selectCityName = e.currentTarget.dataset['name'].replace('市', '');
+    var selectPcode = e.currentTarget.dataset['pcode'];
+    var selectCode = e.currentTarget.dataset['code'];
+    wx.setStorageSync('selectCityName', selectCityName);
+    wx.setStorageSync('selectPcode', selectPcode);
+    wx.setStorageSync('selectCode', selectCode);
+    // app.globalData.locationName = locationName;
     wx.navigateBack({
       delta: 1
     });
@@ -60,6 +63,7 @@ Page({
           if (res.parentLocation.locationType == 'CITY') {
             this.setData({
               locationName: res.parentLocation.locationName.replace('市', ''),
+              locationPcode: res.parentLocation.parentLocation.locationCode,
               locationCode: res.parentLocation.locationCode
             });
           }

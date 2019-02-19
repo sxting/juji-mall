@@ -185,7 +185,7 @@ Page({
                         success: function(res2) { //res3是确认框返回的结果 是确认 还是取消
 
                           if (res2.confirm) {
-                            wx.setStorageSync('selectName', res1.parentLocation.locationName.replace('市', ''));
+                            wx.setStorageSync('selectCityName', res1.parentLocation.locationName.replace('市', ''));
                             wx.setStorageSync('selectCode', res1.parentLocation.locationCode);
                             wx.setStorageSync('selectPcode', res1.parentLocation.parentLocation.locationCode);
                             //如果是 切换到当前定位城市 通过selectPcode selectCode等查询代理商数据
@@ -198,7 +198,7 @@ Page({
                           } else if (res2.cancel) {
                             //如果否 不切换定位名称 继续使用用户选择的外地城市
                             that.setData({
-                              locationName: wx.getStorageSync('selectName'),
+                              locationName: wx.getStorageSync('selectCityName'),
                               locationPcode: wx.getStorageSync('selectPcode'),
                               locationCode: wx.getStorageSync('selectCode')
                             });
@@ -323,11 +323,11 @@ Page({
     if (wx.getStorageSync('selectCode')){//存在 说明用户选过异地城市
       if (wx.getStorageSync('locationCode') != wx.getStorageSync('selectCode')) {
         //如果城市更换了 需要通过用户选择的城市编号code重新加载页面
-        console.log('用户更换城市为：' + wx.getStorageSync('selectName'));
+        console.log('用户更换城市为：' + wx.getStorageSync('selectCityName'));
         this.setData({
           locationCode: wx.getStorageSync('selectCode'),
           locationPcode: wx.getStorageSync('selectPcode'),
-          locationName: wx.getStorageSync('selectName')
+          locationName: wx.getStorageSync('selectCityName')
         });
         this.getDataByCity(); //首页数据已经更新
         //如果用getDataByCity更新了数据 就不能用getSelectProviderByLoc再获取 否则数据会覆盖

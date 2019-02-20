@@ -153,7 +153,7 @@ Page({
 
     service.share(obj).subscribe({
       next: res => {
-        console.log('---------分享返回--------');
+        console.log('---------分享接口返回--------');
         console.log(res);
       },
       error: err => console.log(err),

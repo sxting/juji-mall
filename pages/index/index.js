@@ -8,16 +8,15 @@ import {
 var app = getApp();
 Page({
   data: {
+    locationPcode: '',
     locationCode: '',
     locationName: '',
     curTabIndex: 0,
     businessList: [],
     leavePage: false,
     autoplay: false,
-    current: 1,
     swiperH: '', //swiper高度
-    nowIdx: 1, //当前swiper索引
-    banners: ['../../images/homeBanner.png', '../../images/banner1.png', '../../images/freeGet.png'],
+    nowIdx: 0, //当前swiper索引
     slideShowList: [],
     pointProductList: [],
     recommendPage: [],
@@ -26,7 +25,7 @@ Page({
     pageSize: 5,
     sortArray: ['', 'ASC', 'ASC', ''],
     providerId: '',
-    isShowNewerGet:false
+    isShowNewerGet: false
   },
   onLoad: function(options) {
     console.log(options);
@@ -34,93 +33,282 @@ Page({
       title: ''
     });
     console.log('--------------index-onLoad-------------');
-    wx.getSetting({
-      success: (res) => {
-        console.log(res.authSetting['scope.userInfo']);
-        if (!res.authSetting['scope.userInfo']) {
-          wx.reLaunch({
-            url: '/pages/login/index'
-          });
-        } else { //如果已经授权
-          //判断rowData是否存在
-          if (wx.getStorageSync('rawData')) { //如果存在
 
-            wx.login({
-              success: res => {
-                console.log('code: ' + res.code);
-                console.log(constant.APPID);
-                wx.request({
-                  url: 'https://c.juniuo.com/shopping/user/login.json',
-                  method: 'GET',
-                  data: {
-                    code: res.code,
-                    appId: constant.APPID,
-                    isMock: false, //测试标记
-                    rawData: wx.getStorageSync('rawData')
-                  },
-                  header: {
-                    'content-type': 'application/json',
-                  },
-                  success: (res1) => {
-                    console.log(res1);
-                    if (res1.data.errorCode == '200') {
-                      wx.setStorageSync('token', res1.data.data.token);
-                      wx.setStorageSync('openid', res1.data.data.openId);
-                      wx.setStorageSync('userinfo', JSON.stringify(res1.data.data));
-                      this.getCurLocation(); //用户位置+位置名称
-                    } else {
-                      wx.showToast({
-                        title: '登录失败，错误码:' + res1.data.errorCode + ' 返回错误: ' + res1.data.errorInfo,
-                        icon: 'none',
-                        duration: 3000
-                      })
-                    }
-                  }
-                });
-              }
+    let that = this;
+
+    let p = new Promise(function(resolve, reject) {
+      console.log('Promise is ready!');
+      wx.getSetting({
+        success: (res) => {
+          console.log(res.authSetting['scope.userInfo']);
+          if (!res.authSetting['scope.userInfo']) {
+            wx.reLaunch({
+              url: '/pages/login/index'
             });
-          } else { //如果不存在rowData
-            wx.showToast({
-              title: '已授权但未能获取到rawData',
-            });
+          } else { //如果已经授权
+            //判断rowData是否存在
+            if (wx.getStorageSync('rawData')) { //如果存在
+              resolve();
+            } else { //如果不存在rowData
+              reject('未获取rawData');
+            }
           }
         }
-      }
+      });
     });
-    //查询新用户见面礼
-    service.isNewer().subscribe({
-      next: res =>{
-        console.log(res)
-        if(res){
-          this.setData({
-            isShowNewerGet: true
-          });
+
+
+    p.then(function() {
+
+      return new Promise(function(resolve1, reject1) {
+        wx.login({
+          success: res => {
+            console.log('code: ' + res.code);
+            console.log(constant.APPID);
+            resolve1(res.code);
+          }
+        });
+
+      })
+    }).then(function(code) {
+
+      return new Promise(function(resolve2, reject2) {
+        wx.request({
+          url: 'https://c.juniuo.com/shopping/user/login.json',
+          method: 'GET',
+          data: {
+            code: code,
+            appId: constant.APPID,
+            isMock: false, //测试标记
+            rawData: wx.getStorageSync('rawData')
+          },
+          header: {
+            'content-type': 'application/json',
+          },
+          success: (res1) => {
+            console.log(res1);
+
+            if (res1.data.errorCode == '200') {
+              wx.setStorageSync('token', res1.data.data.token);
+              wx.setStorageSync('openid', res1.data.data.openId);
+              wx.setStorageSync('userinfo', JSON.stringify(res1.data.data));
+
+              //成功登陆之后 查询新用户见面礼
+              service.isNewer().subscribe({
+                next: res2 => {
+                  console.log(res2)
+                  if (res2) {
+                    this.setData({
+                      isShowNewerGet: true
+                    });
+                  }
+
+                },
+                error: err => console.log(err)
+              });
+
+              resolve2();
+            } else {
+              reject2('登录失败，错误码:' + res1.data.errorCode + ' 返回错误: ' + res1.data.errorInfo);
+            }
+          }
+        });
+      });
+
+    }).then(function() {
+      console.log('---------用户位置--------');
+      return new Promise(function(resolve3, reject3) {
+        wx.getLocation({
+          type: 'wgs84',
+          success: function(res) { //res是经纬度
+            wx.setStorageSync('curLatitude', res.latitude);
+            wx.setStorageSync('curLongitude', res.longitude);
+            console.log('--------位置调用成功--------');
+            resolve3(res);
+          },
+          fail: function(err) {
+            console.log('---------位置调用失败或是被拒绝--------');
+            console.log(err);
+            reject('您没有授权获取您的地理位置，无法获取附近的优惠信息，您可以在小程序设置界面（「右上角」 - 「关于」 - 「右上角」 - 「设置」）中设置对该小程序的授权状态，并在授权之后重启小程序。');
+          }
+        })
+      });
+
+    }).then(function(res) {
+      return new Promise(function(resolve4, reject4) {
+        //获取用户当前城市信息
+        service.getCurrentLoc({
+          latitude: res.latitude,
+          longitude: res.longitude
+        }).subscribe({
+          next: res1 => { //res1是定位位置的省市区县
+            console.log(res1);
+
+            wx.setStorageSync('locationName', res1.parentLocation.locationName.replace('市', ''));
+            wx.setStorageSync('locationCode', res1.parentLocation.locationCode);
+            wx.setStorageSync('locationPcode', res1.parentLocation.parentLocation.locationCode);
+
+            if (res1.locationType != 'CITY') { //查出是区县 DISTRICT
+              if (res1.parentLocation.locationType == 'CITY') { //查出是城市
+                var oldcitycode = wx.getStorageSync('locationCode');
+                console.log(oldcitycode);
+                console.log(res1.parentLocation.locationCode);
+                if (!oldcitycode) { //如果不存在定位的城市 是第一次获取位置，不询问 根据定位查询代理商信息
+
+                  that.setData({
+                    locationName: res1.parentLocation.locationName.replace('市', ''),
+                    locationPcode: res1.parentLocation.parentLocation.locationCode,
+                    locationCode: res1.parentLocation.locationCode
+                  });
+                  //根据定位查询代理商信息
+                  resolve4(1); //1是定位获取代理商 2是区号获取代理商
+                } else { //存在定位的城市
+
+                  var oldselectCode = wx.getStorageSync('selectCode');
+
+                  if (oldselectCode) { //判断selectCityCode存在
+                    if (oldselectCode == wx.getStorageSync('locationCode')) { //如果相同 选择与定位的一样
+                      that.setData({
+                        locationName: res1.parentLocation.locationName.replace('市', ''),
+                        locationPcode: res1.parentLocation.parentLocation.locationCode,
+                        locationCode: res1.parentLocation.locationCode
+                      });
+                      resolve4(1);
+                    } else { //如果不等 选择了其他城市
+
+                      //showModal询问是否更换城市到当前定位城市
+
+                      wx.showModal({
+                        title: '提示',
+                        content: '是否切换到' + res1.parentLocation.locationName + '?',
+                        success: function(res2) { //res3是确认框返回的结果 是确认 还是取消
+
+                          if (res2.confirm) {
+                            wx.setStorageSync('selectCityName', res1.parentLocation.locationName.replace('市', ''));
+                            wx.setStorageSync('selectCode', res1.parentLocation.locationCode);
+                            wx.setStorageSync('selectPcode', res1.parentLocation.parentLocation.locationCode);
+                            //如果是 切换到当前定位城市 通过selectPcode selectCode等查询代理商数据
+                            that.setData({
+                              locationName: res1.parentLocation.locationName.replace('市', ''),
+                              locationPcode: res1.parentLocation.parentLocation.locationCode,
+                              locationCode: res1.parentLocation.locationCode
+                            });
+                            resolve4(1);
+                          } else if (res2.cancel) {
+                            //如果否 不切换定位名称 继续使用用户选择的外地城市
+                            that.setData({
+                              locationName: wx.getStorageSync('selectCityName'),
+                              locationPcode: wx.getStorageSync('selectPcode'),
+                              locationCode: wx.getStorageSync('selectCode')
+                            });
+                            resolve4(2);
+                          }
+                        }
+                      });
+
+                    }
+
+                  } else { //如果不存在 用户没有选择异地城市 直接根据定位查询代理商信息
+                    that.setData({
+                      locationName: res1.parentLocation.locationName.replace('市', ''),
+                      locationPcode: res1.parentLocation.parentLocation.locationCode,
+                      locationCode: res1.parentLocation.locationCode
+                    });
+                    resolve4(1);
+                  }
+
+                }
+
+              } else { //不是城市
+                //暂时不处理
+              }
+            } else { //查出是城市
+              //暂时不处理
+            }
+          },
+          error: err => reject4(err)
+        });
+      });
+    }).then(function(result) {
+      console.log('-----查询代理商信息-----');
+      console.log(result);
+      if (result == 1) {
+        console.log('根据定位查询代理商信息');
+
+        var obj = {
+          latitude: wx.getStorageSync('curLatitude'),
+          longitude: wx.getStorageSync('curLongitude')
         }
-        
-      },
-      error: err => console.log(err)
-    })
-  },
-  closeGetNewer:function(){
-    this.setData({
-      isShowNewerGet: false
-    });
-  },
-  //领取桔集见面礼
-  getNewer:function(){
-    service.newerGet().subscribe({
-      next: res => {
-        console.log(res);
-        
-        this.setData({
-          isShowNewerGet: false
+        //获取服务商信息 并加载首页数据
+        service.getSelectProviderByLoc(obj).subscribe({
+          next: res => {
+            console.log('----------服务商信息---------');
+            console.log(res);
+            if (res.id) { //如果存在服务商
+              that.setData({
+                providerId: res.id
+              });
+              that.getIndexData();
+              //根据位置查询附近精选
+              var obj1 = {
+                providerId: that.data.providerId,
+                type: 'PRODUCT',
+                sortField: 'IDX',
+                sortOrder: 'ASC',
+                pageNo: that.data.pageNo,
+                pageSize: that.data.pageSize,
+                longitude: wx.getStorageSync('curLongitude'),
+                latitude: wx.getStorageSync('curLatitude')
+              };
+              that.getRecommendPage(obj1);
+            } else { //如果不存在服务商
+              wx.showModal({
+                title: '错误',
+                content: '当前位置不存在服务商'
+              });
+            }
+          }
         });
-        wx.showToast({
-          title: '领取成功！',
-          icon: 'none'
+      } else if (result == 2) {
+        console.log('不切换定位名称 继续使用用户选择的外地城市');
+        var obj = {
+          provinceCode: that.data.locationPcode,
+          cityCode: that.data.locationCode,
+          areaCode: '',
+        };
+        //选择省市县确认服务商信息
+        service.getSelectHotCity(obj).subscribe({
+          next: res => {
+            console.log('--------选择省市县确认服务商信息---------');
+            console.log(res);
+            that.setData({
+              providerId: res.id,
+              pageNo: 1
+            });
+            console.log('--------选择省市县确认服务商信息后重新加载首页数据---------');
+            that.getIndexData();
+            var obj = {
+              providerId: res.id,
+              type: 'PRODUCT',
+              sortField: 'IDX',
+              sortOrder: 'ASC',
+              pageNo: that.data.pageNo,
+              pageSize: that.data.pageSize,
+              longitude: wx.getStorageSync('curLongitude'),
+              latitude: wx.getStorageSync('curLatitude')
+            };
+            that.getRecommendPage(obj);
+          },
+          error: err => console.log(err)
         });
-      },
-      error: err => wx.showToast({ title: err})
+      }
+
+    }).catch(function(err) {
+      console.log(err);
+      wx.showModal({
+        title: '错误',
+        content: err
+      });
     });
   },
   onShow: function() {
@@ -131,20 +319,26 @@ Page({
       pageNo: 1,
       sortArray: ['', 'ASC', 'ASC', '']
     });
-    if (this.data.locationName) { //已经定位了且位置名称存在
-      if (this.data.locationName != wx.getStorageSync('locationName')) {
+    if (wx.getStorageSync('selectCode')){//存在 说明用户选过异地城市
+      if (wx.getStorageSync('locationCode') != wx.getStorageSync('selectCode')) {
         //如果城市更换了 需要通过用户选择的城市编号code重新加载页面
-        console.log('用户更换城市为：' + wx.getStorageSync('locationName'));
+        console.log('用户更换城市为：' + wx.getStorageSync('selectCityName'));
         this.setData({
-          locationCode: wx.getStorageSync('locationCode'),
-          locationName: wx.getStorageSync('locationName')
+          locationCode: wx.getStorageSync('selectCode'),
+          locationPcode: wx.getStorageSync('selectPcode'),
+          locationName: wx.getStorageSync('selectCityName')
         });
         this.getDataByCity(); //首页数据已经更新
         //如果用getDataByCity更新了数据 就不能用getSelectProviderByLoc再获取 否则数据会覆盖
-      } else { //如果没有更换城市
+      } else { //如果没有更换城市 定位获取
+        console.log('没有更换城市');
+        this.setData({
+          locationCode: wx.getStorageSync('locationCode'),
+          locationPcode: wx.getStorageSync('locationPcode'),
+          locationName: wx.getStorageSync('locationName')
+        });
         var curLatitude = wx.getStorageSync('curLatitude'),
           curLongitude = wx.getStorageSync('curLongitude');
-        console.log();
         if (curLatitude && curLongitude) { //已经定位了并且有经纬度的情况
           var obj = {
             latitude: curLatitude,
@@ -185,7 +379,7 @@ Page({
         } else { //如果一开始没有获取到经纬度
           console.log('一开始没有获取到经纬度');
           clearInterval(that.userLocationInterval);
-          this.userLocationInterval = setInterval(function() {
+          this.userLocationInterval = setInterval(function () {
             //判断是否有获取定位的权限
             wx.getSetting({
               success: (res) => {
@@ -193,7 +387,7 @@ Page({
                 if (res.authSetting['scope.userLocation']) { //如果已经授权
                   wx.getLocation({
                     type: 'wgs84',
-                    success: function(res) {
+                    success: function (res) {
                       wx.setStorageSync('curLatitude', res.latitude);
                       wx.setStorageSync('curLongitude', res.longitude);
                       console.log('--------位置调用成功--------');
@@ -208,13 +402,14 @@ Page({
                           console.log(res);
                           wx.setStorageSync('locationName', res.parentLocation.locationName.replace('市', ''));
                           wx.setStorageSync('locationCode', res.parentLocation.locationCode);
+                          wx.setStorageSync('locationPcode', res.parentLocation.parentLocation.locationCode);
                           that.setData({
                             locationName: res.parentLocation.locationName.replace('市', ''),
-                            locationCode: res.parentLocation.locationCode
+                            locationCode: res.parentLocation.locationCode,
+                            locationPcode: res.parentLocation.parentLocation.locationCode
                           });
                         }
                       });
-
 
                       that.getIndexData();
                       //根据位置查询附近精选
@@ -239,11 +434,35 @@ Page({
           }, 1000);
         }
       }
-      //如果相同的位置名称 首页数据不用更新
-    } else { //不存在 还没有进行定位 => 没有根据定位获取城市信息
-      //
+    }else{//不存在 定位获取
+
     }
 
+  },
+  //关闭新用户见面礼
+  closeGetNewer: function() {
+    this.setData({
+      isShowNewerGet: false
+    });
+  },
+  //领取桔集见面礼
+  getNewer: function() {
+    service.newerGet().subscribe({
+      next: res => {
+        console.log(res);
+
+        this.setData({
+          isShowNewerGet: false
+        });
+        wx.showToast({
+          title: '领取成功！',
+          icon: 'none'
+        });
+      },
+      error: err => wx.showToast({
+        title: err
+      })
+    });
   },
   //swiper滑动事件
   swiperChange: function(e) {
@@ -298,7 +517,7 @@ Page({
     switch (sortIndex) {
       case '1':
         obj = {
-          providerId:this.data.providerId,
+          providerId: this.data.providerId,
           // providerId: '1215422531428605',
           type: 'PRODUCT',
           sortField: 'IDX',
@@ -423,170 +642,6 @@ Page({
       }
     });
   },
-  //获取位置的经纬度，然后根据经纬度获取用户所在城市名称和编号
-  getCurLocation: function() {
-    var that = this;
-    wx.getLocation({
-      type: 'wgs84',
-      success: function(res) {
-        wx.setStorageSync('curLatitude', res.latitude);
-        wx.setStorageSync('curLongitude', res.longitude);
-        console.log('--------位置调用成功--------');
-        var obj = {
-          latitude: res.latitude,
-          longitude: res.longitude
-        }
-        //获取服务商信息
-        service.getSelectProviderByLoc(obj).subscribe({
-          next: res1 => {
-            console.log('----------服务商信息---------');
-            console.log(res1);
-            if (res1.id) { //如果存在服务商
-              that.setData({
-                providerId: res1.id
-              });
-              that.getIndexData();
-              //根据位置查询附近精选
-              var obj1 = {
-                // providerId: res1.id,
-                providerId: that.data.providerId,
-                type: 'PRODUCT',
-                sortField: 'IDX',
-                sortOrder: 'ASC',
-                pageNo: that.data.pageNo,
-                pageSize: that.data.pageSize,
-                longitude: wx.getStorageSync('curLongitude'),
-                latitude: wx.getStorageSync('curLatitude')
-              };
-              that.getRecommendPage(obj1);
-            } else { //如果不存在服务商
-              wx.showToast({
-                title: '当前位置不存在服务商',
-                icon: 'none'
-              })
-            }
-          }
-        });
-
-        //获取用户当前城市信息
-        service.getCurrentLoc({
-          latitude: res.latitude,
-          longitude: res.longitude
-        }).subscribe({
-          next: res => {
-            console.log(res);
-            if (res.locationType != 'CITY') {
-              if (res.parentLocation.locationType == 'CITY') {
-                var oldcitycode = wx.getStorageSync('locationCode');
-                console.log(oldcitycode);
-                console.log(res.parentLocation.locationCode);
-                if (!oldcitycode) {
-                  //如果是第一次获取位置，不询问
-                  wx.setStorageSync('locationName', res.parentLocation.locationName.replace('市', ''));
-                  wx.setStorageSync('locationCode', res.parentLocation.locationCode);
-                  that.setData({
-                    locationName: res.parentLocation.locationName.replace('市', ''),
-                    locationCode: res.parentLocation.locationCode
-                  });
-                } else {
-
-                  if (app.globalData.locationName) { //存在用户自己选了其他城市不询问
-                    that.setData({
-                      locationName: wx.getStorageSync('locationName'),
-                      locationCode: wx.getStorageSync('locationCode')
-                    });
-                  } else { //不存在 用户没选
-                    if (oldcitycode != res.parentLocation.locationCode) {
-                      //询问是否切换到当前城市
-                      wx.showModal({
-                        title: '提示',
-                        content: '是否切换到' + res.parentLocation.locationName + '?',
-                        success: function(res1) {
-                          if (res1.confirm) {
-                            wx.setStorageSync('locationName', res.parentLocation.locationName.replace('市', ''));
-                            wx.setStorageSync('locationCode', res.parentLocation.locationCode);
-                            that.setData({
-                              locationName: res.parentLocation.locationName.replace('市', ''),
-                              locationCode: res.parentLocation.locationCode
-                            });
-                          } else if (res1.cancel) {
-                            that.setData({
-                              locationName: wx.getStorageSync('locationName'),
-                              locationCode: wx.getStorageSync('locationCode')
-                            });
-                          }
-
-                        },
-                        fail: function() {
-                          that.setData({
-                            locationName: wx.getStorageSync('locationName'),
-                            locationCode: wx.getStorageSync('locationCode')
-                          });
-                        }
-                      });
-
-                    } else {
-                      that.setData({
-                        locationName: wx.getStorageSync('locationName'),
-                        locationCode: wx.getStorageSync('locationCode')
-                      });
-                    }
-                  }
-
-
-                }
-
-
-              }
-            } else {
-              var oldcitycode = wx.getStorageSync('locationCode');
-              if (oldcitycode != res.locationCode) {
-                //询问是否切换到当前城市
-                wx.showModal({
-                  title: '提示',
-                  content: '是否切换到' + res.parentLocation.locationName + '?',
-                  success: function(res1) {
-                    if (res1.confirm) {
-                      wx.setStorageSync('locationName', res.locationName.replace('市', ''));
-                      wx.setStorageSync('locationCode', res.locationCode);
-                      that.setData({
-                        locationName: res.locationName.replace('市', ''),
-                        locationCode: res.locationCode
-                      });
-                    } else if (res1.cancel) {
-                      that.setData({
-                        locationName: wx.getStorageSync('locationName'),
-                        locationCode: wx.getStorageSync('locationCode')
-                      });
-                    }
-
-                  },
-                  fail: function() {
-                    that.setData({
-                      locationName: wx.getStorageSync('locationName'),
-                      locationCode: wx.getStorageSync('locationCode')
-                    });
-                  }
-                });
-
-              }
-            }
-
-          },
-          error: err => console.log(err),
-          complete: () => wx.hideToast()
-        });
-      },
-      fail: function(err) {
-        console.log('---------位置调用失败或是被拒绝--------');
-        console.log(err);
-        wx.showModal({
-          title: '无法获取地理位置',
-          content: '无法获取附近的优惠信息，您可以在小程序设置界面（「右上角」 - 「关于」 - 「右上角」 - 「设置」）中设置对该小程序的授权状态，并在授权之后重启小程序。'
-        })
-      }
-    })
-  },
   //根据服务商id（providerId）获取首页轮播图地址和桔子换礼的推荐
   getIndexData: function() {
     service.getIndexData({
@@ -622,7 +677,7 @@ Page({
   getDataByCity: function() {
     var that = this;
     var obj = {
-      provinceCode: this.data.locationCode,
+      provinceCode: this.data.locationPcode,
       cityCode: this.data.locationCode,
       areaCode: '',
     };

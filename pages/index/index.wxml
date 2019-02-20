@@ -8,8 +8,8 @@
   </view>
   <view class="toper">
     <swiper autoplay="{{autoplay}}" current="{{nowIdx}}" previous-margin="35rpx" next-margin="35rpx" interval="3000" duration="1000" indicator-color="#fff" indicator-active-color="#b55fff" bindchange="swiperChange" circular>
-      <swiper-item wx:for="{{banners}}" wx:key="unique">
-        <image src="{{item}}" class="slide-image  {{nowIdx==index?'img-scale':''}}" bindload="getHeight" mode="aspectFill"></image>
+      <swiper-item wx:for="{{slideShowList}}" wx:key="unique">
+        <image src="https://upic.juniuo.com/file/picture/{{item.imgId}}/resize_0_0/mode_fill" class="slide-image  {{nowIdx==index?'img-scale':''}}" bindload="getHeight" mode="aspectFill"></image>
       </swiper-item>
     </swiper>
   </view>

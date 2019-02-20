@@ -17,7 +17,6 @@ Page({
     autoplay: false,
     swiperH: '', //swiper高度
     nowIdx: 0, //当前swiper索引
-    banners: ['../../images/homeBanner.png', '../../images/banner1.png'],
     slideShowList: [],
     pointProductList: [],
     recommendPage: [],

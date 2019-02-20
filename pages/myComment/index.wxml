@@ -6,12 +6,13 @@
             <view class="nickname">{{item.nickName}}</view>
             <view class="ub ub-f1 ub-ac ml10">
                 <image class="icon_ping" wx:for="{{format.initArr(item.score)}}" src="../../images/icon_ped.png" wx:key="unique"></image>
+                <image class="icon_ping" wx:for="{{format.initArr(5-item.score)}}" src="../../images/icon_ping.png" wx:key="unique"></image>
             </view>
             <view class="times">{{item.dateCreated}}</view>
         </view>
         <view class="content">{{item.content}}</view>
         <view class="imglist" wx:if="{{item.imgIds.length>0}}">
-            <image wx:for="{{item.imgIds}}" wx:for-item='it' wx:key="unique" src="{{constant.basePicUrl}}{{it}}{{constant.basePicFix1}}"></image>
+            <image wx:for="{{item.imgIds}}" wx:for-item='it' wx:key="unique" src="{{it?constant.basePicUrl + it + constant.basePicFix1:''}}"></image>
         </view>
         <view class="p15 ub ub-ac info mt10" wx:for="{{item.orders.orderItemList}}" wx:for-item='it' wx:key="unique" bindtap="toComDetail" data-id="{{item.productId}}">
             <image class="goodImg udb" src="{{constant.basePicUrl}}{{it.picId}}{{constant.basePicFix1}}"></image>

@@ -46,7 +46,10 @@
   </view>
 </view>
 <view class="btn_bottom ub ub-ac plr15">
-  <view class="ub-f1" style="font-family: PingFangSC-Medium;font-size: 30rpx;font-weight:bold">金额：
+  <view class="ub-f1" style="font-family: PingFangSC-Medium;font-size: 30rpx;font-weight:bold"  wx:if="{{paytype==3}}">金额：
+    <text style="font-size: 30rpx;color: #E83121;">{{filter.toFix(productInfo.originalPrice*count)}}元</text>
+  </view>
+  <view class="ub-f1" style="font-family: PingFangSC-Medium;font-size: 30rpx;font-weight:bold"  wx:if="{{paytype==1||paytype==2}}">金额：
     <text style="font-size: 30rpx;color: #E83121;">{{filter.toFix(price*count)}}元</text>
   </view>
   <button class="btn_common ub-f1 ub ub-ac ub-pc" wx:if="{{paytype==1||paytype==3}}" bindtap="toPay">确认支付</button>

@@ -470,6 +470,18 @@ Page({
       nowIdx: e.detail.current
     })
   },
+  onTapBanner:function(e){
+    var index = e.currentTarget.dataset.index;
+    if (index==0){
+      wx.navigateTo({
+        url: '../juzihl/index'
+      });
+    }else{
+      wx.navigateTo({
+        url: '../article/index'
+      });
+    }
+  },
   //跳转到商品详情
   toComDetail: function(e) {
     var id = e.currentTarget.dataset.id;

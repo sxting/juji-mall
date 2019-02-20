@@ -16,7 +16,8 @@
     "pages/comDetail/index",
     "pages/juzi/index",
     "pages/bindPhone/index",
-    "pages/merchantsCanUse/index"
+    "pages/merchantsCanUse/index",
+    "pages/article/index"
   ],
   "permission": {
     "scope.userLocation": {

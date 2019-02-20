@@ -43,7 +43,10 @@
         </view>
         <view class="nodataDiv ub ub-ac ub-ver" hidden="{{!isShowNodata}}">
             <image class="nodataImg" src="../../images/null2.png"></image>
-            <view class="nodataTxt">订单为空~</view>
+            <view class="nodataTxt">
+              <view>您还没有相关的订单</view>
+              <view style="font-size:24rpx;color:#999;margin-top:20rpx;" bindtap="toIndex">去首页逛逛吧</view>
+            </view>
         </view>
     </view>
 </view>

@@ -122,7 +122,7 @@ Page({
           description: JSON.parse(res.product.description),
           recommendList: res.recommendList,
           store: res.store,
-          commentCount: res.commentList.length,
+          commentCount: res.commentCount,
           recommendCount: res.recommendList.length,
           note: JSON.parse(res.product.note),
           showPics: picsStrArr

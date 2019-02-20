@@ -1,6 +1,6 @@
 var filters = {
   toFix: function(value) {
-    return value.toFixed(2);
+    return Number(value / 100).toFixed(2);
   },
   toInt: function(value){
     return parseInt(value);

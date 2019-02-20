@@ -13,12 +13,14 @@
         <view class="imglist" wx:if="{{item.imgIds.length>0}}">
             <image wx:for="{{item.imgIds}}" wx:for-item='it' wx:key="unique" src="{{constant.basePicUrl}}{{it}}{{constant.basePicFix1}}"></image>
         </view>
-        <view class="p15 ub ub-ac info mt10" wx:for="{{item.orders.orderItemList}}" wx:for-item='it' wx:key="unique" bindtap="toComDetail" data-id="{{item.orders.providerId}}">
+        <view class="p15 ub ub-ac info mt10" wx:for="{{item.orders.orderItemList}}" wx:for-item='it' wx:key="unique" bindtap="toComDetail" data-id="{{item.productId}}">
             <image class="goodImg udb" src="{{constant.basePicUrl}}{{it.picId}}{{constant.basePicFix1}}"></image>
             <view class="ub-f1 goodMsg">
                 <view class="goodTit">{{it.productName}}</view>
                 <view class="storeName">{{it.merchantName}}</view>
-                <view class="goodAmount">{{it.point}}桔子<text>￥{{it.price}}</text></view>
+                <view class="goodAmount" wx:if="{{it.type=='POINT'}}">{{it.point}}桔子<text>{{format.toFix(it.originalPrice)}}元</text></view>
+                <view class="goodAmount" wx:elif="{{it.type=='PRODUCT'&&it.point!=0}}">{{it.point}}桔子+{{it.price}}元<text>{{format.toFix(it.originalPrice)}}元</text></view>
+                <view class="goodAmount" wx:elif="{{it.type=='PRODUCT'&&it.point==0}}">{{it.price}}元<text>{{format.toFix(it.originalPrice)}}元</text></view>
             </view>
         </view>
     </view>

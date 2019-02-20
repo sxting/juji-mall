@@ -15,7 +15,8 @@ Page({
     count: 1,
     price: 0,
     paytype: 1,
-    pointBalance: 0
+    pointBalance: 0,
+    alreadyPay: false
   },
   onLoad: function(options) {
     wx.setNavigationBarTitle({
@@ -104,28 +105,29 @@ Page({
     });
   },
   toPay: function() {
+    console.log('-------点击测试-------');
     var that = this;
-    if (this.data.count > this.data.productInfo.limitPerOrderNum) {
-      wx.showToast({
-        title: '该商品每日限购' + this.data.productInfo.limitPerOrderNum + '件，请重新选择数量',
-        icon: 'none',
-        duration: 2000
+    if (that.data.alreadyPay) {
+      return;
+    } else {
+      that.setData({
+        alreadyPay : true
       });
     }
-    if (this.data.paytype == 1) { //混合支付
+    if (that.data.paytype == 1) { //混合支付
       service.getPre({
-        productId: this.data.productId
+        productId: that.data.productId
       }).subscribe({
         next: res => {
           console.log('--------下单前数据校验1混合支付-------');
           console.log(res);
           if (res.pointBalance >= that.data.productInfo.point) {
             //判断条件 如果：过往已经购买的数量 + 要买的数量 > 限制购买的最大数量 处理：禁止下单
-            if (res.totalAll + this.data.count <= this.data.productInfo.limitMaxNum) {
+            if (res.totalAll + that.data.count <= that.data.productInfo.limitMaxNum) {
               //判断条件 如果：今日已经购买的数量 + 要买的数量 > 今日限制购买的最大数量 处理：禁止下单
-              if (res.totalToday + this.data.count <= this.data.productInfo.limitPerDayNum) {
+              if (res.totalToday + that.data.count <= that.data.productInfo.limitPerDayNum) {
                 //判断条件 如果：要买的数量 > 每个订单限制购买的最大数量 处理：禁止下单
-                if (this.data.count <= this.data.productInfo.limitPerOrderNum) {
+                if (that.data.count <= that.data.productInfo.limitPerOrderNum) {
                   //创建订单
                   var orderObj = {
                     itemRequests: [{
@@ -165,7 +167,10 @@ Page({
                           console.log(res2);
                           wx.redirectTo({
                             url: '/pages/orderDetail/index?id=' + res1.orderId,
-                          })
+                          });
+                          that.setData({
+                            alreadyPay: false
+                          });
                         },
                         fail(res2) {
                           console.log(res2);
@@ -176,33 +181,50 @@ Page({
                             });
                             //跳转到待支付列表
                             that.toMyOrder();
+                            that.setData({
+                              alreadyPay: false
+                            });
                           }
                         }
                       });
                     },
-                    error: err =>
+                    error: err =>{
                       wx.showModal({
                         title: '错误',
                         content: err,
-                      })
+                      });
+                      that.setData({
+                        alreadyPay: false
+                      });
+                    }
+                      
 
                   });
                 } else {
                   wx.showModal({
                     title: '提示',
-                    content: '该商品每单最多可以购买' + this.data.productInfo.limitPerOrderNum + '件'
+                    content: '该商品每单最多可以购买' + that.data.productInfo.limitPerOrderNum + '件'
+                  });
+                  that.setData({
+                    alreadyPay: false
                   });
                 }
               } else {
                 wx.showModal({
                   title: '提示',
-                  content: '该商品今日还可以购买' + (this.data.productInfo.limitPerDayNum - res.totalToday) + '件'
+                  content: '该商品今日还可以购买' + (that.data.productInfo.limitPerDayNum - res.totalToday) + '件'
+                });
+                that.setData({
+                  alreadyPay: false
                 });
               }
             } else {
               wx.showModal({
                 title: '提示',
-                content: '该商品您最多还可以购买' + (this.data.productInfo.limitMaxNum - res.totalAll) + '件'
+                content: '该商品您最多还可以购买' + (that.data.productInfo.limitMaxNum - res.totalAll) + '件'
+              });
+              that.setData({
+                alreadyPay: false
               });
             }
           } else {
@@ -210,27 +232,35 @@ Page({
               title: '提示',
               content: '当前桔子余额不足，请多赚些桔子吧'
             });
+            that.setData({
+              alreadyPay: false
+            });
           }
         },
-        error: err => wx.showModal({
-          title: '错误',
-          content: err,
-        })
+        error: err => {
+          wx.showModal({
+            title: '错误',
+            content: err,
+          });
+          that.setData({
+            alreadyPay: false
+          });
+        }
       })
-    } else if (this.data.paytype == 2) { //桔子支付
+    } else if (that.data.paytype == 2) { //桔子支付
       service.getPre({
-        productId: this.data.productId
+        productId: that.data.productId
       }).subscribe({
         next: res => {
           console.log('--------下单前数据校验2桔子支付-------');
           console.log(res);
           if (res.pointBalance >= that.data.productInfo.point) {
             //判断条件 如果：过往已经购买的数量 + 要买的数量 > 限制购买的最大数量 处理：禁止下单
-            if (res.totalAll + this.data.count <= this.data.productInfo.limitMaxNum) {
+            if (res.totalAll + that.data.count <= that.data.productInfo.limitMaxNum) {
               //判断条件 如果：今日已经购买的数量 + 要买的数量 > 今日限制购买的最大数量 处理：禁止下单
-              if (res.totalToday + this.data.count <= this.data.productInfo.limitPerDayNum) {
+              if (res.totalToday + that.data.count <= that.data.productInfo.limitPerDayNum) {
                 //判断条件 如果：要买的数量 > 每个订单限制购买的最大数量 处理：禁止下单
-                if (this.data.count <= this.data.productInfo.limitPerOrderNum) {
+                if (that.data.count <= that.data.productInfo.limitPerOrderNum) {
                   //创建订单
                   var orderObj = {
                     itemRequests: [{
@@ -262,29 +292,46 @@ Page({
                       //兑换成功什么都不返回
                       wx.redirectTo({
                         url: '/pages/orderDetail/index?id=' + res1.orderId,
-                      })
+                      });
+                      that.setData({
+                        alreadyPay: false
+                      });
                     },
-                    error: err => wx.showModal({
-                      title: '错误',
-                      content: err,
-                    })
+                    error: err => {
+                      wx.showModal({
+                        title: '错误',
+                        content: err,
+                      });
+                      that.setData({
+                        alreadyPay: false
+                      });
+                    }
                   });
                 } else {
                   wx.showModal({
                     title: '提示',
-                    content: '该商品每单最多可以购买' + this.data.productInfo.limitPerOrderNum + '件'
+                    content: '该商品每单最多可以购买' + that.data.productInfo.limitPerOrderNum + '件'
+                  });
+                  that.setData({
+                    alreadyPay: false
                   });
                 }
               } else {
                 wx.showModal({
                   title: '提示',
-                  content: '该商品今日还可以购买' + (this.data.productInfo.limitPerDayNum - res.totalToday) + '件'
+                  content: '该商品今日还可以购买' + (that.data.productInfo.limitPerDayNum - res.totalToday) + '件'
+                });
+                that.setData({
+                  alreadyPay: false
                 });
               }
             } else {
               wx.showModal({
                 title: '提示',
-                content: '该商品您最多还可以购买' + (this.data.productInfo.limitMaxNum - res.totalAll) + '件'
+                content: '该商品您最多还可以购买' + (that.data.productInfo.limitMaxNum - res.totalAll) + '件'
+              });
+              that.setData({
+                alreadyPay: false
               });
             }
           } else {
@@ -292,26 +339,34 @@ Page({
               title: '提示',
               content: '当前桔子余额不足，请多赚些桔子吧'
             });
+            that.setData({
+              alreadyPay: false
+            });
           }
         },
-        error: err => wx.showModal({
-          title: '错误',
-          content: err,
-        })
+        error: err => {
+          wx.showModal({
+            title: '错误',
+            content: err,
+          });
+          that.setData({
+            alreadyPay: false
+          });
+        }
       })
     } else { //微信支付
       service.getPre({
-        productId: this.data.productId
+        productId: that.data.productId
       }).subscribe({
         next: res => {
           console.log('--------下单前数据校验3微信支付-------');
           console.log(res);
           //判断条件 如果：过往已经购买的数量 + 要买的数量 > 限制购买的最大数量 处理：禁止下单
-          if (res.totalAll + this.data.count <= this.data.productInfo.limitMaxNum) {
+          if (res.totalAll + that.data.count <= that.data.productInfo.limitMaxNum) {
             //判断条件 如果：今日已经购买的数量 + 要买的数量 > 今日限制购买的最大数量 处理：禁止下单
-            if (res.totalToday + this.data.count <= this.data.productInfo.limitPerDayNum) {
+            if (res.totalToday + that.data.count <= that.data.productInfo.limitPerDayNum) {
               //判断条件 如果：要买的数量 > 每个订单限制购买的最大数量 处理：禁止下单
-              if (this.data.count <= this.data.productInfo.limitPerOrderNum) {
+              if (that.data.count <= that.data.productInfo.limitPerOrderNum) {
                 //创建订单
                 var orderObj = {
                   itemRequests: [{
@@ -351,7 +406,10 @@ Page({
                         console.log(res2);
                         wx.redirectTo({
                           url: '/pages/orderDetail/index?id=' + res1.orderId,
-                        })
+                        });
+                        that.setData({
+                          alreadyPay: false
+                        });
                       },
                       fail(res2) {
                         console.log(res2);
@@ -362,39 +420,61 @@ Page({
                           });
                           //跳转到待支付列表
                           that.toMyOrder();
+                          that.setData({
+                            alreadyPay: false
+                          });
                         }
 
                       }
                     });
                   },
-                  error: err => wx.showModal({
-                    title: '错误',
-                    content: err,
-                  })
+                  error: err => {
+                    wx.showModal({
+                      title: '错误',
+                      content: err,
+                    });
+                    that.setData({
+                      alreadyPay: false
+                    });
+                  }
                 });
               } else {
                 wx.showModal({
                   title: '提示',
-                  content: '该商品每单最多可以购买' + this.data.productInfo.limitPerOrderNum + '件'
+                  content: '该商品每单最多可以购买' + that.data.productInfo.limitPerOrderNum + '件'
+                });
+                that.setData({
+                  alreadyPay: false
                 });
               }
             } else {
               wx.showModal({
                 title: '提示',
-                content: '该商品今日还可以购买' + (this.data.productInfo.limitPerDayNum - res.totalToday) + '件'
+                content: '该商品今日还可以购买' + (that.data.productInfo.limitPerDayNum - res.totalToday) + '件'
+              });
+              that.setData({
+                alreadyPay: false
               });
             }
           } else {
             wx.showModal({
               title: '提示',
-              content: '该商品您最多还可以购买' + (this.data.productInfo.limitMaxNum - res.totalAll) + '件'
+              content: '该商品您最多还可以购买' + (that.data.productInfo.limitMaxNum - res.totalAll) + '件'
+            });
+            that.setData({
+              alreadyPay: false
             });
           }
         },
-        error: err => wx.showModal({
-          title: '错误',
-          content: err,
-        })
+        error: err => {
+          wx.showModal({
+            title: '错误',
+            content: err,
+          })
+          that.setData({
+            alreadyPay: false
+          });
+        }
       })
     }
 

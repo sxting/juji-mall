@@ -12,7 +12,6 @@ Page({
     storeId: '',
     showPics: [],
     commentList: [],
-    shortCommentList: [],
     productInfo: {},
     description:[],
     recommendList: [],
@@ -119,7 +118,6 @@ Page({
         });
         this.setData({
           commentList: res.commentList,
-          shortCommentList: res.commentList.slice(0, 1),
           productInfo: res.product,
           description: JSON.parse(res.product.description),
           recommendList: res.recommendList,

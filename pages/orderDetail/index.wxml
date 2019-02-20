@@ -18,7 +18,7 @@
                 </view>
                 <!-- 微信支付 -->
                 <view class="goodAmount" wx:elif="{{orderInfo.payType=='WECHAT'}}">
-                    <text>{{format.toFix(item.originalPrice)}}元</text>
+                    <text>{{format.toFix(item.paidAmount)}}元</text>
                 </view>
                 <view class="num">×{{item.num}}</view>
             </view>

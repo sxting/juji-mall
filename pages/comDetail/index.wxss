@@ -356,7 +356,7 @@
 
 .item {
   background: #fff;
-  padding: 0 30rpx;
+  padding: 0 30rpx 30rpx 30rpx;
 }
 
 .nickMsg .userImg {

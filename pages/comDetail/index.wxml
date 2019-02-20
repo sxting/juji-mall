@@ -85,7 +85,7 @@
   </view>
 
   <view class="yongkaxuzhi-wrap" style="margin-top:20rpx;">
-    <view class="yongkaxuzhi row jc-sb" bindtap="toCommentList">
+    <view class="yongkaxuzhi row jc-sb">
       <view style="font-size: 30rpx;color: #333333;font-weight: bolder;">走心评价({{commentCount}})</view>
       <view class="row" bindtap="toCommentList" wx:if="{{commentCount>2}}">
         <view style="font-size:24rpx;color:#999999;">查看全部</view>
@@ -93,18 +93,19 @@
       </view>
     </view>
 
-    <view class="item" wx:for="{{shortCommentList}}" wx:key="{{index}}" data-comid="{{item.id}}" bindtap="toCommentDetail">
+    <view class="item" wx:for="{{commentList}}" wx:key="{{index}}" data-comid="{{item.id}}" bindtap="toCommentDetail">
       <view class="nickMsg ub ub-ac">
-        <image class="userImg" src="../../images/headimg.png"></image>
+        <image class="userImg" src="{{item.avatar?item.avatar:''}}"></image>
         <view class="nickname">{{item.nickName}}</view>
         <view class="ub ub-f1 ub-ac ml10">
-          <image class="icon_ping" src="../../images/icon_ping.png" wx:for="{{item.score}}" wx:key="{{index}}"></image>
+          <image class="icon_ping" src="../../images/icon_ped.png" wx:for="{{item.score}}" wx:key="un"></image>
+          <image class="icon_ping" src="../../images/icon_ping.png" wx:for="{{5-item.score}}" wx:key="un"></image>
         </view>
-        <view class="times" hidden="{{true}}">2018-01-01 01:00:00</view>
+        <view class="times" hidden="{{true}}">{{item.dateCreated}}</view>
       </view>
       <view class="content">{{item.content}}</view>
-      <view class="imglist" hidden="{{true}}">
-        <image src="../../images/mendianimg.png"></image>
+      <view class="imglist" wx:if="{{item.imgIds.length > 0}}">
+        <image wx:for="{{filter.toSplitImgs(item.imgIds)}}"  wx:for-item='it' wx:key="unique" src="{{it?'https://upic.juniuo.com/file/picture/' + it + '/resize_320_0/mode_fill':''}}"></image>
       </view>
     </view>
   </view>

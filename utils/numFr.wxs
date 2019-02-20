@@ -1,12 +1,15 @@
 var filters = {
   toFix: function(value) {
-    return value.toFixed(2);
+    return Number(value / 100).toFixed(2);
   },
   toInt: function(value){
     return parseInt(value);
   },
   toDis: function (value){
     return Number(value/1000).toFixed(2);
+  },
+  toSplitImgs: function(value){
+    return value.split(',');
   }
 }
 
@@ -44,5 +47,6 @@ module.exports = {
   formatStatus:formatStatus,
   toInt: filters.toInt,
   toDis: filters.toDis,
+  toSplitImgs: filters.toSplitImgs,
   initArr: initArr
 }

@@ -171,8 +171,9 @@ Page({
     };
     this.share(obj);
     return {
-      title: '朋友给你分享了桔集生活，快来看看吧！',
-      path: '/pages/index/index'
+      title: '朋友给你分享了桔集，快来看看吧！',
+      path: '/pages/index/index',
+      imageUrl: '/images/shareMinPro.png'
     }
   }
 })

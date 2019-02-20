@@ -1,16 +1,18 @@
+<wxs module="filter" src="../../utils/numFr.wxs"></wxs>
 <view class="main">
   <view class="item" wx:for="{{commentlist}}" wx:key="{{index}}" data-comid="{{item.id}}" bindtap="toCommentDetail">
     <view class="nickMsg ub ub-ac">
-      <image class="userImg" src="../../images/headimg.png"></image>
+      <image class="userImg" src="{{item.avatar?item.avatar:''}}"></image>
       <view class="nickname">{{item.nickname}}</view>
       <view class="ub ub-f1 ub-ac ml10">
-        <image class="icon_ping" src="../../images/icon_ped.png"></image>
+          <image class="icon_ping" src="../../images/icon_ped.png" wx:for="{{item.score}}" wx:key="un"></image>
+          <image class="icon_ping" src="../../images/icon_ping.png" wx:for="{{5-item.score}}" wx:key="un"></image>
       </view>
-      <view class="times">{{item.time}}</view>
+      <view class="times">{{item.dateCreated}}</view>
     </view>
     <view class="content">{{item.content}}</view>
-    <view class="imglist">
-      <image src="../../images/mendianimg.png"></image>
+    <view class="imglist" wx:if="{{item.imgIds.length > 0}}">
+      <image wx:for="{{filter.toSplitImgs(item.imgIds)}}"  wx:for-item='it' wx:key="unique" src="{{it?'https://upic.juniuo.com/file/picture/' + it + '/resize_320_0/mode_fill':''}}"></image>
     </view>
   </view>
 </view>

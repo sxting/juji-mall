@@ -19,6 +19,9 @@ Page({
         this.setData({ curTabIndex: options.index,status:options.status });
         this.getData(options.status,1);
     },
+    toIndex:function(){
+      wx.switchTab({ url: "/pages/index/index" });
+    },
     toDetail: function(e) {
         var id = e.currentTarget.dataset.id;
         var status = e.currentTarget.dataset.status;

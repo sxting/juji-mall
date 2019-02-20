@@ -470,6 +470,13 @@ Page({
       nowIdx: e.detail.current
     })
   },
+  //点击banner
+  onTapBanner:function(e){
+    var link = e.currentTarget.dataset.link;
+      wx.navigateTo({
+        url: '..'+link
+      });
+  },
   //跳转到商品详情
   toComDetail: function(e) {
     var id = e.currentTarget.dataset.id;

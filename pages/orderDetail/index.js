@@ -56,7 +56,7 @@ Page({
         this.setData({orderInfo: res});
         this.setData({preOrderStr:res.preOrderStr});
         if(res.status=='PAID'){
-          barcode('barcode', res.vouchers[0].voucherCode, 680, 200);
+          barcode('barcode', res.vouchers[0].voucherCode, 640, 136);
           this.getListVoucher(res.vouchers[0].voucherCode);
         }
       },

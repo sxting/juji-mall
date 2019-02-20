@@ -470,17 +470,12 @@ Page({
       nowIdx: e.detail.current
     })
   },
+  //点击banner
   onTapBanner:function(e){
-    var index = e.currentTarget.dataset.index;
-    if (index==0){
+    var link = e.currentTarget.dataset.link;
       wx.navigateTo({
-        url: '../juzihl/index'
+        url: '..'+link
       });
-    }else{
-      wx.navigateTo({
-        url: '../article/index'
-      });
-    }
   },
   //跳转到商品详情
   toComDetail: function(e) {

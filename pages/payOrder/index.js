@@ -32,7 +32,7 @@ Page({
       this.getPointBalance();
     } else {
       wx.showToast({
-        title: '当前商品错误，原因 id=' + options.id + ' storeid=' + options.storeid + ' paytype=' + options.paytype,
+        title: '当前商品错误id=' + options.id + ' storeid=' + options.storeid + ' paytype=' + options.paytype,
         icon: 'none',
         duration: 2000
       });
@@ -188,7 +188,7 @@ Page({
 
                   });
                 } else {
-                  wx.showToast({
+                  wx.showModal({
                     title: '提示',
                     content: '该商品每单最多可以购买' + this.data.productInfo.limitPerOrderNum + '件'
                   });
@@ -270,9 +270,9 @@ Page({
                     })
                   });
                 } else {
-                  wx.showToast({
+                  wx.showModal({
                     title: '提示',
-                    cotent: '该商品每单最多可以购买' + this.data.productInfo.limitPerOrderNum + '件'
+                    content: '该商品每单最多可以购买' + this.data.productInfo.limitPerOrderNum + '件'
                   });
                 }
               } else {

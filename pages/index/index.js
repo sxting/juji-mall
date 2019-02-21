@@ -531,8 +531,8 @@ Page({
           sortOrder: 'ASC',
           pageNo: this.data.pageNo,
           pageSize: this.data.pageSize,
-          longitude: '116.470959',
-          latitude: '39.992368'
+          longitude: wx.getStorageSync('curLongitude'),
+          latitude: wx.getStorageSync('curLatitude')
         };
         break;
       case '2':
@@ -543,8 +543,8 @@ Page({
           sortOrder: this.data.sortArray[Number(sortIndex) - 1],
           pageNo: this.data.pageNo,
           pageSize: this.data.pageSize,
-          longitude: '116.470959',
-          latitude: '39.992368'
+          longitude: wx.getStorageSync('curLongitude'),
+          latitude: wx.getStorageSync('curLatitude')
         };
         break;
       case '3':
@@ -555,8 +555,8 @@ Page({
           sortOrder: this.data.sortArray[Number(sortIndex) - 1],
           pageNo: this.data.pageNo,
           pageSize: this.data.pageSize,
-          longitude: '116.470959',
-          latitude: '39.992368'
+          longitude: wx.getStorageSync('curLongitude'),
+          latitude: wx.getStorageSync('curLatitude')
         };
         break;
       case '4':
@@ -567,8 +567,8 @@ Page({
           sortOrder: 'ASC',
           pageNo: this.data.pageNo,
           pageSize: this.data.pageSize,
-          longitude: '116.470959',
-          latitude: '39.992368'
+          longitude: wx.getStorageSync('curLongitude'),
+          latitude: wx.getStorageSync('curLatitude')
         };
         break;
     }

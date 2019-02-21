@@ -32,7 +32,7 @@
     <view class="mtitle">桔子换礼</view>
     <view class="mRow jc-sb" style="margin-top:5rpx;">
       <view class="subtitle">让生活“换”然一新</view>
-      <view class="moreWrap" wx:if="{{locationName}}"  bindtap="toJuzihl">
+      <view class="moreWrap" wx:if="{{locationName}}" bindtap="toJuzihl">
         <view class="more">更多</view>
         <image src="../../images/arrow-right.png" style="width:10rpx;height:18rpx;"></image>
       </view>
@@ -40,33 +40,33 @@
     <view class="pubu">
       <view class="pubuItem">
         <view class="cardWrap padr10">
-        <view class="card" wx:for="{{pointProductList}}" wx:key="unique" bindtap="toComDetail" data-id="{{item.productId}}" data-storeid="{{item.nearStore.id}}" wx:if="{{index%2 == 0}}">
-          <image src="https://upic.juniuo.com/file/picture/{{item.picId}}/resize_330_330/mode_fill"  lazy-load="true" mode="aspectFill" class="plimg"></image>
-          <view class="pubuname">{{item.productName}}</view>
-          <view class="pububox">
-            <view class="ex-juzi">
-            <view style="font-size: 28rpx;color: #E83221;font-weight:bold;">{{item.point}}</view>
-            <view style="font-size: 22rpx;color: #E83221;font-weight:bold;">桔子</view>
+          <view class="card" wx:for="{{pointProductList}}" wx:key="unique" bindtap="toComDetail" data-id="{{item.productId}}" data-storeid="{{item.nearStore.id}}" wx:if="{{index%2 == 0}}">
+            <image src="https://upic.juniuo.com/file/picture/{{item.picId}}/resize_330_330/mode_fill" lazy-load="true" mode="aspectFill" class="plimg"></image>
+            <view class="pubuname">{{item.productName}}</view>
+            <view class="pububox">
+              <view class="ex-juzi">
+                <view style="font-size: 28rpx;color: #E83221;font-weight:bold;">{{item.point}}</view>
+                <view style="font-size: 22rpx;color: #E83221;font-weight:bold;">桔子</view>
+              </view>
+              <view class="old-price">{{item.originalPrice}}元</view>
             </view>
-            <view class="old-price">{{item.originalPrice}}元</view>
           </view>
-        </view>
         </view>
       </view>
 
       <view class="pubuItem">
         <view class="cardWrap padl10">
-        <view class="card" wx:for="{{pointProductList}}" wx:key="unique" bindtap="toComDetail"  data-id="{{item.productId}}" data-storeid="{{item.nearStore.id}}" wx:if="{{index%2!=0}}">
-          <image src="https://upic.juniuo.com/file/picture/{{item.picId}}/resize_330_330/mode_fill" lazy-load="true" mode="aspectFill" class="plimg"></image>
-          <view class="pubuname">{{item.productName}}</view>
-          <view class="pububox">
-            <view class="ex-juzi">
-            <view style="font-size: 28rpx;color: #E83221;font-weight:bold;">{{item.point}}</view>
-            <view style="font-size: 22rpx;color: #E83221;font-weight:bold;">桔子</view>
+          <view class="card" wx:for="{{pointProductList}}" wx:key="unique" bindtap="toComDetail" data-id="{{item.productId}}" data-storeid="{{item.nearStore.id}}" wx:if="{{index%2!=0}}">
+            <image src="https://upic.juniuo.com/file/picture/{{item.picId}}/resize_330_330/mode_fill" lazy-load="true" mode="aspectFill" class="plimg"></image>
+            <view class="pubuname">{{item.productName}}</view>
+            <view class="pububox">
+              <view class="ex-juzi">
+                <view style="font-size: 28rpx;color: #E83221;font-weight:bold;">{{item.point}}</view>
+                <view style="font-size: 22rpx;color: #E83221;font-weight:bold;">桔子</view>
+              </view>
+              <view class="old-price">{{item.originalPrice}}元</view>
             </view>
-            <view class="old-price">{{item.originalPrice}}元</view>
           </view>
-        </view>
         </view>
       </view>
 
@@ -75,7 +75,8 @@
 
   <!-- 桔子球 -->
   <view class="juziqiu">
-    <view style="font-size: 24rpx;color: #333333;font-weight:bold;text-align:center;margin-top:24rpx"><text style="font-size: 30rpx;color: #151515;">988</text>桔子</view>
+    <view style="font-size: 24rpx;color: #333333;font-weight:bold;text-align:center;margin-top:24rpx">
+      <text style="font-size: 30rpx;color: #151515;">988</text>桔子</view>
     <view class="ub ub-ac ub-pc">
       <text style="font-size: 20rpx;color: #333333;">去赚取</text>
       <image src="../../images/toPointList.png" style="width:12rpx;height:17rpx;margin-left:10rpx;"></image>
@@ -87,18 +88,18 @@
     <view class="subtitle" style="margin-top:10rpx;">精选好物，先到先得</view>
     <view class="labels-wrap">
       <view class="label {{sortIndex==1?'label-active':''}}" data-label="1" bindtap="toggleLabel">
-      综合</view>
+        综合</view>
       <view class="label {{sortIndex==2?'label-active':''}}" data-label="2" bindtap="toggleLabel">
-      价格
-      <image src="{{sortIndex==2?'../../images/sort_top_active.png':'../../images/sort_top.png'}}" class="xIcon {{sortIndex==2&&sortArray[sortIndex - 1]=='DESC'?'rotate':''}}" style="width:13rpx;height:18rpx;margin-left:10rpx;"></image>
+        价格
+        <image src="{{sortIndex==2?'../../images/sort_top_active.png':'../../images/sort_top.png'}}" class="xIcon {{sortIndex==2&&sortArray[sortIndex - 1]=='DESC'?'rotate':''}}" style="width:13rpx;height:18rpx;margin-left:10rpx;"></image>
       </view>
       <view class="label {{sortIndex==3?'label-active':''}}" data-label="3" bindtap="toggleLabel">
-      距离
-      <image src="{{sortIndex==3?'../../images/sort_top_active.png':'../../images/sort_top.png'}}" class="xIcon {{sortIndex==3&&sortArray[sortIndex - 1]=='DESC'?'rotate':''}}"  style="width:13rpx;height:18rpx;margin-left:10rpx;"></image>
+        距离
+        <image src="{{sortIndex==3?'../../images/sort_top_active.png':'../../images/sort_top.png'}}" class="xIcon {{sortIndex==3&&sortArray[sortIndex - 1]=='DESC'?'rotate':''}}" style="width:13rpx;height:18rpx;margin-left:10rpx;"></image>
       </view>
       <view class="label {{sortIndex==4?'label-active':''}}" data-label="4" bindtap="toggleLabel">
-      销量
-      <image src="{{sortIndex==4?'../../images/label_xl_active.png':'../../images/label_xl.png'}}"  style="width:15rpx;height:16rpx;margin-left:10rpx;"></image>
+        销量
+        <image src="{{sortIndex==4?'../../images/label_xl_active.png':'../../images/label_xl.png'}}" style="width:15rpx;height:16rpx;margin-left:10rpx;"></image>
       </view>
     </view>
     <view class="jingxuanlist" wx:for="{{recommendPage}}" wx:key="unique" bindtap="toComDetail" data-id="{{item.productId}}" data-storeid="{{item.nearStore.id}}">

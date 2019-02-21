@@ -74,9 +74,9 @@
   </view>
 
   <!-- 桔子球 -->
-  <view class="juziqiu">
+  <view class="juziqiu" bindtap="onTapJuziqiu">
     <view style="font-size: 24rpx;color: #333333;font-weight:bold;text-align:center;margin-top:24rpx">
-      <text style="font-size: 30rpx;color: #151515;">988</text>桔子</view>
+      <text style="font-size: 30rpx;color: #151515;">{{filter.toFloor(pointBalance)}}</text>桔子</view>
     <view class="ub ub-ac ub-pc">
       <text style="font-size: 20rpx;color: #333333;">去赚取</text>
       <image src="../../images/toPointList.png" style="width:12rpx;height:17rpx;margin-left:10rpx;"></image>

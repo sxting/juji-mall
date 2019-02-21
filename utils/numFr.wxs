@@ -10,6 +10,9 @@ var filters = {
   },
   toSplitImgs: function(value){
     return value.split(',');
+  },
+  toFloor:function(value){
+    return value > 999 ? Math.floor(value/1000)+'k':value;
   }
 }
 
@@ -48,5 +51,6 @@ module.exports = {
   toInt: filters.toInt,
   toDis: filters.toDis,
   toSplitImgs: filters.toSplitImgs,
+  toFloor: filters.toFloor,
   initArr: initArr
 }

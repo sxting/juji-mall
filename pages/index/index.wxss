@@ -402,7 +402,7 @@ swiper {
 .juziqiu{
   position: fixed;
   right:30rpx;
-  top:880rpx;
+  bottom:120rpx;
   width:120rpx;
   height:120rpx;
   border-radius: 50%;

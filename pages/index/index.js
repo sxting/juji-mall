@@ -25,7 +25,8 @@ Page({
     pageSize: 5,
     sortArray: ['', 'ASC', 'ASC', ''],
     providerId: '',
-    isShowNewerGet: false
+    isShowNewerGet: false,
+    pointBalance: 0
   },
   onLoad: function(options) {
     console.log(options);
@@ -105,6 +106,15 @@ Page({
 
                 },
                 error: err => console.log(err)
+              });
+
+              service.currentPoint().subscribe({
+                next: res3 => {
+                  console.log(res3);
+                  that.setData({
+                    pointBalance: res3.pointBalance,
+                  });
+                }
               });
 
               resolve2();
@@ -574,6 +584,12 @@ Page({
     }
     console.log(obj);
     this.getRecommendPage(obj);
+  },
+  //点击桔子球
+  onTapJuziqiu:function(){
+    wx.switchTab({
+      url: '../juzi/index',
+    })
   },
   //点击更多 跳转到桔子换礼列表页
   toJuzihl: function() {

@@ -274,7 +274,7 @@ Page({
         obj = {
           providerId: this.data.providerId,
           type: 'POINT',
-          sortField: 'IDX',
+          sortField: 'POINT',
           sortOrder: this.data.sortArray[Number(sortIndex) - 1],
           pageNo: this.data.pageNo,
           pageSize: this.data.pageSize,

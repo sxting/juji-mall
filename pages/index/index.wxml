@@ -45,8 +45,8 @@
           <view class="pubuname">{{item.productName}}</view>
           <view class="pububox">
             <view class="ex-juzi">
-            <view style="font-size: 28rpx;color: #E83221;">{{item.point}}</view>
-            <view style="font-size: 22rpx;color: #E83221;">桔子</view>
+            <view style="font-size: 28rpx;color: #E83221;font-weight:bold;">{{item.point}}</view>
+            <view style="font-size: 22rpx;color: #E83221;font-weight:bold;">桔子</view>
             </view>
             <view class="old-price">{{item.originalPrice}}元</view>
           </view>
@@ -61,8 +61,8 @@
           <view class="pubuname">{{item.productName}}</view>
           <view class="pububox">
             <view class="ex-juzi">
-            <view style="font-size: 28rpx;color: #E83221;">{{item.point}}</view>
-            <view style="font-size: 22rpx;color: #E83221;">桔子</view>
+            <view style="font-size: 28rpx;color: #E83221;font-weight:bold;">{{item.point}}</view>
+            <view style="font-size: 22rpx;color: #E83221;font-weight:bold;">桔子</view>
             </view>
             <view class="old-price">{{item.originalPrice}}元</view>
           </view>
@@ -70,6 +70,15 @@
         </view>
       </view>
 
+    </view>
+  </view>
+
+  <!-- 桔子球 -->
+  <view class="juziqiu">
+    <view style="font-size: 24rpx;color: #333333;font-weight:bold;text-align:center;margin-top:24rpx"><text style="font-size: 30rpx;color: #151515;">988</text>桔子</view>
+    <view class="ub ub-ac ub-pc">
+      <text style="font-size: 20rpx;color: #333333;">去赚取</text>
+      <image src="../../images/toPointList.png" style="width:12rpx;height:17rpx;margin-left:10rpx;"></image>
     </view>
   </view>
 

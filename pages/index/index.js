@@ -98,7 +98,7 @@ Page({
                 next: res2 => {
                   console.log(res2)
                   if (res2) {
-                    this.setData({
+                    that.setData({
                       isShowNewerGet: true
                     });
                   }

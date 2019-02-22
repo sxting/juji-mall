@@ -158,7 +158,7 @@
 
     <!-- 如果是桔子和人民币组合购买 -->
     <view class="footerBtnWrap" wx:if="{{productInfo.type=='PRODUCT'&&productInfo.point>0&&productInfo.price>0}}">
-      <view class="gokaBtn" bindtap="toCreateOrderByRmb">
+      <view class="gokaBtn" bindtap="toCreateOrderByOriPrice">
         <view>
           <view style="font-size: 24rpx;font-weight:bold;line-height:34rpx;">{{filter.toFix(productInfo.originalPrice)}} 元</view>
           <view style="font-size: 18rpx;line-height:22rpx;">原价购买</view>
@@ -187,7 +187,7 @@
       </view>
     </view>
 
-    <!-- 如果是只能原价购买的商品 -->
+    <!-- 如果是只能人民币购买的商品 -->
     <view class="footerBtnWrap" wx:if="{{productInfo.type=='PRODUCT'&&productInfo.point==0&&productInfo.price>0}}">
       <view class="yuanjia-xiadan" bindtap="toCreateOrderByRmb">
         <view>

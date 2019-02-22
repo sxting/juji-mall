@@ -26,7 +26,7 @@
                         <text>{{it.point}}桔子</text>
                         <text class="origin">{{format.toFix(it.originalPrice)}}元</text>
                     </view>
-                    <!-- 微信支付 原价购买 -->
+                    <!-- 微信支付购买 -->
                     <view class="goodAmount" wx:elif="{{item.payType=='WECHAT'}}"><text>{{format.toFix(it.paidAmount)}}元</text>
                     </view>
                     <view class="num">×{{it.num}}</view>

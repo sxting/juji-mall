@@ -65,9 +65,14 @@ Page({
       url: '/pages/payOrder/index?paytype=2&id=' + this.data.productId + '&storeid=' + this.data.storeId
     });
   },
-  toCreateOrderByRmb: function() { //只用人民币下单
+  toCreateOrderByRmb: function () { //人民币优惠购买
     wx.navigateTo({
       url: '/pages/payOrder/index?paytype=3&id=' + this.data.productId + '&storeid=' + this.data.storeId
+    });
+  },
+  toCreateOrderByOriPrice: function () { //原价购买
+    wx.navigateTo({
+      url: '/pages/payOrder/index?paytype=4&id=' + this.data.productId + '&storeid=' + this.data.storeId
     });
   },
   toGetPoint: function() { //跳转到任务页面赚桔子

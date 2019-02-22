@@ -191,7 +191,7 @@ Page({
     obj.sharePath = '/pages/comDetail/index?id=' + this.data.productId + '&storeid=' + this.data.storeId;
     this.share(obj);
     return {
-      title: '朋友给你分享了优惠商品，快来看看吧！',
+      title: JSON.parse(wx.getStorageSync('userinfo')).nickName+'分享给你一个心动商品，快来一起体验吧～',
       path: '/pages/comDetail/index?id=' + this.data.productId + '&storeid=' + this.data.storeId
     }
   },

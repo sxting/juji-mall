@@ -133,7 +133,7 @@
 
   </view>
 
-  <view style="width:100%;height:100%;background:#ffffff;overflow:hidden;">
+  <view style="width:100%;height:100%;background:#ffffff;overflow:hidden;" wx:else>
 
     <image src="../../images/city.png" style="width:240rpx;height:180rpx;margin:180rpx auto 60rpx;display:block;"></image>
     <view style="font-size: 30rpx;color: #333333;text-align:center;">您的所在的位置暂未开通桔集服务</view>

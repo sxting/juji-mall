@@ -715,6 +715,19 @@ Page({
       complete: () => wx.hideToast()
     });
   },
+  //当前城市没有数据时 点击了其他热门城市
+  selectCity:function(e){
+    var selectCityName = e.currentTarget.dataset['name'].replace('市', '');
+    var selectPcode = e.currentTarget.dataset['pcode'];
+    var selectCode = e.currentTarget.dataset['code'];
+    wx.setStorageSync('selectCityName', selectCityName);
+    wx.setStorageSync('selectPcode', selectPcode);
+    wx.setStorageSync('selectCode', selectCode);
+
+    wx.reLaunch({
+      url: '/pages/index/index',
+    });
+  },
   //已知省市代码，获取该地点的服务商信息，然后更新首页数据
   getDataByCity: function() {
     var that = this;

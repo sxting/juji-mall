@@ -56,7 +56,7 @@
           </view>
           <view wx:for="{{item.content}}"  wx:key="{{index}}" style="display:flex;align-items:flex-start;margin-top:10rpx;">
             <view style="width:10rpx;height:10rpx;border-radius:50%;background: #999999;margin-right:20rpx;margin-top:12rpx;"></view>
-            <view style="font-size: 24rpx;color: #999999;">{{item}}</view>
+            <view style="font-size: 24rpx;color: #999999;width:98%;">{{item}}</view>
           </view>
         </view>
       </view>

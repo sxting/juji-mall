@@ -11,13 +11,12 @@ Page({
     locationPcode: '',
     locationCode: '',
     locationName: '',
-    curTabIndex: 0,
     businessList: [],
     leavePage: false,
     autoplay: false,
     swiperH: '', //swiper高度
     nowIdx: 0, //当前swiper索引
-    slideShowList: [],
+    slideShowList: [{}],
     pointProductList: [],
     recommendPage: [],
     sortIndex: 1,
@@ -26,7 +25,9 @@ Page({
     sortArray: ['', 'ASC', 'ASC', ''],
     providerId: '',
     isShowNewerGet: false,
-    pointBalance: 0
+    pointBalance: 0,
+    imageWidth:'200rpx',
+    citylist:[]
   },
   onLoad: function(options) {
     console.log(options);
@@ -108,6 +109,7 @@ Page({
                 error: err => console.log(err)
               });
 
+              //桔子球 查询用户当前桔子数
               service.currentPoint().subscribe({
                 next: res3 => {
                   console.log(res3);
@@ -116,6 +118,22 @@ Page({
                   });
                 }
               });
+
+              //获取热门城市
+              var imageWidth = (wx.getSystemInfoSync().windowWidth - 66) / 3;
+              that.setData({
+                imageWidth: imageWidth + 'px'
+              });
+              service.getHotData().subscribe({
+                next: res => {
+                  console.log(res);
+                  that.setData({
+                    citylist: res
+                  });
+                },
+                error: err => errDialog(err),
+                complete: () => wx.hideToast()
+              })
 
               resolve2();
             } else {

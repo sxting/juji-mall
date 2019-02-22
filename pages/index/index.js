@@ -457,20 +457,21 @@ Page({
   },
   //领取桔集见面礼
   getNewer: function() {
+    this.setData({
+      isShowNewerGet: false
+    });
+
     service.newerGet().subscribe({
       next: res => {
         console.log(res);
-
-        this.setData({
-          isShowNewerGet: false
-        });
         wx.showToast({
           title: '领取成功！',
           icon: 'none'
         });
       },
       error: err => wx.showToast({
-        title: err
+        title: err,
+        icon: 'none'
       })
     });
   },

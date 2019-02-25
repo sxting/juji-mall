@@ -20,7 +20,8 @@ Page({
     recommendCount: 0,
     pointBalance: 0,
     note:[],
-    despImgHeightValues:[]
+    despImgHeightValues:[],
+    isShowData:false
   },
   onLoad: function(option) {
     wx.setNavigationBarTitle({
@@ -46,10 +47,12 @@ Page({
       storeId: option.storeid
     });
     if(wx.getStorageSync('token')){
+      console.log('token存在');
       this.getItemInfo();
       //查询用户橘子
       this.getPointBalance();
     }else{
+      console.log('token不存在');
       //新用户 授权 登录 跳转
       wx.navigateTo({
         url: '/pages/index/index',
@@ -138,7 +141,8 @@ Page({
           commentCount: res.commentCount,
           recommendCount: res.recommendList.length,
           note: JSON.parse(res.product.note),
-          showPics: picsStrArr
+          showPics: picsStrArr,
+          isShowData: true
         });
       },
       error: err => console.log(err),

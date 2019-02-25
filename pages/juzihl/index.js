@@ -101,7 +101,7 @@ Page({
         }
       }
     } else { //不存在 定位获取
-
+      that.getCurLocation();
     }
 
   },

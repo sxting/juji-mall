@@ -149,6 +149,7 @@ Page({
         wx.getLocation({
           type: 'wgs84',
           success: function(res) { //res是经纬度
+          console.log(res);
             wx.setStorageSync('curLatitude', res.latitude);
             wx.setStorageSync('curLongitude', res.longitude);
             console.log('--------位置调用成功--------');

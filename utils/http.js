@@ -14,9 +14,10 @@ http.get = (url, data = {} ) => {
     }
     return http_request(url, 'GET', data, header)
   }else{
-    wx.navigateTo({
-      url: '../pages/login/index',
-    });
+    console.log('未获取到token');
+    // wx.navigateTo({
+    //   url: '/pages/login/index',
+    // });
     return ;
   }
   
@@ -32,9 +33,10 @@ http.post = (url, data = {}) => {
     }
     return http_request(url, 'POST', data, header)
   }else{
-    wx.navigateTo({
-      url: '../pages/login/index',
-    });
+    console.log('未获取到token');
+    // wx.navigateTo({
+    //   url: '/pages/login/index',
+    // });
     return;
   }
 }

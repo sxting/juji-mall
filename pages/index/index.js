@@ -731,9 +731,7 @@ Page({
     wx.setStorageSync('selectPcode', selectPcode);
     wx.setStorageSync('selectCode', selectCode);
 
-    wx.reLaunch({
-      url: '/pages/index/index',
-    });
+    this.onShow();
   },
   //已知省市代码，获取该地点的服务商信息，然后更新首页数据
   getDataByCity: function() {

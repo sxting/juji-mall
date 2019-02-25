@@ -54,9 +54,9 @@ Page({
     }else{
       console.log('token不存在');
       //新用户 授权 登录 跳转
-      wx.navigateTo({
-        url: '../../pages/index/index',
-      })
+      wx.switchTab({
+        url: '/pages/index/index',
+      });
 
     }
 

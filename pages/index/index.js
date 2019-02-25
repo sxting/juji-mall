@@ -127,8 +127,14 @@ Page({
               service.getHotData().subscribe({
                 next: res => {
                   console.log(res);
+                  let arr = [];
+                  res.forEach(function(item,index){
+                    if (item.subList[0].locationCode != wx.getStorageSync('locationCode')){
+                      arr.push(item);
+                    }
+                  });
                   that.setData({
-                    citylist: res
+                    citylist: arr
                   });
                 },
                 error: err => errDialog(err),

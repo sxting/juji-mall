@@ -4,22 +4,39 @@ import { loading } from 'util';
 
 let http = {}
 
-http.get = (url, data = {}, header = { 'content-type': 'application/json','token':wx.getStorageSync('token') }) => {
-  for (let objName in data) {
-    if (data[objName] === undefined || data[objName] === 'undefined') {
-      data[objName] = '';
+http.get = (url, data = {} ) => {
+  if (wx.getStorageSync('token')){
+    let header = { 'content-type': 'application/json', 'token': wx.getStorageSync('token') };
+    for (let objName in data) {
+      if (data[objName] === undefined || data[objName] === 'undefined') {
+        data[objName] = '';
+      }
     }
+    return http_request(url, 'GET', data, header)
+  }else{
+    wx.navigateTo({
+      url: '../pages/login/index',
+    });
+    return ;
   }
-  return http_request(url, 'GET', data, header)
+  
 }
 //'application/x-www-form-urlencoded' 'application/json'
-http.post = (url, data = {}, header = { 'content-type': 'application/json','token':wx.getStorageSync('token') }) => {
-  for (let objName in data) {
-    if (data[objName] === undefined || data[objName] === 'undefined') {
-      data[objName] = '';
+http.post = (url, data = {}) => {
+  if (wx.getStorageSync('token')) {
+    let header = { 'content-type': 'application/json', 'token': wx.getStorageSync('token') };
+    for (let objName in data) {
+      if (data[objName] === undefined || data[objName] === 'undefined') {
+        data[objName] = '';
+      }
     }
+    return http_request(url, 'POST', data, header)
+  }else{
+    wx.navigateTo({
+      url: '../pages/login/index',
+    });
+    return;
   }
-  return http_request(url, 'POST', data, header)
 }
 
 function http_request(

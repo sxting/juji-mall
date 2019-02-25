@@ -31,10 +31,10 @@ Page({
       wx.showToast({
         title: '发生错误，未找到商品id',
         icon: 'none'
-      })
-      wx.navigateBack({
-        delta: 1
       });
+      wx.navigateTo({
+        url: '/pages/index/index',
+      })
       return ;
     } 
     console.log(wx.getStorageSync('curLatitude'));
@@ -45,9 +45,17 @@ Page({
       productId: option.id,
       storeId: option.storeid
     });
-    this.getItemInfo();
-    //查询用户橘子
-    this.getPointBalance();
+    if(wx.getStorageSync('token')){
+      this.getItemInfo();
+      //查询用户橘子
+      this.getPointBalance();
+    }else{
+      //新用户 授权 登录 跳转
+      wx.navigateTo({
+        url: '/pages/index/index',
+      })
+
+    }
 
   },
   toMerchantsList:function(){

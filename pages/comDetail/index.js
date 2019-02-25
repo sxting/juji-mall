@@ -127,7 +127,7 @@ Page({
         console.log(res);
         var picsStrArr = res.product.picIds.split(',');
         picsStrArr.forEach(function(item,index){
-          picsStrArr[index] = constant.basePicUrl + item + '/resize_0_0/mode_fill'
+          picsStrArr[index] = constant.basePicUrl + item + '/resize_750_420/mode_fill'
         });
         this.setData({
           commentList: res.commentList,

@@ -43,7 +43,7 @@ Page({
     if (e.detail.userInfo) {
       wx.setStorageSync('rawData', e.detail.rawData);
       if (e.currentTarget.dataset.pid && e.currentTarget.dataset.fp){
-        wx.navigateTo({
+        wx.reLaunch({
           url: '/pages/' + e.currentTarget.dataset.fp+'/index?id=' + e.currentTarget.dataset.pid,
         });
       } else {

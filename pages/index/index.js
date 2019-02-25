@@ -600,7 +600,7 @@ Page({
           providerId: this.data.providerId,
           type: 'PRODUCT',
           sortField: 'SOLDNUM',
-          sortOrder: 'ASC',
+          sortOrder: 'DESC',
           pageNo: this.data.pageNo,
           pageSize: this.data.pageSize,
           longitude: wx.getStorageSync('curLongitude'),

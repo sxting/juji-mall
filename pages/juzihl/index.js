@@ -398,7 +398,7 @@ Page({
           providerId: this.data.providerId,
           type: 'POINT',
           sortField: 'SOLDNUM',
-          sortOrder: 'ASC',
+          sortOrder: 'DESC',
           pageNo: this.data.pageNo,
           pageSize: this.data.pageSize,
           longitude: longitude,

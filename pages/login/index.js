@@ -11,15 +11,22 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    fromPage:'',
+    productId:''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    console.log('login');
-    console.log(app.globalData);
+    console.log('---------授权页面----------');
+    console.log(options);
+    if (options.fromPage && options.productId){
+      this.setData({
+        fromPage: options.fromPage,
+        productId: options.productId
+      });
+    }
     wx.getSetting({
       success: (res) => {
         console.log(res.authSetting['scope.userInfo']);
@@ -30,20 +37,20 @@ Page({
         }
       }
     });
-    // if (app.globalData.userInfo){
-    //   wx.reLaunch({
-    //     url: '/pages/index/index'
-    //   });
-    // }
   },
   getUserInfo: function(e) {
     console.log(e);
     if (e.detail.userInfo) {
       wx.setStorageSync('rawData', e.detail.rawData);
-      console.log(app.globalData);
-      wx.reLaunch({
-        url: '/pages/index/index',
-      });
+      if (e.currentTarget.dataset.pid && e.currentTarget.dataset.fp){
+        wx.navigateTo({
+          url: '/pages/' + e.currentTarget.dataset.fp+'/index?id=' + e.currentTarget.dataset.pid,
+        });
+      } else {
+        wx.reLaunch({
+          url: '/pages/index/index',
+        });
+      }
 
 
     }

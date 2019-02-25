@@ -18,6 +18,93 @@ Page({
     sortArray: ['', '', 'ASC', 'ASC', 'ASC', ''],
     providerId: ''
   },
+
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function (options) {
+    wx.setNavigationBarTitle({
+      title: ''
+    });
+    // this.getCurLocation(); //用户位置+位置名称
+  },
+
+  /**
+   * 生命周期函数--监听页面显示
+   */
+
+  onShow: function () {
+    var that = this;
+    //每次进到该页面重置筛选条件
+    this.setData({
+      sortIndex: 1,
+      pageNo: 1,
+      sortArray: ['', '', 'ASC', 'ASC', 'ASC', ''],
+    });
+
+    if (wx.getStorageSync('selectCode')) { //存在 说明用户选过异地城市
+      if (wx.getStorageSync('locationCode') != wx.getStorageSync('selectCode')) {
+        //如果城市更换了 需要通过用户选择的城市编号code重新加载页面
+        console.log('用户更换城市为：' + wx.getStorageSync('selectCityName'));
+        this.setData({
+          locationCode: wx.getStorageSync('selectCode'),
+          locationPcode: wx.getStorageSync('selectPcode'),
+          locationName: wx.getStorageSync('selectCityName')
+        });
+        this.getDataByCity(); //首页数据已经更新
+        //如果用getDataByCity更新了数据 就不能用getSelectProviderByLoc再获取 否则数据会覆盖
+      } else { //如果没有更换城市 定位获取
+        console.log('没有更换城市');
+        this.setData({
+          locationCode: wx.getStorageSync('locationCode'),
+          locationPcode: wx.getStorageSync('locationPcode'),
+          locationName: wx.getStorageSync('locationName')
+        });
+        var curLatitude = wx.getStorageSync('curLatitude'),
+          curLongitude = wx.getStorageSync('curLongitude');
+        if (curLatitude && curLongitude) { //已经定位了并且有经纬度的情况
+          var obj = {
+            latitude: curLatitude,
+            longitude: curLongitude
+          }
+          //获取用户当地服务商信息
+          service.getSelectProviderByLoc(obj).subscribe({
+            next: res1 => {
+              console.log('----------服务商信息---------');
+              console.log(res1);
+              if (res1.id) { //如果存在服务商
+                that.setData({
+                  providerId: res1.id,
+                  pageNo: 1
+                });
+                //根据位置查询附近精选
+                var obj = {
+                  // providerId: res1.id,
+                  providerId: that.data.providerId,
+                  type: 'POINT',
+                  sortField: 'IDX',
+                  sortOrder: 'ASC',
+                  pageNo: that.data.pageNo,
+                  pageSize: that.data.pageSize,
+                  longitude: wx.getStorageSync('curLongitude'),
+                  latitude: wx.getStorageSync('curLatitude')
+                };
+                that.getRecommendPage(obj);
+              } else { //如果不存在服务商
+                wx.showToast({
+                  title: '当前位置不存在服务商',
+                  icon: 'none'
+                })
+              }
+            }
+          });
+        }
+      }
+    } else { //不存在 定位获取
+
+    }
+
+  },
   getDataByCity: function() {
     var that = this;
     var obj = {
@@ -342,96 +429,9 @@ Page({
   },
 
   /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function(options) {
-    wx.setNavigationBarTitle({
-      title: ''
-    });
-    this.getCurLocation(); //用户位置+位置名称
-  },
-
-  /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-
-  onShow: function() {
-    var that = this;
-    //每次进到该页面重置筛选条件
-    this.setData({
-      sortIndex: 1,
-      pageNo: 1,
-      sortArray: ['', '', 'ASC', 'ASC', 'ASC', ''],
-    });
-
-    if (wx.getStorageSync('selectCode')) { //存在 说明用户选过异地城市
-      if (wx.getStorageSync('locationCode') != wx.getStorageSync('selectCode')) {
-        //如果城市更换了 需要通过用户选择的城市编号code重新加载页面
-        console.log('用户更换城市为：' + wx.getStorageSync('selectCityName'));
-        this.setData({
-          locationCode: wx.getStorageSync('selectCode'),
-          locationPcode: wx.getStorageSync('selectPcode'),
-          locationName: wx.getStorageSync('selectCityName')
-        });
-        this.getDataByCity(); //首页数据已经更新
-        //如果用getDataByCity更新了数据 就不能用getSelectProviderByLoc再获取 否则数据会覆盖
-      } else { //如果没有更换城市 定位获取
-        console.log('没有更换城市');
-        this.setData({
-          locationCode: wx.getStorageSync('locationCode'),
-          locationPcode: wx.getStorageSync('locationPcode'),
-          locationName: wx.getStorageSync('locationName')
-        });
-        var curLatitude = wx.getStorageSync('curLatitude'),
-          curLongitude = wx.getStorageSync('curLongitude');
-        if (curLatitude && curLongitude) { //已经定位了并且有经纬度的情况
-          var obj = {
-            latitude: curLatitude,
-            longitude: curLongitude
-          }
-          //获取用户当地服务商信息
-          service.getSelectProviderByLoc(obj).subscribe({
-            next: res1 => {
-              console.log('----------服务商信息---------');
-              console.log(res1);
-              if (res1.id) { //如果存在服务商
-                that.setData({
-                  providerId: res1.id,
-                  pageNo: 1
-                });
-                //根据位置查询附近精选
-                var obj = {
-                  // providerId: res1.id,
-                  providerId: that.data.providerId,
-                  type: 'POINT',
-                  sortField: 'IDX',
-                  sortOrder: 'ASC',
-                  pageNo: that.data.pageNo,
-                  pageSize: that.data.pageSize,
-                  longitude: wx.getStorageSync('curLongitude'),
-                  latitude: wx.getStorageSync('curLatitude')
-                };
-                that.getRecommendPage(obj);
-              } else { //如果不存在服务商
-                wx.showToast({
-                  title: '当前位置不存在服务商',
-                  icon: 'none'
-                })
-              }
-            }
-          });
-        }
-      }
-    } else { //不存在 定位获取
-
-    }
 
   },
 

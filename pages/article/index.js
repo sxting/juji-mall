@@ -15,7 +15,7 @@ Page({
     wx.setNavigationBarTitle({
       title: '如何获得桔子？'
     });
-    wx.hideShareMenu();
+    wx.showShareMenu();
   },
 
   /**

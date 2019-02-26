@@ -3,7 +3,7 @@ page{box-sizing:border-box;height: 100%;background-color: #fff}
 .merchantInfo{height: 160rpx;background-color: #fff;padding: 20rpx 20rpx 0;}
 .merchantDiv{height:100%;background-color: #fbfbfb;padding-left: 20rpx; }
 .merchantImg{width: 120rpx;height: 120rpx;margin-right: 20rpx;background-color: #fff;border-radius: 8rpx;}
-.merchantDiv .txt{font-size: 28rpx;color: #333;}
+.merchantDiv .txt{width:76%;font-size: 28rpx;color: #333;}
 .replyBox{padding: 30rpx;}
 .pingDiv{height: 100rpx;background-color: #fff;}
 .pingDiv .tit{font-size: 30rpx;color: #333;font-weight: bold;}

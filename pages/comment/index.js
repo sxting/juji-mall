@@ -4,8 +4,8 @@ import { service } from '../../service';
 var app = getApp();
 Page({
     data: {
-        pinglist1:[],
-        pinglist2:['','','','',''],
+        pinglist1: ['', '', '', '', ''],
+        pinglist2:[],
         orderId: '',
         constant:constant,
         content: '',
@@ -15,7 +15,7 @@ Page({
         lastPage:"",
         productId:'',
         isDisbaled: false,
-        score:0,
+        score:5,
     },
     clickPing1:function(e){
         var index = e.currentTarget.dataset['index'];

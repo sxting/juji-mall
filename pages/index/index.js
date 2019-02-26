@@ -97,6 +97,7 @@ Page({
             if (res1.data.errorCode == '200') {
               wx.setStorageSync('token', res1.data.data.token);
               wx.setStorageSync('openid', res1.data.data.openId);
+              wx.setStorageSync('inviteCode', res1.data.data.inviteCode);
               wx.setStorageSync('userinfo', JSON.stringify(res1.data.data));
 
               //成功登陆之后 查询新用户见面礼
@@ -744,7 +745,7 @@ Page({
     return {
       title: '桔集：聚集优质好店，体验美好生活！',
       imageUrl: '/images/shareMinPro.png',
-      path: '/pages/index/index'
+      path: '/pages/index/index?inviteCode=' + wx.getStorageSync('inviteCode')
     }
   },
   //已知省市代码，获取该地点的服务商信息，然后更新首页数据

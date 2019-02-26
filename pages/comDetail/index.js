@@ -295,7 +295,7 @@ Page({
   },
   toCommentDetail: function(event) {
     wx.navigateTo({
-      url: '/pages/commentDetail/index?id=' + event.currentTarget.dataset.comid
+      url: '/pages/commentDetail/index?id=' + event.currentTarget.dataset.comid + '&inviteCode=' + wx.getStorageSync('inviteCode')
     });
   }
 })

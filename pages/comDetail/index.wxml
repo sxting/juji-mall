@@ -114,7 +114,7 @@
     <view class="yongkaxuzhi">
       <view style="font-size: 30rpx;color: #333333;font-weight: bolder;">详细信息</view>
       <view style="margin-top:30rpx;" wx:for="{{description}}" wx:key="{{index}}">
-        <image style="width:100%;height:{{despImgHeightValues[(index+1)*(index1+1)-1]}}rpx;" wx:for="{{item.picIds}}" wx:for-item="item1" wx:for-index="index1" wx:key="{{index1}}" src="https://upic.juniuo.com/file/picture/{{item1}}/resize_0_0/mode_fill" bindload="desImgLoad" lazy-load="true"></image>
+        <image style="width:100%;height:{{despImgHeightValues[(index+1)*(index1+1)-1]}}rpx;" mode="widthFix" wx:for="{{item.picIds}}" wx:for-item="item1" wx:for-index="index1" wx:key="{{index1}}" src="https://upic.juniuo.com/file/picture/{{item1}}/resize_0_0/mode_fill" bindload="desImgLoad" lazy-load="true"></image>
         <view wx:if="item.content.length>0" wx:for="{{item.content}}" wx:for-item="item2" wx:for-index="index2" wx:key="{{index2}}" style="font-size: 24rpx;color: #666666;margin-top:30rpx;">{{item2}}</view>
       </view>
     </view>

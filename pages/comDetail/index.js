@@ -280,23 +280,23 @@ Page({
    */
   onShareAppMessage: function(res) {
     console.log(res);
-    var type = this.data.productInfo.type;
-    var obj = {};
-    if (type == 'POINT') {
-      obj.type = 'SHARE_EXCHANGE';
-    } else {
-      obj.type = 'SHARE_PRODUCT';
-    }
-    obj.sharePath = '/pages/comDetail/index?id=' + this.data.productId + '&storeid=' + this.data.storeId;
-    this.share(obj);
+    // var type = this.data.productInfo.type;
+    // var obj = {};
+    // if (type == 'POINT') {
+    //   obj.type = 'SHARE_EXCHANGE';
+    // } else {
+    //   obj.type = 'SHARE_PRODUCT';
+    // }
+    // obj.sharePath = '/pages/comDetail/index?id=' + this.data.productId + '&storeid=' + this.data.storeId;
+    // this.share(obj);
     return {
       title: JSON.parse(wx.getStorageSync('userinfo')).nickName+'分享给您一个心动商品，快来一起体验吧！',
-      path: '/pages/comDetail/index?id=' + this.data.productId + '&storeid=' + this.data.storeId
+      path: '/pages/comDetail/index?id=' + this.data.productId + '&storeid=' + this.data.storeId + '&inviteCode=' + wx.getStorageSync('inviteCode')
     }
   },
   toCommentDetail: function(event) {
     wx.navigateTo({
-      url: '/pages/commentDetail/index?id=' + event.currentTarget.dataset.comid + '&inviteCode=' + wx.getStorageSync('inviteCode')
+      url: '/pages/commentDetail/index?id=' + event.currentTarget.dataset.comid
     });
   }
 })

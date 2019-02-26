@@ -2,7 +2,7 @@
 <view class="main">
     <view class="orderInfo1 p10">
         <view class="ub ub-ac info" wx:for="{{orderInfo.orderItemList}}" wx:key="{{index}}" data-id="{{item.productId}}" bindtap="toComDetail">
-            <image class="goodImg udb" src="{{constant.basePicUrl}}{{item.picId}}{{constant.basePicFix1}}"></image>
+            <image class="goodImg udb" src="{{constant.basePicUrl}}{{item.picId}}/resize_220_200/mode_fill"></image>
             <view class="ub-f1 goodMsg">
                 <view class="goodTit">{{item.productName}}</view>
                 <view class="storeName">{{item.merchantName}}</view>

@@ -23,13 +23,11 @@ Page({
     wx.hideShareMenu();
     console.log('---------授权页面----------');
     console.log(options);
-    if (options.fromPage && options.productId){
-      this.setData({
-        fromPage: options.fromPage,
-        productId: options.productId,
-        inviteCode: options.inviteCode
-      });
-    }
+    this.setData({
+      fromPage: options.fromPage,
+      productId: options.productId,
+      inviteCode: options.inviteCode
+    });
     wx.getSetting({
       success: (res) => {
         console.log(res.authSetting['scope.userInfo']);
@@ -45,15 +43,9 @@ Page({
     console.log(e);
     if (e.detail.userInfo) {
       wx.setStorageSync('rawData', e.detail.rawData);
-      if (e.currentTarget.dataset.pid && e.currentTarget.dataset.fp){
-        wx.reLaunch({
-          url: '/pages/' + e.currentTarget.dataset.fp + '/index?id=' + e.currentTarget.dataset.pid + '&inviteCode=' + e.currentTarget.dataset.inv,
-        });
-      } else {
-        wx.reLaunch({
-          url: '/pages/index/index',
-        });
-      }
+      wx.reLaunch({
+        url: '/pages/' + e.currentTarget.dataset.fp + '/index?id=' + e.currentTarget.dataset.pid + '&inviteCode=' + e.currentTarget.dataset.inv,
+      });
 
 
     }

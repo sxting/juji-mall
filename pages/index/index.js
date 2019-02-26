@@ -48,7 +48,7 @@ Page({
           console.log(res.authSetting['scope.userInfo']);
           if (!res.authSetting['scope.userInfo']) {
             wx.reLaunch({
-              url: '/pages/login/index'
+              url: '/pages/login/index?fromPage=index&inviteCode=' + options.inviteCode
             });
           } else { //如果已经授权
             //判断rowData是否存在

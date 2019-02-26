@@ -281,13 +281,7 @@ Page({
    */
   onShareAppMessage: function(res) {
     console.log(res);
-    // var type = this.data.productInfo.type;
-    // var obj = {};
-    // if (type == 'POINT') {
-    //   obj.type = 'SHARE_EXCHANGE';
-    // } else {
-    //   obj.type = 'SHARE_PRODUCT';
-    // }
+    // var obj = {type:'SHARE_PRODUCT'};
     // obj.sharePath = '/pages/comDetail/index?id=' + this.data.productId + '&storeid=' + this.data.storeId;
     // this.share(obj);
     return {

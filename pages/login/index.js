@@ -47,7 +47,7 @@ Page({
       wx.setStorageSync('rawData', e.detail.rawData);
       if (e.currentTarget.dataset.pid && e.currentTarget.dataset.fp){
         wx.reLaunch({
-          url: '/pages/' + e.currentTarget.dataset.fp + '/index?id=' + e.currentTarget.dataset.pid + '&inviteCode=' + e.currentTarget.dataset.inviteCode,
+          url: '/pages/' + e.currentTarget.dataset.fp + '/index?id=' + e.currentTarget.dataset.pid + '&inviteCode=' + e.currentTarget.dataset.inv,
         });
       } else {
         wx.reLaunch({

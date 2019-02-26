@@ -47,6 +47,7 @@ Page({
     wx.setNavigationBarTitle({
       title: '选择城市'
     });
+    wx.hideShareMenu();
     var imageWidth = (wx.getSystemInfoSync().windowWidth - 66) / 3;
     this.setData({
       imageWidth: imageWidth + 'px'

@@ -82,6 +82,7 @@ Page({
             code: code,
             appId: constant.APPID,
             isMock: false, //测试标记
+            inviteCode: options.inviteCode,
             rawData: wx.getStorageSync('rawData')
           },
           header: {

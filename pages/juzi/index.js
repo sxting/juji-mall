@@ -20,6 +20,7 @@ Page({
     wx.setNavigationBarTitle({
       title: ''
     });
+    wx.hideShareMenu();
     this.getInfo();
     
   },
@@ -179,11 +180,8 @@ Page({
       sharePath: '/pages/index/index'
     };
     this.share(obj);
-    wx.showShareMenu({
-      withShareTicket: true
-    });
     return {
-      title: '朋友给你分享了桔集，快来看看吧！',
+      title: JSON.parse(wx.getStorageSync('userinfo')).nickName +'给你分享了桔集，快来看看吧！',
       path: '/pages/index/index',
       imageUrl: '/images/shareMinPro.png'
     }

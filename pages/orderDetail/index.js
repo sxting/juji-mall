@@ -13,6 +13,7 @@ Page({
   },
   onLoad: function(options) {
     wx.setNavigationBarTitle({title: '订单详情'});
+    wx.hideShareMenu();
     this.getData(options.id);
     this.setData({orderId: options.id});
   },

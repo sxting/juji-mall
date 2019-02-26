@@ -18,6 +18,7 @@ Page({
   },
   onLoad:function(){
     wx.setNavigationBarTitle({title: '我的'});
+    wx.hideShareMenu();
   },
   onShow: function () {
     this.getInfo();

@@ -16,6 +16,7 @@ Page({
     },
     onLoad: function(options) {
         wx.setNavigationBarTitle({ title: '我的订单' });
+        wx.hideShareMenu();
         this.setData({ curTabIndex: options.index,status:options.status });
         this.getData(options.status,1);
     },

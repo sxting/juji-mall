@@ -26,6 +26,7 @@ Page({
     wx.setNavigationBarTitle({
       title: ''
     });
+    wx.hideShareMenu();
     // this.getCurLocation(); //用户位置+位置名称
   },
 

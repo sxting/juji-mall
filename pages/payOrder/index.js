@@ -22,6 +22,7 @@ Page({
     wx.setNavigationBarTitle({
       title: '订单确认',
     });
+    wx.hideShareMenu();
     if (options.id && options.storeid && options.paytype) {
       this.setData({
         productId: options.id,

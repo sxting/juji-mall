@@ -169,6 +169,7 @@ Page({
     onLoad: function(options) {
         new app.ToastPannel();
         wx.setNavigationBarTitle({ title: '发表评价' });
+        wx.hideShareMenu();
         this.setData({productId:options.pid });
         this.setData({ orderId: options.id});
         console.log(this.data.orderId);

@@ -19,6 +19,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    wx.hideShareMenu();
     console.log('---------授权页面----------');
     console.log(options);
     if (options.fromPage && options.productId){

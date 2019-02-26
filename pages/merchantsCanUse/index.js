@@ -17,6 +17,7 @@ Page({
     wx.setNavigationBarTitle({
       title: '适用门店',
     });
+    wx.hideShareMenu();
     if (options.id) {
       this.applyStoreList(options.id)
     } else {

@@ -34,6 +34,9 @@ Page({
     wx.setNavigationBarTitle({
       title: ''
     });
+    wx.showShareMenu({
+      withShareTicket: true
+    });
     console.log('--------------index-onLoad-------------');
 
     let that = this;

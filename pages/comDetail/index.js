@@ -289,7 +289,7 @@ Page({
     obj.sharePath = '/pages/comDetail/index?id=' + this.data.productId + '&storeid=' + this.data.storeId;
     this.share(obj);
     return {
-      title: JSON.parse(wx.getStorageSync('userinfo')).nickName+'分享给你一个心动商品，快来一起体验吧～',
+      title: JSON.parse(wx.getStorageSync('userinfo')).nickName+'分享给您一个心动商品，快来一起体验吧！',
       path: '/pages/comDetail/index?id=' + this.data.productId + '&storeid=' + this.data.storeId
     }
   },

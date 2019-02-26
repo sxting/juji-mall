@@ -737,6 +737,16 @@ Page({
 
     this.onShow();
   },
+  /**
+   * 用户点击右上角分享或页面中的分享
+   */
+  onShareAppMessage: function (res) {
+    return {
+      title: '桔集：聚集优质好店，体验美好生活！',
+      imageUrl: '/images/shareMinPro.png',
+      path: '/pages/index/index'
+    }
+  },
   //已知省市代码，获取该地点的服务商信息，然后更新首页数据
   getDataByCity: function() {
     var that = this;

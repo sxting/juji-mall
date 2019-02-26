@@ -181,7 +181,7 @@ Page({
     };
     this.share(obj);
     return {
-      title: JSON.parse(wx.getStorageSync('userinfo')).nickName +'给你分享了桔集，快来看看吧！',
+      title: JSON.parse(wx.getStorageSync('userinfo')).nickName +'给您分享了桔集小程序，一起享受好店优惠吧！',
       path: '/pages/index/index',
       imageUrl: '/images/shareMinPro.png'
     }

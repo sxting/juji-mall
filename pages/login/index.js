@@ -12,7 +12,8 @@ Page({
    */
   data: {
     fromPage:'',
-    productId:''
+    productId:'',
+    inviteCode:''
   },
 
   /**
@@ -25,7 +26,8 @@ Page({
     if (options.fromPage && options.productId){
       this.setData({
         fromPage: options.fromPage,
-        productId: options.productId
+        productId: options.productId,
+        inviteCode: options.inviteCode
       });
     }
     wx.getSetting({
@@ -45,7 +47,7 @@ Page({
       wx.setStorageSync('rawData', e.detail.rawData);
       if (e.currentTarget.dataset.pid && e.currentTarget.dataset.fp){
         wx.reLaunch({
-          url: '/pages/' + e.currentTarget.dataset.fp+'/index?id=' + e.currentTarget.dataset.pid,
+          url: '/pages/' + e.currentTarget.dataset.fp + '/index?id=' + e.currentTarget.dataset.pid + '&inviteCode=' + e.currentTarget.dataset.inviteCode,
         });
       } else {
         wx.reLaunch({

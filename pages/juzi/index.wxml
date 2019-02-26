@@ -78,9 +78,10 @@
       </view>
 
       <view style="font-size: 24rpx;color: #666666;text-align:center;margin-top:60rpx;">连续签到一周可得{{currentPointObj.signInMax}}个桔子</view>
-
-      <view class="normalBtn" bindtap="signIn" hidden="{{!canSignIn}}" style="margin:30rpx auto 0;">签到</view>
-      <view class="signedBtn" hidden="{{canSignIn}}" style="margin:30rpx auto 0;">已签到</view>
+      <form bindsubmit="signIn" report-submit="true" >
+          <button form-type="submit" class="normalBtn" hidden="{{!canSignIn}}" style="margin:30rpx auto 0;">签到</button>
+          <button class="signedBtn" hidden="{{canSignIn}}" style="margin:30rpx auto 0;">已签到</button>
+      </form>
     </view>
   </view>
 

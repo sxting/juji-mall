@@ -50,7 +50,15 @@ Page({
       url: '/pages/myTrade/index'
     });
   },
-  signIn:function(){
+  signIn:function(e){
+    console.log(e.detail.formId)
+    service.collectFormIds({
+      formId:e.detail.formId
+    }).subscribe({
+      next: res => {
+        console.log(res)
+      }
+    });
     service.signIn().subscribe({
       next: res => {
         console.log(res);
@@ -171,6 +179,9 @@ Page({
       sharePath: '/pages/index/index'
     };
     this.share(obj);
+    wx.showShareMenu({
+      withShareTicket: true
+    });
     return {
       title: '朋友给你分享了桔集，快来看看吧！',
       path: '/pages/index/index',

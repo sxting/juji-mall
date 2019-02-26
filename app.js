@@ -25,7 +25,9 @@ App({
     if (options.shareTicket) {
       wx.getShareInfo({
         shareTicket: options.shareTicket,
-        success: function (res) { }
+        success: function (res) { 
+          console.log(res)
+        }
       });
     }
     

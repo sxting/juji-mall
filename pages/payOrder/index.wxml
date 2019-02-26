@@ -61,7 +61,9 @@
   <view class="ub-f1" style="font-family: PingFangSC-Medium;font-size: 30rpx;font-weight:bold"  wx:if="{{paytype==1||paytype==2}}">金额：
     <text style="font-size: 30rpx;color: #E83121;">{{filter.toFix(price*count)}}元</text>
   </view>
-  <button class="btn_common ub-f1 ub ub-ac ub-pc" wx:if="{{paytype==1||paytype==3}}" bindtap="toPay">确认支付</button>
-  <!-- 如果是桔子换礼类型显示兑换 -->
-  <button class="btn_common ub-f1 ub ub-ac ub-pc" wx:if="{{paytype==2}}" bindtap="toPay">确认兑换</button>
+  <form bindsubmit="collectFormIds" report-submit="true" >
+    <button form-type="submit" class="btn_common ub-f1 ub ub-ac ub-pc" wx:if="{{paytype==1||paytype==3||paytype==4}}" bindtap="toPay">确认支付</button>
+    <!-- 如果是桔子换礼类型显示兑换 -->
+    <button form-type="submit" class="btn_common ub-f1 ub ub-ac ub-pc" wx:if="{{paytype==2}}" bindtap="toPay">确认兑换</button>
+  </form>
 </view>

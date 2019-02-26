@@ -151,6 +151,12 @@ service.userInfo = (data) => {
   return http.get(apiUrl, data);
 }
 
+//采集小程序用户点击按钮事件的formId
+service.collectFormIds = (data) => {
+  let apiUrl = api + '/user/collectFormIds.json';
+  return http.get(apiUrl, data);
+}
+
 /*会员注册*/
 service.regist = () => {
   let apiUrl = api + '/usr/regist.json';

@@ -43,6 +43,17 @@ Page({
     }
 
   },
+  //收集formid做推送
+  collectFormIds: function (e) {
+    console.log(e.detail);
+    service.collectFormIds({
+      formId: e.detail.formId
+    }).subscribe({
+      next: res => {
+        console.log(res)
+      }
+    });
+  },
   toMyOrder: function() {
     wx.redirectTo({
       url: '/pages/orderlist/index?index=1&status=CREATED'

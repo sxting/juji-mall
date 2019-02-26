@@ -136,6 +136,17 @@ Page({
     }
 
   },
+  //收集formid做推送
+  collectFormIds:function(e){
+    console.log(e.detail);
+    service.collectFormIds({
+      formId: e.detail.formId
+    }).subscribe({
+      next: res => {
+        console.log(res)
+      }
+    });
+  },
   toMerchantsList:function(){
     wx.navigateTo({
       url: '/pages/merchantsCanUse/index?id=' + this.data.productId 

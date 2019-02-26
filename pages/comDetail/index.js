@@ -111,6 +111,7 @@ Page({
               if (res1.data.errorCode == '200') {
                 wx.setStorageSync('token', res1.data.data.token);
                 wx.setStorageSync('openid', res1.data.data.openId);
+                wx.setStorageSync('inviteCode', res1.data.data.inviteCode);
                 wx.setStorageSync('userinfo', JSON.stringify(res1.data.data));
 
                 that.getItemInfo();

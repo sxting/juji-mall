@@ -228,7 +228,7 @@ Page({
           store: res.store,
           commentCount: res.commentCount,
           recommendCount: res.recommendList.length,
-          note: JSON.parse(res.product.note),
+          // note: JSON.parse(res.product.note),
           showPics: picsStrArr,
           isShowData: true
         });

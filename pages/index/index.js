@@ -682,12 +682,14 @@ Page({
   //上拉加载
   onReachBottom() {
     let that = this;
+    let p = ++this.data.pageNo;
+    console.log('page:' + p);
     let obj = {
       providerId: this.data.providerId,
       type: 'PRODUCT',
       sortField: 'IDX',
       sortOrder: 'ASC',
-      pageNo: this.data.pageNo,
+      pageNo: p,
       pageSize: this.data.pageSize,
       longitude: '116.470959',
       latitude: '39.992368'
@@ -696,12 +698,9 @@ Page({
     service.getRecommendPage(obj).subscribe({
       next: res => {
         console.log(res);
-        if (res.list.length>0){
-          that.setData({
-            pageNo: ++that.data.pageNo,
-            recommendPage: that.data.recommendPage.concat(res.list)
-          });
-        }
+        this.setData({
+          recommendPage: this.data.recommendPage.concat(res.list)
+        });
       },
       error: err => console.log(err),
       complete: () => wx.hideToast()

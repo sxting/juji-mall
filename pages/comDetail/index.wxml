@@ -199,7 +199,7 @@
 
     <!-- 2.27日修改的逻辑 -->
     <view class="footerBtnWrap" wx:if="{{productInfo.type=='PRODUCT'&&productInfo.point>0&&productInfo.price>0}}">
-      <button form-type="submit" class="yuanjia-xiadan" bindtap="toCreateOrderByRmb" wx:if="{{productInfo.price>0&&pointBalance>=productInfo.point}}">
+      <button form-type="submit" class="yuanjia-xiadan" bindtap="toCreateOrder" wx:if="{{productInfo.price>0&&pointBalance>=productInfo.point}}">
         <view>
           <view style="font-size: 24rpx;font-weight:bold;line-height:34rpx;font-weight:bolder;">{{productInfo.point}}桔子+{{filter.toFix(productInfo.price)}}元</view>
           <view style="font-size: 18rpx;line-height:22rpx;text-align:center;">立即兑换</view>

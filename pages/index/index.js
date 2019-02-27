@@ -27,7 +27,44 @@ Page({
     isShowNewerGet: false,
     pointBalance: 0,
     imageWidth:'200rpx',
-    citylist:[],
+    citylist: [{
+      "version": 0,
+      "dateCreated": "2019-01-23 18:31:25",
+      "lastUpdated": "2019-01-23 18:31:25",
+      "deleted": 0,
+      "locationCode": "410000",
+      "locationName": "河南省",
+      "locationType": "PROVINCE",
+      "parentLocationCode": "0",
+      "parentLocation": null,
+      "subList": [
+        {
+          "version": 0,
+          "dateCreated": "2019-01-23 18:31:25",
+          "lastUpdated": "2019-01-23 18:31:25",
+          "deleted": 0,
+          "locationCode": "410100",
+          "locationName": "郑州市",
+          "locationType": "CITY",
+          "parentLocationCode": "410000",
+          "parentLocation": null,
+          "subList": [
+            {
+              "version": 0,
+              "dateCreated": "2019-01-23 18:31:25",
+              "lastUpdated": "2019-01-23 18:31:25",
+              "deleted": 0,
+              "locationCode": "410105",
+              "locationName": "金水区",
+              "locationType": "DISTRICT",
+              "parentLocationCode": "410100",
+              "parentLocation": null,
+              "subList": null
+            }
+          ]
+        }
+      ]
+    }],
     isFirstShow:true
   },
   onLoad: function(options) {
@@ -126,26 +163,26 @@ Page({
               });
 
               //获取热门城市
-              var imageWidth = (wx.getSystemInfoSync().windowWidth - 66) / 3;
-              that.setData({
-                imageWidth: imageWidth + 'px'
-              });
-              service.getHotData().subscribe({
-                next: res => {
-                  console.log(res);
-                  let arr = [];
-                  res.forEach(function(item,index){
-                    if (item.subList[0].locationCode != wx.getStorageSync('locationCode')){
-                      arr.push(item);
-                    }
-                  });
-                  that.setData({
-                    citylist: arr
-                  });
-                },
-                error: err => errDialog(err),
-                complete: () => wx.hideToast()
-              })
+              // var imageWidth = (wx.getSystemInfoSync().windowWidth - 66) / 3;
+              // that.setData({
+              //   imageWidth: imageWidth + 'px'
+              // });
+              // service.getHotData().subscribe({
+              //   next: res => {
+              //     console.log(res);
+              //     let arr = [];
+              //     res.forEach(function(item,index){
+              //       if (item.subList[0].locationCode != wx.getStorageSync('locationCode')){
+              //         arr.push(item);
+              //       }
+              //     });
+              //     that.setData({
+              //       citylist: arr
+              //     });
+              //   },
+              //   error: err => errDialog(err),
+              //   complete: () => wx.hideToast()
+              // })
 
               resolve2();
             } else {

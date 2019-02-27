@@ -16,20 +16,57 @@ Page({
     imageWidth: '200px',
     locationName:'',
     locationCode:'',
-    locationPcode:''
-
+    locationPcode:'',
+    citylist: [{
+      "version": 0,
+      "dateCreated": "2019-01-23 18:31:25",
+      "lastUpdated": "2019-01-23 18:31:25",
+      "deleted": 0,
+      "locationCode": "410000",
+      "locationName": "河南省",
+      "locationType": "PROVINCE",
+      "parentLocationCode": "0",
+      "parentLocation": null,
+      "subList": [
+        {
+          "version": 0,
+          "dateCreated": "2019-01-23 18:31:25",
+          "lastUpdated": "2019-01-23 18:31:25",
+          "deleted": 0,
+          "locationCode": "410100",
+          "locationName": "郑州市",
+          "locationType": "CITY",
+          "parentLocationCode": "410000",
+          "parentLocation": null,
+          "subList": [
+            {
+              "version": 0,
+              "dateCreated": "2019-01-23 18:31:25",
+              "lastUpdated": "2019-01-23 18:31:25",
+              "deleted": 0,
+              "locationCode": "410105",
+              "locationName": "金水区",
+              "locationType": "DISTRICT",
+              "parentLocationCode": "410100",
+              "parentLocation": null,
+              "subList": null
+            }
+          ]
+        }
+      ]
+    }]
   },
   getCitylist: function() {
-    service.getHotData().subscribe({
-      next: res => {
-        console.log(res);
-        this.setData({
-          citylist: res
-        });
-      },
-      error: err => errDialog(err),
-      complete: () => wx.hideToast()
-    })
+    // service.getHotData().subscribe({
+    //   next: res => {
+    //     console.log(res);
+    //     this.setData({
+    //       citylist: res
+    //     });
+    //   },
+    //   error: err => errDialog(err),
+    //   complete: () => wx.hideToast()
+    // })
   },
   selectCity: function(e) {
     var selectCityName = e.currentTarget.dataset['name'].replace('市', '');
@@ -51,7 +88,7 @@ Page({
     this.setData({
       imageWidth: imageWidth + 'px'
     });
-    this.getCitylist();
+    // this.getCitylist();
     var obj = {
       latitude: wx.getStorageSync('curLatitude'),
       longitude: wx.getStorageSync('curLongitude')

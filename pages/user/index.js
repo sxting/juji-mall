@@ -8,15 +8,14 @@ Page({
         avatar: '',
         phoneNum: '',
 
-        isShowModal:true,
+        isShowModal:false,
         windowWidth: 345,
-        windowHeight: 420,
+        windowHeight: 430,
         headImg: '../../images/shareMinPro.png',
         erwmImg: '../../images/erwmImg.png',
         imgUrl:''
     },
     toJuzi: function() {
-        console.log('juzi');
         wx.switchTab({ url: '../juzi/index' });
     },
     toPage: function(e) {
@@ -35,11 +34,25 @@ Page({
                 'content-type': 'application/json'
             },
             success:(res) => {
-                this.setData({imgUrl:res.data});
+                console.log("11111")
+                wx.downloadFile({
+                  url: res.data,
+                  success: (res) => {
+                    console.log("22222")
+                    console.log(res.tempFilePath);
+                    this.setData({erwmImg:res.tempFilePath});
+                    if (res.statusCode === 200) {
+
+                    }
+                  },
+                  fail:(res)=>{
+                    console.log("33333")
+                  }
+                });
             }
         });
 
-        this.drawImage(50, 50);
+        this.drawImage("商家名字","商品描述",50,48,10);//参数依次是storeName,desc,现价,原价,销量
     },
     onShow: function() {
         this.getInfo();
@@ -68,58 +81,65 @@ Page({
     },
     setCanvasSize: function() {
         var size = {};
-        size.w = wx.getSystemInfoSync().windowWidth-80;
-        console.log(size.w);
+        size.w = wx.getSystemInfoSync().windowWidth-90;
         size.h = 400;
         return size;
     },
-    setTitle: function(context) {
-        var size = this.setCanvasSize();
-        context.setFontSize(16);
+    setTitle: function(context,name) {
+        context.setFontSize(15);
         context.setTextAlign("left");
         context.setFillStyle("#333");
-        context.fillText("兰溪小馆团购餐", 20, 240);
-        context.fillText("“桔”美好生活，集好店优惠", 18, 345);
+        context.fillText(name, 28, 236);
+        context.fillText("“桔”美好生活，集好店优惠", 18, 353);
         context.stroke();
     },
-    setText2: function(context) {
-        var size = this.setCanvasSize();
+    setText1: function(context,desc) {
         context.setFontSize(12);
         context.setTextAlign("left");
         context.setFillStyle("#999");
-        context.fillText("双人情侣套餐，享受双人美味时刻", 20, 264);
-        context.fillText("--------------------------------------------", 20, 312);
+        context.fillText(desc, 28, 264);
+        context.fillText("-------------------------------------------------", 25, 320);
         context.stroke();
     },
-    setText1: function(context, fansCount, attentCount) {
-        var size = this.setCanvasSize();
+    setText2: function(context,price) {
         context.setFontSize(16);
         context.setTextAlign("left");
         context.setFillStyle("#E83221");
-        context.fillText("现价：" + fansCount + "元", 20, 290);
+        context.fillText("现价：" + price + "元", 28, 290);
         context.stroke();
     },
-    setText3: function(context) {
+    setText3: function(context,price,amount) {
         var size = this.setCanvasSize();
+        context.setFontSize(13);
+        context.setTextAlign("left");
+        context.setFillStyle("#999");
+        context.fillText("原价:" + price + "元", 150, 290);
+        context.stroke();
+        context.setFontSize(13);
+        context.setTextAlign("right");
+        context.setFillStyle("#999");
+        context.fillText("销量:" + amount, size.w, 236);
+        context.stroke();
+    },
+    setText4: function(context) {
         context.setFontSize(14);
         context.setTextAlign("left");
         context.setFillStyle("#666");
-        context.fillText("长按识别二维码", 20, 372);
+        context.fillText("长按识别二维码", 28, 379);
         context.stroke();
     },
-    drawImage: function(fansCount, attentCount) {
+    drawImage: function(name, desc,price1,price2,amount) {//name,desc,现价,原价,销量
         var size = this.setCanvasSize();
         var context = wx.createCanvasContext('myCanvas');
-        rectPath(context, 10, 10, size.w, size.h);
-
-        context.drawImage(this.data.headImg, 20, 20, size.w - 20, 195); //宽度70，居中，距离上15
-
+        rectPath(context, 15, 15, size.w, size.h);
+        context.drawImage(this.data.headImg, 28, 28, size.w - 26, 185); //宽度70，居中，距离上15
         context.save();
-        context.drawImage(this.data.erwmImg, size.w - 80, 315, 80, 80); //二维码，宽度100，居中
-        this.setTitle(context);
-        this.setText1(context, fansCount, attentCount);
-        this.setText2(context);
-        this.setText3(context);
+        context.drawImage(this.data.erwmImg, size.w - 80, 325, 80, 80); //二维码，宽度100，居中
+        this.setTitle(context,name);
+        this.setText1(context,desc);
+        this.setText2(context,price1);
+        this.setText3(context,price2,amount);
+        this.setText4(context);
         context.draw();
     },
     savePic: function() {

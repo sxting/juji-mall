@@ -21,8 +21,7 @@ Page({
     pointBalance: 0,
     note:[],
     despImgHeightValues:[],
-    isShowData:false,
-    storeCount:0
+    isShowData:false
   },
   onLoad: function(option) {
     wx.setNavigationBarTitle({

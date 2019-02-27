@@ -90,6 +90,18 @@
 
     <view class="taskItem ub ub-ac ub-pj">
       <view class="ub ub-ac ub-aj" style="width:76%;">
+        <image src="../../images/task3.png" style="width:80rpx;height:80rpx;margin-right:30rpx;"></image>
+
+        <view>
+          <view style="font-size: 28rpx;color: #333333;">邀请新人赚{{currentPointObj.shareProgramTask.onceNum}}桔子</view>
+          <view style="margin-top:10rpx;font-size: 24rpx;color: #999999;">每天不限数量多赚多得</view>
+        </view>
+      </view>
+      <button class="taskBtn" open-type="share">赚桔子</button>
+    </view>
+
+    <view class="taskItem ub ub-ac ub-pj">
+      <view class="ub ub-ac ub-aj" style="width:76%;">
         <image src="../../images/task2.png" style="width:80rpx;height:80rpx;margin-right:30rpx;"></image>
 
         <view>
@@ -107,18 +119,6 @@
         <view>
           <view style="font-size: 28rpx;color: #333333;">分享商城首页赚{{currentPointObj.shareProgramTask.onceNum}}桔子</view>
           <view style="margin-top:10rpx;font-size: 24rpx;color: #999999;">每天最多赚{{currentPointObj.shareProgramTask.dayNum}}个桔子</view>
-        </view>
-      </view>
-      <button class="taskBtn" open-type="share">赚桔子</button>
-    </view>
-
-    <view class="taskItem ub ub-ac ub-pj">
-      <view class="ub ub-ac ub-aj" style="width:76%;">
-        <image src="../../images/task3.png" style="width:80rpx;height:80rpx;margin-right:30rpx;"></image>
-
-        <view>
-          <view style="font-size: 28rpx;color: #333333;">邀请新人赚{{currentPointObj.shareProgramTask.onceNum}}桔子</view>
-          <view style="margin-top:10rpx;font-size: 24rpx;color: #999999;">每天不限数量多赚多得</view>
         </view>
       </view>
       <button class="taskBtn" open-type="share">赚桔子</button>

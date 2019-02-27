@@ -69,7 +69,7 @@
       <view class="row jc-sb" style="margin-top:30rpx;">
         <view style="font-size: 28rpx;color:#333333;">{{store.name}}</view>
         <view class="row" bindtap="toMerchantsList">
-          <view style="font-size: 24rpx;color: #999999;">适用{{storeCount}}家门店</view>
+          <view style="font-size: 24rpx;color: #999999;">适用{{productInfo.nearStoreCount?productInfo.nearStoreCount:0}}家门店</view>
           <image style="width:14rpx;height:26rpx;margin-left:20rpx;" src="../../images/arrow-right.png"></image>
         </view>
       </view>

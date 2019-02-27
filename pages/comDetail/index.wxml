@@ -1,5 +1,5 @@
 <wxs module="filter" src="../../utils/numFr.wxs"></wxs>
-<view class="container" wx:if="{{isShowData}}">
+<view class="container {{isShowModal?'':'ovh'}}" wx:if="{{isShowData}}">
   <view class="swiper-wrap">
     <swiper class="img-wrap" autoplay="true" interval="3000">
       <block wx:for="{{showPics}}" wx:key="{{index}}">
@@ -237,5 +237,27 @@
   </view> -->
 
   <!-- <confirmBox isShowConfirmModal="{{isShowConfirmModal}}" confirmBoxTitle="{{confirmTitle}}" confirmBoxContent="{{confirmContent}}"></confirmBox> -->
+
+
+  <view class="modal" hidden="{{isShowModal}}">
+    <view class="div">
+      <image class="bg" src="../../images/shareBg.png"></image>
+      <canvas canvas-id="myCanvas"></canvas>
+      <image class="close" src="../../images/close.png" bindtap="closeModal"></image>
+    </view>
+    <view class="bott ub ub-ac">
+      <button class="ub-f1 ub ub-ac ub-pc left ub-ver">
+        <image class="icon" src="../../images/icon_friend.png"></image>
+        <text class="udb">发给好友</text>
+      </button>
+      <button class="ub-f1 ub ub-ac ub-pc right ub-ver" bindtap="savePic">
+        <image class="icon" src="../../images/icon_save.png"></image>
+        <text class="udb">保存图片</text>
+      </button>
+    </view>
+  </view>
+
+
+
 
 </view>

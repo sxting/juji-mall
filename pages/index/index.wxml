@@ -123,14 +123,6 @@
       </view>
     </view>
 
-    <view class="newerGetModalWrap" wx:if="{{isShowNewerGet}}">
-      <view class="newerGetModal">
-        <image src="../../images/newerGetBg.png" style="width:680rpx;height:735rpx;"></image>
-        <image src="../../images/newerGetBtn.png" class="newerGetBtn" bindtap="getNewer"></image>
-        <image src="../../images/newerGetClose.png" class="newerGetClose" bindtap="closeGetNewer"></image>
-      </view>
-    </view>
-
   </view>
 
   <view style="width:100%;height:100%;background:#ffffff;overflow:hidden;" wx:else>
@@ -148,6 +140,13 @@
     </view>
   </view>
 
+    <view class="newerGetModalWrap" wx:if="{{isShowNewerGet}}">
+      <view class="newerGetModal">
+        <image src="../../images/newerGetBg.png" style="width:680rpx;height:735rpx;"></image>
+        <image src="../../images/newerGetBtn.png" class="newerGetBtn" bindtap="getNewer"></image>
+        <image src="../../images/newerGetClose.png" class="newerGetClose" bindtap="closeGetNewer"></image>
+      </view>
+    </view>
 </view>
 <!-- <view class="pubu">
     <view class="pubuItem">

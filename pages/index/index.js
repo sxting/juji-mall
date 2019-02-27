@@ -27,7 +27,8 @@ Page({
     isShowNewerGet: false,
     pointBalance: 0,
     imageWidth:'200rpx',
-    citylist:[]
+    citylist:[],
+    isFirstShow:true
   },
   onLoad: function(options) {
     console.log(options);
@@ -351,7 +352,7 @@ Page({
       });
     });
   },
-  onShow: function() {
+  onShow: function () {
     var that = this;
     //每次进到该页面重置筛选条件
     this.setData({
@@ -371,7 +372,14 @@ Page({
         this.getDataByCity(); //首页数据已经更新
         //如果用getDataByCity更新了数据 就不能用getSelectProviderByLoc再获取 否则数据会覆盖
       } else { //如果没有更换城市 定位获取
+        //是首次载入吗
         console.log('没有更换城市');
+        if (this.data.isFirstShow){
+          this.setData({
+            isFirstShow:false
+          })
+          return ;
+        }
         this.setData({
           locationCode: wx.getStorageSync('locationCode'),
           locationPcode: wx.getStorageSync('locationPcode'),
@@ -636,15 +644,13 @@ Page({
   },
   //上拉加载
   onReachBottom() {
-    let p = ++this.data.pageNo;
-    console.log('page:' + p);
-
+    let that = this;
     let obj = {
       providerId: this.data.providerId,
       type: 'PRODUCT',
       sortField: 'IDX',
       sortOrder: 'ASC',
-      pageNo: p,
+      pageNo: this.data.pageNo,
       pageSize: this.data.pageSize,
       longitude: '116.470959',
       latitude: '39.992368'
@@ -653,9 +659,12 @@ Page({
     service.getRecommendPage(obj).subscribe({
       next: res => {
         console.log(res);
-        this.setData({
-          recommendPage: this.data.recommendPage.concat(res.list)
-        });
+        if (res.list.length>0){
+          that.setData({
+            pageNo: ++that.data.pageNo,
+            recommendPage: that.data.recommendPage.concat(res.list)
+          });
+        }
       },
       error: err => console.log(err),
       complete: () => wx.hideToast()
@@ -666,12 +675,13 @@ Page({
   onPullDownRefresh() {
     let that = this;
     this.setData({
-      pageNo: 1
+      sortIndex: 1,
+      pageNo: 1,
+      sortArray: ['', 'ASC', 'ASC', '']
     });
     this.getIndexData();
     //根据位置查询附近精选
     var obj = {
-      // providerId: res1.id,
       providerId: that.data.providerId,
       type: 'PRODUCT',
       sortField: 'IDX',

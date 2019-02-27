@@ -38,7 +38,6 @@ Page({
     wx.setStorageSync('selectCityName', selectCityName);
     wx.setStorageSync('selectPcode', selectPcode);
     wx.setStorageSync('selectCode', selectCode);
-    // app.globalData.locationName = locationName;
     wx.navigateBack({
       delta: 1
     });

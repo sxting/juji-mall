@@ -1,6 +1,6 @@
 <view class="wrap  {{isShowModal?'':'ovh'}}">
 
-  <view class="modal" hidden="{{isShowModal}}">
+  <!-- <view class="modal" hidden="{{isShowModal}}">
     <view class="div">
       <image class="bg" src="../../images/shareBg.png"></image>
       <canvas canvas-id="myCanvas"></canvas>
@@ -16,7 +16,7 @@
         <text class="udb">保存图片</text>
       </button>
     </view>
-  </view>
+  </view> -->
 
   <view class="toper">
     <view style="padding:30rpx;" class="userinfo ub ub-ac">

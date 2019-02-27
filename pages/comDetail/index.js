@@ -21,7 +21,8 @@ Page({
     pointBalance: 0,
     note:[],
     despImgHeightValues:[],
-    isShowData:false
+    isShowData:false,
+    storeCount:0
   },
   onLoad: function(option) {
     wx.setNavigationBarTitle({
@@ -210,6 +211,7 @@ Page({
     })
   },
   getItemInfo: function() {
+    let that = this;
     service.getItemInfo({
       productId: this.data.productId,
       storeId: this.data.storeId
@@ -220,18 +222,36 @@ Page({
         picsStrArr.forEach(function(item,index){
           picsStrArr[index] = constant.basePicUrl + item + '/resize_690_420/mode_fill'
         });
-        this.setData({
-          commentList: res.commentList,
-          productInfo: res.product,
-          description: JSON.parse(res.product.description),
-          recommendList: res.recommendList,
-          store: res.store,
-          commentCount: res.commentCount,
-          recommendCount: res.recommendList.length,
-          // note: JSON.parse(res.product.note),
-          showPics: picsStrArr,
-          isShowData: true
-        });
+        new Promise(function(resolve,reject){
+          let str = JSON.parse(res.product.note);
+          resolve(str);
+        }).then(function(result){
+          that.setData({
+            commentList: res.commentList,
+            productInfo: res.product,
+            description: JSON.parse(res.product.description),
+            recommendList: res.recommendList,
+            store: res.store,
+            commentCount: res.commentCount,
+            recommendCount: res.recommendList.length,
+            note: result,
+            showPics: picsStrArr,
+            isShowData: true
+          });
+        }).catch(function(err){
+          that.setData({
+            commentList: res.commentList,
+            productInfo: res.product,
+            description: JSON.parse(res.product.description),
+            recommendList: res.recommendList,
+            store: res.store,
+            commentCount: res.commentCount,
+            recommendCount: res.recommendList.length,
+            showPics: picsStrArr,
+            isShowData: true
+          });
+        })
+        
       },
       error: err => console.log(err),
       complete: () => wx.hideToast()

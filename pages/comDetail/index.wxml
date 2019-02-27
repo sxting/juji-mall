@@ -178,7 +178,7 @@
        -->
       <!-- 如果不需要人民币 并且 桔子充足 -->
       <!--
-      <button form-type="submit" class="xiadan" bindtap="toCreateOrderByPoint" wx:if="{{productInfo.price==0&&pointBalance>0}}">
+      <button form-type="submit" class="xiadan" bindtap="toCreateOrderByPoint" wx:if="{{productInfo.price==0&&pointBalance>=productInfo.point}}">
         <view>
           <view style="font-size: 24rpx;font-weight:bold;line-height:34rpx;">{{productInfo.point}}桔子</view>
           <view style="font-size: 18rpx;line-height:22rpx;text-align:center;">立即兑换</view>
@@ -187,7 +187,7 @@
        -->
       <!-- 如果桔子不足 跳转到任务 -->
       <!--
-      <button form-type="submit" class="xiadan" bindtap="toGetPoint" wx:if="{{pointBalance==0||!pointBalance}}">
+      <button form-type="submit" class="xiadan" bindtap="toGetPoint" wx:if="{{pointBalance<productInfo.point||!pointBalance}}">
         <view>
           <view style="font-size: 24rpx;font-weight:bold;line-height:34rpx;">桔子不足</view>
           <view style="font-size: 18rpx;line-height:22rpx;text-align:center;">赚桔子</view>
@@ -199,14 +199,14 @@
 
     <!-- 2.27日修改的逻辑 -->
     <view class="footerBtnWrap" wx:if="{{productInfo.type=='PRODUCT'&&productInfo.point>0&&productInfo.price>0}}">
-      <button form-type="submit" class="yuanjia-xiadan" bindtap="toCreateOrderByRmb" wx:if="{{productInfo.price>0&&pointBalance>0}}">
+      <button form-type="submit" class="yuanjia-xiadan" bindtap="toCreateOrderByRmb" wx:if="{{productInfo.price>0&&pointBalance>=productInfo.point}}">
         <view>
           <view style="font-size: 24rpx;font-weight:bold;line-height:34rpx;font-weight:bolder;">{{productInfo.point}}桔子+{{filter.toFix(productInfo.price)}}元</view>
           <view style="font-size: 18rpx;line-height:22rpx;text-align:center;">立即兑换</view>
         </view>
       </button>
 
-      <button form-type="submit" class="yuanjia-xiadan" bindtap="toGetPoint" wx:if="{{pointBalance==0||!pointBalance}}">
+      <button form-type="submit" class="yuanjia-xiadan" bindtap="toGetPoint" wx:if="{{pointBalance<productInfo.point||!pointBalance}}">
         <view>
           <view style="font-size: 24rpx;font-weight:bold;line-height:34rpx;font-weight:bolder;">桔子不足</view>
           <view style="font-size: 18rpx;line-height:22rpx;">赚桔子</view>
@@ -227,14 +227,14 @@
     <!-- 如果是桔子换礼商品 -->
     <view class="footerBtnWrap" wx:if="{{productInfo.type=='POINT'}}">
       <!-- 如果桔子充足 -->
-      <button form-type="submit" class="yuanjia-xiadan" bindtap="toCreateOrderByPoint" wx:if="{{pointBalance>0}}">
+      <button form-type="submit" class="yuanjia-xiadan" bindtap="toCreateOrderByPoint" wx:if="{{pointBalance>=productInfo.point}}">
         <view>
           <view style="font-size: 24rpx;font-weight:bold;line-height:34rpx;font-weight:bolder;">{{productInfo.point}} 桔子</view>
           <view style="font-size: 18rpx;line-height:22rpx;text-align:center;">立即兑换</view>
         </view>
       </button>
       <!-- 如果桔子不足 跳转到任务 -->
-      <button form-type="submit" class="yuanjia-xiadan" bindtap="toGetPoint" wx:if="{{pointBalance==0||!pointBalance}}">
+      <button form-type="submit" class="yuanjia-xiadan" bindtap="toGetPoint" wx:if="{{pointBalance<productInfo.point||!pointBalance}}">
         <view>
           <view style="font-size: 24rpx;font-weight:bold;line-height:34rpx;font-weight:bolder;">桔子不足</view>
           <view style="font-size: 18rpx;line-height:22rpx;">赚桔子</view>

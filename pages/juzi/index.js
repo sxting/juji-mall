@@ -195,11 +195,11 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-    // var obj = {
-    //   type:'SHARE_PROGRAM',
-    //   sharePath: '/pages/index/index'
-    // };
-    // this.share(obj);
+    var obj = {
+      type:'SHARE_PROGRAM',
+      sharePath: '/pages/index/index'
+    };
+    this.share(obj);
     return {
       title: JSON.parse(wx.getStorageSync('userinfo')).nickName +'给您分享了桔集小程序，一起享受好店优惠吧！',
       path: '/pages/index/index?inviteCode=' + wx.getStorageSync('inviteCode'),

@@ -39,8 +39,9 @@ Page({
         break;
     }
     wx.showModal({
-      title: '说明',
+      title: '',
       content: des,
+      showCancel:false
     })
   },
   toJuzihl: function () {

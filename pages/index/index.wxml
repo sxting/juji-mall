@@ -1,5 +1,5 @@
 <wxs module="filter" src="../../utils/numFr.wxs"></wxs>
-<view class="homeTabPage {{isShowNewerGet?'noscroll':''}}">
+<view class="{{(slideShowList.length>0||pointProductList.length>0||recommendPage.length>0)?'':'homeTabPage'}} {{isShowNewerGet?'noscroll':''}}">
   <view class="locationWrap">
     <view class="title">桔集</view>
     <view class="location" bindtap="toCityList">{{locationName}}

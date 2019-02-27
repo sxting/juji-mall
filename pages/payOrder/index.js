@@ -22,6 +22,7 @@ Page({
     wx.setNavigationBarTitle({
       title: '订单确认',
     });
+    wx.hideShareMenu();
     if (options.id && options.storeid && options.paytype) {
       this.setData({
         productId: options.id,
@@ -42,6 +43,17 @@ Page({
       });
     }
 
+  },
+  //收集formid做推送
+  collectFormIds: function (e) {
+    console.log(e.detail);
+    service.collectFormIds({
+      formId: e.detail.formId
+    }).subscribe({
+      next: res => {
+        console.log(res)
+      }
+    });
   },
   toMyOrder: function() {
     wx.redirectTo({
@@ -354,7 +366,7 @@ Page({
           });
         }
       })
-    } else { //微信支付
+    } else if (that.data.paytype == 3) { //人民币优惠支付
       service.getPre({
         productId: that.data.productId
       }).subscribe({
@@ -475,6 +487,133 @@ Page({
             alreadyPay: false
           });
         }
+      })
+    } else if (that.data.paytype == 4){//原价支付
+      service.getPre({
+        productId: that.data.productId
+      }).subscribe({
+        next: res => {
+          console.log('--------下单前数据校验4微信支付原价-------');
+          console.log(res);
+          //判断条件 如果：过往已经购买的数量 + 要买的数量 > 限制购买的最大数量 处理：禁止下单
+          if (res.totalAll + that.data.count <= that.data.productInfo.limitMaxNum) {
+            //判断条件 如果：今日已经购买的数量 + 要买的数量 > 今日限制购买的最大数量 处理：禁止下单
+            if (res.totalToday + that.data.count <= that.data.productInfo.limitPerDayNum) {
+              //判断条件 如果：要买的数量 > 每个订单限制购买的最大数量 处理：禁止下单
+              if (that.data.count <= that.data.productInfo.limitPerOrderNum) {
+                //创建订单
+                var orderObj = {
+                  itemRequests: [{
+                    merchantId: that.data.productInfo.merchantId,
+                    merchantName: that.data.productInfo.merchantName,
+                    num: that.data.count,
+                    originalPrice: that.data.productInfo.originalPrice,
+                    payAmount: that.data.productInfo.price * that.data.count,
+                    payPoint: 0,
+                    picId: that.data.productInfo.picId,
+                    point: that.data.productInfo.point,
+                    price: that.data.productInfo.originalPrice,
+                    productId: that.data.productInfo.productId,
+                    productName: that.data.productInfo.productName,
+                    type: that.data.productInfo.type
+                  }],
+                  openId: wx.getStorageSync('openid'),
+                  originAmount: that.data.productInfo.originalPrice * that.data.count,
+                  payAmount: that.data.productInfo.originalPrice * that.data.count,
+                  payPoint: 0,
+                  payType: 'WECHAT',
+                  providerId: that.data.productInfo.providerId,
+                  providerName: that.data.productInfo.providerName
+                };
+                service.saveOrder(orderObj).subscribe({
+                  next: res1 => {
+                    console.log('--------创建订单返回4微信支付原价--------');
+                    console.log(res1);
+                    var payInfo = JSON.parse(res1.payInfo);
+                    wx.requestPayment({
+                      timeStamp: payInfo.timeStamp,
+                      nonceStr: payInfo.nonceStr,
+                      package: payInfo.package,
+                      signType: payInfo.signType,
+                      paySign: payInfo.paySign,
+                      success(res2) {
+                        console.log(res2);
+                        wx.redirectTo({
+                          url: '/pages/orderDetail/index?id=' + res1.orderId,
+                        });
+                        that.setData({
+                          alreadyPay: false
+                        });
+                      },
+                      fail(res2) {
+                        console.log(res2);
+                        if (res2.errMsg == 'requestPayment:fail cancel') {
+                          wx.showToast({
+                            title: '用户取消支付',
+                            icon: 'none'
+                          });
+                          //跳转到待支付列表
+                          that.toMyOrder();
+                          that.setData({
+                            alreadyPay: false
+                          });
+                        }
+
+                      }
+                    });
+                  },
+                  error: err => {
+                    wx.showModal({
+                      title: '错误',
+                      content: err,
+                    });
+                    that.setData({
+                      alreadyPay: false
+                    });
+                  }
+                });
+              } else {
+                wx.showModal({
+                  title: '提示',
+                  content: '该商品每单最多可以购买' + that.data.productInfo.limitPerOrderNum + '件'
+                });
+                that.setData({
+                  alreadyPay: false
+                });
+              }
+            } else {
+              wx.showModal({
+                title: '提示',
+                content: '该商品今日还可以购买' + (that.data.productInfo.limitPerDayNum - res.totalToday) + '件'
+              });
+              that.setData({
+                alreadyPay: false
+              });
+            }
+          } else {
+            wx.showModal({
+              title: '提示',
+              content: '该商品您最多还可以购买' + (that.data.productInfo.limitMaxNum - res.totalAll) + '件'
+            });
+            that.setData({
+              alreadyPay: false
+            });
+          }
+        },
+        error: err => {
+          wx.showModal({
+            title: '错误',
+            content: err,
+          })
+          that.setData({
+            alreadyPay: false
+          });
+        }
+      })
+    }else{
+      wx.showModal({
+        title: '错误',
+        content: '支付类型错误',
       })
     }
 

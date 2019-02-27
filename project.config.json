@@ -36,13 +36,14 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 14,
+			"current": 16,
 			"list": [
 				{
 					"id": 0,
 					"name": "商品详情",
 					"pathName": "pages/comDetail/index",
-					"query": ""
+					"query": "id=a1949b0d-3656-11e9-8457-58605f589df3&inviteCode=03cc9d760157462994a4a7920fdf361b",
+					"scene": null
 				},
 				{
 					"id": -1,
@@ -136,6 +137,20 @@
 					"id": -1,
 					"name": "文章页",
 					"pathName": "pages/article/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "首页邀请码模式",
+					"pathName": "pages/index/index",
+					"query": "inviteCode=03cc9d760157462994a4a7920fdf361b",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "桔集支付",
+					"pathName": "pages/jujipay/index",
 					"query": "",
 					"scene": null
 				}

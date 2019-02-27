@@ -47,6 +47,7 @@ Page({
     wx.setNavigationBarTitle({
       title: '我的评价',
     });
+    wx.hideShareMenu();
     console.log(options);
     if (options.id) {
       this.commentPage(options.id);

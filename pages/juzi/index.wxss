@@ -43,7 +43,7 @@
 }
 
 .point-text {
-  width: 64rpx;
+  width: 66rpx;
   font-size: 20rpx;
   color: #666;
   text-align: center;

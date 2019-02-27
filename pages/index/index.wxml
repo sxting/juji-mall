@@ -1,123 +1,153 @@
 <wxs module="filter" src="../../utils/numFr.wxs"></wxs>
-<view class="homeTabPage {{isShowNewerGet?'noscroll':''}}" wx:if="{{curTabIndex===0}}">
+<view class="homeTabPage {{isShowNewerGet?'noscroll':''}}">
   <view class="locationWrap">
     <view class="title">桔集</view>
     <view class="location" bindtap="toCityList">{{locationName}}
       <image style="width:16rpx;height:10rpx;margin-left:10rpx;" lazy-load="true" src="../../images/sort-down.png" wx:if="{{locationName}}"></image>
     </view>
   </view>
-  <view class="toper">
-    <swiper autoplay="{{autoplay}}" current="{{nowIdx}}" previous-margin="35rpx" next-margin="35rpx" interval="3000" duration="1000" indicator-color="#fff" indicator-active-color="#b55fff" bindchange="swiperChange" circular>
-      <swiper-item wx:for="{{slideShowList}}" wx:key="unique">
-        <image src="https://upic.juniuo.com/file/picture/{{item.imgId}}/resize_0_0/mode_fill" data-link="{{item.link}}" bindtap="onTapBanner" class="slide-image  {{nowIdx==index?'img-scale':''}}" bindload="getHeight" mode="aspectFill"></image>
-      </swiper-item>
-    </swiper>
-  </view>
 
-  <view class="middleWrap" wx:if="{{false}}">
-    <view class="mBgWrap">
-      <view class="mBtnWrap" bindtap="toChaozhikj">
-        <image src="../../images/kanjia.png" style="width:66rpx;height:66rpx;margin-bottom:20rpx;"></image>
-        <view class="mBtnText">超值砍价</view>
-      </view>
-      <view class="mLine"></view>
-      <view class="mBtnWrap" bindtap="toJuzihl">
-        <image src="../../images/huanli.png" style="width:66rpx;height:66rpx;margin-bottom:20rpx;"></image>
-        <view class="mBtnText">桔子换礼</view>
+  <view wx:if="{{slideShowList.length>0||pointProductList.length>0||recommendPage.length>0}}">
+    <view class="toper">
+      <swiper autoplay="{{autoplay}}" current="{{nowIdx}}" previous-margin="35rpx" next-margin="35rpx" interval="3000" duration="1000" indicator-color="#fff" indicator-active-color="#b55fff" bindchange="swiperChange" circular>
+        <swiper-item wx:for="{{slideShowList}}" wx:key="unique">
+          <image src="{{item.imgId?'https://upic.juniuo.com/file/picture/'+item.imgId+'/resize_0_0/mode_fill':''}}" data-link="{{item.link}}" bindtap="onTapBanner" class="slide-image  {{nowIdx==index?'img-scale':''}}" bindload="getHeight" mode="aspectFill"></image>
+        </swiper-item>
+      </swiper>
+    </view>
+
+    <view class="middleWrap" wx:if="{{false}}">
+      <view class="mBgWrap">
+        <view class="mBtnWrap" bindtap="toChaozhikj">
+          <image src="../../images/kanjia.png" style="width:66rpx;height:66rpx;margin-bottom:20rpx;"></image>
+          <view class="mBtnText">超值砍价</view>
+        </view>
+        <view class="mLine"></view>
+        <view class="mBtnWrap" bindtap="toJuzihl">
+          <image src="../../images/huanli.png" style="width:66rpx;height:66rpx;margin-bottom:20rpx;"></image>
+          <view class="mBtnText">桔子换礼</view>
+        </view>
       </view>
     </view>
-  </view>
 
-  <view class="juzihl-wrap">
-    <view class="mtitle">桔子换礼</view>
-    <view class="mRow jc-sb" style="margin-top:5rpx;">
-      <view class="subtitle">让生活“换”然一新</view>
-      <view class="moreWrap" wx:if="{{locationName}}"  bindtap="toJuzihl">
-        <view class="more">更多</view>
-        <image src="../../images/arrow-right.png" style="width:10rpx;height:18rpx;"></image>
+    <view class="juzihl-wrap">
+      <view class="mtitle">桔子换礼</view>
+      <view class="mRow jc-sb" style="margin-top:5rpx;">
+        <view class="subtitle">让生活“换”然一新</view>
+        <view class="moreWrap" wx:if="{{locationName}}" bindtap="toJuzihl">
+          <view class="more">更多</view>
+          <image src="../../images/arrow-right.png" style="width:10rpx;height:18rpx;"></image>
+        </view>
       </view>
-    </view>
-    <view class="pubu">
-      <view class="pubuItem">
-        <view class="cardWrap padr10">
-        <view class="card" wx:for="{{pointProductList}}" wx:key="unique" bindtap="toComDetail" data-id="{{item.productId}}" data-storeid="{{item.nearStore.id}}" wx:if="{{index%2 == 0}}">
-          <image src="https://upic.juniuo.com/file/picture/{{item.picId}}/resize_330_330/mode_fill"  lazy-load="true" mode="aspectFill" class="plimg"></image>
-          <view class="pubuname">{{item.productName}}</view>
-          <view class="pububox">
-            <view class="ex-juzi">
-            <view style="font-size: 28rpx;color: #E83221;">{{item.point}}</view>
-            <view style="font-size: 22rpx;color: #E83221;">桔子</view>
+      <view class="pubu">
+        <view class="pubuItem">
+          <view class="cardWrap padr10">
+            <view class="card" wx:for="{{pointProductList}}" wx:key="unique" bindtap="toComDetail" data-id="{{item.productId}}" data-storeid="{{item.nearStore.id}}" wx:if="{{index%2 == 0}}">
+              <image src="https://upic.juniuo.com/file/picture/{{item.picId}}/resize_330_330/mode_fill" lazy-load="true" mode="aspectFill" class="plimg"></image>
+              <view class="pubuname">{{item.productName}}</view>
+              <view class="pububox">
+                <view class="ex-juzi">
+                  <view style="font-size: 28rpx;color: #E83221;font-weight:bold;">{{item.point}}</view>
+                  <view style="font-size: 22rpx;color: #E83221;font-weight:bold;">桔子</view>
+                </view>
+                <view class="old-price">{{item.originalPrice}}元</view>
+              </view>
             </view>
-            <view class="old-price">{{item.originalPrice}}元</view>
           </view>
         </view>
-        </view>
-      </view>
 
-      <view class="pubuItem">
-        <view class="cardWrap padl10">
-        <view class="card" wx:for="{{pointProductList}}" wx:key="unique" bindtap="toComDetail"  data-id="{{item.productId}}" data-storeid="{{item.nearStore.id}}" wx:if="{{index%2!=0}}">
-          <image src="https://upic.juniuo.com/file/picture/{{item.picId}}/resize_330_330/mode_fill" lazy-load="true" mode="aspectFill" class="plimg"></image>
-          <view class="pubuname">{{item.productName}}</view>
-          <view class="pububox">
-            <view class="ex-juzi">
-            <view style="font-size: 28rpx;color: #E83221;">{{item.point}}</view>
-            <view style="font-size: 22rpx;color: #E83221;">桔子</view>
+        <view class="pubuItem">
+          <view class="cardWrap padl10">
+            <view class="card" wx:for="{{pointProductList}}" wx:key="unique" bindtap="toComDetail" data-id="{{item.productId}}" data-storeid="{{item.nearStore.id}}" wx:if="{{index%2!=0}}">
+              <image src="https://upic.juniuo.com/file/picture/{{item.picId}}/resize_330_330/mode_fill" lazy-load="true" mode="aspectFill" class="plimg"></image>
+              <view class="pubuname">{{item.productName}}</view>
+              <view class="pububox">
+                <view class="ex-juzi">
+                  <view style="font-size: 28rpx;color: #E83221;font-weight:bold;">{{item.point}}</view>
+                  <view style="font-size: 22rpx;color: #E83221;font-weight:bold;">桔子</view>
+                </view>
+                <view class="old-price">{{item.originalPrice}}元</view>
+              </view>
             </view>
-            <view class="old-price">{{item.originalPrice}}元</view>
           </view>
         </view>
+
+      </view>
+    </view>
+
+    <!-- 桔子球 -->
+    <view class="juziqiu" bindtap="onTapJuziqiu">
+      <view style="font-size: 24rpx;color: #333333;font-weight:bold;text-align:center;margin-top:24rpx">
+        <text style="font-size: 30rpx;color: #151515;">{{filter.toFloor(pointBalance)}}</text>桔子</view>
+      <view class="ub ub-ac ub-pc">
+        <text style="font-size: 20rpx;color: #333333;">去赚取</text>
+        <image src="../../images/toPointList.png" style="width:12rpx;height:17rpx;margin-left:10rpx;"></image>
+      </view>
+    </view>
+
+    <view class="juzihl-wrap" style="margin-top:20rpx;">
+      <view class="mtitle">精选推荐</view>
+      <view class="subtitle" style="margin-top:10rpx;">精选好物，先到先得</view>
+      <view class="labels-wrap">
+        <view class="label {{sortIndex==1?'label-active':''}}" data-label="1" bindtap="toggleLabel">
+          综合</view>
+        <view class="label {{sortIndex==2?'label-active':''}}" data-label="2" bindtap="toggleLabel">
+          价格
+          <image src="{{sortIndex==2?'../../images/sort_top_active.png':'../../images/sort_top.png'}}" class="xIcon {{sortIndex==2&&sortArray[sortIndex - 1]=='DESC'?'rotate':''}}" style="width:13rpx;height:18rpx;margin-left:10rpx;"></image>
+        </view>
+        <view class="label {{sortIndex==3?'label-active':''}}" data-label="3" bindtap="toggleLabel">
+          距离
+          <image src="{{sortIndex==3?'../../images/sort_top_active.png':'../../images/sort_top.png'}}" class="xIcon {{sortIndex==3&&sortArray[sortIndex - 1]=='DESC'?'rotate':''}}" style="width:13rpx;height:18rpx;margin-left:10rpx;"></image>
+        </view>
+        <view class="label {{sortIndex==4?'label-active':''}}" data-label="4" bindtap="toggleLabel">
+          销量
+          <image src="{{sortIndex==4?'../../images/label_xl_active.png':'../../images/label_xl.png'}}" style="width:15rpx;height:16rpx;margin-left:10rpx;"></image>
         </view>
       </view>
-
-    </view>
-  </view>
-
-  <view class="juzihl-wrap" style="margin-top:20rpx;">
-    <view class="mtitle">精选推荐</view>
-    <view class="subtitle" style="margin-top:10rpx;">精选好物，先到先得</view>
-    <view class="labels-wrap">
-      <view class="label {{sortIndex==1?'label-active':''}}" data-label="1" bindtap="toggleLabel">
-      综合</view>
-      <view class="label {{sortIndex==2?'label-active':''}}" data-label="2" bindtap="toggleLabel">
-      价格
-      <image src="{{sortIndex==2?'../../images/sort_top_active.png':'../../images/sort_top.png'}}" class="xIcon {{sortIndex==2&&sortArray[sortIndex - 1]=='DESC'?'rotate':''}}" style="width:13rpx;height:18rpx;margin-left:10rpx;"></image>
-      </view>
-      <view class="label {{sortIndex==3?'label-active':''}}" data-label="3" bindtap="toggleLabel">
-      距离
-      <image src="{{sortIndex==3?'../../images/sort_top_active.png':'../../images/sort_top.png'}}" class="xIcon {{sortIndex==3&&sortArray[sortIndex - 1]=='DESC'?'rotate':''}}"  style="width:13rpx;height:18rpx;margin-left:10rpx;"></image>
-      </view>
-      <view class="label {{sortIndex==4?'label-active':''}}" data-label="4" bindtap="toggleLabel">
-      销量
-      <image src="{{sortIndex==4?'../../images/label_xl_active.png':'../../images/label_xl.png'}}"  style="width:15rpx;height:16rpx;margin-left:10rpx;"></image>
-      </view>
-    </view>
-    <view class="jingxuanlist" wx:for="{{recommendPage}}" wx:key="unique" bindtap="toComDetail" data-id="{{item.productId}}" data-storeid="{{item.nearStore.id}}">
-      <image style="width:100%;height:330rpx;margin-top:30rpx;border-radius:10rpx;" lazy-load="true" src="https://upic.juniuo.com/file/picture/{{item.picId}}/resize_690_330/mode_fill"></image>
-      <view class="dis-wrap jc-sb">
-        <view class="from">{{item.providerName}}</view>
-        <view class="dis">距你{{filter.toDis(item.nearDist)}}km</view>
-      </view>
-      <view class="pro-name">{{item.productName}}</view>
-      <view class="price-wrap jc-sb">
-        <view class="p-wrap">
-          <view class="now-price" wx:if="{{item.point>0}}">{{item.point}}桔子</view>
-          <view class="now-price" wx:if="{{item.point>0&&item.price>0}}">+</view>
-          <view class="now-price" wx:if="{{item.price>0}}">{{filter.toFix(item.price)}}元</view>
-          <view class="old-price">{{filter.toFix(item.originalPrice)}}元</view>
+      <view class="jingxuanlist" wx:for="{{recommendPage}}" wx:key="unique" bindtap="toComDetail" data-id="{{item.productId}}" data-storeid="{{item.nearStore.id}}">
+        <image style="width:100%;height:330rpx;margin-top:30rpx;border-radius:10rpx;" lazy-load="true" src="https://upic.juniuo.com/file/picture/{{item.picId}}/resize_690_330/mode_fill"></image>
+        <view class="dis-wrap jc-sb">
+          <view class="from">{{item.providerName}}</view>
+          <view class="dis">距你{{filter.toDis(item.nearDist)}}km</view>
         </view>
-        <view class="count">已售{{item.soldNum}}件</view>
+        <view class="pro-name">{{item.productName}}</view>
+        <view class="price-wrap jc-sb">
+          <view class="p-wrap">
+            <view class="now-price" wx:if="{{item.point>0}}">{{item.point}}桔子</view>
+            <view class="now-price" wx:if="{{item.point>0&&item.price>0}}">+</view>
+            <view class="now-price" wx:if="{{item.price>0}}">{{filter.toFix(item.price)}}元</view>
+            <view class="old-price">{{filter.toFix(item.originalPrice)}}元</view>
+          </view>
+          <view class="count">已售{{item.soldNum}}件</view>
+        </view>
       </view>
+    </view>
+
+    <view class="newerGetModalWrap" wx:if="{{isShowNewerGet}}">
+      <view class="newerGetModal">
+        <image src="../../images/newerGetBg.png" style="width:680rpx;height:735rpx;"></image>
+        <image src="../../images/newerGetBtn.png" class="newerGetBtn" bindtap="getNewer"></image>
+        <image src="../../images/newerGetClose.png" class="newerGetClose" bindtap="closeGetNewer"></image>
+      </view>
+    </view>
+
+  </view>
+
+  <view style="width:100%;height:100%;background:#ffffff;overflow:hidden;" wx:else>
+
+    <image src="../../images/city.png" style="width:240rpx;height:180rpx;margin:180rpx auto 60rpx;display:block;"></image>
+    <view style="font-size: 30rpx;color: #333333;text-align:center;">您的所在的位置暂未开通桔集服务</view>
+    <view style="margin-top:160rpx;font-size: 28rpx;color: #666666;text-align:center;">逛一下其他热门城市吧</view>
+
+    <view class="main">
+      <view class="citem ub ub-ac ub-pc" wx:for="{{citylist}}" wx:key="unique" bindtap="selectCity" data-name="{{item.locationType=='CITY'?item.locationName:item.subList[0].locationName}}" data-pcode="{{item.locationType=='PROVINCE'?item.locationCode:''}}" data-code="{{item.locationType=='CITY'?item.locationCode:item.subList[0].locationCode}}" style="width:{{imageWidth}}">
+        <view wx:if="{{item.locationType=='CITY'}}">{{item.locationName}}</view>
+        <view wx:else>{{item.subList[0].locationName}}</view>
+      </view>
+      <view class="clear"></view>
     </view>
   </view>
 
-  <view class="newerGetModalWrap" wx:if="{{isShowNewerGet}}">
-    <view class="newerGetModal">
-      <image src="../../images/newerGetBg.png" style="width:680rpx;height:735rpx;"></image>
-      <image src="../../images/newerGetBtn.png" class="newerGetBtn" bindtap="getNewer"></image>
-      <image src="../../images/newerGetClose.png" class="newerGetClose" bindtap="closeGetNewer"></image>
-    </view>
-  </view>
 </view>
 <!-- <view class="pubu">
     <view class="pubuItem">

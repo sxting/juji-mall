@@ -113,6 +113,7 @@ Page({
         wx.setNavigationBarTitle({
             title: '我的评价',
         });
+        wx.hideShareMenu();
         this.getComments(1);
     }
 })

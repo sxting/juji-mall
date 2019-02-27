@@ -38,7 +38,6 @@ Page({
     wx.setStorageSync('selectCityName', selectCityName);
     wx.setStorageSync('selectPcode', selectPcode);
     wx.setStorageSync('selectCode', selectCode);
-    // app.globalData.locationName = locationName;
     wx.navigateBack({
       delta: 1
     });
@@ -47,6 +46,7 @@ Page({
     wx.setNavigationBarTitle({
       title: '选择城市'
     });
+    wx.hideShareMenu();
     var imageWidth = (wx.getSystemInfoSync().windowWidth - 66) / 3;
     this.setData({
       imageWidth: imageWidth + 'px'

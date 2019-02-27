@@ -128,6 +128,7 @@ Page({
     wx.setNavigationBarTitle({
       title: '桔子明细'
     });
+    wx.hideShareMenu();
 
   }
 })

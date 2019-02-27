@@ -20,7 +20,8 @@ Page({
     recommendCount: 0,
     pointBalance: 0,
     note:[],
-    despImgHeightValues:[]
+    despImgHeightValues:[],
+    isShowData:false
   },
   onLoad: function(option) {
     wx.setNavigationBarTitle({
@@ -31,10 +32,10 @@ Page({
       wx.showToast({
         title: '发生错误，未找到商品id',
         icon: 'none'
-      })
-      wx.navigateBack({
-        delta: 1
       });
+      wx.navigateTo({
+        url: '/pages/index/index',
+      })
       return ;
     } 
     console.log(wx.getStorageSync('curLatitude'));
@@ -45,10 +46,108 @@ Page({
       productId: option.id,
       storeId: option.storeid
     });
-    this.getItemInfo();
-    //查询用户橘子
-    this.getPointBalance();
+    let that = this;
+    if(wx.getStorageSync('token')){
+      console.log('token存在');
+      this.getItemInfo();
+      //查询用户橘子
+      this.getPointBalance();
+    }else{
+      console.log('token不存在');
+      //新用户 授权 登录 跳转
+      // wx.switchTab({
+      //   url: '/pages/index/index',
+      // });
 
+      new Promise(function (resolve, reject) {
+        console.log('Promise is ready!');
+        wx.getSetting({
+          success: (res) => {
+            console.log(res.authSetting['scope.userInfo']);
+            if (!res.authSetting['scope.userInfo']) {
+              wx.reLaunch({
+                url: '/pages/login/index?fromPage=comDetail&productId=' + that.data.productId + '&inviteCode=' + option.inviteCode
+              });
+            } else { //如果已经授权
+              //判断rowData是否存在
+              if (wx.getStorageSync('rawData')) { //如果存在
+                resolve();
+              } else { //如果不存在rowData
+                reject('未获取rawData');
+              }
+            }
+          }
+        });
+      }).then(function () {
+
+        return new Promise(function (resolve1, reject1) {
+          wx.login({
+            success: res => {
+              console.log('code: ' + res.code);
+              console.log(constant.APPID);
+              resolve1(res.code);
+            }
+          });
+
+        })
+      }).then(function (code) {
+
+          wx.request({
+            url: 'https://c.juniuo.com/shopping/user/login.json',
+            method: 'GET',
+            data: {
+              code: code,
+              appId: constant.APPID,
+              isMock: false, //测试标记
+              inviteCode: option.inviteCode,
+              rawData: wx.getStorageSync('rawData')
+            },
+            header: {
+              'content-type': 'application/json',
+            },
+            success: (res1) => {
+              console.log(res1);
+
+              if (res1.data.errorCode == '200') {
+                wx.setStorageSync('token', res1.data.data.token);
+                wx.setStorageSync('openid', res1.data.data.openId);
+                wx.setStorageSync('inviteCode', res1.data.data.inviteCode);
+                wx.setStorageSync('userinfo', JSON.stringify(res1.data.data));
+
+                that.getItemInfo();
+                //查询用户橘子
+                that.getPointBalance();
+
+              } else {
+                wx.showModal({
+                  title: '错误',
+                  content: '登录失败，错误码:' + res1.data.errorCode + ' 返回错误: ' + res1.data.errorInfo
+                });
+              }
+            }
+          });
+
+        }).catch(function (err) {
+          console.log(err);
+          wx.showModal({
+            title: '错误',
+            content: err
+          });
+        });
+
+    }
+
+  },
+  //收集formid做推送
+  collectFormIds:function(e){
+    console.log(e.detail);
+    service.collectFormIds({
+      formId: e.detail.formId
+    }).subscribe({
+      next: res => {
+        console.log(res)
+      }
+    });
   },
   toMerchantsList:function(){
     wx.navigateTo({
@@ -65,9 +164,14 @@ Page({
       url: '/pages/payOrder/index?paytype=2&id=' + this.data.productId + '&storeid=' + this.data.storeId
     });
   },
-  toCreateOrderByRmb: function() { //只用人民币下单
+  toCreateOrderByRmb: function () { //人民币优惠购买
     wx.navigateTo({
       url: '/pages/payOrder/index?paytype=3&id=' + this.data.productId + '&storeid=' + this.data.storeId
+    });
+  },
+  toCreateOrderByOriPrice: function () { //原价购买
+    wx.navigateTo({
+      url: '/pages/payOrder/index?paytype=4&id=' + this.data.productId + '&storeid=' + this.data.storeId
     });
   },
   toGetPoint: function() { //跳转到任务页面赚桔子
@@ -114,7 +218,7 @@ Page({
         console.log(res);
         var picsStrArr = res.product.picIds.split(',');
         picsStrArr.forEach(function(item,index){
-          picsStrArr[index] = constant.basePicUrl + item + '/resize_0_0/mode_fill'
+          picsStrArr[index] = constant.basePicUrl + item + '/resize_690_420/mode_fill'
         });
         this.setData({
           commentList: res.commentList,
@@ -125,7 +229,8 @@ Page({
           commentCount: res.commentCount,
           recommendCount: res.recommendList.length,
           note: JSON.parse(res.product.note),
-          showPics: picsStrArr
+          showPics: picsStrArr,
+          isShowData: true
         });
       },
       error: err => console.log(err),
@@ -176,18 +281,12 @@ Page({
    */
   onShareAppMessage: function(res) {
     console.log(res);
-    var type = this.data.productInfo.type;
-    var obj = {};
-    if (type == 'POINT') {
-      obj.type = 'SHARE_EXCHANGE';
-    } else {
-      obj.type = 'SHARE_PRODUCT';
-    }
-    obj.sharePath = '/pages/comDetail/index?id=' + this.data.productId + '&storeid=' + this.data.storeId;
-    this.share(obj);
+    // var obj = {type:'SHARE_PRODUCT'};
+    // obj.sharePath = '/pages/comDetail/index?id=' + this.data.productId + '&storeid=' + this.data.storeId;
+    // this.share(obj);
     return {
-      title: '朋友给你分享了优惠商品，快来看看吧！',
-      path: '/pages/comDetail/index?id=' + this.data.productId + '&storeid=' + this.data.storeId
+      title: JSON.parse(wx.getStorageSync('userinfo')).nickName+'分享给您一个心动商品，快来一起体验吧！',
+      path: '/pages/comDetail/index?id=' + this.data.productId + '&storeid=' + this.data.storeId + '&inviteCode=' + wx.getStorageSync('inviteCode')
     }
   },
   toCommentDetail: function(event) {

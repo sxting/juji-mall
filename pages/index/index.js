@@ -11,13 +11,12 @@ Page({
     locationPcode: '',
     locationCode: '',
     locationName: '',
-    curTabIndex: 0,
     businessList: [],
     leavePage: false,
     autoplay: false,
     swiperH: '', //swiper高度
     nowIdx: 0, //当前swiper索引
-    slideShowList: [],
+    slideShowList: [{}],
     pointProductList: [],
     recommendPage: [],
     sortIndex: 1,
@@ -25,12 +24,19 @@ Page({
     pageSize: 5,
     sortArray: ['', 'ASC', 'ASC', ''],
     providerId: '',
-    isShowNewerGet: false
+    isShowNewerGet: false,
+    pointBalance: 0,
+    imageWidth:'200rpx',
+    citylist:[],
+    isFirstShow:true
   },
   onLoad: function(options) {
     console.log(options);
     wx.setNavigationBarTitle({
       title: ''
+    });
+    wx.showShareMenu({
+      withShareTicket: true
     });
     console.log('--------------index-onLoad-------------');
 
@@ -43,7 +49,7 @@ Page({
           console.log(res.authSetting['scope.userInfo']);
           if (!res.authSetting['scope.userInfo']) {
             wx.reLaunch({
-              url: '/pages/login/index'
+              url: '/pages/login/index?fromPage=index&inviteCode=' + options.inviteCode
             });
           } else { //如果已经授权
             //判断rowData是否存在
@@ -80,6 +86,7 @@ Page({
             code: code,
             appId: constant.APPID,
             isMock: false, //测试标记
+            inviteCode: options.inviteCode,
             rawData: wx.getStorageSync('rawData')
           },
           header: {
@@ -91,6 +98,7 @@ Page({
             if (res1.data.errorCode == '200') {
               wx.setStorageSync('token', res1.data.data.token);
               wx.setStorageSync('openid', res1.data.data.openId);
+              wx.setStorageSync('inviteCode', res1.data.data.inviteCode);
               wx.setStorageSync('userinfo', JSON.stringify(res1.data.data));
 
               //成功登陆之后 查询新用户见面礼
@@ -107,6 +115,38 @@ Page({
                 error: err => console.log(err)
               });
 
+              //桔子球 查询用户当前桔子数
+              service.currentPoint().subscribe({
+                next: res3 => {
+                  console.log(res3);
+                  that.setData({
+                    pointBalance: res3.pointBalance,
+                  });
+                }
+              });
+
+              //获取热门城市
+              var imageWidth = (wx.getSystemInfoSync().windowWidth - 66) / 3;
+              that.setData({
+                imageWidth: imageWidth + 'px'
+              });
+              service.getHotData().subscribe({
+                next: res => {
+                  console.log(res);
+                  let arr = [];
+                  res.forEach(function(item,index){
+                    if (item.subList[0].locationCode != wx.getStorageSync('locationCode')){
+                      arr.push(item);
+                    }
+                  });
+                  that.setData({
+                    citylist: arr
+                  });
+                },
+                error: err => errDialog(err),
+                complete: () => wx.hideToast()
+              })
+
               resolve2();
             } else {
               reject2('登录失败，错误码:' + res1.data.errorCode + ' 返回错误: ' + res1.data.errorInfo);
@@ -121,6 +161,7 @@ Page({
         wx.getLocation({
           type: 'wgs84',
           success: function(res) { //res是经纬度
+          console.log(res);
             wx.setStorageSync('curLatitude', res.latitude);
             wx.setStorageSync('curLongitude', res.longitude);
             console.log('--------位置调用成功--------');
@@ -129,7 +170,7 @@ Page({
           fail: function(err) {
             console.log('---------位置调用失败或是被拒绝--------');
             console.log(err);
-            reject('您没有授权获取您的地理位置，无法获取附近的优惠信息，您可以在小程序设置界面（「右上角」 - 「关于」 - 「右上角」 - 「设置」）中设置对该小程序的授权状态，并在授权之后重启小程序。');
+            reject3('您没有授权获取您的地理位置，无法获取附近的优惠信息，您可以在小程序设置界面（「右上角」 - 「关于」 - 「右上角」 - 「设置」）中设置对该小程序的授权状态，并在授权之后重启小程序。');
           }
         })
       });
@@ -311,7 +352,7 @@ Page({
       });
     });
   },
-  onShow: function() {
+  onShow: function () {
     var that = this;
     //每次进到该页面重置筛选条件
     this.setData({
@@ -331,7 +372,14 @@ Page({
         this.getDataByCity(); //首页数据已经更新
         //如果用getDataByCity更新了数据 就不能用getSelectProviderByLoc再获取 否则数据会覆盖
       } else { //如果没有更换城市 定位获取
+        //是首次载入吗
         console.log('没有更换城市');
+        if (this.data.isFirstShow){
+          this.setData({
+            isFirstShow:false
+          })
+          return ;
+        }
         this.setData({
           locationCode: wx.getStorageSync('locationCode'),
           locationPcode: wx.getStorageSync('locationPcode'),
@@ -447,20 +495,21 @@ Page({
   },
   //领取桔集见面礼
   getNewer: function() {
+    this.setData({
+      isShowNewerGet: false
+    });
+
     service.newerGet().subscribe({
       next: res => {
         console.log(res);
-
-        this.setData({
-          isShowNewerGet: false
-        });
         wx.showToast({
           title: '领取成功！',
           icon: 'none'
         });
       },
       error: err => wx.showToast({
-        title: err
+        title: err,
+        icon: 'none'
       })
     });
   },
@@ -531,8 +580,8 @@ Page({
           sortOrder: 'ASC',
           pageNo: this.data.pageNo,
           pageSize: this.data.pageSize,
-          longitude: '116.470959',
-          latitude: '39.992368'
+          longitude: wx.getStorageSync('curLongitude'),
+          latitude: wx.getStorageSync('curLatitude')
         };
         break;
       case '2':
@@ -543,8 +592,8 @@ Page({
           sortOrder: this.data.sortArray[Number(sortIndex) - 1],
           pageNo: this.data.pageNo,
           pageSize: this.data.pageSize,
-          longitude: '116.470959',
-          latitude: '39.992368'
+          longitude: wx.getStorageSync('curLongitude'),
+          latitude: wx.getStorageSync('curLatitude')
         };
         break;
       case '3':
@@ -555,8 +604,8 @@ Page({
           sortOrder: this.data.sortArray[Number(sortIndex) - 1],
           pageNo: this.data.pageNo,
           pageSize: this.data.pageSize,
-          longitude: '116.470959',
-          latitude: '39.992368'
+          longitude: wx.getStorageSync('curLongitude'),
+          latitude: wx.getStorageSync('curLatitude')
         };
         break;
       case '4':
@@ -564,16 +613,22 @@ Page({
           providerId: this.data.providerId,
           type: 'PRODUCT',
           sortField: 'SOLDNUM',
-          sortOrder: 'ASC',
+          sortOrder: 'DESC',
           pageNo: this.data.pageNo,
           pageSize: this.data.pageSize,
-          longitude: '116.470959',
-          latitude: '39.992368'
+          longitude: wx.getStorageSync('curLongitude'),
+          latitude: wx.getStorageSync('curLatitude')
         };
         break;
     }
     console.log(obj);
     this.getRecommendPage(obj);
+  },
+  //点击桔子球
+  onTapJuziqiu:function(){
+    wx.switchTab({
+      url: '../juzi/index',
+    })
   },
   //点击更多 跳转到桔子换礼列表页
   toJuzihl: function() {
@@ -589,15 +644,13 @@ Page({
   },
   //上拉加载
   onReachBottom() {
-    let p = ++this.data.pageNo;
-    console.log('page:' + p);
-
+    let that = this;
     let obj = {
       providerId: this.data.providerId,
       type: 'PRODUCT',
       sortField: 'IDX',
       sortOrder: 'ASC',
-      pageNo: p,
+      pageNo: this.data.pageNo,
       pageSize: this.data.pageSize,
       longitude: '116.470959',
       latitude: '39.992368'
@@ -606,9 +659,12 @@ Page({
     service.getRecommendPage(obj).subscribe({
       next: res => {
         console.log(res);
-        this.setData({
-          recommendPage: this.data.recommendPage.concat(res.list)
-        });
+        if (res.list.length>0){
+          that.setData({
+            pageNo: ++that.data.pageNo,
+            recommendPage: that.data.recommendPage.concat(res.list)
+          });
+        }
       },
       error: err => console.log(err),
       complete: () => wx.hideToast()
@@ -619,12 +675,13 @@ Page({
   onPullDownRefresh() {
     let that = this;
     this.setData({
-      pageNo: 1
+      sortIndex: 1,
+      pageNo: 1,
+      sortArray: ['', 'ASC', 'ASC', '']
     });
     this.getIndexData();
     //根据位置查询附近精选
     var obj = {
-      // providerId: res1.id,
       providerId: that.data.providerId,
       type: 'PRODUCT',
       sortField: 'IDX',
@@ -679,6 +736,27 @@ Page({
       error: err => console.log(err),
       complete: () => wx.hideToast()
     });
+  },
+  //当前城市没有数据时 点击了其他热门城市
+  selectCity:function(e){
+    var selectCityName = e.currentTarget.dataset['name'].replace('市', '');
+    var selectPcode = e.currentTarget.dataset['pcode'];
+    var selectCode = e.currentTarget.dataset['code'];
+    wx.setStorageSync('selectCityName', selectCityName);
+    wx.setStorageSync('selectPcode', selectPcode);
+    wx.setStorageSync('selectCode', selectCode);
+
+    this.onShow();
+  },
+  /**
+   * 用户点击右上角分享或页面中的分享
+   */
+  onShareAppMessage: function (res) {
+    return {
+      title: '桔集：聚集优质好店，体验美好生活！',
+      imageUrl: '/images/shareMinPro.png',
+      path: '/pages/index/index?inviteCode=' + wx.getStorageSync('inviteCode')
+    }
   },
   //已知省市代码，获取该地点的服务商信息，然后更新首页数据
   getDataByCity: function() {

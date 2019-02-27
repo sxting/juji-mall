@@ -3,5 +3,5 @@
       <text style="font-size:30rpx;color:#333;">当前小程序需要您授权登录之后才能使用</text>
     </view>
 
-    <button open-type="getUserInfo" bindgetuserinfo="getUserInfo" style="margin-top:100rpx;width:200rpx;height:80rpx;line-height:80rpx;border-radius:40rpx;background-image: linear-gradient(-269deg, #FFDC00 0%, #FCBF0A 100%);font-size:30rpx;color:#333;font-weight:bolder;">授权</button>
+    <button open-type="getUserInfo" bindgetuserinfo="getUserInfo" style="margin-top:100rpx;width:200rpx;height:80rpx;line-height:80rpx;border-radius:40rpx;background-image: linear-gradient(-269deg, #FFDC00 0%, #FCBF0A 100%);font-size:30rpx;color:#333;font-weight:bolder;" data-pid="{{productId}}" data-fp="{{fromPage}}" data-inv="{{inviteCode}}">授权</button>
   </view>

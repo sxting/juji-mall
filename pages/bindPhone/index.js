@@ -116,6 +116,7 @@ Page({
     },
     onLoad: function(options) {
         wx.setNavigationBarTitle({ title: '绑定手机号' });
+        wx.hideShareMenu();
         console.log(this.data.intextReady);
     }
 });

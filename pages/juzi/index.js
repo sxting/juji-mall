@@ -1,6 +1,7 @@
 import {
   service
 } from '../../service';
+import { errDialog, loading } from '../../utils/util'
 Page({
 
   /**
@@ -19,6 +20,7 @@ Page({
     wx.setNavigationBarTitle({
       title: ''
     });
+    wx.hideShareMenu();
     this.getInfo();
     
   },
@@ -49,7 +51,15 @@ Page({
       url: '/pages/myTrade/index'
     });
   },
-  signIn:function(){
+  signIn:function(e){
+    console.log(e.detail.formId)
+    service.collectFormIds({
+      formId:e.detail.formId
+    }).subscribe({
+      next: res => {
+        console.log(res)
+      }
+    });
     service.signIn().subscribe({
       next: res => {
         console.log(res);
@@ -165,14 +175,14 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-    var obj = {
-      type:'SHARE_PROGRAM',
-      sharePath: '/pages/index/index'
-    };
-    this.share(obj);
+    // var obj = {
+    //   type:'SHARE_PROGRAM',
+    //   sharePath: '/pages/index/index'
+    // };
+    // this.share(obj);
     return {
-      title: '朋友给你分享了桔集，快来看看吧！',
-      path: '/pages/index/index',
+      title: JSON.parse(wx.getStorageSync('userinfo')).nickName +'给您分享了桔集小程序，一起享受好店优惠吧！',
+      path: '/pages/index/index?inviteCode=' + wx.getStorageSync('inviteCode'),
       imageUrl: '/images/shareMinPro.png'
     }
   }

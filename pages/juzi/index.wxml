@@ -78,9 +78,10 @@
       </view>
 
       <view style="font-size: 24rpx;color: #666666;text-align:center;margin-top:60rpx;">连续签到一周可得{{currentPointObj.signInMax}}个桔子</view>
-
-      <view class="normalBtn" bindtap="signIn" hidden="{{!canSignIn}}" style="margin:30rpx auto 0;">签到</view>
-      <view class="signedBtn" hidden="{{canSignIn}}" style="margin:30rpx auto 0;">已签到</view>
+      <form bindsubmit="signIn" report-submit="true" >
+          <button form-type="submit" class="normalBtn" hidden="{{!canSignIn}}" style="margin:30rpx auto 0;">签到</button>
+          <button class="signedBtn" hidden="{{canSignIn}}" style="margin:30rpx auto 0;">已签到</button>
+      </form>
     </view>
   </view>
 
@@ -88,10 +89,10 @@
     <view class="qtitle ub ub-ac">做任务赚桔子</view>
 
     <view class="taskItem ub ub-ac ub-pj">
-      <view class="ub ub-ac ub-aj">
+      <view class="ub ub-ac ub-aj" style="width:76%;">
         <image src="../../images/task2.png" style="width:80rpx;height:80rpx;margin-right:30rpx;"></image>
 
-        <view style="width:76%;">
+        <view>
           <view style="font-size: 28rpx;color: #333333;">分享商品给朋友赚{{currentPointObj.shareProductTask.onceNum}}桔子</view>
           <view style="margin-top:10rpx;font-size: 24rpx;color: #999999;">每天最多赚{{currentPointObj.shareProductTask.dayNum}}个桔子</view>
         </view>
@@ -100,10 +101,10 @@
     </view>
 
     <view class="taskItem ub ub-ac ub-pj">
-      <view class="ub ub-ac ub-aj">
+      <view class="ub ub-ac ub-aj" style="width:76%;">
         <image src="../../images/task3.png" style="width:80rpx;height:80rpx;margin-right:30rpx;"></image>
 
-        <view style="width:76%;">
+        <view>
           <view style="font-size: 28rpx;color: #333333;">分享商城首页赚{{currentPointObj.shareProgramTask.onceNum}}桔子</view>
           <view style="margin-top:10rpx;font-size: 24rpx;color: #999999;">每天最多赚{{currentPointObj.shareProgramTask.dayNum}}个桔子</view>
         </view>
@@ -112,10 +113,10 @@
     </view>
 
     <view class="taskItem ub ub-ac ub-pj">
-      <view class="ub ub-ac ub-aj">
+      <view class="ub ub-ac ub-aj" style="width:76%;">
         <image src="../../images/task4.png" style="width:80rpx;height:80rpx;margin-right:30rpx;"></image>
 
-        <view style="width:76%;">
+        <view>
           <view style="font-size: 28rpx;color: #333333;">消费后评价赚{{currentPointObj.commentTask.onceNum}}桔子</view>
           <view style="margin-top:10rpx;font-size: 24rpx;color: #999999;">每天不限数量，多评多得</view>
         </view>

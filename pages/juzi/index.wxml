@@ -17,21 +17,21 @@
     </view>
 
     <view class="ub ub-ac ub-pj1" style="margin:0 30rpx;padding:30rpx 40rpx;box-sizing:border-box;height:164rpx;background: #FFFFFF;box-shadow: 0 0 5rpx 0 rgba(228,228,228,0.50);border-radius: 10rpx;">
-      <view class="ub ub-ver ub-ac ub-pc">
+      <view class="ub ub-ver ub-ac ub-pc" bindtap="showDesModal" data-mt="1">
         <view class="qd-title">{{currentPointObj.todayPoint}}</view>
         <view class="qd-text">今日桔子</view>
       </view>
 
       <view class="vline"></view>
 
-      <view class="ub ub-ver ub-ac ub-pc">
+      <view class="ub ub-ver ub-ac ub-pc" bindtap="showDesModal" data-mt="2">
         <view class="qd-title">{{currentPointObj.todayShare}}</view>
         <view class="qd-text">今日分享</view>
       </view>
 
       <view class="vline"></view>
 
-      <view class="ub ub-ver ub-ac ub-pc">
+      <view class="ub ub-ver ub-ac ub-pc" bindtap="showDesModal" data-mt="3">
         <view class="qd-title">{{currentPointObj.todayTask}}</view>
         <view class="qd-text">今日任务</view>
       </view>

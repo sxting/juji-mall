@@ -24,6 +24,25 @@ Page({
     this.getInfo();
     
   },
+  showDesModal:function(e){
+    console.log(e);
+    let des = '';
+    switch (e.currentTarget.dataset.mt){
+      case '1':
+        des = '今日赚取的桔子数量';
+      break;
+      case '2':
+        des = '今日小程序内分享的次数';
+        break;
+      case '3':
+        des = '今日完成的赚桔子任务';
+        break;
+    }
+    wx.showModal({
+      title: '说明',
+      content: des,
+    })
+  },
   toJuzihl: function () {
     wx.navigateTo({
       url: '../juzihl/index'

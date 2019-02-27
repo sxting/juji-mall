@@ -1,5 +1,4 @@
 <view class="wrap">
-
   <view class="toper">
     <view style="padding:30rpx;" class="userinfo ub ub-ac">
       <image wx:if="{{avatar}}" src="{{avatar}}" class="headImg"></image>
@@ -75,5 +74,4 @@
       <image src="../../images/arrow-right.png" style="width:12rpx;height:22rpx;"></image>
     </view>
   </view>
-  <image class="src" src="{{imgUrl}}" bindtap="openModal"></image>
 </view>

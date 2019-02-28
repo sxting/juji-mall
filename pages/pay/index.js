@@ -5,19 +5,22 @@ Page({
    * 页面的初始数据
    */
   data: {
-    url: 'https://juji-dev.juniuo.com/qr/123.htm'
+    
   },
+  
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    let arr = this.data.url.split('/qr/');
-    let arr1 = arr[1].split('.htm');
-    console.log(arr1[0]);
-    this.setData({
-      url: arr1[0]
-    });
+    if (options.q) {
+      console.log(options.q);
+      var link = decodeURIComponent(options.q);
+      console.log(link);
+      this.setData({
+        url: link
+      });
+    }
   },
 
   /**

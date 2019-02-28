@@ -383,17 +383,22 @@ Page({
   setTitle: function(context,name) {
       context.setFontSize(14);
       context.setTextAlign("left");
-      context.setFillStyle("#333");
-      context.fillText(name, 28, 250);
-      context.fillText("“桔” 美 好 生 活", 35, 350);
-      context.fillText("集 好 店 优 惠", 38, 378);
+      context.setFillStyle("#666666");
+      context.fillText(name, 28, 253);
+      context.fillText("“桔”美好生活", 25, 350);
+      context.stroke();
+
+      context.setFontSize(12);
+      context.setTextAlign("left");
+      context.setFillStyle("#666666");
+      context.fillText("集好店优惠", 45, 378);
       context.stroke();
   },
   setText2: function(context,price) {
       context.setFontSize(15);
       context.setTextAlign("left");
       context.setFillStyle("#E83221");
-      context.fillText("现价:" + price, 28, 278);
+      context.fillText("现价:" + price, 28, 281);
       context.stroke();
   },
   setText3: function(context,price,amount) {
@@ -401,12 +406,12 @@ Page({
       context.setFontSize(13);
       context.setTextAlign("left");
       context.setFillStyle("#999");
-      context.fillText("原价:" + price, 150, 278);
+      context.fillText("原价:" + price, 150, 281);
       context.stroke();
       context.setFontSize(13);
       context.setTextAlign("right");
       context.setFillStyle("#999");
-      context.fillText("销量:" + amount, size.w, 250);
+      context.fillText("销量:" + amount, size.w, 253);
       context.stroke();
   },
   setText4: function(context) {
@@ -507,7 +512,7 @@ function rectPath(ctx, x, y, w, h) {
 }
 
 function drawDashLine(ctx, x1, y1, x2, y2, dashLength){  //传context对象，始点x和y坐标，终点x和y坐标，虚线长度
-  ctx.setStrokeStyle("#DEDEDE")//设置线条的颜色
+  ctx.setStrokeStyle("#eeeeee")//设置线条的颜色
   ctx.setLineWidth(1)//设置线条宽度
   var dashLen = dashLength === undefined ? 3 : dashLength,
   xpos = x2 - x1, //得到横向的宽度;

@@ -37,7 +37,7 @@
             <canvas canvas-id="barcode"></canvas>
             <view class="div ub ub ub-ac ub-pj">
                 <view class="txt">剩余有效天数：{{voucherInfo.validDays}}天</view>
-                <view class="txt">可核销{{voucherInfo.num}}次，已核销{{voucherInfo.usedNum}}次</view>
+                <view class="txt">可核销{{voucherInfo.totalNum}}次，已核销{{voucherInfo.usedNum}}次</view>
             </view>
         </view>
     </view>

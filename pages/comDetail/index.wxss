@@ -64,9 +64,10 @@ page{height: 100%;}
 .modal .bott{position: relative;height: 140rpx;width: 100%;margin-top: 36rpx;}
 .modal .bott button{font-size: 28rpx;height: 140rpx;}
 .modal .bott button .icon{display: block;width: 42rpx;height: 37rpx;}
-.modal .bott button .icon1{display: block;width: 37rpx;height: 37rpx;}
-.modal .bott button text{display: block;height: 32rpx;line-height: 32rpx;font-size: 24rpx;margin-top: 16rpx;color: #666}
-.bott .left{border-radius: 10rpx 0 0 10rpx;}
+.modal .bott button .icon1{display: block;width: 40rpx;height: 40rpx;}
+.modal .bott button .txt1{display: block;height: 32rpx;line-height: 32rpx;font-size: 24rpx;margin-top: 16rpx;color: #666}
+.modal .bott button .txt2{display: block;height: 32rpx;line-height: 32rpx;font-size: 24rpx;margin-top: 13rpx;color: #666}
+.bott .left{border-radius: 0;}
 .bott .center{border-radius: 0;}
-.bott .right{border-radius: 0 10rpx 10rpx 0;}
+.bott .right{border-radius: 0;}
 .ovh{overflow: hidden;height: 100%;}

@@ -289,7 +289,11 @@ Page({
       url: '/pages/shareCard/index?merchantId=' + this.data.merchantId
     });
   },
-  share: function (obj){
+  share: function (){
+    var obj = {
+      type:'SHARE_PROGRAM',
+      sharePath: '/pages/index/index'
+    };
     service.share(obj).subscribe({
       next: res=>{
         console.log('---------分享返回--------');
@@ -307,6 +311,9 @@ Page({
       title: JSON.parse(wx.getStorageSync('userinfo')).nickName+'分享给您一个心动商品，快来一起体验吧！',
       path: '/pages/comDetail/index?id=' + this.data.productId + '&storeid=' + this.data.storeId + '&inviteCode=' + wx.getStorageSync('inviteCode'),
       imageUrl:constant.basePicUrl+this.data.productInfo.picId+'/resize_360_360/mode_fill',
+      success: (res) => {
+          this.share();
+      },
     }
   },
   toCommentDetail: function(event) {
@@ -348,10 +355,10 @@ Page({
                       var price1 = info.point+'桔子';
                     }
                     if(info.type=='WECHAT'){
-                      var price1 = info.paidAmount+'元';
+                      var price1 = Number(info.price / 100).toFixed(2)+'元';
                     }
                     if(info.type=="MIX"){
-                      var price1 = info.point+'桔子+'+info.paidAmount+'元';
+                      var price1 = info.point+'桔子+'+Number(info.price / 100).toFixed(2)+'元';
                     }
                     var name = info.productName.substring(0,15);
                     var price2 = Number(info.originalPrice / 100).toFixed(2) + '元';
@@ -480,6 +487,7 @@ Page({
       wx.saveImageToPhotosAlbum({
           filePath: imgUrl,
           success: (res) => {
+            this.share();//分享获得桔子
             if(type==1){
               wx.showToast({
                   title: "已保存至相册",

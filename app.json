@@ -18,7 +18,8 @@
     "pages/bindPhone/index",
     "pages/merchantsCanUse/index",
     "pages/article/index",
-    "pages/jujipay/index"
+    "pages/jujipay/index",
+    "pages/pay/index"
   ],
   "permission": {
     "scope.userLocation": {

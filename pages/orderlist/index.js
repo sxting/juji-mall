@@ -38,8 +38,7 @@ Page({
         var thisStatus = event.currentTarget.dataset['status'];
         this.setData({ curTabIndex: thisIndex });
         this.getData(thisStatus,1);
-        this.setData({isFinall:false});
-        this.setData({ pageNo: 1 });
+        this.setData({ isFinall:false,pageNo: 1 });
     },
     getData: function(status,pageNo) {
         var obj = {
@@ -82,6 +81,7 @@ Page({
     },
 
     toPay: function(e) {
+      let that = this;
         var payInfo = JSON.parse(e.currentTarget.dataset['pre']);
         wx.requestPayment({
             timeStamp: payInfo.timeStamp,
@@ -90,6 +90,9 @@ Page({
             signType: payInfo.signType,
             paySign: payInfo.paySign,
             success(res2) {
+                that.setData({ curTabIndex: 2 });
+                that.getData('PAID', 1);
+                that.setData({ isFinall: false, pageNo: 1 });
                 wx.navigateTo({ url: "/pages/orderDetail/index?id=" + e.currentTarget.dataset['id'] });
             },
             fail(res2) {

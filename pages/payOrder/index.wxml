@@ -1,5 +1,5 @@
 <wxs module="filter" src="../../utils/numFr.wxs"></wxs>
-<view>
+<view wx:if="{{showProduct}}">
   <view class="tradeInfo" style="padding:20rpx 30rpx;">
     <view class="p15 ub ub-ac info">
       <image class="goodImg udb" src="{{productInfo.picId?'https://upic.juniuo.com/file/picture/'+productInfo.picId+'/resize_220_200/mode_fill':''}}" lazy-load="true" mode="widthFix"></image>
@@ -51,7 +51,7 @@
     <view style="padding:20rpx 0 30rpx 0;font-family: PingFangSC-Regular;font-size: 24rpx;color: #999999;">你有{{pointBalance}}个桔子</view>
   </view>
 </view>
-<view class="btn_bottom ub ub-ac plr15">
+<view class="btn_bottom ub ub-ac plr15" wx:if="{{showProduct}}">
   <view class="ub-f1" style="font-family: PingFangSC-Medium;font-size: 30rpx;font-weight:bold"  wx:if="{{paytype==3}}">金额：
     <text style="font-size: 30rpx;color: #E83121;">{{filter.toFix(productInfo.price*count)}}元</text>
   </view>

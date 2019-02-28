@@ -5,7 +5,10 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    logo:'',//门店logo
+    storeName:'',//门店名称
+    showFocus: true,//显示光标
+    numArr: [1, 2, 3, 4, 5, 6, 7, 8, 9],
   },
 
   /**

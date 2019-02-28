@@ -3,16 +3,16 @@
     <view class="bg">
       <view class="contentWrap">
         <view class="content">
-          <image src="https://upic.juniuo.com/file/picture/${logo}/resize_200_200/mode_fill" alt="logo" class="shopLogo"></image>
-          <view class="tit tx-c">付款给${storeName}</view>
+          <image src="{{logo?'https://upic.juniuo.com/file/picture/'+logo+'/resize_200_200/mode_fill':''}}" class="shopLogo"></image>
+          <view class="tit tx-c">付款给{{storeName}}</view>
           <view class="rechargeDiv ub ub-ac ub-pc">
-            <view class="remark" :class="{'font50':showSelectCard}">￥</view>
-            <view class="input bbc ub ub-ac " :class="{'animation':showFocus,'ub-f1':!showSelectCard}" v-text="amount"></view>
+            <view class="remark {{showSelectCard?'font50':''}}">￥</view>
+            <view class="input ub ub-ac {{showFocus?'animation':''}} {{!showSelectCard?'ub-f1':''}}"></view>
           </view>
         </view>
         <view class="blanceWrap2" hidden="showBalanceWrap">
           <view class="blBox">
-            <view class="noselect" :class="{'select':seledAccount}" bindtap="clickAccountPay"></view>
+            <view class="noselect {{seledAccount?'select':''}}" bindtap="clickAccountPay"></view>
             <view class="blanceT1">余额支付</view>
           </view>
           <view class="blBox">
@@ -22,11 +22,11 @@
         </view>
       </view>
     </view>
-    <view class="keyboardBox trans-fade" hidden="!showSelectCard">
+    <view class="keyboardBox trans-fade" hidden="{{false}}">
       <view class="selectCarCon">
         <view class="kbclo1">
           <view class="number clearfix">
-            <view v-for="(item,index) in numArr" bindtap="keyTap(item)" :key="index" v-html="item"></view>
+            <view wx:for="{{numArr}}" wx:key="{{index}}" bindtap="keyTap(item)">{{item}}</view>
           </view>
           <view class="kbrow">
             <view class="point" bindtap="keyTap('.')">·</view>
@@ -35,10 +35,10 @@
         </view>
         <view class="kbclo2">
           <view class="del" bindtap="keyTap('-')">
-            <image src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADoAAAArCAMAAAAe72skAAAAe1BMVEUAAAA0NDQ1NTX///8zMzM3NzczMzMzMzMzMzM2NjY0NDQzMzM0NDQ0NDQ0NDQzMzM0NDQ1NTU8PDwzMzM0NDQ0NDQzMzMzMzMzMzMzMzM3Nzc0NDQzMzNGRkYzMzMzMzM0NDQ0NDQzMzM0NDQ0NDQzMzM2NjY2NjYzMzNB3pXGAAAAKHRSTlMA7S8BkxOX19IXzvvFiYSMMSIFgXtYyJtFNxroMgv0tT3n32KoaDQJj/LuCAAAASdJREFUSMel1ttygjAUheEoQSukIilQPGLP6/2fsK1eLDPJVvbw33/DBNhJTKpzVewhte+a2ghtHR5U2mNSNhhRsYthtgDgPmpvpPLeln/2mJKn1jxo+w7YhJwdREJboqxjOTcjskCjkqwHnEqyHHjTSQZAL0llmf2MopmNpHdYm5t2w7JP0ViaDYDqRi6BIUEpme+ulhJfEaUMygva1b98MSGljO0TgOdIklIKljKklLK9yLWJaEsp2RllQAtKyVKG9IT7kz0HOCWTn6pf69Q3rP+uoZ3+N9GKklYxORdJ24aUk74R5pW2Su4Si8h6F65u9TnUIZVt5o0YKe3ISGnVlPag2v1pX2k1Zw6t+qSj/daer7T6U50WneIuMe0Gw87ae5P+tvYLmlJU1WFZJgMAAAAASUVORK5CYII="
+            <image src="../../images/shanchu.png"
               ></image>
           </view>
-          <view class="pay" :class="{'toResult':amountMaker,'accountpaying':accountpaystatus}" bindtap="toResult">
+          <view class="pay {{amountMaker?'toResult':''}} {{accountpaystatus?'accountpaying':''}}" bindtap="toResult">
             <view>付</view>
             <view style="margin-top:.1rem;">款</view>
             <view class="triple-bounce" hidden="accountpaystatus">
@@ -59,7 +59,7 @@
         </view>
         <view class="titleWrap">
           <view style="font-size: .24rem;color: #999999;margin-right:.2rem;">仅限本商户使用</view>
-          <view class="noselect" :class="{'select':paytype==='recommend'}"></view>
+          <view class="noselect {{paytype==='recommend'?'select':''}}"></view>
         </view>
       </view>
       <view class="swiper-container cardList" hidden="showChuzhi">
@@ -72,10 +72,10 @@
                         <view :class="{'cardSelected-yin':selectCardYin}"></view>
                     </view> -->
           <!-- 余额不存在 则显示选择的卡 -->
-          <view class="swiper-slide card" :class="{'selectCard':selectCardId==item.prepayRuleId&&paytype==='recommend'}" v-for="(item,index) in cardList" :key="index" bindtap="changeSelectCard(item,index)">
-            <view class="yu-e-Title" :class="{'cardTitle':selectCardId==item.prepayRuleId&&paytype==='recommend'}">储值{{item.pay}}元</view>
-            <view class="yu-e-Amount" :class="{'cardAmount':selectCardId==item.prepayRuleId&&paytype==='recommend'}">送{{item.givingMoney}}元</view>
-            <view :class="{'cardSelected':selectCardId==item.prepayRuleId&&paytype==='recommend'}"></view>
+          <view class="swiper-slide card {{selectCardId==item.prepayRuleId&&paytype==='recommend'?'selectCard':''}}" v-for="(item,index) in cardList" :key="index" bindtap="changeSelectCard(item,index)">
+            <view class="yu-e-Title {{selectCardId==item.prepayRuleId&&paytype==='recommend'?'cardTitle':''}}">储值{{item.pay}}元</view>
+            <view class="yu-e-Amount {{selectCardId==item.prepayRuleId&&paytype==='recommend'?'cardAmount':''}}">送{{item.givingMoney}}元</view>
+            <view class="{{selectCardId==item.prepayRuleId&&paytype==='recommend'?'cardSelected':''}}"></view>
           </view>
         </view>
       </view>
@@ -84,14 +84,14 @@
           <view class="weixin"></view>
           <view class="title">微信支付</view>
         </view>
-        <view class="noselect" :class="{'select':(paytype==='thirdpay'&&thirdtype=='1')||(seledAccount&&paytype==='account'&&thirdtype=='1')}"></view>
+        <view class="noselect {{(paytype==='thirdpay'&&thirdtype=='1')||(seledAccount&&paytype==='account'&&thirdtype=='1')?'select':''}}"></view>
       </view>
       <view class="titleRow" hidden="thirdtype=='2'" bindtap="seledAccount?paytype='account':paytype='thirdpay'">
         <view class="titleWrap">
           <view class="alipay"></view>
           <view class="title">支付宝</view>
         </view>
-        <view class="noselect" :class="{'select':(paytype==='thirdpay'&&thirdtype=='2')||(seledAccount&&paytype==='account'&&thirdtype=='2')}"></view>
+        <view class="noselect {{(paytype==='thirdpay'&&thirdtype=='2')||(seledAccount&&paytype==='account'&&thirdtype=='2')?'select':''}}"></view>
       </view>
       <view class="underBox">
         <view class="youhuiWrap">
@@ -103,7 +103,7 @@
           <view class="youhui" hidden="paytype==='thirdpay'">储值享优惠，推荐使用储值支付</view>
         </view>
         <view class="jiesuanBtnWrap">
-          <view class="jiesuanBtn" hidden="paytype==='account'&&seledAccount" :class="{'jiesuaned':toPayStatus}" bindtap="toPay">
+          <view class="jiesuanBtn {{toPayStatus?'jiesuaned':''}}" hidden="paytype==='account'&&seledAccount" bindtap="toPay">
             支付
             <view class="triple-bounce" hidden="toPayStatus">
               <view class="triple-bounce-bounce1"></view>
@@ -111,7 +111,7 @@
               <view class="triple-bounce-bounce3"></view>
             </view>
           </view>
-          <view class="jiesuanBtn" hidden="paytype==='recommend'" :class="{'jiesuaned':toPayStatus}" bindtap="toPay">
+          <view class="jiesuanBtn {{toPayStatus?'jiesuaned':''}}" hidden="paytype==='recommend'" bindtap="toPay">
             储值并支付
             <view class="triple-bounce" hidden="toPayStatus">
               <view class="triple-bounce-bounce1"></view>
@@ -119,7 +119,7 @@
               <view class="triple-bounce-bounce3"></view>
             </view>
           </view>
-          <view class="jiesuanBtn" hidden="paytype==='thirdpay'" :class="{'jiesuaned':toPayStatus}" bindtap="toPay">
+          <view class="jiesuanBtn {{toPayStatus?'jiesuaned':''}}" hidden="paytype==='thirdpay'" bindtap="toPay">
             支付
             <view class="triple-bounce" hidden="toPayStatus">
               <view class="triple-bounce-bounce1"></view>

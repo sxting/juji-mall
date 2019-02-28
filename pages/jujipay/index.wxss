@@ -63,10 +63,6 @@
   }
 }
 
-[v-cloak] {
-  display: none;
-}
-
 .app {
   position: absolute;
   overflow: scroll;
@@ -236,6 +232,7 @@ input {
 .contentWrap {
   width: 100%;
   padding: 0 30rpx;
+  box-sizing: border-box;
 }
 
 .content {
@@ -273,7 +270,7 @@ input {
   margin-top: 50rpx;
 }
 
-.rpxark {
+.remark {
   font-size: 70rpx;
   color: #333;
 }
@@ -360,7 +357,7 @@ input {
   align-items: center;
 }
 
-.del img {
+.del image {
   width: 58rpx;
   height: 43rpx;
 }
@@ -402,7 +399,7 @@ input {
   width: 66.6666%;
 }
 
-.number li {
+.number view {
   width: 33.3333%;
   float: left;
   height: 130rpx;

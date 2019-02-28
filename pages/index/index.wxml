@@ -50,7 +50,7 @@
                   <view style="font-size: 28rpx;color: #E83221;font-weight:bold;">{{item.point}}</view>
                   <view style="font-size: 22rpx;color: #E83221;font-weight:bold;">桔子</view>
                 </view>
-                <view class="old-price">{{item.originalPrice}}元</view>
+                <view class="old-price">{{filter.toFix(item.originalPrice)}}元</view>
               </view>
             </view>
           </view>
@@ -66,7 +66,7 @@
                   <view style="font-size: 28rpx;color: #E83221;font-weight:bold;">{{item.point}}</view>
                   <view style="font-size: 22rpx;color: #E83221;font-weight:bold;">桔子</view>
                 </view>
-                <view class="old-price">{{item.originalPrice}}元</view>
+                <view class="old-price">{{filter.toFix(item.originalPrice)}}元</view>
               </view>
             </view>
           </view>

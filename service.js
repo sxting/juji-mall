@@ -163,6 +163,12 @@ service.regist = () => {
   return http.post(apiUrl);
 }
 
+/*生成小程序码*/
+service.getQrCode = (data) => {
+  let apiUrl = api + '/qr/getByProductId.json';
+  return http.get(apiUrl,data);
+}
+
 module.exports = {
   service: service
 }

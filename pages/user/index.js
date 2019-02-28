@@ -6,8 +6,7 @@ Page({
     data: {
         nickName: '微信名字',
         avatar: '',
-        phoneNum: ''
-
+        phoneNum: '',
     },
     toJuzi: function() {
         wx.switchTab({ url: '../juzi/index' });
@@ -18,27 +17,23 @@ Page({
     },
     onLoad: function() {
         wx.setNavigationBarTitle({ title: '我的' });
-
-        wx.downloadFile({
-          url: res.data,
-          success: (res) => {
-            console.log("22222")
-            console.log(res.tempFilePath);
-            this.setData({erwmImg:res.tempFilePath});
-            if (res.statusCode === 200) {
-
-            }
-          },
-          fail:(res)=>{
-            console.log("33333")
-          }
-        });
-        
     },
     onShow: function() {
         this.getInfo();
     },
-
+    getInfo: function() {
+        service.userInfo({ openId: wx.getStorageSync('openid') }).subscribe({
+            next: res => {
+                this.setData({
+                    nickName: res.nickName,
+                    phoneNum: res.phone,
+                    avatar: res.avatar
+                });
+            },
+            error: err => errDialog(err),
+            complete: () => wx.hideToast()
+        })
+    }
 });
 
 

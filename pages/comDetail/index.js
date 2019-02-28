@@ -1,10 +1,6 @@
 var util = require('../../utils/util.js');
-import {
-  service
-} from '../../service';
-import {
-  constant
-} from '../../utils/constant';
+import { service } from '../../service';
+import { constant } from '../../utils/constant';
 var app = getApp();
 Page({
   data: {
@@ -23,7 +19,7 @@ Page({
     despImgHeightValues:[],
     isShowData:false,
 
-    isShowModal:false,
+    isShowModal:true,
     windowWidth: 345,
     windowHeight: 430,
     headImg: '../../images/shareMinPro.png',
@@ -44,9 +40,7 @@ Page({
         url: '/pages/index/index',
       })
       return ;
-    } 
-    console.log(wx.getStorageSync('curLatitude'));
-    console.log(wx.getStorageSync('curLongitude'));
+    }
     let lat = wx.getStorageSync('curLatitude');
     let lng = wx.getStorageSync('curLongitude');
     this.setData({
@@ -210,7 +204,6 @@ Page({
   },
   onShow: function() {
     //评论列表
-    this.shareGood();
   },
   call: function() {
     wx.makePhoneCall({
@@ -318,27 +311,36 @@ Page({
     });
   },
 
-  shareGood:function(){
-    this.drawImage("商家名字","商品描述",50,48,10);//参数依次是storeName,desc,现价,原价,销量
-  },
-
-// 点击分享
-    openModal:function(){
-        this.setData({isShowModal:false});
+  // 点击分享
+    showShare:function(){
+      wx.downloadFile({
+        url: constant.basePicUrl+this.data.productInfo.picId+'/resize_240_240/mode_fill',
+        success: (res) => {
+          if (res.statusCode === 200) {
+              this.setData({headImg:res.tempFilePath});
+              this.getQrCode();
+          }
+        }
+      });
     },
-
     closeModal:function(){
         this.setData({isShowModal:true});
     },
-
-    getInfo: function() {
-        service.userInfo({ openId: wx.getStorageSync('openid') }).subscribe({
+    getQrCode: function() {
+        service.getQrCode({ productId:this.data.productId,path: 'pages/comDetail/index'}).subscribe({
             next: res => {
-                this.setData({
-                    nickName: res.nickName,
-                    phoneNum: res.phone,
-                    avatar: res.avatar
-                });
+              var picId = res;
+              wx.downloadFile({
+                url: constant.basePicUrl+picId+'/resize_240_240/mode_fill',
+                success: (res1) => {
+                  if (res1.statusCode === 200) {
+                      this.setData({erwmImg:res1.tempFilePath});
+                      var info = this.data.productInfo;
+                      this.drawImage(info.productName,info.productName,info.point,info.originalPrice,info.soldNum);//参数依次是storeName,desc,现价,原价,销量
+                      this.setData({isShowModal:false});                      
+                  }
+                }
+              });
             },
             error: err => errDialog(err),
             complete: () => wx.hideToast()
@@ -354,8 +356,8 @@ Page({
         context.setFontSize(15);
         context.setTextAlign("left");
         context.setFillStyle("#333");
-        context.fillText(name, 28, 236);
-        context.fillText("“桔”美好生活，集好店优惠", 18, 353);
+        context.fillText(name, 28, 240);
+        context.fillText("“桔”美好生活，集好店优惠", 23, 353);
         context.stroke();
     },
     setText1: function(context,desc) {
@@ -367,10 +369,10 @@ Page({
         context.stroke();
     },
     setText2: function(context,price) {
-        context.setFontSize(16);
+        context.setFontSize(15);
         context.setTextAlign("left");
         context.setFillStyle("#E83221");
-        context.fillText("现价：" + price + "元", 28, 290);
+        context.fillText("现价:" + price + "元", 28, 290);
         context.stroke();
     },
     setText3: function(context,price,amount) {
@@ -383,7 +385,7 @@ Page({
         context.setFontSize(13);
         context.setTextAlign("right");
         context.setFillStyle("#999");
-        context.fillText("销量:" + amount, size.w-72, 236);
+        context.fillText("销量:" + amount, size.w, 236);
         context.stroke();
     },
     setText4: function(context) {

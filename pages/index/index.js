@@ -780,6 +780,8 @@ Page({
     service.getIndexData({
       // providerId: this.data.providerId
       providerId: this.data.providerId,
+      longitude: wx.getStorageSync('curLongitude'),
+      latitude: wx.getStorageSync('curLatitude')
     }).subscribe({
       next: res => {
         console.log(res);

@@ -26,15 +26,15 @@
       <view class="selectCarCon">
         <view class="kbclo1">
           <view class="number clearfix">
-            <view wx:for="{{numArr}}" wx:key="{{index}}" bindtap="keyTap(item)">{{item}}</view>
+            <view wx:for="{{numArr}}" wx:key="{{index}}" bindtap="keyTap" data-num="{{item}}">{{item}}</view>
           </view>
           <view class="kbrow">
-            <view class="point" bindtap="keyTap('.')">·</view>
-            <view class="zero" bindtap="keyTap(0)">0</view>
+            <view class="point" bindtap="keyTap" data-num=".">·</view>
+            <view class="zero" bindtap="keyTap" data-num="0">0</view>
           </view>
         </view>
         <view class="kbclo2">
-          <view class="del" bindtap="keyTap('-')">
+          <view class="del" bindtap="keyTap" data-num="-">
             <image src="../../images/shanchu.png"
               ></image>
           </view>

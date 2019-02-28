@@ -1,0 +1,2 @@
+<!--pages/pay/index.wxml-->
+<text>{{url}}</text>

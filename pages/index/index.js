@@ -65,7 +65,8 @@ Page({
         }
       ]
     }],
-    isFirstShow:true
+    isFirstShow:true,
+    isLoadedBalance:true
   },
   onLoad: function(options) {
     console.log(options);
@@ -158,6 +159,7 @@ Page({
                   console.log(res3);
                   that.setData({
                     pointBalance: res3.pointBalance,
+                    isLoadedBalance: true
                   });
                 }
               });
@@ -406,6 +408,13 @@ Page({
           locationPcode: wx.getStorageSync('selectPcode'),
           locationName: wx.getStorageSync('selectCityName')
         });
+        if (this.data.isFirstShow) {
+          this.setData({
+            isFirstShow: false
+          })
+          return;
+        }
+        this.currentPoint();
         this.getDataByCity(); //首页数据已经更新
         //如果用getDataByCity更新了数据 就不能用getSelectProviderByLoc再获取 否则数据会覆盖
       } else { //如果没有更换城市 定位获取
@@ -417,6 +426,8 @@ Page({
           })
           return ;
         }
+        this.currentPoint();
+        
         this.setData({
           locationCode: wx.getStorageSync('locationCode'),
           locationPcode: wx.getStorageSync('locationPcode'),
@@ -523,6 +534,17 @@ Page({
 
     }
 
+  },
+  currentPoint: function () {
+    //桔子球 查询用户当前桔子数
+    service.currentPoint().subscribe({
+      next: res3 => {
+        console.log(res3);
+        this.setData({
+          pointBalance: res3.pointBalance,
+        });
+      }
+    });
   },
   share: function (obj) {
 

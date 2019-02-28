@@ -16,7 +16,8 @@ Page({
     price: 0,
     paytype: 1,
     pointBalance: 0,
-    alreadyPay: false
+    alreadyPay: false,
+    showProduct:false
   },
   onLoad: function(options) {
     wx.setNavigationBarTitle({
@@ -85,7 +86,8 @@ Page({
           productInfo: res.product,
           store: res.store,
           price: res.product.price,
-          point: res.product.point
+          point: res.product.point,
+          showProduct: true
         });
       },
       error: err => console.log(err),

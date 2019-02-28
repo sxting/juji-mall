@@ -1,6 +1,7 @@
 var util = require('../../utils/util.js');
 import { service } from '../../service';
 import { constant } from '../../utils/constant';
+import { errDialog, loading } from '../../utils/util';
 var app = getApp();
 Page({
   data: {
@@ -18,15 +19,18 @@ Page({
     note:[],
     despImgHeightValues:[],
     isShowData:false,
+    isHiddenClose:false,
 
     isShowModal:true,
     windowWidth: 345,
     windowHeight: 430,
+    shareBg: '../../images/shareBg.png',
     headImg: '../../images/shareMinPro.png',
     erwmImg: '../../images/erwmImg.png'
 
   },
   onLoad: function(option) {
+    new app.ToastPannel();
     wx.setNavigationBarTitle({
       title: '商品详情'
     });
@@ -302,7 +306,8 @@ Page({
   onShareAppMessage: function(res) {
     return {
       title: JSON.parse(wx.getStorageSync('userinfo')).nickName+'分享给您一个心动商品，快来一起体验吧！',
-      path: '/pages/comDetail/index?id=' + this.data.productId + '&storeid=' + this.data.storeId + '&inviteCode=' + wx.getStorageSync('inviteCode')
+      path: '/pages/comDetail/index?id=' + this.data.productId + '&storeid=' + this.data.storeId + '&inviteCode=' + wx.getStorageSync('inviteCode'),
+      imageUrl:constant.basePicUrl+this.data.productInfo.picId+'/resize_360_360/mode_fill'
     }
   },
   toCommentDetail: function(event) {
@@ -312,159 +317,184 @@ Page({
   },
 
   // 点击分享
-    showShare:function(){
-      wx.downloadFile({
-        url: constant.basePicUrl+this.data.productInfo.picId+'/resize_240_240/mode_fill',
-        success: (res) => {
-          if (res.statusCode === 200) {
-              this.setData({headImg:res.tempFilePath});
-              this.getQrCode();
-          }
+  showShare:function(){
+    wx.showLoading({title: '生成图片...'});
+    wx.downloadFile({
+      url: constant.basePicUrl+this.data.productInfo.picId+'/resize_240_240/mode_fill',
+      success: (res) => {
+        if (res.statusCode === 200) {
+            this.setData({headImg:res.tempFilePath});
+            this.getQrCode();
+        }else{
+          wx.hideLoading();
         }
-      });
-    },
-    closeModal:function(){
-        this.setData({isShowModal:true});
-    },
-    getQrCode: function() {
-        service.getQrCode({ productId:this.data.productId,path: 'pages/comDetail/index'}).subscribe({
-            next: res => {
-              var picId = res;
-              wx.downloadFile({
-                url: constant.basePicUrl+picId+'/resize_240_240/mode_fill',
-                success: (res1) => {
-                  if (res1.statusCode === 200) {
-                      this.setData({erwmImg:res1.tempFilePath});
-                      var info = this.data.productInfo;
-                      this.drawImage(info.productName,info.productName,info.point,info.originalPrice,info.soldNum);//参数依次是storeName,desc,现价,原价,销量
-                      this.setData({isShowModal:false});                      
-                  }
-                }
-              });
-            },
-            error: err => errDialog(err),
-            complete: () => wx.hideToast()
-        })
-    },
-    setCanvasSize: function() {
-        var size = {};
-        size.w = wx.getSystemInfoSync().windowWidth-90;
-        size.h = 400;
-        return size;
-    },
-    setTitle: function(context,name) {
-        context.setFontSize(15);
-        context.setTextAlign("left");
-        context.setFillStyle("#333");
-        context.fillText(name, 28, 240);
-        context.fillText("“桔”美好生活，集好店优惠", 23, 353);
-        context.stroke();
-    },
-    setText1: function(context,desc) {
-        context.setFontSize(12);
-        context.setTextAlign("left");
-        context.setFillStyle("#999");
-        context.fillText(desc, 28, 264);
-        context.fillText("-------------------------------------------------", 25, 320);
-        context.stroke();
-    },
-    setText2: function(context,price) {
-        context.setFontSize(15);
-        context.setTextAlign("left");
-        context.setFillStyle("#E83221");
-        context.fillText("现价:" + price + "元", 28, 290);
-        context.stroke();
-    },
-    setText3: function(context,price,amount) {
-        var size = this.setCanvasSize();
-        context.setFontSize(13);
-        context.setTextAlign("left");
-        context.setFillStyle("#999");
-        context.fillText("原价:" + price + "元", 150, 290);
-        context.stroke();
-        context.setFontSize(13);
-        context.setTextAlign("right");
-        context.setFillStyle("#999");
-        context.fillText("销量:" + amount, size.w, 236);
-        context.stroke();
-    },
-    setText4: function(context) {
-        context.setFontSize(14);
-        context.setTextAlign("left");
-        context.setFillStyle("#666");
-        context.fillText("长按识别二维码", 28, 379);
-        context.stroke();
-    },
-    drawImage: function(name, desc,price1,price2,amount) {//name,desc,现价,原价,销量
-        var size = this.setCanvasSize();
-        var context = wx.createCanvasContext('myCanvas');
-        rectPath(context, 15, 15, size.w, size.h);
-        context.drawImage(this.data.headImg, 28, 28, size.w - 26, 185); //宽度70，居中，距离上15
-        context.save();
-        context.drawImage(this.data.erwmImg, size.w - 80, 325, 80, 80); //二维码，宽度100，居中
-        this.setTitle(context,name);
-        this.setText1(context,desc);
-        this.setText2(context,price1);
-        this.setText3(context,price2,amount);
-        this.setText4(context);
-        context.draw();
-    },
-    savePic: function() {
-        var that = this;
-        wx.canvasToTempFilePath({
-            canvasId: 'myCanvas',
-            success: function(res1) {
-                wx.getSetting({
-                    success(res2) {
-                        if (!res2.authSetting['scope.writePhotosAlbum']) {
-                            wx.authorize({
-                                scope: 'scope.writePhotosAlbum',
-                                success() {
-                                    console.log('授权成功')
-                                    that.saveAsPhoto(res1.tempFilePath);
-                                },
-                                fail() {
-                                    wx.openSetting({
-                                        success: function() {
-                                            console.log("openSetting: success");
-                                        },
-                                        fail: function() {
-                                            console.log("openSetting: fail");
-                                        }
-                                    });
-                                }
-                            })
-                        } else {
-                            console.log("已经授权");
-                            that.saveAsPhoto(res1.tempFilePath);
-                        }
-                    },
-                    fail() {
-                        console.log("getSetting: fail");
+      }
+    });
+  },
+  closeModal:function(){
+      this.setData({isShowModal:true});
+  },
+  getQrCode: function() {
+      service.getQrCode({ productId:this.data.productId,path: 'pages/comDetail/index'}).subscribe({
+          next: res => {
+            var picId = res;
+            wx.downloadFile({
+              url: constant.basePicUrl+picId+'/resize_240_240/mode_fill',
+              success: (res1) => {
+                if (res1.statusCode === 200) {
+                    this.setData({erwmImg:res1.tempFilePath});
+                    var info = this.data.productInfo;
+                    wx.hideLoading();
+                    if(info.type=='POINT'){
+                      var price1 = info.point+'桔子';
                     }
-                })
-            },
-            fail: function(res) {
-                console.log(res);
-            }
-        });
-    },
-    saveAsPhoto: function(imgUrl) {
-        wx.saveImageToPhotosAlbum({
-            filePath: imgUrl,
-            success: (res) => {
-                wx.showToast({
-                    title: "已保存至相册",
-                    icon: "success"
-                });
-                this.setData({ disabled: true });
-            },
-            fail: function(res) {
-                console.log(res);
-            }
-        })
-    }
+                    if(info.type=='WECHAT'){
+                      var price1 = info.paidAmount+'元';
+                    }
+                    if(info.type=="MIX"){
+                      var price1 = info.point+'桔子+'+info.paidAmount+'元';
+                    }
+                    var name = info.productName.substring(0,15);
+                    var price2 = Number(info.originalPrice / 100).toFixed(2) + '元';
+                    this.drawImage(name,'',price1,price2,info.soldNum);//参数依次是storeName,desc,现价,原价,销量
+                    this.setData({isShowModal:false});
+                    setTimeout(()=>{
+                      this.setData({isHiddenClose:true});
+                    },1500)            
+                }else{
+                  wx.hideLoading();
+                }
+              }
+            });
+          },
+          error: err => {
+            errDialog(err);
+            wx.hideLoading();
+          },
+          complete: () => wx.hideToast()
+      });
+  },
+  setCanvasSize: function() {
+      var size = {};
+      size.w = wx.getSystemInfoSync().windowWidth-90;
+      size.h = 440;
+      return size;
+  },
+  setTitle: function(context,name) {
+      context.setFontSize(14);
+      context.setTextAlign("left");
+      context.setFillStyle("#666666");
+      context.fillText(name, 28, 253);
+      context.fillText("“桔”美好生活", 25, 350);
+      context.stroke();
 
+      context.setFontSize(12);
+      context.setTextAlign("left");
+      context.setFillStyle("#666666");
+      context.fillText("集好店优惠", 38, 378);
+      context.stroke();
+  },
+  setText2: function(context,price) {
+      context.setFontSize(15);
+      context.setTextAlign("left");
+      context.setFillStyle("#E83221");
+      context.fillText("现价:" + price, 28, 281);
+      context.stroke();
+  },
+  setText3: function(context,price,amount) {
+      var size = this.setCanvasSize();
+      context.setFontSize(13);
+      context.setTextAlign("left");
+      context.setFillStyle("#999");
+      context.fillText("原价:" + price, 150, 281);
+      context.stroke();
+      context.setFontSize(13);
+      context.setTextAlign("right");
+      context.setFillStyle("#999");
+      context.fillText("销量:" + amount, size.w, 253);
+      context.stroke();
+  },
+  setText4: function(context) {
+      var size = this.setCanvasSize();
+      context.setFontSize(12);
+      context.setTextAlign("right");
+      context.setFillStyle("#666");
+      context.fillText("长按识别二维码", size.w-10, 410);
+      context.stroke();
+  },
+  drawImage: function(name, desc,price1,price2,amount) {//name,desc,现价,原价,销量
+      var size = this.setCanvasSize();
+      var context = wx.createCanvasContext('myCanvas');
+      context.drawImage(this.data.shareBg, 0, 0, size.w+90, size.h); //宽度70，居中，距离上15
+      rectPath(context, 15, 15, size.w, size.h-30);
+      context.drawImage(this.data.headImg, 28, 28, size.w - 26, 200); //宽度70，居中，距离上15
+      context.save();
+      context.drawImage(this.data.erwmImg, size.w - 90, 312, 80, 80); //二维码，宽度100，居中
+      this.setTitle(context,name);
+      // this.setText1(context,desc);
+      drawDashLine(context, 28, 300, size.w, 300, 4);//横向虚线
+      this.setText2(context,price1);
+      this.setText3(context,price2,amount);
+      this.setText4(context);
+      context.draw();
+  },
+  savePic: function(e) {
+      var type = e.currentTarget.dataset['type'];
+      var that = this;
+      wx.canvasToTempFilePath({
+          canvasId: 'myCanvas',
+          success: function(res1) {
+              wx.getSetting({
+                  success(res2) {
+                      if (!res2.authSetting['scope.writePhotosAlbum']) {
+                          wx.authorize({
+                              scope: 'scope.writePhotosAlbum',
+                              success() {
+                                  that.saveAsPhoto(res1.tempFilePath);
+                              },
+                              fail() {
+                                  wx.openSetting({
+                                      success: function() {
+                                          console.log("openSetting: success");
+                                      },
+                                      fail: function() {
+                                          console.log("openSetting: fail");
+                                      }
+                                  });
+                              }
+                          })
+                      } else {
+                          that.saveAsPhoto(res1.tempFilePath,type);
+                      }
+                  },
+                  fail() {
+                      console.log("getSetting: fail");
+                  }
+              })
+          },
+          fail: function(res) {
+              console.log(res);
+          }
+      });
+  },
+  saveAsPhoto: function(imgUrl,type) {
+      wx.saveImageToPhotosAlbum({
+          filePath: imgUrl,
+          success: (res) => {
+            if(type==1){
+              wx.showToast({
+                  title: "已保存至相册",
+                  icon: "success"
+              });
+            }else{
+              errDialog('图文海报已保存到微信本地相册，打开微信朋友圈分享吧!');
+            }
+          },
+          fail: function(res) {
+              console.log(res);
+          }
+      })
+  }
 });
 
 
@@ -479,4 +509,23 @@ function rectPath(ctx, x, y, w, h) {
     ctx.setStrokeStyle('transparent');
     ctx.fill();
     ctx.closePath();
+}
+
+function drawDashLine(ctx, x1, y1, x2, y2, dashLength){  //传context对象，始点x和y坐标，终点x和y坐标，虚线长度
+  ctx.setStrokeStyle("#eeeeee")//设置线条的颜色
+  ctx.setLineWidth(1)//设置线条宽度
+  var dashLen = dashLength === undefined ? 3 : dashLength,
+  xpos = x2 - x1, //得到横向的宽度;
+  ypos = y2 - y1, //得到纵向的高度;
+  numDashes = Math.floor(Math.sqrt(xpos * xpos + ypos * ypos) / dashLen); 
+  //利用正切获取斜边的长度除以虚线长度，得到要分为多少段;
+  for(var i=0; i<numDashes; i++){
+     if(i % 2 === 0){
+         ctx.moveTo(x1 + (xpos/numDashes) * i, y1 + (ypos/numDashes) * i); 
+         //有了横向宽度和多少段，得出每一段是多长，起点 + 每段长度 * i = 要绘制的起点；
+      }else{
+          ctx.lineTo(x1 + (xpos/numDashes) * i, y1 + (ypos/numDashes) * i);
+      }
+   }
+  ctx.stroke();
 }

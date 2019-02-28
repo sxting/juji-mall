@@ -391,7 +391,7 @@ Page({
       context.setFontSize(12);
       context.setTextAlign("left");
       context.setFillStyle("#666666");
-      context.fillText("集好店优惠", 45, 378);
+      context.fillText("集好店优惠", 38, 378);
       context.stroke();
   },
   setText2: function(context,price) {

@@ -154,15 +154,7 @@ Page({
               });
 
               //桔子球 查询用户当前桔子数
-              service.currentPoint().subscribe({
-                next: res3 => {
-                  console.log(res3);
-                  that.setData({
-                    pointBalance: res3.pointBalance,
-                    isLoadedBalance: true
-                  });
-                }
-              });
+              that.currentPoint();
 
               //获取热门城市
               // var imageWidth = (wx.getSystemInfoSync().windowWidth - 66) / 3;
@@ -576,6 +568,7 @@ Page({
           title: '领取成功！',
           icon: 'none'
         });
+        this.currentPoint();
       },
       error: err => wx.showToast({
         title: err,

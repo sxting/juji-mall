@@ -109,7 +109,7 @@
           <view style="margin-top:10rpx;font-size: 24rpx;color: #999999;">每天最多赚{{currentPointObj.shareProductTask.dayNum}}个桔子</view>
         </view>
       </view>
-      <button class="taskBtn" bindtap="toJuzihl">赚桔子</button>
+      <button class="taskBtn" bindtap="toIndex">赚桔子</button>
     </view>
 
     <view class="taskItem ub ub-ac ub-pj">

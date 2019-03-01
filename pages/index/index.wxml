@@ -34,7 +34,7 @@
       <view class="mtitle">桔子换礼</view>
       <view class="mRow jc-sb" style="margin-top:5rpx;">
         <view class="subtitle">让生活“换”然一新</view>
-        <view class="moreWrap" wx:if="{{locationName}}" bindtap="toJuzihl">
+        <view class="moreWrap" wx:if="{{locationName&&pointProductList.length>0}}" bindtap="toJuzihl">
           <view class="more">更多</view>
           <image src="../../images/arrow-right.png" style="width:10rpx;height:18rpx;"></image>
         </view>

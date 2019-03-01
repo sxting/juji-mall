@@ -353,12 +353,13 @@ Page({
                     wx.hideLoading();
                     if(info.type=='POINT'){
                       var price1 = info.point+'桔子';
-                    }
-                    if(info.type=='WECHAT'){
-                      var price1 = Number(info.price / 100).toFixed(2)+'元';
-                    }
-                    if(info.type=="MIX"){
-                      var price1 = info.point+'桔子+'+Number(info.price / 100).toFixed(2)+'元';
+                    }else{
+                      if(info.point!=0){
+                        var juzi = info.point+'桔子+';
+                      }else{
+                        var juzi = ''
+                      }
+                      var price1 = juzi + Number(info.price / 100).toFixed(2)+'元';
                     }
                     var name = info.productName.substring(0,15);
                     var price2 = Number(info.originalPrice / 100).toFixed(2) + '元';
@@ -410,9 +411,9 @@ Page({
   setText3: function(context,price,amount) {
       var size = this.setCanvasSize();
       context.setFontSize(13);
-      context.setTextAlign("left");
+      context.setTextAlign("right");
       context.setFillStyle("#999");
-      context.fillText("原价:" + price, 150, 281);
+      context.fillText("原价:" + price, size.w, 281);
       context.stroke();
       context.setFontSize(13);
       context.setTextAlign("right");

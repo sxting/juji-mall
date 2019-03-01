@@ -9,7 +9,8 @@ Page({
     storeName:'',//门店名称
     showFocus: true,//显示光标
     numArr: [1, 2, 3, 4, 5, 6, 7, 8, 9],
-    amount: '请输入付款金额'
+    amount: '',
+    maxAmount: 20000
   },
 
   /**
@@ -38,7 +39,7 @@ Page({
     if (this.data.amount == '请输入付款金额') {
       this.data.amount = '';
     }
-    let keys = key,
+    let keys = e.currentTarget.dataset.num,
       content = this.data.amount, //金额字符
       len = content.length; //金额字符长度
     switch (keys) {
@@ -69,7 +70,7 @@ Page({
               if (Number(str) > this.data.maxAmount) { //此处判断例如30000、40000等超过20000的情况
                 wx.showModal({
                   title: '错误',
-                  content: '输入最大金额不能超过' + this.maxAmount
+                  content: '输入最大金额不能超过' + this.data.maxAmount
                 });
                 return;
               } else {
@@ -78,7 +79,7 @@ Page({
             } else {
               wx.showModal({
                 title: '错误',
-                content: '输入最大金额不能超过' + this.maxAmount
+                content: '输入最大金额不能超过' + this.data.maxAmount
               });
             }
           } else { //如果有小数位
@@ -117,10 +118,10 @@ Page({
               if (arr[0].length < 5) { //小数点前的数字在5位以内
                 let str = content; //开始输入的3位（包括3位）以内的数
                 str += keys;
-                if (Number(str) > this.maxAmount) {
+                if (Number(str) > this.data.maxAmount) {
                   wx.showModal({
                     title: '错误',
-                    content: '输入最大金额不能超过' + this.maxAmount
+                    content: '输入最大金额不能超过' + this.data.maxAmount
                   });
                   return;
                 } else {
@@ -129,16 +130,16 @@ Page({
               } else {
                 wx.showModal({
                   title: '错误',
-                  content: '输入最大金额不能超过' + this.maxAmount
+                  content: '输入最大金额不能超过' + this.data.maxAmount
                 });
               }
             } else { //如果有小数位
               let str = content;
               str += keys;
-              if (Number(str) > this.maxAmount) {
+              if (Number(str) > this.data.maxAmount) {
                 wx.showModal({
                   title: '错误',
-                  content: '输入最大金额不能超过' + this.maxAmount
+                  content: '输入最大金额不能超过' + this.data.maxAmount
                 });
                 return;
               } else {
@@ -150,7 +151,9 @@ Page({
         }
         break;
     }
-    this.amount = content;
+    this.setData({
+      amount: content
+    });
   },
 
   /**

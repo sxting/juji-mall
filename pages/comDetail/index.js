@@ -291,7 +291,7 @@ Page({
   },
   share: function (){
     var obj = {
-      type:'SHARE_PROGRAM',
+      type:'SHARE_PRODUCT',
       sharePath: '/pages/index/index'
     };
     service.share(obj).subscribe({

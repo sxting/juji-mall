@@ -307,13 +307,11 @@ Page({
    * 用户点击右上角分享或页面中的分享
    */
   onShareAppMessage: function(res) {
+    this.share();
     return {
       title: JSON.parse(wx.getStorageSync('userinfo')).nickName+'分享给您一个心动商品，快来一起体验吧！',
       path: '/pages/comDetail/index?id=' + this.data.productId + '&storeid=' + this.data.storeId + '&inviteCode=' + wx.getStorageSync('inviteCode'),
-      imageUrl:constant.basePicUrl+this.data.productInfo.picId+'/resize_360_360/mode_fill',
-      success: (res) => {
-          this.share();
-      },
+      imageUrl:constant.basePicUrl+this.data.productInfo.picId+'/resize_360_360/mode_fill'
     }
   },
   toCommentDetail: function(event) {

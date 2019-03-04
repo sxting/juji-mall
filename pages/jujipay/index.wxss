@@ -438,7 +438,7 @@ input {
 
 .selectCardWrap {
   width: 100%;
-  margin-top: 300rpx;
+  margin-top: 370rpx;
 }
 
 .titleRow {

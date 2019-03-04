@@ -22,7 +22,7 @@
         </view>
       </view>
     </view>
-    <view class="keyboardBox trans-fade" hidden="{{false}}">
+    <view class="keyboardBox trans-fade" hidden="{{showSelectCard}}">
       <view class="selectCarCon">
         <view class="kbclo1">
           <view class="number clearfix">
@@ -50,35 +50,29 @@
         </view>
       </view>
     </view>
-    <view class="trans-fade selectCardWrap" hidden="showSelectCard">
-      <view class="titleRow" bindtap="onClickChuzhi" hidden="showChuzhi">
+    <view class="trans-fade selectCardWrap" hidden="{{!showSelectCard}}">
+      <view class="titleRow" bindtap="onClickChuzhi" hidden="{{cardList.length > 0?false:true}}">
         <view class="titleWrap">
           <view class="vip"></view>
           <view class="title">储值支付</view>
           <view class="sheng"></view>
         </view>
         <view class="titleWrap">
-          <view style="font-size: .24rem;color: #999999;margin-right:.2rem;">仅限本商户使用</view>
+          <view style="font-size: 24rpx;color: #999999;margin-right:20rpx;">仅限本商户使用</view>
           <view class="noselect {{paytype==='recommend'?'select':''}}"></view>
         </view>
       </view>
-      <view class="swiper-container cardList" hidden="showChuzhi">
-        <view class="swiper-wrapper">
-          <!-- 如果余额存在 -->
-          <!-- <view class="swiper-slide card" :class="{'selectCard-yin':selectCardYin}" bindtap="paytype='account'"
-                         wx:if="accountFlag&&balance!=0">
-                        <view class="yu-e-Title" :class="{'cardTitle-yin':selectCardYin}">账户余额</view>
-                        <view class="yu-e-Amount" :class="{'cardAmount-yin':selectCardYin}">{{balance}}元</view>
-                        <view :class="{'cardSelected-yin':selectCardYin}"></view>
-                    </view> -->
-          <!-- 余额不存在 则显示选择的卡 -->
-          <view class="swiper-slide card {{selectCardId==item.prepayRuleId&&paytype==='recommend'?'selectCard':''}}" v-for="(item,index) in cardList" :key="index" bindtap="changeSelectCard(item,index)">
+
+      <swiper class="swiper-container cardList" interval="3000" duration="1000" indicator-color="#fff">
+        <swiper-item wx:for="{{cardList}}" wx:key="unique">
+            <view class="swiper-slide card {{selectCardId==item.prepayRuleId&&paytype==='recommend'?'selectCard':''}}" v-for="(item,index) in cardList" :key="index" data-item="{{item}}" data-index="{{index}}" bindtap="changeSelectCard">
             <view class="yu-e-Title {{selectCardId==item.prepayRuleId&&paytype==='recommend'?'cardTitle':''}}">储值{{item.pay}}元</view>
             <view class="yu-e-Amount {{selectCardId==item.prepayRuleId&&paytype==='recommend'?'cardAmount':''}}">送{{item.givingMoney}}元</view>
             <view class="{{selectCardId==item.prepayRuleId&&paytype==='recommend'?'cardSelected':''}}"></view>
           </view>
-        </view>
-      </view>
+        </swiper-item>
+      </swiper>
+
       <view class="titleRow" hidden="thirdtype=='1'" bindtap="seledAccount?paytype='account':paytype='thirdpay'">
         <view class="titleWrap">
           <view class="weixin"></view>

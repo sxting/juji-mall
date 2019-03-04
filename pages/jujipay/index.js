@@ -426,6 +426,22 @@ Page({
 
   },
 
+  changeSelectCard(event) {
+    console.log(event.currentTarget.dataset.item);
+    console.log(event.currentTarget.dataset.index);
+    let item = event.currentTarget.dataset.item;
+    let index = event.currentTarget.dataset.index;
+    this.setData({
+      paytype : 'recommend',
+      selectCardId : item.prepayRuleId,
+      selectCardPay : Number(item.pay).toFixed(2),
+      givingMoney : item.givingMoney,
+      discount : item.discount,
+      selectedSlideIndex : index
+    });
+    // this.swiper.slideTo(index);
+  },
+
   /**
    * 生命周期函数--监听页面隐藏
    */

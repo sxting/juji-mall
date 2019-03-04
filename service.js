@@ -6,6 +6,19 @@ import {
 } from 'utils/http';
 let service = {};
 let api = constant.apiUrl;
+let jujipay = constant.jujipayUrl;
+
+// -------------------------------------桔集支付接口------------------------------------------
+
+service.getPayment = (data) => {
+  let jujipayUrl = jujipay + '/customer/order/getPayment.json';//获取支付方式
+  return http.get(jujipayUrl, data);
+}
+
+service.preOrder = (data) =>{
+  let jujipayUrl = jujipay + '/customer/order/preOrder.json';//获取支付方式
+  return http.post(jujipayUrl, data);
+}
 
 // -------------------------------------橘子商城部分接口------------------------------------------
 

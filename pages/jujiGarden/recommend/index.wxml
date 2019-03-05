@@ -1,0 +1,31 @@
+<wxs src="../../../utils/numFr.wxs" module="format" />
+<view class="main">
+    <view class="tabs ub ub-ac">
+        <view class="{{curTabIndex==1?'on':''}}" data-index="1" bindtap="switchTab">商品推荐</view>
+        <view class="{{curTabIndex==2?'on':''}}" data-index="2" bindtap="switchTab">邀新素材</view>
+    </view>
+    <view class="item" wx:for="{{recommendlist}}" wx:key="{{index}}" data-comid="{{item.id}}" hidden="{{isShowNodata}}">
+        <view class="info ub ub-ac plr15">
+            <image class="userImg" src="../../../images/user.png"></image>
+            <view class="nickname">用户名</view>
+            <view class="ub-f1 txt">200次分享</view>
+        </view>
+        <view class="content plr15">
+            素材文字素材文字素材文字素材文字素材文字素材文字素材文字素材文字素材文字
+        </view>
+        <view class="imglist">
+            <view class="imgWrap" wx:for="{{item.imgIds}}" wx:for-item='it' wx:key="unique">
+              <image src="{{constant.basePicUrl}}25R9F7zL2Dhr/resize_180_180/mode_fill" mode="widthFix"></image>
+            </view>
+        </view>
+        <view class="ctrl ub ub-ac plr15">
+            <view class="ub-f1 ub ub-ac"><image class="wxIcon" src="../../../images/mall.png" mode="aspectFill"></image>保存素材</view>
+            <view class="ub-f1 ub ub-ac"><image class="wxIcon" src="../../../images/mall.png" mode="aspectFill"></image>生成图文</view>
+            <view class="ub-f1 ub ub-ac">分享到<image class="wxIcon" src="../../../images/mall.png" mode="aspectFill"></image><image class="wxIcon" src="../../../images/mall.png" mode="aspectFill"></image></view>
+        </view>
+    </view>
+    <view class="nodataDiv ub ub-ac ub-pc ub-ver" hidden="{{!isShowNodata}}">
+        <image class="nodataImg" src="../../../images/null1.png"></image>
+        <view class="nodataTxt">素材为空~</view>
+    </view>
+</view>

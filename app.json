@@ -24,7 +24,10 @@
     "pages/cardlist/index",
     "pages/payresult/index",
     "pages/jujiGarden/gardenHome/gardenHome",
-    "pages/jujiGarden/userInfor/userInfor"
+    "pages/jujiGarden/userInfor/userInfor",
+    "pages/jujiGarden/gardenIndex/index",
+    "pages/jujiGarden/myUser/index",
+    "pages/jujiGarden/recommend/index"
   ],
   "permission": {
     "scope.userLocation": {

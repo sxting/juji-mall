@@ -39,16 +39,15 @@
 			"current": 17,
 			"list": [
 				{
-					"id": 0,
-					"name": "商品详情",
-					"pathName": "pages/comDetail/index",
-					"query": "id=a1949b0d-3656-11e9-8457-58605f589df3&inviteCode=03cc9d760157462994a4a7920fdf361b",
-					"scene": null
-				},
-				{
 					"id": -1,
 					"name": "订单确认",
 					"pathName": "pages/payOrder/index",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "桔园",
+					"pathName": "pages/invitation/index",
 					"query": ""
 				},
 				{

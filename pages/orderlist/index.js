@@ -36,7 +36,7 @@ Page({
     switchTab: function(event) {
         var thisIndex = event.currentTarget.dataset['index'];
         var thisStatus = event.currentTarget.dataset['status'];
-        this.setData({ curTabIndex: thisIndex });
+      this.setData({ curTabIndex: thisIndex, status: thisStatus });
         this.getData(thisStatus,1);
         this.setData({ isFinall:false,pageNo: 1 });
     },

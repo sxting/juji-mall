@@ -1,6 +1,9 @@
 import {
   service
 } from '../../service';
+import {
+  constant
+} from '../../utils/constant';
 Page({
 
   /**
@@ -27,7 +30,49 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    console.log(options);
+    new Promise(function (resolve, reject) {
+      if (options.q) {
+        console.log(options.q);
+        var link = decodeURIComponent(options.q);
+        console.log(link);
+        this.setData({
+          url: link
+        });
+        resolve();
+      }else{
+        reject('options.q不存在');
+      }
+    }).then(function () {
+     return new Promise(function (resolve1, reject1) {
+      console.log('Promise is ready!');
+      wx.login({
+        success: res => {
+          console.log('code: ' + res.code);
+          console.log(constant.APPID);
+          resolve1(res.code);
+        }
+      })
+    })
+    }).then(function(code){
+      return new Promise(function(resolve2,reject2){
+        service.miniLogin({
+          code: code,
+          appid: constant.APPID,
+          qrcode:''
+        }).subscribe({
+          next: res => {
+            console.log(res);
+            resolve2();
+          }
+        })
+      })
+    }).catch(function(err){
+      wx.showModal({
+        title: '错误',
+        content: err,
+      })
+    })
   },
 
   /**

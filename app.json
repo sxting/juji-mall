@@ -19,7 +19,10 @@
     "pages/merchantsCanUse/index",
     "pages/article/index",
     "pages/jujipay/index",
-    "pages/pay/index"
+    "pages/pay/index",
+    "pages/payrecord/index",
+    "pages/cardlist/index",
+    "pages/payresult/index"
   ],
   "permission": {
     "scope.userLocation": {

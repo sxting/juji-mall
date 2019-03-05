@@ -623,6 +623,9 @@ Page({
   //点击banner
   onTapBanner:function(e){
     var link = e.currentTarget.dataset.link;
+    if (link == '/juzihl/index' && this.data.pointProductList.length==0){
+      return ;
+    }
       wx.navigateTo({
         url: '..'+link
       });

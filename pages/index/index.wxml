@@ -8,6 +8,7 @@
   </view>
 
   <view wx:if="{{slideShowList.length>0||pointProductList.length>0||recommendPage.length>0}}">
+    <view style="background:#fff;padding-bottom:30rpx;">
     <view class="toper">
       <swiper autoplay="{{autoplay}}" current="{{nowIdx}}" previous-margin="35rpx" next-margin="35rpx" interval="3000" duration="1000" indicator-color="#fff" indicator-active-color="#b55fff" bindchange="swiperChange" circular>
         <swiper-item wx:for="{{slideShowList}}" wx:key="unique">
@@ -30,7 +31,7 @@
       </view>
     </view>
 
-    <view class="juzihl-wrap">
+    <view class="juzihl-wrap" wx:if="{{pointProductList.length>0}}">
       <view class="mtitle">桔子换礼</view>
       <view class="mRow jc-sb" style="margin-top:5rpx;">
         <view class="subtitle">让生活“换”然一新</view>
@@ -74,6 +75,7 @@
 
       </view>
     </view>
+    </view>
 
     <!-- 桔子球 -->
     <view class="juziqiu" bindtap="onTapJuziqiu">
@@ -85,7 +87,7 @@
       </view>
     </view>
 
-    <view class="juzihl-wrap" style="margin-top:20rpx;">
+    <view class="juzihl-wrap" style="margin-top:20rpx;padding-bottom:30rpx">
       <view class="mtitle">精选推荐</view>
       <view class="subtitle" style="margin-top:10rpx;">精选好物，先到先得</view>
       <view class="labels-wrap">

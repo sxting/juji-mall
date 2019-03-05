@@ -20,6 +20,11 @@ service.preOrder = (data) =>{
   return http.post(jujipayUrl, data);
 }
 
+service.miniLogin = (data) => {
+  let jujipayUrl = jujipay + '/mini/miniLogin.json';//获取支付方式
+  return http.post(jujipayUrl, data);
+}
+
 // -------------------------------------橘子商城部分接口------------------------------------------
 
 service.getAuthCode = (data) => {

@@ -36,7 +36,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 17,
+			"current": 16,
 			"list": [
 				{
 					"id": 0,
@@ -148,9 +148,9 @@
 					"scene": null
 				},
 				{
-					"id": -1,
+					"id": 16,
 					"name": "桔集支付",
-					"pathName": "pages/jujipay/index",
+					"pathName": "pages/pay/index",
 					"query": "",
 					"scene": null
 				},
@@ -158,6 +158,7 @@
 					"id": -1,
 					"name": "pay截取测试",
 					"pathName": "pages/pay/index",
+					"query": "",
 					"scene": null
 				}
 			]

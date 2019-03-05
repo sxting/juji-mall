@@ -163,85 +163,68 @@ Page({
     console.log(orderObj);
   },
   wxpay(orderObj) {
-    service.preOrder({
-      choosenType: this.data.paytype,
-      givingMoney: Number(orderObj.givingMoney),
-      orderPay: Number(orderObj.orderPay),
-      pay: Number(orderObj.pay),
-      prepayRuleId: orderObj.prepayRuleId,
-      storeId: this.data.storeId
-    }).subscribe({
-      next: res => {
-        console.log('---------使用微信支付返回数据----------');
-        console.log(res);
-        let that = this;
-      }
-    })
-    axios({
-      url: '/customer/order/preOrder.json',
-      method: 'post',
-      headers: {
-        'Content-Type': 'application/json',
-        'Access-Token': $$('accessToken').value
-      },
+    let that = this;
+    wx.request({
+      url: 'https://juji-dev.juniuo.com/customer/order/preOrder.json',
+      method: 'POST',
       data: {
-        choosenType: this.paytype,
+        choosenType: that.data.paytype,
         givingMoney: Number(orderObj.givingMoney),
         orderPay: Number(orderObj.orderPay),
         pay: Number(orderObj.pay),
         prepayRuleId: orderObj.prepayRuleId,
-        storeId: this.data.storeId
-      }
-    }).then(res => {
-      console.log('---------使用微信支付返回数据----------');
-      console.log(res);
-      let that = this;
-      // alert(JSON.stringify(res));
-      if (res.data.errorCode == "0") {
-        wx.requestPayment({
-          timeStamp: res.timeStamp,
-          nonceStr: res.nonceStr,
-          package: res.package,
-          signType: res.signType,
-          paySign: res.paySign,
-          success(res2) {
-            console.log(res2);
-            // wx.redirectTo({
-            //   url: '/pages/orderDetail/index?id=' + res1.orderId,
-            // });
-            that.setData({
-              toPayStatus: false
-            });
-          },
-          fail(res2) {
-            console.log(res2);
-            if (res2.errMsg == 'requestPayment:fail cancel') {
-              wx.showToast({
-                title: '用户取消支付',
-                icon: 'none'
+        storeId: that.data.storeId
+      },
+      header: {
+        'content-type': 'application/json',
+        'Access-Token': wx.getStorageSync('accessToken')
+      },
+      success: (res) => {
+        console.log('---------使用微信支付返回数据----------');
+        console.log(res);
+        if (res.data.errorCode == "0") {
+          wx.requestPayment({
+            timeStamp: res.data.data.timeStamp,
+            nonceStr: res.data.data.nonceStr,
+            package: res.data.data.package,
+            signType: res.data.data.signType,
+            paySign: res.data.data.paySign,
+            success(res2) {
+              console.log(res2);
+              wx.redirectTo({
+                url: '/pages/payresult/index',
               });
-              //跳转到待支付列表
-              that.toMyOrder();
               that.setData({
                 toPayStatus: false
               });
-            }
+            },
+            fail(res2) {
+              console.log(res2);
+              if (res2.errMsg == 'requestPayment:fail cancel') {
+                wx.showToast({
+                  title: '用户取消支付',
+                  icon: 'none'
+                });
+                that.setData({
+                  toPayStatus: false
+                });
+              }
 
-          }
-        });
-      } else {
-        // this.$toast(res.data.errorInfo, 'center');
-        wx.showModal({
-          title: '提示',
-          content: res.data.errorInfo,
-        })
-        that.setData({
-          toPayStatus: false
-        });
+            }
+          });
+        } else {
+          // this.$toast(res.data.errorInfo, 'center');
+          wx.showModal({
+            title: '提示',
+            content: res.data.errorInfo,
+          })
+          that.setData({
+            toPayStatus: false
+          });
+        }
       }
-    }).catch(err => {
-      console.log(err);
-    })
+    });
+    
   },
   changePaytype: function () {
     this.setData({
@@ -484,7 +467,10 @@ Page({
           console.log('paytype: ' + that.data.paytype);
           console.log('accountFlag: ' + that.data.accountFlag);
         } else {
-          alert('系统错误：' + res.data.errorCode);
+          wx.showModal({
+            title: '错误',
+            content: res.data.errorCode,
+          });
         }
       }
     });

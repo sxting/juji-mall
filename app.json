@@ -22,7 +22,9 @@
     "pages/pay/index",
     "pages/payrecord/index",
     "pages/cardlist/index",
-    "pages/payresult/index"
+    "pages/payresult/index",
+    "pages/jujiGarden/gardenHome/gardenHome",
+    "pages/jujiGarden/userInfor/userInfor"
   ],
   "permission": {
     "scope.userLocation": {
@@ -44,6 +46,12 @@
       {
         "text": "首页",
         "pagePath": "pages/index/index",
+        "iconPath": "images/mall.png",
+        "selectedIconPath": "images/mall_selected.png"
+      },
+      {
+        "text": "桔园",
+        "pagePath": "pages/jujiGarden/gardenHome/gardenHome",
         "iconPath": "images/mall.png",
         "selectedIconPath": "images/mall_selected.png"
       },

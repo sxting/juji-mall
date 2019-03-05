@@ -18,7 +18,7 @@
                     <view class="goodTit">{{it.productName}}</view>
                     <view class="storeName">{{it.merchantName}}</view>
                     <!-- 混合支付 -->
-                    <view class="goodAmount" wx:if="{{item.payType=='MIX'&&status=='CREATED'}}">
+                    <view class="goodAmount" wx:if="{{item.payType=='MIX'&&(item.status=='CREATED'||item.status=='CLOSE')}}">
                         <text>{{it.point}}桔子</text><text>+</text><text>{{format.toFix(it.price)}}元</text><text class="origin">{{format.toFix(it.originalPrice)}}元</text>
                     </view>
                     <view class="goodAmount" wx:elif="{{item.payType=='MIX'}}">
@@ -30,13 +30,13 @@
                         <text class="origin">{{format.toFix(it.originalPrice)}}元</text>
                     </view>
                     <!-- 微信支付购买 -->
-                    <view class="goodAmount" wx:elif="{{item.payType=='WECHAT'&&status=='CREATED'}}"><text>{{format.toFix(it.price)}}元</text></view>
+                    <view class="goodAmount" wx:elif="{{item.payType=='WECHAT'&&(item.status=='CREATED'||item.status=='CLOSE')}}"><text>{{format.toFix(it.price)}}元</text></view>
                     <view class="goodAmount" wx:elif="{{item.payType=='WECHAT'}}"><text>{{format.toFix(it.paidAmount)}}元</text>
                     </view>
                     <view class="num">×{{it.num}}</view>
                 </view>
             </view>
-            <view class="tx-r total" wx:if="{{status=='CREATED'}}">
+            <view class="tx-r total" wx:if="{{item.status=='CREATED'||item.status=='CLOSE'}}">
               合计：<text wx:if="{{item.amount>0}}">{{format.toFix(item.amount)}}元</text>
               <text wx:if="{{item.point>0&&item.amount>0}}">+</text>
               <text wx:if="{{item.point>0}}">{{item.point}}桔子</text>

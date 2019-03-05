@@ -6,6 +6,7 @@ import {
 } from 'utils/http';
 let service = {};
 let api = constant.apiUrl;
+let jujipay = constant.jujipayUrl;
 
 // -------------------------------------橘子商城部分接口------------------------------------------
 

@@ -1,0 +1,30 @@
+<view id="app">
+    <view class="container">
+        <view class="topBox">
+            <view class="chengongimgwrap">
+                <image src="/static/assets/chenggong.png" class="chengongimg" ></image>
+            </view>
+            <view class="zhifutip">支付成功</view>
+            <input type="hidden" id="userId" value="${userId}"/>
+            <view class="topRow mt40">
+                <view class="detail">会员卡充值</view>
+                <view class="amount plus"><view class="numRemark">+</view>¥${addMoney}</view>
+            </view>
+
+            <view class="topRow mt20">
+                <view class="detail">会员卡消费</view>
+                <view class="amount"><view class="numRemark">-</view>¥${prepayMoney}</view>
+            </view>
+            <view class="topRow mt20">
+                <view class="amount"><view class="numRemark">-</view>¥${wxPayMoney}</view>
+            </view>
+
+        </view>
+        <view class="completeBtnWrap">
+            <view class="completeBtn" onclick="cards()">查看卡包余额</view>
+        </view>
+        <image src="/static/assets/juji.png" alt="" class="sy" style="width:1.2rem;height:.4rem;"></image>
+        <view class="phonenumber">技术支持</view> 
+
+    </view>
+</view>

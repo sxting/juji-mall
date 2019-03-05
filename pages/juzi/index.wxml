@@ -94,7 +94,7 @@
 
         <view>
           <view style="font-size: 28rpx;color: #333333;">邀请新人赚10桔子</view>
-          <view style="margin-top:10rpx;font-size: 24rpx;color: #999999;">每天不限数量多赚多得</view>
+          <view style="margin-top:10rpx;font-size: 24rpx;color: #999999;">每天不限数量，多赚多得</view>
         </view>
       </view>
       <button class="taskBtn" open-type="share">赚桔子</button>
@@ -109,7 +109,7 @@
           <view style="margin-top:10rpx;font-size: 24rpx;color: #999999;">每天最多赚{{currentPointObj.shareProductTask.dayNum}}个桔子</view>
         </view>
       </view>
-      <button class="taskBtn" bindtap="toJuzihl">赚桔子</button>
+      <button class="taskBtn" bindtap="toIndex">赚桔子</button>
     </view>
 
     <view class="taskItem ub ub-ac ub-pj">
@@ -130,7 +130,7 @@
 
         <view>
           <view style="font-size: 28rpx;color: #333333;">消费后评价赚{{currentPointObj.commentTask.onceNum}}桔子</view>
-          <view style="margin-top:10rpx;font-size: 24rpx;color: #999999;">每天不限数量，多评多得</view>
+          <view style="margin-top:10rpx;font-size: 24rpx;color: #999999;">10字图文评价最多可赚{{currentPointObj.commentTask.onceNum}}桔子</view>
         </view>
       </view>
       <button class="taskBtn" bindtap="toMyOrder">赚桔子</button>

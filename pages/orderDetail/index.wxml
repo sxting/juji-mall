@@ -7,8 +7,12 @@
                 <view class="goodTit">{{item.productName}}</view>
                 <view class="storeName">{{item.merchantName}}</view>
                 <!-- 混合支付 -->
-                <view class="goodAmount" wx:if="{{orderInfo.payType=='MIX'}}">
+                <view class="goodAmount" wx:if="{{orderInfo.payType=='MIX'&&(orderInfo.status=='CREATED'||orderInfo.status=='CLOSE')}}">
                     <text>{{item.point}}桔子</text><text>+</text><text>{{format.toFix(item.price)}}元</text>
+                    <text class="origin">{{format.toFix(item.originalPrice)}}元</text>
+                </view>
+                <view class="goodAmount" wx:elif="{{orderInfo.payType=='MIX'}}">
+                    <text>{{item.paidPoint}}桔子</text><text>+</text><text>{{format.toFix(item.paidAmount)}}元</text>
                     <text class="origin">{{format.toFix(item.originalPrice)}}元</text>
                 </view>
                 <!-- 桔子支付 -->
@@ -17,13 +21,17 @@
                     <text class="origin">{{format.toFix(item.originalPrice)}}元</text>
                 </view>
                 <!-- 微信支付 -->
+                <view class="goodAmount" wx:elif="{{orderInfo.payType=='WECHAT'&&(orderInfo.status=='CREATED'||orderInfo.status=='CLOSE')}}">
+                    <text>{{format.toFix(item.price)}}元</text>
+                </view>
                 <view class="goodAmount" wx:elif="{{orderInfo.payType=='WECHAT'}}">
                     <text>{{format.toFix(item.paidAmount)}}元</text>
                 </view>
                 <view class="num">×{{item.num}}</view>
             </view>
         </view>
-        <view class="tx-r total">合计：<text wx:if="{{orderInfo.amount>0}}">{{format.toFix(orderInfo.amount)}}元</text><text wx:if="{{orderInfo.point>0&&orderInfo.amount>0}}">+</text><text wx:if="{{orderInfo.point>0}}">{{orderInfo.point}}桔子</text></view>
+        <view class="tx-r total" wx:if="{{orderInfo.status=='CREATED'||orderInfo.status=='CLOSE'}}">合计：<text wx:if="{{orderInfo.amount>0}}">{{format.toFix(orderInfo.amount)}}元</text><text wx:if="{{orderInfo.point>0&&orderInfo.amount>0}}">+</text><text wx:if="{{orderInfo.point>0}}">{{orderInfo.point}}桔子</text></view>
+        <view class="tx-r total" wx:else>合计：<text wx:if="{{orderInfo.paidAmount>0}}">{{format.toFix(orderInfo.paidAmount)}}元</text><text wx:if="{{orderInfo.paidPoint>0&&orderInfo.paidAmount>0}}">+</text><text wx:if="{{orderInfo.paidPoint>0}}">{{orderInfo.paidPoint}}桔子</text></view>
     </view>
     <view class="ctrl plr15 ub ub-ac ub-pj">
         <view class="status">{{format.formatStatus(orderInfo.status)}}</view>

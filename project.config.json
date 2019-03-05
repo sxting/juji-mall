@@ -14,7 +14,7 @@
 	"compileType": "miniprogram",
 	"libVersion": "2.3.0",
 	"appid": "wxb03b0ab93bb60ecc",
-	"projectname": "juji_mall",
+	"projectname": "%E6%A1%94%E9%9B%86%E5%95%86%E5%9F%8E",
 	"debugOptions": {
 		"hidedInDevtools": []
 	},
@@ -36,7 +36,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 17,
+			"current": 16,
 			"list": [
 				{
 					"id": -1,
@@ -147,9 +147,9 @@
 					"scene": null
 				},
 				{
-					"id": -1,
+					"id": 16,
 					"name": "桔集支付",
-					"pathName": "pages/jujipay/index",
+					"pathName": "pages/pay/index",
 					"query": "",
 					"scene": null
 				},
@@ -157,6 +157,7 @@
 					"id": -1,
 					"name": "pay截取测试",
 					"pathName": "pages/pay/index",
+					"query": "",
 					"scene": null
 				}
 			]

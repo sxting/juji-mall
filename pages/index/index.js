@@ -27,6 +27,7 @@ Page({
     isShowNewerGet: false,
     pointBalance: 0,
     imageWidth:'200rpx',
+    // citylist: [],
     citylist: [{
       "version": 0,
       "dateCreated": "2019-01-23 18:31:25",
@@ -64,7 +65,44 @@ Page({
           ]
         }
       ]
-    }],
+    }, {
+        "version": 0,
+        "dateCreated": "2019-01-23 18:31:25",
+        "lastUpdated": "2019-01-23 18:31:25",
+        "deleted": 0,
+        "locationCode": "150000",
+        "locationName": "内蒙古自治区",
+        "locationType": "PROVINCE",
+        "parentLocationCode": "0",
+        "parentLocation": null,
+        "subList": [
+          {
+            "version": 0,
+            "dateCreated": "2019-01-23 18:31:25",
+            "lastUpdated": "2019-01-23 18:31:25",
+            "deleted": 0,
+            "locationCode": "152200",
+            "locationName": "兴安盟",
+            "locationType": "CITY",
+            "parentLocationCode": "150000",
+            "parentLocation": null,
+            "subList": [
+              {
+                "version": 0,
+                "dateCreated": "2019-01-23 18:31:25",
+                "lastUpdated": "2019-01-23 18:31:25",
+                "deleted": 0,
+                "locationCode": "152202",
+                "locationName": "阿尔山市",
+                "locationType": "DISTRICT",
+                "parentLocationCode": "152200",
+                "parentLocation": null,
+                "subList": null
+              }
+            ]
+          }
+        ]
+      }],
     isFirstShow:true,
     isLoadedBalance:true
   },
@@ -91,11 +129,11 @@ Page({
             });
           } else { //如果已经授权
             //判断rowData是否存在
-            if (wx.getStorageSync('rawData')) { //如果存在
+            // if (wx.getStorageSync('rawData')) { //如果存在
               resolve();
-            } else { //如果不存在rowData
-              reject('未获取rawData');
-            }
+            // } else { //如果不存在rowData
+            //   reject('未获取rawData');
+            // }
           }
         }
       });
@@ -154,15 +192,7 @@ Page({
               });
 
               //桔子球 查询用户当前桔子数
-              service.currentPoint().subscribe({
-                next: res3 => {
-                  console.log(res3);
-                  that.setData({
-                    pointBalance: res3.pointBalance,
-                    isLoadedBalance: true
-                  });
-                }
-              });
+              that.currentPoint();
 
               //获取热门城市
               // var imageWidth = (wx.getSystemInfoSync().windowWidth - 66) / 3;
@@ -576,6 +606,7 @@ Page({
           title: '领取成功！',
           icon: 'none'
         });
+        this.currentPoint();
       },
       error: err => wx.showToast({
         title: err,
@@ -592,6 +623,9 @@ Page({
   //点击banner
   onTapBanner:function(e){
     var link = e.currentTarget.dataset.link;
+    if (link == '/juzihl/index' && this.data.pointProductList.length==0){
+      return ;
+    }
       wx.navigateTo({
         url: '..'+link
       });

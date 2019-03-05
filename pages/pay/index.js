@@ -1,26 +1,114 @@
-// pages/pay/index.js
+import {
+  service
+} from '../../service';
+import {
+  constant
+} from '../../utils/constant';
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    
+    logo: '',//门店logo
+    storeName: '',//门店名称
+    showFocus: true,//显示光标
+    numArr: [1, 2, 3, 4, 5, 6, 7, 8, 9],
+    amount: '',
+    maxAmount: 20000,
+    seledAccount: false,
+    showBalanceWrap: false,
+    showSelectCard: false,
+    cardList: [{}, {}],
+    selectCardId: '',
+    paytype: 'recommend',
+    recommend: '1',
+    discount: 0, //储值折扣
+    url: '',
+    qrcode:'',
+    headImg:'',
+    merchantId:'',
+    storeId:'',
+    storeName:'',
+    type:''
   },
-  
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    if (options.q) {
-      console.log(options.q);
-      var link = decodeURIComponent(options.q);
-      console.log(link);
-      this.setData({
-        url: link
-      });
-    }
+    console.log(options);
+    let that = this;
+    new Promise(function (resolve, reject) {
+      console.log('Promise is ready!');
+      options.q = 'https://juji-dev.juniuo.com/qr/212345678.htm';
+      if (options.q) {
+        console.log(options.q);
+        var link = decodeURIComponent(options.q);
+        console.log(link);
+        let arr = link.split('/qr/');
+        let arr1 = arr[1].split('.htm');
+        console.log('qrcode: ' + arr1[0]);
+        that.setData({
+          url: link,
+          qrcode: arr1[0]
+        });
+        resolve();
+      } else {
+        reject('options.q不存在');
+      }
+    }).then(function () {
+      return new Promise(function (resolve1, reject1) {
+        
+        wx.login({
+          success: res => {
+            console.log('code: ' + res.code);
+            console.log(constant.APPID);
+            resolve1(res.code);
+          }
+        })
+      })
+    }).then(function (code) {
+      return new Promise(function (resolve2, reject2) {
+        wx.request({
+          url: 'https://juji-dev.juniuo.com/mini/miniLogin.json',
+          method: 'POST',
+          data: {
+            appid: constant.APPID,
+            code: code,
+            qrcode: that.data.qrcode
+          },
+          header: {
+            'content-type': 'application/x-www-form-urlencoded',
+          },
+          success: (res) => {
+            console.log('-----------桔集支付返回门店信息----------');
+            console.log(res);
+
+            if (res.data.errorCode == '0') {
+              wx.setStorageSync('accessToken', res.data.data.accessToken);
+              that.setData({
+                headImg: res.data.data.headImg,
+                merchantId: res.data.data.merchantId,
+                recommend: res.data.data.recommend,
+                storeId: res.data.data.storeId,
+                storeName: res.data.data.storeName,
+                type: res.data.data.type
+              })
+              resolve2();
+            } else {
+              reject2('登录失败，错误码:' + res.data.errorCode + ' 返回错误: ' + res.data.errorInfo);
+            }
+          }
+        });
+
+      })
+    }).catch(function (err) {
+      wx.showModal({
+        title: '错误',
+        content: err,
+      })
+    })
   },
 
   /**
@@ -35,6 +123,373 @@ Page({
    */
   onShow: function () {
 
+  },
+  toPay: function () {
+    if (this.data.toPayStatus) {
+      return;
+    }
+    this.setData({
+      toPayStatus: true
+    });
+    console.log('this.paytype: ' + this.data.paytype);
+    let orderObj = {};
+    this.data.paytype ? orderObj.choosenType = this.data.paytype : orderObj;
+    this.data.selectCardId ? orderObj.prepayRuleId = this.data.selectCardId : orderObj;
+    this.data.givingMoney != undefined && this.data.givingMoney != null ? orderObj.givingMoney = this.data.givingMoney : orderObj;
+    orderObj.orderPay = Number(this.data.dAmount);//订单消费的金额 用户在门店消费金额
+    if (this.data.seledAccount) {//勾选了余额支付
+      if (this.data.paytype === 'account') { //如果勾选了余额支付且选择微信支付后 支付类型是account 是组合支付
+        console.log('微信组合支付');
+        orderObj.pay = Number(this.data.amount);
+        this.wxpay(orderObj);
+      } else if (this.data.paytype === 'recommend') { //如果是储值支付
+        console.log('微信储值支付');
+        orderObj.pay = Number(this.data.selectCardPay);
+        this.wxpay(orderObj);
+      }
+    } else {//没有勾选
+      if (this.data.paytype === 'recommend') {
+        console.log('微信储值支付');
+        orderObj.pay = Number(this.data.selectCardPay);
+        this.wxpay(orderObj);
+      } else {
+        console.log('微信支付');
+        orderObj.pay = Number(this.data.dAmount);
+        this.wxpay(orderObj);
+
+      }
+    }
+
+    console.log(orderObj);
+  },
+  wxpay(orderObj) {
+    let that = this;
+    wx.request({
+      url: 'https://juji-dev.juniuo.com/customer/order/preOrder.json',
+      method: 'POST',
+      data: {
+        choosenType: that.data.paytype,
+        givingMoney: Number(orderObj.givingMoney),
+        orderPay: Number(orderObj.orderPay),
+        pay: Number(orderObj.pay),
+        prepayRuleId: orderObj.prepayRuleId,
+        storeId: that.data.storeId
+      },
+      header: {
+        'content-type': 'application/json',
+        'Access-Token': wx.getStorageSync('accessToken')
+      },
+      success: (res) => {
+        console.log('---------使用微信支付返回数据----------');
+        console.log(res);
+        if (res.data.errorCode == "0") {
+          wx.requestPayment({
+            timeStamp: res.data.data.timeStamp,
+            nonceStr: res.data.data.nonceStr,
+            package: res.data.data.package,
+            signType: res.data.data.signType,
+            paySign: res.data.data.paySign,
+            success(res2) {
+              console.log(res2);
+              wx.redirectTo({
+                url: '/pages/payresult/index',
+              });
+              that.setData({
+                toPayStatus: false
+              });
+            },
+            fail(res2) {
+              console.log(res2);
+              if (res2.errMsg == 'requestPayment:fail cancel') {
+                wx.showToast({
+                  title: '用户取消支付',
+                  icon: 'none'
+                });
+                that.setData({
+                  toPayStatus: false
+                });
+              }
+
+            }
+          });
+        } else {
+          // this.$toast(res.data.errorInfo, 'center');
+          wx.showModal({
+            title: '提示',
+            content: res.data.errorInfo,
+          })
+          that.setData({
+            toPayStatus: false
+          });
+        }
+      }
+    });
+    
+  },
+  changePaytype: function () {
+    this.setData({
+      paytype: 'recommend'
+    });
+  },
+  changePaytype3: function () {
+    console.log(this.data.seledAccount);
+    if (this.data.seledAccount) {
+      this.setData({
+        paytype: 'account'
+      });
+    } else {
+      this.setData({
+        paytype: 'thirdpay'
+      });
+    }
+    console.log(this.data.paytype);
+  },
+
+  keyTap: function (e) {
+    console.log(e.currentTarget.dataset.num);
+    if (this.data.amount == '请输入付款金额') {
+      this.data.amount = '';
+    }
+    let keys = e.currentTarget.dataset.num,
+      content = this.data.amount, //金额字符
+      len = content.length; //金额字符长度
+    switch (keys) {
+      case ".":
+        if (len < 8 && content.indexOf(".") == -1) {
+          //如果字符串里有小数点了，则不能继续输入小数点，且控制最多可输入10个字符串
+          if (len < 1) {
+            //如果小数点是第一个输入，那么在字符串前面补上一个0，让其变成0.
+            content = "0.";
+          } else {
+            //如果不是第一个输入小数点，那么直接在字符串里加上小数点
+            content += ".";
+          }
+        }
+        break;
+      case "-": //如果点击删除键就删除字符串里的最后一个
+        content = content.substr(0, content.length - 1);
+        break;
+      case 0:
+        if (content.indexOf("0") != 0) { //如果第一位不是0 可以显示一个0 如果第二位是个小数点可以再显示一个0
+          //判断小数点前的数字位数 如果超过5位 则接下来只能输入小数点
+          let arr = content.split('.');
+          console.log(arr);
+          if (arr.length < 2) { //如果没有小数位的情况下
+            if (arr[0].length < 5) { //小数点前的数字在5位以内
+              let str = content; //开始输入的4位（包括4位）以内的数
+              str += keys;
+              if (Number(str) > this.data.maxAmount) { //此处判断例如30000、40000等超过20000的情况
+                wx.showModal({
+                  title: '错误',
+                  content: '输入最大金额不能超过' + this.data.maxAmount
+                });
+                return;
+              } else {
+                content += keys;
+              }
+            } else {
+              wx.showModal({
+                title: '错误',
+                content: '输入最大金额不能超过' + this.data.maxAmount
+              });
+            }
+          } else { //如果有小数位
+            if (arr[1] == "" || arr[1].length === 1) {
+              content += keys;
+            }
+          }
+        } else { //如果第一位是0
+          if (content.indexOf(".") == 1) { //在是 '0.' 的情况 可以再输入一次0 '0.0'的情况不可以再输入0
+            if (content.length == 2) {
+              content += keys;
+            } else if (content.length == 3) {
+              if (content == '0.0') {
+                wx.showModal({
+                  title: '错误',
+                  content: '输入金额不能为 0.00'
+                });
+              } else {
+                content += keys;
+              }
+            }
+          }
+        }
+        break;
+      default:
+        let index = content.indexOf("."); //小数点在字符串中的位置
+        if (index == -1 || len - index != 3) {
+          //判断第一位为0且没有小数点的情况
+          if (content.indexOf("0") == 0 && index == -1) {
+            content = keys.toString();
+          } else {
+            //判断小数点前的数字位数 如果超过5位 则接下来只能输入小数点
+            let arr = content.split('.');
+            console.log(arr);
+            if (arr.length < 2) { //如果没有小数位的情况下
+              if (arr[0].length < 5) { //小数点前的数字在5位以内
+                let str = content; //开始输入的3位（包括3位）以内的数
+                str += keys;
+                if (Number(str) > this.data.maxAmount) {
+                  wx.showModal({
+                    title: '错误',
+                    content: '输入最大金额不能超过' + this.data.maxAmount
+                  });
+                  return;
+                } else {
+                  content += keys;
+                }
+              } else {
+                wx.showModal({
+                  title: '错误',
+                  content: '输入最大金额不能超过' + this.data.maxAmount
+                });
+              }
+            } else { //如果有小数位
+              let str = content;
+              str += keys;
+              if (Number(str) > this.data.maxAmount) {
+                wx.showModal({
+                  title: '错误',
+                  content: '输入最大金额不能超过' + this.data.maxAmount
+                });
+                return;
+              } else {
+                content += keys;
+              }
+            }
+          }
+
+        }
+        break;
+    }
+    this.setData({
+      amount: content
+    });
+  },
+
+  toResult() {
+    if (this.data.amount != '' && this.data.amount != '请输入付款金额' && this.data.amount != 0) {
+
+      if (this.data.seledAccount) {//如果用户勾选了余额支付
+        //此处判断余额付款和组合付款的情况 余额付款直接跳转到结果页面 组合支付还要到当前页的另一层
+        if (Number(this.amount) > this.balance) {//如果输入金额比用户余额多
+          this.dAmount = Number(this.amount).toFixed(2);//保存一个接口传入需要用的amount
+          this.amount = Number(Number(this.amount) - this.balance).toFixed(2);
+          this.getPayment(this.dAmount);
+          this.showBalanceWrap = false;
+          this.showFocus = false;
+          this.showSelectCard = true;
+        } else {//如果用户余额充足，可以执行余额支付
+          this.accountpaystatus = true;
+          let orderObj = {};
+          this.paytype ? orderObj.choosenType = this.paytype : orderObj;
+          orderObj.orderPay = Number(this.amount);
+          orderObj.pay = Number(this.amount);
+          this.accountPay(orderObj);
+        }
+      } else {
+        //如果没有勾选 
+        this.setData({
+          amount: Number(this.data.amount).toFixed(2),
+          dAmount: Number(this.data.amount).toFixed(2)
+        });
+        this.getPayment(this.data.dAmount);
+        this.setData({
+          showBalanceWrap: false,
+          showFocus: false,
+          showSelectCard: true
+        });
+      }
+    }
+  },
+
+  getPayment(orderPay) {
+    let that = this;
+    wx.request({
+      url: 'https://juji-dev.juniuo.com/customer/order/getPayment.json',
+      method: 'GET',
+      data: {
+        storeId: that.data.storeId,
+        orderPay: orderPay
+      },
+      header: {
+        'content-type': 'application/json',
+        'Access-Token': wx.getStorageSync('accessToken')
+      },
+      success: (res) => {
+        console.log('-----------余额以及卡列表数据等----------');
+        console.log(res);
+        if (res.data.errorCode == "0") {
+          //支付类型不再依赖于返回 如果 this.cardList长度>0则默认 recommend 没有选择余额时为 thirdpay
+          that.setData({
+            cardList: res.data.data.recommendCards
+          });
+          if (that.data.cardList.length > 0) {
+            //$$('recommend').value 是否优先储值支付 1是储值 0是只有余额
+            if (that.data.recommend == '1') {
+              that.setData({
+                paytype: 'recommend',
+                selectCardId: res.data.data.recommendCards[0].prepayRuleId,
+                selectCardPay: Number(res.data.data.recommendCards[0].pay).toFixed(2),
+                givingMoney: res.data.data.recommendCards[0].givingMoney,
+                discount: res.data.data.recommendCards[0].discount
+              });
+            } else {
+              if (that.data.seledAccount) {//如果选择余额支付
+                //组合支付情况
+                that.setData({
+                  paytype: 'account'
+                })
+              } else {
+                that.setData({
+                  paytype: 'thirdpay'
+                })
+              }
+              that.setData({
+                selectCardId: res.data.data.recommendCards[0].prepayRuleId,
+                selectCardPay: Number(res.data.data.recommendCards[0].pay).toFixed(2),
+                givingMoney: res.data.data.recommendCards[0].givingMoney,
+                discount: res.data.data.recommendCards[0].discount
+              })
+            }
+          } else {
+            if (that.seledAccount) {//如果选择余额支付
+              //组合支付情况
+              that.setData({
+                paytype: 'account'
+              })
+            } else {
+              that.setData({
+                paytype: 'thirdpay'
+              })
+            }
+          }
+          console.log('paytype: ' + that.data.paytype);
+          console.log('accountFlag: ' + that.data.accountFlag);
+        } else {
+          wx.showModal({
+            title: '错误',
+            content: res.data.errorCode,
+          });
+        }
+      }
+    });
+
+  },
+
+  changeSelectCard(event) {
+    console.log(event.currentTarget.dataset.item);
+    console.log(event.currentTarget.dataset.index);
+    let item = event.currentTarget.dataset.item;
+    let index = event.currentTarget.dataset.index;
+    this.setData({
+      paytype: 'recommend',
+      selectCardId: item.prepayRuleId,
+      selectCardPay: Number(item.pay).toFixed(2),
+      givingMoney: item.givingMoney,
+      discount: item.discount
+    });
+    // this.swiper.slideTo(index);
   },
 
   /**

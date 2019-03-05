@@ -8,6 +8,7 @@
   </view>
 
   <view wx:if="{{slideShowList.length>0||pointProductList.length>0||recommendPage.length>0}}">
+    <view style="background:#fff;padding-bottom:30rpx;">
     <view class="toper">
       <swiper autoplay="{{autoplay}}" current="{{nowIdx}}" previous-margin="35rpx" next-margin="35rpx" interval="3000" duration="1000" indicator-color="#fff" indicator-active-color="#b55fff" bindchange="swiperChange" circular>
         <swiper-item wx:for="{{slideShowList}}" wx:key="unique">
@@ -30,11 +31,11 @@
       </view>
     </view>
 
-    <view class="juzihl-wrap">
+    <view class="juzihl-wrap" wx:if="{{pointProductList.length>0}}">
       <view class="mtitle">桔子换礼</view>
       <view class="mRow jc-sb" style="margin-top:5rpx;">
         <view class="subtitle">让生活“换”然一新</view>
-        <view class="moreWrap" wx:if="{{locationName}}" bindtap="toJuzihl">
+        <view class="moreWrap" wx:if="{{locationName&&pointProductList.length>0}}" bindtap="toJuzihl">
           <view class="more">更多</view>
           <image src="../../images/arrow-right.png" style="width:10rpx;height:18rpx;"></image>
         </view>
@@ -74,6 +75,7 @@
 
       </view>
     </view>
+    </view>
 
     <!-- 桔子球 -->
     <view class="juziqiu" bindtap="onTapJuziqiu">
@@ -85,7 +87,7 @@
       </view>
     </view>
 
-    <view class="juzihl-wrap" style="margin-top:20rpx;">
+    <view class="juzihl-wrap" style="margin-top:20rpx;padding-bottom:30rpx">
       <view class="mtitle">精选推荐</view>
       <view class="subtitle" style="margin-top:10rpx;">精选好物，先到先得</view>
       <view class="labels-wrap">
@@ -107,7 +109,7 @@
       <view class="jingxuanlist" wx:for="{{recommendPage}}" wx:key="unique" bindtap="toComDetail" data-id="{{item.productId}}" data-storeid="{{item.nearStore.id}}">
         <image style="width:100%;height:330rpx;margin-top:30rpx;border-radius:10rpx;" lazy-load="true" src="https://upic.juniuo.com/file/picture/{{item.picId}}/resize_690_330/mode_fill"></image>
         <view class="dis-wrap jc-sb">
-          <view class="from">{{item.providerName}}</view>
+          <view class="from">{{item.merchantName}}</view>
           <view class="dis">距你{{filter.toDis(item.nearDist)}}km</view>
         </view>
         <view class="pro-name">{{item.productName}}</view>

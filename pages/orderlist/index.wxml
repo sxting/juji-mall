@@ -18,8 +18,11 @@
                     <view class="goodTit">{{it.productName}}</view>
                     <view class="storeName">{{it.merchantName}}</view>
                     <!-- 混合支付 -->
-                    <view class="goodAmount" wx:if="{{item.payType=='MIX'}}">
+                    <view class="goodAmount" wx:if="{{item.payType=='MIX'&&status=='CREATED'}}">
                         <text>{{it.point}}桔子</text><text>+</text><text>{{format.toFix(it.price)}}元</text><text class="origin">{{format.toFix(it.originalPrice)}}元</text>
+                    </view>
+                    <view class="goodAmount" wx:elif="{{item.payType=='MIX'}}">
+                        <text>{{it.paidPoint}}桔子</text><text>+</text><text>{{format.toFix(it.paidAmount)}}元</text><text class="origin">{{format.toFix(it.originalPrice)}}元</text>
                     </view>
                     <!-- 桔子支付 -->
                     <view class="goodAmount" wx:elif="{{item.payType=='POINT'}}">
@@ -27,12 +30,22 @@
                         <text class="origin">{{format.toFix(it.originalPrice)}}元</text>
                     </view>
                     <!-- 微信支付购买 -->
+                    <view class="goodAmount" wx:elif="{{item.payType=='WECHAT'&&status=='CREATED'}}"><text>{{format.toFix(it.price)}}元</text></view>
                     <view class="goodAmount" wx:elif="{{item.payType=='WECHAT'}}"><text>{{format.toFix(it.paidAmount)}}元</text>
                     </view>
                     <view class="num">×{{it.num}}</view>
                 </view>
             </view>
-            <view class="tx-r total">合计：<text wx:if="{{item.amount>0}}">{{format.toFix(item.amount)}}元</text><text wx:if="{{item.point>0&&item.amount>0}}">+</text><text wx:if="{{item.point>0}}">{{item.point}}桔子</text></view>
+            <view class="tx-r total" wx:if="{{status=='CREATED'}}">
+              合计：<text wx:if="{{item.amount>0}}">{{format.toFix(item.amount)}}元</text>
+              <text wx:if="{{item.point>0&&item.amount>0}}">+</text>
+              <text wx:if="{{item.point>0}}">{{item.point}}桔子</text>
+            </view>
+            <view class="tx-r total" wx:else >
+              合计：<text wx:if="{{item.paidAmount>0}}">{{format.toFix(item.paidAmount)}}元</text>
+              <text wx:if="{{item.paidPoint>0&&item.paidAmount>0}}">+</text>
+              <text wx:if="{{item.paidPoint>0}}">{{item.paidPoint}}桔子</text>
+            </view>
             <view class="ctrl plr15 ub ub-ac ub-pj" hidden="{{item.status=='REFUND'||item.status=='CLOSE'}}">
                 <view wx:if="{{item.status=='PAID'}}" class="left">您已成功付款，请到店展示消费码消费</view>
                 <view wx:if="{{item.status=='CREATED'}}" class="left">请在下单后5分钟内付款，超时将自动关闭</view>

@@ -17,9 +17,8 @@
     </view>
     <view class="qdBtn tx-c" bindtap="toPage" data-page="">提现明细</view>
   </view>
-
   <view style="margin-top:-40rpx;" class="userBox">
-    <view class="ub ub-ac ub-pj" style="padding:30rpx;" bindtap="toPage" data-page="">
+    <view class="ub ub-ac ub-pj" style="padding:30rpx;" bindtap="toPage" data-page="/pages/myUser/index?index=1&status=CREATED">
       <view class="ub-f1" style="font-size: 30rpx;color: #333333;font-weight:bold">我的用户</view>
       <image src="../../images/arrow-right.png" class="udb" style="width:12rpx;height:22rpx;margin-left:10rpx;"></image>
     </view>
@@ -27,33 +26,33 @@
       <view style="height:2rpx;background:#eeeeee;"></view>
     </view>
     <view class="ub ub-ac ub-pj" style="padding: 30rpx 40rpx;">
-      <view class="ub ub-ver ub-ac ub-pc" bindtap="toPage" data-page="/pages/orderlist/index?index=1&status=CREATED">
+      <view class="ub ub-ver ub-ac ub-pc" bindtap="toPage" data-page="/pages/myUser/index?index=1&status=CREATED">
         <text class="orderBtnsNum">2</text>
         <text class="orderBtnsText">已邀桔长</text>
       </view>
-      <view class="ub ub-ver ub-ac ub-pc" bindtap="toPage" data-page="/pages/orderlist/index?index=2&status=PAID">
+      <view class="ub ub-ver ub-ac ub-pc" bindtap="toPage" data-page="/pages/myUser/index?index=2&status=PAID">
         <text class="orderBtnsNum">2</text>
         <text class="orderBtnsText">已邀桔民</text>
       </view>
-      <view class="ub ub-ver ub-ac ub-pc" bindtap="toPage" data-page="/pages/orderlist/index?index=3&status=CONSUME">
+      <view class="ub ub-ver ub-ac ub-pc" bindtap="toPage" data-page="/pages/myUser/index?index=3&status=CONSUME">
         <text class="orderBtnsNum">2</text>
         <text class="orderBtnsText">买家用户</text>
       </view>
-      <view class="ub ub-ver ub-ac ub-pc" bindtap="toPage" data-page="/pages/orderlist/index?index=3&status=CONSUME">
+      <view class="ub ub-ver ub-ac ub-pc" bindtap="toPage" data-page="/pages/myUser/index?index=3&status=CONSUME">
         <text class="orderBtnsNum">2</text>
         <text class="orderBtnsText">浏览用户</text>
       </view>
     </view>
   </view>
   <view class="udb plr15" style="margin-top:20rpx;">
-    <image class="banner" src="../../images/banner.jpg" mode="widthFix"></image>
+    <image class="banner" src="../../images/banner.png" mode="widthFix"></image>
   </view>
   <view style="margin-top:20rpx;" class="menu ub">
-    <view class="ub-f1 ub ub-ver ub-ac ub-pc" bindtap="toPage" data-page="/pages/myComment/index">
+    <view class="ub-f1 ub ub-ver ub-ac ub-pc" bindtap="toPage" data-page="/pages/recommend/index">
       <image src="../../images/shouye.png"></image>
       <text class="itemTxt">商品推荐</text>
     </view>
-    <view class="ub-f1 ub ub-ver ub-ac ub-pc r" bindtap="toPage" data-page="/pages/myComment/index">
+    <view class="ub-f1 ub ub-ver ub-ac ub-pc r" bindtap="toPage" data-page="/pages/recommend/index">
       <image src="../../images/shouye.png"></image>
       <text class="itemTxt">邀新素材</text>
     </view>

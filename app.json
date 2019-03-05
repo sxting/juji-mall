@@ -20,6 +20,8 @@
     "pages/article/index",
     "pages/jujipay/index",
     "pages/invitation/index",
+    "pages/myUser/index",
+    "pages/recommend/index",
     "pages/pay/index",
     "pages/payrecord/index",
     "pages/cardlist/index",
@@ -45,12 +47,6 @@
       {
         "text": "首页",
         "pagePath": "pages/index/index",
-        "iconPath": "images/mall.png",
-        "selectedIconPath": "images/mall_selected.png"
-      },
-      {
-        "text": "桔园",
-        "pagePath": "pages/invitation/index",
         "iconPath": "images/mall.png",
         "selectedIconPath": "images/mall_selected.png"
       },

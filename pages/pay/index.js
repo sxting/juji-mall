@@ -71,7 +71,7 @@ Page({
     }).then(function (code) {
       return new Promise(function (resolve2, reject2) {
         wx.request({
-          url: 'https://juji-dev.juniuo.com/mini/miniLogin.json',
+          url: 'https://juji-dev.juniuo.com/mini/login.json',
           method: 'POST',
           data: {
             appid: constant.APPID,
@@ -205,10 +205,11 @@ Page({
                   title: '用户取消支付',
                   icon: 'none'
                 });
-                that.setData({
-                  toPayStatus: false
-                });
+                
               }
+              that.setData({
+                toPayStatus: false
+              });
 
             }
           });

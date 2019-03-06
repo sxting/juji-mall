@@ -37,6 +37,12 @@ Page({
       })
 
   },
+  toRecord: function(e){
+    console.log(e);
+    wx.navigateTo({
+      url: '/pages/payrecord/index?merchantId=' + e.currentTarget.dataset.mid,
+    })
+  },
   toggleCard:function(e){//切换卡片高度
       console.log(e);
       this.setData({

@@ -8,6 +8,7 @@
 
 .cardsWrap {
   width: 100%;
+  z-index: 9999999;
 }
 
 .cardItem {

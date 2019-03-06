@@ -21,7 +21,7 @@
         </view>
       </view>
       <view class="btnGroup ub">
-        <view class="tx-c cardbtn" bindtap="toRecord">消费记录
+        <view class="tx-c cardbtn" bindtap="toRecord" data-mid="{{item.merchantId}}">消费记录
           <image class="cardbtnArrow" src="../../images/arrow-next.png" style="width:26rpx;height:30rpx;"></image>
         </view>
 

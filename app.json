@@ -23,7 +23,8 @@
     "pages/pay/index",
     "pages/payrecord/index",
     "pages/cardlist/index",
-    "pages/payresult/index"
+    "pages/payresult/index",
+    "pages/search/index"
   ],
   "permission": {
     "scope.userLocation": {

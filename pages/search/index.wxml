@@ -1,0 +1,4 @@
+<view class="search-wrap">
+<input class="searchInput" placeholder="输入您想查找的城市"/>
+<view class="searchBtn">搜索</view>
+</view>

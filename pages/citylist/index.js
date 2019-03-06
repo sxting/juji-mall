@@ -18,6 +18,48 @@ Page({
     locationCode:'',
     locationPcode:'',
     // citylist: [],
+    searching:false,
+    searchValue:'',
+    noRes:false,
+    lowcitylist: [{
+      "version": 0,
+      "dateCreated": "2019-01-23 18:31:25",
+      "lastUpdated": "2019-01-23 18:31:25",
+      "deleted": 0,
+      "locationCode": "150000",
+      "locationName": "内蒙古自治区",
+      "locationType": "PROVINCE",
+      "parentLocationCode": "0",
+      "parentLocation": null,
+      "subList": [
+        {
+          "version": 0,
+          "dateCreated": "2019-01-23 18:31:25",
+          "lastUpdated": "2019-01-23 18:31:25",
+          "deleted": 0,
+          "locationCode": "152200",
+          "locationName": "兴安盟",
+          "locationType": "CITY",
+          "parentLocationCode": "150000",
+          "parentLocation": null,
+          "subList": [
+            {
+              "version": 0,
+              "dateCreated": "2019-01-23 18:31:25",
+              "lastUpdated": "2019-01-23 18:31:25",
+              "deleted": 0,
+              "locationCode": "152202",
+              "locationName": "阿尔山市",
+              "locationType": "DISTRICT",
+              "parentLocationCode": "152200",
+              "parentLocation": null,
+              "subList": null
+            }
+          ]
+        }
+      ]
+    }
+    ],
     citylist: [{
       "version": 0,
       "dateCreated": "2019-01-23 18:31:25",
@@ -55,44 +97,7 @@ Page({
           ]
         }
       ]
-    }, {
-        "version": 0,
-        "dateCreated": "2019-01-23 18:31:25",
-        "lastUpdated": "2019-01-23 18:31:25",
-        "deleted": 0,
-        "locationCode": "150000",
-        "locationName": "内蒙古自治区",
-        "locationType": "PROVINCE",
-        "parentLocationCode": "0",
-        "parentLocation": null,
-        "subList": [
-          {
-            "version": 0,
-            "dateCreated": "2019-01-23 18:31:25",
-            "lastUpdated": "2019-01-23 18:31:25",
-            "deleted": 0,
-            "locationCode": "152200",
-            "locationName": "兴安盟",
-            "locationType": "CITY",
-            "parentLocationCode": "150000",
-            "parentLocation": null,
-            "subList": [
-              {
-                "version": 0,
-                "dateCreated": "2019-01-23 18:31:25",
-                "lastUpdated": "2019-01-23 18:31:25",
-                "deleted": 0,
-                "locationCode": "152202",
-                "locationName": "阿尔山市",
-                "locationType": "DISTRICT",
-                "parentLocationCode": "152200",
-                "parentLocation": null,
-                "subList": null
-              }
-            ]
-          }
-        ]
-      }
+    }
     ]
   },
   getCitylist: function() {
@@ -106,6 +111,36 @@ Page({
       error: err => errDialog(err),
       complete: () => wx.hideToast()
     })
+  },
+  closeSearch: function(){
+    this.setData({
+      searching: false,
+      noRes: false,
+      searchValue: ''
+    })
+  },
+  bindKeyInput(e){
+    this.setData({
+      searchValue: e.detail.value
+    })
+  },
+  toSearch: function(e){
+    console.log(this.data.searchValue)
+    let str = this.data.searchValue;
+    if (str){
+      if (str.indexOf('兴') != -1 || str.indexOf('安') != -1 || str.indexOf('盟') != -1){
+        this.setData({
+          searching: true,
+          noRes: false
+        })
+      }else{
+        this.setData({
+          searching: true,
+          noRes: true
+        })
+      }
+    }
+    
   },
   selectCity: function(e) {
     var selectCityName = e.currentTarget.dataset['name'].replace('市', '');

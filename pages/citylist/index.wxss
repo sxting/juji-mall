@@ -1,4 +1,4 @@
-page{padding:0rpx 30rpx;box-sizing:border-box;}
+page{box-sizing:border-box;}
 .main{flex-wrap:wrap;margin-right:-30rpx;}
 .tit{font-size:30rpx;color:#333;line-height:90rpx;}
 .curItem{height:88rpx;font-size:28rpx;color:#333;line-height:88rpx;position:relative;width:210rpx;border:1rpx solid #eee;background-color:#fff;border-radius: 8rpx;}
@@ -6,3 +6,44 @@ page{padding:0rpx 30rpx;box-sizing:border-box;}
 .item text{font-size:28rpx;}
 .clear{clear:both;}
 .icon_addr1{width:30rpx;height:36rpx;margin-right:20rpx;}
+/* pages/search/index.wxss */
+.search-wrap{
+  height:88rpx;
+  padding:15rpx 30rpx;
+  display:flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fcbf0a;
+  box-sizing: border-box;
+}
+.searchInput{
+  width:590rpx;
+  height:48rpx;
+  background:#fff;
+  border-radius: 24px;
+  padding:10rpx 0 10rpx 20rpx;
+  box-sizing: border-box;
+  line-height: 20rpx;
+  font-size: 24rpx;
+}
+.searchBtn{
+  color:#fff;
+  font-size: 28rpx;
+  padding-right: 10rpx;
+}
+.search-result{
+  padding:0 30rpx;
+}
+
+.resWrap{
+  margin-top:200rpx;
+  text-align: center;
+  font-size: 28rpx;
+  color:#999;
+}
+
+.closeSearch{
+  margin-top:20rpx;
+  text-align: center;
+  font-size: 28rpx;
+}

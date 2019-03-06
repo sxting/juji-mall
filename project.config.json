@@ -173,6 +173,13 @@
 					"pathName": "pages/search/index",
 					"scene": null
 				}
+        ,
+        {
+          "id": -1,
+          "name": "推广素材",
+          "pathName": "pages/recommend/index",
+          "scene": null
+        }
 			]
 		}
 	}

@@ -27,6 +27,8 @@
     "pages/jujiGarden/userInfor/userInfor",
     "pages/jujiGarden/gardenIndex/index",
     "pages/jujiGarden/myUser/index",
+    "pages/jujiGarden/withdrawRecord/index",
+    "pages/jujiGarden/withdrawDetail/index",
     "pages/jujiGarden/recommend/index"
   ],
   "permission": {
@@ -54,7 +56,7 @@
       },
       {
         "text": "桔园",
-        "pagePath": "pages/jujiGarden/gardenHome/gardenHome",
+        "pagePath": "pages/jujiGarden/gardenIndex/index",
         "iconPath": "images/mall.png",
         "selectedIconPath": "images/mall_selected.png"
       },

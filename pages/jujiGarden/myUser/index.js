@@ -4,7 +4,7 @@ import { errDialog, loading } from '../../../utils/util';
 var app = getApp();
 Page({
     data: {
-        tablist: [{ name: '已邀桔长', status: 'ALL' }, { name: '已邀桔民', status: 'CREATED' }, { name: '买家用户', status: 'PAID' }, { name: '浏览用户', status: 'CONSUME' }],
+        tablist: [{ name: '已邀桔长', status: 'ALL' }, { name: '已邀桔民', status: 'CREATED' }],
         curTabIndex: 0,
         constant: constant,
         isShowNodata: false,

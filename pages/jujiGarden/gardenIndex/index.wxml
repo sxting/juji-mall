@@ -1,12 +1,13 @@
 <view class="wrap">
   <view class="toper">
-    <view style="padding:30rpx;">
+    <image class="udb topBg" src="../../../images/topBg.png" mode="scaleToFill"></image>
+    <view class="topCon" style="padding:30rpx;">
       <view class="balance tx-c">20.00</view>
       <view class="remark tx-c">累计全部收入(元)</view>
       <view class="turnover ub ub-ac">
         <view class="ub-f1 div">
           <view class="tx-c balance1">500.00</view>
-          <view class="tx-c remark">今日提现收入</view>
+          <view class="tx-c remark">今日销售收入</view>
         </view>
         <view class="line"></view>
         <view class="ub-f1 div l">
@@ -15,10 +16,10 @@
         </view>
       </view>
     </view>
-    <view class="qdBtn tx-c" bindtap="toPage" data-page="">提现明细</view>
+    <view class="qdBtn tx-c" bindtap="toPage" data-page="/pages/jujiGarden/withdrawRecord/index">提现明细</view>
   </view>
   <view style="margin-top:-40rpx;" class="userBox">
-    <view class="ub ub-ac ub-pj" style="padding:30rpx;" bindtap="toPage" data-page="/pages/myUser/index?index=1&status=CREATED">
+    <view class="ub ub-ac ub-pj" style="padding:30rpx;" bindtap="toPage" data-page="/pages/jujiGarden/myUser/index?index=1&status=CREATED">
       <view class="ub-f1" style="font-size: 30rpx;color: #333333;font-weight:bold">我的用户</view>
       <image src="../../../images/arrow-right.png" class="udb" style="width:12rpx;height:22rpx;margin-left:10rpx;"></image>
     </view>
@@ -26,33 +27,33 @@
       <view style="height:2rpx;background:#eeeeee;"></view>
     </view>
     <view class="ub ub-ac ub-pj" style="padding: 30rpx 40rpx;">
-      <view class="ub ub-ver ub-ac ub-pc" bindtap="toPage" data-page="/pages/myUser/index?index=1&status=CREATED">
+      <view class="ub ub-ver ub-ac ub-pc" bindtap="toPage" data-page="/pages/jujiGarden/myUser/index?index=1&status=CREATED">
         <text class="orderBtnsNum">2</text>
         <text class="orderBtnsText">已邀桔长</text>
       </view>
-      <view class="ub ub-ver ub-ac ub-pc" bindtap="toPage" data-page="/pages/myUser/index?index=2&status=PAID">
+      <view class="ub ub-ver ub-ac ub-pc" bindtap="toPage" data-page="/pages/jujiGarden/myUser/index?index=2&status=PAID">
         <text class="orderBtnsNum">2</text>
         <text class="orderBtnsText">已邀桔民</text>
       </view>
-      <view class="ub ub-ver ub-ac ub-pc" bindtap="toPage" data-page="/pages/myUser/index?index=3&status=CONSUME">
+      <view class="ub ub-ver ub-ac ub-pc" bindtap="toPage" data-page="/pages/jujiGarden/myUser/index?index=3&status=CONSUME">
         <text class="orderBtnsNum">2</text>
         <text class="orderBtnsText">买家用户</text>
       </view>
-      <view class="ub ub-ver ub-ac ub-pc" bindtap="toPage" data-page="/pages/myUser/index?index=3&status=CONSUME">
+      <view class="ub ub-ver ub-ac ub-pc" bindtap="toPage" data-page="/pages/jujiGarden/myUser/index?index=3&status=CONSUME">
         <text class="orderBtnsNum">2</text>
         <text class="orderBtnsText">浏览用户</text>
       </view>
     </view>
   </view>
-  <view class="udb plr15" style="margin-top:20rpx;">
+  <view class="udb plr15" style="margin-top:20rpx;" bindtap="toPage" data-page="/pages/jujiGarden/gardenHome/gardenHome">
     <image class="banner" src="../../../images/banner.png" mode="widthFix"></image>
   </view>
   <view style="margin-top:20rpx;" class="menu ub">
-    <view class="ub-f1 ub ub-ver ub-ac ub-pc" bindtap="toPage" data-page="/pages/recommend/index">
+    <view class="ub-f1 ub ub-ver ub-ac ub-pc" bindtap="toPage" data-page="/pages/jujiGarden/recommend/index">
       <image src="../../../images/shouye.png"></image>
       <text class="itemTxt">商品推荐</text>
     </view>
-    <view class="ub-f1 ub ub-ver ub-ac ub-pc r" bindtap="toPage" data-page="/pages/recommend/index">
+    <view class="ub-f1 ub ub-ver ub-ac ub-pc r" bindtap="toPage" data-page="/pages/jujiGarden/recommend/index">
       <image src="../../../images/shouye.png"></image>
       <text class="itemTxt">邀新素材</text>
     </view>

@@ -5,7 +5,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    cardList:[],
+    current: 0
   },
 
   /**
@@ -21,11 +22,27 @@ Page({
         },
         success: (res) => {
           console.log(res);
+          if(res.data.errorCode=='0'){
+            this.setData({
+              cardList: res.data.data
+            });
+            console.log(this.data.cardList)
+          }else{
+            wx.showModal({
+              title: '错误：'+res.data.errorCode,
+              content: res.data.errorInfo,
+            })
+          }
         }
       })
 
   },
-
+  toggleCard:function(e){//切换卡片高度
+      console.log(e);
+      this.setData({
+        current: e.currentTarget.dataset.index
+      });
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

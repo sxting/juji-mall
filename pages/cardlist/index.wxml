@@ -1,28 +1,28 @@
 
     <view class="main_cardlist">
         <view class="cardsWrap">
-            <view class="cardItem">
-                <view class="cardInfo ub ub-ac">
-                    <image src="https://upic.juniuo.com/file/picture/${card.logo}/resize_200_200/mode_fill" class="shopLogo"></image>
+            <view class="cardItem {{current==index?'':'h148'}}" wx:for="{{cardList}}" wx:key="{{index}}" wx:for-item="item">
+                <view class="cardInfo ub ub-ac" bindtap="toggleCard" data-index="{{index}}">
+                    <image src="{{item.logo?'https://upic.juniuo.com/file/picture/'+item.logo+'/resize_200_200/mode_fill':''}}" class="shopLogo"></image>
                     <view class="ub-f1">
                         <view class="cardInfoRow">
-                            <view class="shopName">阿萨德阿萨德</view>
-                            <view class="ncardNo">NO.123123123123123123</view>
+                            <view class="shopName">{{item.merchantName}}</view>
+                            <view class="ncardNo">NO.{{item.id}}</view>
                         </view>
                         <view class="cardInfoRow">
                             <view class="cardType">储值卡会员</view>
                         </view>
                     </view>
                 </view>
-                <view class="blanceRow">
+                <view class="blanceRow" bindtap="toggleCard" data-index="{{index}}">
                     <view class="blanceTitle">余额</view>
                     <view class="blanceWrap">
                         <view class="blanceMark">￥</view>
-                        <view class="blanceText">111111</view>
+                        <view class="blanceText">{{item.balance}}</view>
                     </view>
                 </view>
                 <view class="btnGroup ub">
-                    <view class="tx-c cardbtn" onclick="toRecord('${card.merchantId}')">消费记录
+                    <view class="tx-c cardbtn" bindtap="toRecord">消费记录
                         <image class="cardbtnArrow" src="../../images/arrow-next.png" style="width:26rpx;height:30rpx;"></image>
                     </view>
 

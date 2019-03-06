@@ -1,5 +1,5 @@
 <view class="search-wrap">
-  <input class="searchInput" placeholder-class="searchInputPlaceholder" placeholder="输入您想查找的城市" bindinput="bindKeyInput" value="{{searchValue}}"/>
+  <input class="searchInput" placeholder-class="searchInputPlaceholder" placeholder="输入您想查找的城市" bindinput="bindKeyInput" value="{{searchValue}}" bindconfirm="bindconfirm"/>
   <view class="searchBtn" bindtap="toSearch">搜索</view>
 </view>
 

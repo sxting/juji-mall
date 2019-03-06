@@ -119,6 +119,22 @@ Page({
       searchValue: ''
     })
   },
+  bindconfirm(e){
+    let str = e.detail.value;
+    if (str) {
+      if (str.indexOf('兴') != -1 || str.indexOf('安') != -1 || str.indexOf('盟') != -1) {
+        this.setData({
+          searching: true,
+          noRes: false
+        })
+      } else {
+        this.setData({
+          searching: true,
+          noRes: true
+        })
+      }
+    }
+  },
   bindKeyInput(e){
     this.setData({
       searchValue: e.detail.value

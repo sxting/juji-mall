@@ -36,7 +36,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 19,
+			"current": 21,
 			"list": [
 				{
 					"id": -1,
@@ -171,15 +171,23 @@
 					"id": -1,
 					"name": "搜索",
 					"pathName": "pages/search/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "推广素材",
+					"pathName": "pages/recommend/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 21,
+					"name": "聚集支付-消费记录",
+					"pathName": "pages/payrecord/index",
+					"query": "",
 					"scene": null
 				}
-        ,
-        {
-          "id": -1,
-          "name": "推广素材",
-          "pathName": "pages/recommend/index",
-          "scene": null
-        }
 			]
 		}
 	}

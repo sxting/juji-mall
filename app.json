@@ -29,6 +29,7 @@
     "pages/jujiGarden/myUser/index",
     "pages/jujiGarden/withdrawRecord/index",
     "pages/jujiGarden/withdrawDetail/index",
+    "pages/jujiGarden/incomeData/index",
     "pages/jujiGarden/recommend/index"
   ],
   "permission": {

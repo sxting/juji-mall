@@ -1,0 +1,26 @@
+page{box-sizing:border-box;height: 100%;background-color: #fbfbfb}
+
+.tablist{height: 100rpx;background-color: #fff}
+.tablist .tabItem{position: relative;font-size: 28rpx;color: #333;padding:0 30rpx;height: 100rpx;line-height: 100rpx;text-align: center;}
+.tablist .tabItem .line{width:72rpx;height: 4rpx;background-color: #FFDC00;border-radius: 2rpx;position:absolute;bottom: 16rpx;left: 50%;margin-left: -36rpx;display: none;}
+.tablist .tabItem.on{color:#333;font-size: 30rpx;font-weight: bold;}
+.tablist .tabItem.on .line{display: block;}
+
+.item{background-color: #fff;position:relative;border-radius: 8rpx;overflow: hidden;margin-bottom: 20rpx;padding:24rpx 30rpx;}
+.userImg{width: 60rpx;height: 60rpx;border-radius: 50%;margin-right: 20rpx;}
+.name{font-size: 28rpx;margin-top: 10rpx;color: #333;}
+.remark{font-size:24rpx;margin-top:20rpx;color: #999;}
+
+.nodataDiv{padding-top: 260rpx;}
+
+.cardBg{background-image: linear-gradient(-90deg, #F27E08 0%, #F79531 56%, #F8B537 100%);border-radius: 20rpx;width: 520rpx;height: 300rpx;padding: 30rpx;box-sizing:border-box;}
+
+.remark1{margin-top: 20rpx;color: #333;font-size: 28rpx;}
+.balance1{font-size: 46rpx;color: #000;font-weight: bold;}
+.remark2{color: #333;font-size: 24rpx;}
+.turnover{margin-top: 20rpx;}
+.turnover .line{height: 64rpx;width: 1rpx;border-left:#666 1rpx solid;margin-left: 40rpx;}
+.turnover .div{height: 64rpx;width: 110rpx;}
+.turnover .l{margin-left:50rpx;}
+.balance2{font-size: 30rpx;margin-top: 5rpx;}
+.content{margin-top: 30rpx}

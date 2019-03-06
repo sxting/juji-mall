@@ -5,12 +5,12 @@
       <view class="balance tx-c">20.00</view>
       <view class="remark tx-c">累计全部收入(元)</view>
       <view class="turnover ub ub-ac">
-        <view class="ub-f1 div">
+        <view class="ub-f1 div" data-page="/pages/jujiGarden/incomeData/index?index=1&status=1" bindtap="toPage">
           <view class="tx-c balance1">500.00</view>
           <view class="tx-c remark">今日销售收入</view>
         </view>
         <view class="line"></view>
-        <view class="ub-f1 div l">
+        <view class="ub-f1 div l" data-page="/pages/jujiGarden/incomeData/index?index=1&status=1" bindtap="toPage">
           <view class="tx-c balance1">500.00</view>
           <view class="tx-c remark">今日提现收入</view>
         </view>

@@ -165,7 +165,7 @@ Page({
   wxpay(orderObj) {
     let that = this;
     wx.request({
-      url: 'https://juji-dev.juniuo.com/customer/order/preOrder.json',
+      url: 'https://juji-dev.juniuo.com/customer/order/miniPreOrder.json',
       method: 'POST',
       data: {
         choosenType: that.data.paytype,
@@ -192,7 +192,7 @@ Page({
             success(res2) {
               console.log(res2);
               wx.redirectTo({
-                url: '/pages/payresult/index',
+                url: '/pages/payresult/index?orderId=' + res.data.data.orderId,
               });
               that.setData({
                 toPayStatus: false

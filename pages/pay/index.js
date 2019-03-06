@@ -41,7 +41,7 @@ Page({
     let that = this;
     new Promise(function (resolve, reject) {
       console.log('Promise is ready!');
-      options.q = 'https://juji-dev.juniuo.com/qr/212345678.htm';
+      // options.q = 'https://juji-dev.juniuo.com/qr/212345678.htm';
       if (options.q) {
         console.log(options.q);
         var link = decodeURIComponent(options.q);

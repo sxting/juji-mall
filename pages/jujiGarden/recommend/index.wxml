@@ -19,9 +19,9 @@
             </view>
         </view>
         <view class="ctrl ub ub-ac plr15">
-            <view class="ub-f1 ub ub-ac"><image class="wxIcon" src="../../../images/mall.png" mode="aspectFill"></image>保存素材</view>
-            <view class="ub-f1 ub ub-ac"><image class="wxIcon" src="../../../images/mall.png" mode="aspectFill"></image>生成图文</view>
-            <view class="ub-f1 ub ub-ac">分享到<image class="wxIcon" src="../../../images/mall.png" mode="aspectFill"></image><image class="wxIcon" src="../../../images/mall.png" mode="aspectFill"></image></view>
+            <view class="ub-f1 ub ub-ac"><image class="wxIcon" src="../../../images/icon_02.png" mode="aspectFit"></image>保存素材</view>
+            <view class="ub-f1 ub ub-ac"><image class="wxIcon" src="../../../images/icon_01.png" mode="aspectFit"></image>生成图文</view>
+            <view class="ub-f1 ub ub-ac">分享到<image class="wxIcon" src="../../../images/icon_03.png" mode="aspectFit"></image><image class="wxIcon" src="../../../images/icon_04.png" mode="aspectFit"></image></view>
         </view>
     </view>
     <view class="nodataDiv ub ub-ac ub-pc ub-ver" hidden="{{!isShowNodata}}">

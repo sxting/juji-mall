@@ -36,7 +36,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 17,
+			"current": 21,
 			"list": [
 				{
 					"id": 0,
@@ -158,6 +158,34 @@
 					"id": -1,
 					"name": "pay截取测试",
 					"pathName": "pages/pay/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "桔园",
+					"pathName": "pages/jujiGarden/gardenIndex/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "提现明细",
+					"pathName": "pages/jujiGarden/withdrawRecord/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "提现详情",
+					"pathName": "pages/jujiGarden/withdrawDetail/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "我的收入",
+					"pathName": "pages/jujiGarden/incomeData/index",
 					"scene": null
 				}
 			]

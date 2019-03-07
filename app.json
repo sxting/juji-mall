@@ -27,9 +27,13 @@
     "pages/jujiGarden/userInfor/userInfor",
     "pages/jujiGarden/gardenIndex/index",
     "pages/jujiGarden/myUser/index",
+    "pages/jujiGarden/managerRights/managerRights",
+    "pages/jujiGarden/withdrawRecord/index",
+    "pages/jujiGarden/withdrawDetail/index",
+    "pages/jujiGarden/incomeData/index",
     "pages/jujiGarden/recommend/index",
-    "pages/jujiGarden/managerRights/managerRights"
   ],
+
   "permission": {
     "scope.userLocation": {
       "desc": "你的位置信息将用于小程序位置接口的效果展示"
@@ -55,9 +59,15 @@
       },
       {
         "text": "桔园",
+<<<<<<< HEAD
         "pagePath": "pages/jujiGarden/gardenHome/gardenHome",
         "iconPath": "images/juyuan.png",
         "selectedIconPath": "images/juyuan-select.png"
+=======
+        "pagePath": "pages/jujiGarden/gardenIndex/index",
+        "iconPath": "images/mall.png",
+        "selectedIconPath": "images/mall_selected.png"
+>>>>>>> 544642723126d55851ff686651751358c8802bb8
       },
       {
         "text": "桔子",

@@ -4,16 +4,14 @@ import { constant } from '../../../utils/constant';
 var app = getApp();
 Page({
     data: {
-        nickName: '微信名字',
-        avatar: '',
-        phoneNum: '',
+        recordlist: [{},{},{}]
     },
     toPage: function(e) {
         var page = e.currentTarget.dataset.page;
         wx.navigateTo({ url: page });
     },
     onLoad: function() {
-        wx.setNavigationBarTitle({ title: '桔园' });
+        wx.setNavigationBarTitle({ title: '提现明细' });
     },
     onShow: function() {
         this.getInfo();

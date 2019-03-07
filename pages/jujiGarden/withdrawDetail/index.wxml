@@ -1,0 +1,67 @@
+<view class="main">
+    <view class="toper ub ub-ver ub-pc ub-ac">
+        <view class="balance">200.00</view>
+        <view class="status">提现成功</view>
+    </view>
+    <view class="content">
+        <view class="bgb itemWrap" style="margin-bottom: 30rpx;">
+            <view class="tit">提现信息</view>
+            <view class="item ub ub-ac">
+                <view class="ub-f1">提取金额</view>
+                <view class="f13">100.00</view>
+            </view>
+            <view class="item ub ub-ac">
+                <view class="ub-f1">手续费用</view>
+                <view class="f13">100.00</view>
+            </view>
+            <view class="item ub ub-ac">
+                <view class="ub-f1">收款方式</view>
+                <view class="f13">微信</view>
+            </view>
+            <view class="item ub ub-ac">
+                <view class="ub-f1">收款账户</view>
+                <view class="f13">名字</view>
+            </view>
+            <view class="item ub ub-ac">
+                <view class="ub-f1">提现时间</view>
+                <view class="f13">2019-10-10 10:10:10</view>
+            </view>
+            <view class="item ub ub-ac">
+                <view class="ub-f1">到账时间</view>
+                <view class="f13">2019-10-10 10:10:10</view>
+            </view>
+        </view>
+        <view class="bgb itemWrap">
+            <view class="tit">订单信息</view>
+            <view class="item ub ub-ac">
+                <view class="ub-f1">推广商品</view>
+                <view class="f13">100.00</view>
+            </view>
+            <view class="item ub ub-ac">
+                <view class="ub-f1">买家商品</view>
+                <view class="f13">100.00</view>
+            </view>
+            <view class="item ub ub-ac">
+                <view class="ub-f1">推广桔长</view>
+                <view class="f13">100.00</view>
+            </view>
+            <view class="item ub ub-ac">
+                <view class="ub-f1">管理佣金</view>
+                <view class="f13">100.00</view>
+            </view>
+            <view class="item ub ub-ac">
+                <view class="ub-f1">订单编号</view>
+                <view class="f13">100.00</view>
+            </view>
+            <view class="item ub ub-ac">
+                <view class="ub-f1">下单时间</view>
+                <view class="f13">100.00</view>
+            </view>
+            <view class="item ub ub-ac">
+                <view class="ub-f1">商品名称</view>
+                <view class="f13">100.00</view>
+            </view>
+        </view>
+    </view>
+    <view class="service ub ub-ac ub-pc">对此订单有疑问，请拨打<text>桔集服务技术支持</text></view>
+</view>

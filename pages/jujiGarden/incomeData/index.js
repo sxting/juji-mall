@@ -4,7 +4,7 @@ import { errDialog, loading } from '../../../utils/util';
 var app = getApp();
 Page({
     data: {
-        tablist: [{ name: '已邀桔长', status: 'ALL' }, { name: '已邀桔民', status: 'CREATED' }],
+        tablist: [{ name: '本日', status: '1' }, { name: '本周', status: '2' }, { name: '本月', status: '2' }, { name: '累计', status: '2' }],
         curTabIndex: 0,
         constant: constant,
         isShowNodata: false,
@@ -14,7 +14,7 @@ Page({
         amount: 0
     },
     onLoad: function(options) {
-        wx.setNavigationBarTitle({ title: '我的用户' });
+        wx.setNavigationBarTitle({ title: '我的收入' });
         this.setData({ curTabIndex: options.index,status:options.status });
         this.getData(options.status);
     },

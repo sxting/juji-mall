@@ -1,0 +1,18 @@
+<view class="main">
+    <view class="toper ub ub-ver ub-ac ub-pc">
+        <view class="remark1">累计收入(元)</view>
+        <view class="balance">300.00</view>
+        <view class="remark2">提现收入自动提现到微信零钱</view>
+    </view>
+    <view class="content">
+        <view class="item ub ub-ac" wx:for="recordlist" bindtap="toPage" data-page="/pages/jujiGarden/withdrawDetail/index">
+            <image class="leftBg" src="../../../images/leftBg.png" mode="scaleToFill"></image>
+            <view class="ub-f1">
+                <view class="amount">+10.00</view>
+                <view class="time">2018-04-26 10:00:00</view>
+            </view>
+            <view class="status">成功</view>
+            <image src="../../../images/arrow-r.png" class="arrow-r"></image>
+        </view>
+    </view>
+</view>

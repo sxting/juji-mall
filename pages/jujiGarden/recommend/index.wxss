@@ -15,7 +15,7 @@
 .imglist:after{clear:both;content:"";display:table;}
 .imgWrap{float:left;margin-bottom:20rpx;padding-right:20rpx;width:33.33%;box-sizing:border-box;}
 .imgWrap image{border-radius:8rpx;width:100%;display:block;}
-.wxIcon{width: 60rpx;height: 40rpx;display: block;margin-left: 20rpx;}
+.wxIcon{width: 50rpx;height: 32rpx;display: block;margin-left: 20rpx;}
 
 .ctrl{margin-top: 10rpx;height: 80rpx;}
 .ctrl view{font-size: 24rpx;color: #333;}

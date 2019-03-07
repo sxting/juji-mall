@@ -58,50 +58,56 @@ Page({
         
       } else { //如果没有更换城市 定位获取
         console.log('没有更换城市');
-        this.setData({
-          locationCode: wx.getStorageSync('locationCode'),
-          locationPcode: wx.getStorageSync('locationPcode'),
-          locationName: wx.getStorageSync('locationName')
-        });
-        // var curLatitude = wx.getStorageSync('curLatitude'),
-        //   curLongitude = wx.getStorageSync('curLongitude');
-        // if (curLatitude && curLongitude) { //已经定位了并且有经纬度的情况
-        //   var obj = {
-        //     latitude: curLatitude,
-        //     longitude: curLongitude
-        //   }
-        //   //获取用户当地服务商信息
-        //   service.getSelectProviderByLoc(obj).subscribe({
-        //     next: res1 => {
-        //       console.log('----------服务商信息---------');
-        //       console.log(res1);
-        //       if (res1.id) { //如果存在服务商
-        //         that.setData({
-        //           providerId: res1.id,
-        //           pageNo: 1
-        //         });
-        //         //根据位置查询附近精选
-        //         var obj = {
-        //           // providerId: res1.id,
-        //           providerId: that.data.providerId,
-        //           type: 'POINT',
-        //           sortField: 'IDX',
-        //           sortOrder: 'ASC',
-        //           pageNo: that.data.pageNo,
-        //           pageSize: that.data.pageSize,
-        //           longitude: curLongitude,
-        //           latitude: curLatitude
-        //         };
-        //         that.getRecommendPage(obj);
-        //       } else { //如果不存在服务商
-        //         wx.showToast({
-        //           title: '当前位置不存在服务商',
-        //           icon: 'none'
-        //         })
-        //       }
-        //     }
-        //   });
-        // }
+        if (this.data.locationCode == wx.getStorageSync('selectCode')) {
+          return;
+        } else {
+          this.setData({
+            locationCode: wx.getStorageSync('locationCode'),
+            locationPcode: wx.getStorageSync('locationPcode'),
+            locationName: wx.getStorageSync('locationName')
+          });
+          var curLatitude = wx.getStorageSync('curLatitude'),
+          curLongitude = wx.getStorageSync('curLongitude');
+        if (curLatitude && curLongitude) { //已经定位了并且有经纬度的情况
+          var obj = {
+            latitude: curLatitude,
+            longitude: curLongitude
+          }
+          //获取用户当地服务商信息
+          service.getSelectProviderByLoc(obj).subscribe({
+            next: res1 => {
+              console.log('----------服务商信息---------');
+              console.log(res1);
+              if (res1.id) { //如果存在服务商
+                that.setData({
+                  providerId: res1.id,
+                  pageNo: 1
+                });
+                //根据位置查询附近精选
+                var obj = {
+                  // providerId: res1.id,
+                  providerId: that.data.providerId,
+                  type: 'POINT',
+                  sortField: 'IDX',
+                  sortOrder: 'ASC',
+                  pageNo: that.data.pageNo,
+                  pageSize: that.data.pageSize,
+                  longitude: curLongitude,
+                  latitude: curLatitude
+                };
+                that.getRecommendPage(obj);
+              } else { //如果不存在服务商
+                wx.showToast({
+                  title: '当前位置不存在服务商',
+                  icon: 'none'
+                })
+              }
+            }
+          });
+        }
+        }
+        
+        
       }
     } else { //不存在 定位获取
       that.getCurLocation();

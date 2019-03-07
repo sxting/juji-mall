@@ -36,12 +36,6 @@ Page({
 
   onShow: function () {
     var that = this;
-    //每次进到该页面重置筛选条件
-    // this.setData({
-    //   sortIndex: 1,
-    //   pageNo: 1,
-    //   sortArray: ['', '', 'ASC', 'ASC', 'ASC', ''],
-    // });
 
     if (wx.getStorageSync('selectCode')) { //存在 说明用户选过异地城市
       if (wx.getStorageSync('locationCode') != wx.getStorageSync('selectCode')) {

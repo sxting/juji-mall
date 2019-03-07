@@ -27,7 +27,8 @@
     "pages/jujiGarden/userInfor/userInfor",
     "pages/jujiGarden/gardenIndex/index",
     "pages/jujiGarden/myUser/index",
-    "pages/jujiGarden/recommend/index"
+    "pages/jujiGarden/recommend/index",
+    "pages/jujiGarden/managerRights/managerRights"
   ],
   "permission": {
     "scope.userLocation": {
@@ -55,8 +56,8 @@
       {
         "text": "桔园",
         "pagePath": "pages/jujiGarden/gardenHome/gardenHome",
-        "iconPath": "images/mall.png",
-        "selectedIconPath": "images/mall_selected.png"
+        "iconPath": "images/juyuan.png",
+        "selectedIconPath": "images/juyuan-select.png"
       },
       {
         "text": "桔子",

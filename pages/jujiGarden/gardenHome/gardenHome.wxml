@@ -1,2 +1,39 @@
 <!--pages/jujiGarden/gardenHome/gardenHome.wxml-->
-<text>pages/jujiGarden/gardenHome/gardenHome.wxml</text>
+
+<!-- 普通用户首次进入 -->
+<view class='page' wx:if="">
+  <image src='{{ juyuanBgFrist }}'></image>
+  <view class='btn-manger'>桔长权益</view>
+  <view class='applyToManager'>
+    <text>申请成为桔长</text>
+    <text class='iconfont icon-right'></text>
+  </view>
+</view>
+
+<!-- 桔员进入 -->
+<view class='page' wx:else>
+  <image src='{{ juyuanBgSecond }}'></image>
+  <view class='btn-manger'>桔长权益</view>
+  <view class='check-progress'>
+    <view class='clearfix my-team'>
+      <view class='fl'>
+        <text>我的队伍 </text>
+        <text class='num'><text style='color:#F35308'>{{ hadNumber }}</text>/10</text>
+      </view>
+      <view class='fr'>
+        <text>查看桔民</text>
+        <text class='iconfont icon-right'></text>
+      </view>
+    </view>
+    <view class='progress-box'>
+      <text wx:for="{{ juminNumList }}" wx:key="item" class="{{item == 'yes'? 'had-number' : ''}}"></text>
+    </view>
+  </view>
+  <view class='applyToManager juyuan' wx:if=''> 
+    <text>申请成为桔长</text>
+    <text class='iconfont icon-right'></text>
+  </view>
+  <view class='juyuan' wx:else>
+    <button class="share-btn" open-type="share">邀请新人加入桔园</button>
+  </view>
+</view>

@@ -10,7 +10,7 @@
             <view class="input ub ub-ac {{showFocus?'animation':''}} {{!showSelectCard?'ub-f1':''}}">{{amount}}</view>
           </view>
         </view>
-        <view class="blanceWrap2" hidden="showBalanceWrap">
+        <view class="blanceWrap2" wx:if="{{showBalanceWrap}}">
           <view class="blBox">
             <view class="noselect {{seledAccount?'select':''}}" bindtap="clickAccountPay"></view>
             <view class="blanceT1">余额支付</view>
@@ -41,7 +41,7 @@
           <view class="pay {{(amount != '' && amount != '请输入付款金额' && amount != 0)?'toResult':''}} {{accountpaystatus?'accountpaying':''}}" bindtap="toResult">
             <view>付</view>
             <view style="margin-top:.1rem;">款</view>
-            <view class="triple-bounce" hidden="accountpaystatus">
+            <view class="triple-bounce" wx:if="{{accountpaystatus}}">
               <view class="triple-bounce-bounce1"></view>
               <view class="triple-bounce-bounce2"></view>
               <view class="triple-bounce-bounce3"></view>

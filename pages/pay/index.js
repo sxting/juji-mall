@@ -15,6 +15,7 @@ Page({
     showFocus: true,//显示光标
     numArr: [1, 2, 3, 4, 5, 6, 7, 8, 9],
     amount: '',
+    dAmount: 0,
     maxAmount: 20000,
     seledAccount: false,
     showBalanceWrap: false,
@@ -30,7 +31,10 @@ Page({
     merchantId:'',
     storeId:'',
     storeName:'',
-    type:''
+    type:'',
+    accountFlag: false,
+    balance: 0,
+    accountpaystatus: false,//余额支付等待中效果标记
   },
 
   /**
@@ -95,6 +99,7 @@ Page({
                 storeName: res.data.data.storeName,
                 type: res.data.data.type
               })
+              that.getAccount();
               resolve2();
             } else {
               reject2('登录失败，错误码:' + res.data.errorCode + ' 返回错误: ' + res.data.errorInfo);
@@ -123,6 +128,56 @@ Page({
    */
   onShow: function () {
 
+  },
+  clickAccountPay:function() {
+    if (this.data.seledAccount) {
+      this.setData({
+        seledAccount : false,
+        paytype: 'recommend'
+      });
+    } else {
+      this.setData({
+        seledAccount : true,
+        paytype : 'account'
+      });
+    }
+  },
+  getAccount: function() {
+    let that = this;
+    wx.request({
+      url: 'https://juji-dev.juniuo.com/customer/user/getAccount.json',
+      method: 'GET',
+      data: {
+        merchantId: that.data.merchantId
+      },
+      header: {
+        'content-type': 'application/json',
+        'Access-Token': wx.getStorageSync('accessToken')
+      },
+      success: (res) => {
+        console.log('---------用户余额----------');
+        console.log(res);
+        if (res.data.errorCode == "0") {
+          if (res.data.data.balance > 0) { //当余额存在且大于0的情况
+            
+            that.setData({
+              paytype : 'account',
+              accountFlag : true,
+              showBalanceWrap : true,
+              seledAccount : true,
+              balance : Number(res.data.data.balance).toFixed(2)
+            });
+          } else {
+            
+            that.setData({
+              accountFlag : false,
+              showBalanceWrap : false,
+              seledAccount : false
+            });
+          }
+        }
+      }
+    });
   },
   toPay: function () {
     if (this.data.toPayStatus) {
@@ -373,19 +428,23 @@ Page({
 
       if (this.data.seledAccount) {//如果用户勾选了余额支付
         //此处判断余额付款和组合付款的情况 余额付款直接跳转到结果页面 组合支付还要到当前页的另一层
-        if (Number(this.amount) > this.balance) {//如果输入金额比用户余额多
-          this.dAmount = Number(this.amount).toFixed(2);//保存一个接口传入需要用的amount
-          this.amount = Number(Number(this.amount) - this.balance).toFixed(2);
-          this.getPayment(this.dAmount);
-          this.showBalanceWrap = false;
-          this.showFocus = false;
-          this.showSelectCard = true;
+        if (Number(this.data.amount) > this.data.balance) {//如果输入金额比用户余额多
+          this.getPayment(this.data.dAmount);
+          this.setData({
+            dAmount : Number(this.data.amount).toFixed(2),//保存一个接口传入需要用的amount
+            amount : Number(Number(this.data.amount) - this.data.balance).toFixed(2),
+            showBalanceWrap : false,
+            showFocus : false,
+            showSelectCard : true
+          });
         } else {//如果用户余额充足，可以执行余额支付
-          this.accountpaystatus = true;
+          this.setData({
+            accountpaystatus : true
+          });
           let orderObj = {};
-          this.paytype ? orderObj.choosenType = this.paytype : orderObj;
-          orderObj.orderPay = Number(this.amount);
-          orderObj.pay = Number(this.amount);
+          this.data.paytype ? orderObj.choosenType = this.data.paytype : orderObj;
+          orderObj.orderPay = Number(this.data.amount);
+          orderObj.pay = Number(this.data.amount);
           this.accountPay(orderObj);
         }
       } else {
@@ -403,7 +462,40 @@ Page({
       }
     }
   },
-
+  // 余额支付
+  accountPay(orderObj) {
+    let that = this;
+    wx.request({
+      url: 'https://juji-dev.juniuo.com/customer/order/accountPay.json',
+      method: 'POST',
+      data: {
+        storeId: that.data.storeId,
+        orderPay: Number(orderObj.orderPay)
+      },
+      header: {
+        'content-type': 'application/x-www-form-urlencoded',
+        'Access-Token': wx.getStorageSync('accessToken')
+      },
+      success: (res) => {
+        console.log('---------使用余额支付返回数据----------');
+        console.log(res);
+        that.setData({
+          toPayStatus:false
+        });
+        if (res.data.errorCode == "0") {
+          console.log('---------------余额支付成功----------------');
+          wx.redirectTo({
+            url: '/pages/payresult/index?orderId=' + res.data.data
+          });
+        } else {
+          wx.showModal({
+            title: '错误',
+            content: res.data.errorInfo,
+          })
+        }
+      }
+    });
+  },
   getPayment(orderPay) {
     let that = this;
     wx.request({

@@ -58,46 +58,7 @@ Page({
           ]
         }
       ]
-    },
-      {
-        "version": 0,
-        "dateCreated": "2019-01-23 18:31:25",
-        "lastUpdated": "2019-01-23 18:31:25",
-        "deleted": 0,
-        "locationCode": "410000",
-        "locationName": "河南省",
-        "locationType": "PROVINCE",
-        "parentLocationCode": "0",
-        "parentLocation": null,
-        "subList": [
-          {
-            "version": 0,
-            "dateCreated": "2019-01-23 18:31:25",
-            "lastUpdated": "2019-01-23 18:31:25",
-            "deleted": 0,
-            "locationCode": "410100",
-            "locationName": "郑州市",
-            "locationType": "CITY",
-            "parentLocationCode": "410000",
-            "parentLocation": null,
-            "subList": [
-              {
-                "version": 0,
-                "dateCreated": "2019-01-23 18:31:25",
-                "lastUpdated": "2019-01-23 18:31:25",
-                "deleted": 0,
-                "locationCode": "410105",
-                "locationName": "金水区",
-                "locationType": "DISTRICT",
-                "parentLocationCode": "410100",
-                "parentLocation": null,
-                "subList": null
-              }
-            ]
-          }
-        ]
-      }
-    ],
+    }],
     citylist: [{
       "version": 0,
       "dateCreated": "2019-01-23 18:31:25",

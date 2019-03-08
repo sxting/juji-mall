@@ -31,9 +31,9 @@
     "pages/jujiGarden/withdrawRecord/index",
     "pages/jujiGarden/withdrawDetail/index",
     "pages/jujiGarden/incomeData/index",
-    "pages/jujiGarden/recommend/index"
+    "pages/jujiGarden/recommend/index",
+    "pages/jujiGarden/orderDetail/orderDetail"
   ],
-
   "permission": {
     "scope.userLocation": {
       "desc": "你的位置信息将用于小程序位置接口的效果展示"

@@ -8,7 +8,10 @@ page{box-sizing:border-box;height: 100%;background-color: #fbfbfb}
 
 .item{background-color: #fff;position:relative;border-radius: 8rpx;overflow: hidden;margin-bottom: 20rpx;padding:24rpx 30rpx;}
 .userImg{width: 60rpx;height: 60rpx;border-radius: 50%;margin-right: 20rpx;}
-.name{font-size: 28rpx;margin-top: 10rpx;color: #333;}
-.remark{font-size:24rpx;margin-top:20rpx;color: #999;}
-
+.name{font-size: 30rpx;margin-top: 10rpx;color: #333;}
+.remark{font-size:24rpx;margin-top:20rpx;color: #666;}
+.income{margin-top: 30rpx;}
+.income text{font-size: 24rpx;color: #333;}
+.income text.r{margin-left: 40rpx}
+.time{position: absolute;top: 36rpx;right: 20rpx;font-size: 20rpx;color: #999}
 .nodataDiv{padding-top: 260rpx;}

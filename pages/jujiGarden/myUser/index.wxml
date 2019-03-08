@@ -9,9 +9,11 @@
     <view class="main ub-f1 p10">
         <view class="item ub" wx:for="{{userlist}}" wx:for-item="item" wx:key="unique">
             <image class="userImg udb" src="{{constant.basePicUrl}}25R9F7zL2Dhr/resize_180_180/mode_fill"></image>
-            <view class="ub-f1">
+            <view class="ub-f1" style="position:realtive">
                 <view class="name">用户名</view>
-                <view class="remark">最后一次浏览时间：2019-02-13 14:48</view>
+                <view class="remark">拥有桔民：10人</view>
+                <view class="income"><text>购物返利：15.00元</text><text class="r">管理佣金：15.00元</text></view>
+                <view class="time">接受邀请时间：2019-02-13 14:48</view>
             </view>
         </view>
     </view>

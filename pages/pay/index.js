@@ -19,7 +19,7 @@ Page({
     seledAccount: false,
     showBalanceWrap: false,
     showSelectCard: false,
-    cardList: [{}, {}],
+    cardList: [],
     selectCardId: '',
     paytype: 'recommend',
     recommend: '1',

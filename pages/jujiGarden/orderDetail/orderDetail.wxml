@@ -47,3 +47,6 @@
     </view>
   </view>
 </view>
+<view class="juniu-bottom">
+  对此订单有疑问，请联系<text>桔集服务技术支持</text>
+</view> 

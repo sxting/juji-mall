@@ -3,7 +3,7 @@
     <view class="bg">
       <view class="contentWrap">
         <view class="content">
-          <image src="{{logo?'https://upic.juniuo.com/file/picture/'+logo+'/resize_200_200/mode_fill':''}}" class="shopLogo"></image>
+          <image src="{{headImg?'https://upic.juniuo.com/file/picture/'+headImg+'/resize_200_200/mode_fill':''}}" class="shopLogo"></image>
           <view class="tit tx-c">付款给{{storeName}}</view>
           <view class="rechargeDiv ub ub-ac ub-pc">
             <view class="remark {{showSelectCard?'font50':''}}">￥</view>

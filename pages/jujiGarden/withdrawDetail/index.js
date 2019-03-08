@@ -18,7 +18,7 @@ Page({
         this.getData();
     },
     getData: function() {
-
+        
     }
 });
 

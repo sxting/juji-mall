@@ -8,7 +8,7 @@ Page({
         curTabIndex: 0,
         constant: constant,
         isShowNodata: false,
-        userlist: ['','',''],
+        recordlist: ['','',''],
         status:'',
         isFinall:false,
         amount: 0

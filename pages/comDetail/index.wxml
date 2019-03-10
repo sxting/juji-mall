@@ -130,7 +130,7 @@
             <view class="ub jc-sb" style="align-items:flex-start;">
               <view class="tuiName">{{item.productName}}</view>
               <view class="tuiExe" wx:if="{{item.type=='POINT'}}">{{item.point}}桔子</view>
-              <view class="tuiExe" wx:else>{{item.point}}桔子+{{item.price}}元</view>
+              <view class="tuiExe" wx:else>{{item.point}}桔子+{{filter.toFix(item.price)}}元</view>
             </view>
             <view class="row jc-sb mt10">
               <view class="tuiPrice">已售{{item.soldNum}}件</view>

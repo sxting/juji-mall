@@ -250,7 +250,43 @@ Page({
                       resolve4(1);
                     } else { //如果不等 选择了其他城市
 
-                      
+                      that.setData({
+                        locationName: wx.getStorageSync('selectCityName'),
+                        locationPcode: wx.getStorageSync('selectPcode'),
+                        locationCode: wx.getStorageSync('selectCode')
+                      });
+
+                      console.log('不切换定位名称 继续使用用户选择的外地城市');
+                      var obj = {
+                        provinceCode: that.data.locationPcode,
+                        cityCode: that.data.locationCode,
+                        areaCode: '',
+                      };
+                      //选择省市县确认服务商信息
+                      service.getSelectHotCity(obj).subscribe({
+                        next: res => {
+                          console.log('--------选择省市县确认服务商信息---------');
+                          console.log(res);
+                          that.setData({
+                            providerId: res.id,
+                            pageNo: 1
+                          });
+                          console.log('--------选择省市县确认服务商信息后重新加载首页数据---------');
+                          that.getIndexData();
+                          var obj = {
+                            providerId: res.id,
+                            type: 'PRODUCT',
+                            sortField: 'IDX',
+                            sortOrder: 'ASC',
+                            pageNo: that.data.pageNo,
+                            pageSize: that.data.pageSize,
+                            longitude: wx.getStorageSync('curLongitude'),
+                            latitude: wx.getStorageSync('curLatitude')
+                          };
+                          that.getRecommendPage(obj);
+                        },
+                        error: err => console.log(err)
+                      }); 
 
                       //showModal询问是否更换城市到当前定位城市
 
@@ -272,15 +308,15 @@ Page({
                             });
                             resolve4(1);
                           } 
-                          else if (res2.cancel) {
-                            //如果否 不切换定位名称 继续使用用户选择的外地城市
-                            that.setData({
-                              locationName: wx.getStorageSync('selectCityName'),
-                              locationPcode: wx.getStorageSync('selectPcode'),
-                              locationCode: wx.getStorageSync('selectCode')
-                            });
-                            resolve4(2);
-                          }
+                          // else if (res2.cancel) {
+                          //   //如果否 不切换定位名称 继续使用用户选择的外地城市
+                          //   that.setData({
+                          //     locationName: wx.getStorageSync('selectCityName'),
+                          //     locationPcode: wx.getStorageSync('selectPcode'),
+                          //     locationCode: wx.getStorageSync('selectCode')
+                          //   });
+                          //   resolve4(2);
+                          // }
                         }
                       });
 

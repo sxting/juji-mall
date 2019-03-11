@@ -17,6 +17,7 @@ Page({
     pageSize: 5,
     sortArray: ['ASC', 'ASC', 'ASC', 'ASC', 'ASC', 'DESC'],
     providerId: '',
+    pullUpFlag: true,
     sortField:'IDX'
   },
 
@@ -48,6 +49,7 @@ Page({
           this.setData({
             sortIndex: 1,
             pageNo: 1,
+            pullUpFlag: true,
             sortArray: ['ASC', 'ASC', 'ASC', 'ASC', 'ASC', 'ASC'],
             locationCode: wx.getStorageSync('selectCode'),
             locationPcode: wx.getStorageSync('selectPcode'),
@@ -344,6 +346,7 @@ Page({
     switch (sortIndex) {
       case '1':
       this.setData({
+        pullUpFlag: true,
         sortField: 'IDX'
       });
         obj = {
@@ -360,6 +363,7 @@ Page({
         break;
       case '2':
         this.setData({
+          pullUpFlag: true,
           sortField: 'CHEAP'
         });
         obj = {
@@ -375,6 +379,7 @@ Page({
         break;
       case '3':
         this.setData({
+          pullUpFlag: true,
           sortField: 'POINT'
         });
         obj = {
@@ -390,6 +395,7 @@ Page({
         break;
       case '4':
         this.setData({
+          pullUpFlag: true,
           sortField: 'PRICE'
         });
         obj = {
@@ -405,6 +411,7 @@ Page({
         break;
       case '5':
         this.setData({
+          pullUpFlag: true,
           sortField: 'DISTANCE'
         });
         obj = {
@@ -420,6 +427,7 @@ Page({
         break;
       case '6':
         this.setData({
+          pullUpFlag: true,
           sortField: 'SOLDNUM'
         });
         obj = {
@@ -485,6 +493,7 @@ Page({
     this.setData({
       pageNo: 1,
       sortIndex: 1,
+      pullUpFlag: true,
       sortField: 'IDX',
       sortArray: ['ASC', 'ASC', 'ASC', 'ASC', 'ASC', 'DESC']
     });
@@ -520,30 +529,40 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function() {
-    let p = ++this.data.pageNo;
-    console.log('page:' + p);
+    //判断是否还可以上拉
+    if (this.data.pullUpFlag) { 
+      let p = ++this.data.pageNo;
+      console.log('page:' + p);
 
-    let obj = {
-      providerId: this.data.providerId,
-      type: 'POINT',
-      sortField: this.data.sortField,
-      sortOrder: this.data.sortArray[Number(this.data.sortIndex) - 1],
-      pageNo: p,
-      pageSize: this.data.pageSize,
-      longitude: wx.getStorageSync('curLongitude'),
-      latitude: wx.getStorageSync('curLatitude')
-    };
+      let obj = {
+        providerId: this.data.providerId,
+        type: 'POINT',
+        sortField: this.data.sortField,
+        sortOrder: this.data.sortArray[Number(this.data.sortIndex) - 1],
+        pageNo: p,
+        pageSize: this.data.pageSize,
+        longitude: wx.getStorageSync('curLongitude'),
+        latitude: wx.getStorageSync('curLatitude')
+      };
 
-    service.getRecommendPage(obj).subscribe({
-      next: res => {
-        console.log(res);
-        this.setData({
-          recommendPage: this.data.recommendPage.concat(res.list)
-        });
-      },
-      error: err => console.log(err),
-      complete: () => wx.hideToast()
-    });
+      service.getRecommendPage(obj).subscribe({
+        next: res => {
+          console.log(res);
+          this.setData({
+            recommendPage: this.data.recommendPage.concat(res.list)
+          });
+          if (res.countPage >= this.data.pageNo) {
+            this.setData({
+              pullUpFlag: false
+            });
+          }
+        },
+        error: err => console.log(err),
+        complete: () => wx.hideToast()
+      });
+    }else{
+      return;
+    }
   },
 
   /**

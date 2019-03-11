@@ -28,6 +28,7 @@ Page({
     pointBalance: 0,
     imageWidth:'200rpx',
     sortField:'IDX',
+    pullUpFlag: true,
     // citylist: [],
     citylist: [{
       "version": 0,
@@ -439,6 +440,7 @@ Page({
           this.setData({
             sortIndex: 1,
             pageNo: 1,
+            pullUpFlag: true,
             sortArray: ['ASC', 'ASC', 'ASC', 'DESC'],
             locationCode: wx.getStorageSync('selectCode'),
             locationPcode: wx.getStorageSync('selectPcode'),
@@ -691,6 +693,7 @@ Page({
     switch (sortIndex) {
       case '1':
         this.setData({
+          pullUpFlag: true,
           sortField: 'IDX'
         });
         obj = {
@@ -707,6 +710,7 @@ Page({
         break;
       case '2':
         this.setData({
+          pullUpFlag: true,
           sortField: 'PRICE'
         });
         obj = {
@@ -722,6 +726,7 @@ Page({
         break;
       case '3':
         this.setData({
+          pullUpFlag: true,
           sortField: 'DISTANCE'
         });
         obj = {
@@ -737,6 +742,7 @@ Page({
         break;
       case '4':
         this.setData({
+          pullUpFlag: true,
           sortField: 'SOLDNUM'
         });
         obj = {
@@ -774,36 +780,48 @@ Page({
   },
   //上拉加载
   onReachBottom() {
-    let that = this;
-    let p = ++this.data.pageNo;
-    console.log('page:' + p);
-    let obj = {
-      providerId: that.data.providerId,
-      type: 'PRODUCT',
-      sortField: that.data.sortField,
-      sortOrder: that.data.sortArray[Number(that.data.sortIndex) - 1],
-      pageNo: p,
-      pageSize: that.data.pageSize,
-      longitude: wx.getStorageSync('curLongitude'),
-      latitude: wx.getStorageSync('curLatitude')
-    };
+    //判断是否还可以上拉
+    if (this.data.pullUpFlag) { 
+      let that = this;
+      let p = ++this.data.pageNo;
+      console.log('page:' + p);
+      let obj = {
+        providerId: that.data.providerId,
+        type: 'PRODUCT',
+        sortField: that.data.sortField,
+        sortOrder: that.data.sortArray[Number(that.data.sortIndex) - 1],
+        pageNo: p,
+        pageSize: that.data.pageSize,
+        longitude: wx.getStorageSync('curLongitude'),
+        latitude: wx.getStorageSync('curLatitude')
+      };
 
-    service.getRecommendPage(obj).subscribe({
-      next: res => {
-        console.log(res);
-        this.setData({
-          recommendPage: this.data.recommendPage.concat(res.list)
-        });
-      },
-      error: err => console.log(err),
-      complete: () => wx.hideToast()
-    });
+      service.getRecommendPage(obj).subscribe({
+        next: res => {
+          console.log(res);
+          this.setData({
+            recommendPage: this.data.recommendPage.concat(res.list)
+          });
+          if (res.countPage >= this.data.pageNo){
+            this.setData({
+              pullUpFlag: false
+            });
+          }
+        },
+        error: err => console.log(err),
+        complete: () => wx.hideToast()
+      });
+    }else{
+      return ;
+    }
+    
 
   },
   //下拉刷新
   onPullDownRefresh() {
     let that = this;
     this.setData({
+      pullUpFlag:true,
       sortField:'IDX',
       sortIndex: 1,
       pageNo: 1,
@@ -881,6 +899,7 @@ Page({
     this.setData({
       sortIndex: 1,
       pageNo: 1,
+      pullUpFlag: true,
       sortArray: ['ASC', 'ASC', 'ASC', 'DESC'],
       locationCode: wx.getStorageSync('selectCode'),
       locationPcode: wx.getStorageSync('selectPcode'),

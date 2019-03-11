@@ -1,7 +1,8 @@
 <view class="wrap">
+    <!-- 普通用户进入 -->
     <view class='page' wx:if="{{status==1}}">
         <image class="pageBg" src="../../../images/juyuan-bg1.jpg"></image>
-        <view class='btn-manger'>桔长权益</view>
+        <view class='btn-manger' bindtap="toPage" data-page="/pages/jujiGarden/managerRights/managerRights">桔长权益</view>
         <view class='applyToManager' bindtap="apply">
             <text>申请成为桔长</text>
             <text class='iconfont icon-right'></text>
@@ -10,7 +11,7 @@
     <!-- 桔员进入 -->
     <view class='page' wx:if="{{status==2}}">
         <image class="pageBg" src="../../../images/juyuan-bg2.jpg"></image>
-        <view class='btn-manger'>桔长权益</view>
+        <view class='btn-manger' bindtap="toPage" data-page="/pages/jujiGarden/managerRights/managerRights">桔长权益</view>
         <view class='check-progress'>
             <view class='clearfix my-team'>
                 <view class='fl'>
@@ -18,7 +19,7 @@
                     <text class='num'><text style='color:#F35308'>{{ hadNumber }}</text>/10</text>
                 </view>
                 <view class='fr'>
-                    <text>查看桔民</text>
+                    <text catchtap="toPage" data-page="/pages/jujiGarden/userInfor/userInfor">查看桔民</text>
                     <text class='iconfont icon-right'></text>
                 </view>
             </view>
@@ -30,6 +31,8 @@
             <button class="share-btn" open-type="share">邀请新人加入桔园</button>
         </view>
     </view>
+
+    <!-- 桔长进入 -->
     <view class="page" wx:if="{{status==3}}">
         <view class="toper">
             <image class="udb topBg" src="../../../images/topBg.png" mode="scaleToFill"></image>

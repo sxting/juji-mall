@@ -4,9 +4,10 @@ import { constant } from '../../../utils/constant';
 var app = getApp();
 Page({
     data: {
-        status:'3',
+        status:'2',
         juminNumList: [],//队员人数
-        hadNumber: 2
+        hadNumber: 2,
+        storeId: ''
     },
     apply:function(e){
         this.setData({status:'2'});

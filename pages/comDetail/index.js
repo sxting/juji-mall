@@ -224,7 +224,7 @@ Page({
         console.log(res);
         var picsStrArr = res.product.picIds.split(',');
         picsStrArr.forEach(function(item,index){
-          picsStrArr[index] = constant.basePicUrl + item + '/resize_690_420/mode_fill'
+          picsStrArr[index] = constant.basePicUrl + item + '/resize_750_420/mode_fill'
         });
         new Promise(function(resolve,reject){
           let str = JSON.parse(res.product.note);

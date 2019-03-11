@@ -530,8 +530,8 @@ Page({
       sortOrder: this.data.sortArray[Number(this.data.sortIndex) - 1],
       pageNo: p,
       pageSize: this.data.pageSize,
-      longitude: '116.470959',
-      latitude: '39.992368'
+      longitude: wx.getStorageSync('curLongitude'),
+      latitude: wx.getStorageSync('curLatitude')
     };
 
     service.getRecommendPage(obj).subscribe({

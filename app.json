@@ -59,7 +59,7 @@
       },
       {
         "text": "桔园",
-        "pagePath": "pages/jujiGarden/gardenIndex/index",
+        "pagePath": "pages/jujiGarden/gardenHome/gardenHome",
         "iconPath": "images/juyuan.png",
         "selectedIconPath": "images/juyuan-select.png"
       },

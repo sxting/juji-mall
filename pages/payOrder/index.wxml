@@ -1,29 +1,27 @@
 <wxs module="filter" src="../../utils/numFr.wxs"></wxs>
 <view wx:if="{{showProduct}}">
   <view class="tradeInfo" style="padding:20rpx 30rpx;">
-    <view class="p15 ub ub-ac info">
+    <view class="p15 ub info" style="align-items:flex-start;">
       <image class="goodImg udb" src="{{productInfo.picId?'https://upic.juniuo.com/file/picture/'+productInfo.picId+'/resize_220_200/mode_fill':''}}" lazy-load="true" mode="widthFix"></image>
-      <view class="ub-f1 goodMsg">
-        <view class="goodTit">{{productInfo.productName}}</view>
-        <view class="storeName">{{store.name}}</view>
+      <view class="ub ub-ver ub-pj goodMsg">
+        <view>
+          <view class="goodTit">{{productInfo.productName}}</view>
+          <view class="storeName">{{store.name}}</view>
+        </view>
+        
         <!-- 组合购买 -->
-        <view class="goodAmount" wx:if="{{paytype==1}}">{{productInfo.point}}
-          <text style="font-family: PingFangSC-Medium;font-size:28rpx;">桔子</text>+
-          {{filter.toFix(productInfo.price)}}
-          <text style="font-family: PingFangSC-Medium;font-size:28rpx;">元</text>
+        <view class="goodAmount" wx:if="{{paytype==1}}">{{productInfo.point}}<text style="font-family: PingFangSC-Medium;font-size:28rpx;">桔子</text>+
+          {{filter.toFix(productInfo.price)}}<text style="font-family: PingFangSC-Medium;font-size:28rpx;">元</text>
           <text style="margin-left: 10rpx;font-size: 24rpx;color: #999999;text-decoration:line-through">{{filter.toFix(productInfo.originalPrice)}}元</text>
         </view>
         <!-- 桔子购买 -->
-        <view class="goodAmount" wx:if="{{paytype==2}}">{{productInfo.point}}
-          <text style="font-family: PingFangSC-Medium;font-size:28rpx;">桔子</text>
+        <view class="goodAmount" wx:if="{{paytype==2}}">{{productInfo.point}}<text style="font-family: PingFangSC-Medium;font-size:28rpx;">桔子</text>
         </view>
         <!-- 人民币优惠购买 -->
-        <view class="goodAmount" wx:if="{{paytype==3}}">{{filter.toFix(productInfo.price)}}
-          <text style="font-family: PingFangSC-Medium;font-size:28rpx;">元</text>
+        <view class="goodAmount" wx:if="{{paytype==3}}">{{filter.toFix(productInfo.price)}}<text style="font-family: PingFangSC-Medium;font-size:28rpx;">元</text>
         </view>
         <!-- 原价购买 -->
-        <view class="goodAmount" wx:if="{{paytype==4}}">{{filter.toFix(productInfo.originalPrice)}}
-          <text style="font-family: PingFangSC-Medium;font-size:28rpx;">元</text>
+        <view class="goodAmount" wx:if="{{paytype==4}}">{{filter.toFix(productInfo.originalPrice)}}<text style="font-family: PingFangSC-Medium;font-size:28rpx;">元</text>
         </view>
 
       </view>

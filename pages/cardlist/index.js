@@ -5,16 +5,50 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    cardList:[],
+    current: 0
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+      wx.request({
+        url: 'https://juji-dev.juniuo.com/mini/mycard.json',
+        method: 'GET',
+        header: {
+          'content-type': 'application/json',
+          'Access-Token': wx.getStorageSync('accessToken')
+        },
+        success: (res) => {
+          console.log(res);
+          if(res.data.errorCode=='0'){
+            this.setData({
+              cardList: res.data.data
+            });
+            console.log(this.data.cardList)
+          }else{
+            wx.showModal({
+              title: '错误：'+res.data.errorCode,
+              content: res.data.errorInfo,
+            })
+          }
+        }
+      })
 
   },
-
+  toRecord: function(e){
+    console.log(e);
+    wx.navigateTo({
+      url: '/pages/payrecord/index?merchantId=' + e.currentTarget.dataset.mid,
+    })
+  },
+  toggleCard:function(e){//切换卡片高度
+      console.log(e);
+      this.setData({
+        current: e.currentTarget.dataset.index
+      });
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

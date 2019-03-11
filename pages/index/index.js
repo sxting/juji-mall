@@ -393,6 +393,7 @@ Page({
         console.log('用户更换城市为：' + wx.getStorageSync('selectCityName'));
         //此处应该判断用户有没有再次更换城市 如果没有更换城市不再次查询
         if (this.data.locationCode == wx.getStorageSync('selectCode')){
+          this.currentPoint();
           return ;
         }else{
           this.setData({
@@ -830,14 +831,24 @@ Page({
   },
   //当前城市没有数据时 点击了其他热门城市
   selectCity:function(e){
+    console.log('点击了下面的其他城市');
     var selectCityName = e.currentTarget.dataset['name'].replace('市', '');
     var selectPcode = e.currentTarget.dataset['pcode'];
     var selectCode = e.currentTarget.dataset['code'];
     wx.setStorageSync('selectCityName', selectCityName);
     wx.setStorageSync('selectPcode', selectPcode);
     wx.setStorageSync('selectCode', selectCode);
-
-    this.onShow();
+    this.setData({
+      sortIndex: 1,
+      pageNo: 1,
+      sortArray: ['ASC', 'ASC', 'ASC', 'DESC'],
+      locationCode: wx.getStorageSync('selectCode'),
+      locationPcode: wx.getStorageSync('selectPcode'),
+      locationName: wx.getStorageSync('selectCityName')
+    });
+    this.currentPoint();
+    this.getDataByCity(); //首页数据已经更新
+    // this.onShow();
   },
   /**
    * 用户点击右上角分享或页面中的分享

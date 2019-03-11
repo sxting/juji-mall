@@ -5,8 +5,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    juyuanBgFrist: '/images/juyuan-bg1.png',
-    juyuanBgSecond: '/images/juyuan-bg2.png',
+    juyuanBgFrist: '/images/juyuan-bg1.jpg',
+    juyuanBgSecond: '/images/juyuan-bg2.jpg',
     juminNumList: [],//队员人数
     hadNumber: 2
   },

@@ -4,9 +4,12 @@ import { constant } from '../../../utils/constant';
 var app = getApp();
 Page({
     data: {
-        nickName: '微信名字',
-        avatar: '',
-        phoneNum: '',
+        status:'3',
+        juminNumList: [],//队员人数
+        hadNumber: 2
+    },
+    apply:function(e){
+        this.setData({status:'2'});
     },
     toPage: function(e) {
         var page = e.currentTarget.dataset.page;
@@ -14,6 +17,19 @@ Page({
     },
     onLoad: function() {
         wx.setNavigationBarTitle({ title: '桔园' });
+        this.data.juminNumList = [];
+        if (this.data.hadNumber > 0) {
+          for (let i = 0; i < this.data.hadNumber; i++) {
+            let list = 'yes';
+            this.data.juminNumList.push(list);
+          }
+          for (let j = 0; j < (10 -  parseInt(this.data.hadNumber)); j++){
+            this.data.juminNumList.push('');
+          }
+        }
+        this.setData({
+          juminNumList: this.data.juminNumList,
+        })
     },
     onShow: function() {
         this.getInfo();
@@ -22,15 +38,13 @@ Page({
         service.userInfo({ openId: wx.getStorageSync('openid') }).subscribe({
             next: res => {
                 this.setData({
-                    nickName: res.nickName,
-                    phoneNum: res.phone,
-                    avatar: res.avatar
+
                 });
             },
             error: err => errDialog(err),
             complete: () => wx.hideToast()
         })
-    }
+    },
 });
 
 

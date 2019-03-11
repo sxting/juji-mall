@@ -1,4 +1,5 @@
 <view class="wrap">
+    <!-- 普通用户进入 -->
     <view class='page' wx:if="{{status==1}}">
         <image class="pageBg" src="../../../images/juyuan-bg1.jpg"></image>
         <view class='btn-manger' bindtap="toPage" data-page="/pages/jujiGarden/managerRights/managerRights">桔长权益</view>
@@ -30,6 +31,8 @@
             <button class="share-btn" open-type="share">邀请新人加入桔园</button>
         </view>
     </view>
+
+    <!-- 桔长进入 -->
     <view class="page" wx:if="{{status==3}}">
         <view class="toper">
             <image class="udb topBg" src="../../../images/topBg.png" mode="scaleToFill"></image>

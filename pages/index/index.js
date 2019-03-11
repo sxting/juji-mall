@@ -22,11 +22,12 @@ Page({
     sortIndex: 1,
     pageNo: 1,
     pageSize: 5,
-    sortArray: ['', 'ASC', 'ASC', ''],
+    sortArray: ['ASC', 'ASC', 'ASC', 'DESC'],
     providerId: '',
     isShowNewerGet: false,
     pointBalance: 0,
     imageWidth:'200rpx',
+    sortField:'IDX',
     // citylist: [],
     citylist: [{
       "version": 0,
@@ -434,7 +435,7 @@ Page({
           this.setData({
             sortIndex: 1,
             pageNo: 1,
-            sortArray: ['', 'ASC', 'ASC', ''],
+            sortArray: ['ASC', 'ASC', 'ASC', 'DESC'],
             locationCode: wx.getStorageSync('selectCode'),
             locationPcode: wx.getStorageSync('selectPcode'),
             locationName: wx.getStorageSync('selectCityName')
@@ -685,6 +686,9 @@ Page({
     let obj = {};
     switch (sortIndex) {
       case '1':
+        this.setData({
+          sortField: 'IDX'
+        });
         obj = {
           providerId: this.data.providerId,
           // providerId: '1215422531428605',
@@ -698,6 +702,9 @@ Page({
         };
         break;
       case '2':
+        this.setData({
+          sortField: 'PRICE'
+        });
         obj = {
           providerId: this.data.providerId,
           type: 'PRODUCT',
@@ -710,6 +717,9 @@ Page({
         };
         break;
       case '3':
+        this.setData({
+          sortField: 'DISTANCE'
+        });
         obj = {
           providerId: this.data.providerId,
           type: 'PRODUCT',
@@ -722,6 +732,9 @@ Page({
         };
         break;
       case '4':
+        this.setData({
+          sortField: 'SOLDNUM'
+        });
         obj = {
           providerId: this.data.providerId,
           type: 'PRODUCT',
@@ -761,12 +774,12 @@ Page({
     let p = ++this.data.pageNo;
     console.log('page:' + p);
     let obj = {
-      providerId: this.data.providerId,
+      providerId: that.data.providerId,
       type: 'PRODUCT',
-      sortField: 'IDX',
-      sortOrder: 'ASC',
+      sortField: that.data.sortField,
+      sortOrder: that.data.sortArray[Number(that.data.sortIndex) - 1],
       pageNo: p,
-      pageSize: this.data.pageSize,
+      pageSize: that.data.pageSize,
       longitude: '116.470959',
       latitude: '39.992368'
     };
@@ -787,9 +800,10 @@ Page({
   onPullDownRefresh() {
     let that = this;
     this.setData({
+      sortField:'IDX',
       sortIndex: 1,
       pageNo: 1,
-      sortArray: ['', 'ASC', 'ASC', '']
+      sortArray: ['ASC', 'ASC', 'ASC', 'DESC']
     });
     this.getIndexData();
     //根据位置查询附近精选

@@ -15,8 +15,9 @@ Page({
     sortIndex: 1,
     pageNo: 1,
     pageSize: 5,
-    sortArray: ['', '', 'ASC', 'ASC', 'ASC', ''],
-    providerId: ''
+    sortArray: ['ASC', 'ASC', 'ASC', 'ASC', 'ASC', 'DESC'],
+    providerId: '',
+    sortField:'IDX'
   },
 
   /**
@@ -47,7 +48,7 @@ Page({
           this.setData({
             sortIndex: 1,
             pageNo: 1,
-            sortArray: ['', '', 'ASC', 'ASC', 'ASC', ''],
+            sortArray: ['ASC', 'ASC', 'ASC', 'ASC', 'ASC', 'ASC'],
             locationCode: wx.getStorageSync('selectCode'),
             locationPcode: wx.getStorageSync('selectPcode'),
             locationName: wx.getStorageSync('selectCityName')
@@ -342,6 +343,9 @@ Page({
     let obj = {};
     switch (sortIndex) {
       case '1':
+      this.setData({
+        sortField: 'IDX'
+      });
         obj = {
           // providerId: '1215422531428605',
           providerId: this.data.providerId,
@@ -355,6 +359,9 @@ Page({
         };
         break;
       case '2':
+        this.setData({
+          sortField: 'CHEAP'
+        });
         obj = {
           providerId: this.data.providerId,
           type: 'POINT',
@@ -367,6 +374,9 @@ Page({
         };
         break;
       case '3':
+        this.setData({
+          sortField: 'POINT'
+        });
         obj = {
           providerId: this.data.providerId,
           type: 'POINT',
@@ -379,6 +389,9 @@ Page({
         };
         break;
       case '4':
+        this.setData({
+          sortField: 'PRICE'
+        });
         obj = {
           providerId: this.data.providerId,
           type: 'POINT',
@@ -391,6 +404,9 @@ Page({
         };
         break;
       case '5':
+        this.setData({
+          sortField: 'DISTANCE'
+        });
         obj = {
           providerId: this.data.providerId,
           type: 'POINT',
@@ -403,6 +419,9 @@ Page({
         };
         break;
       case '6':
+        this.setData({
+          sortField: 'SOLDNUM'
+        });
         obj = {
           providerId: this.data.providerId,
           type: 'POINT',
@@ -466,7 +485,8 @@ Page({
     this.setData({
       pageNo: 1,
       sortIndex: 1,
-      sortArray: ['', '', 'ASC', 'ASC', 'ASC', '']
+      sortField: 'IDX',
+      sortArray: ['ASC', 'ASC', 'ASC', 'ASC', 'ASC', 'DESC']
     });
     //根据位置查询附近精选
     var obj = {
@@ -506,8 +526,8 @@ Page({
     let obj = {
       providerId: this.data.providerId,
       type: 'POINT',
-      sortField: 'IDX',
-      sortOrder: 'ASC',
+      sortField: this.data.sortField,
+      sortOrder: this.data.sortArray[Number(this.data.sortIndex) - 1],
       pageNo: p,
       pageSize: this.data.pageSize,
       longitude: '116.470959',

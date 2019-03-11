@@ -6,12 +6,14 @@ Page({
     data: {
         tablist: [{ name: '本日', status: '1' }, { name: '本周', status: '2' }, { name: '本月', status: '2' }, { name: '累计', status: '2' }],
         curTabIndex: 0,
+        curActiveIndex:1,
         constant: constant,
         isShowNodata: false,
         recordlist: ['','',''],
         status:'',
         isFinall:false,
-        amount: 0
+        amount: 0,
+        sortIndex:1
     },
     onLoad: function(options) {
         wx.setNavigationBarTitle({ title: '我的收入' });
@@ -24,9 +26,16 @@ Page({
     },
     switchTab: function(e) {
         var thisIndex = e.currentTarget.dataset.index;
-        var thisStatus = e.currentTarget.dataset.status;
-        this.setData({ curTabIndex: thisIndex, status: thisStatus });
+        this.setData({ curTabIndex: thisIndex});
         this.getData(thisStatus);
+    },
+    toggleLabel:function(e){
+        var index = e.currentTarget.dataset.label;
+        this.setData({ sortIndex: index });
+    },
+    switchActive:function(e){
+        var index = e.currentTarget.dataset.index;
+        this.setData({ curActiveIndex: index });
     },
     getData: function(status){
 

@@ -9,41 +9,62 @@
     <view class="main p10">
         <swiper display-multiple-items="1.36" next-margin="-30rpx">
             <swiper-item>
-                <view class="cardBg">
-                    <view class="remark1 tx-l">销售收入(元)</view>
-                    <view class="balance1 tx-l">500.00</view>
-                    <view class="turnover ub ub-ac">
-                        <view class="div" data-page="/pages/jujiGarden/incomeData/index?index=1&status=1" bindtap="toPage">
-                            <view class="tx-l remark2">管理佣金</view>
-                            <view class="tx-l balance2">500.00</view>
-                        </view>
-                        <view class="line"></view>
-                        <view class="div l" data-page="/pages/jujiGarden/incomeData/index?index=1&status=1" bindtap="toPage">
-                            <view class="tx-l remark2">购物返利</view>
-                            <view class="tx-l balance2">500.00</view>
+                <view class="cardItem">
+                    <image class="card" src="../../../images/card1.png"></image>
+                    <view class="con">
+                        <view class="remark1 tx-l">销售收入（元）</view>
+                        <view class="balance1 tx-l">500.00</view>
+                        <view class="turnover ub ub-ac">
+                            <view class="div" data-page="/pages/jujiGarden/incomeData/index?index=1&status=1" bindtap="toPage">
+                                <view class="tx-l remark2">管理佣金</view>
+                                <view class="tx-l balance2">500.00</view>
+                            </view>
+                            <view class="line"></view>
+                            <view class="div l" data-page="/pages/jujiGarden/incomeData/index?index=1&status=1" bindtap="toPage">
+                                <view class="tx-l remark2">购物返利</view>
+                                <view class="tx-l balance2">500.00</view>
+                            </view>
                         </view>
                     </view>
                 </view>
             </swiper-item>
             <swiper-item>
-                <view class="cardBg">
-                    <view class="remark1 tx-l">提现金额(元)</view>
-                    <view class="balance1 tx-l">500.00</view>
-                    <view class="turnover ub ub-ac">
-                        <view class="div" data-page="/pages/jujiGarden/incomeData/index?index=1&status=1" bindtap="toPage">
-                            <view class="tx-l remark2">管理佣金</view>
-                            <view class="tx-l balance2">500.00</view>
-                        </view>
-                        <view class="line"></view>
-                        <view class="div l" data-page="/pages/jujiGarden/incomeData/index?index=1&status=1" bindtap="toPage">
-                            <view class="tx-l remark2">购物返利</view>
-                            <view class="tx-l balance2">500.00</view>
+                <view class="cardItem">
+                    <image class="card" src="../../../images/card2.png"></image>
+                    <view class="con">
+                        <view class="remark1 tx-l">提现金额（元）</view>
+                        <view class="balance1 tx-l">500.00</view>
+                        <view class="turnover ub ub-ac">
+                            <view class="div" data-page="/pages/jujiGarden/incomeData/index?index=1&status=1" bindtap="toPage">
+                                <view class="tx-l remark2">管理佣金</view>
+                                <view class="tx-l balance2">500.00</view>
+                            </view>
+                            <view class="line"></view>
+                            <view class="div l" data-page="/pages/jujiGarden/incomeData/index?index=1&status=1" bindtap="toPage">
+                                <view class="tx-l remark2">购物返利</view>
+                                <view class="tx-l balance2">500.00</view>
+                            </view>
                         </view>
                     </view>
                 </view>
             </swiper-item>
         </swiper>
-        <view class="content">
+    </view>
+    <view class="tablist">
+        <view class="tablist ub ub-ac">
+            <view class="tabItem {{curActiveIndex==1?'on':''}}" bindtap="switchActive" data-index="1">销售收入<view class="line"></view>
+            </view>
+            <view class="tabItem {{curActiveIndex==2?'on':''}}" bindtap="switchActive" data-index="2">提现金额<view class="line"></view>
+            </view>
+        </view>
+    </view>
+    <view class="p10" style="padding-bottom:0">
+        <view class="labels-wrap">
+            <view class="label {{sortIndex==1?'active':''}}" data-label="1" bindtap="toggleLabel">全部</view>
+            <view class="label {{sortIndex==2?'active':''}}" data-label="2" bindtap="toggleLabel">管理佣金</view>
+            <view class="label {{sortIndex==3?'active':''}}" data-label="3" bindtap="toggleLabel">购物返利</view>
+        </view>
+        <view class="mt10">
             <view class="item ub" wx:for="{{recordlist}}" wx:for-item="item" wx:key="unique">
                 <image class="userImg udb" src="{{constant.basePicUrl}}25R9F7zL2Dhr/resize_180_180/mode_fill"></image>
                 <view class="ub-f1">

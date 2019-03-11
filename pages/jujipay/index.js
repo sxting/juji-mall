@@ -1,12 +1,11 @@
-// pages/jujiGarden/userInfor/userInfor.js
+// pages/jujipay/index.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    userHeadUrl: '/images/pinglunuser.png',
-    userListInfor: ['','']
+
   },
 
   /**

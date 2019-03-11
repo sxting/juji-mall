@@ -13,14 +13,14 @@
 <!-- 桔员进入 -->
 <view class='page' wx:else>
   <image src='{{ juyuanBgSecond }}'></image>
-  <view class='btn-manger'>桔长权益</view>
+  <view class='btn-manger' catchtap='checkManagerRight'>桔长权益</view>
   <view class='check-progress'>
     <view class='clearfix my-team'>
       <view class='fl'>
         <text>我的队伍 </text>
         <text class='num'><text style='color:#F35308'>{{ hadNumber }}</text>/10</text>
       </view>
-      <view class='fr'>
+      <view class='fr' catchtap='checkAllJumin'>
         <text>查看桔民</text>
         <text class='iconfont icon-right'></text>
       </view>

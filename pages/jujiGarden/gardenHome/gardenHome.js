@@ -7,6 +7,7 @@ Page({
   data: {
     juyuanBgFrist: '/images/juyuan-bg1.png',
     juyuanBgSecond: '/images/juyuan-bg2.png',
+    storeId: '',//门店ID
     juminNumList: [],//队员人数
     hadNumber: 2
   },
@@ -45,13 +46,6 @@ Page({
   },
 
   /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
    * 邀请新人加入桔园
    */
   inviteNewMembers: function (res) {
@@ -63,23 +57,20 @@ Page({
   },
 
   /**
-   * 页面相关事件处理函数--监听用户下拉动作
+   * 查看所有桔民
    */
-  onPullDownRefresh: function () {
-
+  checkAllJumin: function () {
+    wx.navigateTo({
+      url: '/pages/jujiGarden/userInfor/userInfor?storeId=' + this.data.storeId,
+    })
   },
 
   /**
-   * 页面上拉触底事件的处理函数
+   * 查看局长权益
    */
-  onReachBottom: function () {
-
+  checkManagerRight: function () {
+    wx.navigateTo({
+      url: '/pages/jujiGarden/managerRights/managerRights?storeId=' + this.data.storeId,
+    })
   },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  }
 })

@@ -195,12 +195,12 @@
 					"pathName": "pages/jujiGarden/myUser/index",
 					"scene": null
 				},
-        {
-          "id": -1,
-          "name": "订单详情",
-          "pathName": "pages/jujiGarden/orderDetail/orderDetail",
-          "scene": null
-        }
+				{
+					"id": -1,
+					"name": "订单详情",
+					"pathName": "pages/jujiGarden/orderDetail/orderDetail",
+					"scene": null
+				}
 			]
 		}
 	}

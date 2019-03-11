@@ -135,7 +135,7 @@ Page({
         next: res => {
           console.log('--------下单前数据校验1混合支付-------');
           console.log(res);
-          if (res.pointBalance >= that.data.productInfo.point) {
+          if (res.pointBalance >= that.data.productInfo.point * that.data.count) {
             //判断条件 如果：过往已经购买的数量 + 要买的数量 > 限制购买的最大数量 处理：禁止下单
             if (res.totalAll + that.data.count <= that.data.productInfo.limitMaxNum) {
               //判断条件 如果：今日已经购买的数量 + 要买的数量 > 今日限制购买的最大数量 处理：禁止下单
@@ -268,7 +268,7 @@ Page({
         next: res => {
           console.log('--------下单前数据校验2桔子支付-------');
           console.log(res);
-          if (res.pointBalance >= that.data.productInfo.point) {
+          if (res.pointBalance >= that.data.productInfo.point * that.data.count) {
             //判断条件 如果：过往已经购买的数量 + 要买的数量 > 限制购买的最大数量 处理：禁止下单
             if (res.totalAll + that.data.count <= that.data.productInfo.limitMaxNum) {
               //判断条件 如果：今日已经购买的数量 + 要买的数量 > 今日限制购买的最大数量 处理：禁止下单

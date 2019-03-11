@@ -250,12 +250,15 @@ Page({
                       resolve4(1);
                     } else { //如果不等 选择了其他城市
 
+                      
+
                       //showModal询问是否更换城市到当前定位城市
 
                       wx.showModal({
                         title: '提示',
                         content: '是否切换到' + res1.parentLocation.locationName + '?',
                         success: function(res2) { //res3是确认框返回的结果 是确认 还是取消
+                          
 
                           if (res2.confirm) {
                             wx.setStorageSync('selectCityName', res1.parentLocation.locationName.replace('市', ''));
@@ -268,7 +271,8 @@ Page({
                               locationCode: res1.parentLocation.locationCode
                             });
                             resolve4(1);
-                          } else if (res2.cancel) {
+                          } 
+                          else if (res2.cancel) {
                             //如果否 不切换定位名称 继续使用用户选择的外地城市
                             that.setData({
                               locationName: wx.getStorageSync('selectCityName'),

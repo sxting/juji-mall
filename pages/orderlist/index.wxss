@@ -11,13 +11,13 @@ page{box-sizing:border-box;height: 100%;background-color: #fbfbfb}
 .orderItem .top .status{font-size: 30rpx;color: #333;font-weight: bold}
 .orderItem .top .restTime{font-size: 24rpx;color: #999;}
 .orderItem .info{padding: 20rpx;padding-bottom: 0}
-.orderItem .total{font-size: 24rpx;color: #333;height: 72rpx;line-height: 72rpx;padding-right: 30rpx}
+.orderItem .total{font-size: 24rpx;color: #333;padding-right: 30rpx;padding-top:30rpx;padding-bottom:40rpx;}
 .goodImg{width: 180rpx;height: 180rpx;border-radius: 8rpx;border:1rpx #eee solid;}
 .goodMsg{margin-left: 20rpx;}
 .goodTit{font-size: 28rpx;}
 .storeName{font-size: 24rpx;margin-top: 10rpx;color: #999;}
-.goodAmount{font-size:28rpx;margin-top:48rpx;color:#333;}
-.goodAmount text.origin{margin-left:10rpx;font-size:24rpx;color:#999;text-decoration:line-through}
+.goodAmount{font-size:26rpx;margin-top:48rpx;color:#333;font-weight:bold;}
+.goodAmount text.origin{margin-left:30rpx;font-size:24rpx;color:#999;text-decoration:line-through}
 .goodMsg .num{position: absolute;bottom: 10rpx;right: 20rpx;color: #999;font-size: 22rpx;}
 .orderItem .ctrl{height: 106rpx;border-top: 1rpx #eee solid;}
 .orderItem .ctrl .left{font-size: 24rpx;color: #999;}

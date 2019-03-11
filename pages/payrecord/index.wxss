@@ -1,1 +1,36 @@
-/* pages/payrecord/index.wxss */
+.recordlist {
+  z-index: 999999;
+}
+
+.main_record .item .chong {
+  color: #6a3c12;
+}
+
+.main_record .item {
+  height: 136rpx;
+  margin-bottom: 0.20rpx;
+  background: #fff;
+}
+
+.main_record .item .tit {
+  font-size: 28rpx;
+  color: #333;
+}
+
+.main_record .item .date {
+  font-size: 24rpx;
+  color: #999;
+  margin-top: 16rpx;
+}
+
+.main_record .item .amount {
+  color: #333;
+  font-size: 32rpx;
+}
+
+.shuiyin {
+  position: absolute;
+  bottom: 90rpx;
+  left: 50%;
+  margin-left: -60rpx;
+}

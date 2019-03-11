@@ -224,7 +224,7 @@ Page({
         console.log(res);
         var picsStrArr = res.product.picIds.split(',');
         picsStrArr.forEach(function(item,index){
-          picsStrArr[index] = constant.basePicUrl + item + '/resize_690_420/mode_fill'
+          picsStrArr[index] = constant.basePicUrl + item + '/resize_750_420/mode_fill'
         });
         new Promise(function(resolve,reject){
           let str = JSON.parse(res.product.note);
@@ -308,10 +308,11 @@ Page({
    */
   onShareAppMessage: function(res) {
     this.share();
+    this.setData({ isShowModal: true });
     return {
       title: JSON.parse(wx.getStorageSync('userinfo')).nickName+'分享给您一个心动商品，快来一起体验吧！',
       path: '/pages/comDetail/index?id=' + this.data.productId + '&storeid=' + this.data.storeId + '&inviteCode=' + wx.getStorageSync('inviteCode'),
-      imageUrl:constant.basePicUrl+this.data.productInfo.picId+'/resize_360_360/mode_fill'
+      // imageUrl:constant.basePicUrl+this.data.productInfo.picId+'/resize_360_360/mode_fill'
     }
   },
   toCommentDetail: function(event) {

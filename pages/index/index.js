@@ -22,11 +22,12 @@ Page({
     sortIndex: 1,
     pageNo: 1,
     pageSize: 5,
-    sortArray: ['', 'ASC', 'ASC', ''],
+    sortArray: ['ASC', 'ASC', 'ASC', 'DESC'],
     providerId: '',
     isShowNewerGet: false,
     pointBalance: 0,
     imageWidth:'200rpx',
+    sortField:'IDX',
     // citylist: [],
     citylist: [{
       "version": 0,
@@ -65,44 +66,7 @@ Page({
           ]
         }
       ]
-    }, {
-        "version": 0,
-        "dateCreated": "2019-01-23 18:31:25",
-        "lastUpdated": "2019-01-23 18:31:25",
-        "deleted": 0,
-        "locationCode": "150000",
-        "locationName": "内蒙古自治区",
-        "locationType": "PROVINCE",
-        "parentLocationCode": "0",
-        "parentLocation": null,
-        "subList": [
-          {
-            "version": 0,
-            "dateCreated": "2019-01-23 18:31:25",
-            "lastUpdated": "2019-01-23 18:31:25",
-            "deleted": 0,
-            "locationCode": "152200",
-            "locationName": "兴安盟",
-            "locationType": "CITY",
-            "parentLocationCode": "150000",
-            "parentLocation": null,
-            "subList": [
-              {
-                "version": 0,
-                "dateCreated": "2019-01-23 18:31:25",
-                "lastUpdated": "2019-01-23 18:31:25",
-                "deleted": 0,
-                "locationCode": "152202",
-                "locationName": "阿尔山市",
-                "locationType": "DISTRICT",
-                "parentLocationCode": "152200",
-                "parentLocation": null,
-                "subList": null
-              }
-            ]
-          }
-        ]
-      }],
+    }],
     isFirstShow:true,
     isLoadedBalance:true
   },
@@ -423,47 +387,53 @@ Page({
   },
   onShow: function () {
     var that = this;
-    //每次进到该页面重置筛选条件
-    this.setData({
-      sortIndex: 1,
-      pageNo: 1,
-      sortArray: ['', 'ASC', 'ASC', '']
-    });
     if (wx.getStorageSync('selectCode')){//存在 说明用户选过异地城市
       if (wx.getStorageSync('locationCode') != wx.getStorageSync('selectCode')) {
         //如果城市更换了 需要通过用户选择的城市编号code重新加载页面
         console.log('用户更换城市为：' + wx.getStorageSync('selectCityName'));
-        this.setData({
-          locationCode: wx.getStorageSync('selectCode'),
-          locationPcode: wx.getStorageSync('selectPcode'),
-          locationName: wx.getStorageSync('selectCityName')
-        });
+        //此处应该判断用户有没有再次更换城市 如果没有更换城市不再次查询
+        if (this.data.locationCode == wx.getStorageSync('selectCode')){
+          this.currentPoint();
+          return ;
+        }else{
+          this.setData({
+            sortIndex: 1,
+            pageNo: 1,
+            sortArray: ['ASC', 'ASC', 'ASC', 'DESC'],
+            locationCode: wx.getStorageSync('selectCode'),
+            locationPcode: wx.getStorageSync('selectPcode'),
+            locationName: wx.getStorageSync('selectCityName')
+          });
+          if (this.data.isFirstShow) {
+            this.setData({
+              isFirstShow: false
+            })
+            return;
+          }
+          this.currentPoint();
+          this.getDataByCity(); //首页数据已经更新
+        //如果用getDataByCity更新了数据 就不能用getSelectProviderByLoc再获取 否则数据会覆盖
+        }
+        
+      } else { 
+        //是首次载入吗
+        console.log('没有更换城市');
         if (this.data.isFirstShow) {
           this.setData({
             isFirstShow: false
           })
           return;
         }
-        this.currentPoint();
-        this.getDataByCity(); //首页数据已经更新
-        //如果用getDataByCity更新了数据 就不能用getSelectProviderByLoc再获取 否则数据会覆盖
-      } else { //如果没有更换城市 定位获取
-        //是首次载入吗
-        console.log('没有更换城市');
-        if (this.data.isFirstShow){
+        //如果没有更换城市 有两种情况 一种是由其他城市切回所在城市 一种是由其他页面回退到本页面
+        if (this.data.locationCode == wx.getStorageSync('selectCode')) {
+          return;
+        } else {
           this.setData({
-            isFirstShow:false
-          })
-          return ;
-        }
-        this.currentPoint();
-        
-        this.setData({
-          locationCode: wx.getStorageSync('locationCode'),
-          locationPcode: wx.getStorageSync('locationPcode'),
-          locationName: wx.getStorageSync('locationName')
-        });
-        var curLatitude = wx.getStorageSync('curLatitude'),
+            locationCode: wx.getStorageSync('locationCode'),
+            locationPcode: wx.getStorageSync('locationPcode'),
+            locationName: wx.getStorageSync('locationName')
+          });
+          var curLatitude = wx.getStorageSync('curLatitude'),
           curLongitude = wx.getStorageSync('curLongitude');
         if (curLatitude && curLongitude) { //已经定位了并且有经纬度的情况
           var obj = {
@@ -490,8 +460,8 @@ Page({
                   sortOrder: 'ASC',
                   pageNo: that.data.pageNo,
                   pageSize: that.data.pageSize,
-                  longitude: wx.getStorageSync('curLongitude'),
-                  latitude: wx.getStorageSync('curLatitude')
+                  longitude: curLongitude,
+                  latitude: curLatitude
                 };
                 that.getRecommendPage(obj);
               } else { //如果不存在服务商
@@ -559,9 +529,13 @@ Page({
             });
           }, 1000);
         }
+        }
+        
+        this.currentPoint();
+
       }
     }else{//不存在 定位获取
-
+      return ;
     }
 
   },
@@ -676,6 +650,9 @@ Page({
     let obj = {};
     switch (sortIndex) {
       case '1':
+        this.setData({
+          sortField: 'IDX'
+        });
         obj = {
           providerId: this.data.providerId,
           // providerId: '1215422531428605',
@@ -689,6 +666,9 @@ Page({
         };
         break;
       case '2':
+        this.setData({
+          sortField: 'PRICE'
+        });
         obj = {
           providerId: this.data.providerId,
           type: 'PRODUCT',
@@ -701,6 +681,9 @@ Page({
         };
         break;
       case '3':
+        this.setData({
+          sortField: 'DISTANCE'
+        });
         obj = {
           providerId: this.data.providerId,
           type: 'PRODUCT',
@@ -713,6 +696,9 @@ Page({
         };
         break;
       case '4':
+        this.setData({
+          sortField: 'SOLDNUM'
+        });
         obj = {
           providerId: this.data.providerId,
           type: 'PRODUCT',
@@ -752,14 +738,14 @@ Page({
     let p = ++this.data.pageNo;
     console.log('page:' + p);
     let obj = {
-      providerId: this.data.providerId,
+      providerId: that.data.providerId,
       type: 'PRODUCT',
-      sortField: 'IDX',
-      sortOrder: 'ASC',
+      sortField: that.data.sortField,
+      sortOrder: that.data.sortArray[Number(that.data.sortIndex) - 1],
       pageNo: p,
-      pageSize: this.data.pageSize,
-      longitude: '116.470959',
-      latitude: '39.992368'
+      pageSize: that.data.pageSize,
+      longitude: wx.getStorageSync('curLongitude'),
+      latitude: wx.getStorageSync('curLatitude')
     };
 
     service.getRecommendPage(obj).subscribe({
@@ -778,9 +764,10 @@ Page({
   onPullDownRefresh() {
     let that = this;
     this.setData({
+      sortField:'IDX',
       sortIndex: 1,
       pageNo: 1,
-      sortArray: ['', 'ASC', 'ASC', '']
+      sortArray: ['ASC', 'ASC', 'ASC', 'DESC']
     });
     this.getIndexData();
     //根据位置查询附近精选
@@ -844,14 +831,24 @@ Page({
   },
   //当前城市没有数据时 点击了其他热门城市
   selectCity:function(e){
+    console.log('点击了下面的其他城市');
     var selectCityName = e.currentTarget.dataset['name'].replace('市', '');
     var selectPcode = e.currentTarget.dataset['pcode'];
     var selectCode = e.currentTarget.dataset['code'];
     wx.setStorageSync('selectCityName', selectCityName);
     wx.setStorageSync('selectPcode', selectPcode);
     wx.setStorageSync('selectCode', selectCode);
-
-    this.onShow();
+    this.setData({
+      sortIndex: 1,
+      pageNo: 1,
+      sortArray: ['ASC', 'ASC', 'ASC', 'DESC'],
+      locationCode: wx.getStorageSync('selectCode'),
+      locationPcode: wx.getStorageSync('selectPcode'),
+      locationName: wx.getStorageSync('selectCityName')
+    });
+    this.currentPoint();
+    this.getDataByCity(); //首页数据已经更新
+    // this.onShow();
   },
   /**
    * 用户点击右上角分享或页面中的分享

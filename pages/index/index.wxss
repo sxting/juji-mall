@@ -49,7 +49,7 @@ swiper {
   height: 330rpx;
   box-sizing: border-box;
   border-radius: 10rpx;
-  transform: scale(0.94);
+  transform: scale(0.95);
   transition: all 0.3s ease;
 }
 
@@ -245,7 +245,7 @@ swiper {
 }
 
 .mtitle {
-  font-size: 40rpx;
+  font-size: 38rpx;
   color: #333;
   font-weight: bold;
 }

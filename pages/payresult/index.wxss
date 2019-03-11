@@ -1,5 +1,94 @@
-.whiteBtn{width:100%;height:.88rem;border:1px solid #6A3C12;border-radius:50px;font-size:.32rem;color:#6A3C12;display:flex;justify-content:center;align-items:center;background:#fff;}
-.sy{position:absolute;bottom:.94rem;left:50%;margin-left:-.6rem;}
-.phonenumber{position:absolute;bottom:.4rem;left:50%;margin-left:-1.3rem;font-size:.24rem;color:#C4C4C4;}
-.phonenumber a{font-size:.24rem;color:#C4C4C4;}
-.whiteBtnWrap{width:100%;padding:0 .3rem;margin-top:.4rem;}
+.topBox {
+  background: #fff;
+  padding-top: 67rpx;
+  padding-bottom: 70rpx;
+}
+
+.chengongimgwrap {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+
+.zhifutip {
+  text-align: center;
+  font-size: 34rpx;
+  color: #333;
+  margin-top: 30rpx;
+  font-weight: bold;
+}
+
+.mt40 {
+  margin-top: 40rpx;
+}
+
+.mt20 {
+  margin-top: 20rpx;
+}
+
+.topRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 80rpx;
+}
+
+.detail {
+  font-size: 30rpx;
+  color: #333;
+}
+
+.amount {
+  display: flex;
+  align-items: center;
+  font-size: 30rpx;
+  color: #333;
+}
+
+.plus {
+  color: #6a3c12;
+}
+
+.completeBtnWrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 30rpx;
+}
+
+.completeBtn {
+  width: 100%;
+  height: 88rpx;
+  background-image: linear-gradient(-180deg, #e8d39b 1%, #e3ca91 55%, #ddc287 100%);
+  border-radius: 44rpx;
+  font-size: 34rpx;
+  color: #6a3c12;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  margin-top: 160rpx;
+}
+
+.shuiyin {
+  position: absolute;
+  bottom: 90rpx;
+  left: 50%;
+  margin-left: -60rpx;
+}
+
+.phonenumber {
+  display: flex;
+  position: absolute;
+  bottom: 40rpx;
+  left: 50%;
+  margin-left: -130rpx;
+  font-size: 24rpx;
+  color: #c4c4c4;
+}
+
+.phonenum {
+  font-size: 24rpx;
+  color: #c4c4c4;
+  margin-left: 10rpx;
+}

@@ -1,1 +1,9 @@
 <!--pages/jujiGarden/userInfor/userInfor.wxml-->
+<view class='page'>
+  <view class='list-box'>
+    <view class='list'>
+      
+
+    </view>
+  </view>
+</view>

@@ -245,7 +245,7 @@ swiper {
 }
 
 .mtitle {
-  font-size: 40rpx;
+  font-size: 38rpx;
   color: #333;
   font-weight: bold;
 }

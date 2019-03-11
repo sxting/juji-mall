@@ -66,44 +66,7 @@ Page({
           ]
         }
       ]
-    }, {
-        "version": 0,
-        "dateCreated": "2019-01-23 18:31:25",
-        "lastUpdated": "2019-01-23 18:31:25",
-        "deleted": 0,
-        "locationCode": "150000",
-        "locationName": "内蒙古自治区",
-        "locationType": "PROVINCE",
-        "parentLocationCode": "0",
-        "parentLocation": null,
-        "subList": [
-          {
-            "version": 0,
-            "dateCreated": "2019-01-23 18:31:25",
-            "lastUpdated": "2019-01-23 18:31:25",
-            "deleted": 0,
-            "locationCode": "152200",
-            "locationName": "兴安盟",
-            "locationType": "CITY",
-            "parentLocationCode": "150000",
-            "parentLocation": null,
-            "subList": [
-              {
-                "version": 0,
-                "dateCreated": "2019-01-23 18:31:25",
-                "lastUpdated": "2019-01-23 18:31:25",
-                "deleted": 0,
-                "locationCode": "152202",
-                "locationName": "阿尔山市",
-                "locationType": "DISTRICT",
-                "parentLocationCode": "152200",
-                "parentLocation": null,
-                "subList": null
-              }
-            ]
-          }
-        ]
-      }],
+    }],
     isFirstShow:true,
     isLoadedBalance:true
   },

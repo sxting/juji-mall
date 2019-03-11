@@ -16,6 +16,10 @@
         <text class='fl'>共2件，合计200元</text>
         <text class='fr'>管理佣金：40.00元</text>
       </view>
+       <view class='consume'>
+        已消费2件
+        <text class=''>，已退款1件</text>
+      </view>
     </view>
   </view>
   <!-- 用户信息 -->
@@ -48,5 +52,5 @@
   </view>
 </view>
 <view class="juniu-bottom">
-  对此订单有疑问，请联系<text>桔集服务技术支持</text>
+  对此订单有疑问，请联系<text catchtap="onTelClick">桔集服务技术支持</text>
 </view> 

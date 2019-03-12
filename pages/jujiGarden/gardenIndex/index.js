@@ -4,7 +4,7 @@ import { constant } from '../../../utils/constant';
 var app = getApp();
 Page({
     data: {
-        status:'2',
+        status:'3',
         juminNumList: [],//队员人数
         hadNumber: 2,
         storeId: ''

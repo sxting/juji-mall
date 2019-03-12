@@ -324,7 +324,7 @@ Page({
   showShare:function(){
     wx.showLoading({title: '生成图片...'});
     wx.downloadFile({
-      url: constant.basePicUrl+this.data.productInfo.picId+'/resize_240_240/mode_fill',
+      url: constant.basePicUrl+this.data.productInfo.picId+'/resize_750_420/mode_fill',
       success: (res) => {
         if (res.statusCode === 200) {
             this.setData({headImg:res.tempFilePath});
@@ -343,7 +343,7 @@ Page({
           next: res => {
             var picId = res;
             wx.downloadFile({
-              url: constant.basePicUrl+picId+'/resize_240_240/mode_fill',
+              url: constant.basePicUrl+picId+'/resize_200_200/mode_fill',
               success: (res1) => {
                 if (res1.statusCode === 200) {
                     this.setData({erwmImg:res1.tempFilePath});

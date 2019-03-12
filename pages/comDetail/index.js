@@ -324,7 +324,7 @@ Page({
   showShare:function(){
     wx.showLoading({title: '生成图片...'});
     wx.downloadFile({
-      url: constant.basePicUrl+this.data.productInfo.picId+'/resize_240_240/mode_fill',
+      url: constant.basePicUrl+this.data.productInfo.picId+'/resize_750_420/mode_fill',
       success: (res) => {
         if (res.statusCode === 200) {
             this.setData({headImg:res.tempFilePath});
@@ -343,7 +343,7 @@ Page({
           next: res => {
             var picId = res;
             wx.downloadFile({
-              url: constant.basePicUrl+picId+'/resize_240_240/mode_fill',
+              url: constant.basePicUrl+picId+'/resize_200_200/mode_fill',
               success: (res1) => {
                 if (res1.statusCode === 200) {
                     this.setData({erwmImg:res1.tempFilePath});
@@ -382,63 +382,76 @@ Page({
   setCanvasSize: function() {
       var size = {};
       size.w = 256;
-      size.h = 425;
+      size.h = 419;
       return size;
   },
   setTitle: function(context,name) {
-      context.setFontSize(14);
+      context.setFontSize(12);
       context.setTextAlign("left");
       context.setFillStyle("#333");
       context.fillText(name, 20, 210);
       context.stroke();
 
-      context.setFontSize(16);
-      context.setTextAlign("left");
+      context.setFontSize(13);
+      context.setTextAlign("center");
       context.setFillStyle("#000");
-      context.fillText("“桔”美好生活，集好店优惠", 10, 36);
+      context.fillText("“桔”美好生活，集好店优惠", 128, 68);
       context.stroke();
   },
-  setText2: function(context,price) {
-      context.setFontSize(15);
+  setText2: function(context,price1,price2) {
+      var size = this.setCanvasSize();
+      context.setFontSize(12);
       context.setTextAlign("left");
       context.setFillStyle("#E83221");
-      context.fillText("现价:" + price, 20, 233);
+      context.fillText(price1, 55, 233);
+      context.stroke();
+      context.setFontSize(10);
+      context.setTextAlign("right");
+      context.setFillStyle("#999999");
+      context.fillText("原价:" + price2, size.w - 20, 233);
       context.stroke();
   },
-  setText3: function(context,price,amount) {
+  setText3: function(context,amount) {
       var size = this.setCanvasSize();
-      context.setFontSize(13);
-      context.setTextAlign("left");
-      context.setFillStyle("#999");
-      context.fillText("原价:" + price, 20, 255);
-      context.stroke();
-      context.setFontSize(13);
+      context.setFontSize(10);
       context.setTextAlign("right");
-      context.setFillStyle("#999");
+      context.setFillStyle("#999999");
       context.fillText("销量:" + amount, size.w-20, 255);
       context.stroke();
   },
   setText4: function(context) {
       var size = this.setCanvasSize();
-      context.setFontSize(12);
+      context.setFontSize(11);
+      context.setTextAlign("center");
+      context.setFillStyle("#666666");
+      context.fillText("长按识别二维码", 128, 388);
+      context.stroke();
+  },
+  setText5: function(context) {
+      var size = this.setCanvasSize();
+      context.setFontSize(9);
       context.setTextAlign("left");
-      context.setFillStyle("#666");
-      context.fillText("长按识别二维码", size.w/2-40, 388);
+      context.setFillStyle("#999999");
+      context.fillText("过期退", 35, 256);
+      context.fillText("随时退", 95, 256);
       context.stroke();
   },
   drawImage: function(name, desc,price1,price2,amount) {//name,desc,现价,原价,销量
       var size = this.setCanvasSize();
       var context = wx.createCanvasContext('myCanvas');
       context.drawImage(this.data.shareBg, 0, 0, size.w, size.h); //宽度70，居中，距离上15
-      rectPath(context, 10, 60, size.w-20, 355);
-      context.drawImage(this.data.headImg, 0, 0, size.w - 20, 130,10,60,size.w-20,130); //宽度70，居中，距离上15
-      context.save();
-      context.drawImage(this.data.erwmImg, size.w/2 - 40, 287, 80, 80); //二维码，宽度100，居中
+      context.drawImage("../../images/logo.png", size.w/2-14, 15, 28,30); //宽度70，居中，距离上15
+      context.drawImage(this.data.headImg, 10, 82, size.w - 20,140); //宽度70，居中，距离上15
+      rectPath(context, 10, 190, size.w-20, 218);
+      context.drawImage(this.data.erwmImg, size.w/2 - 40, 287.5, 80, 80); //二维码，宽度100，居中
       this.setTitle(context,name);
-      // this.setText1(context,desc);
-      drawDashLine(context, 12, 275, size.w-12, 275, 4);//横向虚线
-      this.setText2(context,price1);
-      this.setText3(context,price2,amount);
+      context.drawImage("../../images/price.png", 20, 223, 30,13); //宽度70，居中，距离上15
+      context.drawImage("../../images/gou.png", 20, 247.5, 10,10); //宽度70，居中，距离上15
+      context.drawImage("../../images/gou.png", 80, 247.5, 10,10); //宽度70，居中，距离上15
+      this.setText5(context);
+      drawDashLine(context, 15, 275, size.w-15, 275, 4);//横向虚线
+      this.setText2(context,price1,price2);
+      this.setText3(context,amount);
       this.setText4(context);
       context.draw();
   },
@@ -486,6 +499,7 @@ Page({
           filePath: imgUrl,
           success: (res) => {
             this.share();//分享获得桔子
+            this.closeModal();
             if(type==1){
               wx.showToast({
                   title: "已保存至相册",
@@ -505,29 +519,28 @@ Page({
 
 function rectPath(ctx, x, y, w, h) {
     ctx.beginPath();
-    ctx.setFillStyle('#fff');
+    ctx.setFillStyle('#ffffff');
     ctx.moveTo(x, y);
     ctx.lineTo(x + w, y);
     ctx.lineTo(x + w, y + h);
     ctx.lineTo(x, y + h);
     ctx.lineTo(x, y);
-    ctx.setStrokeStyle('#fff');
+    ctx.setStrokeStyle('#ffffff');
     ctx.fill();
     ctx.closePath();
 }
 
 function drawDashLine(ctx, x1, y1, x2, y2, dashLength){  //传context对象，始点x和y坐标，终点x和y坐标，虚线长度
+  ctx.beginPath();
   ctx.setStrokeStyle("#eeeeee")//设置线条的颜色
   ctx.setLineWidth(1)//设置线条宽度
   var dashLen = dashLength === undefined ? 3 : dashLength,
   xpos = x2 - x1, //得到横向的宽度;
   ypos = y2 - y1, //得到纵向的高度;
   numDashes = Math.floor(Math.sqrt(xpos * xpos + ypos * ypos) / dashLen); 
-  //利用正切获取斜边的长度除以虚线长度，得到要分为多少段;
   for(var i=0; i<numDashes; i++){
      if(i % 2 === 0){
          ctx.moveTo(x1 + (xpos/numDashes) * i, y1 + (ypos/numDashes) * i); 
-         //有了横向宽度和多少段，得出每一段是多长，起点 + 每段长度 * i = 要绘制的起点；
       }else{
           ctx.lineTo(x1 + (xpos/numDashes) * i, y1 + (ypos/numDashes) * i);
       }

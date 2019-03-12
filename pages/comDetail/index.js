@@ -20,7 +20,6 @@ Page({
     despImgHeightValues:[],
     isShowData:false,
     isHiddenClose:false,
-
     isShowModal:true,
     windowWidth: 345,
     windowHeight: 430,
@@ -382,63 +381,62 @@ Page({
   },
   setCanvasSize: function() {
       var size = {};
-      size.w = wx.getSystemInfoSync().windowWidth-90;
-      size.h = 440;
+      size.w = 256;
+      size.h = 425;
       return size;
   },
   setTitle: function(context,name) {
       context.setFontSize(14);
       context.setTextAlign("left");
-      context.setFillStyle("#666666");
-      context.fillText(name, 28, 253);
-      context.fillText("“桔”美好生活", 25, 350);
+      context.setFillStyle("#333");
+      context.fillText(name, 20, 210);
       context.stroke();
 
-      context.setFontSize(12);
+      context.setFontSize(16);
       context.setTextAlign("left");
-      context.setFillStyle("#666666");
-      context.fillText("集好店优惠", 38, 378);
+      context.setFillStyle("#000");
+      context.fillText("“桔”美好生活，集好店优惠", 10, 36);
       context.stroke();
   },
   setText2: function(context,price) {
       context.setFontSize(15);
       context.setTextAlign("left");
       context.setFillStyle("#E83221");
-      context.fillText("现价:" + price, 28, 281);
+      context.fillText("现价:" + price, 20, 233);
       context.stroke();
   },
   setText3: function(context,price,amount) {
       var size = this.setCanvasSize();
       context.setFontSize(13);
-      context.setTextAlign("right");
+      context.setTextAlign("left");
       context.setFillStyle("#999");
-      context.fillText("原价:" + price, size.w, 281);
+      context.fillText("原价:" + price, 20, 255);
       context.stroke();
       context.setFontSize(13);
       context.setTextAlign("right");
       context.setFillStyle("#999");
-      context.fillText("销量:" + amount, size.w, 253);
+      context.fillText("销量:" + amount, size.w-20, 255);
       context.stroke();
   },
   setText4: function(context) {
       var size = this.setCanvasSize();
       context.setFontSize(12);
-      context.setTextAlign("right");
+      context.setTextAlign("left");
       context.setFillStyle("#666");
-      context.fillText("长按识别二维码", size.w-10, 410);
+      context.fillText("长按识别二维码", size.w/2-40, 388);
       context.stroke();
   },
   drawImage: function(name, desc,price1,price2,amount) {//name,desc,现价,原价,销量
       var size = this.setCanvasSize();
       var context = wx.createCanvasContext('myCanvas');
-      context.drawImage(this.data.shareBg, 0, 0, size.w+90, size.h); //宽度70，居中，距离上15
-      rectPath(context, 15, 15, size.w, size.h-30);
-      context.drawImage(this.data.headImg, 28, 28, size.w - 26, 200); //宽度70，居中，距离上15
+      context.drawImage(this.data.shareBg, 0, 0, size.w, size.h); //宽度70，居中，距离上15
+      rectPath(context, 10, 60, size.w-20, 355);
+      context.drawImage(this.data.headImg, 0, 0, size.w - 20, 130,10,60,size.w-20,130); //宽度70，居中，距离上15
       context.save();
-      context.drawImage(this.data.erwmImg, size.w - 90, 312, 80, 80); //二维码，宽度100，居中
+      context.drawImage(this.data.erwmImg, size.w/2 - 40, 287, 80, 80); //二维码，宽度100，居中
       this.setTitle(context,name);
       // this.setText1(context,desc);
-      drawDashLine(context, 28, 300, size.w, 300, 4);//横向虚线
+      drawDashLine(context, 12, 275, size.w-12, 275, 4);//横向虚线
       this.setText2(context,price1);
       this.setText3(context,price2,amount);
       this.setText4(context);
@@ -513,7 +511,7 @@ function rectPath(ctx, x, y, w, h) {
     ctx.lineTo(x + w, y + h);
     ctx.lineTo(x, y + h);
     ctx.lineTo(x, y);
-    ctx.setStrokeStyle('transparent');
+    ctx.setStrokeStyle('#fff');
     ctx.fill();
     ctx.closePath();
 }

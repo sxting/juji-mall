@@ -265,28 +265,25 @@
 
   <!-- <confirmBox isShowConfirmModal="{{isShowConfirmModal}}" confirmBoxTitle="{{confirmTitle}}" confirmBoxContent="{{confirmContent}}"></confirmBox> -->
 
-  <view class="modal ub ub-ac ub-pc" hidden="{{isShowModal}}">
-    <view class="div">
+  <view class="modal ub ub-ver" hidden="{{isShowModal}}" bindtap="closeModal">
+    <view class="div ub-f1 ub ub-ac ub-pc">
       <view class="canvas">
         <canvas canvas-id="myCanvas"></canvas>
       </view>
-      <view class="close">
-        <image class="closeImg" src="../../images/close.png" bindtap="closeModal"></image>
-      </view>
-      <view class="bott ub ub-ac">
-        <button class="ub-f1 ub ub-ac ub-pc left ub-ver" open-type="share">
-          <image class="icon" src="../../images/icon_friend.png"></image>
-          <text class="txt1">发给好友</text>
-        </button>
-        <button class="ub-f1 ub ub-ac ub-pc center ub-ver" bindtap="savePic" data-type="2">
-          <image class="icon1" src="../../images/icon_circle.png"></image>
-          <text class="txt2">分享朋友圈</text>
-        </button>
-        <button class="ub-f1 ub ub-ac ub-pc right ub-ver" bindtap="savePic" data-type="1">
-          <image class="icon" src="../../images/icon_save.png"></image>
-          <text class="txt1">保存图片</text>
-        </button>
-      </view>
+    </view>
+    <view class="bott ub ub-ac">
+      <button class="ub-f1 ub ub-ac ub-pc left ub-ver" open-type="share">
+        <image class="icon" src="../../images/icon_friend.png"></image>
+        <text class="txt1">分享给好友</text>
+      </button>
+      <button class="ub-f1 ub ub-ac ub-pc center ub-ver" bindtap="savePic" data-type="2">
+        <image class="icon" src="../../images/icon_circle.png"></image>
+        <text class="txt2">分享朋友圈</text>
+      </button>
+      <button class="ub-f1 ub ub-ac ub-pc right ub-ver" bindtap="savePic" data-type="1">
+        <image class="icon" src="../../images/icon_save.png"></image>
+        <text class="txt1">保存图片</text>
+      </button>
     </view>
   </view>
 

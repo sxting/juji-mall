@@ -266,8 +266,8 @@
   <!-- <confirmBox isShowConfirmModal="{{isShowConfirmModal}}" confirmBoxTitle="{{confirmTitle}}" confirmBoxContent="{{confirmContent}}"></confirmBox> -->
 
   <view class="modal1 ub ub-ver" hidden="{{isShowModal}}">
-    <view style="width:100%;height:100%;background-color:rgba(0,0,0,0.3);position:absolute;z-index:1;top: 0;left: 0" bindtap="closeModal"></view>
     <view class="div ub-f1 ub ub-ac ub-pc">
+      <view style="width:100%;height:100%;background-color:rgba(0,0,0,0.3);position:absolute;z-index:1;top: 0;left: 0" bindtap="closeModal"></view>
       <view class="canvas">
         <canvas canvas-id="myCanvas"></canvas>
       </view>

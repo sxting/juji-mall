@@ -13,7 +13,7 @@ Page({
     locationName: '',
     businessList: [],
     leavePage: false,
-    autoplay: false,
+    autoplay: true,
     swiperH: '', //swiper高度
     nowIdx: 0, //当前swiper索引
     slideShowList: [{}],
@@ -643,7 +643,7 @@ Page({
       return ;
     }
       wx.navigateTo({
-        url: '..'+link
+        url: '/pages'+link
       });
   },
   //跳转到商品详情

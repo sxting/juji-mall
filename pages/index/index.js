@@ -643,7 +643,7 @@ Page({
       return ;
     }
       wx.navigateTo({
-        url: '..'+link
+        url: '/pages'+link
       });
   },
   //跳转到商品详情

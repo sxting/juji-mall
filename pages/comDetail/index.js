@@ -382,7 +382,7 @@ Page({
   setCanvasSize: function() {
       var size = {};
       size.w = 256;
-      size.h = 419;
+      size.h = 424;
       return size;
   },
   setTitle: function(context,name) {
@@ -403,12 +403,12 @@ Page({
       context.setFontSize(12);
       context.setTextAlign("left");
       context.setFillStyle("#E83221");
-      context.fillText(price1, 55, 233);
+      context.fillText(price1, 55, 235);
       context.stroke();
       context.setFontSize(10);
       context.setTextAlign("right");
       context.setFillStyle("#999999");
-      context.fillText("原价:" + price2, size.w - 20, 233);
+      context.fillText("原价:" + price2, size.w - 20, 234);
       context.stroke();
   },
   setText3: function(context,amount) {
@@ -416,7 +416,7 @@ Page({
       context.setFontSize(10);
       context.setTextAlign("right");
       context.setFillStyle("#999999");
-      context.fillText("销量:" + amount, size.w-20, 255);
+      context.fillText("销量:" + amount, size.w-20, 262);
       context.stroke();
   },
   setText4: function(context) {
@@ -424,7 +424,7 @@ Page({
       context.setFontSize(11);
       context.setTextAlign("center");
       context.setFillStyle("#666666");
-      context.fillText("长按识别二维码", 128, 388);
+      context.fillText("长按识别二维码", 128, 393);
       context.stroke();
   },
   setText5: function(context) {
@@ -432,8 +432,8 @@ Page({
       context.setFontSize(9);
       context.setTextAlign("left");
       context.setFillStyle("#999999");
-      context.fillText("过期退", 35, 256);
-      context.fillText("随时退", 95, 256);
+      context.fillText("过期退", 35, 261);
+      context.fillText("随时退", 95, 261);
       context.stroke();
   },
   drawImage: function(name, desc,price1,price2,amount) {//name,desc,现价,原价,销量
@@ -442,14 +442,14 @@ Page({
       context.drawImage(this.data.shareBg, 0, 0, size.w, size.h); //宽度70，居中，距离上15
       context.drawImage("../../images/logo.png", size.w/2-14, 15, 28,30); //宽度70，居中，距离上15
       context.drawImage(this.data.headImg, 10, 82, size.w - 20,140); //宽度70，居中，距离上15
-      rectPath(context, 10, 190, size.w-20, 218);
-      context.drawImage(this.data.erwmImg, size.w/2 - 40, 287.5, 80, 80); //二维码，宽度100，居中
+      rectPath(context, 10, 190, size.w-20, 219);
+      context.drawImage(this.data.erwmImg, size.w/2 - 40, 292.5, 80, 80); //二维码，宽度100，居中
       this.setTitle(context,name);
-      context.drawImage("../../images/price.png", 20, 223, 30,13); //宽度70，居中，距离上15
-      context.drawImage("../../images/gou.png", 20, 247.5, 10,10); //宽度70，居中，距离上15
-      context.drawImage("../../images/gou.png", 80, 247.5, 10,10); //宽度70，居中，距离上15
+      context.drawImage("../../images/price.png", 20, 224, 30,13); //宽度70，居中，距离上15
+      context.drawImage("../../images/gou.png", 20, 252.5, 10,10); //宽度70，居中，距离上15
+      context.drawImage("../../images/gou.png", 80, 252.5, 10,10); //宽度70，居中，距离上15
       this.setText5(context);
-      drawDashLine(context, 15, 275, size.w-15, 275, 4);//横向虚线
+      drawDashLine(context, 15, 280, size.w-15, 280, 4);//横向虚线
       this.setText2(context,price1,price2);
       this.setText3(context,amount);
       this.setText4(context);

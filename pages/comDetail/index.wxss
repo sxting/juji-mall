@@ -59,8 +59,8 @@ page{height: 100%;}
 .modal1 .div{width:100%;position:relative;z-index:9;box-sizing:border-box;}
 .modal1 .div .canvas{width:256px;height:420px;position:relative;z-index:6;}
 .modal1 canvas{width:256px;height:420px;}
-.modal1 .bott{position:relative;height:140rpx;width:100%;z-index:99}
-.modal1 .bott button{font-size:28rpx;height:140rpx;}
+.modal1 .bott{position:relative;height:160rpx;width:100%;z-index:99}
+.modal1 .bott button{font-size:28rpx;height:140rpx;background-color: #ffffff}
 .modal1 .bott button .icon{display:block;width:60rpx;height:60rpx;}
 .modal1 .bott button .txt1{display:block;height:32rpx;line-height:32rpx;font-size:24rpx;margin-top:16rpx;color:#666}
 .modal1 .bott button .txt2{display:block;height:32rpx;line-height:32rpx;font-size:24rpx;margin-top:13rpx;color:#666}

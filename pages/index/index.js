@@ -183,6 +183,12 @@ Page({
             } else {
               reject2('登录失败，错误码:' + res1.data.errorCode + ' 返回错误: ' + res1.data.errorInfo);
             }
+          },
+          fail:(err) =>{
+            that.setData({
+              showPageLoading: false
+            });
+            reject2(err.errMsg);
           }
         });
       });
@@ -430,6 +436,11 @@ Page({
   },
   onShow: function () {
     var that = this;
+    setTimeout(() => {
+      that.setData({
+        showPageLoading: false
+      });
+    }, 5000);
     if (wx.getStorageSync('selectCode')){//存在 说明用户选过异地城市
       if (wx.getStorageSync('locationCode') != wx.getStorageSync('selectCode')) {
         //如果城市更换了 需要通过用户选择的城市编号code重新加载页面

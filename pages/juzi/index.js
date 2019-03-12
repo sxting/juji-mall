@@ -104,7 +104,8 @@ Page({
           currentPointObj:res,
           canSignIn: res.canSignIn
         });
-      }
+      },
+      error: err => errDialog(err)
     });
   },
   closejuzigzModal: function() {

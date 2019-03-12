@@ -673,16 +673,6 @@ Page({
       url: '/pages/comDetail/index?id=' + id + '&storeid=' + storeid
     });
   },
-  //获取swiper高度
-  getHeight: function(e) {
-    var winWid = wx.getSystemInfoSync().windowWidth - 2 * 30; //获取当前屏幕的宽度
-    var imgh = e.detail.height; //图片高度
-    var imgw = e.detail.width;
-    var sH = winWid * imgh / imgw + "px"
-    this.setData({
-      swiperH: sH //设置高度
-    })
-  },
   //切换筛选的升序和降序
   toggleLabel: function(event) {
     let sortIndex = event.currentTarget.dataset['label'];

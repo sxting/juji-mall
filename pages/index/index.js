@@ -419,6 +419,9 @@ Page({
 
     }).catch(function(err) {
       console.log(err);
+      that.setData({
+        showPageLoading: false
+      });
       wx.showModal({
         title: '错误',
         content: err
@@ -578,6 +581,9 @@ Page({
 
       }
     }else{//不存在 定位获取
+      this.setData({
+        showPageLoading: false
+      });
       return ;
     }
 

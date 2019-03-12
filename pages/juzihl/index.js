@@ -551,7 +551,7 @@ Page({
           this.setData({
             recommendPage: this.data.recommendPage.concat(res.list)
           });
-          if (res.countPage >= this.data.pageNo) {
+          if (res.countPage <= this.data.pageNo) {
             this.setData({
               pullUpFlag: false
             });

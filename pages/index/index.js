@@ -183,6 +183,12 @@ Page({
             } else {
               reject2('登录失败，错误码:' + res1.data.errorCode + ' 返回错误: ' + res1.data.errorInfo);
             }
+          },
+          fail:(err) =>{
+            that.setData({
+              showPageLoading: false
+            });
+            reject2(err.errMsg);
           }
         });
       });
@@ -430,6 +436,11 @@ Page({
   },
   onShow: function () {
     var that = this;
+    setTimeout(() => {
+      that.setData({
+        showPageLoading: false
+      });
+    }, 5000);
     if (wx.getStorageSync('selectCode')){//存在 说明用户选过异地城市
       if (wx.getStorageSync('locationCode') != wx.getStorageSync('selectCode')) {
         //如果城市更换了 需要通过用户选择的城市编号code重新加载页面
@@ -661,16 +672,6 @@ Page({
     wx.navigateTo({
       url: '/pages/comDetail/index?id=' + id + '&storeid=' + storeid
     });
-  },
-  //获取swiper高度
-  getHeight: function(e) {
-    var winWid = wx.getSystemInfoSync().windowWidth - 2 * 30; //获取当前屏幕的宽度
-    var imgh = e.detail.height; //图片高度
-    var imgw = e.detail.width;
-    var sH = winWid * imgh / imgw + "px"
-    this.setData({
-      swiperH: sH //设置高度
-    })
   },
   //切换筛选的升序和降序
   toggleLabel: function(event) {

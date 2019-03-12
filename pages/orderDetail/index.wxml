@@ -51,7 +51,7 @@
     </view>
     <view class="ub ub-ac tkDiv plr15 mt10" wx:if="{{orderInfo.status=='PAID'}}">
         <image class="udb" src="../../images/tuikuan.png"></image>
-        <view class="txt ub-f1">有效期内未使用请联系商家退款</view>
+        <view class="txt ub-f1">未使用可联系平台申请退款</view>
         <view class="btn ub ub-ac ub-pc" bindtap="reFund">退款</view>
     </view>
     <view class="orderInfo3 plr15 mt10">

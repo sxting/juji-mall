@@ -29,6 +29,7 @@ Page({
     imageWidth:'200rpx',
     sortField:'IDX',
     pullUpFlag: true,
+    showPageLoading: true,//首页加载过程中标记 当最后一层的pageComment返回之后设置为false
     // citylist: [],
     citylist: [{
       "version": 0,
@@ -83,7 +84,7 @@ Page({
 
     let that = this;
 
-    let p = new Promise(function(resolve, reject) {
+    new Promise(function(resolve, reject) {
       console.log('Promise is ready!');
       wx.getSetting({
         success: (res) => {
@@ -102,10 +103,7 @@ Page({
           }
         }
       });
-    });
-
-
-    p.then(function() {
+    }).then(function() {
 
       return new Promise(function(resolve1, reject1) {
         wx.login({
@@ -303,6 +301,7 @@ Page({
                             wx.setStorageSync('selectPcode', res1.parentLocation.parentLocation.locationCode);
                             //如果是 切换到当前定位城市 通过selectPcode selectCode等查询代理商数据
                             that.setData({
+                              showPageLoading: true,
                               locationName: res1.parentLocation.locationName.replace('市', ''),
                               locationPcode: res1.parentLocation.parentLocation.locationCode,
                               locationCode: res1.parentLocation.locationCode
@@ -438,6 +437,7 @@ Page({
           return ;
         }else{
           this.setData({
+            showPageLoading: true,
             sortIndex: 1,
             pageNo: 1,
             pullUpFlag: true,
@@ -471,6 +471,7 @@ Page({
           return;
         } else {
           this.setData({
+            showPageLoading: true,
             locationCode: wx.getStorageSync('locationCode'),
             locationPcode: wx.getStorageSync('locationPcode'),
             locationName: wx.getStorageSync('locationName')
@@ -882,15 +883,24 @@ Page({
       next: res => {
         console.log(res);
         this.setData({
+          showPageLoading:false,
           recommendPage: res.list
         });
       },
-      error: err => console.log(err),
+      error: err => {
+        console.log(err);
+          this.setData({
+            showPageLoading: false
+          });
+        },
       complete: () => wx.hideToast()
     });
   },
   //当前城市没有数据时 点击了其他热门城市
   selectCity:function(e){
+    this.setData({
+      showPageLoading: true
+    });
     console.log('点击了下面的其他城市');
     var selectCityName = e.currentTarget.dataset['name'].replace('市', '');
     var selectPcode = e.currentTarget.dataset['pcode'];

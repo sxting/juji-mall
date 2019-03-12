@@ -1,5 +1,9 @@
 <wxs module="filter" src="../../utils/numFr.wxs"></wxs>
-<view class="{{(slideShowList.length>0||pointProductList.length>0||recommendPage.length>0)?'':'homeTabPage'}} {{isShowNewerGet?'noscroll':''}}">
+<view wx:if="{{showPageLoading}}" class="pageLoading">
+  <image src="../../images/pageLoading.gif" class="pageLoadingImg"></image>
+  <view class="pageLoadingTip" style="color:#666666;font-size: 30rpx;">桔美好生活，集好店优惠</view>
+</view>
+<view class="{{(slideShowList.length>0||pointProductList.length>0||recommendPage.length>0)?'':'homeTabPage'}} {{isShowNewerGet?'noscroll':''}}" wx:else>
   <view class="locationWrap">
     <view class="title">桔集</view>
     <view class="location" bindtap="toCityList">{{locationName}}

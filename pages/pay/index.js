@@ -127,7 +127,14 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    let scene = wx.getStorageSync('scene');
+    if (scene == '1011' || scene == '1012' || scene == '1013') {//扫描二维码场景值
+      return ;
+    }else{
+      wx.switchTab({
+        url: '/pages/index/index',
+      })
+    }
   },
   clickAccountPay:function() {
     if (this.data.seledAccount) {
@@ -589,9 +596,7 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-    wx.switchTab({
-      url: '/pages/index/index',
-    })
+    
   },
 
   /**

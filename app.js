@@ -22,6 +22,7 @@ App({
     });
     console.log('app');
     console.log(options);
+    wx.setStorageSync('scene', options.scene);
     if (options.shareTicket) {
       wx.getShareInfo({
         shareTicket: options.shareTicket,
@@ -31,6 +32,13 @@ App({
       });
     }
     
+  },
+  onHide: function(){
+    console.log('App Hide')
+  },
+  onShow: function (options){
+    console.log(options);
+    wx.setStorageSync('scene', options.scene);
   },
   getMyInfo: function() {
     service.getMyInfo().subscribe({

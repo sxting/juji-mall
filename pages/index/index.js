@@ -13,7 +13,7 @@ Page({
     locationName: '',
     businessList: [],
     leavePage: false,
-    autoplay: false,
+    autoplay: true,
     swiperH: '', //swiper高度
     nowIdx: 0, //当前swiper索引
     slideShowList: [{}],

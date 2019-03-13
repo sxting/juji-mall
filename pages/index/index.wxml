@@ -14,7 +14,7 @@
   <view wx:if="{{slideShowList.length>0||pointProductList.length>0||recommendPage.length>0}}">
     <view style="background:#fff;padding-bottom:30rpx;">
     <view class="toper">
-      <swiper autoplay="{{autoplay}}" current="{{nowIdx}}" previous-margin="30rpx" next-margin="30rpx" interval="3000" duration="1000" indicator-color="#fff" indicator-active-color="#b55fff" bindchange="swiperChange" circular>
+      <swiper autoplay="{{autoplay}}" previous-margin="30rpx" next-margin="30rpx" interval="3000" duration="1000" indicator-color="#fff" indicator-active-color="#b55fff" bindchange="swiperChange" circular>
         <swiper-item wx:for="{{slideShowList}}" wx:key="unique">
           <image src="{{item.imgId?'https://upic.juniuo.com/file/picture/'+item.imgId+'/resize_0_0/mode_fill':''}}" data-link="{{item.link}}" bindtap="onTapBanner" class="slide-image  {{nowIdx==index?'img-scale':''}}" mode="aspectFill"></image>
         </swiper-item>
@@ -125,6 +125,16 @@
             <view class="old-price">{{filter.toFix(item.originalPrice)}}元</view>
           </view>
           <view class="count">已售{{item.soldNum}}件</view>
+        </view>
+      </view>
+    </view>
+
+    <view class="phoneWrap" wx:if="{{!pullUpFlag}}">
+      <view class="phoneView ub ub-ac" bindtap="callPhone">
+        <image src="../../images/logo_main.png" style="width:80rpx;height:80rpx;"></image>
+        <view class="phoneInner">
+          <view>桔集生活严选</view>
+          <view class="ub ub-ac"><image src="../../images/dianhua.png" style="width:30rpx;height:26rpx;margin-right:10rpx;"></image>合作电话：400-001-1139</view>
         </view>
       </view>
     </view>

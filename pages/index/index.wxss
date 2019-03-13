@@ -442,3 +442,21 @@ swiper {
   margin-left: -200rpx;
   text-align: center;
 }
+
+.phoneWrap {
+  width: 100%;
+  padding:60rpx 0;
+}
+
+.phoneView {
+  width: 420rpx;
+  height: 80rpx;
+  margin:0 auto;
+}
+.phoneInner{
+  margin-left:20rpx;
+}
+.phoneInner view {
+  font-size: 24rpx;
+  color: #333;
+}

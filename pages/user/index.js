@@ -33,7 +33,12 @@ Page({
             error: err => errDialog(err),
             complete: () => wx.hideToast()
         })
-    }
+    },
+  callPhone: function(){
+    wx.makePhoneCall({
+      phoneNumber: '4000011139',
+    });
+  }
 });
 
 

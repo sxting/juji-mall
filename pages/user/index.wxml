@@ -68,10 +68,22 @@
       <view style="height:1rpx;background:#eeeeee;"></view>
     </view>
     <view class="ub ub-ac ub-pj plr15">
-        <view class="ub-f1">
-            <button class='kefu tx-l udb' open-type='contact' session-from='weapp'>客服</button>
-        </view>
+      <view class="ub-f1">
+        <button class='kefu tx-l udb' open-type='contact' session-from='weapp'>客服</button>
+      </view>
       <image src="../../images/arrow-right.png" style="width:12rpx;height:22rpx;"></image>
     </view>
   </view>
+
+  <view class="phoneWrap">
+    <view class="phoneView ub ub-ac" bindtap="callPhone">
+      <image src="../../images/logo_main.png" style="width:80rpx;height:80rpx;"></image>
+      <view class="phoneInner">
+        <view>桔集生活严选</view>
+        <view class="ub ub-ac"><image src="../../images/dianhua.png" style="width:30rpx;height:26rpx;margin-right:10rpx;"></image>合作电话：400-001-1139</view>
+      </view>
+    </view>
+  </view>
+
+
 </view>

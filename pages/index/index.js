@@ -977,5 +977,10 @@ Page({
       error: err => console.log(err),
       complete: () => wx.hideToast()
     });
+  },
+  callPhone: function () {
+    wx.makePhoneCall({
+      phoneNumber: '4000011139',
+    });
   }
 })

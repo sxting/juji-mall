@@ -170,6 +170,11 @@ service.getQrCode = (data) => {
   return http.get(apiUrl,data);
 }
 
+service.getComIdByscence = (data) => {
+  let apiUrl = api +'/qr/getBySceneId.json';
+  return http.get(apiUrl,data);
+}
+
 module.exports = {
   service: service
 }

@@ -35,112 +35,134 @@ Page({
     });
     console.log(option);
     if (!option.id) {
-      wx.showToast({
-        title: '发生错误，未找到商品id',
-        icon: 'none'
-      });
-      wx.navigateTo({
-        url: '/pages/index/index',
-      })
-      return ;
-    }
-    let lat = wx.getStorageSync('curLatitude');
-    let lng = wx.getStorageSync('curLongitude');
-    this.setData({
-      productId: option.id,
-      storeId: option.storeid
-    });
-    let that = this;
-    if(wx.getStorageSync('token')){
-      console.log('token存在');
-      this.getItemInfo();
-      //查询用户橘子
-      this.getPointBalance();
+      if (option.scene) {
+        let scene = decodeURIComponent(option.scene);
+        service.getComIdByscence({ sceneId: scene }).subscribe({
+          next: res => {
+            this.setData({
+              productId: res.productId
+            });
+            if (wx.getStorageSync('token')) {
+              console.log('token存在');
+              this.getItemInfo();
+              //查询用户橘子
+              this.getPointBalance();
+            } else {
+              console.log('token不存在');
+              //新用户 授权 登录 跳转
+              this.mainFnc();
+            }
+          },
+          error: err => console.log(err),
+          complete: () => wx.hideToast()
+        });
+        
+      }else{
+        wx.showToast({
+          title: '发生错误，未找到商品id',
+          icon: 'none'
+        });
+        this.gohomepage();
+        return;
+      }
+      
     }else{
-      console.log('token不存在');
-      //新用户 授权 登录 跳转
-      // wx.switchTab({
-      //   url: '/pages/index/index',
-      // });
+      this.setData({
+        productId: option.id,
+        storeId: option.storeid
+      });
+      
+      if (wx.getStorageSync('token')) {
+        console.log('token存在');
+        this.getItemInfo();
+        //查询用户橘子
+        this.getPointBalance();
+      } else {
+        console.log('token不存在');
+        //新用户 授权 登录 跳转
+        this.mainFnc();
+      }
+    }
+    
 
-      new Promise(function (resolve, reject) {
-        console.log('Promise is ready!');
-        wx.getSetting({
-          success: (res) => {
-            console.log(res.authSetting['scope.userInfo']);
-            if (!res.authSetting['scope.userInfo']) {
-              wx.reLaunch({
-                url: '/pages/login/index?fromPage=comDetail&productId=' + that.data.productId + '&inviteCode=' + option.inviteCode
-              });
-            } else { //如果已经授权
-              //判断rowData是否存在
-              if (wx.getStorageSync('rawData')) { //如果存在
-                resolve();
-              } else { //如果不存在rowData
-                reject('未获取rawData');
-              }
+  },
+  mainFnc: function(){
+    let that = this;
+    new Promise(function (resolve, reject) {
+      console.log('Promise is ready!');
+      wx.getSetting({
+        success: (res) => {
+          console.log(res.authSetting['scope.userInfo']);
+          if (!res.authSetting['scope.userInfo']) {
+            wx.reLaunch({
+              url: '/pages/login/index?fromPage=comDetail&productId=' + that.data.productId + '&inviteCode=' + option.inviteCode
+            });
+          } else { //如果已经授权
+            //判断rowData是否存在
+            if (wx.getStorageSync('rawData')) { //如果存在
+              resolve();
+            } else { //如果不存在rowData
+              reject('未获取rawData');
             }
           }
-        });
-      }).then(function () {
+        }
+      });
+    }).then(function () {
 
-        return new Promise(function (resolve1, reject1) {
-          wx.login({
-            success: res => {
-              console.log('code: ' + res.code);
-              console.log(constant.APPID);
-              resolve1(res.code);
-            }
-          });
-
-        })
-      }).then(function (code) {
-
-          wx.request({
-            url: 'https://c.juniuo.com/shopping/user/login.json',
-            method: 'GET',
-            data: {
-              code: code,
-              appId: constant.APPID,
-              isMock: false, //测试标记
-              inviteCode: option.inviteCode,
-              rawData: wx.getStorageSync('rawData')
-            },
-            header: {
-              'content-type': 'application/json',
-            },
-            success: (res1) => {
-              console.log(res1);
-
-              if (res1.data.errorCode == '200') {
-                wx.setStorageSync('token', res1.data.data.token);
-                wx.setStorageSync('openid', res1.data.data.openId);
-                wx.setStorageSync('inviteCode', res1.data.data.inviteCode);
-                wx.setStorageSync('userinfo', JSON.stringify(res1.data.data));
-
-                that.getItemInfo();
-                //查询用户橘子
-                that.getPointBalance();
-
-              } else {
-                wx.showModal({
-                  title: '错误',
-                  content: '登录失败，错误码:' + res1.data.errorCode + ' 返回错误: ' + res1.data.errorInfo
-                });
-              }
-            }
-          });
-
-        }).catch(function (err) {
-          console.log(err);
-          wx.showModal({
-            title: '错误',
-            content: err
-          });
+      return new Promise(function (resolve1, reject1) {
+        wx.login({
+          success: res => {
+            console.log('code: ' + res.code);
+            console.log(constant.APPID);
+            resolve1(res.code);
+          }
         });
 
-    }
+      })
+    }).then(function (code) {
 
+      wx.request({
+        url: 'https://c.juniuo.com/shopping/user/login.json',
+        method: 'GET',
+        data: {
+          code: code,
+          appId: constant.APPID,
+          isMock: false, //测试标记
+          inviteCode: option.inviteCode,
+          rawData: wx.getStorageSync('rawData')
+        },
+        header: {
+          'content-type': 'application/json',
+        },
+        success: (res1) => {
+          console.log(res1);
+
+          if (res1.data.errorCode == '200') {
+            wx.setStorageSync('token', res1.data.data.token);
+            wx.setStorageSync('openid', res1.data.data.openId);
+            wx.setStorageSync('inviteCode', res1.data.data.inviteCode);
+            wx.setStorageSync('userinfo', JSON.stringify(res1.data.data));
+
+            that.getItemInfo();
+            //查询用户橘子
+            that.getPointBalance();
+
+          } else {
+            wx.showModal({
+              title: '错误',
+              content: '登录失败，错误码:' + res1.data.errorCode + ' 返回错误: ' + res1.data.errorInfo
+            });
+          }
+        }
+      });
+
+    }).catch(function (err) {
+      console.log(err);
+      wx.showModal({
+        title: '错误',
+        content: err
+      });
+    });
   },
   //收集formid做推送
   collectFormIds:function(e){

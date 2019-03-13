@@ -45,12 +45,12 @@ Page({
     let that = this;
     new Promise(function (resolve, reject) {
       console.log('Promise is ready!');
-      // options.q = 'https://juji-dev.juniuo.com/qr/212345678.htm';
+      // options.q = 'https://juji-dev.juniuo.com/qrm/212345678.htm';
       if (options.q) {
         console.log(options.q);
         var link = decodeURIComponent(options.q);
         console.log(link);
-        let arr = link.split('/qr/');
+        let arr = link.split('/qrm/');
         let arr1 = arr[1].split('.htm');
         console.log('qrcode: ' + arr1[0]);
         that.setData({

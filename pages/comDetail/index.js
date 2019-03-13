@@ -50,7 +50,7 @@ Page({
             } else {
               console.log('token不存在');
               //新用户 授权 登录 跳转
-              this.mainFnc();
+              this.mainFnc(option);
             }
           },
           error: err => console.log(err),
@@ -80,13 +80,13 @@ Page({
       } else {
         console.log('token不存在');
         //新用户 授权 登录 跳转
-        this.mainFnc();
+        this.mainFnc(option);
       }
     }
     
 
   },
-  mainFnc: function(){
+  mainFnc: function (option){
     let that = this;
     new Promise(function (resolve, reject) {
       console.log('Promise is ready!');

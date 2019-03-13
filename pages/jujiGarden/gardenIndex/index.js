@@ -1,10 +1,12 @@
 import { errDialog, loading } from '../../../utils/util'
 import { service } from '../../../service';
 import { constant } from '../../../utils/constant';
+import { jugardenService } from '../shared/service.js'
 var app = getApp();
+
 Page({
     data: {
-        status:'3',
+        status:'2',
         juminNumList: [],//队员人数
         hadNumber: 2,
         storeId: ''
@@ -17,20 +19,21 @@ Page({
         wx.navigateTo({ url: page });
     },
     onLoad: function() {
-        wx.setNavigationBarTitle({ title: '桔园' });
-        this.data.juminNumList = [];
-        if (this.data.hadNumber > 0) {
-          for (let i = 0; i < this.data.hadNumber; i++) {
-            let list = 'yes';
-            this.data.juminNumList.push(list);
-          }
-          for (let j = 0; j < (10 -  parseInt(this.data.hadNumber)); j++){
-            this.data.juminNumList.push('');
-          }
+      let self = this;
+      wx.setNavigationBarTitle({ title: '桔园' });
+      this.data.juminNumList = [];
+      if (this.data.hadNumber > 0) {
+        for (let i = 0; i < this.data.hadNumber; i++) {
+          let list = 'yes';
+          this.data.juminNumList.push(list);
         }
-        this.setData({
-          juminNumList: this.data.juminNumList,
-        })
+        for (let j = 0; j < (10 -  parseInt(this.data.hadNumber)); j++){
+          this.data.juminNumList.push('');
+        }
+      }
+      this.setData({
+        juminNumList: this.data.juminNumList,
+      })
     },
     onShow: function() {
         this.getInfo();
@@ -47,3 +50,16 @@ Page({
         })
     },
 });
+
+// 首页信息获取 
+function getGardenInfor(){
+  jugardenService.getGardenHomeInfor().subscribe({
+    next: res => {
+      if (res) {
+        console.log(res);
+      }
+    },
+    error: err => errDialog(err),
+    complete: () => wx.hideToast()
+  })
+}

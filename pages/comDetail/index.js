@@ -30,33 +30,56 @@ Page({
   },
   onLoad: function(option) {
     new app.ToastPannel();
-    wx.setNavigationBarTitle({
-      title: '商品详情'
-    });
+    wx.setNavigationBarTitle({title: '商品详情'});
     console.log(option);
     if (!option.id) {
       if (option.scene) {
         let scene = decodeURIComponent(option.scene);
         this.setData({sceneId: scene});
-        service.getComIdByscence({ sceneId: scene }).subscribe({
-          next: res => {
-            this.setData({
-              productId: res.productId
-            });
-            if (wx.getStorageSync('token')) {
-              console.log('token存在');
-              this.getItemInfo();
-              //查询用户橘子
-              this.getPointBalance();
-            } else {
-              console.log('token不存在');
-              //新用户 授权 登录 跳转
-              this.mainFnc(option,1);
-            }
+
+        wx.request({
+          url: 'https://c.juniuo.com/shopping/qr/getBySceneId.json?sceneId='+scene,
+          method: 'GET',
+          header: {
+            'content-type': 'application/json',
           },
-          error: err => console.log(err),
-          complete: () => wx.hideToast()
+          success: (res) => {
+              this.setData({
+                productId: res.data.data.productId
+              });
+              if (wx.getStorageSync('token')) {
+                console.log('token存在');
+                this.getItemInfo();
+                //查询用户橘子
+                this.getPointBalance();
+              } else {
+                console.log('token不存在');
+                //新用户 授权 登录 跳转
+                this.mainFnc(option,1);
+              }
+          }
         });
+
+
+        // service.getComIdByscence({ sceneId: scene }).subscribe({
+        //   next: res => {
+        //     this.setData({
+        //       productId: res.productId
+        //     });
+        //     if (wx.getStorageSync('token')) {
+        //       console.log('token存在');
+        //       this.getItemInfo();
+        //       //查询用户橘子
+        //       this.getPointBalance();
+        //     } else {
+        //       console.log('token不存在');
+        //       //新用户 授权 登录 跳转
+        //       this.mainFnc(option,1);
+        //     }
+        //   },
+        //   error: err => console.log(err),
+        //   complete: () => wx.hideToast()
+        // });
         
       }else{
         wx.showToast({

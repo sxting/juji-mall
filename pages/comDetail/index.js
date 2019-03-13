@@ -35,8 +35,28 @@ Page({
     });
     console.log(option);
     if (!option.id) {
-      if(true){//tiaojian
-        this.mainFnc();
+      if (option.scene) {
+        let scene = decodeURIComponent(option.scene);
+        service.getComIdByscence({ sceneId: scene }).subscribe({
+          next: res => {
+            this.setData({
+              productId: res.productId
+            });
+            if (wx.getStorageSync('token')) {
+              console.log('token存在');
+              this.getItemInfo();
+              //查询用户橘子
+              this.getPointBalance();
+            } else {
+              console.log('token不存在');
+              //新用户 授权 登录 跳转
+              this.mainFnc();
+            }
+          },
+          error: err => console.log(err),
+          complete: () => wx.hideToast()
+        });
+        
       }else{
         wx.showToast({
           title: '发生错误，未找到商品id',

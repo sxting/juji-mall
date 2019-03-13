@@ -25,8 +25,8 @@ Page({
     windowHeight: 430,
     shareBg: '../../images/shareBg.png',
     headImg: '../../images/shareMinPro.png',
-    erwmImg: '../../images/erwmImg.png'
-
+    erwmImg: '../../images/erwmImg.png',
+    sceneId:''
   },
   onLoad: function(option) {
     new app.ToastPannel();
@@ -37,6 +37,7 @@ Page({
     if (!option.id) {
       if (option.scene) {
         let scene = decodeURIComponent(option.scene);
+        this.setData({sceneId: scene});
         service.getComIdByscence({ sceneId: scene }).subscribe({
           next: res => {
             this.setData({
@@ -50,7 +51,7 @@ Page({
             } else {
               console.log('token不存在');
               //新用户 授权 登录 跳转
-              this.mainFnc(option);
+              this.mainFnc(option,1);
             }
           },
           error: err => console.log(err),
@@ -80,13 +81,13 @@ Page({
       } else {
         console.log('token不存在');
         //新用户 授权 登录 跳转
-        this.mainFnc(option);
+        this.mainFnc(option,2);
       }
     }
     
 
   },
-  mainFnc: function (option){
+  mainFnc: function (option,type){
     let that = this;
     new Promise(function (resolve, reject) {
       console.log('Promise is ready!');
@@ -94,9 +95,7 @@ Page({
         success: (res) => {
           console.log(res.authSetting['scope.userInfo']);
           if (!res.authSetting['scope.userInfo']) {
-            wx.reLaunch({
-              url: '/pages/login/index?fromPage=comDetail&productId=' + that.data.productId + '&inviteCode=' + option.inviteCode
-            });
+              wx.reLaunch({url: '/pages/login/index?fromPage=comDetail&productId=' + that.data.productId + '&inviteCode=' + option.inviteCode});
           } else { //如果已经授权
             //判断rowData是否存在
             // if (wx.getStorageSync('rawData')) { //如果存在
@@ -120,17 +119,27 @@ Page({
 
       })
     }).then(function (code) {
-
-      wx.request({
-        url: 'https://c.juniuo.com/shopping/user/login.json',
-        method: 'GET',
-        data: {
+      if(type==1){
+        var requestObj = {
+          code: code,
+          appId: constant.APPID,
+          isMock: false, //测试标记
+          sceneId: that.data.sceneId,
+          rawData: wx.getStorageSync('rawData')
+        }
+      }else{
+        var requestObj = {
           code: code,
           appId: constant.APPID,
           isMock: false, //测试标记
           inviteCode: option.inviteCode,
           rawData: wx.getStorageSync('rawData')
-        },
+        }
+      }
+      wx.request({
+        url: 'https://c.juniuo.com/shopping/user/login.json',
+        method: 'GET',
+        data: requestObj,
         header: {
           'content-type': 'application/json',
         },

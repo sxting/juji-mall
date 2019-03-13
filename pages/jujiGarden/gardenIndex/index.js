@@ -34,6 +34,7 @@ Page({
       this.setData({
         juminNumList: this.data.juminNumList,
       })
+      getGardenInfor.call(self);
     },
     onShow: function() {
         this.getInfo();
@@ -50,3 +51,16 @@ Page({
         })
     },
 });
+
+// 首页信息获取 
+function getGardenInfor(){
+  jugardenService.getGardenHomeInfor().subscribe({
+    next: res => {
+      if (res) {
+        console.log(res);
+      }
+    },
+    error: err => errDialog(err),
+    complete: () => wx.hideToast()
+  })
+}

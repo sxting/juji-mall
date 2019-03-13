@@ -75,12 +75,13 @@
 }
 
 .phoneView {
-  width: 420rpx;
+  width: 440rpx;
   height: 80rpx;
   margin:0 auto;
 }
 .phoneInner{
   margin-left:20rpx;
+  height:100%;
 }
 .phoneInner view {
   font-size: 24rpx;

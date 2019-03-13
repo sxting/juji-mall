@@ -79,8 +79,8 @@
     <view class="phoneView ub ub-ac" bindtap="callPhone">
       <image src="../../images/logo_main.png" style="width:80rpx;height:80rpx;"></image>
       <view class="phoneInner">
-        <view>桔集生活严选</view>
-        <view class="ub ub-ac"><image src="../../images/dianhua.png" style="width:30rpx;height:26rpx;margin-right:10rpx;"></image>合作电话：400-001-1139</view>
+        <view>桔集-桔美好生活，集好店优惠</view>
+        <view class="ub ub-ac" style="margin-top: 10rpx;"><image src="../../images/dianhua.png" style="width:30rpx;height:26rpx;margin-right:10rpx;"></image>合作电话：400-001-1139</view>
       </view>
     </view>
   </view>

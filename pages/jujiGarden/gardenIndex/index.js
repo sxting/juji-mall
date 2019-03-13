@@ -34,21 +34,9 @@ Page({
       this.setData({
         juminNumList: this.data.juminNumList,
       })
-      getGardenInfor.call(self);
     },
     onShow: function() {
-        this.getInfo();
-    },
-    getInfo: function() {
-        service.userInfo({ openId: wx.getStorageSync('openid') }).subscribe({
-            next: res => {
-                this.setData({
-
-                });
-            },
-            error: err => errDialog(err),
-            complete: () => wx.hideToast()
-        })
+      getGardenInfor.call(self);//get首页信息
     },
 });
 
@@ -56,9 +44,9 @@ Page({
 function getGardenInfor(){
   jugardenService.getGardenHomeInfor().subscribe({
     next: res => {
-      if (res) {
-        console.log(res);
-      }
+      this.setData({
+
+      });
     },
     error: err => errDialog(err),
     complete: () => wx.hideToast()

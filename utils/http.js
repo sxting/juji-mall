@@ -71,11 +71,11 @@ function http_request(
                       });
                     } else { //如果已经授权
                       //判断rowData是否存在
-                      if (wx.getStorageSync('rawData')) { //如果存在
+                      // if (wx.getStorageSync('rawData')) { //如果存在
                         resolve();
-                      } else { //如果不存在rowData
-                        reject('未获取rawData');
-                      }
+                      // } else { //如果不存在rowData
+                      //   reject('未获取rawData');
+                      // }
                     }
                   }
                 });

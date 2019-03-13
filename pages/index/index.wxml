@@ -129,7 +129,7 @@
       </view>
     </view>
 
-    <view class="phoneWrap" wx:if="{{!pullUpFlag}}">
+    <!-- <view class="phoneWrap" wx:if="{{!pullUpFlag}}">
       <view class="phoneView ub ub-ac" bindtap="callPhone">
         <image src="../../images/logo_main.png" style="width:80rpx;height:80rpx;"></image>
         <view class="phoneInner">
@@ -137,7 +137,7 @@
           <view class="ub ub-ac"><image src="../../images/dianhua.png" style="width:30rpx;height:26rpx;margin-right:10rpx;"></image>合作电话：400-001-1139</view>
         </view>
       </view>
-    </view>
+    </view> -->
 
   </view>
 

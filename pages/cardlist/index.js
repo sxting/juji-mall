@@ -1,4 +1,6 @@
-// pages/cardlist/index.js
+import {
+  constant
+} from '../../utils/constant';
 Page({
 
   /**

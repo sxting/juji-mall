@@ -1,4 +1,6 @@
-// pages/payrecord/index.js
+import {
+  constant
+} from '../../utils/constant';
 Page({
 
   /**

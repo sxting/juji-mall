@@ -10,6 +10,11 @@ Page({
       hadNumber: 0,
       storeId: '',
       role: '',//桔园角色
+      todaySaleRebate: 0,//今日销售收入
+      todaySettlementAmount: 0,//今日提现 
+      totalSettlementAmount: 0,//累计提现
+      invitedLeaderCount: 0,
+      invitedMemberCount: 0
   },
   onLoad: function () {
     let self = this;
@@ -59,9 +64,14 @@ function getGardenInfor(){
           }
         }
         this.setData({
-          role: res.role,
+          role: 'LEADER',
           juminNumList: this.data.juminNumList,
           hadNumber: this.data.hadNumber,
+          todaySaleRebate: res.todaySaleRebate ? res.todaySaleRebate: 0,
+          todaySettlementAmount: res.todaySettlementAmount ? res.todaySettlementAmount : 0,
+          totalSettlementAmount: res.totalSettlementAmount ? res.totalSettlementAmount : 0,
+          invitedLeaderCount: res.invitedLeaderCount? res.invitedLeaderCount : 0,
+          invitedMemberCount: res.invitedMemberCount? res.invitedMemberCount : 0
         })
       }
     },

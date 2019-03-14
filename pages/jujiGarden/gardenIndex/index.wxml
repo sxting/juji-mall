@@ -37,16 +37,16 @@
         <view class="toper">
             <image class="udb topBg" src="../../../images/topBg.png" mode="scaleToFill"></image>
             <view class="topCon" style="padding:30rpx;">
-                <view class="balance tx-c">20.00</view>
+                <view class="balance tx-c">{{ totalSettlementAmount }}</view>
                 <view class="remark tx-c">累计全部收入(元)</view>
                 <view class="turnover ub ub-ac">
                     <view class="ub-f1 div" data-page="/pages/jujiGarden/incomeData/index?index=1&status=1" bindtap="toPage">
-                        <view class="tx-c balance1">500.00</view>
+                        <view class="tx-c balance1">{{ todaySaleRebate /100 }}</view>
                         <view class="tx-c remark">今日销售收入</view>
                     </view>
                     <view class="line"></view>
                     <view class="ub-f1 div l" data-page="/pages/jujiGarden/incomeData/index?index=1&status=1" bindtap="toPage">
-                        <view class="tx-c balance1">500.00</view>
+                        <view class="tx-c balance1">{{ todaySettlementAmount }}</view>
                         <view class="tx-c remark">今日提现收入</view>
                     </view>
                 </view>
@@ -63,20 +63,12 @@
             </view>
             <view class="ub ub-ac ub-pj" style="padding: 30rpx 40rpx;">
                 <view class="ub ub-ver ub-ac ub-pc" bindtap="toPage" data-page="/pages/jujiGarden/myUser/index?index=1&status=CREATED">
-                    <text class="orderBtnsNum">2</text>
+                    <text class="orderBtnsNum">{{ invitedLeaderCount }}</text>
                     <text class="orderBtnsText">已邀桔长</text>
                 </view>
                 <view class="ub ub-ver ub-ac ub-pc" bindtap="toPage" data-page="/pages/jujiGarden/myUser/index?index=2&status=PAID">
-                    <text class="orderBtnsNum">2</text>
+                    <text class="orderBtnsNum">{{ invitedMemberCount }}</text>
                     <text class="orderBtnsText">已邀桔民</text>
-                </view>
-                <view class="ub ub-ver ub-ac ub-pc" bindtap="toPage" data-page="/pages/jujiGarden/myUser/index?index=3&status=CONSUME">
-                    <text class="orderBtnsNum">2</text>
-                    <text class="orderBtnsText">买家用户</text>
-                </view>
-                <view class="ub ub-ver ub-ac ub-pc" bindtap="toPage" data-page="/pages/jujiGarden/myUser/index?index=3&status=CONSUME">
-                    <text class="orderBtnsNum">2</text>
-                    <text class="orderBtnsText">浏览用户</text>
                 </view>
             </view>
         </view>

@@ -24,7 +24,7 @@ Page({
       title: '订单确认',
     });
     wx.hideShareMenu();
-    if (options.id && options.storeid && options.paytype) {
+    if (options.id && options.paytype) {
       this.setData({
         productId: options.id,
         storeId: options.storeid,
@@ -34,11 +34,10 @@ Page({
       //查询用户橘子
       this.getPointBalance();
     } else {
-      wx.showToast({
-        title: '当前商品错误id=' + options.id + ' storeid=' + options.storeid + ' paytype=' + options.paytype,
-        icon: 'none',
-        duration: 2000
-      });
+      wx.showModal({
+        title: '错误',
+        content: '当前商品错误id=' + options.id + ' paytype=' + options.paytype,
+      })
       wx.navigateBack({
         delta: 1
       });

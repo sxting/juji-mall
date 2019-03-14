@@ -98,7 +98,7 @@ Page({
       }).then(function (code) {
 
           wx.request({
-            url: 'https://c.juniuo.com/shopping/user/login.json',
+            url: constant.apiUrl + '/user/login.json',
             method: 'GET',
             data: {
               code: code,

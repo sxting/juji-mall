@@ -1,6 +1,6 @@
 <view class="wrap">
     <!-- 普通用户进入 -->
-    <view class='page' wx:if="{{status==1}}">
+    <view class='page' wx:if="{{role == 'UNDEFINED'}}">
         <image class="pageBg" src="../../../images/juyuan-bg1.jpg"></image>
         <view class='btn-manger' bindtap="toPage" data-page="/pages/jujiGarden/managerRights/managerRights">桔长权益</view>
         <view class='applyToManager' bindtap="apply">
@@ -9,7 +9,7 @@
         </view>
     </view>
     <!-- 桔员进入 -->
-    <view class='page' wx:if="{{status==2}}">
+    <view class='page' wx:if="{{role == 'MEMBER'}}">
         <image class="pageBg" src="../../../images/juyuan-bg2.jpg"></image>
         <view class='btn-manger' bindtap="toPage" data-page="/pages/jujiGarden/managerRights/managerRights">桔长权益</view>
         <view class='check-progress'>
@@ -33,7 +33,7 @@
     </view>
 
     <!-- 桔长进入 -->
-    <view class="page" wx:if="{{status==3}}">
+    <view class="page" wx:if="{{ role == 'LEADER'}}">
         <view class="toper">
             <image class="udb topBg" src="../../../images/topBg.png" mode="scaleToFill"></image>
             <view class="topCon" style="padding:30rpx;">

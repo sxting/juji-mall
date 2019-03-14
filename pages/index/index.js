@@ -120,7 +120,7 @@ Page({
 
       return new Promise(function(resolve2, reject2) {
         wx.request({
-          url: 'https://c.juniuo.com/shopping/user/login.json',
+          url: constant.apiUrl + '/user/login.json',
           method: 'GET',
           data: {
             code: code,

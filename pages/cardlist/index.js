@@ -8,15 +8,27 @@ Page({
    */
   data: {
     cardList:[],
-    current: 0
+    current: 0,
+    payUrl:'https://juji.juniuo.com'
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+      let payUrl = wx.getStorageSync('payUrl');
+      if (payUrl) {
+        this.setData({
+          payUrl: payUrl
+        });
+
+      } else {
+        this.setData({
+          payUrl: constant.jujipayUrl
+        });
+      }
       wx.request({
-        url: constant.jujipayUrl +'/mini/mycard.json',
+        url: this.data.payUrl +'/mini/mycard.json',
         method: 'GET',
         header: {
           'content-type': 'application/json',

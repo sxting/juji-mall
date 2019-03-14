@@ -35,6 +35,7 @@ Page({
     accountFlag: false,
     balance: 0,
     accountpaystatus: false,//余额支付等待中效果标记
+    payUrl: 'https://juji.juniuo.com'
   },
 
   /**
@@ -51,7 +52,19 @@ Page({
         var link = decodeURIComponent(options.q);
         console.log(link);
         let arr = link.split('/qrm/');
+        console.log(arr);//['https://juji-dev.juniuo.com','212345678.htm']
+        if(arr[0]){
+          that.setData({
+            payUrl: arr[0]
+          });
+          wx.setStorageSync('payUrl', arr[0]);
+        }else{
+          that.setData({
+            payUrl: that.data.payUrl
+          });
+        }
         let arr1 = arr[1].split('.htm');
+        console.log(arr1);//['212345678']
         console.log('qrcode: ' + arr1[0]);
         that.setData({
           url: link,
@@ -75,7 +88,7 @@ Page({
     }).then(function (code) {
       return new Promise(function (resolve2, reject2) {
         wx.request({
-          url: constant.jujipayUrl+'/mini/login.json',
+          url: that.data.payUrl+'/mini/login.json',
           method: 'POST',
           data: {
             appid: constant.APPID,
@@ -152,7 +165,7 @@ Page({
   getAccount: function() {
     let that = this;
     wx.request({
-      url: constant.jujipayUrl +'/customer/user/getAccount.json',
+      url: that.data.payUrl +'/customer/user/getAccount.json',
       method: 'GET',
       data: {
         merchantId: that.data.merchantId
@@ -227,7 +240,7 @@ Page({
   wxpay(orderObj) {
     let that = this;
     wx.request({
-      url: constant.jujipayUrl +'/customer/order/miniPreOrder.json',
+      url: that.data.payUrl +'/customer/order/miniPreOrder.json',
       method: 'POST',
       data: {
         choosenType: that.data.paytype,
@@ -473,7 +486,7 @@ Page({
   accountPay(orderObj) {
     let that = this;
     wx.request({
-      url: constant.jujipayUrl +'/customer/order/accountPay.json',
+      url: that.data.payUrl +'/customer/order/accountPay.json',
       method: 'POST',
       data: {
         storeId: that.data.storeId,
@@ -506,7 +519,7 @@ Page({
   getPayment(orderPay) {
     let that = this;
     wx.request({
-      url: constant.jujipayUrl +'/customer/order/getPayment.json',
+      url: that.data.payUrl +'/customer/order/getPayment.json',
       method: 'GET',
       data: {
         storeId: that.data.storeId,

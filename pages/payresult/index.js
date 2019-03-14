@@ -9,7 +9,8 @@ Page({
   data: {
     addMoney:0,
     prepayMoney:0,
-    wxPayMoney:0
+    wxPayMoney:0,
+    payUrl: 'https://juji.juniuo.com'
   },
 
   /**
@@ -23,8 +24,19 @@ Page({
       })
       return;
     } else {
+      let payUrl = wx.getStorageSync('payUrl');
+      if (payUrl) {
+        this.setData({
+          payUrl: payUrl
+        });
+        
+      } else {
+        this.setData({
+          payUrl: constant.jujipayUrl
+        });
+      }
       wx.request({
-        url: constant.jujipayUrl +'/customer/order/getOrdersDetail.json',
+        url: this.data.payUrl +'/customer/order/getOrdersDetail.json',
         method: 'GET',
         data: {
           orderId: options.orderId

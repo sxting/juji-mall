@@ -7,7 +7,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    recordList:[]
+    recordList:[],
+    payUrl: 'https://juji.juniuo.com'
   },
 
   /**
@@ -16,8 +17,19 @@ Page({
   onLoad: function (options) {
     // options.merchantId = '101542271446184185';
     if (options.merchantId){
+      let payUrl = wx.getStorageSync('payUrl');
+      if (payUrl) {
+        this.setData({
+          payUrl: payUrl
+        });
+
+      } else {
+        this.setData({
+          payUrl: constant.jujipayUrl
+        });
+      }
       wx.request({
-        url: constant.jujipayUrl +'/mini/payRecords.json',
+        url: this.data.payUrl +'/mini/payRecords.json',
         method: 'GET',
         data: {
           merchantId: options.merchantId

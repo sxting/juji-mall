@@ -1,4 +1,6 @@
-// pages/payresult/index.js
+import {
+  constant
+} from '../../utils/constant';
 Page({
 
   /**
@@ -22,7 +24,7 @@ Page({
       return;
     } else {
       wx.request({
-        url: 'https://juji-dev.juniuo.com/customer/order/getOrdersDetail.json',
+        url: constant.jujipayUrl +'/customer/order/getOrdersDetail.json',
         method: 'GET',
         data: {
           orderId: options.orderId

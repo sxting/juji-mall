@@ -45,7 +45,7 @@ Page({
     let that = this;
     new Promise(function (resolve, reject) {
       console.log('Promise is ready!');
-      // options.q = 'https://juji-dev.juniuo.com/qrm/212345678.htm';
+      // options.q = 'https://juji-dev.juniuo.com/qrm/212345678.htm';//测试用
       if (options.q) {
         console.log(options.q);
         var link = decodeURIComponent(options.q);
@@ -75,7 +75,7 @@ Page({
     }).then(function (code) {
       return new Promise(function (resolve2, reject2) {
         wx.request({
-          url: 'https://juji-dev.juniuo.com/mini/login.json',
+          url: constant.jujipayUrl+'/mini/login.json',
           method: 'POST',
           data: {
             appid: constant.APPID,
@@ -152,7 +152,7 @@ Page({
   getAccount: function() {
     let that = this;
     wx.request({
-      url: 'https://juji-dev.juniuo.com/customer/user/getAccount.json',
+      url: constant.jujipayUrl +'/customer/user/getAccount.json',
       method: 'GET',
       data: {
         merchantId: that.data.merchantId
@@ -227,7 +227,7 @@ Page({
   wxpay(orderObj) {
     let that = this;
     wx.request({
-      url: 'https://juji-dev.juniuo.com/customer/order/miniPreOrder.json',
+      url: constant.jujipayUrl +'/customer/order/miniPreOrder.json',
       method: 'POST',
       data: {
         choosenType: that.data.paytype,
@@ -473,7 +473,7 @@ Page({
   accountPay(orderObj) {
     let that = this;
     wx.request({
-      url: 'https://juji-dev.juniuo.com/customer/order/accountPay.json',
+      url: constant.jujipayUrl +'/customer/order/accountPay.json',
       method: 'POST',
       data: {
         storeId: that.data.storeId,
@@ -506,7 +506,7 @@ Page({
   getPayment(orderPay) {
     let that = this;
     wx.request({
-      url: 'https://juji-dev.juniuo.com/customer/order/getPayment.json',
+      url: constant.jujipayUrl +'/customer/order/getPayment.json',
       method: 'GET',
       data: {
         storeId: that.data.storeId,

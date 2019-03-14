@@ -14,7 +14,7 @@ Page({
    */
   onLoad: function (options) {
       wx.request({
-        url: 'https://juji-dev.juniuo.com/mini/mycard.json',
+        url: constant.jujipayUrl +'/mini/mycard.json',
         method: 'GET',
         header: {
           'content-type': 'application/json',

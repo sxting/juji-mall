@@ -15,7 +15,7 @@ Page({
     // options.merchantId = '101542271446184185';
     if (options.merchantId){
       wx.request({
-        url: 'https://juji-dev.juniuo.com/mini/payRecords.json',
+        url: constant.jujipayUrl +'/mini/payRecords.json',
         method: 'GET',
         data: {
           merchantId: options.merchantId

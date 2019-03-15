@@ -9,7 +9,7 @@
         </view>
     </view>
     <!-- 桔员进入 -->
-    <view class='page' wx:if="{{role == 'MEMBER'}}">
+    <!-- <view class='page' wx:if="{{role == 'MEMBER'}}">
         <image class="pageBg" src="../../../images/juyuan-bg2.jpg"></image>
         <view class='btn-manger' bindtap="toPage" data-page="/pages/jujiGarden/managerRights/managerRights">桔长权益</view>
         <view class='check-progress'>
@@ -29,6 +29,22 @@
         </view>
         <view class='juyuan'>
             <button class="share-btn" open-type="share">邀请新人加入桔园</button>
+        </view>
+    </view> -->
+
+     <!-- 桔长进入实名认证 -->
+    <view class='page' wx:if="{{role == 'MEMBER'}}">
+        <image class="pageBg" src="../../../images/juyuan-bg3.png"></image>
+        <view class='authentication-progress'>
+            <view class='my-team'>
+              <input class='wechat-no' placeholder='请填写您的微信账号'></input>
+              <input class='wechat-name' placeholder='请填写您的微信实名认证姓名'></input>
+              <view>请如实填写以上信息，推广获得的收入将自动提现到微信零钱</view>
+              <view class='btn-box'>
+                <image src='../../../images/sure-btn.png' class='sure-btn' catchtap='submit-btn'></image>
+                <text>确定</text>
+              </view>
+            </view>
         </view>
     </view>
 
@@ -87,4 +103,6 @@
             </view>
         </view>
     </view>
+
+
 </view>

@@ -9,7 +9,7 @@
         </view>
     </view>
     <!-- 桔员进入 -->
-    <!-- <view class='page' wx:if="{{role == 'MEMBER'}}">
+    <view class='page' wx:if="{{role == 'MEMBER'}}">
         <image class="pageBg" src="../../../images/juyuan-bg2.jpg"></image>
         <view class='btn-manger' bindtap="toPage" data-page="/pages/jujiGarden/managerRights/managerRights">桔长权益</view>
         <view class='check-progress'>
@@ -30,10 +30,10 @@
         <view class='juyuan'>
             <button class="share-btn" open-type="share">邀请新人加入桔园</button>
         </view>
-    </view> -->
+    </view>
 
      <!-- 桔长进入实名认证 -->
-    <view class='page' wx:if="{{role == 'MEMBER'}}">
+    <view class='page' wx:if="{{role == 'LEADER'}}">
         <image class="pageBg" src="../../../images/juyuan-bg3.png"></image>
         <view class='authentication-progress'>
             <view class='my-team'>

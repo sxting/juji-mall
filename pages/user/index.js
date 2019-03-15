@@ -13,6 +13,7 @@ Page({
     },
     toPage: function(e) {
         var page = e.currentTarget.dataset.page;
+        console.log(page);
         wx.navigateTo({ url: page });
     },
     onLoad: function() {

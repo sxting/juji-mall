@@ -497,7 +497,7 @@ Page({
   },
 
   toResult() {
-    if (this.data.amount != '' && this.data.amount != '请输入付款金额' && this.data.amount != 0) {
+    if (this.data.amount != '' && this.data.amount != '请输入付款金额' && this.data.amount != 0 && this.data.storeId) {
 
       if (this.data.seledAccount) {//如果用户勾选了余额支付
         //此处判断余额付款和组合付款的情况 余额付款直接跳转到结果页面 组合支付还要到当前页的另一层

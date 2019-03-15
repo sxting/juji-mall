@@ -46,9 +46,9 @@ jugardenService.getSettlementDetail = (data) => {
 }
 
 // 提现摘要列表
-jugardenService.getSettlementList = (data) => {
+jugardenService.getSettlementList = () => {
   let url = API + '/distributor/settlementDigests.json';
-  return http.get(url, data);
+  return http.get(url);
 }
 
 module.exports = {

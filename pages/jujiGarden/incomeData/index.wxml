@@ -2,7 +2,7 @@
 <view class="fullScreen ub ub-ver">
     <view class="tablist">
         <view class="tablist ub ub-ac ub-pj1">
-            <view wx:for="{{tablist}}" wx:key="unique" class="tabItem {{curTabIndex==index?'on':''}}" bindtap="switchTab" data-type="{{index}}" data-index="{{index}}" data-status="{{item.status}}">{{item.name}}<view class="line"></view>
+            <view wx:for="{{tablist}}" wx:key="unique" class="tabItem {{curTabIndex==index?'on':''}}" bindtap="switchTab" data-type="{{item.type}}" data-index="{{index}}">{{item.name}}<view class="line"></view>
             </view>
         </view>
     </view>

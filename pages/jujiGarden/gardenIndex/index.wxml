@@ -53,7 +53,7 @@
             </view>
             <view class="qdBtn tx-c" bindtap="toPage" data-page="/pages/jujiGarden/withdrawRecord/index">提现明细</view>
         </view>
-        <view style="margin-top:-40rpx;" class="userBox">
+        <view class="userBox">
             <view class="ub ub-ac ub-pj" style="padding:30rpx;" bindtap="toPage" data-page="/pages/jujiGarden/myUser/index?index=1&status=CREATED">
                 <view class="ub-f1" style="font-size: 30rpx;color: #333333;font-weight:bold">我的用户</view>
                 <image src="../../../images/arrow-right.png" class="udb" style="width:12rpx;height:22rpx;margin-left:10rpx;"></image>
@@ -61,12 +61,13 @@
             <view style="padding:0 30rpx;">
                 <view style="height:2rpx;background:#eeeeee;"></view>
             </view>
-            <view class="ub ub-ac ub-pj" style="padding: 30rpx 40rpx;">
-                <view class="ub ub-ver ub-ac ub-pc" bindtap="toPage" data-page="/pages/jujiGarden/myUser/index?index=1&status=CREATED">
+            <view class="ub ub-ac ub-pj" style="padding: 0 60rpx">
+                <view class="ub ub-ver ub-ac ub-pc user" bindtap="toPage" data-page="/pages/jujiGarden/myUser/index?index=1&status=CREATED">
                     <text class="orderBtnsNum">{{ invitedLeaderCount }}</text>
                     <text class="orderBtnsText">已邀桔长</text>
                 </view>
-                <view class="ub ub-ver ub-ac ub-pc" bindtap="toPage" data-page="/pages/jujiGarden/myUser/index?index=2&status=PAID">
+                <view style='height:60rpx;width:1rpx;border-left:#eee 1rpx solid;'></view>
+                <view class="ub ub-ver ub-ac ub-pc user" bindtap="toPage" data-page="/pages/jujiGarden/myUser/index?index=2&status=PAID">
                     <text class="orderBtnsNum">{{ invitedMemberCount }}</text>
                     <text class="orderBtnsText">已邀桔民</text>
                 </view>

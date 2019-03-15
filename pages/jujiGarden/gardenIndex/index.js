@@ -3,19 +3,22 @@ import { service } from '../../../service';
 import { constant } from '../../../utils/constant';
 import { jugardenService } from '../shared/service.js'
 var app = getApp();
+var timeVal;
 
 Page({
   data: {
-      juminNumList: [],//队员人数
-      hadNumber: 0,
-      storeId: '',
-      role: '',//桔园角色
-      todaySaleRebate: 0,//今日销售收入
-      todaySettlementAmount: 0,//今日提现 
-      totalSettlementAmount: 0,//累计提现
-      invitedLeaderCount: 0,
-      invitedMemberCount: 0
+    juminNumList: [],//队员人数
+    hadNumber: 0,
+    storeId: '',
+    openId: wx.getStorageSync('openid'),//邀请者id
+    role: '',//桔园角色
+    todaySaleRebate: 0,//今日销售收入
+    todaySettlementAmount: 0,//今日提现 
+    totalSettlementAmount: 0,//累计提现
+    invitedLeaderCount: 0,
+    invitedMemberCount: 0,
   },
+
   onLoad: function () {
     let self = this;
     wx.setNavigationBarTitle({ title: '桔园' });
@@ -29,7 +32,8 @@ Page({
 
   // 申请成为桔长
   apply:function(e){
-
+    let self = this;
+    joinDistributor.call(self);
   },
 
   // 跳转页面
@@ -37,6 +41,17 @@ Page({
       var page = e.currentTarget.dataset.page;
       wx.navigateTo({ url: page });
   },
+
+  /**
+  * 用户点击右上角分享
+  */
+  onShareAppMessage: function () {
+    return {
+      title: JSON.parse(wx.getStorageSync('rawData')).nickName + '邀请您桔园结义成为桔长，购物返利最高可享40%商品返利',
+      path: '/pages/jujiGarden/gardenIndex/index?inviteCode=' + wx.getStorageSync('inviteCode'),
+      imageUrl: '/images/banner-invent.png'
+    }
+  }
 });
 
 // 首页信息获取 
@@ -64,14 +79,40 @@ function getGardenInfor(){
           }
         }
         this.setData({
-          role: 'LEADER',
+          role: res.role,
           juminNumList: this.data.juminNumList,
           hadNumber: this.data.hadNumber,
           todaySaleRebate: res.todaySaleRebate ? res.todaySaleRebate: 0,
           todaySettlementAmount: res.todaySettlementAmount ? res.todaySettlementAmount : 0,
           totalSettlementAmount: res.totalSettlementAmount ? res.totalSettlementAmount : 0,
           invitedLeaderCount: res.invitedLeaderCount? res.invitedLeaderCount : 0,
-          invitedMemberCount: res.invitedMemberCount? res.invitedMemberCount : 0
+          invitedMemberCount: res.invitedMemberCount? res.invitedMemberCount : 0,
+        })
+        if (res.role == 'LEADER'){//动态设置title背景色
+          wx.setNavigationBarColor({
+            frontColor: '#000000', // 必写项
+            backgroundColor: '#FFDC00', // 必写项
+          })
+        }
+      }
+    },
+    error: err => errDialog(err),
+    complete: () => wx.hideToast()
+  })
+}
+
+// 加入分销  成为桔民
+function joinDistributor() {
+  let self = this;
+  let data = {
+    parentId: this.data.openId
+  }
+  jugardenService.joinDistributor(data).subscribe({
+    next: res => {
+      if (res) {
+        console.log(res);
+        this.setData({
+          role: res.role,
         })
       }
     },

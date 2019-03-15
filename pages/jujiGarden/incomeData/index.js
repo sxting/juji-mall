@@ -25,6 +25,27 @@ Page({
         this.getDataByType('',1);
         this.getDataByType('SETTLED',1);
     },
+    tipAlert:function(e){
+        var type = e.currentTarget.dataset.type;
+        if(type==1){
+            showModal('提现金额','提现金额提现金额提现金额提现金额');
+        }
+        if(type==2){
+            showModal('提现金额','提现金额提现金额提现金额提现金额');
+        }
+        if(type==3){
+            showModal('提现金额','提现金额提现金额提现金额提现金额');
+        }
+        if(type==4){
+            showModal('提现金额','提现金额提现金额提现金额提现金额');
+        }
+        if(type==5){
+            showModal('提现金额','提现金额提现金额提现金额提现金额');
+        }
+        if(type==6){
+            showModal('提现金额','提现金额提现金额提现金额提现金额');
+        }
+    },
     switchTab: function(e) {
         var thisIndex = e.currentTarget.dataset.index;
         this.setData({ curTabIndex: thisIndex});
@@ -147,4 +168,13 @@ function getMonthLastDay(){
     var M=Number(MonthLastDay.getMonth())+1;
     var D=MonthLastDay.getDate();   
     return MonthLastDay.getFullYear()+"-"+(M<10?'0'+M:M)+'-'+(D<10?'0'+D:D);     
+}
+
+function showModal(tit,str){
+   wx.showModal({
+      title: tit,
+      showCancel: false,
+      content: str,
+      confirmColor:'#333333'
+    });
 }

@@ -12,16 +12,16 @@
                 <view class="cardItem">
                     <image class="card" src="../../../images/card1.png"></image>
                     <view class="con">
-                        <view class="remark1 tx-l">销售收入（元）</view>
+                        <view class="remark1 tx-l">销售收入（元）<image class="help" bindtap="tipAlert" data-type="1" src="../../../images/help.png"></image></view>
                         <view class="balance1 tx-l">{{format.toFix(incomeData.saleRebate)}}</view>
                         <view class="turnover ub ub-ac">
                             <view class="div" data-page="/pages/jujiGarden/incomeData/index?index=1&status=1" bindtap="toPage">
-                                <view class="tx-l remark2">管理佣金</view>
+                                <view class="tx-l remark2">管理佣金<image class="help" bindtap="tipAlert" data-type="2" src="../../../images/help.png"></image></view>
                                 <view class="tx-l balance2">{{format.toFix(incomeData.manageRebate)}}</view>
                             </view>
                             <view class="line"></view>
                             <view class="div l" data-page="/pages/jujiGarden/incomeData/index?index=1&status=1" bindtap="toPage">
-                                <view class="tx-l remark2">购物返利</view>
+                                <view class="tx-l remark2">购物返利<image class="help" bindtap="tipAlert" data-type="3" src="../../../images/help.png"></image></view>
                                 <view class="tx-l balance2">{{format.toFix(incomeData.saleRebate)}}</view>
                             </view>
                         </view>
@@ -32,16 +32,16 @@
                 <view class="cardItem">
                     <image class="card" src="../../../images/card2.png"></image>
                     <view class="con">
-                        <view class="remark1 tx-l">提现金额（元）</view>
+                        <view class="remark1 tx-l">提现金额（元）<image class="help" bindtap="tipAlert" data-type="4" src="../../../images/help.png"></image></view>
                         <view class="balance1 tx-l">{{format.toFix(withdrawData.saleRebate)}}</view>
                         <view class="turnover ub ub-ac">
                             <view class="div" data-page="/pages/jujiGarden/incomeData/index?index=1&status=1" bindtap="toPage">
-                                <view class="tx-l remark2">管理佣金</view>
+                                <view class="tx-l remark2">管理佣金<image class="help" bindtap="tipAlert" data-type="5" src="../../../images/help.png"></image></view>
                                 <view class="tx-l balance2">{{format.toFix(withdrawData.manageRebate)}}</view>
                             </view>
                             <view class="line"></view>
                             <view class="div l" data-page="/pages/jujiGarden/incomeData/index?index=1&status=1" bindtap="toPage">
-                                <view class="tx-l remark2">购物返利</view>
+                                <view class="tx-l remark2">购物返利<image class="help" bindtap="tipAlert" data-type="6" src="../../../images/help.png"></image></view>
                                 <view class="tx-l balance2">{{format.toFix(withdrawData.saleRebate)}}</view>
                             </view>
                         </view>

@@ -196,6 +196,11 @@ Page({
       });
     });
   },
+  callPhone: function () {
+    wx.makePhoneCall({
+      phoneNumber: '4000011139',
+    });
+  },
   //收集formid做推送
   collectFormIds:function(e){
     console.log(e.detail);

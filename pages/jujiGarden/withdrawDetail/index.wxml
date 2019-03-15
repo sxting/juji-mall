@@ -1,14 +1,17 @@
 <view class="main">
-    <view class="toper ub ub-ver ub-pc ub-ac">
-        <view class="balance">200.00</view>
-        <view class="status">提现成功</view>
+    <view class="toper">
+        <view class='toper-box'>
+          <view class="balance">{{ settlementDetailData.settlementAmount/100 }}</view>
+          <view class="status">提现成功</view>
+          <view class='tips' wx:if=''>此微信账号状态异常</view>
+        </view>
     </view>
     <view class="content">
         <view class="bgb itemWrap" style="margin-bottom: 30rpx;">
             <view class="tit">提现信息</view>
             <view class="item ub ub-ac">
                 <view class="ub-f1">提取金额</view>
-                <view class="f13">100.00</view>
+                <view class="f13">{{ settlementDetailData.settlementAmount/100 }}</view>
             </view>
             <view class="item ub ub-ac">
                 <view class="ub-f1">手续费用</view>
@@ -20,7 +23,7 @@
             </view>
             <view class="item ub ub-ac">
                 <view class="ub-f1">收款账户</view>
-                <view class="f13">名字</view>
+                <view class="f13">{{settlementDetailData.account}}</view>
             </view>
             <view class="item ub ub-ac">
                 <view class="ub-f1">提现时间</view>
@@ -63,5 +66,5 @@
             </view>
         </view>
     </view>
-    <view class="service ub ub-ac ub-pc">对此订单有疑问，请拨打<text>桔集服务技术支持</text></view>
+    <view class="service ub ub-ac ub-pc">对此订单有疑问，请拨打<text catchtap="onTelClick">桔集服务技术支持</text></view>
 </view>

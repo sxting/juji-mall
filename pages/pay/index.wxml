@@ -38,7 +38,7 @@
             <image src="../../images/shanchu.png"
               ></image>
           </view>
-          <view class="pay {{(amount != '' && amount != '请输入付款金额' && amount != 0)?'toResult':''}} {{accountpaystatus?'accountpaying':''}}" bindtap="toResult">
+          <view class="pay {{(amount != '' && amount != '请输入付款金额' && amount != 0 && storeId)?'toResult':''}} {{accountpaystatus?'accountpaying':''}}" bindtap="toResult">
             <view>付</view>
             <view style="margin-top:.1rem;">款</view>
             <view class="triple-bounce" wx:if="{{accountpaystatus}}">

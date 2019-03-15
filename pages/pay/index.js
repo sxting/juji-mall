@@ -45,6 +45,10 @@ Page({
     console.log(options);
     let that = this;
     new Promise(function (resolve, reject) {
+      wx.showLoading({
+        title: '加载中',
+        mask: true
+      })
       console.log('Promise is ready!');
       // options.q = 'https://juji-dev.juniuo.com/qrm/212345678.htm';//测试用
       if (options.q) {
@@ -112,8 +116,46 @@ Page({
                 storeName: res.data.data.storeName,
                 type: res.data.data.type
               })
-              that.getAccount();
-              resolve2();
+              // that.getAccount();
+              wx.request({
+                url: that.data.payUrl + '/customer/user/getAccount.json',
+                method: 'GET',
+                data: {
+                  merchantId: that.data.merchantId
+                },
+                header: {
+                  'content-type': 'application/json',
+                  'Access-Token': wx.getStorageSync('accessToken')
+                },
+                success: (res2) => {
+                  console.log('---------用户余额----------');
+                  console.log(res2);
+                  if (res2.data.errorCode == "0") {
+                    if (res2.data.data.balance > 0) { //当余额存在且大于0的情况
+
+                      that.setData({
+                        paytype: 'account',
+                        accountFlag: true,
+                        showBalanceWrap: true,
+                        seledAccount: true,
+                        balance: Number(res2.data.data.balance).toFixed(2)
+                      });
+                    } else {
+
+                      that.setData({
+                        accountFlag: false,
+                        showBalanceWrap: false,
+                        seledAccount: false
+                      });
+                    }
+                    wx.hideLoading();
+                    resolve2();
+                  }else{
+                    reject2('查询余额失败，错误码:' + res2.data.errorCode + ' 返回错误: ' + res2.data.errorInfo);
+                  }
+                }
+              });
+              
             } else {
               reject2('登录失败，错误码:' + res.data.errorCode + ' 返回错误: ' + res.data.errorInfo);
             }
@@ -122,6 +164,7 @@ Page({
 
       })
     }).catch(function (err) {
+      wx.hideLoading();
       wx.showModal({
         title: '错误',
         content: err,

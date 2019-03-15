@@ -565,6 +565,7 @@ input {
 }
 
 .card {
+  position: relative;
   width: 280rpx;
   height: 180rpx;
   background: #f5f5f5;
@@ -620,7 +621,7 @@ input {
 .cardSelected {
   position: absolute;
   top: 15rpx;
-  right: 35rpx;
+  right: 15rpx;
   width: 34rpx;
   height: 34rpx;
   background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACIAAAAiCAMAAAANmfvwAAAAolBMVEUAAAD///////////////////////////////////////////////////////////////9qPBL39fPw6+eHYkB6UCv18u+sknqUc1SNakp1SiPs5+Ls5uHq493n4Nnk3NXe1MvZzcObfWGRb1CBWzh9VTBvQhr9/Pz6+fjz7+zi2dHTxrrMva/FtKO/rJqznIevl4CihmyfgWaLaEeCXDmAWTZ7jwiQAAAAEHRSTlMA9/Pw2b+knHNSSTEfC66vEyWHyQAAARNJREFUOMuVlNeWgjAQQAMEYkBwBhDUtev23v7/1zbriCYSyPE+cObhkjIlTCOVIuS+z0MhU2YjyTw44WVJSxhGcEE0NI04gBZBrBsDsDIwDIcTQyfx8aRBtxLQmSPoITrkA3pJlDLqVzKVdQ+svG9zynPKpFW4rxEnFEombMbDJyK+USxYaDHyLeLdKxAh4xTcfNV5Y1QTZbzAEc58CnZq74rCYoo4e4YGv1E2M8RpcVivVMYGNIUDsR4jlnOA5Q/ieA1n+Pm4T7eI+8VKfX9XoBFql17u1f//ay1AR+ipm5eo+C7AQGoFoLvsHk3DS80yVvVH3i6juxncLeVuTHd7u4fEPWrugb1q7Ilk1PV4uJ+gP/9eO+0bgfcnAAAAAElFTkSuQmCC) no-repeat center;

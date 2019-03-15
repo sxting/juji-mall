@@ -45,10 +45,13 @@ Page({
     console.log(options);
     let that = this;
     new Promise(function (resolve, reject) {
-      wx.showLoading({
-        title: '加载中',
-        mask: true
-      })
+      // wx.showLoading({
+      //   title: '加载中',
+      //   mask: true
+      // })
+      // that.setData({
+      //   accountpaystatus: true
+      // });
       console.log('Promise is ready!');
       // options.q = 'https://juji-dev.juniuo.com/qrm/212345678.htm';//测试用
       if (options.q) {
@@ -148,7 +151,10 @@ Page({
                         seledAccount: false
                       });
                     }
-                    wx.hideLoading();
+                    // wx.hideLoading();
+                    // that.setData({
+                    //   accountpaystatus: false
+                    // });
                     resolve2();
                   }else{
                     reject2('查询余额失败，错误码:' + res2.data.errorCode + ' 返回错误: ' + res2.data.errorInfo);
@@ -164,11 +170,14 @@ Page({
 
       })
     }).catch(function (err) {
-      wx.hideLoading();
+      // wx.hideLoading();
+      // that.setData({
+      //   accountpaystatus: false
+      // });
       wx.showModal({
         title: '错误',
         content: err,
-      })
+      });
     })
   },
 

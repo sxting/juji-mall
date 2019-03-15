@@ -16,5 +16,5 @@
 .menu .ub-f1{ background: #fff; box-shadow: 0 0 6rpx 0 rgba(228, 228, 228, 0.50); border-radius: 10rpx;}
 .menu .ub-f1.r{ margin-left: 20rpx;height: 160rpx;}
 .menu .ub-f1 image{display: block;width: 44rpx;height: 44rpx;}
-.menu .ub-f1 text{font-size: 24rpx;color: #333333;font-size: 30rpx;margin-top: 10rpx}
+.menu .ub-f1 text{color: #333333;font-size: 30rpx;margin-top: 10rpx}
 

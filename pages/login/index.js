@@ -32,9 +32,9 @@ Page({
       success: (res) => {
         console.log(res.authSetting['scope.userInfo']);
         if (res.authSetting['scope.userInfo']) {
-          wx.reLaunch({
-            url: '/pages/index/index'
-          });
+          // wx.reLaunch({
+          //   url: '/pages/index/index'
+          // });
         }
       }
     });

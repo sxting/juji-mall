@@ -1,7 +1,7 @@
-<view>
-    <view style="margin-top:300rpx;text-align:center;">
-      <text style="font-size:30rpx;color:#333;">当前小程序需要您授权登录之后才能使用</text>
-    </view>
-
-    <button open-type="getUserInfo" bindgetuserinfo="getUserInfo" style="margin-top:100rpx;width:200rpx;height:80rpx;line-height:80rpx;border-radius:40rpx;background-image: linear-gradient(-269deg, #FFDC00 0%, #FCBF0A 100%);font-size:30rpx;color:#333;font-weight:bolder;" data-pid="{{productId}}" data-fp="{{fromPage}}" data-inv="{{inviteCode}}">授权</button>
+<view style="position:relative;">
+    <image src="../../images/logo2.png" class="logo"></image>
+    <image src="../../images/sq_main.png" class="mainImg"></image>
+    <view class="title">微信授权登录</view>
+    <view class="content">授权获取公开信息 为您提供更好服务</view>
+    <button class="sq_btn" open-type="getUserInfo" bindgetuserinfo="getUserInfo" data-pid="{{productId}}" data-fp="{{fromPage}}" data-inv="{{inviteCode}}">授权</button>
   </view>

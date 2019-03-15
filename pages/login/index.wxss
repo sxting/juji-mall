@@ -42,6 +42,8 @@
   font-family: PingFangSC;
   width: 608rpx;
   height: 106rpx;
+  box-sizing: border-box;
+  padding-top:4rpx;
   position: absolute;
   top: 990rpx;
   left: 50%;

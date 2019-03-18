@@ -9,7 +9,8 @@ Page({
   data: {
     cardList: [],
     current: 0,
-    payUrl: 'https://juji.juniuo.com'
+    payUrl: 'https://juji.juniuo.com',
+    noCards: false
   },
 
   /**
@@ -38,10 +39,19 @@ Page({
         success: (res) => {
           console.log(res);
           if (res.data.errorCode == '0') {
+            console.log(this.data.cardList)
             this.setData({
               cardList: res.data.data
             });
-            console.log(this.data.cardList)
+            if (res.data.data.length>0){
+              this.setData({
+                noCards: false
+              });
+            }else{
+              this.setData({
+                noCards: true
+              });
+            }
           } else {
             wx.showModal({
               title: '错误：' + res.data.errorCode,
@@ -56,9 +66,9 @@ Page({
         title: '',
         content: '未获取到accessToken',
       });
-      // wx.navigateBack({
-      //   delta: 1
-      // })
+      this.setData({
+        noCards: true
+      });
     }
 
   },

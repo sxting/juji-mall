@@ -13,3 +13,5 @@ page{height: 100%}
 .time{color: #999;font-size:22rpx;margin-top: 16rpx;}
 .amount{font-size: 28rpx;color: #333}
 .conDiv{height: 100%;box-sizing:border-box;}
+.phone{font-size: 28rpx;color: #FCBF0A;margin-top: 16rpx;display: flex;align-items: center;}
+.call{width:28rpx;height:28rpx;margin-right: 10rpx;}

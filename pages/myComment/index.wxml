@@ -20,8 +20,8 @@
                 <view class="goodTit">{{it.productName}}</view>
                 <view class="storeName">{{it.merchantName}}</view>
                 <view class="goodAmount" wx:if="{{it.type=='POINT'}}">{{it.point}}桔子<text>{{format.toFix(it.originalPrice)}}元</text></view>
-                <view class="goodAmount" wx:elif="{{it.type=='PRODUCT'&&it.point!=0}}">{{it.point}}桔子+{{it.price}}元<text>{{format.toFix(it.originalPrice)}}元</text></view>
-                <view class="goodAmount" wx:elif="{{it.type=='PRODUCT'&&it.point==0}}">{{it.price}}元<text>{{format.toFix(it.originalPrice)}}元</text></view>
+                <view class="goodAmount" wx:elif="{{it.type=='PRODUCT'&&it.point!=0}}">{{it.point}}桔子+{{format.toFix(it.price)}}元<text>{{format.toFix(it.originalPrice)}}元</text></view>
+                <view class="goodAmount" wx:elif="{{it.type=='PRODUCT'&&it.point==0}}">{{format.toFix(it.price)}}元<text>{{format.toFix(it.originalPrice)}}元</text></view>
             </view>
         </view>
     </view>

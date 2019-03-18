@@ -191,7 +191,6 @@ swiper {
   box-sizing: border-box;
   display: flex;
   flex-direction: row;
-  margin-top: 10rpx;
 }
 
 .pubuItem {
@@ -213,12 +212,12 @@ swiper {
   border-radius: 5px;
   background: #fff;
   box-sizing: border-box;
-  margin-top: 20rpx;
+  margin-top: 10rpx;
 }
 
 .pubuItem .plimg {
   width: 100%;
-  height: 220rpx;
+  height: 185rpx;
   border-radius: 10rpx;
 }
 

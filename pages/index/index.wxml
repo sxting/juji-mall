@@ -159,7 +159,7 @@
     <view class="newerGetModalWrap" wx:if="{{isShowNewerGet}}">
       <view class="newerGetModal">
         <image src="../../images/newerGetBg.png" style="width:680rpx;height:735rpx;"></image>
-        <image src="../../images/newerGetBtn.png" class="newerGetBtn" bindtap="getNewer"></image>
+        <image src="../../images/newerGetBtn.png" class="newerGetBtn" bindtap="closeGetNewer"></image>
         <image src="../../images/newerGetClose.png" class="newerGetClose" bindtap="closeGetNewer"></image>
       </view>
     </view>

@@ -26,7 +26,8 @@ Page({
     shareBg: '../../images/shareBg.png',
     headImg: '../../images/shareMinPro.png',
     erwmImg: '../../images/erwmImg.png',
-    sceneId:''
+    sceneId:'',
+    isShowNewerGet: false
   },
   onLoad: function(option) {
     new app.ToastPannel();
@@ -52,6 +53,18 @@ Page({
                 this.getItemInfo();
                 //查询用户橘子
                 this.getPointBalance();
+                //查询新用户见面礼
+                service.isNewer().subscribe({
+                  next: res2 => {
+                    console.log(res2);
+                    this.setData({
+                      isShowNewerGet: res2
+                    });
+
+                  },
+                  error: err => console.log(err)
+                });
+
               } else {
                 console.log('token不存在');
                 //新用户 授权 登录 跳转
@@ -101,6 +114,17 @@ Page({
         this.getItemInfo();
         //查询用户橘子
         this.getPointBalance();
+        //查询新用户见面礼
+        service.isNewer().subscribe({
+          next: res2 => {
+            console.log(res2)
+            this.setData({
+              isShowNewerGet: res2
+            });
+
+          },
+          error: err => console.log(err)
+        });
       } else {
         console.log('token不存在');
         //新用户 授权 登录 跳转
@@ -194,6 +218,12 @@ Page({
         title: '错误',
         content: err
       });
+    });
+  },
+  //关闭新用户见面礼
+  closeGetNewer: function () {
+    this.setData({
+      isShowNewerGet: false
     });
   },
   callPhone: function () {

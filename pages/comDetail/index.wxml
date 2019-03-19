@@ -149,7 +149,7 @@
         <view class="pubuItem">
           <view class="cardWrap padr10">
             <view class="card" wx:for="{{recommendList}}" wx:key="{{index}}" bindtap="toComDetail" data-id="{{item.productId}}" data-storeid="{{item.nearStore.id}}" wx:if="{{index%2 == 0}}">
-              <image src="https://upic.juniuo.com/file/picture/{{item.picId}}/resize_330_330/mode_fill" lazy-load="true" mode="aspectFill" class="plimg"></image>
+              <image src="https://upic.juniuo.com/file/picture/{{item.picId}}/resize_0_0/mode_fill" lazy-load="true" mode="aspectFit" class="plimg"></image>
               <view class="pubuname">{{item.productName}}</view>
               <view class="pububox" style="margin-top:10rpx;">
                 <view class="ex-juzi">
@@ -172,7 +172,7 @@
         <view class="pubuItem">
           <view class="cardWrap padl10">
             <view class="card" wx:for="{{recommendList}}" wx:key="{{index}}" bindtap="toComDetail" data-id="{{item.productId}}" data-storeid="{{item.nearStore.id}}" wx:if="{{index%2!=0}}">
-              <image src="https://upic.juniuo.com/file/picture/{{item.picId}}/resize_330_330/mode_fill" lazy-load="true" mode="aspectFill" class="plimg"></image>
+              <image src="https://upic.juniuo.com/file/picture/{{item.picId}}/resize_0_0/mode_fill" lazy-load="true" mode="aspectFit" class="plimg"></image>
               <view class="pubuname">{{item.productName}}</view>
               <view class="pububox" style="margin-top:10rpx;">
                 <view class="ex-juzi">
@@ -188,8 +188,8 @@
             </view>
           </view>
         </view>
+    </view>
 
-        </view>
   </view>
 
           <view class="phoneWrap">

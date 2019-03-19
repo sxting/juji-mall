@@ -158,6 +158,10 @@
   margin:0 30rpx;
   background: #F6F6F6;
 }
+.detailInner text{
+  font-size: 26rpx;
+  color: #999999;
+}
 .showDetailWrap1{
   height: 294rpx;
 }

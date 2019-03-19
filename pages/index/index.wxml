@@ -111,7 +111,7 @@
         </view>
       </view>
       <view class="jingxuanlist" wx:for="{{recommendPage}}" wx:key="unique" bindtap="toComDetail" data-id="{{item.productId}}" data-storeid="{{item.nearStore.id}}">
-        <image style="width:100%;height:330rpx;margin-top:30rpx;border-radius:10rpx;" lazy-load="true" src="https://upic.juniuo.com/file/picture/{{item.picId}}/resize_690_330/mode_fill"  mode="aspectFill"></image>
+        <image style="width:100%;height:388rpx;margin-top:30rpx;border-radius:10rpx;" lazy-load="true" src="https://upic.juniuo.com/file/picture/{{item.picId}}/resize_690_388/mode_fill"  mode="aspectFit"></image>
         <view class="dis-wrap jc-sb">
           <view class="from">{{item.merchantName}}</view>
           <view class="dis">距你{{filter.toDis(item.nearDist)}}km</view>

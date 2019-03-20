@@ -8,12 +8,12 @@ Page({
     lat: '39.959372',
     lng: '116.323634',
     markers: [{
-      iconPath: '../../images/yqd.png',
+      iconPath: '../../images/store_location.png',
       id: 0,
       latitude: 39.959372,
       longitude: 116.323634,
-      width: 24,
-      height: 24
+      width: 30,
+      height: 37
     }],
   },
 
@@ -27,12 +27,12 @@ Page({
         lat: options.lat,
         lng: options.lng,
         markers: [{
-          iconPath: '../../images/yqd.png',
+          iconPath: '../../images/store_location.png',
           id: 0,
           latitude: options.lat,
           longitude: options.lng,
-          width: 24,
-          height: 24
+          width: 30,
+          height: 37
         }]
       });
     }else{

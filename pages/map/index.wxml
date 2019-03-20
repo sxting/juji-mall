@@ -2,7 +2,7 @@
   id="map"
   longitude="{{lng}}"
   latitude="{{lat}}"
-  scale="14"
+  scale="15"
   markers="{{markers}}"
   bindmarkertap="markertap"
   show-location

@@ -12,6 +12,7 @@ Page({
     storeId: '',
     openId: wx.getStorageSync('openid'),//邀请者id
     role: '',//桔园角色
+    isAuthed:false,//是否实名认证
     todaySaleRebate: 0,//今日销售收入
     todaySettlementAmount: 0,//今日提现 
     totalSettlementAmount: 0,//累计提现

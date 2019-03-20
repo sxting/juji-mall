@@ -7,6 +7,7 @@
         </view>
     </view>
     <view class="main p10">
+        <view class="curdate">{{curdate}}</view>
         <swiper display-multiple-items="1.36" next-margin="-30rpx">
             <swiper-item>
                 <view class="cardItem">

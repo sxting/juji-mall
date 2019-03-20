@@ -1,4 +1,4 @@
-import { jugardenService } from '../shared/service.js'
+import { jugardenService } from '../shared/service'
 import { constant } from '../../../utils/constant';
 import { errDialog, loading } from '../../../utils/util';
 var app = getApp();
@@ -18,6 +18,7 @@ Page({
         incomeData:{},
         withdrawData:{},
         incomelist:{},
+        curdate:"",
         withdrawlist:{}
     },
     onLoad: function(options) {
@@ -69,18 +70,23 @@ Page({
         if(type==1){//本日
             var startDate = getNowDate()+' 00:00:00';
             var endDate = getNowDate()+' 23:59:59';
+            this.setData({curdate:getNowDate().replace(/-/g, ".")});
         }
         if(type==2){//本周
             var startDate = getWeekFirstDay()+' 00:00:00';
             var endDate = getWeekLastDay()+' 23:59:59';
+            this.setData({curdate:getWeekFirstDay().replace(/-/g, ".")+"-"+getNowDate().replace(/-/g, ".")});
         }
         if(type==3){//本月
             var startDate = getMonthFirstDay()+' 00:00:00';
             var endDate = getMonthLastDay()+' 23:59:59';
+            this.setData({curdate:getMonthFirstDay().replace(/-/g, ".")+"-"+getNowDate().replace(/-/g, ".")});
         }
         if(type==4){//累计
             var startDate = '2019-01-01 00:00:00';
+            this.setData({curdate:getNowDate()});
             var endDate = '2100-01-01 00:00:00';
+            this.setData({curdate:'至今'});
         }
         this.getData(status,startDate,endDate);
         this.getDigestlist(status,startDate,endDate);

@@ -7,6 +7,7 @@ page{box-sizing:border-box;height: 100%;background-color: #fbfbfb}
 .tablist .tabItem.on .line{display: block;}
 
 .nodataDiv{padding-top: 260rpx;}
+.curdate{font-size: 24rpx;color: #666666;margin-bottom: 20rpx;}
 swiper{height: 320rpx;}
 .cardItem{border-radius: 20rpx;width: 520rpx;height: 300rpx;}
 .cardItem .card{width: 100%;height: 100%;}

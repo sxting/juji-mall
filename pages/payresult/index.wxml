@@ -153,7 +153,7 @@
         <!-- <view class="completeBtnWrap">
             <view class="completeBtn" bindtap="toCardList">查看卡包余额</view>
         </view> -->
-<view class="shuiyinWrap {{recommendList.length>0?'':'ab'}}">
+<view class="shuiyinWrap {{recommendList.length>0||showDetail?'':'ab'}}">
         <image src="../../images/juji.png" alt="" class="shuiyin" style="width:120rpx;height:40rpx;"></image>
 
         <view class="phonenumber" bindtap="phoneCall">技术支持 

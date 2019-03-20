@@ -95,7 +95,6 @@
   align-items: center;
   font-size: 30rpx;
   color: #6a3c12;
-  font-weight: bold;
   box-sizing: border-box;
 }
 .shuiyinWrap{
@@ -175,6 +174,7 @@
 .goText{
   font-size: 30rpx;
   color: #FFEDC7;
+  font-weight: bold;
   position: absolute;
   z-index: 99;
 }

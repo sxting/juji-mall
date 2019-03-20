@@ -36,7 +36,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 21,
+			"current": 22,
 			"list": [
 				{
 					"id": -1,
@@ -186,6 +186,12 @@
 					"name": "聚集支付-消费记录",
 					"pathName": "pages/payrecord/index",
 					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "地图定位",
+					"pathName": "pages/map/index",
 					"scene": null
 				}
 			]

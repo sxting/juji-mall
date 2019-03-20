@@ -27,7 +27,9 @@ Page({
     headImg: '../../images/shareMinPro.png',
     erwmImg: '../../images/erwmImg.png',
     sceneId:'',
-    isShowNewerGet: false
+    isShowNewerGet: false,
+    lat:'',
+    lng:''
   },
   onLoad: function(option) {
     new app.ToastPannel();
@@ -226,6 +228,15 @@ Page({
       isShowNewerGet: false
     });
   },
+  toMap: function(e){
+    console.log(e);
+    if (e.currentTarget.dataset.lat && e.currentTarget.dataset.lng){
+      wx.navigateTo({
+        url: '/pages/map/index?lat=' + e.currentTarget.dataset.lat + '&lng=' + e.currentTarget.dataset.lng,
+      });
+    }
+    
+  },
   callPhone: function () {
     wx.makePhoneCall({
       phoneNumber: '4000011139',
@@ -312,7 +323,7 @@ Page({
         console.log(res);
         var picsStrArr = res.product.picIds.split(',');
         picsStrArr.forEach(function(item,index){
-          picsStrArr[index] = constant.basePicUrl + item + '/resize_750_420/mode_fill'
+          picsStrArr[index] = constant.basePicUrl + item + '/resize_751_420/mode_fill'
         });
         new Promise(function(resolve,reject){
           let str = JSON.parse(res.product.note);
@@ -328,7 +339,9 @@ Page({
             recommendCount: res.recommendList.length,
             note: result,
             showPics: picsStrArr,
-            isShowData: true
+            isShowData: true,
+            lat: res.store.lat,
+            lng: res.store.lng
           });
         }).catch(function(err){
           that.setData({
@@ -340,7 +353,9 @@ Page({
             commentCount: res.commentCount,
             recommendCount: res.recommendList.length,
             showPics: picsStrArr,
-            isShowData: true
+            isShowData: true,
+            lat: res.store.lat,
+            lng: res.store.lng
           });
         })
         
@@ -413,7 +428,7 @@ Page({
   showShare:function(){
     wx.showLoading({title: '生成图片...'});
     wx.downloadFile({
-      url: constant.basePicUrl+this.data.productInfo.picId+'/resize_750_420/mode_fill',
+      url: constant.basePicUrl+this.data.productInfo.picId+'/resize_751_420/mode_fill',
       success: (res) => {
         if (res.statusCode === 200) {
             this.setData({headImg:res.tempFilePath});

@@ -197,8 +197,8 @@
 				},
 				{
 					"id": -1,
-					"name": "订单详情",
-					"pathName": "pages/jujiGarden/orderDetail/orderDetail",
+					"name": "推广素材",
+					"pathName": "pages/jujiGarden/recommend/index",
 					"scene": null
 				}
 			]

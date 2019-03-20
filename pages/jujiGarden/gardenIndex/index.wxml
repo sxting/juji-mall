@@ -1,3 +1,4 @@
+<wxs src="../../../utils/numFr.wxs" module="format" />
 <view class="wrap">
     <!-- 普通用户进入 -->
     <view class='page' wx:if="{{role == 'UNDEFINED'}}">
@@ -16,7 +17,7 @@
             <view class='clearfix my-team'>
                 <view class='fl'>
                   <text>我的队伍 </text>
-                  <text class='num'><text style='color:#F35308'>{{ hadNumber }}                                  </text>/10</text>
+                  <text class='num'><text style='color:#F35308'>{{ hadNumber }}</text>/10</text>
                 </view>
                 <view class='fr' wx:if='{{ hadNumber != 0 }}'>
                     <text catchtap="toPage" data-page="/pages/jujiGarden/userInfor/userInfor">查看桔民</text>
@@ -33,7 +34,7 @@
     </view>
 
      <!-- 桔长进入实名认证 -->
-    <view class='page' wx:if="{{role == 'LEADER'}}">
+    <view class='page' wx:if="{{role == 'LEADER'&&!isAuthed}}">
         <image class="pageBg" src="../../../images/juyuan-bg3.png"></image>
         <view class='authentication-progress'>
             <view class='my-team'>
@@ -49,21 +50,21 @@
     </view>
 
     <!-- 桔长进入 -->
-    <view class="page" wx:if="{{ role == 'LEADER'}}">
+    <view class="page" wx:if="{{ role == 'LEADER'&&isAuthed}}">
         <view class="toper">
             <image class="udb topBg" src="../../../images/topBg.png" mode="scaleToFill"></image>
             <view class="topCon" style="padding:30rpx;">
-                <view class="balance tx-c">{{ totalSettlementAmount }}</view>
-                <view class="remark tx-c">累计全部收入(元)</view>
+                <view class="balance tx-c">{{ format.toFix(totalSettlementAmount) }}</view>
+                <view class="remark tx-c">累计提现金额(元)</view>
                 <view class="turnover ub ub-ac">
                     <view class="ub-f1 div" data-page="/pages/jujiGarden/incomeData/index?index=1&status=1" bindtap="toPage">
-                        <view class="tx-c balance1">{{ todaySaleRebate /100 }}</view>
+                        <view class="tx-c balance1">{{ format.toFix(todaySaleRebate) }}</view>
                         <view class="tx-c remark">今日销售收入</view>
                     </view>
                     <view class="line"></view>
                     <view class="ub-f1 div l" data-page="/pages/jujiGarden/incomeData/index?index=1&status=1" bindtap="toPage">
-                        <view class="tx-c balance1">{{ todaySettlementAmount }}</view>
-                        <view class="tx-c remark">今日提现收入</view>
+                        <view class="tx-c balance1">{{ format.toFix(todaySettlementAmount) }}</view>
+                        <view class="tx-c remark">今日提现金额</view>
                     </view>
                 </view>
             </view>
@@ -94,11 +95,11 @@
         </view>
         <view style="margin-top:20rpx;" class="menu ub">
             <view class="ub-f1 ub ub-ver ub-ac ub-pc" bindtap="toPage" data-page="/pages/jujiGarden/recommend/index">
-                <image src="../../../images/shouye.png"></image>
+                <image src="../../../images/icon_tj.png"></image>
                 <text class="itemTxt">商品推荐</text>
             </view>
             <view class="ub-f1 ub ub-ver ub-ac ub-pc r" bindtap="toPage" data-page="/pages/jujiGarden/recommend/index">
-                <image src="../../../images/shouye.png"></image>
+                <image src="../../../images/icon_sc.png"></image>
                 <text class="itemTxt">邀新素材</text>
             </view>
         </view>

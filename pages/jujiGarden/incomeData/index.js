@@ -29,22 +29,22 @@ Page({
     tipAlert:function(e){
         var type = e.currentTarget.dataset.type;
         if(type==1){
-            showModal('提现金额','提现金额提现金额提现金额提现金额');
+            showModal('销售收入','你与已邀桔长推广的订单收入总额');
         }
         if(type==2){
-            showModal('提现金额','提现金额提现金额提现金额提现金额');
+            showModal('管理佣金','你邀请的桔长通过推广商品赚取到购物返利后，你可获得一部分管理佣金');
         }
         if(type==3){
-            showModal('提现金额','提现金额提现金额提现金额提现金额');
+            showModal('购物返利','通过向用户推广商品，被购买后你可获得购物返利');
         }
         if(type==4){
             showModal('提现金额','提现金额提现金额提现金额提现金额');
         }
         if(type==5){
-            showModal('提现金额','提现金额提现金额提现金额提现金额');
+            showModal('管理佣金','你邀请的桔长通过推广商品赚取到购物返利后，你可获得一部分管理佣金');
         }
         if(type==6){
-            showModal('提现金额','提现金额提现金额提现金额提现金额');
+            showModal('购物返利','通过向用户推广商品，被购买后你可获得购物返利');
         }
     },
     switchTab: function(e) {

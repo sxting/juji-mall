@@ -19,9 +19,43 @@ Page({
     invitedMemberCount: 0,
   },
 
-  onLoad: function () {
+  onLoad: function (options) {
     let self = this;
     wx.setNavigationBarTitle({ title: '桔园' });
+    console.log(wx.getExtConfigSync());
+    if (options.type && options.type == 'share') {//分享进来
+      let self = this;
+      wx.login({
+        success: function (result) {
+          wx.getUserInfo({
+            withCredentials: true,
+            success: function (res) {
+              self.setData({
+                getUserInfo: true
+              })
+              let extConfig = wx.getExtConfigSync ? wx.getExtConfigSync() : {};
+              let appId = 'wxb03b0ab93bb60ecc';
+              if (result.code) {
+                logIn.call(self, result.code, extConfig.theAppid ? extConfig.theAppid : appId, res.rawData);
+              } else {
+                console.log('获取用户登录态失败！' + result.errMsg)
+              }
+            },
+            fail: function () {
+              self.setData({
+                getUserInfo: false
+              })
+            }
+          });
+        },
+        fail: function (res) {
+          self.setData({
+            getUserInfo: false
+          })
+        },
+        complete: function (res) { },
+      });
+    }
     getGardenInfor.call(self);//get首页信息,获取分销角色
   },
 
@@ -123,6 +157,20 @@ function joinDistributor() {
         this.setData({
           role: res.role,
         })
+      }
+    },
+    error: err => errDialog(err),
+    complete: () => wx.hideToast()
+  })
+}
+
+// 登陆
+function logIn(code, appid, rawData) {
+  let self = this;
+  jugardenService.logIn({ code: code, appid: appid, rawData: rawData }).subscribe({
+    next: res => {
+      if (res) {
+        console.log(res);
       }
     },
     error: err => errDialog(err),

@@ -51,6 +51,12 @@ jugardenService.getSettlementList = () => {
   return http.get(url);
 }
 
+// 登陆
+jugardenService.logIn = (data) => {
+  let url = API + '/user/login.json';
+  return http.get(url, data);
+}
+
 module.exports = {
   jugardenService: jugardenService
 }

@@ -255,7 +255,7 @@ swiper {
   box-sizing: border-box;
   display: flex;
   flex-direction: row;
-  margin-top: 24rpx;
+  margin-top: 30rpx;
 }
 
 .pubuItem {
@@ -415,7 +415,7 @@ swiper {
 .price-wrap {
   display: flex;
   align-items: center;
-  margin-top: 18rpx;
+  margin-top: 16rpx;
   padding: 0 30rpx;
 }
 

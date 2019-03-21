@@ -14,6 +14,8 @@ Page({
     businessList: [],
     leavePage: false,
     autoplay: true,
+    dotsColor: 'rgba(51,51,51,0.3)',
+    dotsActiveColor: '#FFDC00',
     swiperH: '', //swiper高度
     nowIdx: 0, //当前swiper索引
     slideShowList: [{}],

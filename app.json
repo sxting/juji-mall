@@ -31,7 +31,7 @@
     "pages/jujiGarden/withdrawDetail/index",
     "pages/jujiGarden/incomeData/index",
     "pages/jujiGarden/recommend/index",
-    "pages/jujiGarden/orderDetail/orderDetail"
+    "pages/jujiGarden/orderDetail/orderDetail",
     "pages/search/index",
     "pages/map/index"
   ],

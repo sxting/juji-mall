@@ -13,8 +13,14 @@
 .balancelist view.r text{text-align: right;}
 .balancelist view text.amount{font-size: 30rpx;color: #333333;margin-top: 10rpx;}
 
-.remark2{margin-top: 30rpx;color: #333;font-size: 24rpx;}
-
+.remark2{margin-top: 30rpx;color: #333;font-size: 24rpx;line-height: 35rpx}
+.remark2 image{width: 24rpx;height: 24rpx;vertical-align:middle;display: inline-block;}
+.remark2 text{
+  font-family: PingFangSC-Regular;
+  font-size: 24rpx;
+  color: #333333;
+  margin-left: 20rpx
+}
 .content{margin-top: 60rpx;padding-bottom:40rpx;}
 .item{height: 150rpx;padding: 20rpx 20rpx 35rpx 40rpx;box-sizing:border-box; margin-top: -20rpx;}
 .leftBg{width:28rpx;height:157rpx;position: absolute;top: 0;left: 0;}

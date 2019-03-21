@@ -10,11 +10,14 @@
             <view class="line"></view>
             <view class="ub-f3 ub-ver ub-ac ub-pc r"><text class="tit">处理中</text><text class="amount">{{format.toFix(totalSettlementAmount)}}</text></view>
         </view>
-        <view class="remark2">提现金额自动提现到微信零钱</view>
+        <view class="remark2">
+          <image src='/images/alert-warning.png'></image>
+          <text>提现金额自动提现到微信零钱</text>
+        </view>
     </view>
     <view class="content">
         <view class="item ub ub-ac" wx:for="{{ recordlist }}" wx:key="item" bindtap="toPage"  data-digestid='{{item.digestId}}'>
-            <image class="leftBg" src="../../../images/leftBg.png" mode="scaleToFill"></image>
+            <image class="leftBg" src="/images/leftBg.png" mode="scaleToFill"></image>
             <view class="ub-f1">
                 <view class="amount">+{{ format.toFix(item.amount) }}</view>
                 <view class="time">{{ item.date }}</view>

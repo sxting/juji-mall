@@ -49,8 +49,8 @@
         </view>
     </view>
 
-    <!-- 桔长进入  && isAuthed-->
-    <view class="page" wx:if="{{ role == 'LEADER' }}">
+    <!-- 桔长进入 -->
+    <view class="page" wx:if="{{role == 'LEADER' && isAuthed}}">
         <view class="toper">
             <image class="udb topBg" src="../../../images/topBg.png" mode="scaleToFill"></image>
             <view class="topCon" style="padding:30rpx;">

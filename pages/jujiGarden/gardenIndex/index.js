@@ -11,7 +11,7 @@ Page({
     hadNumber: 0,
     storeId: '',
     openId: wx.getStorageSync('openid'),//邀请者id
-    role: '',//桔园角色
+    role: 'UNDEFINED',//桔园角色
     isAuthed: false,//是否实名认证
     todaySaleRebate: 0,//今日销售收入
     todaySettlementAmount: 0,//今日提现 
@@ -26,40 +26,12 @@ Page({
     let self = this;
     wx.setNavigationBarTitle({ title: '桔园' });
     console.log(wx.getExtConfigSync());
-    if (options.type && options.type == 'share') {//分享进来
+    if (options.openId) {//分享点进来
       let self = this;
-      wx.login({
-        success: function (result) {
-          wx.getUserInfo({
-            withCredentials: true,
-            success: function (res) {
-              self.setData({
-                getUserInfo: true
-              })
-              let extConfig = wx.getExtConfigSync ? wx.getExtConfigSync() : {};
-              let appId = 'wxb03b0ab93bb60ecc';
-              if (result.code) {
-                logIn.call(self, result.code, extConfig.theAppid ? extConfig.theAppid : appId, res.rawData);
-              } else {
-                console.log('获取用户登录态失败！' + result.errMsg)
-              }
-            },
-            fail: function () {
-              self.setData({
-                getUserInfo: false
-              })
-            }
-          });
-        },
-        fail: function (res) {
-          self.setData({
-            getUserInfo: false
-          })
-        },
-        complete: function (res) { },
-      });
+      console.log('分享点进来');
+    }else{
+      getGardenInfor.call(self);//get首页信息,获取分销角色
     }
-    getGardenInfor.call(self);//get首页信息,获取分销角色
   },
 
   onShow: function () {
@@ -85,7 +57,7 @@ Page({
     let self = this;
     return {
       title: JSON.parse(wx.getStorageSync('rawData')).nickName + '邀请您桔园结义成为桔长，购物返利最高可享40%商品返利',
-      path: '/pages/jujiGarden/gardenIndex/index?inviteCode=' + wx.getStorageSync('inviteCode'),
+      path: '/pages/jujiGarden/gardenIndex/index?openId=' + wx.getStorageSync('openid'),
       imageUrl: '/images/banner-invent.png',
       success: function (res) {
         // 转发成功
@@ -193,8 +165,27 @@ function joinDistributor() {
     next: res => {
       if (res) {
         console.log(res);
+        if (res.role == 'MEMBER' || res.role == 'UNDEFINED') {//桔民
+          this.data.juminNumList = [];
+          this.data.hadNumber = parseInt(res.invitedLeaderCount) + parseInt(res.invitedMemberCount);
+          if (this.data.hadNumber > 0) {
+            for (let i = 0; i < this.data.hadNumber; i++) {
+              let list = 'yes';
+              this.data.juminNumList.push(list);
+            }
+            for (let j = 0; j < (10 - parseInt(this.data.hadNumber)); j++) {
+              this.data.juminNumList.push('');
+            }
+          } else {
+            for (let j = 0; j < 10; j++) {
+              this.data.juminNumList.push('');
+            }
+          }
+        }
         this.setData({
           role: res.role,
+          juminNumList: this.data.juminNumList,
+          hadNumber: this.data.hadNumber,
         })
       }
     },

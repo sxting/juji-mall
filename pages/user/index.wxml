@@ -1,21 +1,28 @@
 <view class="wrap">
   <view class="toper">
-    <view style="padding:30rpx;" class="userinfo ub ub-ac">
-      <image wx:if="{{avatar}}" src="{{avatar}}" class="headImg"></image>
-      <image wx:else src="../../images/user.png" class="headImg"></image>
-      <view class="">
-        <view style="font-size: 34rpx;color: #000000;">{{nickName}}</view>
-        <view class="ub ub-ac" style="margin-top:10rpx;" wx:if="{{phoneNum}}">
-          <view class="phoneTxt">{{phoneNum}}</view>
-        </view>
-        <view class="ub ub-ac" style="margin-top:10rpx;" wx:else bindtap="toPage" data-page="/pages/bindPhone/index">
-          <view class="phoneTxt">绑定手机号</view>
-          <image style="width:12rpx;height:22rpx;" src="../../images/arrow-r.png"></image>
+    <view class="bgg">
+      <view style="padding:30rpx;" class="userinfo ub ub-ac">
+        <image wx:if="{{avatar}}" src="{{avatar}}" class="headImg"></image>
+        <image wx:else src="../../images/user.png" class="headImg"></image>
+        <view class="">
+          <view style="font-size: 34rpx;color: #000000;">{{nickName}}</view>
+          <view class="ub ub-ac" style="margin-top:10rpx;" wx:if="{{phoneNum}}">
+            <view class="phoneTxt">{{phoneNum}}</view>
+          </view>
+          <view class="ub ub-ac" style="margin-top:10rpx;" wx:else bindtap="toPage" data-page="/pages/bindPhone/index">
+            <view class="phoneTxt">绑定手机号</view>
+            <image style="width:12rpx;height:22rpx;" src="../../images/arrow-r.png"></image>
+          </view>
         </view>
       </view>
+      <view class="qdBtn" bindtap="toJuzi">签到领桔子</view>
     </view>
-    <view class="qdBtn" bindtap="toJuzi">签到领桔子</view>
-    <view style="height:140rpx;margin-top:10rpx;" class="userBox">
+
+    <view class="bgBar"></view>
+
+    <image src="../../images/bgy.png" class="bgy"></image>
+
+    <view style="height:140rpx;" class="taskCenter">
       <view class="ub ub-ac ub-pj" style="padding:30rpx;" bindtap="toJuzi">
         <view class="ub ub-ac">
           <image style="width:110rpx;height:75rpx;margin-right:40rpx;" src="../../images/user_rwzx.png"></image>
@@ -30,6 +37,7 @@
         </view>
       </view>
     </view>
+
   </view>
 
   <view style="margin-top:90rpx;" class="userBox">
@@ -87,7 +95,8 @@
       <image src="../../images/logo_main.png" style="width:80rpx;height:80rpx;"></image>
       <view class="phoneInner">
         <view>桔集-桔美好生活，集好店优惠</view>
-        <view class="ub ub-ac" style="margin-top: 10rpx;"><image src="../../images/dianhua.png" style="width:30rpx;height:26rpx;margin-right:10rpx;"></image>合作电话：400-001-1139</view>
+        <view class="ub ub-ac" style="margin-top: 10rpx;">
+          <image src="../../images/dianhua.png" style="width:30rpx;height:26rpx;margin-right:10rpx;"></image>合作电话：400-001-1139</view>
       </view>
     </view>
   </view>

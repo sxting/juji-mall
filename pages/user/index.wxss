@@ -1,6 +1,21 @@
 .toper {
   height: 270rpx;
-  background: #fcbf0a;
+  position: relative;
+}
+.bgg{
+  height: 168rpx;
+  background: #FFDC00;
+}
+
+.bgBar {
+  width: 100%;
+  height: 20rpx;
+  background: #ffdc00;
+}
+
+.bgy {
+  width: 100%;
+  height: 102rpx;
 }
 
 .qdBtn {
@@ -21,6 +36,16 @@
 
 .userBox {
   margin: 0 30rpx;
+  background: #fff;
+  box-shadow: 0 0 5rpx 0 rgba(228, 228, 228, 0.50);
+  border-radius: 10rpx;
+}
+
+.taskCenter{
+  position: absolute;
+  bottom:-70rpx;
+  left: 30rpx;
+  right: 30rpx;
   background: #fff;
   box-shadow: 0 0 5rpx 0 rgba(228, 228, 228, 0.50);
   border-radius: 10rpx;

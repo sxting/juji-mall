@@ -12,7 +12,7 @@
       <view class="toper">
         <swiper autoplay="{{autoplay}}" indicator-dots="true" indicator-color="{{dotsColor}}" indicator-active-color="{{dotsActiveColor}}" circular>
           <swiper-item wx:for="{{slideShowList}}" wx:key="unique">
-            <image src="{{item.imgId?'https://upic.juniuo.com/file/picture/'+item.imgId+'/resize_0_0/mode_fill':''}}" data-link="{{item.link}}" bindtap="onTapBanner" class="slide-image" mode="widthFix"></image>
+            <image src="{{item.imgId?'https://upic.juniuo.com/file/picture/'+item.imgId+'/resize_0_0/mode_fill':''}}" data-link="{{item.link}}" bindtap="onTapBanner" class="slide-image" mode="scaleToFill"></image>
           </swiper-item>
         </swiper>
 
@@ -120,7 +120,7 @@
           </view>
         </view>
         <view class="ub ub-fe jc-sb" style="padding: 0 30rpx 30rpx 30rpx;">
-          <view class="count">已售{{item.soldNum}}件</view>
+          <view class="ub ub-ac count"><image src="../../images/soldCount.png" style="width:24rpx;height: 22rpx;margin-right:10rpx;"></image>已售{{item.soldNum}}件</view>
           <button class="buyBtn">购买</button>
         </view>
       </view>

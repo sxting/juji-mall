@@ -15,3 +15,29 @@ page{box-sizing:border-box;height: 100%;background-color: #fbfbfb}
 .income text.r{margin-left: 40rpx}
 .time{position: absolute;top: 36rpx;right: 20rpx;font-size: 20rpx;color: #999}
 .nodataDiv{padding-top: 260rpx;}
+.explain-text-box{
+  padding: 0 30rpx;
+  height: 120rpx;
+  background-color: #FDF6D8;
+  font-family: PingFangSC-Regular;
+  font-size: 24rpx;
+  color: #533900;
+  letter-spacing: 0;
+  text-align: left;
+  position: relative;
+}
+.explain-text{
+  width: 100%;
+}
+.explain-text image{
+  width: 30rpx;
+  height: 30rpx;
+  margin-top: 28rpx
+}
+.explain-text .text-infor{
+  width: 648rpx;
+  line-height: 40rpx;
+  position: absolute;
+  left: 74rpx;
+  top: 22rpx
+}

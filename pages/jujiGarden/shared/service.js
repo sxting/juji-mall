@@ -63,6 +63,18 @@ jugardenService.shareList = (data) => {
   return http.get(url, data);
 }
 
+// 绑定微信号和姓名
+jugardenService.bindWechatInfor = (data) => {
+  let url = API + '/distributor/bindWechatId.json';
+  return http.get(url, data);
+}
+
+// 我的用户
+jugardenService.personListInfor = (data) => {
+  let url = API + '/distributor/persons.json';
+  return http.get(url, data);
+}
+
 module.exports = {
   jugardenService: jugardenService
 }

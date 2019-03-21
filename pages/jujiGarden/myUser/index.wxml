@@ -2,19 +2,29 @@
 <view class="fullScreen ub ub-ver">
     <view class="tablist">
         <view class="tablist ub ub-ac ub-pj1">
-            <view wx:for="{{tablist}}" wx:key="unique" class="tabItem {{curTabIndex==index?'on':''}}" bindtap="switchTab" data-type="{{index}}" data-index="{{index}}" data-status="{{item.status}}">{{item.name}}<view class="line"></view>
+            <view wx:for="{{tablist}}" wx:key="item" wx:for-index="index" bindtap="switchTab" data-index="{{index}}" data-status="{{item.status}}" class="tabItem {{index == curTabIndex? 'on' : ''}}" >{{item.name}}<view class="line"></view>
             </view>
         </view>
     </view>
+    <!-- 解释说明 -->
+    <view class='explain-text-box' wx:if='{{isShowTips}}'>
+      <view class='explain-text'>
+        <image src='/images/close-red.png' catchtap='closeTips'></image>
+        <view class='text-infor'>当你邀请的桔民升级为桔长后，你可根据桔长获得的推广返利获得佣金提成，贡献金额为截止到昨天的累计贡献金额</view>
+      </view>
+    </view>
     <view class="main ub-f1 p10">
-        <view class="item ub" wx:for="{{userlist}}" wx:for-item="item" wx:key="unique">
-            <image class="userImg udb" src="{{constant.basePicUrl}}25R9F7zL2Dhr/resize_180_180/mode_fill"></image>
-            <view class="ub-f1" style="position:realtive">
-                <view class="name">用户名</view>
-                <view class="remark">拥有桔民：10人</view>
-                <view class="income"><text>购物返利：15.00元</text><text class="r">管理佣金：15.00元</text></view>
-                <view class="time">接受邀请时间：2019-02-13 14:48</view>
-            </view>
+      <scroll-view scroll-y style='height: 950rpx' bindscrolltolower="scrolltolower">
+        <view class="item ub" wx:for="{{userlistInfor}}"  wx:key="list">
+          <image class="userImg udb" src="{{list.avatar? list.avatar : '/images/pinglunuser.png'}}"></image>
+          <view class="ub-f1" style="position:realtive">
+            <view class="name">{{list.nickName}}</view>
+            <view class="remark">拥有桔民：{{list.invitedMemberCount}}人</view>
+            <view class="income"><text>购物返利：{{list.saleRebate/100}}元</text><text class="r">管理佣金：{{list.manageRebate/100}}元</text></view>
+            <view class="time">接受邀请时间：{{list.joinedDate}}</view>
+          </view>
         </view>
+      </scroll-view>
+        
     </view>
 </view>

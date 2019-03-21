@@ -70,6 +70,17 @@ function errDialog(content) {
     });
 }
 
+// 弹框提示
+function showAlert(content) {
+  wx.showModal({
+    title: '温馨提示',
+    content: `${content}`,
+    showCancel: false,
+    confirmText: '确定',
+    confirmColor: '#333'
+  });
+}
+
 function checkMobile(sMobile) {
     if (!(/^1[3|4|5|8|7][0-9]\d{8}$/.test(sMobile))) {
         return false;
@@ -102,5 +113,6 @@ module.exports = {
     getUrlParma:getUrlParma,
     checkMobile:checkMobile,
     barcode: barc,
-    delBlank:delBlank
+    delBlank:delBlank,
+    showAlert: showAlert
 }

@@ -3,5 +3,6 @@
   "usingComponents": {},
   "enablePullDownRefresh": true,
   "backgroundColor": "#FFDC00",
-  "backgroundTextStyle": "light"
+  "backgroundColorTop": "#FFDC00",
+  "backgroundColorBottom": "#FFFFFF"
 }

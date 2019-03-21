@@ -67,7 +67,7 @@ Page({
                zhuheAmount: res.data.data.wxPayMoney && res.data.data.wxPayMoney > 0 && res.data.data.prepayMoney > 0 ? (Number(res.data.data.prepayMoney) + Number(res.data.data.wxPayMoney)).toFixed(2) : res.data.data.prepayMoney,
                aMoney: res.data.data.givingMoney ? Number(res.data.data.addMoney) - Number(res.data.data.givingMoney) : res.data.data.addMoney,
                givingMoney: res.data.data.givingMoney ? res.data.data.givingMoney:0,
-               preBalance: res.data.data.prepayMoney ? (Number(res.data.data.accountDto.balance) + Number(res.data.data.prepayMoney)).toFixed(2) : res.data.data.accountDto.balance,
+               preBalance: res.data.data.preBalance ? res.data.data.preBalance : 0,
                balance: res.data.data.accountDto.balance,
                point: res.data.data.point,
                addMoney: res.data.data.addMoney?Number(res.data.data.addMoney):0,
@@ -78,45 +78,28 @@ Page({
                 latitude: res.data.data.store.lat,
                longitude: res.data.data.store.lng
               }
-            // service.getSelectProviderByLoc(obj).subscribe({
-            //   next: res2 => {
-            //     console.log('----------服务商信息---------');
-            //     console.log(res2);
-            //     if (res2.id) { //如果存在服务商
-            //       //根据位置查询附近精选
-            //       var obj2 = {
-            //         // providerId: '1215434805522133',//测试
-            //         providerId: res2.id,
-            //         type: 'PRODUCT',
-            //         sortField: 'IDX',
-            //         sortOrder: 'ASC',
-            //         pageNo: 1,
-            //         pageSize: 4,
-            //         longitude: res.data.data.store.lng,
-            //         latitude: res.data.data.store.lat
-            //       };
-
-            //       service.getRecommendPage(obj2).subscribe({
-            //         next: res3 => {
-            //           console.log(res3);
-            //           this.setData({
-            //             recommendList: res3.list
-            //           });
-            //         },
-            //         error: err => {
-            //           console.log(err);
-            //         },
-            //         complete: () => wx.hideToast()
-            //       });
-
-            //     } else { //如果不存在服务商
-            //       // wx.showModal({
-            //       //   title: '错误',
-            //       //   content: '当前位置不存在服务商'
-            //       // });
-            //     }
-            //   }
-            // });
+            //  /recommend/hot.json
+            wx.request({
+              url: constant.apiUrl+'/recommend/hot.json',
+              method: 'GET',
+              data: {
+                providerId: res.data.data.agentId
+              },
+              success: (res2) => {
+                console.log(res2);
+                if (res2.data.errorCode == '200') {
+                    this.setData({
+                      recommendList: res2.data.data
+                    })
+                  // console.log(this.data.recommendList);
+                }else{
+                    // wx.showModal({
+                    //   title: '错误: ' + res2.data.errorCode,
+                    //   content: res2.data.errorInfo,
+                    // })
+                }
+              }
+            })
            }else{
              wx.showModal({
                title: '错误: ' + res.data.errorCode,

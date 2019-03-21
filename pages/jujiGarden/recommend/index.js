@@ -1,52 +1,53 @@
-import { service } from '../../../service';
+import { jugardenService } from '../shared/service';
 import { constant } from '../../../utils/constant';
 import { errDialog, loading } from '../../../utils/util';
 
 Page({
     data: {
-        recommendlist: [{ imgIds: ['25R9F7zL2Dhr', '260HcKCwl672', '25SGzGlgKSrG', '25SGzGlgKSrG', '25Xi1X38wUK8', '25R9F7zL2Dhr'] }],
-        picId: '25R9F7zL2Dhr',
-        constant: constant,
-        isShowNodata: false,
-        curTabIndex: 1,
-        shareBg: '../../../images/shareBg.png',
-        isShowModal:false
+      recommendlist: [{
+        imageIds: ['25R9F7zL2Dhr', '260HcKCwl672', '25SGzGlgKSrG', '25SGzGlgKSrG', '25Xi1X38wUK8', '25R9F7zL2Dhr'],
+        descriptions:" 素材文字素材文字素材文字素材文字素材",
+        editorAvatar:"https://upic.juniuo.com/file/picture/25R9F7zL2Dhr/resize_180_180/mode_fill",
+        editorNickName:"小仙女",
+        sceneId:'1110'
+      }],
+      picId: '25R9F7zL2Dhr',
+      constant: constant,
+      isShowNodata: false,
+      curTabIndex: 1,
+      shareBg: '../../../images/shareBg.png',
+      isShowModal:true
     },
     onLoad: function(options) {
-        wx.setNavigationBarTitle({
-            title: '推广素材',
-        });
+        wx.setNavigationBarTitle({title: '推广素材'});
+        this.getData();
     },
-
+    getData: function(status,startDate,endDate){
+        jugardenService.shareList({
+            pageNo:0,
+            pageSize:10
+        }).subscribe({
+            next: res => {
+              // this.setData({recommendlist:res})
+            },
+            error: err => errDialog(err),
+            complete: () => wx.hideToast()
+        })
+    },
     switchTab: function(e) {
         this.setData({ curTabIndex: e.currentTarget.dataset.index });
     },
-
     /**生成图文**/
     showImageTextToShare: function() {
-        wx.showLoading({ title: '生成图片...' });
-        wx.downloadFile({
-            url: constant.basePicUrl + this.data.picId + '/resize_240_240/mode_fill',
-            success: (res) => {
-                if (res.statusCode === 200) {
 
-                } else {
-                    wx.hideLoading();
-                }
-            }
-        });
     },
     /**分享给朋友**/
     shareToFriend: function() {
 
     },
-    /**分享到朋友圈**/
-    shareToWechatCircles: function() {
-
-    },
     /**保存素材**/
     saveImagesToPhone: function(e) {
-        var imgIds = e.currentTarget.dataset.imgs;
+        var imageIds = e.currentTarget.dataset.imgs;
         var that = this;
         wx.getSetting({
             success(res) {
@@ -54,11 +55,11 @@ Page({
                     wx.authorize({
                         scope: 'scope.writePhotosAlbum',
                         success() {
-                            that.saveFile(imgIds);
+                            that.saveFile(imageIds);
                         }
                     })
                 } else {
-                    that.saveFile(imgIds);
+                    that.saveFile(imageIds);
                 }
             },
             fail() {
@@ -66,18 +67,18 @@ Page({
             }
         })
     },
-    saveFile: function(imgIds) {
+    saveFile: function(imageIds) {
         var imgIndex = 0;
-        for (var i = 0; i < imgIds.length; i++) {
-            var imgId = imgIds[i];
+        for (var i = 0; i < imageIds.length; i++) {
+            var imgId = imageIds[i];
             wx.downloadFile({
-                url: constant.basePicUrl + imgIds[i] + '/resize_240_240/mode_fill',
+                url: constant.basePicUrl + imageIds[i] + '/resize_240_240/mode_fill',
                 success: function(res) {
                     wx.saveImageToPhotosAlbum({
                         filePath: res.tempFilePath,
                         success: (res) => {
                             imgIndex++;
-                            if (imgIndex == imgIds.length) {
+                            if (imgIndex == imageIds.length) {
                                 wx.showToast({
                                     title: "已保存至相册",
                                     icon: "success"
@@ -92,12 +93,31 @@ Page({
             });
         }
     },
-    getQrCode: function() {
+
+  // 点击分享
+  showShare:function(){
+    wx.showLoading({title: '生成图片...'});
+    wx.downloadFile({
+      url: constant.basePicUrl+this.data.productInfo.picId+'/resize_750_420/mode_fill',
+      success: (res) => {
+        if (res.statusCode === 200) {
+            this.setData({headImg:res.tempFilePath});
+            this.getQrCode();
+        }else{
+          wx.hideLoading();
+        }
+      }
+    });
+  },
+  closeModal:function(){
+      this.setData({isShowModal:true});
+  },
+  getQrCode: function() {
       service.getQrCode({ productId:this.data.productId,path: 'pages/comDetail/index'}).subscribe({
           next: res => {
             var picId = res;
             wx.downloadFile({
-              url: constant.basePicUrl+picId+'/resize_240_240/mode_fill',
+              url: constant.basePicUrl+picId+'/resize_200_200/mode_fill',
               success: (res1) => {
                 if (res1.statusCode === 200) {
                     this.setData({erwmImg:res1.tempFilePath});
@@ -132,72 +152,84 @@ Page({
           },
           complete: () => wx.hideToast()
       });
-    },
-    setCanvasSize: function() {
+  },
+  setCanvasSize: function() {
       var size = {};
-      size.w = wx.getSystemInfoSync().windowWidth-90;
-      size.h = 440;
+      size.w = 256;
+      size.h = 424;
       return size;
-    },
-    setTitle: function(context,name) {
-      context.setFontSize(14);
+  },
+  setTitle: function(context,name) {
+      context.setFontSize(12);
       context.setTextAlign("left");
-      context.setFillStyle("#666666");
-      context.fillText(name, 28, 253);
-      context.fillText("“桔”美好生活", 25, 350);
+      context.setFillStyle("#333");
+      context.fillText(name, 20, 210);
       context.stroke();
 
-      context.setFontSize(12);
-      context.setTextAlign("left");
-      context.setFillStyle("#666666");
-      context.fillText("集好店优惠", 38, 378);
+      context.setFontSize(13);
+      context.setTextAlign("center");
+      context.setFillStyle("#000");
+      context.fillText("“桔”美好生活，集好店优惠", 128, 68);
       context.stroke();
-    },
-    setText2: function(context,price) {
-      context.setFontSize(15);
+  },
+  setText2: function(context,price1,price2) {
+      var size = this.setCanvasSize();
+      context.setFontSize(12);
       context.setTextAlign("left");
       context.setFillStyle("#E83221");
-      context.fillText("现价:" + price, 28, 281);
+      context.fillText(price1, 55, 235);
       context.stroke();
-    },
-    setText3: function(context,price,amount) {
+      context.setFontSize(10);
+      context.setTextAlign("right");
+      context.setFillStyle("#999999");
+      context.fillText("原价:" + price2, size.w - 20, 234);
+      context.stroke();
+  },
+  setText3: function(context,amount) {
       var size = this.setCanvasSize();
-      context.setFontSize(13);
+      context.setFontSize(10);
       context.setTextAlign("right");
-      context.setFillStyle("#999");
-      context.fillText("原价:" + price, size.w, 281);
+      context.setFillStyle("#999999");
+      context.fillText("销量:" + amount, size.w-20, 262);
       context.stroke();
-      context.setFontSize(13);
-      context.setTextAlign("right");
-      context.setFillStyle("#999");
-      context.fillText("销量:" + amount, size.w, 253);
-      context.stroke();
-    },
-    setText4: function(context) {
+  },
+  setText4: function(context) {
       var size = this.setCanvasSize();
-      context.setFontSize(12);
-      context.setTextAlign("right");
-      context.setFillStyle("#666");
-      context.fillText("长按识别二维码", size.w-10, 410);
+      context.setFontSize(11);
+      context.setTextAlign("center");
+      context.setFillStyle("#666666");
+      context.fillText("长按识别二维码", 128, 393);
       context.stroke();
-    },
-    drawImage: function(name, desc,price1,price2,amount) {//name,desc,现价,原价,销量
+  },
+  setText5: function(context) {
+      var size = this.setCanvasSize();
+      context.setFontSize(9);
+      context.setTextAlign("left");
+      context.setFillStyle("#999999");
+      context.fillText("过期退", 35, 261);
+      context.fillText("随时退", 95, 261);
+      context.stroke();
+  },
+  drawImage: function(name, desc,price1,price2,amount) {//name,desc,现价,原价,销量
       var size = this.setCanvasSize();
       var context = wx.createCanvasContext('myCanvas');
-      context.drawImage(this.data.shareBg, 0, 0, size.w+90, size.h); //宽度70，居中，距离上15
-      rectPath(context, 15, 15, size.w, size.h-30);
-      context.drawImage(this.data.headImg, 28, 28, size.w - 26, 200); //宽度70，居中，距离上15
-      context.save();
-      context.drawImage(this.data.erwmImg, size.w - 90, 312, 80, 80); //二维码，宽度100，居中
+      context.drawImage(this.data.shareBg, 0, 0, size.w, size.h); //宽度70，居中，距离上15
+      context.drawImage("../../../images/logo.png", size.w/2-14, 15, 28,30); //宽度70，居中，距离上15
+      context.drawImage(this.data.headImg, 10, 82, size.w - 20,140); //宽度70，居中，距离上15
+      rectPath(context, 10, 190, size.w-20, 219);
+      context.drawImage(this.data.erwmImg, size.w/2 - 40, 292.5, 80, 80); //二维码，宽度100，居中
       this.setTitle(context,name);
-      // this.setText1(context,desc);
-      drawDashLine(context, 28, 300, size.w, 300, 4);//横向虚线
-      this.setText2(context,price1);
-      this.setText3(context,price2,amount);
+      context.drawImage("../../../images/price.png", 20, 224, 30,13); //宽度70，居中，距离上15
+      context.drawImage("../../../images/gou.png", 20, 252.5, 10,10); //宽度70，居中，距离上15
+      context.drawImage("../../../images/gou.png", 80, 252.5, 10,10); //宽度70，居中，距离上15
+      this.setText5(context);
+      drawDashLine(context, 15, 280, size.w-15, 280, 4);//横向虚线
+      this.setText2(context,price1,price2);
+      this.setText3(context,amount);
       this.setText4(context);
       context.draw();
-    },
-    savePic: function(e) {
+  },
+  savePic: function(e) {
       var type = e.currentTarget.dataset['type'];
       var that = this;
       wx.canvasToTempFilePath({
@@ -235,12 +267,13 @@ Page({
               console.log(res);
           }
       });
-    },
-    saveAsPhoto: function(imgUrl,type) {
+  },
+  saveAsPhoto: function(imgUrl,type) {
       wx.saveImageToPhotosAlbum({
           filePath: imgUrl,
           success: (res) => {
             this.share();//分享获得桔子
+            this.closeModal();
             if(type==1){
               wx.showToast({
                   title: "已保存至相册",
@@ -254,13 +287,37 @@ Page({
               console.log(res);
           }
       })
-    }
+  }
+
 })
 
-// get推广素材list信息
-function getProductListInfor() {
-    let self = this;
-    let data = {
+function rectPath(ctx, x, y, w, h) {
+  ctx.beginPath();
+  ctx.setFillStyle('#ffffff');
+  ctx.moveTo(x, y);
+  ctx.lineTo(x + w, y);
+  ctx.lineTo(x + w, y + h);
+  ctx.lineTo(x, y + h);
+  ctx.lineTo(x, y);
+  ctx.setStrokeStyle('#ffffff');
+  ctx.fill();
+  ctx.closePath();
+}
 
-    }
+function drawDashLine(ctx, x1, y1, x2, y2, dashLength){  //传context对象，始点x和y坐标，终点x和y坐标，虚线长度
+  ctx.beginPath();
+  ctx.setStrokeStyle("#eeeeee")//设置线条的颜色
+  ctx.setLineWidth(1)//设置线条宽度
+  var dashLen = dashLength === undefined ? 3 : dashLength,
+  xpos = x2 - x1, //得到横向的宽度;
+  ypos = y2 - y1, //得到纵向的高度;
+  numDashes = Math.floor(Math.sqrt(xpos * xpos + ypos * ypos) / dashLen); 
+  for(var i=0; i<numDashes; i++){
+     if(i % 2 === 0){
+         ctx.moveTo(x1 + (xpos/numDashes) * i, y1 + (ypos/numDashes) * i); 
+      }else{
+          ctx.lineTo(x1 + (xpos/numDashes) * i, y1 + (ypos/numDashes) * i);
+      }
+   }
+  ctx.stroke();
 }

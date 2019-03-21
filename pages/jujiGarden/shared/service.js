@@ -57,6 +57,12 @@ jugardenService.logIn = (data) => {
   return http.get(url, data);
 }
 
+// 我的素材
+jugardenService.shareList = (data) => {
+  let url = API + '/distributor/shareList.json';
+  return http.get(url, data);
+}
+
 module.exports = {
   jugardenService: jugardenService
 }

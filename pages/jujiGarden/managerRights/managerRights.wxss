@@ -1,1 +1,38 @@
 /* pages/jujiGarden/managerRights/managerRights.wxss */
+.page{
+  width: 100%;
+  height: 2198rpx;
+  overflow:hidden;
+  position: relative
+}
+.page image{
+  width: 100%;
+  height: 2198rpx;
+}
+.page .title{
+  position: absolute;
+  left: 90rpx;
+  font-family: PingFangSC-Medium;
+  font-size: 36rpx;
+  color: #333333;
+  letter-spacing: 0;
+}
+.page .title text{
+  display: block;
+  width: 570rpx
+}
+.page .title text:last-of-type{
+  font-family: PingFangSC-Regular;
+  font-size: 28rpx;
+  color: #999999;
+  margin-top: 40rpx
+}
+.page .title-1{
+  top: 60rpx;
+}
+.page .title-2{
+  top: 1045rpx;
+}
+.page .title-3{
+  bottom: 40rpx;
+}

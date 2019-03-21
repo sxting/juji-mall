@@ -1,4 +1,4 @@
-import { errDialog, loading } from '../../../utils/util'
+import { errDialog, loading, showAlert } from '../../../utils/util'
 import { service } from '../../../service';
 import { constant } from '../../../utils/constant';
 import { jugardenService } from '../shared/service.js'
@@ -12,12 +12,14 @@ Page({
     storeId: '',
     openId: wx.getStorageSync('openid'),//邀请者id
     role: '',//桔园角色
-    isAuthed:false,//是否实名认证
+    isAuthed: false,//是否实名认证
     todaySaleRebate: 0,//今日销售收入
     todaySettlementAmount: 0,//今日提现 
     totalSettlementAmount: 0,//累计提现
     invitedLeaderCount: 0,
     invitedMemberCount: 0,
+    wechatId: '',//微信号码
+    name: '',//姓名
   },
 
   onLoad: function (options) {
@@ -65,21 +67,20 @@ Page({
     getGardenInfor.call(self);//get首页信息,获取分销角色
   },
 
-  // 申请成为桔长
+  /**申请成为桔长  **/
   apply:function(e){
     let self = this;
     joinDistributor.call(self);
   },
 
-  // 跳转页面
+  /**   跳转页面  */
   toPage: function(e) {
-      var page = e.currentTarget.dataset.page;
-      wx.navigateTo({ url: page });
+    let role = e.currentTarget.dataset.role ? e.currentTarget.dataset.role : '';
+    let page = role ? e.currentTarget.dataset.page + '?role=' + role : e.currentTarget.dataset.page;
+    wx.navigateTo({ url: page });
   },
 
-  /**
-  * 用户点击右上角分享
-  */
+  /*** 用户点击右上角分享  ***/
   onShareAppMessage: function () {
     let self = this;
     return {
@@ -94,6 +95,42 @@ Page({
         // 转发失败
         console.log(res);
       }
+    }
+  },
+
+  dataChange(e){
+    console.log(e.currentTarget.dataset.type);
+    if (e.currentTarget.dataset.type == 'wechatid'){
+      this.setData({
+        wechatId: e.detail.value,//微信号码
+      })
+    }else{
+      this.setData({
+        name: e.detail.value,//姓名
+      })
+    }
+  },
+
+  /***绑定微信号及姓名   */ 
+  submitUserInfor(){
+    let data = {
+      wechatId: this.data.wechatId,
+      name: this.data.name
+    }
+    if (this.data.wechatId == ''){
+      showAlert('请填写您的微信账号');
+    } else if (this.data.name == ''){
+      showAlert('请填写您的实名认证姓名');
+    } else{
+      jugardenService.bindWechatInfor(data).subscribe({
+        next: res => {
+          if (res) {
+            console.log(res);
+          }
+        },
+        error: err => errDialog(err),
+        complete: () => wx.hideToast()
+      })
     }
   }
 });
@@ -131,8 +168,9 @@ function getGardenInfor(){
           totalSettlementAmount: res.totalSettlementAmount ? res.totalSettlementAmount : 0,
           invitedLeaderCount: res.invitedLeaderCount? res.invitedLeaderCount : 0,
           invitedMemberCount: res.invitedMemberCount? res.invitedMemberCount : 0,
+          isAuthed: res.allowDistribute == true? true : false
         })
-        if (res.role == 'LEADER'){//动态设置title背景色
+        if (res.role == 'LEADER' && res.allowDistribute){//动态设置title背景色 是桔长并已经认证
           wx.setNavigationBarColor({
             frontColor: '#000000', // 必写项
             backgroundColor: '#FFDC00', // 必写项
@@ -145,7 +183,7 @@ function getGardenInfor(){
   })
 }
 
-// 加入分销  成为桔民
+// 加入分销 成为桔民
 function joinDistributor() {
   let self = this;
   let data = {

@@ -20,7 +20,7 @@
                   <text class='num'><text style='color:#F35308'>{{ hadNumber }}</text>/10</text>
                 </view>
                 <view class='fr' wx:if='{{ hadNumber != 0 }}'>
-                    <text catchtap="toPage" data-page="/pages/jujiGarden/userInfor/userInfor">查看桔民</text>
+                    <text catchtap="toPage" data-page="/pages/jujiGarden/userInfor/userInfor" data-role='{{role}}'>查看桔民</text>
                     <text class='iconfont icon-right'></text>
                 </view>
             </view>
@@ -34,23 +34,23 @@
     </view>
 
      <!-- 桔长进入实名认证 -->
-    <view class='page' wx:if="{{role == 'LEADER'&&!isAuthed}}">
+    <view class='page' wx:if="{{role == 'LEADER' && !isAuthed}}">
         <image class="pageBg" src="../../../images/juyuan-bg3.png"></image>
         <view class='authentication-progress'>
             <view class='my-team'>
-              <input class='wechat-no' placeholder='请填写您的微信账号'></input>
-              <input class='wechat-name' placeholder='请填写您的微信实名认证姓名'></input>
+              <input class='wechat-no' placeholder='请填写您的微信账号' value='{{ wechatId }}' bindinput="dataChange" data-type='wechatid'></input>
+              <input class='wechat-name' placeholder='请填写您的微信实名认证姓名' value='{{ name }}' bindinput="dataChange" data-type='name'></input>
               <view>请如实填写以上信息，推广获得的收入将自动提现到微信零钱</view>
-              <view class='btn-box'>
-                <image src='../../../images/sure-btn.png' class='sure-btn' catchtap='submit-btn'></image>
+              <view class='btn-box' bindtap='submitUserInfor'>
+                <image src='../../../images/sure-btn.png' class='sure-btn'></image>
                 <text>确定</text>
               </view>
             </view>
         </view>
     </view>
 
-    <!-- 桔长进入 -->
-    <view class="page" wx:if="{{ role == 'LEADER'&&isAuthed}}">
+    <!-- 桔长进入  && isAuthed-->
+    <view class="page" wx:if="{{ role == 'LEADER' }}">
         <view class="toper">
             <image class="udb topBg" src="../../../images/topBg.png" mode="scaleToFill"></image>
             <view class="topCon" style="padding:30rpx;">

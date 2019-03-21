@@ -1,4 +1,9 @@
 // pages/jujiGarden/userInfor/userInfor.js
+import { errDialog, loading, showAlert } from '../../../utils/util'
+import { service } from '../../../service';
+import { constant } from '../../../utils/constant';
+import { jugardenService } from '../shared/service.js'
+
 Page({
 
   /**
@@ -6,62 +11,43 @@ Page({
    */
   data: {
     userHeadUrl: '/images/pinglunuser.png',
-    userListInfor: ['','']
+    userListInfor: ['',''],
+    role: '',
+    pageNo: 1,
+    pageSize: 10
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    console.log(options);
+    let self = this;
+    this.setData({
+      role: options.role ? options.role : ''
+    })
+    getPersonListInfor.call(self);//get我的用户信息列表
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  }
 })
+
+//  获取用户信息列表
+function getPersonListInfor(){
+  let self = this;
+  let data = {
+    role: self.data.role,
+    pageNo: self.data.pageNo,
+    pageSize: self.data.pageSize
+  }
+  jugardenService.personListInfor(data).subscribe({
+    next: res => {
+      if (res) {
+        self.setData({
+          userListInfor: res
+        })
+      }
+    },
+    error: err => errDialog(err),
+    complete: () => wx.hideToast()
+  })
+
+}

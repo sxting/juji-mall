@@ -1,5 +1,5 @@
 <wxs src="../../../utils/numFr.wxs" module="format" />
-<view class="main">
+<view class="main {{isShowModal?'':'ovh'}}">
   <view class="tabs ub ub-ac">
     <view class="{{curTabIndex==1?'on':''}}" data-index="1" bindtap="switchTab">商品推荐</view>
     <view class="{{curTabIndex==2?'on':''}}" data-index="2" bindtap="switchTab">邀新素材</view>

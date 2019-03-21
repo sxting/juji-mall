@@ -95,7 +95,7 @@ Page({
         //   error: err => console.log(err),
         //   complete: () => wx.hideToast()
         // });
-        
+
       }else{
         wx.showToast({
           title: '发生错误，未找到商品id',
@@ -104,13 +104,13 @@ Page({
         this.gohomepage();
         return;
       }
-      
+
     }else{
       this.setData({
         productId: option.id,
         storeId: option.storeid
       });
-      
+
       if (wx.getStorageSync('token')) {
         console.log('token存在');
         this.getItemInfo();
@@ -133,7 +133,7 @@ Page({
         this.mainFnc(option,2);
       }
     }
-    
+
 
   },
   mainFnc: function (option,type){
@@ -235,7 +235,7 @@ Page({
         url: '/pages/map/index?lat=' + e.currentTarget.dataset.lat + '&lng=' + e.currentTarget.dataset.lng,
       });
     }
-    
+
   },
   callPhone: function () {
     wx.makePhoneCall({
@@ -641,10 +641,10 @@ function drawDashLine(ctx, x1, y1, x2, y2, dashLength){  //传context对象，�
   var dashLen = dashLength === undefined ? 3 : dashLength,
   xpos = x2 - x1, //得到横向的宽度;
   ypos = y2 - y1, //得到纵向的高度;
-  numDashes = Math.floor(Math.sqrt(xpos * xpos + ypos * ypos) / dashLen); 
+  numDashes = Math.floor(Math.sqrt(xpos * xpos + ypos * ypos) / dashLen);
   for(var i=0; i<numDashes; i++){
      if(i % 2 === 0){
-         ctx.moveTo(x1 + (xpos/numDashes) * i, y1 + (ypos/numDashes) * i); 
+         ctx.moveTo(x1 + (xpos/numDashes) * i, y1 + (ypos/numDashes) * i);
       }else{
           ctx.lineTo(x1 + (xpos/numDashes) * i, y1 + (ypos/numDashes) * i);
       }

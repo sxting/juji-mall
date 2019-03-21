@@ -30,7 +30,7 @@
           <view class="mtitle">桔子换礼</view>
           <view class="subtitle">让生活“换”然一新</view>
         </view>
-        
+
         <view class="moreWrap" wx:if="{{locationName&&pointProductList.length>0}}" bindtap="toJuzihl">
           <view class="more">更多</view>
           <image src="../../images/arrow-right.png" style="width:10rpx;height:18rpx;"></image>
@@ -89,7 +89,7 @@
         <view class="mtitle">精选推荐</view>
         <view class="subtitle" style="margin-top:10rpx;">精选好物，先到先得</view>
       </view>
-      
+
       <view class="labels-wrap">
         <view class="label {{sortIndex==1?'label-active':''}}" data-label="1" bindtap="toggleLabel">
           综合</view>

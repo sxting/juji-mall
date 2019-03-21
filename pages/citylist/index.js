@@ -107,7 +107,7 @@ Page({
           citylist: res
         });
       },
-      error: err => errDialog(err),
+      // error: err => errDialog(err),
       complete: () => wx.hideToast()
     })
   },
@@ -201,7 +201,7 @@ Page({
         }
 
       },
-      error: err => errDialog(err),
+      // error: err => errDialog(err),
       complete: () => wx.hideToast()
     })
     // this.setData({'curCity':curCity});

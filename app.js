@@ -47,7 +47,7 @@ App({
           this.globalData.userInfo = res;
         }
       },
-      error: err => errDialog(err),
+      // error: err => errDialog(err),
       complete: () => wx.hideToast()
     })
   },

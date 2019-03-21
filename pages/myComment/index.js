@@ -47,7 +47,7 @@ Page({
                     isShowNodata: this.data.commentlist.length == 0
                 });
             },
-            error: err => errDialog(err),
+            // error: err => errDialog(err),
             complete: () => wx.hideToast()
         })
     },
@@ -93,7 +93,7 @@ Page({
                     isShowNodata: this.data.commentlist.length == 0
                 });
             },
-            error: err => errDialog(err),
+            // error: err => errDialog(err),
             complete: () => {
                 setTimeout(() => {
                     wx.stopPullDownRefresh()

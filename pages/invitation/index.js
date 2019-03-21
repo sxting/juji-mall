@@ -30,7 +30,7 @@ Page({
                     avatar: res.avatar
                 });
             },
-            error: err => errDialog(err),
+            // error: err => errDialog(err),
             complete: () => wx.hideToast()
         })
     }

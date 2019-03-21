@@ -61,7 +61,7 @@ Page({
                 }
                 this.setData({ isShowNodata: this.data.orderlist.length == 0 });
             },
-            error: err => errDialog(err),
+            // error: err => errDialog(err),
             complete: () => wx.hideToast()
         })
     },

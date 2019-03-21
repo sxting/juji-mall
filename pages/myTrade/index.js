@@ -86,7 +86,7 @@ Page({
           inputlist: this.data.inputlist.concat(res)
         });
       },
-      error: err => errDialog(err),
+      // error: err => errDialog(err),
       complete: () => wx.hideLoading()
     });
 
@@ -117,7 +117,7 @@ Page({
           inputlist: res
         });
       },
-      error: err => errDialog(err),
+      // error: err => errDialog(err),
       complete: () => wx.hideLoading()
     });
   },

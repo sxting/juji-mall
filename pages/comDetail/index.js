@@ -41,7 +41,7 @@ Page({
         this.setData({sceneId: scene});
 
         wx.request({
-          url: 'https://c.juniuo.com/shopping/qr/getBySceneId.json?sceneId='+scene,
+          url: constant.apiUrl + '/qr/getBySceneId.json?sceneId='+scene,
           method: 'GET',
           header: {
             'content-type': 'application/json',
@@ -186,7 +186,7 @@ Page({
         }
       }
       wx.request({
-        url: 'https://c.juniuo.com/shopping/user/login.json',
+        url: constant.apiUrl + '/user/login.json',
         method: 'GET',
         data: requestObj,
         header: {

@@ -37,10 +37,6 @@ Page({
     switchTab: function(e) {
         this.setData({ curTabIndex: e.currentTarget.dataset.index });
     },
-    /**生成图文**/
-    showImageTextToShare: function() {
-
-    },
     /**分享给朋友**/
     shareToFriend: function() {
 
@@ -95,14 +91,15 @@ Page({
     },
 
   // 点击分享
-  showShare:function(){
+  showImageTextToShare:function(e){
     wx.showLoading({title: '生成图片...'});
+    var imageId = e.currentTarget.dataset.img;
     wx.downloadFile({
-      url: constant.basePicUrl+this.data.productInfo.picId+'/resize_750_420/mode_fill',
+      url: constant.basePicUrl+imageId+'/resize_750_420/mode_fill',
       success: (res) => {
         if (res.statusCode === 200) {
-            this.setData({headImg:res.tempFilePath});
-            this.getQrCode();
+          this.setData({headImg:res.tempFilePath});
+          this.getQrCode();
         }else{
           wx.hideLoading();
         }
@@ -129,7 +126,7 @@ Page({
                       if(info.point!=0){
                         var juzi = info.point+'桔子+';
                       }else{
-                        var juzi = ''
+                        var juzi = '';
                       }
                       var price1 = juzi + Number(info.price / 100).toFixed(2)+'元';
                     }

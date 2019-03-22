@@ -29,6 +29,10 @@
 }
 
 .shuiyin {
+  display: block;
+  margin: 50rpx auto;
+}
+.ab{
   position: absolute;
   bottom: 90rpx;
   left: 50%;

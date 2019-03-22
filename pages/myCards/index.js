@@ -78,7 +78,7 @@ Page({
   toRecord: function(e) {
     console.log(e);
     wx.navigateTo({
-      url: '/pages/payrecord/index?merchantId=' + e.currentTarget.dataset.mid,
+      url: '/pages/myRecord/index?merchantId=' + e.currentTarget.dataset.mid,
     })
   },
   toggleCard: function(e) { //切换卡片高度
@@ -98,15 +98,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-    // wx.setStorageSync('scene', '1011'); //测试用
-    let scene = wx.getStorageSync('scene');
-    if (scene == '1011' || scene == '1012' || scene == '1013') { //扫描二维码场景值
-      return;
-    } else {
-      wx.switchTab({
-        url: '/pages/index/index',
-      })
-    }
+
   },
 
   /**

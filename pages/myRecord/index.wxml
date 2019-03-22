@@ -28,5 +28,6 @@
   <view class="shuiyin {{recordList.length>0?'':'ab'}}">
     <image src="../../images/juji.png" alt=""></image>
   </view>
+  
 
 </view>

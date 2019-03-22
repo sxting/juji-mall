@@ -24,8 +24,8 @@
           <image src="../../images/arrow-right.png" style="width:14rpx;height:26rpx;margin-left:20rpx;"></image>
         </view>
       </view>
-      <view class="row jc-sb" style="margin-top:10rpx;">
-        <view class="row">
+      <view class="ub ub-fe jc-sb" style="margin-top:10rpx;">
+        <view class="ub ub-fe">
           <view class="row" wx:if="{{productInfo.type=='POINT'}}">
             <view style="font-size:34rpx;color: #E83221;font-weight:bold;">{{productInfo.point}}</view>
             <view style="font-size:28rpx;color: #E83221;font-weight:bold;">桔子</view>
@@ -40,7 +40,7 @@
           <view style="font-size: 24rpx;color: #999999;text-decoration:line-through;margin-left:25rpx;">{{filter.toFix(productInfo.originalPrice)}} 元</view>
         </view>
 
-        <view style="font-size: 24rpx;color: #999999;">已售{{productInfo.soldNum}}件</view>
+        <view class="ub ub-ac" style="font-size: 24rpx;color: #999999;"><image src="../../images/soldCount.png" style="width:24rpx;height: 22rpx;margin-right:10rpx;"></image>已售{{productInfo.soldNum}}件</view>
       </view>
 
     </view>
@@ -149,9 +149,9 @@
         <view class="pubuItem">
           <view class="cardWrap padr10">
             <view class="card" wx:for="{{recommendList}}" wx:key="{{index}}" bindtap="toComDetail" data-id="{{item.productId}}" data-storeid="{{item.nearStore.id}}" wx:if="{{index%2 == 0}}">
-              <image src="https://upic.juniuo.com/file/picture/{{item.picId}}/resize_0_0/mode_fill" lazy-load="true" mode="aspectFit" class="plimg"></image>
+              <image src="https://upic.juniuo.com/file/picture/{{item.picId}}/resize_0_0/mode_fill" lazy-load="true" mode="widthFix" class="plimg"></image>
               <view class="pubuname">{{item.productName}}</view>
-              <view class="pububox" style="margin-top:10rpx;">
+              <view class="ub ub-ac ub-pj" style="margin-top:10rpx;">
                 <view class="ex-juzi">
                   <!-- <view style="font-size: 28rpx;color: #E83221;font-weight:bold;">{{item.point}}</view>
                   <view style="font-size: 22rpx;color: #E83221;font-weight:bold;">桔子</view> -->
@@ -160,11 +160,14 @@
                   <view style="font-size: 28rpx;color: #E83221;font-weight:bold;" wx:if="{{item.point>0&&item.price>0}}">+</view>
                   <view style="font-size: 28rpx;color: #E83221;font-weight:bold;display:flex;align-items:center;" wx:if="{{item.price>0}}">{{filter.toFix(item.price)}}<text style="font-size: 22rpx;color: #E83221;font-weight:bold;">元</text></view>
                 </view>
+                <view class="ub ub-ac" style="font-size: 22rpx;color: #999999;">
+                <image src="../../images/soldCount.png" style="width:24rpx;height: 22rpx;margin-right:10rpx;"></image>
+                已售{{item.soldNum}}件</view>
               </view>
-              <view class="ub ub-ac ub-pj" style="margin-top:10rpx;">
+              <!-- <view class="ub ub-ac ub-pj" style="margin-top:10rpx;">
                 <view class="old-price">{{filter.toFix(item.originalPrice)}}元</view>
                 <view style="font-size: 22rpx;color: #999999;">已售{{item.soldNum}}件</view>
-              </view>
+              </view> -->
             </view>
           </view>
         </view>
@@ -172,19 +175,22 @@
         <view class="pubuItem">
           <view class="cardWrap padl10">
             <view class="card" wx:for="{{recommendList}}" wx:key="{{index}}" bindtap="toComDetail" data-id="{{item.productId}}" data-storeid="{{item.nearStore.id}}" wx:if="{{index%2!=0}}">
-              <image src="https://upic.juniuo.com/file/picture/{{item.picId}}/resize_0_0/mode_fill" lazy-load="true" mode="aspectFit" class="plimg"></image>
+              <image src="https://upic.juniuo.com/file/picture/{{item.picId}}/resize_0_0/mode_fill" lazy-load="true" mode="widthFix" class="plimg"></image>
               <view class="pubuname">{{item.productName}}</view>
-              <view class="pububox" style="margin-top:10rpx;">
+              <view class="ub ub-ac ub-pj" style="margin-top:10rpx;">
                 <view class="ex-juzi">
                   <view style="font-size: 28rpx;color: #E83221;font-weight:bold;display:flex;align-items:center;" wx:if="{{item.point>0}}">{{item.point}}<text style="font-size: 22rpx;color: #E83221;font-weight:bold;">桔子</text></view>
                   <view style="font-size: 28rpx;color: #E83221;font-weight:bold;" wx:if="{{item.point>0&&item.price>0}}">+</view>
                   <view style="font-size: 28rpx;color: #E83221;font-weight:bold;display:flex;align-items:center;" wx:if="{{item.price>0}}">{{filter.toFix(item.price)}}<text style="font-size: 22rpx;color: #E83221;font-weight:bold;">元</text></view>
                 </view>
+                <view class="ub ub-ac" style="font-size: 22rpx;color: #999999;">
+                <image src="../../images/soldCount.png" style="width:24rpx;height: 22rpx;margin-right:10rpx;"></image>
+                已售{{item.soldNum}}件</view>
               </view>
-              <view class="ub ub-ac ub-pj" style="margin-top:10rpx;">
+              <!-- <view class="ub ub-ac ub-pj" style="margin-top:10rpx;">
                 <view class="old-price">{{filter.toFix(item.originalPrice)}}元</view>
                 <view style="font-size: 22rpx;color: #999999;">已售{{item.soldNum}}件</view>
-              </view>
+              </view> -->
             </view>
           </view>
         </view>

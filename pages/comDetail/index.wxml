@@ -149,9 +149,9 @@
         <view class="pubuItem">
           <view class="cardWrap padr10">
             <view class="card" wx:for="{{recommendList}}" wx:key="{{index}}" bindtap="toComDetail" data-id="{{item.productId}}" data-storeid="{{item.nearStore.id}}" wx:if="{{index%2 == 0}}">
-              <image src="https://upic.juniuo.com/file/picture/{{item.picId}}/resize_0_0/mode_fill" lazy-load="true" mode="aspectFit" class="plimg"></image>
+              <image src="https://upic.juniuo.com/file/picture/{{item.picId}}/resize_0_0/mode_fill" lazy-load="true" mode="widthFix" class="plimg"></image>
               <view class="pubuname">{{item.productName}}</view>
-              <view class="pububox" style="margin-top:10rpx;">
+              <view class="ub ub-ac ub-pj" style="margin-top:10rpx;">
                 <view class="ex-juzi">
                   <!-- <view style="font-size: 28rpx;color: #E83221;font-weight:bold;">{{item.point}}</view>
                   <view style="font-size: 22rpx;color: #E83221;font-weight:bold;">桔子</view> -->
@@ -160,11 +160,14 @@
                   <view style="font-size: 28rpx;color: #E83221;font-weight:bold;" wx:if="{{item.point>0&&item.price>0}}">+</view>
                   <view style="font-size: 28rpx;color: #E83221;font-weight:bold;display:flex;align-items:center;" wx:if="{{item.price>0}}">{{filter.toFix(item.price)}}<text style="font-size: 22rpx;color: #E83221;font-weight:bold;">元</text></view>
                 </view>
+                <view class="ub ub-ac" style="font-size: 22rpx;color: #999999;">
+                <image src="../../images/soldCount.png" style="width:24rpx;height: 22rpx;margin-right:10rpx;"></image>
+                已售{{item.soldNum}}件</view>
               </view>
-              <view class="ub ub-ac ub-pj" style="margin-top:10rpx;">
+              <!-- <view class="ub ub-ac ub-pj" style="margin-top:10rpx;">
                 <view class="old-price">{{filter.toFix(item.originalPrice)}}元</view>
                 <view style="font-size: 22rpx;color: #999999;">已售{{item.soldNum}}件</view>
-              </view>
+              </view> -->
             </view>
           </view>
         </view>
@@ -172,19 +175,22 @@
         <view class="pubuItem">
           <view class="cardWrap padl10">
             <view class="card" wx:for="{{recommendList}}" wx:key="{{index}}" bindtap="toComDetail" data-id="{{item.productId}}" data-storeid="{{item.nearStore.id}}" wx:if="{{index%2!=0}}">
-              <image src="https://upic.juniuo.com/file/picture/{{item.picId}}/resize_0_0/mode_fill" lazy-load="true" mode="aspectFit" class="plimg"></image>
+              <image src="https://upic.juniuo.com/file/picture/{{item.picId}}/resize_0_0/mode_fill" lazy-load="true" mode="widthFix" class="plimg"></image>
               <view class="pubuname">{{item.productName}}</view>
-              <view class="pububox" style="margin-top:10rpx;">
+              <view class="ub ub-ac ub-pj" style="margin-top:10rpx;">
                 <view class="ex-juzi">
                   <view style="font-size: 28rpx;color: #E83221;font-weight:bold;display:flex;align-items:center;" wx:if="{{item.point>0}}">{{item.point}}<text style="font-size: 22rpx;color: #E83221;font-weight:bold;">桔子</text></view>
                   <view style="font-size: 28rpx;color: #E83221;font-weight:bold;" wx:if="{{item.point>0&&item.price>0}}">+</view>
                   <view style="font-size: 28rpx;color: #E83221;font-weight:bold;display:flex;align-items:center;" wx:if="{{item.price>0}}">{{filter.toFix(item.price)}}<text style="font-size: 22rpx;color: #E83221;font-weight:bold;">元</text></view>
                 </view>
+                <view class="ub ub-ac" style="font-size: 22rpx;color: #999999;">
+                <image src="../../images/soldCount.png" style="width:24rpx;height: 22rpx;margin-right:10rpx;"></image>
+                已售{{item.soldNum}}件</view>
               </view>
-              <view class="ub ub-ac ub-pj" style="margin-top:10rpx;">
+              <!-- <view class="ub ub-ac ub-pj" style="margin-top:10rpx;">
                 <view class="old-price">{{filter.toFix(item.originalPrice)}}元</view>
                 <view style="font-size: 22rpx;color: #999999;">已售{{item.soldNum}}件</view>
-              </view>
+              </view> -->
             </view>
           </view>
         </view>

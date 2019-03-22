@@ -29,12 +29,18 @@
 }
 
 .shuiyin {
-  display: block;
-  margin: 50rpx auto;
+  width:100%;
+  padding: 50rpx 0;
 }
 .ab{
   position: absolute;
-  bottom: 90rpx;
-  left: 50%;
-  margin-left: -60rpx;
+  bottom: 0rpx;
+  left: 0;
+  right: 0;
+}
+.shuiyin image{
+  width:120rpx;
+  height:40rpx;
+  margin:0 auto;
+  display: block;
 }

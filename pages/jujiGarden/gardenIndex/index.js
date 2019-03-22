@@ -22,6 +22,7 @@ Page({
     name: '',//姓名
     phone: '',
     applyLeader: false,//是否申请桔长
+    switchFun: false
   },
 
   onLoad: function (options) {
@@ -31,7 +32,8 @@ Page({
       let self = this;
       console.log('分享点进来');
       self.setData({
-        openId: options.openId
+        openId: options.openId,
+        switchFun: true
       })
       if (wx.getStorageSync('token')){//token存在
         console.log(wx.getStorageSync('token') + ' /token存在');
@@ -228,14 +230,14 @@ function getGardenInfor(){
               this.data.juminNumList.push('');
             }
           }
-        } else if (res.role == 'UNDEFINED'){
+        } else if (res.role == 'UNDEFINED' && this.data.switchFun){
           self.setData({ applyLeader: false })
           let data = {
             parentId: this.data.openId,
             applyLeader: this.data.applyLeader
           }
           joinDistributor.call(self,data);
-        } else { //邀请者是桔长
+        } else if (res.role == 'LEADER' && this.data.switchFun){ //邀请者是桔长
           let data = {
             parentId: this.data.openId,
             applyLeader: this.data.applyLeader

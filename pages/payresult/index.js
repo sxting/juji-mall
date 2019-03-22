@@ -155,7 +155,7 @@ Page({
 
   toCardList:function(){
     wx.redirectTo({
-      url: '/pages/cardlist/index',
+      url: '/pages/cardlist/index?fromPage=payresult',
     });
   },
 

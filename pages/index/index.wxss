@@ -338,6 +338,8 @@ swiper {
 .moreWrap {
   display: flex;
   align-items: center;
+  padding-top: 10rpx;
+  padding-left: 10rpx;
 }
 
 .more {
@@ -415,7 +417,7 @@ swiper {
 .price-wrap {
   display: flex;
   align-items: center;
-  margin-top: 16rpx;
+  margin-top: 14rpx;
   padding: 0 30rpx;
 }
 
@@ -439,6 +441,7 @@ swiper {
 .count {
   font-size: 24rpx;
   color: #999;
+  margin-left: 10rpx;
 }
 
 .buyBtn{

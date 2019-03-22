@@ -29,37 +29,74 @@ Page({
           payUrl: constant.jujipayUrl
         });
       }
-      wx.request({
-        url: this.data.payUrl + '/mini/mycard.json',
-        method: 'GET',
-        header: {
-          'content-type': 'application/json',
-          'Access-Token': wx.getStorageSync('accessToken')
-        },
-        success: (res) => {
-          console.log(res);
-          if (res.data.errorCode == '0') {
-            console.log(this.data.cardList)
-            this.setData({
-              cardList: res.data.data
-            });
-            if (res.data.data.length>0){
+      if (options.fromPage=='payresult'){
+        wx.request({
+          url: this.data.payUrl + '/mini/mycard.json',
+          method: 'GET',
+          header: {
+            'content-type': 'application/json',
+            'Access-Token': wx.getStorageSync('accessToken')
+          },
+          success: (res) => {
+            console.log(res);
+            if (res.data.errorCode == '0') {
+              console.log(this.data.cardList)
               this.setData({
-                noCards: false
+                cardList: res.data.data
               });
-            }else{
-              this.setData({
-                noCards: true
-              });
+              if (res.data.data.length > 0) {
+                this.setData({
+                  noCards: false
+                });
+              } else {
+                this.setData({
+                  noCards: true
+                });
+              }
+            } else {
+              wx.showModal({
+                title: '错误：' + res.data.errorCode,
+                content: res.data.errorInfo,
+              })
             }
-          } else {
-            wx.showModal({
-              title: '错误：' + res.data.errorCode,
-              content: res.data.errorInfo,
-            })
           }
-        }
-      })
+        })
+      } else if (options.fromPage == 'user'){
+        wx.request({
+          url: this.data.payUrl + '/mini/getCardsByOpenid.json',
+          method: 'GET',
+          data:{
+            openid: wx.getStorageSync('openid')
+          },
+          header: {
+            'content-type': 'application/json'
+          },
+          success: (res) => {
+            console.log(res);
+            if (res.data.errorCode == '0') {
+              console.log(this.data.cardList)
+              this.setData({
+                cardList: res.data.data
+              });
+              if (res.data.data.length > 0) {
+                this.setData({
+                  noCards: false
+                });
+              } else {
+                this.setData({
+                  noCards: true
+                });
+              }
+            } else {
+              wx.showModal({
+                title: '错误：' + res.data.errorCode,
+                content: res.data.errorInfo,
+              })
+            }
+          }
+        })
+      }
+      
 
     } else {
       wx.showModal({

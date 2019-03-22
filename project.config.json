@@ -36,7 +36,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 16,
+			"current": 26,
 			"list": [
 				{
 					"id": 0,
@@ -72,8 +72,8 @@
 					"scene": null
 				},
 				{
-					"id": -1,
-					"name": "橘子换礼",
+					"id": 5,
+					"name": "桔子换礼",
 					"pathName": "pages/juzihl/index",
 					"query": "",
 					"scene": null
@@ -207,6 +207,20 @@
 					"id": -1,
 					"name": "地图定位",
 					"pathName": "pages/map/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "支付结果跳卡包",
+					"pathName": "pages/cardlist/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "我的跳卡包",
+					"pathName": "pages/myCards/index",
 					"query": "",
 					"scene": null
 				}

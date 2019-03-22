@@ -33,7 +33,8 @@
     "pages/jujiGarden/recommend/index",
     "pages/jujiGarden/orderDetail/orderDetail",
     "pages/search/index",
-    "pages/map/index"
+    "pages/map/index",
+    "pages/myCards/index"
   ],
   "permission": {
     "scope.userLocation": {

@@ -378,7 +378,7 @@ swiper {
   margin-top: 30rpx;
 }
 
-.jingxuanlist image{
+.jingxuanlist .productImg{
   width:100%;
   height:387rpx;
   border-top-left-radius: 10rpx;

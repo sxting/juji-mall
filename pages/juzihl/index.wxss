@@ -57,7 +57,7 @@
 }
 
 .label-active {
-  background: #fcbf0a;
+  background: #FFDC00;
   color: #333;
 }
 

@@ -10,7 +10,7 @@ Page({
     juminNumList: [],//队员人数
     hadNumber: 0,
     storeId: '',
-    openId: wx.getStorageSync('openid'),//邀请者id
+    openId: '',//邀请者id
     role: '',//桔园角色
     isAuthed: false,//是否实名认证
     todaySaleRebate: 0,//今日销售收入
@@ -21,12 +21,12 @@ Page({
     wechatId: '',//微信号码
     name: '',//姓名
     phone: '',
+    applyLeader: false,//是否申请桔长
   },
 
   onLoad: function (options) {
     let self = this;
     wx.setNavigationBarTitle({ title: '桔园' });
-    console.log(options);
     if (options.openId) {//分享点进来
       let self = this;
       console.log('分享点进来');
@@ -34,7 +34,9 @@ Page({
         openId: options.openId
       })
       if (wx.getStorageSync('token')){//token存在
-        console.log(wx.getStorageSync('token') + 'token存在');
+        console.log(wx.getStorageSync('token') + ' /token存在');
+        // 直接调成为桔民的接口；然后调 getGardenInfor 方法 拿到信息； applyLeader 判断有没有申请过成为局长，如果没有 页面的展示是申请成为桔长，   点击申请成为桔长   判断是否绑定手机号
+
         getGardenInfor.call(self);//get首页信息,获取分销角色
       }else{//token不存在 登陆
         this.mainFnc(options);
@@ -51,10 +53,9 @@ Page({
       console.log('Promise is ready!');
       wx.getSetting({
         success: (res) => {
-          console.log(res.authSetting['scope.userInfo'] + 'haha');
+          console.log(res.authSetting['scope.userInfo'] + ' haha');
           if (!res.authSetting['scope.userInfo']) {
-            console.log('999');
-            wx.reLaunch({ url: '/pages/login/index?fromPage=comDetail&productId=' + that.data.productId + '&inviteCode=' + option.inviteCode });
+            wx.reLaunch({ url: '/pages/login/index?fromPage=gardenIndex&openId=' + that.data.openId });
           } else { //如果已经授权
             resolve();
           }
@@ -64,13 +65,14 @@ Page({
       return new Promise(function (resolve1, reject1) {
         wx.login({
           success: res => {
-            console.log('code: ' + res.code);
+            console.log(res);
             console.log(constant.APPID);
             resolve1(res.code);
           }
         });
       })
     }).then(function (code) {
+      console.log(constant.APPID + '999');
       var requestObj = {
         code: code,
         appId: constant.APPID,
@@ -78,6 +80,7 @@ Page({
         inviteCode: '',
         rawData: wx.getStorageSync('rawData')
       }
+
       wx.request({
         url: constant.apiUrl + '/user/login.json',
         method: 'GET',
@@ -92,7 +95,6 @@ Page({
             wx.setStorageSync('openid', res1.data.data.openId);
             wx.setStorageSync('inviteCode', res1.data.data.inviteCode);
             wx.setStorageSync('userinfo', JSON.stringify(res1.data.data));
-
             getGardenInfor.call(that);//get用户信息身份
           } else {
             wx.showModal({
@@ -183,14 +185,19 @@ Page({
     let self = this;
     service.userInfo({ openId: wx.getStorageSync('openid') }).subscribe({
       next: res => {
-        if (res.phone){//已经绑定手机号码
-          joinDistributor.call(self);
+        if (res.phone) {//已经绑定手机号码  && self.data.role == 'UNDEFINED'
+          this.setData({
+            phone: res.phone,
+            applyLeader: true
+          });
+          let data = {
+            parentId: this.data.openId,
+            applyLeader: this.data.applyLeader
+          }
+          joinDistributor.call(self,data);//加入桔园
         }else{
           wx.navigateTo({ url: '/pages/bindPhone/index' });
         }
-        this.setData({
-          phone: res.phone
-        });
       },
       error: err => errDialog(err),
       complete: () => wx.hideToast()
@@ -205,7 +212,7 @@ function getGardenInfor(){
     next: res => {
       if (res) {
         console.log(res);
-        if (res.role == 'MEMBER' || res.role == 'UNDEFINED'){//桔民
+        if (res.role == 'MEMBER') {// 1、邀请进来的是桔民 return 2、邀请进来的是其他的 加入桔园 applyLeader=false;
           this.data.juminNumList = [];
           this.data.hadNumber = parseInt(res.invitedLeaderCount) + parseInt(res.invitedMemberCount);
           if (this.data.hadNumber > 0) {
@@ -221,6 +228,19 @@ function getGardenInfor(){
               this.data.juminNumList.push('');
             }
           }
+        } else if (res.role == 'UNDEFINED'){
+          self.setData({ applyLeader: false })
+          let data = {
+            parentId: this.data.openId,
+            applyLeader: this.data.applyLeader
+          }
+          joinDistributor.call(self,data);
+        } else { //邀请者是桔长
+          let data = {
+            parentId: this.data.openId,
+            applyLeader: this.data.applyLeader
+          }
+          joinDistributor.call(self, data);
         }
         this.setData({
           role: res.role,
@@ -231,7 +251,8 @@ function getGardenInfor(){
           totalSettlementAmount: res.totalSettlementAmount ? res.totalSettlementAmount : 0,
           invitedLeaderCount: res.invitedLeaderCount? res.invitedLeaderCount : 0,
           invitedMemberCount: res.invitedMemberCount? res.invitedMemberCount : 0,
-          isAuthed: res.allowDistribute == true? true : false
+          isAuthed: res.allowDistribute == true? true : false,
+          applyLeader: res.applyLeader
         })
         if (res.role == 'LEADER' && res.allowDistribute){//动态设置title背景色 是桔长并已经认证
           wx.setNavigationBarColor({
@@ -247,11 +268,8 @@ function getGardenInfor(){
 }
 
 // 加入分销 成为桔民
-function joinDistributor() {
+function joinDistributor(data) {
   let self = this;
-  let data = {
-    parentId: this.data.openId
-  }
   jugardenService.joinDistributor(data).subscribe({
     next: res => {
       if (res) {
@@ -276,6 +294,7 @@ function joinDistributor() {
           role: res.role,
           juminNumList: this.data.juminNumList,
           hadNumber: this.data.hadNumber,
+          applyLeader: res.applyLeader
         })
       }
     },

@@ -1,7 +1,7 @@
 <wxs src="../../../utils/numFr.wxs" module="format" />
 <view class="wrap">
-    <!-- 普通用户进入 -->
-    <view class='page' wx:if="{{role == 'UNDEFINED'}}">
+    <!-- 普通用户进入 1、普通用户 从没申请  2、桔民 从没申请过-->
+    <view class='page' wx:if="{{(role == 'UNDEFINED' && !applyLeader) || (role == 'MEMBER' && !applyLeader)}}">
         <image class="pageBg" src="../../../images/juyuan-bg1.jpg"></image>
         <view class='btn-manger' bindtap="toPage" data-page="/pages/jujiGarden/managerRights/managerRights">桔长权益</view>
         <view class='applyToManager' bindtap="apply">
@@ -9,8 +9,8 @@
             <text class='iconfont icon-right'></text>
         </view>
     </view>
-    <!-- 桔员进入 -->
-    <view class='page' wx:if="{{role == 'MEMBER'}}">
+    <!-- 桔员进入 桔民 申请过-->
+    <view class='page' wx:if="{{role == 'MEMBER' && applyLeader}}">
         <image class="pageBg" src="../../../images/juyuan-bg2.jpg"></image>
         <view class='btn-manger' bindtap="toPage" data-page="/pages/jujiGarden/managerRights/managerRights">桔长权益</view>
         <view class='check-progress'>

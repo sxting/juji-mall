@@ -1,0 +1,29 @@
+<view class="main_record">
+  <view class="recordlist">
+    <view class="item plr15" wx:for="{{recordList}}">
+
+      <view style="width:100%;height:100%;" class="ub ub-ac" wx:if="{{item.type == 'add'}}">
+        <view class="ub-f1">
+          <view class="tit">充值</view>
+          <view class="date">{{item.dateCreated}}</view>
+        </view>
+        <view class="amount chong">
+          +¥{{item.addMoney}}
+        </view>
+      </view>
+
+      <view style="width:100%;height:100%;" class="ub ub-ac" wx:elif="{{item.type == 'sub'}}">
+        <view class="ub-f1">
+          <view class="tit">消费扣减</view>
+          <view class="date">{{item.dateCreated}}</view>
+        </view>
+        <view class="amount">
+          -¥{{item.subMoney}}
+        </view>
+      </view>
+
+    </view>
+  </view>
+  <image src="../../images/juji.png" alt="" class="shuiyin" style="width:120rpx;height:40rpx;"></image>
+
+</view>

@@ -34,7 +34,8 @@
     "pages/jujiGarden/orderDetail/orderDetail",
     "pages/search/index",
     "pages/map/index",
-    "pages/myCards/index"
+    "pages/myCards/index",
+    "pages/myRecord/index"
   ],
   "permission": {
     "scope.userLocation": {

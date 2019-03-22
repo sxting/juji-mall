@@ -7,17 +7,16 @@ Page({
    * 页面的初始数据
    */
   data: {
-    cardList: [],
-    current: 0,
-    payUrl: 'https://juji.juniuo.com',
-    noCards: false
+    recordList: [],
+    payUrl: 'https://juji.juniuo.com'
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(options) {
-    if (wx.getStorageSync('accessToken')) {
+  onLoad: function (options) {
+    // options.merchantId = '101542271446184185';
+    if (options.merchantId) {
       let payUrl = wx.getStorageSync('payUrl');
       if (payUrl) {
         this.setData({
@@ -30,9 +29,10 @@ Page({
         });
       }
       wx.request({
-        url: this.data.payUrl + '/mini/getCardsByOpenid.json',
+        url: this.data.payUrl + '/mini/getPayRecordsByOpenid.json',
         method: 'GET',
         data: {
+          merchantId: options.merchantId,
           openid: wx.getStorageSync('openid')
         },
         header: {
@@ -41,19 +41,10 @@ Page({
         success: (res) => {
           console.log(res);
           if (res.data.errorCode == '0') {
-            console.log(this.data.cardList)
             this.setData({
-              cardList: res.data.data
+              recordList: res.data.data.list
             });
-            if (res.data.data.length > 0) {
-              this.setData({
-                noCards: false
-              });
-            } else {
-              this.setData({
-                noCards: true
-              });
-            }
+            console.log(this.data.recordList)
           } else {
             wx.showModal({
               title: '错误：' + res.data.errorCode,
@@ -62,75 +53,60 @@ Page({
           }
         }
       })
-
-
     } else {
       wx.showModal({
-        title: '',
-        content: '未获取到accessToken',
+        title: '系统错误',
+        content: '未能获取到商户信息',
       });
-      this.setData({
-        noCards: true
-      });
+      return;
     }
 
   },
-  toRecord: function(e) {
-    console.log(e);
-    wx.navigateTo({
-      url: '/pages/myRecord/index?merchantId=' + e.currentTarget.dataset.mid,
-    })
-  },
-  toggleCard: function(e) { //切换卡片高度
-    console.log(e);
-    this.setData({
-      current: e.currentTarget.dataset.index
-    });
-  },
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function() {
+  onReady: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function() {
-
+  onShow: function () {
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function() {},
+  onHide: function () {
+  },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function() {
+  onUnload: function () {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function() {
+  onPullDownRefresh: function () {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function() {
+  onReachBottom: function () {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function() {
+  onShareAppMessage: function () {
 
   }
 })

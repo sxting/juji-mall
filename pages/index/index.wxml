@@ -125,14 +125,19 @@
             <view class="now-price" wx:if="{{item.point>0&&item.price>0}}">+</view>
             <view class="now-price" wx:if="{{item.price>0}}">{{filter.toFix(item.price)}}元</view>
             <!-- <view class="old-price">{{filter.toFix(item.originalPrice)}}元</view> -->
+            <view class="proDiv ub ub-ac" wx:if="{{item.distributor}}">
+              <view class="l">赚</view>
+              <view class="r">￥10</view>
+            </view>
           </view>
         </view>
-        <view class="ub ub-fe jc-sb" style="padding: 0 30rpx 30rpx 30rpx;">
-          <view class="ub ub-ac">
+        <view class="ub ub-ac jc-sb" style="padding: 0 30rpx 30rpx 30rpx;">
+          <view class="ub ub-ac ub-f1">
             <image src="../../images/soldCount.png" style="width:24rpx;height: 22rpx;"></image>
             <text class="count">已售{{item.soldNum}}件</text>
           </view>
           <button class="buyBtn">购买</button>
+          <button class="proBtn" wx:if="{{item.distributor}}">推广</button>
         </view>
       </view>
     </view>

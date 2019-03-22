@@ -788,6 +788,11 @@ Page({
       url: '../citylist/index'
     });
   },
+  toPro:function(e){
+    wx.navigateTo({
+      url: 'pages/jujiGarden/recommend/index?productId='+e.currentTarget.dataset.id
+    });
+  },
   //上拉加载
   onReachBottom() {
     //判断是否还可以上拉

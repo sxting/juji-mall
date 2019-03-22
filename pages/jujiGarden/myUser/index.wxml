@@ -14,7 +14,7 @@
       </view>
     </view>
     <view class="main ub-f1 p10">
-      <scroll-view scroll-y style='height: 950rpx' bindscrolltolower="scrolltolower">
+      <scroll-view scroll-y style='height: 950rpx' bindscrolltolower="scrolltolower" wx:if='{{userlistInfor.length != 0}}'>
         <view class="item ub" wx:for="{{userlistInfor}}"  wx:key="list">
           <image class="userImg udb" src="{{list.avatar? list.avatar : '/images/pinglunuser.png'}}"></image>
           <view class="ub-f1" style="position:realtive">
@@ -25,6 +25,10 @@
           </view>
         </view>
       </scroll-view>
-        
+      <!-- 缺省页面 -->
+      <view class="space-box" wx:else>
+        <view class="space-bg"><image src="/images/Bitmap.png"></image></view>
+        <view class="space-text">{{role == 'LEADER'? '还没有桔民升级为桔长，继续努力吧' : '还没有桔民，邀请好友加入吧'}}</view>
+      </view>
     </view>
 </view>

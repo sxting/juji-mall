@@ -18,6 +18,10 @@ Page({
 
     onLoad: function(options) {
       let self = this;
+      this.setData({
+        role: options.role,
+        curTabIndex: options.role == '' || options.role == 'LEADER'? 0 : 1
+      })
       wx.setNavigationBarTitle({ title: '我的用户' });
       getPersonListInfor.call(self);//get我的用户信息
     },

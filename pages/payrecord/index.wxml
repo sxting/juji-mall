@@ -24,6 +24,9 @@
 
     </view>
   </view>
-  <image src="../../images/juji.png" alt="" class="shuiyin {{recordList.length>0?'':'ab'}}" style="width:120rpx;height:40rpx;"></image>
+
+  <view class="shuiyin {{recordList.length>0?'':'ab'}}">
+    <image src="../../images/juji.png" alt=""></image>
+  </view>
 
 </view>

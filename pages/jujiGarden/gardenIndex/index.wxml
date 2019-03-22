@@ -16,7 +16,7 @@
         <view class='check-progress'>
             <view class='clearfix my-team'>
                 <view class='fl'>
-                  <text>我的队伍 </text>
+                  <text style='font-weight:bold;'>我的队伍 </text>
                   <text class='num'><text style='color:#F35308'>{{ hadNumber }}</text>/10</text>
                 </view>
                 <view class='fr' wx:if='{{ hadNumber != 0 }}'>
@@ -38,8 +38,8 @@
         <image class="pageBg" src="../../../images/juyuan-bg3.png"></image>
         <view class='authentication-progress'>
             <view class='my-team'>
-              <input class='wechat-no' placeholder='请填写您的微信账号' value='{{ wechatId }}' bindinput="dataChange" data-type='wechatid'></input>
-              <input class='wechat-name' placeholder='请填写您的微信实名认证姓名' value='{{ name }}' bindinput="dataChange" data-type='name'></input>
+              <input class='wechat-no' placeholder='请填写您的微信账号' value='{{ wechatId }}' bindinput="dataChange" data-type='wechatid' maxlength='20' placeholder-class='placeholder'></input>
+              <input class='wechat-name' placeholder='请填写您的微信实名认证姓名' value='{{ name }}' bindinput="dataChange" data-type='name' maxlength='8' placeholder-class='placeholder'></input>
               <view>请如实填写以上信息，推广获得的收入将自动提现到微信零钱</view>
               <view class='btn-box' bindtap='submitUserInfor'>
                 <image src='../../../images/sure-btn.png' class='sure-btn'></image>

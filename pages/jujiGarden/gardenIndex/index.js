@@ -11,7 +11,7 @@ Page({
     hadNumber: 0,
     storeId: '',
     openId: wx.getStorageSync('openid'),//邀请者id
-    role: 'UNDEFINED',//桔园角色
+    role: '',//桔园角色
     isAuthed: false,//是否实名认证
     todaySaleRebate: 0,//今日销售收入
     todaySettlementAmount: 0,//今日提现 
@@ -20,29 +20,109 @@ Page({
     invitedMemberCount: 0,
     wechatId: '',//微信号码
     name: '',//姓名
+    phone: '',
   },
 
   onLoad: function (options) {
     let self = this;
     wx.setNavigationBarTitle({ title: '桔园' });
-    console.log(wx.getExtConfigSync());
+    console.log(options);
     if (options.openId) {//分享点进来
       let self = this;
       console.log('分享点进来');
+      self.setData({
+        openId: options.openId
+      })
+      if (wx.getStorageSync('token')){//token存在
+        console.log(wx.getStorageSync('token') + 'token存在');
+        getGardenInfor.call(self);//get首页信息,获取分销角色
+      }else{//token不存在 登陆
+        this.mainFnc(options);
+      }
     }else{
       getGardenInfor.call(self);//get首页信息,获取分销角色
     }
   },
 
+  // 登陆
+  mainFnc: function (option) {
+    let that = this;
+    new Promise(function (resolve, reject) {
+      console.log('Promise is ready!');
+      wx.getSetting({
+        success: (res) => {
+          console.log(res.authSetting['scope.userInfo'] + 'haha');
+          if (!res.authSetting['scope.userInfo']) {
+            console.log('999');
+            wx.reLaunch({ url: '/pages/login/index?fromPage=comDetail&productId=' + that.data.productId + '&inviteCode=' + option.inviteCode });
+          } else { //如果已经授权
+            resolve();
+          }
+        }
+      });
+    }).then(function () {
+      return new Promise(function (resolve1, reject1) {
+        wx.login({
+          success: res => {
+            console.log('code: ' + res.code);
+            console.log(constant.APPID);
+            resolve1(res.code);
+          }
+        });
+      })
+    }).then(function (code) {
+      var requestObj = {
+        code: code,
+        appId: constant.APPID,
+        isMock: false, //测试标记
+        inviteCode: '',
+        rawData: wx.getStorageSync('rawData')
+      }
+      wx.request({
+        url: 'https://c.juniuo.com/shopping/user/login.json',
+        method: 'GET',
+        data: requestObj,
+        header: {
+          'content-type': 'application/json',
+        },
+        success: (res1) => {
+          console.log(res1);
+          if (res1.data.errorCode == '200') {
+            wx.setStorageSync('token', res1.data.data.token);
+            wx.setStorageSync('openid', res1.data.data.openId);
+            wx.setStorageSync('inviteCode', res1.data.data.inviteCode);
+            wx.setStorageSync('userinfo', JSON.stringify(res1.data.data));
+
+            getGardenInfor.call(that);//get用户信息身份
+          } else {
+            wx.showModal({
+              title: '错误',
+              content: '登录失败，错误码:' + res1.data.errorCode + ' 返回错误: ' + res1.data.errorInfo
+            });
+          }
+        }
+      });
+    }).catch(function (err) {
+      console.log(err);
+      wx.showModal({
+        title: '错误',
+        content: err
+      });
+    });
+  },
+
   onShow: function () {
     let self = this;
-    getGardenInfor.call(self);//get首页信息,获取分销角色
+    if (wx.getStorageSync('token')) {//token存在
+      getGardenInfor.call(self);//get首页信息,获取分销角色
+    } else {//token不存在 登陆
+      return;
+    }
   },
 
   /**申请成为桔长  **/
   apply:function(e){
-    let self = this;
-    joinDistributor.call(self);
+    this.getUserInfor();
   },
 
   /**   跳转页面  */
@@ -56,17 +136,10 @@ Page({
   onShareAppMessage: function () {
     let self = this;
     return {
-      title: JSON.parse(wx.getStorageSync('rawData')).nickName + '邀请您桔园结义成为桔长，购物返利最高可享40%商品返利',
+      title: JSON.parse(wx.getStorageSync('userinfo')).nickName + '邀请您桔园结义成为桔长，购物返利最高可享40%商品返利',
+      // title: '邀请您桔园结义成为桔长，购物返利最高可享40%商品返利',
       path: '/pages/jujiGarden/gardenIndex/index?openId=' + wx.getStorageSync('openid'),
       imageUrl: '/images/banner-invent.png',
-      success: function (res) {
-        // 转发成功
-        console.log(res + '转发成功');
-      },
-      fail: function (res) {
-        // 转发失败
-        console.log(res);
-      }
     }
   },
 
@@ -83,7 +156,7 @@ Page({
     }
   },
 
-  /***绑定微信号及姓名   */ 
+  // 绑定微信号及姓名
   submitUserInfor(){
     let data = {
       wechatId: this.data.wechatId,
@@ -104,7 +177,26 @@ Page({
         complete: () => wx.hideToast()
       })
     }
-  }
+  },
+
+  // 获取用户信息 
+  getUserInfor: function () {
+    let self = this;
+    service.userInfo({ openId: wx.getStorageSync('openid') }).subscribe({
+      next: res => {
+        if (res.phone){//已经绑定手机号码
+          joinDistributor.call(self);
+        }else{
+          wx.navigateTo({ url: '/pages/bindPhone/index' });
+        }
+        this.setData({
+          phone: res.phone
+        });
+      },
+      error: err => errDialog(err),
+      complete: () => wx.hideToast()
+    })
+  },
 });
 
 // 首页信息获取 
@@ -164,7 +256,6 @@ function joinDistributor() {
   jugardenService.joinDistributor(data).subscribe({
     next: res => {
       if (res) {
-        console.log(res);
         if (res.role == 'MEMBER' || res.role == 'UNDEFINED') {//桔民
           this.data.juminNumList = [];
           this.data.hadNumber = parseInt(res.invitedLeaderCount) + parseInt(res.invitedMemberCount);
@@ -194,16 +285,5 @@ function joinDistributor() {
   })
 }
 
-// 登陆
-function logIn(code, appid, rawData) {
-  let self = this;
-  jugardenService.logIn({ code: code, appid: appid, rawData: rawData }).subscribe({
-    next: res => {
-      if (res) {
-        console.log(res);
-      }
-    },
-    error: err => errDialog(err),
-    complete: () => wx.hideToast()
-  })
-}
+
+

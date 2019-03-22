@@ -77,7 +77,7 @@ Page({
   onLoad: function(options) {
     console.log(options);
     wx.setNavigationBarTitle({
-      title: ''
+      title: '桔集'
     });
     wx.showShareMenu({
       withShareTicket: true

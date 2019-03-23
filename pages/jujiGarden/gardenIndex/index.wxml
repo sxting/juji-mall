@@ -99,7 +99,7 @@
                 <image src="../../../images/icon_tj.png"></image>
                 <text class="itemTxt">商品推荐</text>
             </view>
-            <view class="ub-f1 ub ub-ver ub-ac ub-pc r" bindtap="toPage" data-page="/pages/jujiGarden/recommend/index">
+            <view class="ub-f1 ub ub-ver ub-ac ub-pc r" bindtap="toPage" data-page="/pages/jujiGarden/recommendnew/index">
                 <image src="../../../images/icon_sc.png"></image>
                 <text class="itemTxt">邀新素材</text>
             </view>

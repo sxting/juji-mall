@@ -55,7 +55,7 @@ Page({
             return {
                 title: JSON.parse(wx.getStorageSync('userinfo')).nickName + '分享给您一个心动商品，快来一起体验吧！',
                 path: '/pages/comDetail/index?id=' + this.data.productId + '&sceneid='+this.data.sceneId,
-                imageUrl: constant.basePicUrl + this.productInfo.picId + '/resize_360_360/mode_fill'
+                imageUrl: constant.basePicUrl + this.data.productInfo.picId + '/resize_360_360/mode_fill'
             }
         }
     },

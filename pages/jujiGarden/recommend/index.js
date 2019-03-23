@@ -5,27 +5,29 @@ import { errDialog, loading } from '../../../utils/util';
 
 Page({
     data: {
-        recommendlist: [{
-            imageIds: ['25R9F7zL2Dhr', '260HcKCwl672', '25SGzGlgKSrG', '25SGzGlgKSrG', '25Xi1X38wUK8', '25R9F7zL2Dhr'],
-            descriptions: "素材文字素材文字素材文字素材文字素材",
-            editorAvatar: "https://upic.juniuo.com/file/picture/25R9F7zL2Dhr/resize_180_180/mode_fill",
-            editorNickName: "小仙女",
-            productId: '2019031415090868068616188',
-            sceneId: '26FPo2h5cDNg'
-        }],
-        picId: '25SGzGlgKSrG',
+        // recommendlist: [{
+        //     imageIds: ['25R9F7zL2Dhr', '260HcKCwl672', '25SGzGlgKSrG', '25SGzGlgKSrG', '25Xi1X38wUK8', '25R9F7zL2Dhr'],
+        //     descriptions: "素材文字素材文字素材文字素材文字素材",
+        //     editorAvatar: "https://upic.juniuo.com/file/picture/25R9F7zL2Dhr/resize_180_180/mode_fill",
+        //     editorNickName: "小仙女",
+        //     productId: '2019031415090868068616188',
+        //     sceneId: '26FPo2h5cDNg'
+        // }],
+        recommendlist:[],
         constant: constant,
         isShowNodata: false,
         curTabIndex: 1,
         productInfo: {}, //当前商品的信息
         shareBg: '../../../images/shareBg.png',
+        erwmImg:'',
+        headImg:'',
         isShowModal: true,
-        productId: '2019031415090868068616188'
+        productId: ''//当前商品的id
     },
     onLoad: function(options) {
         wx.setNavigationBarTitle({ title: '推广素材' });
-        if (options.productId) {
-            this.setData({ productId: options.productId });
+        if (options.productid) {
+            this.setData({ productId: options.productid });
         }
         this.getData(this.data.productId);
     },
@@ -36,7 +38,7 @@ Page({
             pageSize: 10
         }).subscribe({
             next: res => {
-                // this.setData({recommendlist:res});
+                this.setData({recommendlist:res});
                 this.setData({isShowNodata: this.data.recommendlist.length == 0 });
             },
             error: err => errDialog(err),
@@ -117,7 +119,7 @@ Page({
             next: res => {
               this.setData({productInfo:res.product});
               wx.downloadFile({
-                    url: constant.basePicUrl + this.data.picId + '/resize_750_420/mode_fill',
+                    url: constant.basePicUrl + imageId + '/resize_750_420/mode_fill',
                     success: (res) => {
                         if (res.statusCode === 200) {
                             this.setData({ headImg: res.tempFilePath });

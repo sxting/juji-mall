@@ -165,6 +165,7 @@ Page({
       wechatId: this.data.wechatId,
       name: this.data.name
     }
+    let self = this;
     if (this.data.wechatId == ''){
       showAlert('请填写您的微信账号');
     } else if (this.data.name == ''){
@@ -174,7 +175,7 @@ Page({
         next: res => {
           if (res) {
             this.setData({ switchFun: false });
-            getGardenInfor.call(this);
+            getGardenInfor.call(self);//获取用户信息
           }
         },
         error: err => errDialog(err),
@@ -215,6 +216,7 @@ function getGardenInfor(){
     next: res => {
       if (res) {
         console.log(res);
+        conosle.log('进入查询用户信息拉');
         if (res.role == 'MEMBER') {// 1、邀请进来的是桔民 return 2、邀请进来的是其他的 加入桔园 applyLeader=false;
           this.data.juminNumList = [];
           this.data.hadNumber = parseInt(res.invitedLeaderCount) + parseInt(res.invitedMemberCount);
@@ -245,6 +247,12 @@ function getGardenInfor(){
           }
           joinDistributor.call(self, data);
         }
+        if (res.role == 'LEADER' && res.hasReceiver) {//动态设置title背景色 是桔长并已经认证
+          wx.setNavigationBarColor({
+            frontColor: '#000000', // 必写项
+            backgroundColor: '#FFDC00', // 必写项
+          })
+        }
         this.setData({
           role: res.role,
           juminNumList: this.data.juminNumList,
@@ -258,12 +266,6 @@ function getGardenInfor(){
           applyLeader: res.applyLeader,
           minInvitedMemberCount: res.minInvitedMemberCount
         })
-        if (res.role == 'LEADER' && res.allowDistribute){//动态设置title背景色 是桔长并已经认证
-          wx.setNavigationBarColor({
-            frontColor: '#000000', // 必写项
-            backgroundColor: '#FFDC00', // 必写项
-          })
-        }
       }
     },
     error: err => errDialog(err),

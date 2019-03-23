@@ -118,7 +118,6 @@ Page({
         this.setData({productId:productId});
         var imageId = e.currentTarget.dataset.img;
         var sceneId = e.currentTarget.dataset.sceneid;
-        this.setData({sceneId:sceneId});
         service.getItemInfo({
             productId: productId,storeId:''
         }).subscribe({
@@ -146,11 +145,15 @@ Page({
     createProImg: function(sceneId) {
         console.log(sceneId);
         if(sceneId){
+            this.setData({sceneId:sceneId});
+            console.log('scene111='+this.data.sceneId);
             this.drawCanvas(sceneId);
         }else{
             jugardenService.getQrCode({ productId:this.data.productId,path: 'pages/comDetail/index'}).subscribe({
                 next: res => {
                     var sceneId = res.senceId;
+                    this.setData({sceneId:sceneId});
+                    console.log('scene222='+this.data.sceneId);
                     this.drawCanvas(sceneId);
                 },
                 error: err => {
@@ -205,7 +208,7 @@ Page({
         context.setFontSize(15);
         context.setTextAlign("left");
         context.setFillStyle("#000");
-        context.fillText("“桔”美好生活，集好店优惠", 40, 35);
+        context.fillText("“桔”美好生活，集好店优惠", 45, 35);
         context.stroke();
     },
     setText2: function(context, price1, price2) {

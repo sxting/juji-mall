@@ -108,7 +108,8 @@ Page({
     }else{
       this.setData({
         productId: option.id,
-        storeId: option.storeid
+        storeId: option.storeid,
+        sceneId: option.sceneid
       });
 
       if (wx.getStorageSync('token')) {
@@ -536,7 +537,7 @@ Page({
       context.setFontSize(15);
       context.setTextAlign("left");
       context.setFillStyle("#000");
-      context.fillText("“桔”美好生活，集好店优惠", 40, 35);
+      context.fillText("“桔”美好生活，集好店优惠", 45, 35);
       context.stroke();
   },
   setText2: function(context,price1,price2) {

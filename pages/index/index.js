@@ -77,7 +77,7 @@ Page({
   onLoad: function(options) {
     console.log(options);
     wx.setNavigationBarTitle({
-      title: ''
+      title: '桔集'
     });
     wx.showShareMenu({
       withShareTicket: true
@@ -786,6 +786,11 @@ Page({
   toCityList: function() {
     wx.navigateTo({
       url: '../citylist/index'
+    });
+  },
+  toPro:function(e){
+    wx.navigateTo({
+      url: 'pages/jujiGarden/recommend/index?productId='+e.currentTarget.dataset.id
     });
   },
   //上拉加载

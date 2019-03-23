@@ -15,10 +15,13 @@
 .imglist:after{clear:both;content:"";display:table;}
 .imgWrap{float:left;margin-bottom:20rpx;padding-right:20rpx;width:33.33%;box-sizing:border-box;}
 .imgWrap image{border-radius:8rpx;width:100%;display:block;}
-.wxIcon{width: 50rpx;height: 32rpx;display: block;margin-left: 20rpx;}
+.wxIcon{width: 50rpx;height: 32rpx;display: block;}
 
 .ctrl{height: 80rpx;}
 .ctrl view{font-size: 24rpx;color: #333;}
+
+.btn{display: block;width: 50rpx;height: 32rpx;background-color: #fff;padding: 0}
+
 
 .modal1{width:100%;height:100%;position:fixed;left:0;top:0;z-index:2;box-sizing:border-box;}
 .modal1 .div{width:100%;position:relative;z-index:9;box-sizing:border-box;}

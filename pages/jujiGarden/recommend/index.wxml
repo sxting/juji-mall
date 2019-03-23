@@ -1,14 +1,10 @@
 <wxs src="../../../utils/numFr.wxs" module="format" />
 <view class="main {{isShowModal?'':'ovh'}}">
-  <view class="tabs ub ub-ac">
-    <view class="{{curTabIndex==1?'on':''}}" data-index="1" bindtap="switchTab">商品推荐</view>
-    <view class="{{curTabIndex==2?'on':''}}" data-index="2" bindtap="switchTab">邀新素材</view>
-  </view>
   <view class="item" wx:for="{{recommendlist}}" wx:key="{{index}}" data-comid="{{item.id}}" hidden="{{isShowNodata}}">
     <view class="info ub ub-ac plr15">
       <image class="userImg" src="{{item.editorAvatar}}"></image>
       <view class="nickname">{{item.editorNickName}}</view>
-      <view class="ub-f1 txt">200次分享</view>
+      <!-- <view class="ub-f1 txt">200次分享</view> -->
     </view>
     <view class="content plr15">
       {{item.descriptions}}
@@ -23,20 +19,20 @@
         <image class="wxIcon" src="../../../images/icon_02.png" mode="aspectFit"></image>
         保存素材
       </view>
-      <view class="ub-f1 ub ub-ac" catchtap='showImageTextToShare' data-img="{{item.imageIds[0]}}">
+      <view class="ub-f1 ub ub-ac" catchtap='shareToCircle' data-img="{{item.imageIds[0]}}">
         <image class="wxIcon" src="../../../images/icon_01.png" mode="aspectFit"></image>
         生成图文
       </view>
       <view class="ub-f1 ub ub-ac">
         分享到
-        <image class="wxIcon" src="../../../images/icon_03.png" mode="aspectFit" catchtap='shareToWechatCircles'></image>
-        <image class="wxIcon" src="../../../images/icon_04.png" mode="aspectFit" catchtap='shareToFriend'></image>
+        <button class="btn ub ub-pc ub-ac" open-type="share" data-img="{{item.imageIds[0]}}"><image class="wxIcon" src="../../../images/icon_04.png" mode="aspectFit"></image></button>
+        <button class="btn ub ub-pc ub-ac" catchtap='shareToCircle'><image class="wxIcon" src="../../../images/icon_03.png" mode="aspectFit"></image></button>
       </view>
     </view>
   </view>
   <view class="nodataDiv ub ub-ac ub-pc ub-ver" hidden="{{!isShowNodata}}">
     <image class="nodataImg" src="../../../images/null1.png"></image>
-    <view class="nodataTxt">素材为空~</view>
+    <view class="nodataTxt" style="margin-bottom:200rpx;">素材为空~</view>
   </view>
 
   <view class="modal1 ub ub-ver" hidden="{{isShowModal}}">

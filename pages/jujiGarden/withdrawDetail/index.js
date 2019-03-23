@@ -6,15 +6,15 @@ import { jugardenService } from '../shared/service.js'
 Page({
   data: {
     settlementDetailData: {},//提现详情信息
-    digestId: '',
+    transferId: '',
     status: '',
-    phone: '15210921650',
+    phone: '400-001-1139',
   },
 
   onLoad: function (options) {
     let self = this;
     this.setData({
-      digestId: options.digestId ? options.digestId : ''
+      digestId: options.transferId ? options.transferId : ''
     })
     console.log(this.data.digestId);
     wx.setNavigationBarTitle({ title: '提现详情' });
@@ -35,13 +35,13 @@ Page({
 function getSettlementDetail(){
   let self = this;
   let data = {
-    digestId: this.data.digestId
+    transferId: this.data.transferId
   }
   jugardenService.getSettlementDetail(data).subscribe({
     next: res => {
       if (res) {
         self.setData({
-          settlementDetailData: res,
+          settlementDetailData: res
         })
       }
     },

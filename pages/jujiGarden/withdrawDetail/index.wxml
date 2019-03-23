@@ -2,8 +2,8 @@
     <view class="toper">
         <view class='toper-box'>
           <view class="balance">{{ settlementDetailData.settlementAmount/100 }}</view>
-          <view class="status">提现成功</view>
-          <view class='tips' wx:if=''>此微信账号状态异常</view>
+          <view class="status">{{settlementDetailData.status == 'PENDING'? '处理中': settlementDetailData.status == 'SUCCESS'? '提现成功': '提现失败'}}</view>
+          <view class='tips'>{{settlementDetailData.failReason}}</view>
         </view>
     </view>
     <view class="content">
@@ -14,12 +14,8 @@
                 <view class="f13">{{ settlementDetailData.settlementAmount/100 }}</view>
             </view>
             <view class="item ub ub-ac">
-                <view class="ub-f1">手续费用</view>
-                <view class="f13">100.00</view>
-            </view>
-            <view class="item ub ub-ac">
                 <view class="ub-f1">收款方式</view>
-                <view class="f13">微信</view>
+                <view class="f13">{{settlementDetailData.transferChannel == 'CHANNEL_WECHAT_PAY'? '微信' : '-'}}</view>
             </view>
             <view class="item ub ub-ac">
                 <view class="ub-f1">收款账户</view>
@@ -27,42 +23,42 @@
             </view>
             <view class="item ub ub-ac">
                 <view class="ub-f1">提现时间</view>
-                <view class="f13">2019-10-10 10:10:10</view>
+                <view class="f13">{{settlementDetailData.transferDate}}</view>
             </view>
             <view class="item ub ub-ac">
                 <view class="ub-f1">到账时间</view>
-                <view class="f13">2019-10-10 10:10:10</view>
+                <view class="f13">{{settlementDetailData.arrivalDate}}</view>
             </view>
         </view>
         <view class="bgb itemWrap">
             <view class="tit">订单信息</view>
             <view class="item ub ub-ac">
                 <view class="ub-f1">推广商品</view>
-                <view class="f13">100.00</view>
+                <view class="f13">{{settlementDetailData.goodsName}}</view>
             </view>
             <view class="item ub ub-ac">
-                <view class="ub-f1">买家商品</view>
-                <view class="f13">100.00</view>
+                <view class="ub-f1">买家用户</view>
+                <view class="f13">{{settlementDetailData.buyerName}}</view>
             </view>
             <view class="item ub ub-ac">
                 <view class="ub-f1">推广桔长</view>
-                <view class="f13">100.00</view>
+                <view class="f13">{{settlementDetailData.distributorName}}</view>
             </view>
-            <view class="item ub ub-ac">
+            <!-- <view class="item ub ub-ac">
                 <view class="ub-f1">管理佣金</view>
-                <view class="f13">100.00</view>
-            </view>
+                <view class="f13">{{}}</view>
+            </view> -->
             <view class="item ub ub-ac">
                 <view class="ub-f1">订单编号</view>
-                <view class="f13">100.00</view>
+                <view class="f13">{{settlementDetailData.orderNo}}</view>
             </view>
             <view class="item ub ub-ac">
                 <view class="ub-f1">下单时间</view>
-                <view class="f13">100.00</view>
+                <view class="f13">{{settlementDetailData.orderDate}}</view>
             </view>
             <view class="item ub ub-ac">
-                <view class="ub-f1">商品名称</view>
-                <view class="f13">100.00</view>
+                <view class="ub-f1">商户名称</view>
+                <view class="f13">{{settlementDetailData.merchantName}}</view>
             </view>
         </view>
     </view>

@@ -4,11 +4,11 @@
         <view class="remark1">累计提现金额（元）</view>
         <view class="balance">{{format.toFix(totalSettlementAmount)}}</view>
         <view class="balancelist ub ub-ac">
-            <view class="ub-f3 ub-ver ub-ac ub-pc l"><text class="tit">提现成功</text><text class="amount">{{format.toFix(totalSettlementAmount)}}</text></view>
+            <view class="ub-f3 ub-ver ub-ac ub-pc l"><text class="tit">提现成功</text><text class="amount">{{format.toFix(successSettlementAmount)}}</text></view>
             <view class="line"></view>
-            <view class="ub-f4 ub-ver ub-ac ub-pc c"><text class="tit">提现失败</text><text class="amount">{{format.toFix(totalSettlementAmount)}}</text></view>
+            <view class="ub-f4 ub-ver ub-ac ub-pc c"><text class="tit">提现失败</text><text class="amount">{{format.toFix(failSettlementAmount)}}</text></view>
             <view class="line"></view>
-            <view class="ub-f3 ub-ver ub-ac ub-pc r"><text class="tit">处理中</text><text class="amount">{{format.toFix(totalSettlementAmount)}}</text></view>
+            <view class="ub-f3 ub-ver ub-ac ub-pc r"><text class="tit">处理中</text><text class="amount">{{format.toFix(processingSettlementAmount)}}</text></view>
         </view>
         <view class="remark2 ub ub-ac">
           <image src='/images/alert-warning.png'></image>
@@ -16,7 +16,7 @@
         </view>
     </view>
     <view class="content">
-        <view class="item ub ub-ac" wx:for="{{ recordlist }}" wx:key="item" bindtap="toPage"  data-digestid='{{item.digestId}}'>
+        <view class="item ub ub-ac" wx:for="{{ recordlist }}" wx:key="item" bindtap="toPage"  data-transferid='{{item.transferId}}'>
             <image class="leftBg" src="/images/leftBg.png" mode="scaleToFill"></image>
             <view class="ub-f1">
                 <view class="amount">+{{ format.toFix(item.amount) }}</view>

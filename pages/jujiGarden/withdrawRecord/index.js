@@ -6,20 +6,26 @@ var app = getApp();
 
 Page({
   data: {
-      recordlist: [],
-      totalSettlementAmount: 0
+    recordlist: [],
+    totalSettlementAmount: 0,
+    pageNo: 1,
+    pageSize: 10,
+    failSettlementAmount: 0,
+    processingSettlementAmount: 0,
+    successSettlementAmount: 0,
   },
 
   onLoad: function() {
     let self = this;
     wx.setNavigationBarTitle({ title: '提现明细' });
     getSettlementList.call(self);//get提现摘要列表
+    getCardData.call(self);
   },
 
   // 到详情页面
   toPage: function (e) {
     wx.navigateTo({
-      url: `/pages/jujiGarden/withdrawDetail/index?digestId=` + e.currentTarget.dataset.digestid 
+      url: `/pages/jujiGarden/withdrawDetail/index?transferId=` + e.currentTarget.dataset.transferid 
     });
   },
 
@@ -28,10 +34,15 @@ Page({
 // 提现摘要列表
 function getSettlementList(){
   let self = this;
-  jugardenService.getSettlementList().subscribe({
+  let data = {
+    pageNo: this.data.pageNo,
+    pageSize: this.data.pageSize
+  }
+  jugardenService.getSettlementList(data).subscribe({
     next: res => {
       if (res) {
-        res.infos.forEach(function(item){
+        console.log(res);
+        res.forEach(function(item){
           switch (item.status) {
             case 'PENDING':
               item.statusText = '待分账'; break;
@@ -58,8 +69,7 @@ function getSettlementList(){
           }
         })
         self.setData({
-          recordlist: res.infos ? res.infos : [],
-          totalSettlementAmount: res.totalSettlementAmount
+          recordlist: res? res : []
         })
       }
     },
@@ -68,5 +78,27 @@ function getSettlementList(){
   })
 }
 
+
+// 卡面数据
+function getCardData(){
+  let self = this;
+  jugardenService.transferIndex().subscribe({
+    next: res => {
+      if (res) {
+        console.log(res);
+        let totalSettlementAmount = 0;
+        totalSettlementAmount = (res.failSettlementAmount + res.processingSettlementAmount + res.successSettlementAmount)/100;
+        self.setData({
+          failSettlementAmount: res.failSettlementAmount/100,
+          processingSettlementAmount: res.processingSettlementAmount/100,
+          successSettlementAmount: res.successSettlementAmount/100,
+          totalSettlementAmount: totalSettlementAmount
+        })
+      }
+    },
+    error: err => errDialog(err),
+    complete: () => wx.hideToast()
+  })
+}
 
 

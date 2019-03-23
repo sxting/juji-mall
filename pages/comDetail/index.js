@@ -111,7 +111,7 @@ Page({
         storeId: option.storeid,
         sceneId: option.sceneid
       });
-
+      console.log('sceneId='+this.data.sceneId);
       if (wx.getStorageSync('token')) {
         console.log('token存在');
         this.getItemInfo();
@@ -238,22 +238,20 @@ Page({
     }
   },
   toBuy:function(){
-    if(!this.data.sceneId){
-      service.getProQrCode({ productId:this.data.productId,path: 'pages/comDetail/index'}).subscribe({
-          next: res => {
-              var sceneId = res.senceId;
-              this.setData({sceneId:sceneId});
-              this.buyProduct();  
-          },
-          error: err => {
-              errDialog(err);
-              wx.hideLoading();
-          },
-          complete: () => wx.hideToast()
-      });
-    }else{
-        this.buyProduct();  
-    }
+    console.log('下单前sceneId='+this.data.sceneId);
+    service.getProQrCode({ productId:this.data.productId,path: 'pages/comDetail/index'}).subscribe({
+        next: res => {
+            var sceneId = res.senceId;
+            this.setData({sceneId:sceneId});
+            console.log('接口生成sceneId='+this.data.sceneId);
+            this.buyProduct();  
+        },
+        error: err => {
+            errDialog(err);
+            wx.hideLoading();
+        },
+        complete: () => wx.hideToast()
+    });
   },
   buyProduct:function(){
       if(this.data.productInfo.type=='PRODUCT'&&this.data.productInfo.point>0&&this.data.productInfo.price>0){

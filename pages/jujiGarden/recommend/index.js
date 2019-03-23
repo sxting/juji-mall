@@ -23,6 +23,7 @@ Page({
         headImg:'',
         isShowModal: true,
         sceneId:'',
+        scenepicid:'',
         productId: ''//当前商品的id
     },
     onLoad: function(options) {
@@ -54,7 +55,7 @@ Page({
         if (res.from === 'button') {
             return {
                 title: JSON.parse(wx.getStorageSync('userinfo')).nickName + '分享给您一个心动商品，快来一起体验吧！',
-                path: '/pages/comDetail/index?id=' + this.data.productId + '&sceneid='+this.data.sceneId,
+                path: '/pages/comDetail/index?id=' + this.data.productId + '&storeid=&sceneid='+this.data.sceneId,
                 imageUrl: constant.basePicUrl + this.data.productInfo.picId + '/resize_360_360/mode_fill',
                 success: (res) => {
                     this.closeModal();
@@ -118,6 +119,9 @@ Page({
         this.setData({productId:productId});
         var imageId = e.currentTarget.dataset.img;
         var sceneId = e.currentTarget.dataset.sceneid;
+        var scenepicid = e.currentTarget.dataset.scenepicid;
+        this.setData({scenepicid:scenepicid});
+        this.setData({sceneId:sceneId});
         service.getItemInfo({
             productId: productId,storeId:''
         }).subscribe({
@@ -128,7 +132,7 @@ Page({
                     success: (res) => {
                         if (res.statusCode === 200) {
                             this.setData({ headImg: res.tempFilePath });
-                            this.createProImg(sceneId);
+                            this.createProImg(sceneId,scenepicid);
                         } else {
                             wx.hideLoading();
                         }
@@ -142,19 +146,20 @@ Page({
     closeModal: function() {
         this.setData({ isShowModal: true });
     },
-    createProImg: function(sceneId) {
+    createProImg: function(sceneId,scenepicid) {
         console.log(sceneId);
         if(sceneId){
             this.setData({sceneId:sceneId});
             console.log('scene111='+this.data.sceneId);
-            this.drawCanvas(sceneId);
+            this.drawCanvas(scenepicid);
         }else{
             jugardenService.getQrCode({ productId:this.data.productId,path: 'pages/comDetail/index'}).subscribe({
                 next: res => {
                     var sceneId = res.senceId;
+                    var scenePicId = res.picId;
                     this.setData({sceneId:sceneId});
                     console.log('scene222='+this.data.sceneId);
-                    this.drawCanvas(sceneId);
+                    this.drawCanvas(scenePicId);
                 },
                 error: err => {
                     errDialog(err);
@@ -164,9 +169,9 @@ Page({
             });
         }
     },
-    drawCanvas:function(sceneId){
+    drawCanvas:function(scenePicId){
         wx.downloadFile({
-            url: constant.basePicUrl + sceneId + '/resize_200_200/mode_fill',
+            url: constant.basePicUrl + scenePicId + '/resize_200_200/mode_fill',
             success: (res1) => {
                 if (res1.statusCode === 200) {
                     this.setData({ erwmImg: res1.tempFilePath });

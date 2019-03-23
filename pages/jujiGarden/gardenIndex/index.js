@@ -38,7 +38,6 @@ Page({
       if (wx.getStorageSync('token')){//token存在
         console.log(wx.getStorageSync('token') + ' /token存在');
         // 直接调成为桔民的接口；然后调 getGardenInfor 方法 拿到信息； applyLeader 判断有没有申请过成为局长，如果没有 页面的展示是申请成为桔长，   点击申请成为桔长   判断是否绑定手机号
-
         getGardenInfor.call(self);//get首页信息,获取分销角色
       }else{//token不存在 登陆
         this.mainFnc(options);

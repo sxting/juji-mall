@@ -88,31 +88,34 @@ Page({
             var endDate = '2100-01-01 00:00:00';
             this.setData({curdate:'至今'});
         }
-        this.getData(status,startDate,endDate);
-        this.getDigestlist(status,startDate,endDate);
+        this.getData(startDate,endDate);
+        this.getDigestlist(status,startDate,endDate,type);
     },
-    getData: function(status,startDate,endDate){
+    getData: function(startDate,endDate){
         jugardenService.getIncomeInfor({
-            status:status,
             startDate:startDate,
             endDate:endDate
         }).subscribe({
             next: res => {
-                if(status==""){
-                    this.setData({incomeData:res});
-                }else{
-                    this.setData({withdrawData:res});
-                }
+              console.log(res);
+                // if(status==""){
+                //     this.setData({incomeData:res});
+                // }else{
+                //     this.setData({withdrawData:res});
+                // }
             },
             error: err => errDialog(err),
             complete: () => wx.hideToast()
         })
     },
-    getDigestlist:function(status,startDate,endDate){
+    getDigestlist: function (status, startDate, endDate, type){
         jugardenService.getIncomeOrderDigests({
             status:status,
             startDate:startDate,
-            endDate:endDate
+            endDate:endDate,
+            type: type,
+            pageNo: this.data.pageNo,
+            pageSize: 10
         }).subscribe({
             next: res => {
                 if(status==""){

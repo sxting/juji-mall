@@ -31,7 +31,11 @@ Page({
       let self = this;
       let thisIndex = e.currentTarget.dataset.index;
       let thisStatus = e.currentTarget.dataset.status;
-      this.setData({ curTabIndex: thisIndex, role: thisStatus });
+      this.setData({ 
+        curTabIndex: thisIndex, 
+        role: thisStatus,
+        userlistInfor: []
+      });
       getPersonListInfor.call(self);//get我的用户信息
     },
 

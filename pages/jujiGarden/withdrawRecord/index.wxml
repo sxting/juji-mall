@@ -16,7 +16,7 @@
         </view>
     </view>
     <view class="content">
-        <view class="item ub ub-ac" wx:for="{{ recordlist }}" wx:key="item" bindtap="toPage"  data-transferid='{{item.transferId}}'>
+        <view class="item ub ub-ac" hidden="{{isShowNodata}}" wx:for="{{ recordlist }}" wx:key="item" bindtap="toPage"  data-transferid='{{item.transferId}}'>
             <image class="leftBg" src="/images/leftBg.png" mode="scaleToFill"></image>
             <view class="ub-f1">
                 <view class="amount">+{{ format.toFix(item.amount) }}</view>
@@ -24,6 +24,10 @@
             </view>
             <view class="status">{{ item.statusText }}</view>
             <image src="../../../images/arrow-r.png" class="arrow-r"></image>
+        </view>
+        <view hidden="{{!isShowNodata}}" class="nodataDiv ub ub-ver ub-ac ub-pc" style="height:600rpx;">
+            <image class="nodataImg" src="../../../images/null4.png" style="width:200rpx;height:137rpx"></image>
+            <view class="nodataTxt">暂无明细</view>
         </view>
     </view>
 </view>

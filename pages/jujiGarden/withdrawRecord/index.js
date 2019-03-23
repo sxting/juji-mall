@@ -10,6 +10,7 @@ Page({
     totalSettlementAmount: 0,
     pageNo: 1,
     pageSize: 10,
+    isShowNodata: false,
     failSettlementAmount: 0,
     processingSettlementAmount: 0,
     successSettlementAmount: 0,
@@ -70,7 +71,8 @@ function getSettlementList(){
         })
         self.setData({
           recordlist: res? res : []
-        })
+        });
+        self.setData({isShowNodata:this.data.recordlist.length==0});
       }
     },
     error: err => errDialog(err),

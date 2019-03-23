@@ -14,6 +14,7 @@ Page({
       sortIndex: 0,
       incomelist:{},
       orderIncomelist: [],//订单列表
+      isShowNodata:false,
       curdate:"",//时间tips
       pageNo: 1,
       typeStatus: '',//管理佣金 还是购物返利 还是全部

@@ -12,7 +12,7 @@ Page({
       userlistInfor: [],
       role: 'LEADER',
       pageNo: 1,
-      pageSize: 1,
+      pageSize: 10,
       ifBottom: true,//返回空数组的话，已经到底部，返回不请求
     },
 

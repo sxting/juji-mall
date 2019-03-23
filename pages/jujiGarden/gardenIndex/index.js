@@ -36,7 +36,6 @@ Page({
         openId: options.openId,
         switchFun: true
       })
-      
       if (wx.getStorageSync('token')){//token存在
         console.log(wx.getStorageSync('token') + ' /token存在');
         // 直接调成为桔民的接口；然后调 getGardenInfor 方法 拿到信息； applyLeader 判断有没有申请过成为局长，如果没有 页面的展示是申请成为桔长，   点击申请成为桔长   判断是否绑定手机号
@@ -277,6 +276,7 @@ function joinDistributor(data) {
   jugardenService.joinDistributor(data).subscribe({
     next: res => {
       if (res) {
+        console.log('加入进桔园啦啦啦');
         if (res.role == 'MEMBER' || res.role == 'UNDEFINED') {//桔民
           this.data.juminNumList = [];
           this.data.hadNumber = parseInt(res.invitedLeaderCount) + parseInt(res.invitedMemberCount);

@@ -61,9 +61,7 @@
     </view>
     <view class="p10" style="padding-bottom:0">
         <view class="labels-wrap">
-            <view class="label {{sortIndex2==1?'active':''}}" data-label="1" data-type='' bindtap="toggleLabel">全部</view>
-            <view class="label {{sortIndex2==2?'active':''}}" data-label="2" data-type=' DISTRIBUTOR_MANAGER_REBATE' bindtap="toggleLabel">管理佣金</view>
-            <view class="label {{sortIndex2==3?'active':''}}" data-label="3" data-typs='DISTRIBUTOR_SALES_REBATE' bindtap="toggleLabel">购物返利</view>
+          <view wx:for='{{statuslist}}' wx:key='item' data-index="{{index}}" class="label {{index == sortIndex?'active':''}}" data-status='{{item.status}}' bindtap="toggleLabel">{{item.name}}</view>
         </view>
         <view class="mt10">
             <view class="item ub" wx:for="{{incomelist}}" wx:for-item="item" wx:key="unique" data-id="{{item.orderNo}}" bindtap="toDetail">

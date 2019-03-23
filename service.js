@@ -175,6 +175,12 @@ service.getComIdByscence = (data) => {
   return http.get(apiUrl,data);
 }
 
+// 获取sceneID
+service.getProQrCode = (data) => {
+  let url = api + '/qr/getDistributorProduct.json';
+  return http.get(url, data);
+}
+
 module.exports = {
   service: service
 }

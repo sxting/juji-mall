@@ -240,7 +240,7 @@ Page({
     if(!this.data.sceneId){
       service.getProQrCode({ productId:this.data.productId,path: 'pages/comDetail/index'}).subscribe({
           next: res => {
-              var sceneId = res;
+              var sceneId = res.senceId;
               this.setData({sceneId:sceneId});
               this.buyProduct();  
           },

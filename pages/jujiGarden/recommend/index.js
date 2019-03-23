@@ -150,7 +150,7 @@ Page({
         }else{
             jugardenService.getQrCode({ productId:this.data.productId,path: 'pages/comDetail/index'}).subscribe({
                 next: res => {
-                    var sceneId = res;
+                    var sceneId = res.senceId;
                     this.drawCanvas(sceneId);
                 },
                 error: err => {

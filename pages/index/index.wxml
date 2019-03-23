@@ -127,7 +127,7 @@
             <!-- <view class="old-price">{{filter.toFix(item.originalPrice)}}元</view> -->
             <view class="proDiv ub ub-ac" wx:if="{{item.distributor}}">
               <view class="l">赚</view>
-              <view class="r">￥{{item.distributorSalesRebate}}</view>
+              <view class="r">￥{{filter.toFix(item.distributorSalesRebate)}}</view>
             </view>
           </view>
         </view>

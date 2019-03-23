@@ -282,22 +282,22 @@ Page({
   },
   toCreateOrder: function() { //跳转订单确认 桔子和人民币组合订单
     wx.navigateTo({
-      url: '/pages/payOrder/index?paytype=1&id=' + this.data.productId + '&storeid=' + this.data.storeId
+      url: '/pages/payOrder/index?paytype=1&id=' + this.data.productId + '&storeid=' + this.data.storeId + '&sceneid='+this.data.sceneid
     });
   },
   toCreateOrderByPoint: function() { //只用桔子下单
     wx.navigateTo({
-      url: '/pages/payOrder/index?paytype=2&id=' + this.data.productId + '&storeid=' + this.data.storeId
+      url: '/pages/payOrder/index?paytype=2&id=' + this.data.productId + '&storeid=' + this.data.storeId + '&sceneid='+this.data.sceneid
     });
   },
   toCreateOrderByRmb: function () { //人民币优惠购买
     wx.navigateTo({
-      url: '/pages/payOrder/index?paytype=3&id=' + this.data.productId + '&storeid=' + this.data.storeId
+      url: '/pages/payOrder/index?paytype=3&id=' + this.data.productId + '&storeid=' + this.data.storeId + '&sceneid='+this.data.sceneid
     });
   },
   toCreateOrderByOriPrice: function () { //原价购买
     wx.navigateTo({
-      url: '/pages/payOrder/index?paytype=4&id=' + this.data.productId + '&storeid=' + this.data.storeId
+      url: '/pages/payOrder/index?paytype=4&id=' + this.data.productId + '&storeid=' + this.data.storeId + '&sceneid='+this.data.sceneid
     });
   },
   toGetPoint: function() { //跳转到任务页面赚桔子

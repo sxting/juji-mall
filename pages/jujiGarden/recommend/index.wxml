@@ -38,7 +38,6 @@
     <image class="nodataImg" src="../../../images/null1.png" style="width:200rpx;height:137rpx"></image>
     <view class="nodataTxt" style="margin-bottom:200rpx;">素材为空~</view>
   </view>
-
   <view class="modal1 ub ub-ver" hidden="{{isShowModal}}">
     <view class="div ub-f1 ub ub-ac ub-pc">
       <view style="width:100%;height:100%;background-color:rgba(0,0,0,0.3);position:absolute;z-index:1;top: 0;left: 0" bindtap="closeModal"></view>

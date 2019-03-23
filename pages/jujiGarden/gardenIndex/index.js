@@ -173,7 +173,8 @@ Page({
       jugardenService.bindWechatInfor(data).subscribe({
         next: res => {
           if (res) {
-            console.log(res);
+            this.setData({ switchFun: false });
+            getGardenInfor.call(this);
           }
         },
         error: err => errDialog(err),

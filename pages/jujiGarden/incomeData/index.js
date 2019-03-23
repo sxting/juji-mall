@@ -23,9 +23,9 @@ Page({
     },
 
     onLoad: function(options) {
-        wx.setNavigationBarTitle({ title: '我的收入' });
-        this.getDataByType('',1);
-        this.getDataByType('SETTLED',1);
+      wx.setNavigationBarTitle({ title: '我的收入' });
+      this.getDataByType('',1);
+      this.getDataByType('SETTLED',1);
     },
 
     tipAlert:function(e){
@@ -52,7 +52,10 @@ Page({
 
     switchTab: function(e) {
         let thisIndex = e.currentTarget.dataset.index;
-        this.setData({ curTabIndex: thisIndex});
+        this.setData({ 
+          curTabIndex: thisIndex,
+          orderIncomelist: []
+        });
         let type = e.currentTarget.dataset.type;
         this.getDataByType('',type);
         this.getDataByType('SETTLED',type);
@@ -64,7 +67,8 @@ Page({
       console.log(e.currentTarget.dataset.status);
       this.setData({ 
         sortIndex: index,
-        typeStatus: type
+        typeStatus: type,
+        orderIncomelist: []
       });
       this.getIncomeData(this.data.startDate, this.data.endDate);
       this.getDigestlist(this.data.status, this.data.startDate, this.data.endDate, this.data.typeStatus);
@@ -74,7 +78,8 @@ Page({
       let index = e.currentTarget.dataset.index;
       this.setData({ 
         curActiveIndex: index,
-        status: e.currentTarget.dataset.status
+        status: e.currentTarget.dataset.status,
+        orderIncomelist: []
       });
       this.getIncomeData(this.data.startDate, this.data.endDate);
       this.getDigestlist(this.data.status, this.data.startDate, this.data.endDate, this.data.typeStatus);

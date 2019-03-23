@@ -37,7 +37,7 @@
                     <view style="font-size: 24rpx;color: #999999;text-decoration:line-through;margin-left:25rpx;">{{filter.toFix(productInfo.originalPrice)}} 元</view>
                     <view class="proDiv ub ub-ac" wx:if="{{productInfo.distributor}}">
                         <view class="l">赚</view>
-                        <view class="r">￥{{productInfo.distributorSalesRebate}}</view>
+                        <view class="r">￥{{filter.toFix(productInfo.distributorSalesRebate)}}</view>
                     </view>
                 </view>
                 <view class="ub ub-ac" style="font-size: 24rpx;color: #999999;">
@@ -214,11 +214,11 @@
           <view class="proBtns ub ub-ac">
             <view class="ub-f1 ub ub-ver ub-ac ub-pc l" bindtap="toBuy">
               <text class="txt1">购买</text>
-              <!-- <text class="txt2">返3.00元</text> -->
+              <text class="txt2">返{{filter.toFix(productInfo.distributorSalesRebate)}}元</text>
             </view>
             <view class="ub-f1 ub ub-ver ub-ac ub-pc r" bindtap="toPro" data-id="{{productInfo.productId}}">
               <text class="txt1">推广</text>
-              <text class="txt2">赚￥{{productInfo.distributorSalesRebate}}元</text>
+              <text class="txt2">赚￥{{filter.toFix(productInfo.distributorSalesRebate)}}元</text>
             </view>
           </view>
         </form>

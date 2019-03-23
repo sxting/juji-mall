@@ -237,22 +237,40 @@ Page({
     }
   },
   toBuy:function(){
-    if(this.data.productInfo.type=='PRODUCT'&&this.data.productInfo.point>0&&this.data.productInfo.price>0){
-      if(this.data.productInfo.price>0&&this.data.pointBalance>=this.data.productInfo.point){
-        this.toCreateOrder();
-      }else{
+    if(!this.data.sceneId){
+      service.getProQrCode({ productId:this.data.productId,path: 'pages/comDetail/index'}).subscribe({
+          next: res => {
+              var sceneId = res;
+              this.setData({sceneId:sceneId});
+              this.buyProduct();  
+          },
+          error: err => {
+              errDialog(err);
+              wx.hideLoading();
+          },
+          complete: () => wx.hideToast()
+      });
+    }else{
+        this.buyProduct();  
+    }
+  },
+  buyProduct:function(){
+      if(this.data.productInfo.type=='PRODUCT'&&this.data.productInfo.point>0&&this.data.productInfo.price>0){
+        if(this.data.productInfo.price>0&&this.data.pointBalance>=this.data.productInfo.point){
+          this.toCreateOrder();
+        }else{
+          this.toGetPoint();
+        }
+      }
+      if(this.data.productInfo.type=='PRODUCT'&&this.data.productInfo.point==0&&this.data.productInfo.price>0){
+        this.toCreateOrderByRmb();
+      }
+      if(this.data.productInfo.type=='POINT'){
+        this.toCreateOrderByPoint();
+      }
+      if(this.data.pointBalance<this.data.productInfo.point||!this.data.pointBalance){
         this.toGetPoint();
       }
-    }
-    if(this.data.productInfo.type=='PRODUCT'&&this.data.productInfo.point==0&&this.data.productInfo.price>0){
-      this.toCreateOrderByRmb();
-    }
-    if(this.data.productInfo.type=='POINT'){
-      this.toCreateOrderByPoint();
-    }
-    if(this.data.pointBalance<this.data.productInfo.point||!this.data.pointBalance){
-      this.toGetPoint();
-    }
   },
   toPro:function(e){
     wx.navigateTo({
@@ -282,22 +300,22 @@ Page({
   },
   toCreateOrder: function() { //跳转订单确认 桔子和人民币组合订单
     wx.navigateTo({
-      url: '/pages/payOrder/index?paytype=1&id=' + this.data.productId + '&storeid=' + this.data.storeId + '&sceneid='+this.data.sceneid
+      url: '/pages/payOrder/index?paytype=1&id=' + this.data.productId + '&storeid=' + this.data.storeId + '&sceneid='+this.data.sceneId
     });
   },
   toCreateOrderByPoint: function() { //只用桔子下单
     wx.navigateTo({
-      url: '/pages/payOrder/index?paytype=2&id=' + this.data.productId + '&storeid=' + this.data.storeId + '&sceneid='+this.data.sceneid
+      url: '/pages/payOrder/index?paytype=2&id=' + this.data.productId + '&storeid=' + this.data.storeId + '&sceneid='+this.data.sceneId
     });
   },
   toCreateOrderByRmb: function () { //人民币优惠购买
     wx.navigateTo({
-      url: '/pages/payOrder/index?paytype=3&id=' + this.data.productId + '&storeid=' + this.data.storeId + '&sceneid='+this.data.sceneid
+      url: '/pages/payOrder/index?paytype=3&id=' + this.data.productId + '&storeid=' + this.data.storeId + '&sceneid='+this.data.sceneId
     });
   },
   toCreateOrderByOriPrice: function () { //原价购买
     wx.navigateTo({
-      url: '/pages/payOrder/index?paytype=4&id=' + this.data.productId + '&storeid=' + this.data.storeId + '&sceneid='+this.data.sceneid
+      url: '/pages/payOrder/index?paytype=4&id=' + this.data.productId + '&storeid=' + this.data.storeId + '&sceneid='+this.data.sceneId
     });
   },
   toGetPoint: function() { //跳转到任务页面赚桔子

@@ -13,7 +13,6 @@ Page({
       sortIndex: 0,
       incomelist:{},
       orderIncomelist: [],//订单列表
-      isShowNodata:false,
       curdate:"",//时间tips
       pageNo: 1,
       typeStatus: '',//管理佣金 还是购物返利 还是全部
@@ -25,7 +24,6 @@ Page({
     onLoad: function(options) {
       wx.setNavigationBarTitle({ title: '我的收入' });
       this.getDataByType('',1);
-      this.getDataByType('SETTLED',1);
     },
 
     tipAlert:function(e){
@@ -51,14 +49,14 @@ Page({
     },
 
     switchTab: function(e) {
-        let thisIndex = e.currentTarget.dataset.index;
-        this.setData({ 
-          curTabIndex: thisIndex,
-          orderIncomelist: []
-        });
-        let type = e.currentTarget.dataset.type;
-        this.getDataByType('',type);
-        this.getDataByType('SETTLED',type);
+      let thisIndex = e.currentTarget.dataset.index;
+      this.setData({ 
+        curTabIndex: thisIndex,
+        orderIncomelist: [],
+        pageNo: 1,
+      });
+      let type = e.currentTarget.dataset.type;
+      this.getDataByType(this.data.status,type);
     },
 
     toggleLabel:function(e){
@@ -68,9 +66,10 @@ Page({
       this.setData({ 
         sortIndex: index,
         typeStatus: type,
+        pageNo: 1,
         orderIncomelist: []
       });
-      this.getIncomeData(this.data.startDate, this.data.endDate);
+      // this.getIncomeData(this.data.startDate, this.data.endDate);
       this.getDigestlist(this.data.status, this.data.startDate, this.data.endDate, this.data.typeStatus);
     },
 
@@ -78,10 +77,11 @@ Page({
       let index = e.currentTarget.dataset.index;
       this.setData({ 
         curActiveIndex: index,
+        pageNo: 1,
         status: e.currentTarget.dataset.status,
         orderIncomelist: []
       });
-      this.getIncomeData(this.data.startDate, this.data.endDate);
+      // this.getIncomeData(this.data.startDate, this.data.endDate);
       this.getDigestlist(this.data.status, this.data.startDate, this.data.endDate, this.data.typeStatus);
     },
 
@@ -166,8 +166,8 @@ Page({
               this.setData({ 
                 orderIncomelist: this.data.orderIncomelist.concat(res),
                 ifBottom: res.length == 0 ? true : false,
-                isShowNodata: this.data.incomelist.length == 0
               });
+              console.log(this.data.orderIncomelist);
             },
             error: err => errDialog(err),
             complete: () => wx.hideToast()

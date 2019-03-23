@@ -26,7 +26,7 @@
             <image src="../../../images/arrow-r.png" class="arrow-r"></image>
         </view>
         <view hidden="{{!isShowNodata}}" class="nodataDiv ub ub-ver ub-ac ub-pc" style="height:600rpx;">
-            <image class="nodataImg" src="../../../images/null4.png" style="width:200rpx;height:137rpx"></image>
+            <image class="nodataImg" src="../../../images/null3.png" style="width:200rpx;height:137rpx"></image>
             <view class="nodataTxt">暂无明细</view>
         </view>
     </view>

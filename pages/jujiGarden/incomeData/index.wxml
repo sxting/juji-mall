@@ -64,7 +64,7 @@
           <view wx:for='{{statuslist}}' wx:key='item' data-index="{{index}}" class="label {{index == sortIndex?'active':''}}" data-status='{{item.status}}' bindtap="toggleLabel">{{item.name}}</view>
         </view>
         <view class="mt10">
-            <view class="item ub" wx:for="{{incomelist}}" wx:for-item="item" wx:key="unique" data-id="{{item.orderNo}}" bindtap="toDetail">
+            <view class="item ub" hidden="{{isShowNodata}}" wx:for="{{incomelist}}" wx:for-item="item" wx:key="unique" data-id="{{item.orderNo}}" bindtap="toDetail">
                 <image class="userImg udb" src="{{item.avatar}}"></image>
                 <view class="ub-f1">
                     <view class="name">{{item.name}}</view>
@@ -73,6 +73,12 @@
                     <view class="amount">+{{item.amount/100}}元</view>
                 </view>
             </view>
+
+            <view hidden="{{!isShowNodata}}" class="nodataDiv ub ub-ver ub-ac ub-pc" style="height:400rpx;padding-top:60rpx">
+                <image class="nodataImg" src="../../../images/null4.png" style="width:160rpx" mode="widthFix"></image>
+                <view class="nodataTxt" style="margin-top:30rpx;">暂无任何{{curActiveIndex==1?'销售收入':'提现金额'}}</view>
+            </view>
+
         </view>
     </view>
 </view>

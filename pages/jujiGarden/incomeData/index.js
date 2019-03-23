@@ -143,7 +143,8 @@ Page({
             pageSize: 10
         }).subscribe({
             next: res => {
-              this.setData({ orderIncomelist: res });
+              this.setData({ incomelist: res });
+              this.setData({ isShowNodata: this.data.incomelist.length==0 });
             },
             error: err => errDialog(err),
             complete: () => wx.hideToast()

@@ -11,13 +11,13 @@ Page({
             editorAvatar: "https://upic.juniuo.com/file/picture/25R9F7zL2Dhr/resize_180_180/mode_fill",
             editorNickName: "小仙女",
             productId: '2019031415090868068616188',
-            sceneId: '1110'
+            sceneId: '26FPo2h5cDNg'
         }],
-        picId: '25R9F7zL2Dhr',
+        picId: '25SGzGlgKSrG',
         constant: constant,
         isShowNodata: false,
         curTabIndex: 1,
-        procuctInfo: {}, //当前商品的信息
+        productInfo: {}, //当前商品的信息
         shareBg: '../../../images/shareBg.png',
         isShowModal: true,
         productId: '2019031415090868068616188'
@@ -27,20 +27,7 @@ Page({
         if (options.productId) {
             this.setData({ productId: options.productId });
         }
-        this.getItemInfo(this.data.productId);
         this.getData(this.data.productId);
-    },
-    getItemInfo: function(productId) {
-        service.getItemInfo({
-            productId: productId,
-            storeId:''
-        }).subscribe({
-            next: res => {
-              this.setData({productInfo:res.product});
-            },
-            error: err => console.log(err),
-            complete: () => wx.hideToast()
-        })
     },
     getData: function(productId) {
         jugardenService.shareList({
@@ -59,7 +46,7 @@ Page({
     switchTab: function(e) {
         this.setData({ curTabIndex: e.currentTarget.dataset.index });
     },
-    onShareAppMessage: function(res) {
+    onShareAppMessage: function(res,e) {
         if (res.from === 'button') {
             var imageId = e.currentTarget.dataset.img;
             return {
@@ -121,61 +108,59 @@ Page({
     // 分享朋友圈，生成图文
     shareToCircle: function(e) {
         wx.showLoading({ title: '生成图片...' });
+        var productId = e.currentTarget.dataset.productid;
         var imageId = e.currentTarget.dataset.img;
-        wx.downloadFile({
-            url: constant.basePicUrl + imageId + '/resize_750_420/mode_fill',
-            success: (res) => {
-                if (res.statusCode === 200) {
-                    this.setData({ headImg: res.tempFilePath });
-                    this.getQrCode();
-                } else {
-                    wx.hideLoading();
-                }
-            }
-        });
-    },
-    closeModal: function() {
-        this.setData({ isShowModal: true });
-    },
-    getQrCode: function() {
-        service.getQrCode({ productId: this.data.productId, path: 'pages/comDetail/index' }).subscribe({
+        var sceneId = e.currentTarget.dataset.sceneid;
+        service.getItemInfo({
+            productId: productId,storeId:''
+        }).subscribe({
             next: res => {
-                var picId = res;
-                wx.downloadFile({
-                    url: constant.basePicUrl + picId + '/resize_200_200/mode_fill',
-                    success: (res1) => {
-                        if (res1.statusCode === 200) {
-                            this.setData({ erwmImg: res1.tempFilePath });
-                            var info = this.data.productInfo;
-                            wx.hideLoading();
-                            if (info.type == 'POINT') {
-                                var price1 = info.point + '桔子';
-                            } else {
-                                if (info.point != 0) {
-                                    var juzi = info.point + '桔子+';
-                                } else {
-                                    var juzi = '';
-                                }
-                                var price1 = juzi + Number(info.price / 100).toFixed(2) + '元';
-                            }
-                            var name = info.productName.substring(0, 15);
-                            var price2 = Number(info.originalPrice / 100).toFixed(2) + '元';
-                            this.drawImage(name, '', price1, price2, info.soldNum); //参数依次是storeName,desc,现价,原价,销量
-                            this.setData({ isShowModal: false });
-                            setTimeout(() => {
-                                this.setData({ isHiddenClose: true });
-                            }, 1500)
+              this.setData({productInfo:res.product});
+              wx.downloadFile({
+                    url: constant.basePicUrl + this.data.picId + '/resize_750_420/mode_fill',
+                    success: (res) => {
+                        if (res.statusCode === 200) {
+                            this.setData({ headImg: res.tempFilePath });
+                            this.createProImg(sceneId);
                         } else {
                             wx.hideLoading();
                         }
                     }
-                });
+               });
             },
-            error: err => {
-                errDialog(err);
-                wx.hideLoading();
-            },
-            complete: () => wx.hideToast()
+            error: err => console.log(err),
+            complete: () => wx.hideLoading()
+        })
+    },
+    closeModal: function() {
+        this.setData({ isShowModal: true });
+    },
+    createProImg: function(sceneId) {
+        wx.downloadFile({
+            url: constant.basePicUrl + sceneId + '/resize_200_200/mode_fill',
+            success: (res1) => {
+                if (res1.statusCode === 200) {
+                    this.setData({ erwmImg: res1.tempFilePath });
+                    var info = this.data.productInfo;
+                    wx.hideLoading();
+                    if (info.type == 'POINT') {
+                        var price1 = info.point + '桔子';
+                    } else {
+                        if (info.point != 0) {
+                            var juzi = info.point + '桔子+';
+                        } else {
+                            var juzi = '';
+                        }
+                        var price1 = juzi + Number(info.price / 100).toFixed(2) + '元';
+                    }
+                    var name = info.productName.substring(0, 15);
+                    var price2 = Number(info.originalPrice / 100).toFixed(2) + '元';
+                    this.drawImage(name, '', price1, price2, info.soldNum); //参数依次是storeName,desc,现价,原价,销量
+                    this.setData({ isShowModal: false });
+                } else {
+                    wx.hideLoading();
+                }
+            }
         });
     },
     setCanvasSize: function() {
@@ -240,8 +225,8 @@ Page({
         var context = wx.createCanvasContext('myCanvas');
         context.drawImage(this.data.shareBg, 0, 0, size.w, size.h); //宽度70，居中，距离上15
         context.drawImage("../../../images/logo.png", 20, 18, 20, 21); //宽度70，居中，距离上15
-        context.drawImage(this.data.headImg, 10, 52, size.w - 20, 170); //宽度70，居中，距离上15
-        rectPath(context, 10, 190, size.w - 20, 219);
+        context.drawImage(this.data.headImg, 10, 52, size.w - 20, 138); //宽度70，居中，距离上15
+        rectPath(context, 10, 190, size.w-20, 219);
         context.drawImage(this.data.erwmImg, size.w / 2 - 40, 292.5, 80, 80); //二维码，宽度100，居中
         this.setTitle(context, name);
         context.drawImage("../../../images/price.png", 20, 224, 30, 13); //宽度70，居中，距离上15
@@ -266,7 +251,7 @@ Page({
                             wx.authorize({
                                 scope: 'scope.writePhotosAlbum',
                                 success() {
-                                    that.saveAsPhoto(res1.tempFilePath);
+                                    that.saveAsPhoto(res1.tempFilePath, type);
                                 },
                                 fail() {
                                     wx.openSetting({

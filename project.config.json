@@ -36,7 +36,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 26,
+			"current": 23,
 			"list": [
 				{
 					"id": 0,
@@ -197,9 +197,9 @@
 					"scene": null
 				},
 				{
-					"id": -1,
+					"id": 23,
 					"name": "推广素材",
-					"pathName": "pages/jujiGarden/recommend/index",
+					"pathName": "pages/index/index",
 					"query": "",
 					"scene": null
 				},

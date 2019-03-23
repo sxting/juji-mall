@@ -186,11 +186,13 @@
 
 .progress-box {
   margin-top: 25rpx;
+  width: 540rpx;
+  display: flex
 }
 
 .progress-box text {
   display: inline-block;
-  width: 50rpx;
+  flex:1;
   height: 12rpx;
   background: #ffeda0;
   margin-right: 5rpx;

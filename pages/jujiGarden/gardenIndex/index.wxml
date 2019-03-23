@@ -17,7 +17,7 @@
             <view class='clearfix my-team'>
                 <view class='fl'>
                   <text style='font-weight:bold;'>我的队伍 </text>
-                  <text class='num'><text style='color:#F35308'>{{ hadNumber }}</text>/10</text>
+                  <text class='num'><text style='color:#F35308'>{{ hadNumber }}</text>/{{minInvitedMemberCount}}</text>
                 </view>
                 <view class='fr' wx:if='{{ hadNumber != 0 }}'>
                     <text catchtap="toPage" data-page="/pages/jujiGarden/userInfor/userInfor" data-role='{{role}}'>查看桔民</text>

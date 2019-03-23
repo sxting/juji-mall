@@ -13,7 +13,6 @@ Page({
       sortIndex: 0,
       incomelist:{},
       orderIncomelist: [],//订单列表
-      isShowNodata:false,
       curdate:"",//时间tips
       pageNo: 1,
       typeStatus: '',//管理佣金 还是购物返利 还是全部
@@ -25,7 +24,6 @@ Page({
     onLoad: function(options) {
       wx.setNavigationBarTitle({ title: '我的收入' });
       this.getDataByType('',1);
-      this.getDataByType('SETTLED',1);
     },
 
     tipAlert:function(e){
@@ -166,8 +164,8 @@ Page({
               this.setData({ 
                 orderIncomelist: this.data.orderIncomelist.concat(res),
                 ifBottom: res.length == 0 ? true : false,
-                isShowNodata: this.data.incomelist.length == 0
               });
+              console.log(this.data.orderIncomelist);
             },
             error: err => errDialog(err),
             complete: () => wx.hideToast()

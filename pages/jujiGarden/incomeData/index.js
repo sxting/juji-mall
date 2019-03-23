@@ -19,6 +19,7 @@ Page({
       typeStatus: '',//管理佣金 还是购物返利 还是全部
       settlementSaleMoney: 0,//提现金额
       saleMoney: 0,//销售收入
+      ifBottom: true,//返回空数组的话，已经到底部，返回不请求
     },
 
     onLoad: function(options) {
@@ -110,6 +111,19 @@ Page({
       this.getIncomeData(startDate,endDate);
       this.getDigestlist(this.data.status,startDate,endDate,this.data.typeStatus);
     },
+
+    //上拉加载更多
+    scrolltolower: function () {
+      console.log(this.data.pageNo)
+      if (this.data.ifBottom) {
+        return;
+      }
+      this.setData({
+        pageNo: this.data.pageNo + 1
+      })
+      this.getDigestlist(this.data.status, this.data.startDate, this.data.endDate, this.data.typeStatus);
+    },
+
     // 我的收入
     getIncomeData: function (startDate,endDate){
         jugardenService.getIncomeInfor({
@@ -120,8 +134,9 @@ Page({
               console.log(res);
               let settlementSaleMoney = 0;
               let saleMoney = 0;
-              settlementSaleMoney = (parseFloat(res.settlementManageRebate) + parseFloat(res.settlementSaleRebate))/100;
-              saleMoney = (parseFloat(res.manageRebate) + parseFloat(res.saleRebate)) / 100;
+              settlementSaleMoney = res.settlementManageRebate + res.settlementSaleRebate;
+              saleMoney = res.manageRebate + res.saleRebate;
+              console.log(saleMoney + ' ' + settlementSaleMoney);
               this.setData({ 
                 incomeData: res,
                 settlementSaleMoney: settlementSaleMoney,
@@ -143,8 +158,11 @@ Page({
             pageSize: 10
         }).subscribe({
             next: res => {
-              this.setData({ incomelist: res });
-              this.setData({ isShowNodata: this.data.incomelist.length==0 });
+              this.setData({ 
+                orderIncomelist: this.data.orderIncomelist.concat(res),
+                ifBottom: res.length == 0 ? true : false,
+                isShowNodata: this.data.incomelist.length == 0
+              });
             },
             error: err => errDialog(err),
             complete: () => wx.hideToast()
@@ -152,7 +170,7 @@ Page({
     },
     toDetail:function(e){
       let id = e.currentTarget.dataset.id;
-      wx.navigateTo({ url: '../orderDetail/orderDetail?id='+id });
+      wx.navigateTo({ url: '../orderDetail/orderDetail?orderNo='+id });
     },
 });
 

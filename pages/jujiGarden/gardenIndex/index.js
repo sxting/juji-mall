@@ -177,9 +177,9 @@ Page({
             this.setData({
               role: res.role,
               switchFun: false,
-              todaySaleRebate: res.todaySaleRebate ? res.todaySaleRebate : 0,
-              todaySettlementAmount: res.todaySettlementAmount ? res.todaySettlementAmount : 0,
-              totalSettlementAmount: res.totalSettlementAmount ? res.totalSettlementAmount : 0,
+              todaySaleRebate: res.todaySaleRebate ? res.todaySaleRebate/100 : 0,
+              todaySettlementAmount: res.todaySettlementAmount ? res.todaySettlementAmount/100 : 0,
+              totalSettlementAmount: res.totalSettlementAmount ? res.totalSettlementAmount/100 : 0,
               invitedLeaderCount: res.invitedLeaderCount ? res.invitedLeaderCount : 0,
               invitedMemberCount: res.invitedMemberCount ? res.invitedMemberCount : 0,
               isAuthed: res.hasReceiver == true ? true : false,

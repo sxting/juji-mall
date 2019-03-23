@@ -35,6 +35,7 @@ Page({
         openId: options.openId,
         switchFun: true
       })
+      
       if (wx.getStorageSync('token')){//token存在
         console.log(wx.getStorageSync('token') + ' /token存在');
         // 直接调成为桔民的接口；然后调 getGardenInfor 方法 拿到信息； applyLeader 判断有没有申请过成为局长，如果没有 页面的展示是申请成为桔长，   点击申请成为桔长   判断是否绑定手机号
@@ -252,7 +253,7 @@ function getGardenInfor(){
           totalSettlementAmount: res.totalSettlementAmount ? res.totalSettlementAmount : 0,
           invitedLeaderCount: res.invitedLeaderCount? res.invitedLeaderCount : 0,
           invitedMemberCount: res.invitedMemberCount? res.invitedMemberCount : 0,
-          isAuthed: res.allowDistribute == true? true : false,
+          isAuthed: res.hasReceiver == true? true : false,
           applyLeader: res.applyLeader
         })
         if (res.role == 'LEADER' && res.allowDistribute){//动态设置title背景色 是桔长并已经认证
@@ -295,7 +296,8 @@ function joinDistributor(data) {
           role: res.role,
           juminNumList: this.data.juminNumList,
           hadNumber: this.data.hadNumber,
-          applyLeader: res.applyLeader
+          applyLeader: res.applyLeader,
+          isAuthed: res.hasReceiver == true ? true : false,
         })
       }
     },

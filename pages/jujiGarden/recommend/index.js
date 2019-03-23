@@ -111,6 +111,7 @@ Page({
     shareToCircle: function(e) {
         wx.showLoading({ title: '生成图片...' });
         var productId = e.currentTarget.dataset.productid;
+        this.setData({productId:productId});
         var imageId = e.currentTarget.dataset.img;
         var sceneId = e.currentTarget.dataset.sceneid;
         service.getItemInfo({
@@ -138,6 +139,24 @@ Page({
         this.setData({ isShowModal: true });
     },
     createProImg: function(sceneId) {
+        console.log(sceneId);
+        if(sceneId){
+            this.drawCanvas(sceneId);
+        }else{
+            jugardenService.getQrCode({ productId:this.data.productId,path: 'pages/comDetail/index'}).subscribe({
+                next: res => {
+                    var sceneId = res;
+                    this.drawCanvas(sceneId);
+                },
+                error: err => {
+                    errDialog(err);
+                    wx.hideLoading();
+                },
+                complete: () => wx.hideToast()
+            });
+        }
+    },
+    drawCanvas:function(sceneId){
         wx.downloadFile({
             url: constant.basePicUrl + sceneId + '/resize_200_200/mode_fill',
             success: (res1) => {

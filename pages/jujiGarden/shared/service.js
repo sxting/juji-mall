@@ -81,6 +81,12 @@ jugardenService.personListInfor = (data) => {
   return http.get(url, data);
 }
 
+// 获取小程序码
+jugardenService.getQrCode = (data) => {
+  let url = API + '/qr/getDistributorProduct.json';
+  return http.get(url, data);
+}
+
 module.exports = {
   jugardenService: jugardenService
 }

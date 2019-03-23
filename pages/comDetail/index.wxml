@@ -216,7 +216,7 @@
               <text class="txt1">购买</text>
               <text class="txt2">返3.00元</text>
             </view>
-            <view class="ub-f1 ub ub-ver ub-ac ub-pc r" bindtap="toPro" data-id=="productInfo.productId">
+            <view class="ub-f1 ub ub-ver ub-ac ub-pc r" bindtap="toPro" data-id="{{productInfo.productId}}">
               <text class="txt1">推广</text>
               <text class="txt2">赚3.00元</text>
             </view>

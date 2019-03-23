@@ -237,10 +237,10 @@ function getGardenInfor(){
             applyLeader: this.data.applyLeader
           }
           joinDistributor.call(self,data);
-        } else if (res.role == 'LEADER' && this.data.switchFun){ //邀请者是桔长
+        } else if ((res.role == 'LEADER' || res.role == 'MEMBER') && this.data.switchFun){ //邀请者是桔长或者桔民
           let data = {
             parentId: this.data.openId,
-            applyLeader: this.data.applyLeader
+            applyLeader: res.applyLeader
           }
           joinDistributor.call(self, data);
         }

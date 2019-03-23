@@ -4,28 +4,28 @@ import { errDialog, loading } from '../../../utils/util';
 var app = getApp();
 Page({
     data: {
-        tablist: [{ name: '本日', type: '1' }, { name: '本周', type: '2' }, { name: '本月', type: '3' }, { name: '累计', type: '4' }],
-        curTabIndex: 0,
-        curActiveIndex:1,
-        constant: constant,
-        isShowNodata: false,
-        recordlist: ['','',''],
-        status:'',
-        isFinall:false,
-        amount: 0,
-        sortIndex1:1,
-        sortIndex2:1,
-        incomeData:{},
-        withdrawData:{},
-        incomelist:{},
-        curdate:"",
-        withdrawlist:{}
+      tablist: [{ name: '本日', type: '1' }, { name: '本周', type: '2' }, { name: '本月', type: '3' }, { name: '累计', type: '4' }],
+      curTabIndex: 0,
+      curActiveIndex:1,
+      constant: constant,
+      status:'',
+      sortIndex1:1,
+      sortIndex2:1,
+      incomelist:{},
+      orderIncomelist: [],//订单列表
+      curdate:"",//时间tips
+      pageNo: 1,
+      typeStatus: '',//管理佣金 还是购物返利 还是全部
+      settlementSaleMoney: 0,//提现金额
+      saleMoney: 0,//销售收入
     },
+
     onLoad: function(options) {
         wx.setNavigationBarTitle({ title: '我的收入' });
         this.getDataByType('',1);
         this.getDataByType('SETTLED',1);
     },
+
     tipAlert:function(e){
         var type = e.currentTarget.dataset.type;
         if(type==1){
@@ -47,67 +47,90 @@ Page({
             showModal('购物返利','通过向用户推广商品，被购买后你可获得购物返利');
         }
     },
+
     switchTab: function(e) {
-        var thisIndex = e.currentTarget.dataset.index;
+        let thisIndex = e.currentTarget.dataset.index;
         this.setData({ curTabIndex: thisIndex});
-        var type = e.currentTarget.dataset.type;
+        let type = e.currentTarget.dataset.type;
         this.getDataByType('',type);
         this.getDataByType('SETTLED',type);
     },
-    toggleLabel1:function(e){
-        var index = e.currentTarget.dataset.label;
-        this.setData({ sortIndex1: index });
+
+    toggleLabel:function(e){
+        let index = e.currentTarget.dataset.label;
+        let type = e.currentTarget.dataset.type;
+        this.setData({ 
+          sortIndex2: index,
+          typeStatus: type
+        });
+        this.getIncomeData(this.data.status, this.data.startDate, this.data.endDate);
+        this.getDigestlist(this.data.status, this.data.startDate, this.data.endDate, this.data.typeStatus);
     },
-    toggleLabel2:function(e){
-        var index = e.currentTarget.dataset.label;
-        this.setData({ sortIndex2: index });
-    },
+
     switchActive:function(e){
-        var index = e.currentTarget.dataset.index;
-        this.setData({ curActiveIndex: index });
+      let index = e.currentTarget.dataset.index;
+      this.setData({ 
+        curActiveIndex: index,
+        status: e.currentTarget.dataset.status
+      });
+      this.getIncomeData(this.data.status, this.data.startDate, this.data.endDate);
+      this.getDigestlist(this.data.status, this.data.startDate, this.data.endDate, this.data.typeStatus);
     },
+
     getDataByType:function(status,type){
-        if(type==1){//本日
-            var startDate = getNowDate()+' 00:00:00';
-            var endDate = getNowDate()+' 23:59:59';
-            this.setData({curdate:getNowDate().replace(/-/g, ".")});
-        }
-        if(type==2){//本周
-            var startDate = getWeekFirstDay()+' 00:00:00';
-            var endDate = getWeekLastDay()+' 23:59:59';
-            this.setData({curdate:getWeekFirstDay().replace(/-/g, ".")+"-"+getNowDate().replace(/-/g, ".")});
-        }
-        if(type==3){//本月
-            var startDate = getMonthFirstDay()+' 00:00:00';
-            var endDate = getMonthLastDay()+' 23:59:59';
-            this.setData({curdate:getMonthFirstDay().replace(/-/g, ".")+"-"+getNowDate().replace(/-/g, ".")});
-        }
-        if(type==4){//累计
-            var startDate = '2019-01-01 00:00:00';
-            this.setData({curdate:getNowDate()});
-            var endDate = '2100-01-01 00:00:00';
-            this.setData({curdate:'至今'});
-        }
-        this.getData(startDate,endDate);
-        this.getDigestlist(status,startDate,endDate,type);
+      let startDate = '';
+      let endDate = '';
+      if(type==1){//本日
+          startDate = getNowDate()+' 00:00:00';
+          endDate = getNowDate()+' 23:59:59';
+          this.setData({curdate:getNowDate().replace(/-/g, ".")});
+      }
+      if(type==2){//本周
+          startDate = getWeekFirstDay()+' 00:00:00';
+          endDate = getWeekLastDay()+' 23:59:59';
+          this.setData({curdate:getWeekFirstDay().replace(/-/g, ".")+"-"+getNowDate().replace(/-/g, ".")});
+      }
+      if(type==3){//本月
+          startDate = getMonthFirstDay()+' 00:00:00';
+          endDate = getMonthLastDay()+' 23:59:59';
+          this.setData({curdate:getMonthFirstDay().replace(/-/g, ".")+"-"+getNowDate().replace(/-/g, ".")});
+      }
+      if(type==4){//累计
+          startDate = '';
+          this.setData({curdate:getNowDate()});
+          endDate = '';
+          this.setData({curdate:'至今'});
+      }
+      this.setData({
+        startDate: startDate,
+        endDate: endDate,
+      })
+      this.getIncomeData(startDate,endDate);
+      this.getDigestlist(this.data.status,startDate,endDate,this.data.typeStatus);
     },
-    getData: function(startDate,endDate){
+    // 我的收入
+    getIncomeData: function (startDate,endDate){
         jugardenService.getIncomeInfor({
             startDate:startDate,
             endDate:endDate
         }).subscribe({
             next: res => {
               console.log(res);
-                // if(status==""){
-                //     this.setData({incomeData:res});
-                // }else{
-                //     this.setData({withdrawData:res});
-                // }
+              let settlementSaleMoney = 0;
+              let saleMoney = 0;
+              settlementSaleMoney = parseFloat(res.settlementManageRebate) + parseFloat(res.settlementSaleRebate)/100;
+              saleMoney = parseFloat(res.manageRebate) + parseFloat(res.saleRebate) / 100;
+              this.setData({ 
+                incomeData: res,
+                settlementSaleMoney: settlementSaleMoney,
+                saleMoney: saleMoney
+              });
             },
             error: err => errDialog(err),
             complete: () => wx.hideToast()
         })
     },
+    // 我的收入订单摘要列表
     getDigestlist: function (status, startDate, endDate, type){
         jugardenService.getIncomeOrderDigests({
             status:status,
@@ -118,18 +141,14 @@ Page({
             pageSize: 10
         }).subscribe({
             next: res => {
-                if(status==""){
-                    this.setData({incomelist:res});
-                }else{
-                    this.setData({withdrawlist:res});
-                }
+              this.setData({ orderIncomelist: res });
             },
             error: err => errDialog(err),
             complete: () => wx.hideToast()
         })
     },
     toDetail:function(e){
-      var id = e.currentTarget.dataset.id;
+      let id = e.currentTarget.dataset.id;
       wx.navigateTo({ url: '../orderDetail/orderDetail?id='+id });
     },
 });

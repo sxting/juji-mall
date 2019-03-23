@@ -71,6 +71,11 @@ page { height: 100%; }
 .proDiv{margin-left: 16rpx;border-radius: 6rpx;overflow: hidden;}
 .proDiv .l{padding: 3rpx 10rpx;background: #444444;font-size: 22rpx;color: #FED901;}
 .proDiv .r{padding: 3rpx 10rpx;font-size: 24rpx;color: #000000;background-image: linear-gradient(-269deg, #FCBF0A 0%, #FFDC00 100%);}
+.proBtns{border-radius: 44rpx;overflow: hidden;height: 88rpx;}
+.proBtns .l{width: 240rpx;height: 88rpx;background: #333333;}
+.proBtns .r{width: 240rpx;height: 88rpx;background: #E83221;}
+.proBtns .txt1{color: #fff;font-size: 28rpx;}
+.proBtns .txt2{color: #fff;font-size: 18rpx;}
 
 .pubu { width: 100%; box-sizing: border-box; display: flex; flex-direction: row; margin-top: 10rpx; }
 .pubuItem { width: 50%; display: flex; flex-direction: column; }

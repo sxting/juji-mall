@@ -235,7 +235,11 @@ Page({
         url: '/pages/map/index?lat=' + e.currentTarget.dataset.lat + '&lng=' + e.currentTarget.dataset.lng,
       });
     }
-
+  },
+  toPro:function(e){
+    wx.navigateTo({
+      url: 'pages/jujiGarden/recommend/index?productId='+e.currentTarget.dataset.id
+    });
   },
   callPhone: function () {
     wx.makePhoneCall({

@@ -274,6 +274,7 @@ Page({
                         next: res => {
                           console.log('--------选择省市县确认服务商信息---------');
                           console.log(res);
+                          wx.setStorageSync('providerId',res.id);
                           that.setData({
                             providerId: res.id,
                             pageNo: 1

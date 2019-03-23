@@ -33,6 +33,7 @@ Page({
     },
     getData: function(productId) {
         jugardenService.shareList({
+            providerId:wx.getStorageSync('providerId'),
             productId: productId, //如果从首页进入productId不为空
             pageNo: 1,
             pageSize: 10

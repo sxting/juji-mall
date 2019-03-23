@@ -5,12 +5,13 @@ var app = getApp();
 Page({
     data: {
       tablist: [{ name: '本日', type: '1' }, { name: '本周', type: '2' }, { name: '本月', type: '3' }, { name: '累计', type: '4' }],
+
+      statuslist: [{ name: '全部', status: '' }, { name: '管理佣金', status: 'DISTRIBUTOR_MANAGER_REBATE' }, { name: '购物返利', type: 'DISTRIBUTOR_SALES_REBATE' }],
       curTabIndex: 0,
       curActiveIndex:1,
       constant: constant,
       status:'',
-      sortIndex1:1,
-      sortIndex2:1,
+      sortIndex: 0,
       incomelist:{},
       orderIncomelist: [],//订单列表
       curdate:"",//时间tips
@@ -57,13 +58,13 @@ Page({
     },
 
     toggleLabel:function(e){
-        let index = e.currentTarget.dataset.label;
-        let type = e.currentTarget.dataset.type;
+        let index = e.currentTarget.dataset.index;
+        let type = e.currentTarget.dataset.status;
         this.setData({ 
-          sortIndex2: index,
+          sortIndex: index,
           typeStatus: type
         });
-        this.getIncomeData(this.data.status, this.data.startDate, this.data.endDate);
+        this.getIncomeData(this.data.startDate, this.data.endDate);
         this.getDigestlist(this.data.status, this.data.startDate, this.data.endDate, this.data.typeStatus);
     },
 
@@ -73,7 +74,7 @@ Page({
         curActiveIndex: index,
         status: e.currentTarget.dataset.status
       });
-      this.getIncomeData(this.data.status, this.data.startDate, this.data.endDate);
+      this.getIncomeData(this.data.startDate, this.data.endDate);
       this.getDigestlist(this.data.status, this.data.startDate, this.data.endDate, this.data.typeStatus);
     },
 

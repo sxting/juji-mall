@@ -22,7 +22,8 @@ Page({
     name: '',//姓名
     phone: '',
     applyLeader: false,//是否申请桔长
-    switchFun: false
+    switchFun: false,
+    minInvitedMemberCount: 0,//邀请几个人就可以成为桔长
   },
 
   onLoad: function (options) {
@@ -221,11 +222,11 @@ function getGardenInfor(){
               let list = 'yes';
               this.data.juminNumList.push(list);
             }
-            for (let j = 0; j < (10 - parseInt(this.data.hadNumber)); j++) {
+            for (let j = 0; j < (res.minInvitedMemberCount - parseInt(this.data.hadNumber)); j++) {
               this.data.juminNumList.push('');
             }
-          }else{
-            for (let j = 0; j < 10; j++) {
+          } else {
+            for (let j = 0; j < res.minInvitedMemberCount; j++) {
               this.data.juminNumList.push('');
             }
           }
@@ -252,8 +253,9 @@ function getGardenInfor(){
           totalSettlementAmount: res.totalSettlementAmount ? res.totalSettlementAmount : 0,
           invitedLeaderCount: res.invitedLeaderCount? res.invitedLeaderCount : 0,
           invitedMemberCount: res.invitedMemberCount? res.invitedMemberCount : 0,
-          isAuthed: res.allowDistribute == true? true : false,
-          applyLeader: res.applyLeader
+          isAuthed: res.hasReceiver == true? true : false,
+          applyLeader: res.applyLeader,
+          minInvitedMemberCount: res.minInvitedMemberCount
         })
         if (res.role == 'LEADER' && res.allowDistribute){//动态设置title背景色 是桔长并已经认证
           wx.setNavigationBarColor({
@@ -274,6 +276,7 @@ function joinDistributor(data) {
   jugardenService.joinDistributor(data).subscribe({
     next: res => {
       if (res) {
+        console.log('加入进桔园啦啦啦');
         if (res.role == 'MEMBER' || res.role == 'UNDEFINED') {//桔民
           this.data.juminNumList = [];
           this.data.hadNumber = parseInt(res.invitedLeaderCount) + parseInt(res.invitedMemberCount);
@@ -282,11 +285,11 @@ function joinDistributor(data) {
               let list = 'yes';
               this.data.juminNumList.push(list);
             }
-            for (let j = 0; j < (10 - parseInt(this.data.hadNumber)); j++) {
+            for (let j = 0; j < (res.minInvitedMemberCount - parseInt(this.data.hadNumber)); j++) {
               this.data.juminNumList.push('');
             }
           } else {
-            for (let j = 0; j < 10; j++) {
+            for (let j = 0; j < res.minInvitedMemberCount; j++) {
               this.data.juminNumList.push('');
             }
           }
@@ -295,7 +298,9 @@ function joinDistributor(data) {
           role: res.role,
           juminNumList: this.data.juminNumList,
           hadNumber: this.data.hadNumber,
-          applyLeader: res.applyLeader
+          applyLeader: res.applyLeader,
+          isAuthed: res.hasReceiver == true ? true : false,
+          minInvitedMemberCount: res.minInvitedMemberCount
         })
       }
     },

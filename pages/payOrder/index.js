@@ -15,7 +15,7 @@ Page({
     count: 1,
     price: 0,
     paytype: 1,
-    sceneId:"49b77161cf394d1a883b8da0919e4286",
+    sceneId:"",
     pointBalance: 0,
     alreadyPay: false,
     showProduct:false
@@ -29,8 +29,8 @@ Page({
       this.setData({
         productId: options.id,
         storeId: options.storeid,
-        paytype: options.paytype//,
-        // sceneId:options.sceneid
+        paytype: options.paytype,
+        sceneId:options.sceneid
       });
       this.getItemInfo();
       //查询用户橘子
@@ -146,7 +146,7 @@ Page({
                   //创建订单
                   var orderObj = {
                     itemRequests: [{
-                      sceneId:that.data.sceneId,
+                      sceneId:'49b77161cf394d1a883b8da0919e4286',//that.data.sceneId,
                       merchantId: that.data.productInfo.merchantId,
                       merchantName: that.data.productInfo.merchantName,
                       num: that.data.count,
@@ -280,6 +280,7 @@ Page({
                   //创建订单
                   var orderObj = {
                     itemRequests: [{
+                      sceneId:'49b77161cf394d1a883b8da0919e4286',//that.data.sceneId,
                       merchantId: that.data.productInfo.merchantId,
                       merchantName: that.data.productInfo.merchantName,
                       num: that.data.count,
@@ -386,6 +387,7 @@ Page({
                 //创建订单
                 var orderObj = {
                   itemRequests: [{
+                    sceneId:'49b77161cf394d1a883b8da0919e4286',//that.data.sceneId,
                     merchantId: that.data.productInfo.merchantId,
                     merchantName: that.data.productInfo.merchantName,
                     num: that.data.count,
@@ -508,6 +510,7 @@ Page({
                 //创建订单
                 var orderObj = {
                   itemRequests: [{
+                    sceneId:'49b77161cf394d1a883b8da0919e4286',//that.data.sceneId,
                     merchantId: that.data.productInfo.merchantId,
                     merchantName: that.data.productInfo.merchantName,
                     num: that.data.count,

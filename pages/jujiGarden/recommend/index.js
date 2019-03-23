@@ -22,6 +22,7 @@ Page({
         erwmImg:'',
         headImg:'',
         isShowModal: true,
+        sceneId:'',
         productId: ''//当前商品的id
     },
     onLoad: function(options) {
@@ -36,7 +37,7 @@ Page({
             providerId:wx.getStorageSync('providerId'),
             productId: productId, //如果从首页进入productId不为空
             pageNo: 1,
-            pageSize: 10
+            pageSize: 20
         }).subscribe({
             next: res => {
                 this.setData({recommendlist:res});
@@ -49,13 +50,12 @@ Page({
     switchTab: function(e) {
         this.setData({ curTabIndex: e.currentTarget.dataset.index });
     },
-    onShareAppMessage: function(res,e) {
+    onShareAppMessage: function(res) {
         if (res.from === 'button') {
-            var imageId = e.currentTarget.dataset.img;
             return {
                 title: JSON.parse(wx.getStorageSync('userinfo')).nickName + '分享给您一个心动商品，快来一起体验吧！',
-                path: '/pages/comDetail/index?id=' + this.data.productId + '&storeid=' + this.data.storeId + '&inviteCode=' + wx.getStorageSync('inviteCode'),
-                imageUrl: constant.basePicUrl + imageId + '/resize_360_360/mode_fill'
+                path: '/pages/comDetail/index?id=' + this.data.productId + '&sceneid='+this.data.sceneId,
+                imageUrl: constant.basePicUrl + this.productInfo.picId + '/resize_360_360/mode_fill'
             }
         }
     },
@@ -68,7 +68,7 @@ Page({
                 if (!res.authSetting['scope.writePhotosAlbum']) {
                     wx.authorize({
                         scope: 'scope.writePhotosAlbum',
-                        success() {
+                        success: (res) => {
                             that.saveFile(imageIds);
                         }
                     })
@@ -115,6 +115,7 @@ Page({
         this.setData({productId:productId});
         var imageId = e.currentTarget.dataset.img;
         var sceneId = e.currentTarget.dataset.sceneid;
+        this.setData({sceneId:sceneId});
         service.getItemInfo({
             productId: productId,storeId:''
         }).subscribe({
@@ -304,15 +305,11 @@ Page({
         wx.saveImageToPhotosAlbum({
             filePath: imgUrl,
             success: (res) => {
-                this.share(); //分享获得桔子
                 this.closeModal();
                 if (type == 1) {
-                    wx.showToast({
-                        title: "已保存至相册",
-                        icon: "success"
-                    });
+                    wx.showToast({title: "已保存至相册",icon: "success"});
                 } else {
-                    errDialog('图文海报已保存到微信本地相册，打开微信朋友圈分享吧!');
+                    errDialog('图文海报已保存到微信本地相册');
                 }
             },
             fail: function(res) {
@@ -320,7 +317,6 @@ Page({
             }
         })
     }
-
 })
 
 function rectPath(ctx, x, y, w, h) {

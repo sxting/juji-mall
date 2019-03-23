@@ -49,14 +49,14 @@ Page({
     },
 
     switchTab: function(e) {
-        let thisIndex = e.currentTarget.dataset.index;
-        this.setData({ 
-          curTabIndex: thisIndex,
-          orderIncomelist: []
-        });
-        let type = e.currentTarget.dataset.type;
-        this.getDataByType('',type);
-        this.getDataByType('SETTLED',type);
+      let thisIndex = e.currentTarget.dataset.index;
+      this.setData({ 
+        curTabIndex: thisIndex,
+        orderIncomelist: [],
+        pageNo: 1,
+      });
+      let type = e.currentTarget.dataset.type;
+      this.getDataByType(this.data.status,type);
     },
 
     toggleLabel:function(e){
@@ -66,9 +66,10 @@ Page({
       this.setData({ 
         sortIndex: index,
         typeStatus: type,
+        pageNo: 1,
         orderIncomelist: []
       });
-      this.getIncomeData(this.data.startDate, this.data.endDate);
+      // this.getIncomeData(this.data.startDate, this.data.endDate);
       this.getDigestlist(this.data.status, this.data.startDate, this.data.endDate, this.data.typeStatus);
     },
 
@@ -76,10 +77,11 @@ Page({
       let index = e.currentTarget.dataset.index;
       this.setData({ 
         curActiveIndex: index,
+        pageNo: 1,
         status: e.currentTarget.dataset.status,
         orderIncomelist: []
       });
-      this.getIncomeData(this.data.startDate, this.data.endDate);
+      // this.getIncomeData(this.data.startDate, this.data.endDate);
       this.getDigestlist(this.data.status, this.data.startDate, this.data.endDate, this.data.typeStatus);
     },
 

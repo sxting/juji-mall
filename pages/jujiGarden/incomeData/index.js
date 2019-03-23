@@ -169,8 +169,8 @@ Page({
         })
     },
     toDetail:function(e){
-      let id = e.currentTarget.dataset.id;
-      wx.navigateTo({ url: '../orderDetail/orderDetail?orderNo='+id });
+      // let id = e.currentTarget.dataset.id;
+      // wx.navigateTo({ url: '../orderDetail/orderDetail?orderNo='+id });
     },
 });
 

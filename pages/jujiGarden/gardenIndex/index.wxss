@@ -303,3 +303,14 @@
 .placeholder {
   color: #85460d;
 }
+.invent-btn-box{
+  position: relative
+}
+.invent-btn-box .share-btn{
+  position: absolute;
+  width: 690rpx;
+  height: 140rpx;
+  padding: 0!important;
+  background-color: rgba(0, 0, 0, 0);
+  opacity: 1!important;
+}

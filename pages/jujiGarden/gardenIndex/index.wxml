@@ -49,7 +49,7 @@
         </view>
     </view>
 
-    <!-- 桔长进入-->
+    <!-- 桔长进入 -->
     <view class="page" wx:if="{{role == 'LEADER' && isAuthed}}">
         <view class="toper">
             <image class="udb topBg" src="../../../images/topBg.png" mode="scaleToFill"></image>
@@ -90,8 +90,9 @@
                 </view>
             </view>
         </view>
-        <view class="udb plr15" style="margin-top:20rpx;" bindtap="onShareAppMessage">
-            <image class="banner" src="../../../images/banner.png" mode="widthFix"></image>
+        <view class="udb plr15 invent-btn-box" style="margin-top:20rpx;">
+          <button class="share-btn" open-type="share"></button>
+          <image class="banner" src="/images/banner.png" mode="widthFix"></image>
         </view>
         <view style="margin-top:20rpx;" class="menu ub">
             <view class="ub-f1 ub ub-ver ub-ac ub-pc" bindtap="toPage" data-page="/pages/jujiGarden/recommend/index">

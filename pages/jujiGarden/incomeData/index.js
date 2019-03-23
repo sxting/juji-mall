@@ -5,8 +5,7 @@ var app = getApp();
 Page({
     data: {
       tablist: [{ name: '本日', type: '1' }, { name: '本周', type: '2' }, { name: '本月', type: '3' }, { name: '累计', type: '4' }],
-
-      statuslist: [{ name: '全部', status: '' }, { name: '管理佣金', status: 'DISTRIBUTOR_MANAGER_REBATE' }, { name: '购物返利', type: 'DISTRIBUTOR_SALES_REBATE' }],
+      statuslist: [{ name: '全部', status: '' }, { name: '管理佣金', status: 'DISTRIBUTOR_MANAGER_REBATE' }, { name: '购物返利', status: 'DISTRIBUTOR_SALES_REBATE' }],
       curTabIndex: 0,
       curActiveIndex:1,
       constant: constant,
@@ -59,14 +58,15 @@ Page({
     },
 
     toggleLabel:function(e){
-        let index = e.currentTarget.dataset.index;
-        let type = e.currentTarget.dataset.status;
-        this.setData({ 
-          sortIndex: index,
-          typeStatus: type
-        });
-        this.getIncomeData(this.data.startDate, this.data.endDate);
-        this.getDigestlist(this.data.status, this.data.startDate, this.data.endDate, this.data.typeStatus);
+      let index = e.currentTarget.dataset.index;
+      let type = e.currentTarget.dataset.status;
+      console.log(e.currentTarget.dataset.status);
+      this.setData({ 
+        sortIndex: index,
+        typeStatus: type
+      });
+      this.getIncomeData(this.data.startDate, this.data.endDate);
+      this.getDigestlist(this.data.status, this.data.startDate, this.data.endDate, this.data.typeStatus);
     },
 
     switchActive:function(e){

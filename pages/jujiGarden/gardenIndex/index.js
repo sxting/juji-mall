@@ -174,8 +174,17 @@ Page({
       jugardenService.bindWechatInfor(data).subscribe({
         next: res => {
           if (res) {
-            this.setData({ switchFun: false });
-            getGardenInfor.call(self);//获取用户信息
+            this.setData({
+              role: res.role,
+              switchFun: false,
+              todaySaleRebate: res.todaySaleRebate ? res.todaySaleRebate : 0,
+              todaySettlementAmount: res.todaySettlementAmount ? res.todaySettlementAmount : 0,
+              totalSettlementAmount: res.totalSettlementAmount ? res.totalSettlementAmount : 0,
+              invitedLeaderCount: res.invitedLeaderCount ? res.invitedLeaderCount : 0,
+              invitedMemberCount: res.invitedMemberCount ? res.invitedMemberCount : 0,
+              isAuthed: res.hasReceiver == true ? true : false,
+              applyLeader: res.applyLeader,
+            })
           }
         },
         error: err => errDialog(err),
@@ -216,7 +225,7 @@ function getGardenInfor(){
     next: res => {
       if (res) {
         console.log(res);
-        conosle.log('进入查询用户信息拉');
+        console.log('进入查询用户信息拉');
         if (res.role == 'MEMBER') {// 1、邀请进来的是桔民 return 2、邀请进来的是其他的 加入桔园 applyLeader=false;
           this.data.juminNumList = [];
           this.data.hadNumber = parseInt(res.invitedLeaderCount) + parseInt(res.invitedMemberCount);

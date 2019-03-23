@@ -90,7 +90,7 @@
                 </view>
             </view>
         </view>
-        <view class="udb plr15" style="margin-top:20rpx;" bindtap="toPage" data-page="/pages/jujiGarden/gardenHome/gardenHome">
+        <view class="udb plr15" style="margin-top:20rpx;" bindtap="onShareAppMessage">
             <image class="banner" src="../../../images/banner.png" mode="widthFix"></image>
         </view>
         <view style="margin-top:20rpx;" class="menu ub">

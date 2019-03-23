@@ -72,6 +72,7 @@ function getPersonListInfor() {
     next: res => {
       if (res) {
         console.log(res.length);
+        console.log(res);
         self.setData({
           userlistInfor: this.data.userlistInfor.concat(res),
           ifBottom: res.length == 0? true : false

@@ -15,13 +15,13 @@
     </view>
     <view class="main ub-f1 p10">
       <scroll-view scroll-y style='height: 950rpx' bindscrolltolower="scrolltolower" wx:if='{{userlistInfor.length != 0}}'>
-        <view class="item ub" wx:for="{{userlistInfor}}"  wx:key="list">
-          <image class="userImg udb" src="{{list.avatar? list.avatar : '/images/pinglunuser.png'}}"></image>
+        <view class="item ub" wx:for="{{userlistInfor}}" wx:key='item'>
+          <image class="userImg udb" src="{{item.avatar? item.avatar : '/images/pinglunuser.png'}}"></image>
           <view class="ub-f1" style="position:realtive">
-            <view class="name">{{list.nickName}}</view>
-            <view class="remark">拥有桔民：{{list.invitedMemberCount}}人</view>
-            <view class="income"><text>购物返利：{{list.saleRebate/100}}元</text><text class="r">管理佣金：{{list.manageRebate/100}}元</text></view>
-            <view class="time">接受邀请时间：{{list.joinedDate}}</view>
+            <view class="name">{{item.nickName}}</view>
+            <view class="remark">拥有桔民：{{item.invitedMemberCount}}人</view>
+            <view class="income"><text>购物返利：{{item.saleRebate/100}}元</text><text class="r">管理佣金：{{item.manageRebate/100}}元</text></view>
+            <view class="time">接受邀请时间：{{item.joinedDate}}</view>
           </view>
         </view>
       </scroll-view>

@@ -256,7 +256,7 @@ Page({
   },
   toPro:function(e){
     wx.navigateTo({
-      url: '/pages/jujiGarden/recommend/index?productId='+e.currentTarget.dataset.id
+      url: '/pages/jujiGarden/recommend/index?productid='+e.currentTarget.dataset.id
     });
   },
   callPhone: function () {

@@ -120,8 +120,8 @@ Page({
               console.log(res);
               let settlementSaleMoney = 0;
               let saleMoney = 0;
-              settlementSaleMoney = parseFloat(res.settlementManageRebate) + parseFloat(res.settlementSaleRebate)/100;
-              saleMoney = parseFloat(res.manageRebate) + parseFloat(res.saleRebate) / 100;
+              settlementSaleMoney = (parseFloat(res.settlementManageRebate) + parseFloat(res.settlementSaleRebate))/100;
+              saleMoney = (parseFloat(res.manageRebate) + parseFloat(res.saleRebate)) / 100;
               this.setData({ 
                 incomeData: res,
                 settlementSaleMoney: settlementSaleMoney,

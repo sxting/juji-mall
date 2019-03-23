@@ -210,9 +210,9 @@
             <image src="../../images/fenxiang.png" style="width:40rpx;height:40rpx;" open-type="share"></image>
             <view class="home">分享</view>
         </button>
-        <form bindsubmit="collectFormIds" report-submit="true" wx:if="{{!productInfo.distributor}}">
+        <form bindsubmit="collectFormIds" report-submit="true" wx:if="{{productInfo.distributor}}">
           <view class="proBtns ub ub-ac">
-            <view class="ub-f1 ub ub-ver ub-ac ub-pc l" bindtap="toGetPoint">
+            <view class="ub-f1 ub ub-ver ub-ac ub-pc l" bindtap="toBuy">
               <text class="txt1">购买</text>
               <text class="txt2">返3.00元</text>
             </view>

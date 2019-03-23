@@ -790,7 +790,7 @@ Page({
   },
   toPro:function(e){
     wx.navigateTo({
-      url: 'pages/jujiGarden/recommend/index?productId='+e.currentTarget.dataset.id
+      url: '/pages/jujiGarden/recommend/index?productId='+e.currentTarget.dataset.id
     });
   },
   //上拉加载

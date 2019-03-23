@@ -59,11 +59,6 @@
         "pagePath": "pages/index/index",
         "iconPath": "images/mall.png",
         "selectedIconPath": "images/mall_selected.png"
-      },{
-        "text": "桔园",
-        "pagePath": "pages/jujiGarden/gardenIndex/index",
-        "iconPath": "images/mall.png",
-        "selectedIconPath": "images/mall_selected.png"
       },
       {
         "text": "桔园",

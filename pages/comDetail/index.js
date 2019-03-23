@@ -236,9 +236,27 @@ Page({
       });
     }
   },
+  toBuy:function(){
+    if(this.data.productInfo.type=='PRODUCT'&&this.data.productInfo.point>0&&this.data.productInfo.price>0){
+      if(this.data.productInfo.price>0&&this.data.pointBalance>=this.data.productInfo.point){
+        this.toCreateOrder();
+      }else{
+        this.toGetPoint();
+      }
+    }
+    if(this.data.productInfo.type=='PRODUCT'&&this.data.productInfo.point==0&&this.data.productInfo.price>0){
+      this.toCreateOrderByRmb();
+    }
+    if(this.data.productInfo.type=='POINT'){
+      this.toCreateOrderByPoint();
+    }
+    if(this.data.pointBalance<this.data.productInfo.point||!this.data.pointBalance){
+      this.toGetPoint();
+    }
+  },
   toPro:function(e){
     wx.navigateTo({
-      url: 'pages/jujiGarden/recommend/index?productId='+e.currentTarget.dataset.id
+      url: '/pages/jujiGarden/recommend/index?productId='+e.currentTarget.dataset.id
     });
   },
   callPhone: function () {
@@ -471,9 +489,6 @@ Page({
                     var price2 = Number(info.originalPrice / 100).toFixed(2) + '元';
                     this.drawImage(name,'',price1,price2,info.soldNum);//参数依次是storeName,desc,现价,原价,销量
                     this.setData({isShowModal:false});
-                    setTimeout(()=>{
-                      this.setData({isHiddenClose:true});
-                    },1500)            
                 }else{
                   wx.hideLoading();
                 }
@@ -500,10 +515,10 @@ Page({
       context.fillText(name, 20, 210);
       context.stroke();
 
-      context.setFontSize(13);
-      context.setTextAlign("center");
+      context.setFontSize(15);
+      context.setTextAlign("left");
       context.setFillStyle("#000");
-      context.fillText("“桔”美好生活，集好店优惠", 128, 68);
+      context.fillText("“桔”美好生活，集好店优惠", 40, 35);
       context.stroke();
   },
   setText2: function(context,price1,price2) {
@@ -548,8 +563,8 @@ Page({
       var size = this.setCanvasSize();
       var context = wx.createCanvasContext('myCanvas');
       context.drawImage(this.data.shareBg, 0, 0, size.w, size.h); //宽度70，居中，距离上15
-      context.drawImage("../../images/logo.png", size.w/2-14, 15, 28,30); //宽度70，居中，距离上15
-      context.drawImage(this.data.headImg, 10, 82, size.w - 20,140); //宽度70，居中，距离上15
+      context.drawImage("../../images/logo.png", 20, 18, 20, 21); //宽度70，居中，距离上15
+      context.drawImage(this.data.headImg, 10, 52, size.w - 20,138); //宽度70，居中，距离上15
       rectPath(context, 10, 190, size.w-20, 219);
       context.drawImage(this.data.erwmImg, size.w/2 - 40, 292.5, 80, 80); //二维码，宽度100，居中
       this.setTitle(context,name);
@@ -575,7 +590,7 @@ Page({
                           wx.authorize({
                               scope: 'scope.writePhotosAlbum',
                               success() {
-                                  that.saveAsPhoto(res1.tempFilePath);
+                                  that.saveAsPhoto(res1.tempFilePath,type);
                               },
                               fail() {
                                   wx.openSetting({

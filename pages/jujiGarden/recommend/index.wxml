@@ -19,7 +19,7 @@
         <image class="wxIcon" src="../../../images/icon_02.png" mode="aspectFit"></image>
         保存素材
       </view>
-      <view class="ub-f1 ub ub-ac" catchtap='shareToCircle' data-productid="{{item.productId}}" data-img="{{item.imageIds[0]}}" data-sceneid="{{item.sceneId}}">
+      <view class="ub-f1 ub ub-ac" catchtap='shareToCircle' data-productid="{{item.productId}}" data-img="{{item.imageIds[0]}}" data-sceneid="{{item.scenePicId}}">
         <image class="wxIcon" src="../../../images/icon_01.png" mode="aspectFit"></image>
         生成图文
       </view>
@@ -28,7 +28,7 @@
         <button class="btn ub ub-pc ub-ac" open-type="share" data-img="{{item.imageIds[0]}}">
           <image class="wxIcon" src="../../../images/icon_04.png" mode="aspectFit"></image>
         </button>
-        <button class="btn ub ub-pc ub-ac" catchtap='shareToCircle' data-productid="{{item.productId}}" data-sceneid="{{item.sceneId}}">
+        <button class="btn ub ub-pc ub-ac" catchtap='shareToCircle' data-productid="{{item.productId}}" data-sceneid="{{item.scenePicId}}">
           <image class="wxIcon" src="../../../images/icon_03.png" mode="aspectFit"></image>
         </button>
       </view>

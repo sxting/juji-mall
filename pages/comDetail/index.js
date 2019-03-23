@@ -639,7 +639,6 @@ Page({
   }
 });
 
-
 function rectPath(ctx, x, y, w, h) {
     ctx.beginPath();
     ctx.setFillStyle('#ffffff');

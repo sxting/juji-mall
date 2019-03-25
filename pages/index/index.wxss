@@ -92,7 +92,7 @@ swiper{display:block;width:100%;height:340rpx;box-sizing:border-box;overflow:hid
 .buyBtn1,.proBtn1{background-color: #E83221;border-radius:6rpx;color:#ffffff;margin-left: 20rpx;}
 .xIcon{transition:all 0.3 ease;}
 .rotate{transform:rotate(180deg);}
-.newerGetModalWrap{position:fixed;top:0;left:0;right:0;bottom:0;width:100%;height:100%;background:rgba(0,0,0,0.5);}
+.newerGetModalWrap{position:fixed;top:0;left:0;right:0;bottom:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index: 999999999;}
 .newerGetModal{width:680rpx;height:735rpx;position:absolute;top:50%;left:50%;margin-top:-367rpx;margin-left:-320rpx;}
 .newerGetBtn{width:424rpx;height:83rpx;position:absolute;bottom:110rpx;left:50%;margin-left:-232rpx;}
 .newerGetClose{width:60rpx;height:60rpx;position:absolute;bottom:-50rpx;left:50%;margin-left:-50rpx;}

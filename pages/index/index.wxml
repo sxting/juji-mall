@@ -111,13 +111,13 @@
           <image src="{{sortIndex==4?'../../images/label_xl_active.png':'../../images/label_xl.png'}}" style="width:15rpx;height:16rpx;margin-left:10rpx;"></image>
         </view>
       </view>
-      <view class="jingxuanlist" wx:for="{{recommendPage}}" wx:key="unique" bindtap="toComDetail" data-id="{{item.productId}}" data-storeid="{{item.nearStore.id}}">
-        <image class="productImg" lazy-load="true" src="https://upic.juniuo.com/file/picture/{{item.picId}}/resize_690_387/mode_fill"  mode="widthFix"></image>
+      <view class="jingxuanlist" wx:for="{{recommendPage}}" wx:key="unique">
+        <image class="productImg" bindtap="toComDetail" data-id="{{item.productId}}" data-storeid="{{item.nearStore.id}}" lazy-load="true" src="https://upic.juniuo.com/file/picture/{{item.picId}}/resize_690_387/mode_fill" mode="widthFix"></image>
         <view class="dis-wrap jc-sb">
           <view class="from">{{item.merchantName}}</view>
           <view class="dis">距你{{filter.toDis(item.nearDist)}}km</view>
         </view>
-        <view class="pro-name" style="margin-top:8rpx">{{item.productName}}</view>
+        <view class="pro-name" bindtap="toComDetail" data-id="{{item.productId}}" data-storeid="{{item.nearStore.id}}" style="margin-top:8rpx">{{item.productName}}</view>
         <view class="price-wrap jc-sb">
           <view class="p-wrap">
             <view class="now-price" wx:if="{{item.point>0}}">{{item.point}}桔子</view>
@@ -135,8 +135,10 @@
             <image src="../../images/soldCount.png" style="width:24rpx;height: 22rpx;"></image>
             <text class="count">已售{{item.soldNum}}件</text>
           </view>
-          <button class="buyBtn">购买</button>
-          <button class="proBtn" wx:if="{{item.distributor}}">推广</button>
+          <button class="ctrlbtn sharBtn" wx:if="{{!item.distributor}}" bindtap="toComDetailAndShare" data-id="{{item.productId}}" data-storeid="{{item.nearStore.id}}">分享</button>
+          <button class="ctrlbtn buyBtn1" wx:if="{{!item.distributor}}" bindtap="toComDetail" data-id="{{item.productId}}" data-storeid="{{item.nearStore.id}}">购买</button>
+          <button class="ctrlbtn buyBtn2" wx:if="{{item.distributor}}" bindtap="toComDetail" data-id="{{item.productId}}" data-storeid="{{item.nearStore.id}}">购买</button>
+          <button class="ctrlbtn proBtn1" wx:if="{{item.distributor}}" bindtap="toPro" data-id="{{item.productId}}">推广</button>
         </view>
       </view>
     </view>

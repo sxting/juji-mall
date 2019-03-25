@@ -87,9 +87,9 @@ swiper{display:block;width:100%;height:340rpx;box-sizing:border-box;overflow:hid
 .proDiv{margin-left: 16rpx;border-radius: 6rpx;overflow: hidden;}
 .proDiv .l{padding: 3rpx 10rpx;background: #444444;font-size: 20rpx;color: #FED901;}
 .proDiv .r{padding: 3rpx 10rpx;font-size: 20rpx;color: #000000;background-image: linear-gradient(-269deg, #FCBF0A 0%, #FFDC00 100%);}
-
-.buyBtn{width:106rpx;height:50rpx;border:2rpx solid #E83221;border-radius:6rpx;font-size:26rpx;color:#E83221;display:flex;align-items:center;justify-content:center;margin:0;padding:0;box-sizing:border-box;background:#fff;}
-.proBtn{width:106rpx;height:50rpx;background-color: #E83221;border-radius:6rpx;font-size:26rpx;color:#ffffff;display:flex;align-items:center;justify-content:center;margin:0;padding:0;box-sizing:border-box;margin-left: 20rpx;}
+.ctrlbtn{width:106rpx;height:50rpx;font-size:26rpx;display:flex;align-items:center;justify-content:center;padding:0;box-sizing:border-box;}
+.sharBtn,.buyBtn2{border:2rpx solid #E83221;border-radius:6rpx;color:#E83221;background:#fff;}
+.buyBtn1,.proBtn1{background-color: #E83221;border-radius:6rpx;color:#ffffff;margin-left: 20rpx;}
 .xIcon{transition:all 0.3 ease;}
 .rotate{transform:rotate(180deg);}
 .newerGetModalWrap{position:fixed;top:0;left:0;right:0;bottom:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index: 999999999;}

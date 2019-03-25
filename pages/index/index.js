@@ -752,7 +752,14 @@ Page({
     var storeid = e.currentTarget.dataset.storeid;
     console.log(id);
     wx.navigateTo({
-      url: '/pages/comDetail/index?id=' + id + '&storeid=' + storeid
+      url: '/pages/comDetail/index?share=0&id=' + id + '&storeid=' + storeid
+    });
+  },
+  toComDetailAndShare:function(e){
+    var id = e.currentTarget.dataset.id;
+    var storeid = e.currentTarget.dataset.storeid;
+    wx.navigateTo({
+      url: '/pages/comDetail/index?share=1&id=' + id + '&storeid=' + storeid
     });
   },
   //切换筛选的升序和降序

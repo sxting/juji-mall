@@ -53,16 +53,11 @@ Page({
     },
     onShareAppMessage: function(res) {
         if (res.from === 'button') {
+            this.closeModal();
             return {
                 title: JSON.parse(wx.getStorageSync('userinfo')).nickName + '分享给您一个心动商品，快来一起体验吧！',
                 path: '/pages/comDetail/index?id=' + this.data.productId + '&storeid=&sceneid='+this.data.sceneId,
-                imageUrl: constant.basePicUrl + this.data.productInfo.picId + '/resize_360_360/mode_fill',
-                success: (res) => {
-                    this.closeModal();
-                },
-                fail: (res) => {
-                    this.closeModal();
-                }
+                imageUrl: constant.basePicUrl + this.data.productInfo.picId + '/resize_360_360/mode_fill'
             }
         }
     },
@@ -190,7 +185,7 @@ Page({
                         }
                         var price1 = juzi + Number(info.price / 100).toFixed(2) + '元';
                     }
-                    var name = info.productName.substring(0, 15);
+                    var name = info.productName.substring(0, 19);
                     var price2 = Number(info.originalPrice / 100).toFixed(2) + '元';
                     this.drawImage(name, '', price1, price2, info.soldNum); //参数依次是storeName,desc,现价,原价,销量
                     this.setData({ isShowModal: false });
@@ -216,7 +211,7 @@ Page({
         context.setFontSize(15);
         context.setTextAlign("left");
         context.setFillStyle("#000");
-        context.fillText("“桔”美好生活，集好店优惠", 45, 35);
+        context.fillText("“桔”美好生活，集好店优惠", 48, 35);
         context.stroke();
     },
     setText2: function(context, price1, price2) {
@@ -264,6 +259,15 @@ Page({
         context.drawImage("../../../images/logo.png", 20, 18, 20, 21); //宽度70，居中，距离上15
         context.drawImage(this.data.headImg, 10, 52, size.w - 20, 138); //宽度70，居中，距离上15
         rectPath(context, 10, 190, size.w-20, 219);
+
+        context.beginPath();
+        context.setLineCap('round');
+        context.setStrokeStyle('#FFDC00');
+        context.setLineWidth(18);
+        context.moveTo(87, 389);
+        context.lineTo(170, 389);
+        context.stroke();
+
         context.drawImage(this.data.erwmImg, size.w / 2 - 40, 292.5, 80, 80); //二维码，宽度100，居中
         this.setTitle(context, name);
         context.drawImage("../../../images/price.png", 20, 224, 30, 13); //宽度70，居中，距离上15

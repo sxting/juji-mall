@@ -501,7 +501,7 @@ Page({
                       }
                       var price1 = juzi + Number(info.price / 100).toFixed(2)+'元';
                     }
-                    var name = info.productName.substring(0,15);
+                    var name = info.productName.substring(0,19);
                     var price2 = Number(info.originalPrice / 100).toFixed(2) + '元';
                     this.drawImage(name,'',price1,price2,info.soldNum);//参数依次是storeName,desc,现价,原价,销量
                     this.setData({isShowModal:false});
@@ -600,7 +600,6 @@ Page({
       drawDashLine(context, 15, 280, size.w-15, 280, 4);//横向虚线
       this.setText2(context,price1,price2);
       this.setText3(context,amount);
-
 
       this.setText4(context);
       context.draw();

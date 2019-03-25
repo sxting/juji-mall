@@ -262,24 +262,6 @@ function getGardenInfor(){
             backgroundColor: '#FFDC00', // 必写项
           })
         }
-
-        this.data.juminNumList = [];
-        this.data.hadNumber = parseInt(res.invitedLeaderCount) + parseInt(res.invitedMemberCount);
-        if (this.data.hadNumber > 0) {
-          for (let i = 0; i < this.data.hadNumber; i++) {
-            let list = 'yes';
-            this.data.juminNumList.push(list);
-          }
-          for (let j = 0; j < (res.minInvitedMemberCount - parseInt(this.data.hadNumber)); j++) {
-            this.data.juminNumList.push('');
-          }
-        } else {
-          for (let j = 0; j < res.minInvitedMemberCount; j++) {
-            this.data.juminNumList.push('');
-          }
-        }
-
-        
         this.setData({
           role: res.role,
           juminNumList: this.data.juminNumList,

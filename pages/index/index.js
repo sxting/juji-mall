@@ -38,6 +38,79 @@ Page({
       "dateCreated": "2019-01-23 18:31:25",
       "lastUpdated": "2019-01-23 18:31:25",
       "deleted": 0,
+      "locationCode": "110000",
+      "locationName": "北京",
+      "locationType": "PROVINCE",
+      "parentLocationCode": "0",
+      "parentLocation": null,
+      "subList": [
+        {
+          "version": 0,
+          "dateCreated": "2019-01-23 18:31:25",
+          "lastUpdated": "2019-01-23 18:31:25",
+          "deleted": 0,
+          "locationCode": "110100",
+          "locationName": "北京市",
+          "locationType": "CITY",
+          "parentLocationCode": "110000",
+          "parentLocation": null,
+          "subList": [
+            {
+              "version": 0,
+              "dateCreated": "2019-01-23 18:31:25",
+              "lastUpdated": "2019-01-23 18:31:25",
+              "deleted": 0,
+              "locationCode": "110101",
+              "locationName": "东城区",
+              "locationType": "DISTRICT",
+              "parentLocationCode": "110100",
+              "parentLocation": null,
+              "subList": null
+            },
+            {
+              "version": 0,
+              "dateCreated": "2019-01-23 18:31:25",
+              "lastUpdated": "2019-01-23 18:31:25",
+              "deleted": 0,
+              "locationCode": "110105",
+              "locationName": "朝阳区",
+              "locationType": "DISTRICT",
+              "parentLocationCode": "110100",
+              "parentLocation": null,
+              "subList": null
+            },
+            {
+              "version": 0,
+              "dateCreated": "2019-01-23 18:31:25",
+              "lastUpdated": "2019-01-23 18:31:25",
+              "deleted": 0,
+              "locationCode": "110108",
+              "locationName": "海淀区",
+              "locationType": "DISTRICT",
+              "parentLocationCode": "110100",
+              "parentLocation": null,
+              "subList": null
+            },
+            {
+              "version": 0,
+              "dateCreated": "2019-01-23 18:31:25",
+              "lastUpdated": "2019-01-23 18:31:25",
+              "deleted": 0,
+              "locationCode": "110114",
+              "locationName": "昌平区",
+              "locationType": "DISTRICT",
+              "parentLocationCode": "110100",
+              "parentLocation": null,
+              "subList": null
+            }
+          ]
+        }
+      ]
+    },{
+      "version": 0,
+      "dateCreated": "2019-01-23 18:31:25",
+      "lastUpdated": "2019-01-23 18:31:25",
+      "deleted": 0,
       "locationCode": "410000",
       "locationName": "河南省",
       "locationType": "PROVINCE",

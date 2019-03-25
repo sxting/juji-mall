@@ -39,7 +39,6 @@ Page({
       if (option.scene) {
         let scene = decodeURIComponent(option.scene);
         this.setData({sceneId: scene});
-
         wx.request({
           url: constant.apiUrl + '/qr/getBySceneId.json?sceneId='+scene,
           method: 'GET',
@@ -535,7 +534,7 @@ Page({
       context.setFontSize(15);
       context.setTextAlign("left");
       context.setFillStyle("#000");
-      context.fillText("“桔”美好生活，集好店优惠", 45, 35);
+      context.fillText("“桔”美好生活，集好店优惠", 48, 35);
       context.stroke();
   },
   setText2: function(context,price1,price2) {
@@ -583,6 +582,15 @@ Page({
       context.drawImage("../../images/logo.png", 20, 18, 20, 21); //宽度70，居中，距离上15
       context.drawImage(this.data.headImg, 10, 52, size.w - 20,138); //宽度70，居中，距离上15
       rectPath(context, 10, 190, size.w-20, 219);
+
+      context.beginPath();
+      context.setLineCap('round');
+      context.setStrokeStyle('#FFDC00');
+      context.setLineWidth(18);
+      context.moveTo(87, 389);
+      context.lineTo(170, 389);
+      context.stroke();
+
       context.drawImage(this.data.erwmImg, size.w/2 - 40, 292.5, 80, 80); //二维码，宽度100，居中
       this.setTitle(context,name);
       context.drawImage("../../images/price.png", 20, 224, 30,13); //宽度70，居中，距离上15
@@ -592,6 +600,8 @@ Page({
       drawDashLine(context, 15, 280, size.w-15, 280, 4);//横向虚线
       this.setText2(context,price1,price2);
       this.setText3(context,amount);
+
+
       this.setText4(context);
       context.draw();
   },

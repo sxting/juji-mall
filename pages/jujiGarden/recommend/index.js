@@ -59,6 +59,9 @@ Page({
                 imageUrl: constant.basePicUrl + this.data.productInfo.picId + '/resize_360_360/mode_fill',
                 success: (res) => {
                     this.closeModal();
+                },
+                fail: (res) => {
+                    this.closeModal();
                 }
             }
         }
@@ -319,8 +322,10 @@ Page({
                 this.closeModal();
                 if (type == 1) {
                     wx.showToast({title: "已保存至相册",icon: "success"});
+                    this.closeModal();
                 } else {
                     errDialog('图文海报已保存到微信本地相册');
+                    this.closeModal();
                 }
             },
             fail: function(res) {

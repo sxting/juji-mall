@@ -10,41 +10,6 @@
         </view>
     </view>
 
-    <!-- 普通用户进入 1、普通用户 从没申请  2、桔民 从没申请过
-    <view class="wrap page-content new-page-1" wx:if="{{role == 'MEMBER' && applyLeader}}">
-      <view class='group-title-box'>
-        <view class='btn-manger' bindtap="toPage" data-page="/pages/jujiGarden/managerRights/managerRights">桔长权益</view>
-
-       </view>
-      <image src='/images/group-start.png' class='group-title' style='height: 296rpx'></image>
-      <view class='btn-new-person-box'>
-        <view class='btn-new-person'>
-          <view class='btn-box-invent'>
-              <image src='/images/sure-btn.png' class='sure-btn'></image>
-              <button class="share-btn" open-type="share">申请成为桔长</button>
-            </view>
-          <view class='list-box'>
-            <view class='list-infortext'>
-              <image src='/images/invent-icon.png' class='icon-type'></image>
-              <image src='/images/01-one.png' class='icon-num'></image>
-              <text class='text-detail'>邀请{{minInvitedMemberCount}}名新人入队</text>
-            </view>
-            <view class='list-infortext'>
-              <image src='/images/right-icon.png' class='icon-type'></image>
-              <image src='/images/02-two.png' class='icon-num'></image>
-              <text class='text-detail'>获得桔长资格</text>
-            </view>
-            <view class='list-infortext'>
-              <image src='/images/sale-money-icon.png' class='icon-type'></image>
-              <image src='/images/03-three.png' class='icon-num'></image>
-              <text class='text-detail'>推广商品最高得40%返利</text>
-            </view>
-          </view>
-        </view>
-      </view>
-      <image src='/images/group-bottom.png' class='group-bottom'></image>
-    </view> -->
-
     <!-- 桔员进入 桔民 申请过-->
     <view class="wrap page-content new-page-2" wx:if="{{role == 'MEMBER' && applyLeader}}">
       <view class='group-title-box'>
@@ -56,7 +21,7 @@
                     <text style='font-weight:bold;'>我的队伍 </text>
                     <text class='num'><text style='color:#F35308'>{{ hadNumber }}</text>/{{minInvitedMemberCount}}</text>
                   </view>
-                  <view class='fr'>
+                  <view class='fr' wx:if='{{hadNumber != 0}}'>
                       <text catchtap="toPage" data-page="/pages/jujiGarden/userInfor/userInfor" data-role='{{role}}'>查看桔民</text>
                       <text class='iconfont icon-right'></text>
                   </view>

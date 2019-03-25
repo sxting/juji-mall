@@ -138,7 +138,7 @@ Page({
                });
             },
             error: err => console.log(err),
-            complete: () => wx.hideLoading()
+            complete: () => wx.hideToast()
         })
     },
     closeModal: function() {
@@ -211,7 +211,7 @@ Page({
         context.setFontSize(15);
         context.setTextAlign("left");
         context.setFillStyle("#000");
-        context.fillText("“桔”美好生活，集好店优惠", 48, 35);
+        context.fillText("“桔”美好生活，集好店优惠", 52, 35);
         context.stroke();
     },
     setText2: function(context, price1, price2) {
@@ -239,7 +239,7 @@ Page({
         var size = this.setCanvasSize();
         context.setFontSize(11);
         context.setTextAlign("center");
-        context.setFillStyle("#666666");
+        context.setFillStyle("#333333");
         context.fillText("长按识别二维码", 128, 393);
         context.stroke();
     },
@@ -264,8 +264,8 @@ Page({
         context.setLineCap('round');
         context.setStrokeStyle('#FFDC00');
         context.setLineWidth(18);
-        context.moveTo(87, 389);
-        context.lineTo(170, 389);
+        context.moveTo(82, 389);
+        context.lineTo(175, 389);
         context.stroke();
 
         context.drawImage(this.data.erwmImg, size.w / 2 - 40, 292.5, 80, 80); //二维码，宽度100，居中
@@ -279,6 +279,7 @@ Page({
         this.setText3(context, amount);
         this.setText4(context);
         context.draw();
+        wx.hideLoading();
     },
     savePic: function(e) {
         var type = e.currentTarget.dataset['type'];

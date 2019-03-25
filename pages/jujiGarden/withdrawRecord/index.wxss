@@ -1,7 +1,7 @@
 .main{padding: 30rpx 30rpx 0;height: 100%;background-color: #fff;overflow-y:auto;box-sizing:border-box;}
-.toper{height: 360rpx;background-image: linear-gradient(-90deg, #FCBF0A 0%, #FFDC00 100%);border-radius: 20rpx;box-sizing:border-box;box-shadow: 0 0 30rpx 0 rgba(0,0,0,0.3);}
+.toper{height: 360rpx;background-image: linear-gradient(-90deg, #FCBF0A 0%, #FFDC00 100%);border-radius: 20rpx;box-sizing:border-box;box-shadow: 0 0 30rpx 0 rgba(255,220,0,0.9);}
 
-.balance{font-size: 60rpx;color: #000;text-align: left;}
+.balance{font-size: 60rpx;color: #000;text-align: left;font-weight: bold;}
 .remark1{color: #333;font-size: 24rpx;text-align: left;}
 
 .balancelist{width: 85%;margin-top: 20rpx}
@@ -11,7 +11,7 @@
 .balancelist view.c text{text-align: center;}
 .balancelist view.line{height: 50rpx;width: 1rpx;border-left:#666 2rpx solid;}
 .balancelist view.r text{text-align: right;}
-.balancelist view text.amount{font-size: 30rpx;color: #333333;margin-top: 10rpx;}
+.balancelist view text.amount{font-size: 30rpx;color: #333333;margin-top: 10rpx;font-weight: bold;}
 
 .remark2{margin-top: 30rpx;color: #333;font-size: 24rpx;line-height: 35rpx}
 .remark2 image{width: 24rpx;height: 24rpx;vertical-align:middle;display: inline-block;}

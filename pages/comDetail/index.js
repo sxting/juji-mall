@@ -485,7 +485,7 @@ Page({
 
   // 点击分享
   showShare:function(){
-    wx.showLoading({title: '生成图片...'});
+    wx.showLoading({title: '生成分享图片'});
     wx.downloadFile({
       url: constant.basePicUrl+this.data.productInfo.picId+'/resize_751_420/mode_fill',
       success: (res) => {

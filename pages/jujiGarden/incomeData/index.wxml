@@ -73,9 +73,9 @@
                     <view class="amount">+{{item.amount/100}}元</view>
                 </view>
             </view>
-            <view class="nodataDiv ub ub-ver ub-ac ub-pc" style="height:400rpx;padding-top:60rpx" wx:if='{{orderIncomelist.length == 0}}'>
+            <view class="nodataDiv ub ub-ver ub-ac ub-pc" wx:if='{{orderIncomelist.length == 0}}'>
               <image class="nodataImg" src="../../../images/null4.png" style="width:160rpx" mode="widthFix"></image>
-              <view class="nodataTxt" style="margin-top:30rpx;">暂无任何{{curActiveIndex==1?'销售收入':'提现金额'}}</view>
+              <view class="nodataTxt" style="margin-top:30rpx;font-size:28rpx;">暂无任何{{curActiveIndex==1?'销售收入':'提现金额'}}</view>
             </view>
         </view>
     </view>

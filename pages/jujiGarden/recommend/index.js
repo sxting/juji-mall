@@ -112,7 +112,7 @@ Page({
 
     // 分享朋友圈，生成图文
     shareToCircle: function(e) {
-        wx.showLoading({ title: '生成图片...' });
+        wx.showLoading({ title: '生成分享图片' });
         var productId = e.currentTarget.dataset.productid;
         this.setData({productId:productId});
         var imageId = e.currentTarget.dataset.img;

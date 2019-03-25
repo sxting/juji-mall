@@ -17,7 +17,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    if (wx.getStorageSync('accessToken')) {
+    if (wx.getStorageSync('openid')) {
       let payUrl = wx.getStorageSync('payUrl');
       if (payUrl) {
         this.setData({
@@ -66,8 +66,8 @@ Page({
 
     } else {
       wx.showModal({
-        title: '',
-        content: '未获取到accessToken',
+        title: '错误',
+        content: '未获取到openid',
       });
       this.setData({
         noCards: true

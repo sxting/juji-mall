@@ -14,9 +14,9 @@ Page({
   onLoad: function (options) {
     let self = this;
     this.setData({
-      digestId: options.transferId ? options.transferId : ''
+      transferId: options.transferId ? options.transferId : ''
     })
-    console.log(this.data.digestId);
+    console.log(this.data.transferId);
     wx.setNavigationBarTitle({ title: '提现详情' });
     getSettlementDetail.call(self);//get提现详情信息
   },

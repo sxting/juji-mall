@@ -22,7 +22,7 @@
                 <view class="amount">+{{ format.toFix(item.amount) }}</view>
                 <view class="time">{{ item.date }}</view>
             </view>
-            <view class="status">{{ item.statusText }}</view>
+            <view class="status {{item.status == 'PROCESSING'? 'process': item.status == 'CLOSED'? 'fail': ''}}">{{ item.statusText }}</view>
             <image src="../../../images/arrow-r.png" class="arrow-r"></image>
         </view>
         <view hidden="{{!isShowNodata}}" class="nodataDiv ub ub-ver ub-ac ub-pc" style="height:600rpx;">

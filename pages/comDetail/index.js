@@ -29,10 +29,13 @@ Page({
     sceneId:'',
     isShowNewerGet: false,
     lat:'',
-    lng:''
+    lng:'',
+    share:0,
   },
   onLoad: function(option) {
-    new app.ToastPannel();
+    if(option.share){
+      this.setData({share:option.share});
+    }
     wx.setNavigationBarTitle({title: '商品详情'});
     console.log(option);
     if (!option.id) {
@@ -393,6 +396,9 @@ Page({
             lat: res.store.lat,
             lng: res.store.lng
           });
+          if(that.data.share){
+            that.showShare();
+          }
         }).catch(function(err){
           that.setData({
             commentList: res.commentList,
@@ -407,6 +413,9 @@ Page({
             lat: res.store.lat,
             lng: res.store.lng
           });
+          if(that.data.share){
+            that.showShare();
+          }
         })
         
       },

@@ -761,7 +761,7 @@ Page({
     wx.navigateTo({
       url: '/pages/comDetail/index?share=1&id=' + id + '&storeid=' + storeid
     });
-  }
+  },
   //切换筛选的升序和降序
   toggleLabel: function(event) {
     let sortIndex = event.currentTarget.dataset['label'];

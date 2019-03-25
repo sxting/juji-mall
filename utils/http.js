@@ -57,7 +57,7 @@ function http_request(
           if (res.data.errorCode === '200') {
             return listener.next(res.data.data);
           } else {
-            if (res.data.errorCode === 'LOGIN_EXPIRE'){
+            if (res.data.errorCode === 'LOGIN_EXPIRE' || res.data.errorCode === 'token error'){
               console.log('调用重新登录');
 
               new Promise(function (resolve, reject) {

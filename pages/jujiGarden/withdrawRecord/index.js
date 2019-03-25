@@ -25,6 +25,7 @@ Page({
 
   // 到详情页面
   toPage: function (e) {
+    console.log(e.currentTarget.dataset.transferid);
     wx.navigateTo({
       url: `/pages/jujiGarden/withdrawDetail/index?transferId=` + e.currentTarget.dataset.transferid 
     });
@@ -45,28 +46,28 @@ function getSettlementList(){
         console.log(res);
         res.forEach(function(item){
           switch (item.status) {
-            case 'PENDING':
-              item.statusText = '待分账'; break;
-            case 'REFUNDING':
-              item.statusText = '退款中'; break;
-            case 'REFUNDED':
-              item.statusText = '已退款'; break;
-            case 'ACCEPTED':
-              item.statusText = '受理成功'; break;
+            // case 'PENDING':
+            //   item.statusText = '待分账'; break;
+            // case 'REFUNDING':
+            //   item.statusText = '退款中'; break;
+            // case 'REFUNDED':
+            //   item.statusText = '已退款'; break;
+            // case 'ACCEPTED':
+            //   item.statusText = '受理成功'; break;
             case 'PROCESSING':
               item.statusText = '处理中'; break;
-            case 'FINISHED':
-              item.statusText = '处理完成'; break;
+            // case 'FINISHED':
+            //   item.statusText = '处理完成'; break;
             case 'CLOSED':
-              item.statusText = '已关闭'; break;
+              item.statusText = '失败'; break;
             case 'SUCCESS':
-              item.statusText = '分账成功'; break;
-            case 'UNFREEZE':
-              item.statusText = '释放冻结资金'; break;
-            case 'ADJUST':
-              item.statusText = '分账失败'; break;
-            case 'RETURNED':
-              item.statusText = '已转回分账方';  
+              item.statusText = '成功'; break;
+            // case 'UNFREEZE':
+            //   item.statusText = '释放冻结资金'; break;
+            // case 'ADJUST':
+            //   item.statusText = '分账失败'; break;
+            // case 'RETURNED':
+            //   item.statusText = '已转回分账方';  
           }
         })
         self.setData({
@@ -89,11 +90,11 @@ function getCardData(){
       if (res) {
         console.log(res);
         let totalSettlementAmount = 0;
-        totalSettlementAmount = (res.failSettlementAmount + res.processingSettlementAmount + res.successSettlementAmount)/100;
+        totalSettlementAmount = res.failSettlementAmount + res.processingSettlementAmount + res.successSettlementAmount;
         self.setData({
-          failSettlementAmount: res.failSettlementAmount/100,
-          processingSettlementAmount: res.processingSettlementAmount/100,
-          successSettlementAmount: res.successSettlementAmount/100,
+          failSettlementAmount: res.failSettlementAmount,
+          processingSettlementAmount: res.processingSettlementAmount,
+          successSettlementAmount: res.successSettlementAmount,
           totalSettlementAmount: totalSettlementAmount
         })
       }

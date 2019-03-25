@@ -85,8 +85,8 @@ swiper{display:block;width:100%;height:340rpx;box-sizing:border-box;overflow:hid
 .count{font-size:24rpx;color:#999;margin-left:10rpx;}
 
 .proDiv{margin-left: 16rpx;border-radius: 6rpx;overflow: hidden;}
-.proDiv .l{padding: 3rpx 10rpx;background: #444444;font-size: 22rpx;color: #FED901;}
-.proDiv .r{padding: 3rpx 10rpx;font-size: 24rpx;color: #000000;background-image: linear-gradient(-269deg, #FCBF0A 0%, #FFDC00 100%);}
+.proDiv .l{padding: 3rpx 10rpx;background: #444444;font-size: 20rpx;color: #FED901;}
+.proDiv .r{padding: 3rpx 10rpx;font-size: 20rpx;color: #000000;background-image: linear-gradient(-269deg, #FCBF0A 0%, #FFDC00 100%);}
 
 .buyBtn{width:106rpx;height:50rpx;border:2rpx solid #E83221;border-radius:6rpx;font-size:26rpx;color:#E83221;display:flex;align-items:center;justify-content:center;margin:0;padding:0;box-sizing:border-box;background:#fff;}
 .proBtn{width:106rpx;height:50rpx;background-color: #E83221;border-radius:6rpx;font-size:26rpx;color:#ffffff;display:flex;align-items:center;justify-content:center;margin:0;padding:0;box-sizing:border-box;margin-left: 20rpx;}

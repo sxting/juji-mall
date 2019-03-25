@@ -30,7 +30,6 @@
           <view class="mtitle">桔子换礼</view>
           <view class="subtitle">让生活“换”然一新</view>
         </view>
-
         <view class="moreWrap" wx:if="{{locationName&&pointProductList.length>0}}" bindtap="toJuzihl">
           <view class="more">更多</view>
           <image src="../../images/arrow-right.png" style="width:10rpx;height:18rpx;"></image>
@@ -118,7 +117,7 @@
           <view class="from">{{item.merchantName}}</view>
           <view class="dis">距你{{filter.toDis(item.nearDist)}}km</view>
         </view>
-        <view class="pro-name">{{item.productName}}</view>
+        <view class="pro-name" style="margin-top:8rpx">{{item.productName}}</view>
         <view class="price-wrap jc-sb">
           <view class="p-wrap">
             <view class="now-price" wx:if="{{item.point>0}}">{{item.point}}桔子</view>
@@ -132,7 +131,7 @@
           </view>
         </view>
         <view class="ub ub-ac jc-sb" style="padding: 0 30rpx 30rpx 30rpx;">
-          <view class="ub ub-ac ub-f1">
+          <view class="ub ub-ac ub-f1" style="margin-top:20rpx">
             <image src="../../images/soldCount.png" style="width:24rpx;height: 22rpx;"></image>
             <text class="count">已售{{item.soldNum}}件</text>
           </view>

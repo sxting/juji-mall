@@ -61,6 +61,12 @@ Page({
                     this.setData({
                       isShowNewerGet: res2
                     });
+                    service.newerGet().subscribe({
+                      next: res3 => {
+                        console.log(res3);
+                        this.getPointBalance();
+                      }
+                    });
 
                   },
                   error: err => console.log(err)
@@ -122,6 +128,12 @@ Page({
             console.log(res2)
             this.setData({
               isShowNewerGet: res2
+            });
+            service.newerGet().subscribe({
+              next: res3 => {
+                console.log(res3);
+                this.getPointBalance();
+              }
             });
 
           },

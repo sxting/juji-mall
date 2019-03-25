@@ -14,6 +14,7 @@ Page({
     failSettlementAmount: 0,
     processingSettlementAmount: 0,
     successSettlementAmount: 0,
+    ifBottom: true,//返回空数组的话，已经到底部，返回不请求
   },
 
   onLoad: function() {
@@ -29,6 +30,19 @@ Page({
     wx.navigateTo({
       url: `/pages/jujiGarden/withdrawDetail/index?transferId=` + e.currentTarget.dataset.transferid 
     });
+  },
+
+  //上拉加载更多
+  scrolltolower: function () {
+    let self = this;
+    console.log(this.data.pageNo)
+    if (this.data.ifBottom) {
+      return;
+    }
+    this.setData({
+      pageNo: this.data.pageNo + 1
+    })
+    getSettlementList.call(self);//get提现摘要列表
   },
 
 });
@@ -71,7 +85,8 @@ function getSettlementList(){
           }
         })
         self.setData({
-          recordlist: res? res : []
+          recordlist: res ? this.data.recordlist.concat(res) : [],
+          ifBottom: res.length == 0 ? true : false
         });
         self.setData({isShowNodata:this.data.recordlist.length==0});
       }

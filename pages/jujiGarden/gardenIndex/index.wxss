@@ -179,13 +179,13 @@
   left: 50%;
   margin-left: -345rpx;
   font-family: "黑体";
-  font-size: 30rpx;
+  font-size: 28rpx;
   color: #6a3c12;
   text-align: center;
 }
 
 .progress-box {
-  margin-top: 25rpx;
+  margin-top: 50rpx;
   width: 540rpx;
   display: flex
 }
@@ -311,6 +311,109 @@
   width: 690rpx;
   height: 140rpx;
   padding: 0!important;
+  background-color: rgba(0, 0, 0, 0);
+  opacity: 1!important;
+}
+
+/* 新样式 */
+.page-content{
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+.new-page-1{
+    background-image: linear-gradient(180deg, #FDF4DE 0%, #FDD37F 100%);
+}
+.new-page-2{
+    background-image: linear-gradient(180deg, #FFEBB6 0%, #FDD37F 100%);
+}
+.new-page-3{
+    background-image: linear-gradient(180deg, #FDF4DE 0%, #FDD37F 100%);
+}
+.group-title-box{
+  padding:40rpx 30rpx 0 30rpx;
+  position: relative;
+}
+.group-title{
+  width: 100%;
+  height: 328rpx;
+}
+.group-gift{
+  position: absolute;
+  width: 100%;
+  height: 282rpx;
+  top: 175rpx;
+}
+.group-bottom{
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 180rpx;
+}
+.btn-new-person-box{
+  padding: 0 30rpx;
+  position: relative;
+  top: 120rpx;
+}
+.btn-new-person{
+  width: 100%;
+  height: 493rpx;
+  background: #FFFBF0;
+  box-shadow: 0 0 10rpx 0 #FCBE3E;
+  border-radius: 10rpx;
+}
+.list-box{
+  padding-top: 70rpx;
+}
+.list-box .list-infortext {
+  font-family: PingFangSC-Medium;
+  font-size: 30rpx;
+  color: #85460D;
+  text-align: left;
+  padding-left: 50rpx;
+  position: relative;
+  margin-bottom:40rpx;
+}
+.list-box .list-infortext:last-of-type{
+  margin-bottom: 0
+}
+.list-infortext .icon-type{
+  width: 92rpx;
+  height: 90rpx;
+}
+.list-infortext .icon-num{
+  width: 44rpx;
+  height: 29rpx;
+  margin:0 22rpx 0 32rpx;
+  position: absolute;
+  top: 40rpx;
+}
+.list-infortext .text-detail{
+  position: absolute;
+  left: 240rpx;
+  top: 32rpx;
+}
+.btn-box-invent{
+  position: absolute;
+  width: 460rpx;
+  height: 80rpx;
+  left: 50%;
+  margin-left: -230rpx;
+  top: -40rpx;
+}
+.btn-box-invent image{
+  width: 100%;
+  height: 100%;
+}
+.btn-box-invent .share-btn{
+  font-family: PingFangSC-Semibold;
+  font-size: 30rpx;
+  color: #FFFFFF;
+  text-align: center;
+  line-height: 80rpx;
+  position: absolute;
+  top: 0;
+  width: 100%;
   background-color: rgba(0, 0, 0, 0);
   opacity: 1!important;
 }

@@ -18,17 +18,6 @@ Page({
    */
   onLoad: function(options) {
     if (wx.getStorageSync('openid')) {
-      let payUrl = wx.getStorageSync('payUrl');
-      if (payUrl) {
-        this.setData({
-          payUrl: payUrl
-        });
-
-      } else {
-        this.setData({
-          payUrl: constant.jujipayUrl
-        });
-      }
       wx.request({
         url: this.data.payUrl + '/mini/getCardsByOpenid.json',
         method: 'GET',
@@ -55,6 +44,9 @@ Page({
               });
             }
           } else {
+            this.setData({
+              noCards: true
+            });
             wx.showModal({
               title: '错误：' + res.data.errorCode,
               content: res.data.errorInfo,

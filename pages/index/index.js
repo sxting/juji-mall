@@ -150,6 +150,12 @@ Page({
                     that.setData({
                       isShowNewerGet: true
                     });
+                    service.newerGet().subscribe({
+                      next: res3 => {
+                        console.log(res3);
+                        that.currentPoint();
+                      }
+                    });
                   }
 
                 },

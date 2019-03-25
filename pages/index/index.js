@@ -150,6 +150,12 @@ Page({
                     that.setData({
                       isShowNewerGet: true
                     });
+                    service.newerGet().subscribe({
+                      next: res3 => {
+                        console.log(res3);
+                        that.currentPoint();
+                      }
+                    });
                   }
 
                 },
@@ -643,11 +649,7 @@ Page({
           icon: 'none'
         });
         this.currentPoint();
-      },
-      error: err => wx.showToast({
-        title: err,
-        icon: 'none'
-      })
+      }
     });
   },
   //swiper滑动事件

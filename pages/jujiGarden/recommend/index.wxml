@@ -2,8 +2,9 @@
 <view class="main {{isShowModal?'':'ovh'}}">
   <view class="item" wx:for="{{recommendlist}}" wx:key="{{index}}" data-comid="{{item.id}}" hidden="{{isShowNodata}}">
     <view class="info ub ub-ac plr15">
-      <image class="userImg" src="{{item.editorAvatar}}"></image>
-      <view class="nickname">{{item.editorNickName}}</view>
+      <image class="userImg" src="{{constant.basePicUrl}}26LA8Gl7vnxL/resize_180_180/mode_fill"></image>
+      <!-- <view class="nickname">{{item.editorNickName}}</view> -->
+      <view class="nickname">桔集小编</view>
       <!-- <view class="ub-f1 txt">200次分享</view> -->
     </view>
     <view class="content plr15">
@@ -19,23 +20,23 @@
         <image class="wxIcon" src="../../../images/icon_02.png" mode="aspectFit"></image>
         保存素材
       </view>
-      <view class="ub-f1 ub ub-ac" catchtap='shareToCircle' data-productid="{{item.productId}}" data-img="{{item.imageIds[0]}}" data-sceneid="{{item.scenePicId}}">
+      <view class="ub-f1 ub ub-ac" catchtap='shareToCircle' data-productid="{{item.productId}}" data-img="{{item.imageIds[0]}}" data-sceneid="{{item.sceneId}}" data-scenepicid="{{item.scenePicId}}">
         <image class="wxIcon" src="../../../images/icon_01.png" mode="aspectFit"></image>
         生成图文
       </view>
       <view class="ub-f1 ub ub-ac">
         分享到
-        <button class="btn ub ub-pc ub-ac" catchtap='shareToCircle' data-productid="{{item.productId}}" data-img="{{item.imageIds[0]}}" data-sceneid="{{item.scenePicId}}">
+        <button class="btn ub ub-pc ub-ac" catchtap='shareToCircle' data-productid="{{item.productId}}" data-img="{{item.imageIds[0]}}" data-sceneid="{{item.sceneId}}" data-scenepicid="{{item.scenePicId}}">
           <image class="wxIcon" src="../../../images/icon_04.png" mode="aspectFit"></image>
         </button>
-        <button class="btn ub ub-pc ub-ac" catchtap='shareToCircle' data-productid="{{item.productId}}" data-img="{{item.imageIds[0]}}" data-sceneid="{{item.scenePicId}}">
+        <button class="btn ub ub-pc ub-ac" catchtap='shareToCircle' data-productid="{{item.productId}}" data-img="{{item.imageIds[0]}}" data-sceneid="{{item.sceneId}}" data-scenepicid="{{item.scenePicId}}">
           <image class="wxIcon" src="../../../images/icon_03.png" mode="aspectFit"></image>
         </button>
       </view>
     </view>
   </view>
   <view class="nodataDiv ub ub-ac ub-pc ub-ver" hidden="{{!isShowNodata}}">
-    <image class="nodataImg" src="../../../images/null1.png" style="width:200rpx;height:137rpx"></image>
+    <image class="nodataImg" src="../../../images/null3.png" style="width:200rpx;height:137rpx"></image>
     <view class="nodataTxt" style="margin-bottom:200rpx;">素材为空~</view>
   </view>
   <view class="modal1 ub ub-ver" hidden="{{isShowModal}}">

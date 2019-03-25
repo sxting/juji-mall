@@ -93,9 +93,7 @@
 }
 
 .phoneWrap {
-  position: absolute;
-  bottom: 60rpx;
-  left: 0;
+  margin-top: 60rpx;
   width: 100%;
 }
 

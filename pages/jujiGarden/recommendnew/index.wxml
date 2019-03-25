@@ -1,7 +1,7 @@
 <wxs src="../../../utils/numFr.wxs" module="format" />
 <view class="main">
   <view class="nodataDiv ub ub-ac ub-pc ub-ver">
-    <image class="nodataImg" src="../../../images/null1.png" style="width:200rpx;height:137rpx"></image>
+    <image class="nodataImg" src="../../../images/null5.png" style="width:200rpx;height:137rpx"></image>
     <view class="nodataTxt" style="margin-bottom:200rpx;">素材为空~</view>
   </view>
 </view>

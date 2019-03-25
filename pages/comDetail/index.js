@@ -39,7 +39,6 @@ Page({
       if (option.scene) {
         let scene = decodeURIComponent(option.scene);
         this.setData({sceneId: scene});
-
         wx.request({
           url: constant.apiUrl + '/qr/getBySceneId.json?sceneId='+scene,
           method: 'GET',
@@ -111,7 +110,7 @@ Page({
         storeId: option.storeid,
         sceneId: option.sceneid
       });
-
+      console.log('sceneId='+this.data.sceneId);
       if (wx.getStorageSync('token')) {
         console.log('token存在');
         this.getItemInfo();
@@ -238,22 +237,20 @@ Page({
     }
   },
   toBuy:function(){
-    if(!this.data.sceneId){
-      service.getProQrCode({ productId:this.data.productId,path: 'pages/comDetail/index'}).subscribe({
-          next: res => {
-              var sceneId = res.senceId;
-              this.setData({sceneId:sceneId});
-              this.buyProduct();  
-          },
-          error: err => {
-              errDialog(err);
-              wx.hideLoading();
-          },
-          complete: () => wx.hideToast()
-      });
-    }else{
-        this.buyProduct();  
-    }
+    console.log('下单前sceneId='+this.data.sceneId);
+    service.getProQrCode({ productId:this.data.productId,path: 'pages/comDetail/index'}).subscribe({
+        next: res => {
+            var sceneId = res.senceId;
+            this.setData({sceneId:sceneId});
+            console.log('接口生成sceneId='+this.data.sceneId);
+            this.buyProduct();  
+        },
+        error: err => {
+            errDialog(err);
+            wx.hideLoading();
+        },
+        complete: () => wx.hideToast()
+    });
   },
   buyProduct:function(){
       if(this.data.productInfo.type=='PRODUCT'&&this.data.productInfo.point>0&&this.data.productInfo.price>0){
@@ -504,7 +501,7 @@ Page({
                       }
                       var price1 = juzi + Number(info.price / 100).toFixed(2)+'元';
                     }
-                    var name = info.productName.substring(0,15);
+                    var name = info.productName.substring(0,19);
                     var price2 = Number(info.originalPrice / 100).toFixed(2) + '元';
                     this.drawImage(name,'',price1,price2,info.soldNum);//参数依次是storeName,desc,现价,原价,销量
                     this.setData({isShowModal:false});
@@ -537,7 +534,7 @@ Page({
       context.setFontSize(15);
       context.setTextAlign("left");
       context.setFillStyle("#000");
-      context.fillText("“桔”美好生活，集好店优惠", 45, 35);
+      context.fillText("“桔”美好生活，集好店优惠", 48, 35);
       context.stroke();
   },
   setText2: function(context,price1,price2) {
@@ -585,6 +582,15 @@ Page({
       context.drawImage("../../images/logo.png", 20, 18, 20, 21); //宽度70，居中，距离上15
       context.drawImage(this.data.headImg, 10, 52, size.w - 20,138); //宽度70，居中，距离上15
       rectPath(context, 10, 190, size.w-20, 219);
+
+      context.beginPath();
+      context.setLineCap('round');
+      context.setStrokeStyle('#FFDC00');
+      context.setLineWidth(18);
+      context.moveTo(87, 389);
+      context.lineTo(170, 389);
+      context.stroke();
+
       context.drawImage(this.data.erwmImg, size.w/2 - 40, 292.5, 80, 80); //二维码，宽度100，居中
       this.setTitle(context,name);
       context.drawImage("../../images/price.png", 20, 224, 30,13); //宽度70，居中，距离上15
@@ -594,6 +600,7 @@ Page({
       drawDashLine(context, 15, 280, size.w-15, 280, 4);//横向虚线
       this.setText2(context,price1,price2);
       this.setText3(context,amount);
+
       this.setText4(context);
       context.draw();
   },

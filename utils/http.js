@@ -113,7 +113,7 @@ function http_request(
                         wx.setStorageSync('openid', res1.data.data.openId);
                         wx.setStorageSync('userinfo', JSON.stringify(res1.data.data));
                         wx.switchTab({
-                          url: '../index/index',
+                          url: '/pages/index/index',
                         });
                         wx.showModal({
                           title: '登录令牌过期',

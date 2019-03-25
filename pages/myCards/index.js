@@ -17,18 +17,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    if (wx.getStorageSync('accessToken')) {
-      let payUrl = wx.getStorageSync('payUrl');
-      if (payUrl) {
-        this.setData({
-          payUrl: payUrl
-        });
-
-      } else {
-        this.setData({
-          payUrl: constant.jujipayUrl
-        });
-      }
+    if (wx.getStorageSync('openid')) {
       wx.request({
         url: this.data.payUrl + '/mini/getCardsByOpenid.json',
         method: 'GET',
@@ -55,6 +44,9 @@ Page({
               });
             }
           } else {
+            this.setData({
+              noCards: true
+            });
             wx.showModal({
               title: '错误：' + res.data.errorCode,
               content: res.data.errorInfo,
@@ -66,8 +58,8 @@ Page({
 
     } else {
       wx.showModal({
-        title: '',
-        content: '未获取到accessToken',
+        title: '错误',
+        content: '未获取到openid',
       });
       this.setData({
         noCards: true

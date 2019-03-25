@@ -17,17 +17,6 @@ Page({
   onLoad: function (options) {
     // options.merchantId = '101542271446184185';
     if (options.merchantId) {
-      let payUrl = wx.getStorageSync('payUrl');
-      if (payUrl) {
-        this.setData({
-          payUrl: payUrl
-        });
-
-      } else {
-        this.setData({
-          payUrl: constant.jujipayUrl
-        });
-      }
       wx.request({
         url: this.data.payUrl + '/mini/getPayRecordsByOpenid.json',
         method: 'GET',
@@ -55,7 +44,7 @@ Page({
       })
     } else {
       wx.showModal({
-        title: '系统错误',
+        title: '错误',
         content: '未能获取到商户信息',
       });
       return;

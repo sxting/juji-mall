@@ -1,14 +1,14 @@
 <wxs src="../../../utils/numFr.wxs" module="format" />
-<view class="fullScreen ub ub-ver">
-    <view class="tablist">
+<view class="fullScreen ub ub-ver w_100">
+    <view class="tablist w_100">
         <view class="tablist ub ub-ac ub-pj1">
             <view wx:for="{{tablist}}" wx:key="unique" class="tabItem {{curTabIndex==index?'on':''}}" bindtap="switchTab" data-type="{{item.type}}" data-index="{{index}}">{{item.name}}<view class="line"></view>
             </view>
         </view>
     </view>
-    <view class="main p10">
-        <view class="curdate">{{curdate}}</view>
-        <swiper display-multiple-items="1.36" next-margin="-30rpx">
+    <view class="main w_100" style="padding-left:5rpx;">
+        <view class="curdate" style="padding-left:24rpx">{{curdate}}</view>
+        <swiper display-multiple-items="1.36" next-margin="-20rpx">
             <swiper-item>
                 <view class="cardItem">
                     <image class="card" src="../../../images/card1.png"></image>
@@ -51,7 +51,7 @@
             </swiper-item>
         </swiper>
     </view>
-    <view class="tablist">
+    <view class="tablist w_100" style="margin-top:10rpx;">
         <view class="tablist ub ub-ac">
             <view class="tabItem {{curActiveIndex==1?'on':''}}" bindtap="switchActive" data-index="1" data-status=''>销售收入<view class="line"></view>
             </view>
@@ -59,12 +59,11 @@
             </view>
         </view>
     </view>
-    <view class="p10" style="padding-bottom:0">
-        <view class="labels-wrap">
+    <view class="w_100 ub-f1 ub ub-ver" style="padding-top:10rpx">
+        <view class="labels ub ub-ac w_100 plr10">
           <view wx:for='{{statuslist}}' wx:key='item' data-index="{{index}}" class="label {{index == sortIndex?'active':''}}" data-status='{{item.status}}' bindtap="toggleLabel">{{item.name}}</view>
         </view>
-        <view class="mt10">
-          <scroll-view scroll-y style='height: 480rpx' bindscrolltolower="scrolltolower"> 
+        <view class="mt10 w_100 ub-f1 plr10" style="overflow:scroll">
             <view class="item ub"  wx:for="{{orderIncomelist}}" wx:for-item="item" wx:key="unique" data-id="{{item.orderNo}}" bindtap="toDetail" wx:if='{{orderIncomelist.length != 0}}'>
                 <image class="userImg udb" src="{{item.avatar}}"></image>
                 <view class="ub-f1">
@@ -74,11 +73,10 @@
                     <view class="amount">+{{item.amount/100}}元</view>
                 </view>
             </view>
-            <view class="nodataDiv ub ub-ver ub-ac ub-pc" style="height:400rpx;padding-top:60rpx"  wx:if='{{orderIncomelist.length == 0}}' >
+            <view class="nodataDiv ub ub-ver ub-ac ub-pc" wx:if='{{orderIncomelist.length == 0}}'>
               <image class="nodataImg" src="../../../images/null4.png" style="width:160rpx" mode="widthFix"></image>
-              <view class="nodataTxt" style="margin-top:30rpx;">暂无任何{{curActiveIndex==1?'销售收入':'提现金额'}}</view>
+              <view class="nodataTxt" style="margin-top:30rpx;font-size:28rpx;">暂无任何{{curActiveIndex==1?'销售收入':'提现金额'}}</view>
             </view>
-          </scroll-view>
         </view>
     </view>
 </view>

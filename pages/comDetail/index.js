@@ -396,7 +396,7 @@ Page({
             lat: res.store.lat,
             lng: res.store.lng
           });
-          if(that.data.share){
+          if(that.data.share==1){
             that.showShare();
           }
         }).catch(function(err){
@@ -413,7 +413,7 @@ Page({
             lat: res.store.lat,
             lng: res.store.lng
           });
-          if(that.data.share){
+          if(that.data.share==1){
             that.showShare();
           }
         })
@@ -485,7 +485,7 @@ Page({
 
   // 点击分享
   showShare:function(){
-    wx.showLoading({title: '生成图片...'});
+    wx.showLoading({title: '生成分享图片'});
     wx.downloadFile({
       url: constant.basePicUrl+this.data.productInfo.picId+'/resize_751_420/mode_fill',
       success: (res) => {
@@ -568,32 +568,22 @@ Page({
       context.setFontSize(10);
       context.setTextAlign("right");
       context.setFillStyle("#999999");
-      context.fillText("原价:" + price2, size.w - 20, 234);
+      context.fillText("原价:" + price2, size.w - 20, 262);
       context.stroke();
   },
-  setText3: function(context,amount) {
-      var size = this.setCanvasSize();
-      context.setFontSize(10);
-      context.setTextAlign("right");
-      context.setFillStyle("#999999");
-      context.fillText("销量:" + amount, size.w-20, 262);
-      context.stroke();
-  },
-  setText4: function(context) {
+  setText3: function(context) {
       var size = this.setCanvasSize();
       context.setFontSize(11);
       context.setTextAlign("center");
       context.setFillStyle("#333333");
       context.fillText("长按识别二维码", 128, 393);
       context.stroke();
-  },
-  setText5: function(context) {
-      var size = this.setCanvasSize();
+      
       context.setFontSize(9);
       context.setTextAlign("left");
       context.setFillStyle("#999999");
-      context.fillText("过期退", 35, 261);
-      context.fillText("随时退", 95, 261);
+      context.fillText("可退款", 35, 261);
+      context.fillText("可转赠", 95, 261);
       context.stroke();
   },
   drawImage: function(name, desc,price1,price2,amount) {//name,desc,现价,原价,销量
@@ -617,12 +607,10 @@ Page({
       context.drawImage("../../images/price.png", 20, 224, 30,13); //宽度70，居中，距离上15
       context.drawImage("../../images/gou.png", 20, 252.5, 10,10); //宽度70，居中，距离上15
       context.drawImage("../../images/gou.png", 80, 252.5, 10,10); //宽度70，居中，距离上15
-      this.setText5(context);
       drawDashLine(context, 15, 280, size.w-15, 280, 4);//横向虚线
       this.setText2(context,price1,price2);
-      this.setText3(context,amount);
 
-      this.setText4(context);
+      this.setText3(context);
       context.draw();
   },
   savePic: function(e) {

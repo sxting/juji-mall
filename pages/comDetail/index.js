@@ -64,12 +64,14 @@ Page({
                     this.setData({
                       isShowNewerGet: res2
                     });
-                    service.newerGet().subscribe({
-                      next: res3 => {
-                        console.log(res3);
-                        this.getPointBalance();
-                      }
-                    });
+                    if (res2) {
+                      service.newerGet().subscribe({
+                        next: res3 => {
+                          console.log(res3);
+                          this.getPointBalance();
+                        }
+                      });
+                    }
 
                   },
                   error: err => console.log(err)
@@ -132,12 +134,14 @@ Page({
             this.setData({
               isShowNewerGet: res2
             });
-            service.newerGet().subscribe({
-              next: res3 => {
-                console.log(res3);
-                this.getPointBalance();
-              }
-            });
+            if (res2){
+              service.newerGet().subscribe({
+                next: res3 => {
+                  console.log(res3);
+                  this.getPointBalance();
+                }
+              });
+            }
 
           },
           error: err => console.log(err)

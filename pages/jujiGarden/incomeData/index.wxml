@@ -70,7 +70,7 @@
                     <view class="name">{{item.name}}</view>
                     <view class="time">{{item.date}}</view>
                     <view class="remark">{{item.type}}</view>
-                    <view class="amount">+{{format.toFix(amount)}}元</view>
+                    <view class="amount">+{{format.toFix(item.amount? item.amount : 0)}}元</view>
                 </view>
             </view>
             <view class="nodataDiv ub ub-ver ub-ac ub-pc" wx:if='{{orderIncomelist.length == 0}}'>

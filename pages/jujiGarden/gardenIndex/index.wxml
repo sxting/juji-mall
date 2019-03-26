@@ -88,8 +88,15 @@
 
      <!-- 桔长进入实名认证 -->
     <view class='page new-page-3' wx:if="{{role == 'LEADER' && !isAuthed}}">
-        <image class="pageBg" src="../../../images/juyuan-bg3.png"></image>
-        <view class='authentication-progress'>
+      <image class="title-page3" src="/images/group-sucess.png"></image>
+      <view class='title-text'>接下来开启您的推广赚钱之旅</view>
+      <image src='/images/orange-icon1.png' class='orange-icon orange-2'></image>
+      <image src='/images/orange-icon2.png' class='orange-icon orange-1'></image>
+      <view class='authentication-box'>
+        <view class='authentication-progress-box'>
+          <image src='/images/airport-icon.png' class='airport'></image>
+          <image src='/images/popo-icon.png' class='popo'></image>
+          <view class='authentication-progress'>
             <view class='my-team'>
               <input class='wechat-no' placeholder='请填写您的微信账号' value='{{ wechatId }}' bindinput="dataChange" data-type='wechatid' maxlength='20' placeholder-class='placeholder'></input>
               <input class='wechat-name' placeholder='请填写您的微信实名认证姓名' value='{{ name }}' bindinput="dataChange" data-type='name' maxlength='8' placeholder-class='placeholder'></input>
@@ -99,7 +106,10 @@
                 <text>确定</text>
               </view>
             </view>
+          </view>
         </view>
+      </view>
+      <image src='/images/sucess-bottom.png' class='group-bottom'></image>
     </view>
 
     <!-- 桔长进入 -->

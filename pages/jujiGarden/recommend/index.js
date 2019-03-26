@@ -185,7 +185,7 @@ Page({
                         }
                         var price1 = juzi + Number(info.price / 100).toFixed(2) + '元';
                     }
-                    var name = info.productName.substring(0, 19);
+                    var name = info.productName.substring(0, 18);
                     var price2 = Number(info.originalPrice / 100).toFixed(2) + '元';
                     this.drawImage(name, '', price1, price2, info.soldNum); //参数依次是storeName,desc,现价,原价,销量
                     this.setData({ isShowModal: false });

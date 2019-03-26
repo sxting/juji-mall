@@ -1,13 +1,39 @@
 <wxs src="../../../utils/numFr.wxs" module="format" />
 <view class="wrap">
-    <!-- 普通用户进入 1、普通用户 从没申请  2、桔民 从没申请过-->
-    <view class='page' wx:if="{{(role == 'UNDEFINED' && !applyLeader) || (role == 'MEMBER' && !applyLeader)}}">
-        <image class="pageBg" src="../../../images/juyuan-bg1.jpg"></image>
+    <!-- 普通用户进入 1、普通用户 从没申请  2、桔民 从没申请过  -->
+    <view class="wrap page-content new-page-1" wx:if="{{(role == 'UNDEFINED' && !applyLeader) || (role == 'MEMBER' && !applyLeader)}}">
+      <view class='group-title-home'>
         <view class='btn-manger' bindtap="toPage" data-page="/pages/jujiGarden/managerRights/managerRights">桔长权益</view>
-        <view class='applyToManager' bindtap="apply">
-            <text>申请成为桔长</text>
-            <text class='iconfont icon-right'></text>
+        <view class='title-home-page home-title'>邀请{{minInvitedMemberCount}}人可成为桔长</view>
+        <view class='home-title'>单单享返利 件件享优惠</view>
+      </view>
+      <image src='/images/group-start.png' class='group-gift t180'></image>
+      <view class='btn-box-invent t480' bindtap="apply">
+        <image src='/images/sure-btn.png' class='sure-btn applyToManager'></image>
+        <text class='text'>申请成为桔长<text class='iconfont icon-right'></text></text>
+      </view>
+      <view class='btn-new-person-box t375'>
+        <view class='btn-new-person height453'>
+          <view class='list-box'>
+            <view class='list-infortext mb35'>
+              <image src='/images/invent-icon.png' class='icon-type'></image>
+              <image src='/images/01-one.png' class='icon-num'></image>
+              <text class='text-detail'>邀请{{minInvitedMemberCount}}名新人入队</text>
+            </view>
+            <view class='list-infortext mb35'>
+              <image src='/images/right-icon.png' class='icon-type'></image>
+              <image src='/images/02-two.png' class='icon-num'></image>
+              <text class='text-detail'>获得桔长资格</text>
+            </view>
+            <view class='list-infortext mb35'>
+              <image src='/images/sale-money-icon.png' class='icon-type'></image>
+              <image src='/images/03-three.png' class='icon-num'></image>
+              <text class='text-detail'>推广商品最高得40%返利</text>
+            </view>
+          </view>
         </view>
+      </view>
+      <image src='/images/group-bottom.png' class='group-bottom'></image>
     </view>
 
     <!-- 桔员进入 桔民 申请过-->
@@ -32,12 +58,12 @@
           </view>    
       </view>
       <image src='/images/group-gift.png' class='group-gift'></image>
+      <view class='btn-box-invent'>
+        <image src='/images/sure-btn.png' class='sure-btn'></image>
+        <button class="share-btn" open-type="share">邀请新人加入桔园<text class='iconfont icon-right'></text></button>
+      </view>
       <view class='btn-new-person-box'>
         <view class='btn-new-person'>
-          <view class='btn-box-invent'>
-              <image src='/images/sure-btn.png' class='sure-btn'></image>
-              <button class="share-btn" open-type="share">邀请新人加入桔园</button>
-            </view>
           <view class='list-box'>
             <view class='list-infortext'>
               <image src='/images/invent-icon.png' class='icon-type'></image>

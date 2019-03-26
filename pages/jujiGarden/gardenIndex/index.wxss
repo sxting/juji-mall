@@ -149,25 +149,12 @@
   border-radius: 25rpx 0 0 25rpx;
 }
 
-.applyToManager {
-  position: absolute;
-  font-family: "黑体";
-  font-size: 30rpx;
-  color: #fff;
-  text-align: center;
-  top: 44%;
-  line-height: 80rpx;
-  width: 460rpx;
-  height: 80rpx;
-  left: 50%;
-  margin-left: -230rpx;
-  font-weight: bold;
-}
 
-.applyToManager .iconfont {
-  font-size: 32rpx;
-  font-weight: bold;
-  margin-left: 10rpx;
+.btn-box-invent  .iconfont {
+  font-size:38rpx;
+  font-weight:bolder;
+  position: absolute;
+  color: #fff;
 }
 
 .check-progress {
@@ -342,7 +329,7 @@
   position: absolute;
   width: 100%;
   height: 282rpx;
-  top: 175rpx;
+  top: 190rpx;
 }
 .group-bottom{
   position: fixed;
@@ -353,7 +340,7 @@
 .btn-new-person-box{
   padding: 0 30rpx;
   position: relative;
-  top: 120rpx;
+  top: 200rpx;
 }
 .btn-new-person{
   width: 100%;
@@ -363,14 +350,14 @@
   border-radius: 10rpx;
 }
 .list-box{
-  padding-top: 70rpx;
+  padding-top: 40rpx;
 }
 .list-box .list-infortext {
   font-family: PingFangSC-Medium;
   font-size: 30rpx;
   color: #85460D;
   text-align: left;
-  padding-left: 50rpx;
+  padding-left: 55rpx;
   position: relative;
   margin-bottom:40rpx;
 }
@@ -395,11 +382,11 @@
 }
 .btn-box-invent{
   position: absolute;
-  width: 460rpx;
-  height: 80rpx;
+  width: 500rpx;
+  height: 90rpx;
   left: 50%;
-  margin-left: -230rpx;
-  top: -40rpx;
+  margin-left: -250rpx;
+  top: 465rpx;
 }
 .btn-box-invent image{
   width: 100%;
@@ -407,13 +394,54 @@
 }
 .btn-box-invent .share-btn{
   font-family: PingFangSC-Semibold;
-  font-size: 30rpx;
+  font-size: 34rpx;
   color: #FFFFFF;
   text-align: center;
-  line-height: 80rpx;
+  line-height: 85rpx;
   position: absolute;
   top: 0;
   width: 100%;
   background-color: rgba(0, 0, 0, 0);
   opacity: 1!important;
+}
+.home-title{
+  font-family: PingFangSC-Semibold;
+  font-size: 30rpx;
+  color: #FF5A00;
+  letter-spacing: 0;
+  text-align: center;
+}
+.title-home-page{
+  font-size: 66rpx;
+}
+.group-title-home{
+  padding:86rpx 75rpx 0;
+}
+.t375{
+  top:375rpx;
+}
+.t180{
+  top: 180rpx;
+  height: 296rpx
+}
+.height453{
+  height: 453rpx
+}
+.t480{
+  top: 480rpx
+}
+.t480 .text{
+  display: block;
+  font-family: PingFangSC-Medium;
+  font-size: 34rpx;
+  color: #FFFFFF;
+  text-align:center;
+  line-height:85rpx;
+  position:absolute;
+  width:100%;
+  top:0;
+  left:0;
+}
+.list-box .mb35{
+  margin-bottom: 35rpx
 }

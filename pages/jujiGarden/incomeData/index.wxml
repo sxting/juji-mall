@@ -18,12 +18,12 @@
                         <view class="turnover ub ub-ac">
                             <view class="div">
                                 <view class="tx-l remark2 ub ub-ac">管理佣金<image class="help" bindtap="tipAlert" data-type="2" src="../../../images/help.png"></image></view>
-                                <view class="tx-l balance2">{{format.toFix(incomeData.manageRebate)}}</view>
+                                <view class="tx-l balance2">{{format.toFix(incomeData.manageRebate? incomeData.manageRebate : 0)}}</view>
                             </view>
                             <view class="line"></view>
                             <view class="div l">
                                 <view class="tx-l remark2 ub ub-ac">购物返利<image class="help" bindtap="tipAlert" data-type="3" src="../../../images/help.png"></image></view>
-                                <view class="tx-l balance2">{{format.toFix(incomeData.saleRebate)}}</view>
+                                <view class="tx-l balance2">{{format.toFix(incomeData.saleRebate? incomeData.saleRebate : 0)}}</view>
                             </view>
                         </view>
                     </view>
@@ -38,12 +38,12 @@
                         <view class="turnover ub ub-ac">
                             <view class="div">
                                 <view class="tx-l remark2 ub ub-ac">管理佣金<image class="help" bindtap="tipAlert" data-type="5" src="../../../images/help.png"></image></view>
-                                <view class="tx-l balance2">{{format.toFix(incomeData.settlementManageRebate)}}</view>
+                                <view class="tx-l balance2">{{format.toFix(incomeData.settlementManageRebate? incomeData.settlementManageRebate : 0)}}</view>
                             </view>
                             <view class="line"></view>
                             <view class="div l">
                                 <view class="tx-l remark2 ub ub-ac">购物返利<image class="help" bindtap="tipAlert" data-type="6" src="../../../images/help.png"></image></view>
-                                <view class="tx-l balance2">{{format.toFix(incomeData.settlementSaleRebate)}}</view>
+                                <view class="tx-l balance2">{{format.toFix(incomeData.settlementSaleRebate? incomeData.settlementSaleRebate : 0)}}</view>
                             </view>
                         </view>
                     </view>
@@ -70,7 +70,7 @@
                     <view class="name">{{item.name}}</view>
                     <view class="time">{{item.date}}</view>
                     <view class="remark">{{item.type}}</view>
-                    <view class="amount">+{{item.amount/100}}元</view>
+                    <view class="amount">+{{format.toFix(amount)}}元</view>
                 </view>
             </view>
             <view class="nodataDiv ub ub-ver ub-ac ub-pc" wx:if='{{orderIncomelist.length == 0}}'>

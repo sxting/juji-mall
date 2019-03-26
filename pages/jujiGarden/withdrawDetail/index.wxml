@@ -3,7 +3,7 @@
     <view class="toper">
         <view class='toper-box'>
           <view class="balance">{{format.toFix(settlementDetailData.settlementAmount)}}</view>
-          <view class="status {{settlementDetailData.status == 'PENDING'? 'activeing': settlementDetailData.status == 'SUCCESS'? 'fail-active' : ''}}">{{settlementDetailData.status == 'PENDING'? '处理中': settlementDetailData.status == 'CLOSED'? '提现成功': '提现失败'}}</view>
+          <view class="status {{settlementDetailData.status == 'PENDING'? 'activeing': settlementDetailData.status == 'CLOSED'? 'fail-active' : ''}}">{{settlementDetailData.status == 'PENDING'? '处理中': settlementDetailData.status == 'CLOSED'? '提现失败': '提现成功'}}</view>
           <view class='tips' wx:if='{{settlementDetailData.status == "CLOSED"}}'>{{settlementDetailData.failReason}}</view>
         </view>
     </view>

@@ -118,9 +118,11 @@ Page({
     }else{
       this.setData({
         productId: option.id,
-        storeId: option.storeid,
-        sceneId: option.sceneid
+        storeId: option.storeid
       });
+      if(option.sceneid){
+        this.setData({sceneId: option.sceneid})
+      }
       console.log('sceneId='+this.data.sceneId);
       if (wx.getStorageSync('token')) {
         console.log('token存在');
@@ -312,25 +314,29 @@ Page({
   },
   toMerchantsList:function(){
     wx.navigateTo({
-      url: '/pages/merchantsCanUse/index?id=' + this.data.productId 
+      url: '/pages/merchantsCanUse/index?id=' + this.data.productId
     });
   },
   toCreateOrder: function() { //跳转订单确认 桔子和人民币组合订单
+    console.log("跳转前sceneId="+this.data.sceneId);
     wx.navigateTo({
       url: '/pages/payOrder/index?paytype=1&id=' + this.data.productId + '&storeid=' + this.data.storeId + '&sceneid='+this.data.sceneId
     });
   },
   toCreateOrderByPoint: function() { //只用桔子下单
+    console.log("跳转前sceneId="+this.data.sceneId);
     wx.navigateTo({
       url: '/pages/payOrder/index?paytype=2&id=' + this.data.productId + '&storeid=' + this.data.storeId + '&sceneid='+this.data.sceneId
     });
   },
   toCreateOrderByRmb: function () { //人民币优惠购买
+    console.log("跳转前sceneId="+this.data.sceneId);
     wx.navigateTo({
       url: '/pages/payOrder/index?paytype=3&id=' + this.data.productId + '&storeid=' + this.data.storeId + '&sceneid='+this.data.sceneId
     });
   },
   toCreateOrderByOriPrice: function () { //原价购买
+    console.log("跳转前sceneId="+this.data.sceneId);
     wx.navigateTo({
       url: '/pages/payOrder/index?paytype=4&id=' + this.data.productId + '&storeid=' + this.data.storeId + '&sceneid='+this.data.sceneId
     });
@@ -526,7 +532,7 @@ Page({
                       }
                       var price1 = juzi + Number(info.price / 100).toFixed(2)+'元';
                     }
-                    var name = info.productName.substring(0,19);
+                    var name = info.productName.substring(0,18);
                     var price2 = Number(info.originalPrice / 100).toFixed(2) + '元';
                     this.drawImage(name,'',price1,price2,info.soldNum);//参数依次是storeName,desc,现价,原价,销量
                     this.setData({isShowModal:false});

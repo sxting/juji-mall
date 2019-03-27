@@ -1,5 +1,5 @@
 @import 'style/iconfont.wxss';
-page { background-color: #f7f7f7; height: 100%;box-sizing: border-box; }
+page { background-color: #f6f6f6; height: 100%;box-sizing: border-box; }
 .container { height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: space-between; padding: 200rpx 0; box-sizing: border-box; }
 .ub { display: -webkit-flex; display: flex; position: relative; }
 .ub-ver { -webkit-flex-direction: column; flex-direction: column; }

@@ -1,9 +1,5 @@
-import {
-  service
-} from '../../service';
-import {
-  constant
-} from '../../utils/constant';
+import {service} from '../../service';
+import {constant} from '../../utils/constant';
 var app = getApp();
 Page({
   data: {
@@ -146,7 +142,7 @@ Page({
                   //创建订单
                   var orderObj = {
                     itemRequests: [{
-                      sceneId:'49b77161cf394d1a883b8da0919e4286',//that.data.sceneId,
+                      sceneId:that.data.sceneId,
                       merchantId: that.data.productInfo.merchantId,
                       merchantName: that.data.productInfo.merchantName,
                       num: that.data.count,

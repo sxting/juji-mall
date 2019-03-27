@@ -8,8 +8,20 @@
 
 .main_record .item {
   height: 136rpx;
-  margin-bottom: 0.20rpx;
   background: #fff;
+  position: relative;
+}
+.border::after{
+  content: '';
+  position: absolute;  /* 把父视图设置为relative，方便定位*/
+  top: 0;
+  left: 0;
+  width: 200%;
+  height: 200%;
+  transform: scale(0.5);
+  transform-origin: 0 0;
+  box-sizing: border-box;
+  border: 2rpx solid #f6f6f6;
 }
 
 .main_record .item .tit {

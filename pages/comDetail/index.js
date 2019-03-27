@@ -29,7 +29,7 @@ Page({
     userImg:'',
     sceneId:'',
     isShowNewerGet: false,
-    userImgUrl:'',
+    userImgUrl:'../../images/shareBg.png',
     nickName:'',
     lat:'',
     lng:'',
@@ -513,12 +513,10 @@ Page({
                 if (res.statusCode === 200) {
                     this.setData({headImg:res.tempFilePath});
                     console.log(this.data.userImgUrl);
-                    wx.showLoading({title: '开始下载用户头像'});
                     wx.downloadFile({
                       url: this.data.userImgUrl,
                       success: (obj) => {
                         if (obj.statusCode === 200) {
-                          wx.showLoading({title: '用户头像下载成功'});
                           this.setData({userImg:obj.tempFilePath});
                           this.getQrCode();
                         }else{

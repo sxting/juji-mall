@@ -139,14 +139,14 @@
                 <image src="../../../images/arrow-right.png" class="udb" style="width:12rpx;height:22rpx;margin-left:10rpx;"></image>
             </view>
             <view style="padding:0 30rpx;">
-                <view style="height:1rpx;border-top:#eee 1rpx solid;"></view>
+                <view style="height:1rpx;border-top:#eee 2rpx solid;"></view>
             </view>
-            <view class="ub ub-ac ub-pj" style="padding: 0 10rpx;border-bottom:1rpx #eee solid">
+            <view class="ub ub-ac ub-pj" style="padding: 0 10rpx;border-bottom:2rpx #eee solid">
                 <view class="ub ub-ver ub-ac ub-pc user" bindtap="toPage" data-page="/pages/jujiGarden/myUser/index?role=LEADER">
                     <text class="orderBtnsNum">{{ invitedLeaderCount }}</text>
                     <text class="orderBtnsText">已邀桔长</text>
                 </view>
-                <view style='height:60rpx;width:1rpx;border-left:#eee 1rpx solid;'></view>
+                <view class='line'></view>
                 <view class="ub ub-ver ub-ac ub-pc user" bindtap="toPage" data-page="/pages/jujiGarden/myUser/index?role=MEMBER">
                     <text class="orderBtnsNum">{{ invitedMemberCount }}</text>
                     <text class="orderBtnsText">已邀桔民</text>
@@ -159,7 +159,7 @@
         </view>
         <view style="margin-top:20rpx;" class="menu ub">
             <view class="ub-f1 ub ub-ver ub-ac ub-pc" bindtap="toPage" data-page="/pages/jujiGarden/recommend/index">
-                <image src="../../../images/icon_tj.png"></image>
+                <image src="../../../images/icon_tj.png" class='product-icon'></image>
                 <text class="itemTxt">商品推荐</text>
             </view>
             <view class="ub-f1 ub ub-ver ub-ac ub-pc r" bindtap="toPage" data-page="/pages/jujiGarden/recommendnew/index">

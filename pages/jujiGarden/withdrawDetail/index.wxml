@@ -47,7 +47,7 @@
             </view>
             <!-- <view class="item ub ub-ac">
                 <view class="ub-f1">管理佣金</view>
-                <view class="txt">{{}}</view>
+                <view class="txt">{{}}</view> 
             </view> -->
             <view class="item ub ub-ac">
                 <view class="ub-f1">订单编号</view>

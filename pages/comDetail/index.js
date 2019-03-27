@@ -24,8 +24,9 @@ Page({
     windowWidth: 345,
     windowHeight: 430,
     shareBg: '../../images/shareBg.png',
-    headImg: '../../images/shareMinPro.png',
-    erwmImg: '../../images/erwmImg.png',
+    headImg: '',
+    erwmImg: '',
+    userImg:'',
     sceneId:'',
     isShowNewerGet: false,
     lat:'',
@@ -118,9 +119,11 @@ Page({
     }else{
       this.setData({
         productId: option.id,
-        storeId: option.storeid,
-        sceneId: option.sceneid
+        storeId: option.storeid
       });
+      if(option.sceneid){
+        this.setData({sceneId: option.sceneid})
+      }
       console.log('sceneId='+this.data.sceneId);
       if (wx.getStorageSync('token')) {
         console.log('token存在');
@@ -312,25 +315,29 @@ Page({
   },
   toMerchantsList:function(){
     wx.navigateTo({
-      url: '/pages/merchantsCanUse/index?id=' + this.data.productId 
+      url: '/pages/merchantsCanUse/index?id=' + this.data.productId
     });
   },
   toCreateOrder: function() { //跳转订单确认 桔子和人民币组合订单
+    console.log("跳转前sceneId="+this.data.sceneId);
     wx.navigateTo({
       url: '/pages/payOrder/index?paytype=1&id=' + this.data.productId + '&storeid=' + this.data.storeId + '&sceneid='+this.data.sceneId
     });
   },
   toCreateOrderByPoint: function() { //只用桔子下单
+    console.log("跳转前sceneId="+this.data.sceneId);
     wx.navigateTo({
       url: '/pages/payOrder/index?paytype=2&id=' + this.data.productId + '&storeid=' + this.data.storeId + '&sceneid='+this.data.sceneId
     });
   },
   toCreateOrderByRmb: function () { //人民币优惠购买
+    console.log("跳转前sceneId="+this.data.sceneId);
     wx.navigateTo({
       url: '/pages/payOrder/index?paytype=3&id=' + this.data.productId + '&storeid=' + this.data.storeId + '&sceneid='+this.data.sceneId
     });
   },
   toCreateOrderByOriPrice: function () { //原价购买
+    console.log("跳转前sceneId="+this.data.sceneId);
     wx.navigateTo({
       url: '/pages/payOrder/index?paytype=4&id=' + this.data.productId + '&storeid=' + this.data.storeId + '&sceneid='+this.data.sceneId
     });
@@ -486,16 +493,25 @@ Page({
       url: '/pages/commentDetail/index?id=' + event.currentTarget.dataset.comid
     });
   },
-
   // 点击分享
   showShare:function(){
     wx.showLoading({title: '生成分享图片'});
     wx.downloadFile({
-      url: constant.basePicUrl+this.data.productInfo.picId+'/resize_751_420/mode_fill',
+      url: constant.basePicUrl+this.data.productInfo.picId+'/resize_750_420/mode_fill',
       success: (res) => {
         if (res.statusCode === 200) {
             this.setData({headImg:res.tempFilePath});
-            this.getQrCode();
+            wx.downloadFile({
+              url: JSON.parse(wx.getStorageSync('userinfo')).avatar,
+              success: (res1) => {
+                if (res1.statusCode === 200) {
+                  this.setData({userImg:res1.tempFilePath});
+                  this.getQrCode();
+                }else{
+                  wx.hideLoading();
+                }
+              }
+            });
         }else{
           wx.hideLoading();
         }
@@ -526,9 +542,10 @@ Page({
                       }
                       var price1 = juzi + Number(info.price / 100).toFixed(2)+'元';
                     }
-                    var name = info.productName.substring(0,19);
+                    var name = info.productName;
                     var price2 = Number(info.originalPrice / 100).toFixed(2) + '元';
-                    this.drawImage(name,'',price1,price2,info.soldNum);//参数依次是storeName,desc,现价,原价,销量
+                    var storeLen = info.productStores.length;
+                    this.drawImage(info.merchantName,name,'',price1,price2,storeLen);//参数依次是storeName,desc,现价,原价,门店数
                     this.setData({isShowModal:false});
                 }else{
                   wx.hideLoading();
@@ -543,78 +560,43 @@ Page({
           complete: () => wx.hideToast()
       });
   },
-  setCanvasSize: function() {
-      var size = {};
-      size.w = 256;
-      size.h = 424;
-      return size;
-  },
-  setTitle: function(context,name) {
-      context.setFontSize(12);
-      context.setTextAlign("left");
-      context.setFillStyle("#333");
-      context.fillText(name, 20, 210);
-      context.stroke();
-
-      context.setFontSize(15);
-      context.setTextAlign("left");
-      context.setFillStyle("#000");
-      context.fillText("“桔”美好生活，集好店优惠", 52, 35);
-      context.stroke();
-  },
-  setText2: function(context,price1,price2) {
-      var size = this.setCanvasSize();
-      context.setFontSize(12);
-      context.setTextAlign("left");
-      context.setFillStyle("#E83221");
-      context.fillText(price1, 55, 235);
-      context.stroke();
-      context.setFontSize(10);
-      context.setTextAlign("right");
-      context.setFillStyle("#999999");
-      context.fillText("原价:" + price2, size.w - 20, 262);
-      context.stroke();
-  },
-  setText3: function(context) {
-      var size = this.setCanvasSize();
-      context.setFontSize(11);
-      context.setTextAlign("center");
-      context.setFillStyle("#333333");
-      context.fillText("长按识别二维码", 128, 393);
-      context.stroke();
-      
-      context.setFontSize(9);
-      context.setTextAlign("left");
-      context.setFillStyle("#999999");
-      context.fillText("可退款", 35, 261);
-      context.fillText("可转赠", 95, 261);
-      context.stroke();
-  },
-  drawImage: function(name, desc,price1,price2,amount) {//name,desc,现价,原价,销量
-      var size = this.setCanvasSize();
+  drawImage: function(merchant,name,desc,price1,price2,storeLen) {
+      var size = {w:260,h:424};
       var context = wx.createCanvasContext('myCanvas');
-      context.drawImage(this.data.shareBg, 0, 0, size.w, size.h); //宽度70，居中，距离上15
-      context.drawImage("../../images/logo.png", 20, 18, 20, 21); //宽度70，居中，距离上15
-      context.drawImage(this.data.headImg, 10, 52, size.w - 20,138); //宽度70，居中，距离上15
-      rectPath(context, 10, 190, size.w-20, 219);
+      context.drawImage(this.data.shareBg, 0, 0, size.w, size.h);
+      context.drawImage("../../images/logo.png", 20, 18, 20, 21);
+      setText(context,"“桔”美好生活，集好店优惠", 52, 35,"#000",15,'left');
+      context.drawImage(this.data.headImg, 10, 52, size.w - 20,138);
+      rectPath(context, 10, 190, size.w-20, 134);
+      setText(context,merchant, 20, 210,"#999",10,'left');//商户名
+      drawText(context,name,20,230,50,216);//商品名字
+      setText(context,"适用"+storeLen+"家门店", size.w - 20, 210,"#999",10,'right');//适用门店
 
+      context.drawImage("../../images/price.png", 20, 263, 30,13);
+      setText(context,price1, 55, 275,'#E83221',14,'left');//价格
+      setText(context,"原价:" + price2, size.w - 20, 275,'#999',10,'right');//原价
+
+      context.drawImage("../../images/gou.png", 20, 293, 10,10);
+      setText(context,"可退款", 35, 302,'#999',9,'left');
+      context.drawImage("../../images/gou.png", 80, 293, 10,10);
+      setText(context,"可转赠", 95, 302,'#999',9,'left');
+
+      rectPath(context, 0, 334, size.w, 88);
+      context.drawImage('../../images/erbg.png', 70, 387, 103, 18);
+      setText(context,"长按识别小程序码", 77, 400,'#333',11,'left');
+
+
+      context.save();
       context.beginPath();
-      context.setLineCap('round');
-      context.setStrokeStyle('#FFDC00');
-      context.setLineWidth(18);
-      context.moveTo(82, 389);
-      context.lineTo(175, 389);
-      context.stroke();
+      context.arc(35, 375, 25, 0, Math.PI * 2, false);
+      context.clip();
+      context.drawImage(this.data.userImg, 10, 350, 50, 50);
+      context.restore();
 
-      context.drawImage(this.data.erwmImg, size.w/2 - 40, 292.5, 80, 80); //二维码，宽度100，居中
-      this.setTitle(context,name);
-      context.drawImage("../../images/price.png", 20, 224, 30,13); //宽度70，居中，距离上15
-      context.drawImage("../../images/gou.png", 20, 252.5, 10,10); //宽度70，居中，距离上15
-      context.drawImage("../../images/gou.png", 80, 252.5, 10,10); //宽度70，居中，距离上15
-      drawDashLine(context, 15, 280, size.w-15, 280, 4);//横向虚线
-      this.setText2(context,price1,price2);
-
-      this.setText3(context);
+      context.drawImage(this.data.erwmImg, size.w - 80, 342.5, 70, 70);
+      var username = JSON.parse(wx.getStorageSync('userinfo')).nickName;
+      setText(context,username, 70, 360,"#333",12,'left');
+      setText(context,"私藏好物，分享给你", 70, 379,'#666',11,'left');
       context.draw();
   },
   savePic: function(e) {
@@ -678,6 +660,14 @@ Page({
   }
 });
 
+function setText(ctx,str,x,y,color,size,align){
+    ctx.setFontSize(size);
+    ctx.setTextAlign(align);
+    ctx.setFillStyle(color);
+    ctx.fillText(str, x, y);
+    ctx.stroke();
+}
+
 function rectPath(ctx, x, y, w, h) {
     ctx.beginPath();
     ctx.setFillStyle('#ffffff');
@@ -691,20 +681,40 @@ function rectPath(ctx, x, y, w, h) {
     ctx.closePath();
 }
 
-function drawDashLine(ctx, x1, y1, x2, y2, dashLength){  //传context对象，始点x和y坐标，终点x和y坐标，虚线长度
-  ctx.beginPath();
-  ctx.setStrokeStyle("#eeeeee")//设置线条的颜色
-  ctx.setLineWidth(1)//设置线条宽度
-  var dashLen = dashLength === undefined ? 3 : dashLength,
-  xpos = x2 - x1, //得到横向的宽度;
-  ypos = y2 - y1, //得到纵向的高度;
-  numDashes = Math.floor(Math.sqrt(xpos * xpos + ypos * ypos) / dashLen);
-  for(var i=0; i<numDashes; i++){
-     if(i % 2 === 0){
-         ctx.moveTo(x1 + (xpos/numDashes) * i, y1 + (ypos/numDashes) * i);
-      }else{
-          ctx.lineTo(x1 + (xpos/numDashes) * i, y1 + (ypos/numDashes) * i);
-      }
-   }
-  ctx.stroke();
+function drawBar(ctx,x1,x2,y){
+    ctx.beginPath();
+    ctx.setLineCap('round');
+    ctx.setStrokeStyle('#FFDC00');
+    ctx.setLineWidth(18);
+    ctx.moveTo(x1, y);
+    ctx.lineTo(x2, y);
+    ctx.stroke();
+}
+
+//1、canvas对象，2、文本 3、距离左侧的距离 4、距离顶部的距离 5、6、文本的宽度
+function drawText(ctx, str, left, top, titleHeight, canvasWidth) {
+    var lineWidth = 0;
+    var lastSubStrIndex = 0; //每次开始截取的字符串的索引
+    ctx.setFontSize(12);
+    ctx.setTextAlign('left');
+    ctx.setFillStyle('#333');
+    if(str.length>36){
+      var str = str.substring(0,36)+'...';
+    }
+    for (let i = 0; i < str.length; i++) {
+        lineWidth += ctx.measureText(str[i]).width;
+        if (lineWidth > canvasWidth) {
+            ctx.fillText(str.substring(lastSubStrIndex, i), left, top); //绘制截取部分
+            top += 16; //16为字体的高度
+            lineWidth = 0;
+            lastSubStrIndex = i;
+            titleHeight += 30;
+        }
+        if (i == str.length - 1) { //绘制剩余部分
+            ctx.fillText(str.substring(lastSubStrIndex, i + 1), left, top);
+        }
+    }
+    ctx.stroke();
+    titleHeight = titleHeight + 10;
+    return titleHeight
 }

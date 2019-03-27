@@ -58,8 +58,13 @@
 .orderBtnsNum {
   font-size: 34rpx;
   color: #333;
+  font-weight:bold;
 }
-
+.line{
+  height:60rpx;
+  width:2rpx;
+  border-left:#eee 2rpx solid;
+}
 .orderBtnsText {
   font-size: 24rpx;
   color: #666;
@@ -105,15 +110,17 @@
 
 .menu .ub-f1 image {
   display: block;
-  width: 44rpx;
-  height: 44rpx;
+  width: 43rpx;
+  height: 43rpx;
 }
-
+.menu .ub-f1 .product-icon{
+  width: 46rpx;
+  height: 46rpx
+}
 .menu .ub-f1 text {
-  font-size: 24rpx;
+  font-size: 28rpx;
   color: #333;
-  font-size: 30rpx;
-  margin-top: 10rpx;
+  margin-top: 20rpx;
 }
 
 .wrap {

@@ -24,6 +24,7 @@ Page({
         isShowModal: true,
         sceneId:'',
         scenepicid:'',
+        userImg:'../../../images/logo.png',
         productId: ''//当前商品的id
     },
     onLoad: function(options) {
@@ -229,7 +230,8 @@ Page({
       context.restore();
 
       context.drawImage(this.data.erwmImg, size.w - 80, 342.5, 70, 70);
-      setText(context,this.data.nickName, 70, 360,"#333",12,'left');
+      var nickName = JSON.parse(wx.getStorageSync('userinfo')).nickName;
+      setText(context,nickName, 70, 360,"#333",12,'left');
       setText(context,"私藏好物，分享给你", 70, 379,'#666',11,'left');
       context.draw();
   },

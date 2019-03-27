@@ -7,8 +7,9 @@
           <view class="tit">充值</view>
           <view class="date">{{item.dateCreated}}</view>
         </view>
-        <view class="amount chong">
+        <view class="amount chong ub ub-ac">
           +¥{{item.addMoney}}
+          <image src="../../images/arrow-right.png" style="width:14rpx;height: 28rpx;margin-left: 20rpx;"></image>
         </view>
       </view>
 
@@ -17,10 +18,13 @@
           <view class="tit">消费扣减</view>
           <view class="date">{{item.dateCreated}}</view>
         </view>
-        <view class="amount">
+        <view class="amount ub ub-ac">
           -¥{{item.subMoney}}
+          <image src="../../images/arrow-right.png" style="width:14rpx;height: 28rpx;margin-left: 20rpx;"></image>
         </view>
       </view>
+
+      <view class="border"></view>
 
     </view>
   </view>

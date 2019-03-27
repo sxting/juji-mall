@@ -29,11 +29,15 @@ Page({
     userImg:'',
     sceneId:'',
     isShowNewerGet: false,
+    userImgUrl:'',
+    nickName:'',
     lat:'',
     lng:'',
     share:0,
   },
   onLoad: function(option) {
+    // var userImgUrl = JSON.parse(wx.getStorageSync('userinfo')).avatar;
+    // this.setData({userImgUrl:userImgUrl});
     if(option.share){
       this.setData({share:option.share});
     }
@@ -85,7 +89,6 @@ Page({
               }
           }
         });
-
 
         // service.getComIdByscence({ sceneId: scene }).subscribe({
         //   next: res => {
@@ -495,28 +498,46 @@ Page({
   },
   // 点击分享
   showShare:function(){
-    wx.showLoading({title: '生成分享图片'});
-    wx.downloadFile({
-      url: constant.basePicUrl+this.data.productInfo.picId+'/resize_750_420/mode_fill',
-      success: (res) => {
-        if (res.statusCode === 200) {
-            this.setData({headImg:res.tempFilePath});
+    console.log('生成分享图片');
+    console.log(constant.basePicUrl+this.data.productInfo.picId+'/resize_750_420/mode_fill');
+    service.userInfo({ openId: wx.getStorageSync('openid') }).subscribe({
+        next: res => {
+            this.setData({
+                nickName: res.nickName,
+                userImgUrl: res.avatar
+            });
+            wx.showLoading({title: '生成分享图片'});
             wx.downloadFile({
-              url: JSON.parse(wx.getStorageSync('userinfo')).avatar,
-              success: (res1) => {
-                if (res1.statusCode === 200) {
-                  this.setData({userImg:res1.tempFilePath});
-                  this.getQrCode();
+              url: constant.basePicUrl+this.data.productInfo.picId+'/resize_750_420/mode_fill',
+              success: (res) => {
+                if (res.statusCode === 200) {
+                    this.setData({headImg:res.tempFilePath});
+                    console.log(this.data.userImgUrl);
+                    wx.showLoading({title: '开始下载用户头像'});
+                    wx.downloadFile({
+                      url: this.data.userImgUrl,
+                      success: (obj) => {
+                        if (obj.statusCode === 200) {
+                          wx.showLoading({title: '用户头像下载成功'});
+                          this.setData({userImg:obj.tempFilePath});
+                          this.getQrCode();
+                        }else{
+                          wx.hideLoading();
+                        }
+                      },
+                      fail:(err)=>{
+                          wx.showLoading({title: '用户头像下载失败'});
+                      }
+                    });
                 }else{
                   wx.hideLoading();
                 }
               }
             });
-        }else{
-          wx.hideLoading();
-        }
-      }
-    });
+        },
+        // error: err => errDialog(err),
+        complete: () => {}
+    })
   },
   closeModal:function(){
       this.setData({isShowModal:true});
@@ -594,8 +615,7 @@ Page({
       context.restore();
 
       context.drawImage(this.data.erwmImg, size.w - 80, 342.5, 70, 70);
-      var username = JSON.parse(wx.getStorageSync('userinfo')).nickName;
-      setText(context,username, 70, 360,"#333",12,'left');
+      setText(context,this.data.nickName, 70, 360,"#333",12,'left');
       setText(context,"私藏好物，分享给你", 70, 379,'#666',11,'left');
       context.draw();
   },

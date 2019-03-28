@@ -527,6 +527,9 @@ Page({
       if (wx.getStorageSync('locationCode') != wx.getStorageSync('selectCode')) {
         //如果城市更换了 需要通过用户选择的城市编号code重新加载页面
         console.log('用户更换城市为：' + wx.getStorageSync('selectCityName'));
+        this.currentPoint('selectCode: ' + wx.getStorageSync('selectCode'));
+        this.currentPoint('selectPcode: ' + wx.getStorageSync('selectPcode'));
+        this.currentPoint('selectCityName: ' + wx.getStorageSync('selectCityName'));
         //此处应该判断用户有没有再次更换城市 如果没有更换城市不再次查询
         if (this.data.locationCode == wx.getStorageSync('selectCode')){
           this.currentPoint();

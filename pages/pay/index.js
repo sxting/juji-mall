@@ -336,7 +336,8 @@ Page({
                 
               }
               that.setData({
-                toPayStatus: false
+                toPayStatus: false,//取消正在支付状态
+                accountpaystatus: false//取消loading状态
               });
 
             }
@@ -348,7 +349,8 @@ Page({
             content: res.data.errorInfo,
           })
           that.setData({
-            toPayStatus: false
+            toPayStatus: false,//取消正在支付状态
+            accountpaystatus: false//取消loading状态
           });
         }
       }
@@ -512,7 +514,7 @@ Page({
           });
         } else {//如果用户余额充足，可以执行余额支付
           this.setData({
-            accountpaystatus : true
+            accountpaystatus: true//显示支付loading
           });
           let orderObj = {};
           this.data.paytype ? orderObj.choosenType = this.data.paytype : orderObj;
@@ -526,12 +528,26 @@ Page({
           amount: Number(this.data.amount).toFixed(2),
           dAmount: Number(this.data.amount).toFixed(2)
         });
-        this.getPayment(this.data.dAmount);
-        this.setData({
-          showBalanceWrap: false,
-          showFocus: false,
-          showSelectCard: true
-        });
+        
+        //判断是否优先储值支付
+        if(this.data.recommend=='1'){//储值支付
+          this.getPayment(this.data.dAmount);
+          this.setData({
+            showBalanceWrap: false,
+            showFocus: false,
+            showSelectCard: true
+          });
+        }else{//只能微信支付 直接调用微信支付 不再显示中间推荐储值页
+          this.setData({
+            accountpaystatus: true//显示支付loading
+          });
+          let orderObj = {};
+          this.data.paytype ? orderObj.choosenType = this.data.paytype : orderObj;
+          orderObj.orderPay = Number(this.data.dAmount);
+          orderObj.pay = Number(this.data.dAmount);
+          wxpay(orderObj);
+        }
+        
       }
     }
   },

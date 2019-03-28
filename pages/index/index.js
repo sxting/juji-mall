@@ -526,10 +526,10 @@ Page({
     if (wx.getStorageSync('selectCode')){//存在 说明用户选过异地城市
       if (wx.getStorageSync('locationCode') != wx.getStorageSync('selectCode')) {
         //如果城市更换了 需要通过用户选择的城市编号code重新加载页面
-        console.log('用户更换城市为：' + wx.getStorageSync('selectCityName'));
-        this.currentPoint('selectCode: ' + wx.getStorageSync('selectCode'));
-        this.currentPoint('selectPcode: ' + wx.getStorageSync('selectPcode'));
-        this.currentPoint('selectCityName: ' + wx.getStorageSync('selectCityName'));
+        console.log('用户使用自选城市：' + wx.getStorageSync('selectCityName'));
+        console.log('selectCode: ' + wx.getStorageSync('selectCode'));
+        console.log('selectPcode: ' + wx.getStorageSync('selectPcode'));
+        console.log('selectCityName: ' + wx.getStorageSync('selectCityName'));
         //此处应该判断用户有没有再次更换城市 如果没有更换城市不再次查询
         if (this.data.locationCode == wx.getStorageSync('selectCode')){
           this.currentPoint();
@@ -558,7 +558,7 @@ Page({
         
       } else { 
         //是首次载入吗
-        console.log('没有更换城市');
+        console.log('用户使用定位城市：' + this.data.locationName);
         if (this.data.isFirstShow) {
           this.setData({
             isFirstShow: false
@@ -677,6 +677,11 @@ Page({
 
       }
     }else{//不存在 定位获取
+      if (this.data.isFirstShow) {
+        this.setData({
+          isFirstShow: false
+        })
+      }
       this.setData({
         showPageLoading: false
       });
@@ -1048,6 +1053,7 @@ Page({
       cityCode: this.data.locationCode,
       areaCode: '',
     };
+    console.log(JSON.stringify(obj));
     //选择省市县确认服务商信息
     service.getSelectHotCity(obj).subscribe({
       next: res => {

@@ -8,9 +8,10 @@
         <view class='home-title'>单单享返利 件件享优惠</view>
       </view>
       <image src='/images/group-start.png' class='group-gift t180'></image>
-      <view class='btn-box-invent t480' bindtap="apply">
+      <view class='btn-box-invent t480'>
         <image src='/images/sure-btn.png' class='sure-btn applyToManager'></image>
-        <text class='text'>申请成为桔长<text class='iconfont icon-right'></text></text>
+        <text class='text' bindtap="apply" wx:if='{{bindPhoneNumber}}'>申请成为桔长<text class='iconfont icon-right'></text></text>
+        <button class="share-btn" wx:else='{{!bindPhoneNumber}}' open-type="getPhoneNumber" bindgetphonenumber="getUserPhoneNumber">申请成为桔长<text class='iconfont icon-right'></text></button>
       </view>
       <view class='btn-new-person-box t375'>
         <view class='btn-new-person height453'>

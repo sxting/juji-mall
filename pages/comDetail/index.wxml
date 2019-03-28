@@ -219,7 +219,7 @@
             </view>
             <view class="ub-f1 ub ub-ver ub-ac ub-pc r" bindtap="toPro" data-id="{{productInfo.productId}}">
               <text class="txt1">推广</text>
-              <text class="txt2">赚￥{{filter.toFix(productInfo.distributorSalesRebate)}}元</text>
+              <text class="txt2">赚{{filter.toFix(productInfo.distributorSalesRebate)}}元</text>
             </view>
           </view>
         </form>

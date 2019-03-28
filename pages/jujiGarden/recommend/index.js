@@ -5,14 +5,6 @@ import { errDialog, loading } from '../../../utils/util';
 
 Page({
     data: {
-        // recommendlist: [{
-        //     imageIds: ['25R9F7zL2Dhr', '260HcKCwl672', '25SGzGlgKSrG', '25SGzGlgKSrG', '25Xi1X38wUK8', '25R9F7zL2Dhr'],
-        //     descriptions: "素材文字素材文字素材文字素材文字素材",
-        //     editorAvatar: "https://upic.juniuo.com/file/picture/25R9F7zL2Dhr/resize_180_180/mode_fill",
-        //     editorNickName: "小仙女",
-        //     productId: '2019031415090868068616188',
-        //     sceneId: '26FPo2h5cDNg'
-        // }],
         recommendlist:[],
         constant: constant,
         isShowNodata: false,
@@ -24,7 +16,8 @@ Page({
         isShowModal: true,
         sceneId:'',
         scenepicid:'',
-        userImg:'../../../images/logo.png',
+        userImg:'',
+        userImgUrl:'',
         productId: ''//当前商品的id
     },
     onLoad: function(options) {
@@ -33,6 +26,7 @@ Page({
             this.setData({ productId: options.productid });
         }
         this.getData(this.data.productId);
+        this.getUserImg();
     },
     getData: function(productId) {
         jugardenService.shareList({
@@ -48,6 +42,14 @@ Page({
             error: err => errDialog(err),
             complete: () => wx.hideToast()
         })
+    },
+    getUserImg:function(){
+      service.userInfo({ openId: wx.getStorageSync('openid') }).subscribe({
+          next: res => {
+            this.setData({userImgUrl:res.avatar});
+          },
+          complete: () => wx.hideToast()
+      })
     },
     switchTab: function(e) {
         this.setData({ curTabIndex: e.currentTarget.dataset.index });
@@ -110,7 +112,6 @@ Page({
             });
         }
     },
-
     // 分享朋友圈，生成图文
     shareToCircle: function(e) {
         wx.showLoading({ title: '生成分享图片' });
@@ -131,7 +132,21 @@ Page({
                     success: (res) => {
                         if (res.statusCode === 200) {
                             this.setData({ headImg: res.tempFilePath });
-                            this.createProImg(sceneId,scenepicid);
+                            console.log('开始下载头像');
+                            wx.downloadFile({
+                              url: this.data.userImgUrl,
+                              success: (obj) => {
+                                if (obj.statusCode === 200) {
+                                  this.setData({userImg:obj.tempFilePath});
+                                  this.createProImg(sceneId,scenepicid);
+                                }else{
+                                  wx.hideLoading();
+                                }
+                              },
+                              fail:(err)=>{
+                                  console.log('头像下载失败');
+                              }
+                            });
                         } else {
                             wx.hideLoading();
                         }

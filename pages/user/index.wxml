@@ -9,9 +9,11 @@
           <view class="ub ub-ac" style="margin-top:10rpx;" wx:if="{{phoneNum}}">
             <view class="phoneTxt">{{phoneNum}}</view>
           </view>
-          <view class="ub ub-ac" style="margin-top:10rpx;" wx:else bindtap="toPage" data-page="/pages/bindPhone/index">
-            <view class="phoneTxt">绑定手机号</view>
-            <image style="width:12rpx;height:22rpx;" src="../../images/arrow-r.png"></image>
+          <view style="margin-top:10rpx;" wx:else>
+            <button class="ub ub-ac bindBtn" open-type="getPhoneNumber" bindgetphonenumber="getUserPhoneNumber">
+              <view class="phoneTxt">绑定手机号</view>
+              <image style="width:12rpx;height:22rpx;" src="../../images/arrow-r.png"></image>
+            </button>
           </view>
         </view>
       </view>

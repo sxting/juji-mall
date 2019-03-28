@@ -524,7 +524,7 @@ Page({
                         }
                       },
                       fail:(err)=>{
-                          wx.showLoading({title: '用户头像下载失败'});
+                          console.log('头像下载失败');
                       }
                     });
                 }else{

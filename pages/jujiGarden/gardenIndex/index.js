@@ -24,11 +24,13 @@ Page({
     applyLeader: false,//是否申请桔长
     switchFun: false,
     minInvitedMemberCount: 0,//邀请几个人就可以成为桔长
+    bindPhoneNumber: false,//是否绑定手机号码 是true 不是false
   },
 
   onLoad: function (options) {
     let self = this;
     wx.setNavigationBarTitle({ title: '桔园' });
+    this.getUserInfor();//用户信息，是否绑定手机号码
     if (options.openId) {//分享点进来
       let self = this;
       console.log('分享点进来');
@@ -126,7 +128,18 @@ Page({
 
   /**申请成为桔长  **/
   apply:function(e){
-    this.getUserInfor();
+    let self = this;
+    if (this.data.bindPhoneNumber) {//已经绑定手机号码  
+      this.setData({
+        applyLeader: true,
+        parentId: this.data.openId
+      });
+      let data = {
+        parentId: this.data.openId,
+        applyLeader: this.data.applyLeader
+      }
+      joinDistributor.call(self, data);//加入桔园
+    }
   },
 
   /**   跳转页面  */
@@ -198,25 +211,61 @@ Page({
     let self = this;
     service.userInfo({ openId: wx.getStorageSync('openid') }).subscribe({
       next: res => {
-        if (res.phone) {//已经绑定手机号码  && self.data.role == 'UNDEFINED'
-          this.setData({
-            phone: res.phone,
-            applyLeader: true
-          });
-          let data = {
-            parentId: this.data.openId,
-            applyLeader: this.data.applyLeader
-          }
-          joinDistributor.call(self,data);//加入桔园
-        }else{
-          wx.navigateTo({ url: '/pages/bindPhone/index' });
-        }
+        this.setData({
+          phone: res.phone,
+          bindPhoneNumber: res.phone ? true : false
+        });
+        console.log(this.data.bindPhoneNumber);
       },
       error: err => errDialog(err),
       complete: () => wx.hideToast()
     })
   },
+
+  // 授权手机号码
+  getUserPhoneNumber: function (e) {
+    let self = this;
+    let data = { encryptData: e.detail.encryptedData, iv: e.detail.iv }
+    service.decodeUserPhone(data).subscribe({
+      next: res => {
+        this.setData({ 
+          phone: res.phoneNumber,
+        });
+        console.log(this.data.phone);
+        bindPhone.call(self);//授权以后绑定手机号码
+      },
+      error: err => errDialog(err),
+      complete: () => wx.hideToast()
+    })
+  },
+
 });
+
+// 绑定手机号码
+function bindPhone(){
+  let self = this;
+  let data = { phone: this.data.phone}
+  service.bindPhone(data).subscribe({
+    next: res => {
+      wx.showToast({
+        title: "绑定成功",
+        icon: "success",
+      });
+      this.setData({
+        bindPhoneNumber: true,
+        applyLeader: true,
+      })
+      console.log('绑定手机号');
+      let data = {
+        parentId: this.data.openId,
+        applyLeader: this.data.applyLeader
+      }
+      joinDistributor.call(self, data);//加入桔园
+    },
+    error: err => errDialog(err),
+    complete: () => wx.hideToast()
+  })
+}
 
 // 首页信息获取 
 function getGardenInfor(){

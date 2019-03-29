@@ -23,7 +23,8 @@ Page({
     cardList: [],
     selectCardId: '',
     paytype: 'recommend',
-    recommend: '1',
+    recommend: '1',//默认选中储值支付 0则默认微信支付
+    recommendStatus: '0',//默认开启储值推荐也就是可以到第二页 为'1'则不展示第二页直接支付
     discount: 0, //储值折扣
     url: '',
     qrcode:'',
@@ -54,7 +55,7 @@ Page({
       //   accountpaystatus: true
       // });
       console.log('Promise is ready!');
-      options.q = 'https://juji-dev.juniuo.com/qrm/212345678.htm';//测试用
+      // options.q = 'https://juji-dev.juniuo.com/qrm/212345678.htm';//测试用
       if (options.q) {
         console.log(options.q);
         var link = decodeURIComponent(options.q);
@@ -116,9 +117,11 @@ Page({
                 headImg: res.data.data.headImg,
                 merchantId: res.data.data.merchantId,
                 recommend: res.data.data.recommend,
+                recommendStatus: res.data.data.recommendStatus,
                 storeId: res.data.data.storeId,
                 storeName: res.data.data.storeName,
-                type: res.data.data.type
+                type: res.data.data.type,
+                paytype: res.data.data.recommend == '1' ? 'recommend' : 'thirdpay'
               })
               // that.getAccount();
               wx.request({
@@ -193,7 +196,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    wx.setStorageSync('scene','1011');//测试用
+    // wx.setStorageSync('scene','1011');//测试用
     let scene = wx.getStorageSync('scene');
     if (scene == '1011' || scene == '1012' || scene == '1013') {//扫描二维码场景值
       return ;
@@ -531,14 +534,14 @@ Page({
         });
         
         //判断是否优先储值支付
-        if(this.data.recommend=='1'){//储值支付
+        if (this.data.recommendStatus == '0' || !this.data.recommendStatus){//显示储值支付
           this.getPayment(this.data.dAmount);
           this.setData({
             showBalanceWrap: false,
             showFocus: false,
             showSelectCard: true
           });
-        }else{//只能微信支付 直接调用微信支付 不再显示中间推荐储值页
+        } else if (this.data.recommendStatus == '1'){//只能微信支付 直接调用微信支付 不再显示中间推荐储值页
           this.setData({
             accountpaystatus: true//显示支付loading
           });

@@ -508,7 +508,9 @@ Page({
       if (this.data.seledAccount) {//如果用户勾选了余额支付
         //此处判断余额付款和组合付款的情况 余额付款直接跳转到结果页面 组合支付还要到当前页的另一层
         if (Number(this.data.amount) > this.data.balance) {//如果输入金额比用户余额多
-          this.getPayment(this.data.dAmount);
+          console.log('如果输入金额比用户余额多');
+          console.log(Number(this.data.amount).toFixed(2));
+          this.getPayment(Number(this.data.amount).toFixed(2));
           this.setData({
             dAmount : Number(this.data.amount).toFixed(2),//保存一个接口传入需要用的amount
             amount : Number(Number(this.data.amount) - this.data.balance).toFixed(2),
@@ -527,11 +529,13 @@ Page({
           this.accountPay(orderObj);
         }
       } else {
-        //如果没有勾选 
+        console.log('如果没有勾选余额支付');
+        //如果没有勾选余额支付
         this.setData({
           amount: Number(this.data.amount).toFixed(2),
           dAmount: Number(this.data.amount).toFixed(2)
         });
+        console.log(this.data.dAmount);
         
         //判断是否优先储值支付
         if (this.data.recommendStatus == '0' || !this.data.recommendStatus){//显示储值支付

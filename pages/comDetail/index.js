@@ -668,7 +668,7 @@ Page({
                   icon: "success"
               });
             }else{
-              errDialog('图文海报已保存到微信本地相册，打开微信朋友圈分享吧!');
+              errDialog('图文海报已保存到微信本地相册，打开微信发送给朋友吧!');
             }
           },
           fail: function(res) {

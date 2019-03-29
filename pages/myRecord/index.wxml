@@ -9,7 +9,7 @@
         </view>
         <view class="amount chong ub ub-ac">
           +¥{{item.addMoney}}
-          <image src="../../images/arrow-right.png" style="width:14rpx;height: 28rpx;margin-left: 20rpx;"></image>
+          <image src="../../images/arrow-right.png" style="display:none;width:14rpx;height: 28rpx;margin-left: 20rpx;"></image>
         </view>
       </view>
 
@@ -20,7 +20,7 @@
         </view>
         <view class="amount ub ub-ac">
           -¥{{item.subMoney}}
-          <image src="../../images/arrow-right.png" style="width:14rpx;height: 28rpx;margin-left: 20rpx;"></image>
+          <image src="../../images/arrow-right.png" style="display:none;width:14rpx;height: 28rpx;margin-left: 20rpx;"></image>
         </view>
       </view>
 

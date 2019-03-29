@@ -74,10 +74,12 @@ Page({
     })
   },
   toggleCard: function(e) { //切换卡片高度
+    console.log(this.data.current);
     console.log(e);
     this.setData({
       current: e.currentTarget.dataset.index
     });
+    console.log(this.data.current);
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

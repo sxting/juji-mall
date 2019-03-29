@@ -618,18 +618,18 @@ Page({
       context.draw();
   },
   savePic: function(e) {
-      var type = e.currentTarget.dataset['type'];
+      var type = e.currentTarget.dataset.type;
       var that = this;
       wx.canvasToTempFilePath({
           canvasId: 'myCanvas',
-          success: function(res1) {
+          success: function(res) {
               wx.getSetting({
-                  success(res2) {
-                      if (!res2.authSetting['scope.writePhotosAlbum']) {
+                  success(rep) {
+                      if (!rep.authSetting['scope.writePhotosAlbum']) {
                           wx.authorize({
                               scope: 'scope.writePhotosAlbum',
                               success() {
-                                  that.saveAsPhoto(res1.tempFilePath,type);
+                                  that.saveAsPhoto(res.tempFilePath,type);
                               },
                               fail() {
                                   wx.openSetting({
@@ -643,7 +643,7 @@ Page({
                               }
                           })
                       } else {
-                          that.saveAsPhoto(res1.tempFilePath,type);
+                          that.saveAsPhoto(res.tempFilePath,type);
                       }
                   },
                   fail() {

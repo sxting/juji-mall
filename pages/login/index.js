@@ -13,7 +13,8 @@ Page({
   data: {
     fromPage:'',
     productId:'',
-    inviteCode:''
+    inviteCode:'',
+    openId: ''
   },
 
   /**

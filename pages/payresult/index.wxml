@@ -57,7 +57,7 @@
 
             <!-- 储值并支付 -->
             <view wx:if="{{addMoney&&addMoney>0&&prepayMoney>0}}">
-              <view class="topRow"><text>账户余额支付</text><text style="margin-right:30rpx;">{{addMoney}}元</text></view>
+              <view class="topRow"><text>账户余额支付</text><text style="margin-right:30rpx;">{{prepayMoney}}元</text></view>
               <view class="topRow" bindtap="toggleDetailWrap"><text>账户消费明细</text><image src="../../images/icon_drop.png" class="dropIcon {{showDetail?'topIcon':''}}"></image></view>
 
               <view class="detailWrap {{showDetail?'showDetailWrap2':''}}">

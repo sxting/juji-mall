@@ -60,6 +60,7 @@ jugardenService.transferIndex = () => {
 // 登陆
 jugardenService.logIn = (data) => {
   let url = API + '/user/login.json';
+  console.log(url);
   return http.get(url, data);
 }
 

@@ -30,7 +30,6 @@ Page({
   onLoad: function (options) {
     let self = this;
     wx.setNavigationBarTitle({ title: '桔园' });
-    this.getUserInfor();//用户信息，是否绑定手机号码
     if (options.openId) {//分享点进来
       let self = this;
       console.log('分享点进来');
@@ -40,80 +39,77 @@ Page({
       })
       if (wx.getStorageSync('token')){//token存在
         console.log(wx.getStorageSync('token') + ' /token存在');
-        // 直接调成为桔民的接口；然后调 getGardenInfor 方法 拿到信息； applyLeader 判断有没有申请过成为局长，如果没有 页面的展示是申请成为桔长，   点击申请成为桔长   判断是否绑定手机号
-        getGardenInfor.call(self);//get首页信息,获取分销角色
+        this.getUserInfor();//用户信息，是否绑定手机号码
+        // getGardenInfor.call(self);//get首页信息,获取分销角色
       }else{//token不存在 登陆
         this.mainFnc(options);
       }
     }else{
-      getGardenInfor.call(self);//get首页信息,获取分销角色
+      this.getUserInfor();//用户信息，是否绑定手机号码
+      // getGardenInfor.call(self);//get首页信息,获取分销角色
     }
   },
 
   // 登陆
   mainFnc: function (option) {
-    let that = this;
-    new Promise(function (resolve, reject) {
-      console.log('Promise is ready!');
-      wx.getSetting({
-        success: (res) => {
-          console.log(res.authSetting['scope.userInfo'] + ' haha');
-          if (!res.authSetting['scope.userInfo']) {
-            wx.reLaunch({ url: '/pages/login/index?fromPage=gardenIndex&openId=' + that.data.openId });
-          } else { //如果已经授权
-            resolve();
-          }
+    let self = this;
+    wx.getSetting({
+      success: (res) => {
+        console.log(res.authSetting['scope.userInfo'] + ' haha');
+        if (!res.authSetting['scope.userInfo']) {
+          wx.reLaunch({ url: '/pages/login/index?fromPage=gardenIndex&openId=' + that.data.openId });
+        } else { //如果已经授权
+          wx.login({
+            success: function (result) {
+              wx.getUserInfo({
+                withCredentials: true,
+                success: function (res) {
+                  if (result.code) {
+                    let requestObj = {
+                      code: result.code,
+                      appId: constant.APPID,
+                      isMock: false, //测试标记
+                      inviteCode: '',
+                      rawData: res.rawData
+                    }
+                    wx.request({
+                      url: constant.apiUrl + '/user/login.json',
+                      method: 'GET',
+                      data: requestObj,
+                      header: {
+                        'content-type': 'application/json',
+                      },
+                      success: (res1) => {
+                        console.log(res1);
+                        if (res1.data.errorCode == '200') {
+                          wx.setStorageSync('token', res1.data.data.token);
+                          wx.setStorageSync('openid', res1.data.data.openId);
+                          wx.setStorageSync('inviteCode', res1.data.data.inviteCode);
+                          wx.setStorageSync('userinfo', JSON.stringify(res1.data.data));
+                          self.getUserInfor();//用户信息，是否绑定手机号码
+                        } else {
+                          wx.showModal({
+                            title: '错误',
+                            content: '登录失败，错误码:' + res1.data.errorCode + ' 返回错误: ' + res1.data.errorInfo
+                          });
+                        }
+                      }
+                    });
+                  } else {
+                    console.log('获取用户登录态失败！' + result.errMsg)
+                  }
+                },
+                fail: function () {
+                }
+              });
+            },
+            fail: function (res) {
+              console.log('获取用户登录态失败！o' + res)
+            },
+            complete: function (res) { },
+          });
         }
-      });
-    }).then(function () {
-      return new Promise(function (resolve1, reject1) {
-        wx.login({
-          success: res => {
-            console.log(res);
-            console.log(constant.APPID);
-            resolve1(res.code);
-          }
-        });
-      })
-    }).then(function (code) {
-      console.log(constant.APPID + '999');
-      var requestObj = {
-        code: code,
-        appId: constant.APPID,
-        isMock: false, //测试标记
-        inviteCode: '',
-        rawData: wx.getStorageSync('rawData')
       }
-
-      wx.request({
-        url: constant.apiUrl + '/user/login.json',
-        method: 'GET',
-        data: requestObj,
-        header: {
-          'content-type': 'application/json',
-        },
-        success: (res1) => {
-          console.log(res1);
-          if (res1.data.errorCode == '200') {
-            wx.setStorageSync('token', res1.data.data.token);
-            wx.setStorageSync('openid', res1.data.data.openId);
-            wx.setStorageSync('inviteCode', res1.data.data.inviteCode);
-            wx.setStorageSync('userinfo', JSON.stringify(res1.data.data));
-            getGardenInfor.call(that);//get用户信息身份
-          } else {
-            wx.showModal({
-              title: '错误',
-              content: '登录失败，错误码:' + res1.data.errorCode + ' 返回错误: ' + res1.data.errorInfo
-            });
-          }
-        }
-      });
-    }).catch(function (err) {
-      console.log(err);
-      wx.showModal({
-        title: '错误',
-        content: err
-      });
     });
   },
 
@@ -215,6 +211,7 @@ Page({
           phone: res.phone,
           bindPhoneNumber: res.phone ? true : false
         });
+        getGardenInfor.call(self);//get用户信息身份
         console.log(this.data.bindPhoneNumber);
       },
       error: err => errDialog(err),
@@ -364,6 +361,18 @@ function joinDistributor(data) {
           minInvitedMemberCount: res.minInvitedMemberCount
         })
       }
+    },
+    error: err => errDialog(err),
+    complete: () => wx.hideToast()
+  })
+}
+
+// 登陆
+function logIn(data) {
+  let self = this;
+  jugardenService.logIn(data).subscribe({
+    next: res => {
+      console.log(res);
     },
     error: err => errDialog(err),
     complete: () => wx.hideToast()

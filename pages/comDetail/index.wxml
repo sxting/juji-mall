@@ -104,7 +104,7 @@
             </view>
             <view class="content">{{item.content}}</view>
             <view class="imglist" wx:if="{{item.imgIds.length > 0}}">
-                <image wx:for="{{filter.toSplitImgs(item.imgIds)}}" wx:for-item='it' wx:key="unique" src="{{it?'https://upic.juniuo.com/file/picture/' + it + '/resize_320_0/mode_fill':''}}"></image>
+                <image wx:for="{{filter.toSplitImgs(item.imgIds)}}" wx:for-item='it' wx:key="unique" data-url="{{it}}" bindtap="previewImage" src="{{it?'https://upic.juniuo.com/file/picture/' + it + '/resize_320_0/mode_fill':''}}"></image>
             </view>
         </view>
     </view>

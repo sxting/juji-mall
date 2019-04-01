@@ -55,7 +55,7 @@ Page({
       //   accountpaystatus: true
       // });
       console.log('Promise is ready!');
-      options.q = 'https://juji-dev.juniuo.com/qrm/212345678.htm';//测试用
+      // options.q = 'https://juji-dev.juniuo.com/qrm/212345678.htm';//测试用
       if (options.q) {
         console.log(options.q);
         var link = decodeURIComponent(options.q);
@@ -196,7 +196,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    wx.setStorageSync('scene','1011');//测试用
+    // wx.setStorageSync('scene','1011');//测试用
     let scene = wx.getStorageSync('scene');
     if (scene == '1011' || scene == '1012' || scene == '1013') {//扫描二维码场景值
       return ;

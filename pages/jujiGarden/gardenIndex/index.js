@@ -57,7 +57,7 @@ Page({
       success: (res) => {
         console.log(res.authSetting['scope.userInfo'] + ' haha');
         if (!res.authSetting['scope.userInfo']) {
-          wx.reLaunch({ url: '/pages/login/index?fromPage=gardenIndex&openId=' + self.data.openId });
+          wx.reLaunch({ url: '/pages/login/index?fromPage=jujiGarden/gardenIndex&openId=' + self.data.openId });
         } else { //如果已经授权
           wx.login({
             success: function (result) {

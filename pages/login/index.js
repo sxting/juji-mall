@@ -24,9 +24,10 @@ Page({
     console.log('---------授权页面----------');
     console.log(options);
     this.setData({
-      fromPage: options.fromPage,
-      productId: options.productId,
-      inviteCode: options.inviteCode
+      fromPage: options.fromPage ? options.fromPage:'',
+      productId: options.productId ? options.productId : '',
+      inviteCode: options.inviteCode ? options.inviteCode : '',
+      openId: options.openId ? options.openId : ''
     });
     wx.getSetting({
       success: (res) => {
@@ -44,7 +45,7 @@ Page({
     if (e.detail.userInfo) {
       wx.setStorageSync('rawData', e.detail.rawData);
       wx.reLaunch({
-        url: '/pages/' + e.currentTarget.dataset.fp + '/index?id=' + e.currentTarget.dataset.pid + '&inviteCode=' + e.currentTarget.dataset.inv,
+        url: '/pages/' + e.currentTarget.dataset.fp + '/index?id=' + e.currentTarget.dataset.pid + '&inviteCode=' + e.currentTarget.dataset.inv + '&openId=' + e.currentTarget.dataset.opid,
       });
 
 

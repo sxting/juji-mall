@@ -11,6 +11,19 @@ Page({
         isFinall: false,
         scorelist: []
     },
+    previewImage: function(e){
+      // console.log(e);
+      var arr = [];
+      var url = constant.basePicUrl + e.currentTarget.dataset.url + '/resize_0_0/mode_fill';
+      arr.push(url);
+      // console.log(arr);
+      wx.previewImage({
+        urls: arr // 需要预览的图片http链接列表
+        // success: res => { console.log(res)},
+        // fail: err => { console.log(err)},
+        // complete: res =>{ console.log(res)}
+      })
+    },
     getComments: function(pageNo) {
         var obj = {
             pageNo: pageNo,

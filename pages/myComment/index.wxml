@@ -12,7 +12,7 @@
         </view>
         <view class="content">{{item.content}}</view>
         <view class="imglist" wx:if="{{item.imgIds.length>0}}">
-            <image wx:for="{{item.imgIds}}" wx:for-item='it' wx:key="unique" src="{{it?constant.basePicUrl + it + constant.basePicFix1:''}}"></image>
+            <image wx:for="{{item.imgIds}}" wx:for-item='it' wx:key="unique" data-url="{{it}}" src="{{it?constant.basePicUrl + it + constant.basePicFix1:''}}" bindtap="previewImage"></image>
         </view>
         <view class="p15 ub ub-ac info mt10" wx:for="{{item.orders.orderItemList}}" wx:for-item='it' wx:key="unique" bindtap="toComDetail" data-id="{{item.productId}}">
             <image class="goodImg udb" src="{{constant.basePicUrl}}{{it.picId}}/resize_220_200/mode_fill"></image>

@@ -1,12 +1,21 @@
 import {
   service
 } from '../../service';
+import { constant } from '../../utils/constant';
 var app = getApp();
 Page({
   data: {
     commentlist: [],
     pageNo: 1,
     pageSize: 10
+  },
+  previewImage: function (e) {
+    var arr = [];
+    var url = constant.basePicUrl + e.currentTarget.dataset.url + '/resize_0_0/mode_fill';
+    arr.push(url);
+    wx.previewImage({
+      urls: arr // 需要预览的图片http链接列表
+    })
   },
 
   getComments: function(obj) {
@@ -45,7 +54,7 @@ Page({
 
   onLoad: function(options) {
     wx.setNavigationBarTitle({
-      title: '我的评价',
+      title: '用户评价',
     });
     wx.hideShareMenu();
     console.log(options);

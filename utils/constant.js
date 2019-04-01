@@ -1,5 +1,5 @@
 var constant = {
-  TPLID: '1.0.05',//应用版本
+  TPLID: '1.0.06',//应用版本
   APPID: 'wxb03b0ab93bb60ecc',//小程序wxid
   apiUrl: 'https://c.juniuo.com/shopping',//接口前缀 http://juzi-dev.juniuo.cn
   // apiUrl: 'http://juzi-dev.juniuo.cn',//测试接口前缀 

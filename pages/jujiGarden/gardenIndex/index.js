@@ -367,17 +367,5 @@ function joinDistributor(data) {
   })
 }
 
-// 登陆
-function logIn(data) {
-  let self = this;
-  jugardenService.logIn(data).subscribe({
-    next: res => {
-      console.log(res);
-    },
-    error: err => errDialog(err),
-    complete: () => wx.hideToast()
-  })
-}
-
 
 

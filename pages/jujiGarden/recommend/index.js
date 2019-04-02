@@ -2,7 +2,7 @@ import { jugardenService } from '../shared/service';
 import { service } from '../../../service.js';
 import { constant } from '../../../utils/constant';
 import { errDialog, loading } from '../../../utils/util';
-
+var app = getApp();
 Page({
     data: {
         recommendlist:[],
@@ -21,7 +21,8 @@ Page({
         productId: ''//当前商品的id
     },
     onLoad: function(options) {
-        wx.setNavigationBarTitle({ title: '推广素材' });
+        new app.ToastPannel();
+        wx.setNavigationBarTitle({ title: '商品推荐' });
         if (options.productid) {
             this.setData({ productId: options.productid });
         }
@@ -54,6 +55,13 @@ Page({
     switchTab: function(e) {
         this.setData({ curTabIndex: e.currentTarget.dataset.index });
     },
+    previewImage: function(event) {
+        var src = event.currentTarget.dataset.src;
+        wx.previewImage({
+            current: src,
+            urls: [src]
+        })
+    },
     onShareAppMessage: function(res) {
         if (res.from === 'button') {
             this.closeModal();
@@ -67,41 +75,44 @@ Page({
     /**保存素材**/
     saveImagesToPhone: function(e) {
         var imageIds = e.currentTarget.dataset.imgs;
+        var desc = e.currentTarget.dataset.desc;
         var that = this;
-        wx.getSetting({
-            success(res) {
-                if (!res.authSetting['scope.writePhotosAlbum']) {
-                    wx.authorize({
-                        scope: 'scope.writePhotosAlbum',
-                        success: (res) => {
-                            that.saveFile(imageIds);
-                        }
-                    })
-                } else {
-                    that.saveFile(imageIds);
+        wx.setClipboardData({
+          data: desc,
+          success: (res) => {
+            wx.getSetting({
+                success(res) {
+                    if (!res.authSetting['scope.writePhotosAlbum']) {
+                        wx.authorize({
+                            scope: 'scope.writePhotosAlbum',
+                            success: (res) => {
+                                that.saveFile(imageIds);
+                            }
+                        })
+                    } else {
+                        that.saveFile(imageIds);
+                    }
+                },
+                fail() {
+                    console.log("getSetting: fail");
                 }
-            },
-            fail() {
-                console.log("getSetting: fail");
-            }
-        })
+            });
+          }
+        });
     },
     saveFile: function(imageIds) {
         var imgIndex = 0;
         for (var i = 0; i < imageIds.length; i++) {
             var imgId = imageIds[i];
             wx.downloadFile({
-                url: constant.basePicUrl + imageIds[i] + '/resize_240_240/mode_fill',
+                url: constant.basePicUrl + imageIds[i] + '/resize_0_0/mode_fill',
                 success: function(res) {
                     wx.saveImageToPhotosAlbum({
                         filePath: res.tempFilePath,
                         success: (res) => {
                             imgIndex++;
                             if (imgIndex == imageIds.length) {
-                                wx.showToast({
-                                    title: "已保存至相册",
-                                    icon: "success"
-                                });
+                                this.showToast("图片已下载到微信相册，文案已复制到剪贴板")
                             }
                         },
                         fail: (res) => {

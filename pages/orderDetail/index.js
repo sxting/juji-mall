@@ -42,29 +42,6 @@ Page({
         }
       }
     })
-    // wx.showModal({
-    //   title: '退款后金额将原路返回',
-    //   content: '退款金额为商品实付金额，商品优惠金额不予退款',
-    //   showCancel:true,
-    //   cancelColor:'#999999',
-    //   confirmColor:'#333333',
-    //   success:(res) => {
-    //     if (res.confirm) {
-    //       service.refund({orderId: this.data.orderId}).subscribe({
-    //         next: res => {
-    //             wx.showToast({
-    //                 title:"退款成功",
-    //                 icon:"success"
-    //             });
-    //         },
-    //         error: err => console.log(err),
-    //         complete: () => wx.hideToast()
-    //       })
-    //     } else if (res.cancel) {
-    //       console.log('用户点击取消');
-    //     }
-    //   }
-    // })
   },
   getData: function(orderId) {
     service.orderInfo({orderId: orderId}).subscribe({

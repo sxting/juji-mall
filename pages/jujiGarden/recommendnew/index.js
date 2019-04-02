@@ -10,7 +10,7 @@ Page({
         info: {
             imageIds: ['26PwRewDdJlf', '26PwRIQO2lz-']
         },
-        descrtion:"寻找有想法的你，只要一部手机，随时随地即可赚钱，无忧零风险，赚钱又顾家的全新体验，反正都要玩手机，不如乘机赚点钱。加入桔集，带你燃烧心中的激情。",
+        descrtion:"寻找有想法的你，只要一部手机，随时随地即可赚钱，无忧零风险，赚钱又顾家的全新体验。反正都要玩手机，不如趁机赚点钱。加入桔集，带你燃烧心中的激情。",
         avatar: '',
         phoneNum: '',
         shareBg: "../../../images/sharenew.jpg"
@@ -108,7 +108,7 @@ Page({
             var imgId = imageIds[i];
             wx.downloadFile({
                 url: constant.basePicUrl + imageIds[i] + '/resize_0_0/mode_fill',
-                success: function(res) {
+                success: (res)=> {
                     wx.saveImageToPhotosAlbum({
                         filePath: res.tempFilePath,
                         success: (res) => {

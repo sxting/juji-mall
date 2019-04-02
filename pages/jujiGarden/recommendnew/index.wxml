@@ -13,7 +13,7 @@
         </view>
         <view class="ctrl ub ub-ac plr15">
             <view class="ub-f1 ub ub-ac"></view>
-            <view class="ctrlbtn ub ub-ac" catchtap='saveImagesToPhone' data-imgs="{{item.imageIds}}">
+            <view class="ctrlbtn ub ub-ac" catchtap='saveImagesToPhone' data-imgs="{{info.imageIds}}" data-desc="{{descrtion}}">
                 <image class="wxIcon" src="../../../images/icon_02.png" mode="aspectFit"></image>
                 保存素材
             </view>

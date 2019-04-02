@@ -106,7 +106,7 @@ Page({
             var imgId = imageIds[i];
             wx.downloadFile({
                 url: constant.basePicUrl + imageIds[i] + '/resize_0_0/mode_fill',
-                success: function(res) {
+                success: (res)=> {
                     wx.saveImageToPhotosAlbum({
                         filePath: res.tempFilePath,
                         success: (res) => {

@@ -447,6 +447,7 @@ Page({
             console.log('----------服务商信息---------');
             console.log(res);
             if (res.id) { //如果存在服务商
+              wx.setStorageSync('providerId', res.id);
               that.setData({
                 providerId: res.id
               });
@@ -483,6 +484,7 @@ Page({
           next: res => {
             console.log('--------选择省市县确认服务商信息---------');
             console.log(res);
+            wx.setStorageSync('providerId', res.id);
             that.setData({
               providerId: res.id,
               pageNo: 1
@@ -588,6 +590,7 @@ Page({
               console.log('----------服务商信息---------');
               console.log(res1);
               if (res1.id) { //如果存在服务商
+                wx.setStorageSync('providerId', res1.id);
                 that.setData({
                   providerId: res1.id,
                   pageNo: 1

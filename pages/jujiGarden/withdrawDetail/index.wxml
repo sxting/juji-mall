@@ -2,7 +2,7 @@
 <view class="main">
     <view class="toper">
         <view class='toper-box'>
-          <view class="balance">{{format.toFix(settlementDetailData.settlementAmount)}}</view>
+          <view class="balance">{{format.toFix(settlementDetailData.settlementAmount? settlementDetailData.settlementAmount:0)}}</view>
           <view class="status {{settlementDetailData.status == 'PENDING'? 'activeing': settlementDetailData.status == 'CLOSED'? 'fail-active' : ''}}">{{settlementDetailData.status == 'PENDING'? '处理中': settlementDetailData.status == 'CLOSED'? '提现失败': '提现成功'}}</view>
           <view class='tips' wx:if='{{settlementDetailData.status == "CLOSED"}}'>{{settlementDetailData.failReason}}</view>
         </view>
@@ -12,7 +12,7 @@
             <view class="tit">提现信息</view>
             <view class="item ub ub-ac">
                 <view class="ub-f1">提取金额</view>
-                <view class="txt">{{format.toFix(settlementDetailData.settlementAmount)}}</view>
+                <view class="txt">{{format.toFix(settlementDetailData.settlementAmount? settlementDetailData.settlementAmount : 0)}}</view>
             </view>
             <view class="item ub ub-ac">
                 <view class="ub-f1">收款方式</view>

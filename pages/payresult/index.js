@@ -65,7 +65,7 @@ Page({
            if(res.data.errorCode=='0'){
              this.setData({
                zhuheAmount: res.data.data.wxPayMoney && res.data.data.wxPayMoney > 0 && res.data.data.prepayMoney > 0 ? (Number(res.data.data.prepayMoney) + Number(res.data.data.wxPayMoney)).toFixed(2) : res.data.data.prepayMoney,
-               aMoney: res.data.data.givingMoney ? Number(res.data.data.addMoney) - Number(res.data.data.givingMoney) : res.data.data.addMoney,
+               aMoney: res.data.data.givingMoney ? (Number(res.data.data.addMoney) - Number(res.data.data.givingMoney)).toFixed(2) : res.data.data.addMoney,
                givingMoney: res.data.data.givingMoney ? res.data.data.givingMoney:0,
                preBalance: res.data.data.preBalance ? res.data.data.preBalance : 0,
                balance: res.data.data.accountDto.balance,

@@ -23,16 +23,16 @@
             </view>
             <view class="ub ub-fe jc-sb" style="margin-top:10rpx;">
                 <view class="ub ub-fe">
-                    <view style="display:flex;align-items: flex-end;" wx:if="{{productInfo.type=='POINT'}}">
+                    <!-- <view style="display:flex;align-items: flex-end;" wx:if="{{productInfo.type=='POINT'}}">
                         <view style="font-size:38rpx;color: #E83221;font-weight:bold;line-height:38rpx;">{{productInfo.point}}</view>
                         <view style="font-size:24rpx;color: #E83221;font-weight:bold;line-height:24rpx;margin-bottom:4rpx;">桔子</view>
-                    </view>
-                    <view style="display:flex;align-items: flex-end;" wx:else>
+                    </view> -->
+                    <view style="display:flex;align-items: flex-end;">
                         <view style="font-size:38rpx;color: #E83221;font-weight:bold;line-height:38rpx;" wx:if="{{productInfo.point!=0}}">{{productInfo.point}}</view>
                         <view style="font-size:24rpx;color: #E83221;font-weight:bold;line-height:24rpx;margin-bottom:4rpx;" wx:if="{{productInfo.point!=0}}">桔子</view>
-                        <view style="font-size:24rpx;color: #E83221;font-weight:bold;line-height:24rpx;margin-bottom:4rpx;" wx:if="{{productInfo.point!=0}}">+</view>
-                        <view style="font-size:38rpx;color: #E83221;font-weight:bold;line-height:38rpx;">{{filter.toFix(productInfo.price)}}</view>
-                        <view style="font-size:24rpx;color: #E83221;font-weight:bold;line-height:24rpx;margin-bottom:4rpx;">元</view>
+                        <view style="font-size:24rpx;color: #E83221;font-weight:bold;line-height:24rpx;margin-bottom:4rpx;" wx:if="{{productInfo.point!=0&&productInfo.price!=0}}">+</view>
+                        <view style="font-size:38rpx;color: #E83221;font-weight:bold;line-height:38rpx;" wx:if="{{productInfo.price!=0}}">{{filter.toFix(productInfo.price)}}</view>
+                        <view style="font-size:24rpx;color: #E83221;font-weight:bold;line-height:24rpx;margin-bottom:4rpx;" wx:if="{{productInfo.price!=0}}">元</view>
                     </view>
                     <view style="font-size: 24rpx;color: #999999;text-decoration:line-through;margin-left:25rpx;line-height:24rpx;">{{filter.toFix(productInfo.originalPrice)}} 元</view>
                     <view class="proDiv ub ub-ac" wx:if="{{productInfo.distributor}}">
@@ -104,7 +104,7 @@
             </view>
             <view class="content">{{item.content}}</view>
             <view class="imglist" wx:if="{{item.imgIds.length > 0}}">
-                <image wx:for="{{filter.toSplitImgs(item.imgIds)}}" wx:for-item='it' wx:key="unique" src="{{it?'https://upic.juniuo.com/file/picture/' + it + '/resize_320_0/mode_fill':''}}"></image>
+                <image wx:for="{{filter.toSplitImgs(item.imgIds)}}" wx:for-item='it' wx:key="unique" data-url="{{it}}" bindtap="previewImage" src="{{it?'https://upic.juniuo.com/file/picture/' + it + '/resize_320_0/mode_fill':''}}"></image>
             </view>
         </view>
     </view>
@@ -226,8 +226,8 @@
         <!-- 判断用户橘子足不足  和是否只能原价购买 -->
         <form bindsubmit="collectFormIds" report-submit="true" wx:else>
             <!-- 如果是桔子和人民币组合购买 -->
-            <!-- 2.27日修改的逻辑 -->
-            <view class="footerBtnWrap" wx:if="{{productInfo.type=='PRODUCT'&&productInfo.point>0&&productInfo.price>0}}">
+            <!-- 4月02日修改的逻辑 -->
+            <view class="footerBtnWrap" wx:if="{{productInfo.point>0&&productInfo.price>0}}">
                 <button form-type="submit" class="yuanjia-xiadan" bindtap="toCreateOrder" wx:if="{{productInfo.price>0&&pointBalance>=productInfo.point}}">
                     <view>
                         <view style="font-size: 24rpx;font-weight:bold;line-height:34rpx;font-weight:bolder;">{{productInfo.point}}桔子+{{filter.toFix(productInfo.price)}}元</view>
@@ -250,8 +250,8 @@
                     </view>
                 </button>
             </view>
-            <!-- 如果是桔子换礼商品 -->
-            <view class="footerBtnWrap" wx:if="{{productInfo.type=='POINT'}}">
+            <!-- 如果只能用桔子兑换的商品 -->
+            <view class="footerBtnWrap" wx:if="{{productInfo.type=='POINT'&&productInfo.price==0}}">
                 <!-- 如果桔子充足 -->
                 <button form-type="submit" class="yuanjia-xiadan" bindtap="toCreateOrderByPoint" wx:if="{{pointBalance>=productInfo.point}}">
                     <view>

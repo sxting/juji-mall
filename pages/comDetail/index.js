@@ -247,6 +247,14 @@ Page({
       });
     });
   },
+  previewImage: function (e) {
+    var arr = [];
+    var url = constant.basePicUrl + e.currentTarget.dataset.url + '/resize_0_0/mode_fill';
+    arr.push(url);
+    wx.previewImage({
+      urls: arr // 需要预览的图片http链接列表
+    })
+  },
   //关闭新用户见面礼
   closeGetNewer: function () {
     this.setData({

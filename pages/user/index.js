@@ -43,7 +43,7 @@ Page({
                 });
                 this.setData({phoneNum:this.data.bindPhone});
             },
-            error: err => errDialog(err),
+            error: err => { console.log(err) },
             complete: () => wx.hideToast()
         })
     },
@@ -56,7 +56,8 @@ Page({
                     this.setData({bindPhone: res.phoneNumber});
                     this.bindPhone();
                 },
-                error: err => errDialog(err),
+                // error: err => errDialog(err),
+              error: err => { console.log(err) },
                 complete: () => wx.hideToast()
             })
         }
@@ -65,5 +66,11 @@ Page({
         wx.makePhoneCall({
             phoneNumber: '4000011139',
         });
+    },
+    /**
+   * 页面相关事件处理函数--监听用户下拉动作
+   */
+    onPullDownRefresh: function () {
+      this.getInfo();
     }
 });

@@ -33,117 +33,7 @@ Page({
     pullUpFlag: true,
     showPageLoading: true,//首页加载过程中标记 当最后一层的pageComment返回之后设置为false
     // citylist: [],
-    citylist: [{
-      "version": 0,
-      "dateCreated": "2019-01-23 18:31:25",
-      "lastUpdated": "2019-01-23 18:31:25",
-      "deleted": 0,
-      "locationCode": "110000",
-      "locationName": "北京",
-      "locationType": "PROVINCE",
-      "parentLocationCode": "0",
-      "parentLocation": null,
-      "subList": [
-        {
-          "version": 0,
-          "dateCreated": "2019-01-23 18:31:25",
-          "lastUpdated": "2019-01-23 18:31:25",
-          "deleted": 0,
-          "locationCode": "110100",
-          "locationName": "北京市",
-          "locationType": "CITY",
-          "parentLocationCode": "110000",
-          "parentLocation": null,
-          "subList": [
-            {
-              "version": 0,
-              "dateCreated": "2019-01-23 18:31:25",
-              "lastUpdated": "2019-01-23 18:31:25",
-              "deleted": 0,
-              "locationCode": "110101",
-              "locationName": "东城区",
-              "locationType": "DISTRICT",
-              "parentLocationCode": "110100",
-              "parentLocation": null,
-              "subList": null
-            },
-            {
-              "version": 0,
-              "dateCreated": "2019-01-23 18:31:25",
-              "lastUpdated": "2019-01-23 18:31:25",
-              "deleted": 0,
-              "locationCode": "110105",
-              "locationName": "朝阳区",
-              "locationType": "DISTRICT",
-              "parentLocationCode": "110100",
-              "parentLocation": null,
-              "subList": null
-            },
-            {
-              "version": 0,
-              "dateCreated": "2019-01-23 18:31:25",
-              "lastUpdated": "2019-01-23 18:31:25",
-              "deleted": 0,
-              "locationCode": "110108",
-              "locationName": "海淀区",
-              "locationType": "DISTRICT",
-              "parentLocationCode": "110100",
-              "parentLocation": null,
-              "subList": null
-            },
-            {
-              "version": 0,
-              "dateCreated": "2019-01-23 18:31:25",
-              "lastUpdated": "2019-01-23 18:31:25",
-              "deleted": 0,
-              "locationCode": "110114",
-              "locationName": "昌平区",
-              "locationType": "DISTRICT",
-              "parentLocationCode": "110100",
-              "parentLocation": null,
-              "subList": null
-            }
-          ]
-        }
-      ]
-    },{
-      "version": 0,
-      "dateCreated": "2019-01-23 18:31:25",
-      "lastUpdated": "2019-01-23 18:31:25",
-      "deleted": 0,
-      "locationCode": "410000",
-      "locationName": "河南省",
-      "locationType": "PROVINCE",
-      "parentLocationCode": "0",
-      "parentLocation": null,
-      "subList": [
-        {
-          "version": 0,
-          "dateCreated": "2019-01-23 18:31:25",
-          "lastUpdated": "2019-01-23 18:31:25",
-          "deleted": 0,
-          "locationCode": "410100",
-          "locationName": "郑州市",
-          "locationType": "CITY",
-          "parentLocationCode": "410000",
-          "parentLocation": null,
-          "subList": [
-            {
-              "version": 0,
-              "dateCreated": "2019-01-23 18:31:25",
-              "lastUpdated": "2019-01-23 18:31:25",
-              "deleted": 0,
-              "locationCode": "410105",
-              "locationName": "金水区",
-              "locationType": "DISTRICT",
-              "parentLocationCode": "410100",
-              "parentLocation": null,
-              "subList": null
-            }
-          ]
-        }
-      ]
-    }],
+    citylist: [],
     isFirstShow:true,
     isLoadedBalance:true
   },
@@ -239,26 +129,27 @@ Page({
               that.currentPoint();
 
               //获取热门城市
-              // var imageWidth = (wx.getSystemInfoSync().windowWidth - 66) / 3;
-              // that.setData({
-              //   imageWidth: imageWidth + 'px'
-              // });
-              // service.getHotData().subscribe({
-              //   next: res => {
-              //     console.log(res);
-              //     let arr = [];
-              //     res.forEach(function(item,index){
-              //       if (item.subList[0].locationCode != wx.getStorageSync('locationCode')){
-              //         arr.push(item);
-              //       }
-              //     });
-              //     that.setData({
-              //       citylist: arr
-              //     });
-              //   },
-              //   error: err => errDialog(err),
-              //   complete: () => wx.hideToast()
-              // })
+              var imageWidth = (wx.getSystemInfoSync().windowWidth - 66) / 3;
+              that.setData({
+                imageWidth: imageWidth + 'px'
+              });
+              service.getOpenedData().subscribe({
+                next: res => {
+                  console.log('--------------新版开通的热门城市--------------');
+                  console.log(res);
+                  // let arr = [];
+                  // res.forEach(function(item,index){
+                  //   if (item.subList[0].locationCode != wx.getStorageSync('locationCode')){
+                  //     arr.push(item);
+                  //   }
+                  // });
+                  that.setData({
+                    citylist: res
+                  });
+                },
+                error: err => errDialog(err),
+                complete: () => wx.hideToast()
+              })
 
               resolve2();
             } else {
@@ -353,7 +244,7 @@ Page({
                         next: res => {
                           console.log('--------选择省市县确认服务商信息---------');
                           console.log(res);
-                          wx.setStorageSync('providerId',res.id);
+                          wx.setStorageSync('providerId',res.id?res.id:'');
                           that.setData({
                             providerId: res.id,
                             pageNo: 1
@@ -447,7 +338,7 @@ Page({
             console.log('----------服务商信息---------');
             console.log(res);
             if (res.id) { //如果存在服务商
-              wx.setStorageSync('providerId', res.id);
+              wx.setStorageSync('providerId', res.id ? res.id : '');
               that.setData({
                 providerId: res.id
               });
@@ -484,7 +375,7 @@ Page({
           next: res => {
             console.log('--------选择省市县确认服务商信息---------');
             console.log(res);
-            wx.setStorageSync('providerId', res.id);
+            wx.setStorageSync('providerId', res.id ? res.id : '');
             that.setData({
               providerId: res.id,
               pageNo: 1
@@ -590,7 +481,7 @@ Page({
               console.log('----------服务商信息---------');
               console.log(res1);
               if (res1.id) { //如果存在服务商
-                wx.setStorageSync('providerId', res1.id);
+                wx.setStorageSync('providerId', res1.id ? res1.id : '');
                 that.setData({
                   providerId: res1.id,
                   pageNo: 1

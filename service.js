@@ -33,6 +33,11 @@ service.getHotData = (data) => {
   return http.get(apiUrl, data);
 }
 
+service.getOpenedData = (data) => {
+  let apiUrl = api + '/loc/opened.json';//描述:查询(新版)热门开通城市
+  return http.get(apiUrl, data);
+}
+
 service.getCurrentLoc = (data) => {
   let apiUrl = api + '/loc/currentLoc.json';//描述:当前城市 参数经纬度
   return http.get(apiUrl, data);

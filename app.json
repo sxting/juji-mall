@@ -18,7 +18,6 @@
     "pages/bindPhone/index",
     "pages/merchantsCanUse/index",
     "pages/article/index",
-    "pages/jujipay/index",
     "pages/pay/index",
     "pages/payrecord/index",
     "pages/cardlist/index",

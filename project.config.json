@@ -36,7 +36,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 27,
+			"current": 28,
 			"list": [
 				{
 					"id": 0,
@@ -229,6 +229,13 @@
 					"name": "模拟更新",
 					"pathName": "pages/index/index",
 					"query": "",
+					"scene": null
+				},
+				{
+					"id": 28,
+					"name": "模拟分享",
+					"pathName": "pages/login/index",
+					"query": "path=/pages/index/index&params={\"inviteCode\":\"573f68c3547449109c5b1e94c3ac38fd\"}",
 					"scene": null
 				}
 			]

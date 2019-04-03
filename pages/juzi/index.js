@@ -201,10 +201,12 @@ Page({
       type:'SHARE_PROGRAM',
       sharePath: '/pages/index/index'
     };
+    var paramsStr = JSON.stringify({ inviteCode: wx.getStorageSync('inviteCode')});
+    // console.log(paramsStr);
     this.share(obj);
     return {
       title: JSON.parse(wx.getStorageSync('userinfo')).nickName +'给您分享了桔集小程序，一起享受好店优惠吧！',
-      path: '/pages/index/index?inviteCode=' + wx.getStorageSync('inviteCode'),
+      path: '/pages/login/index?path=/pages/index/index&params=' + paramsStr,
       imageUrl: 'https://upic.juniuo.com/file/picture/26PTWGQU8nHo/resize_0_0/mode_fill'
     }
   }

@@ -1,7 +1,7 @@
 {
   "pages": [
-    "pages/index/index",
     "pages/login/index",
+    "pages/index/index",
     "pages/user/index",
     "pages/myTrade/index",
     "pages/myComment/index",

@@ -202,16 +202,10 @@ Page({
                     this.setData({ erwmImg: res1.tempFilePath });
                     var info = this.data.productInfo;
                     wx.hideLoading();
-                    if (info.type == 'POINT') {
-                        var price1 = info.point + '桔子';
-                    } else {
-                        if (info.point != 0) {
-                            var juzi = info.point + '桔子+';
-                        } else {
-                            var juzi = '';
-                        }
-                        var price1 = juzi + Number(info.price / 100).toFixed(2) + '元';
-                    }
+                    var point = info.point==0?'':info.point+'桔子';
+                    var price = info.price==0?'':Number(info.price/100).toFixed(2)+'元';
+                    var link = info.price!=0&&info.point!=0?'+':'';
+                    var price1 = point + link + price;
                     var name = info.productName;
                     var price2 = Number(info.originalPrice / 100).toFixed(2) + '元';
                     var storeLen = info.productStores.length;

@@ -235,7 +235,6 @@ Page({
       complete: () => wx.hideToast()
     })
   },
-
 });
 
 // 绑定手机号码

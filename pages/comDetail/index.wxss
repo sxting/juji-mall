@@ -71,7 +71,7 @@ page { height: 100%; }
 
 .proDiv{margin-left: 16rpx;border-radius: 6rpx;overflow: hidden;}
 .proDiv .l{padding: 3rpx 10rpx;background: #444444;font-size: 20rpx;color: #FED901;}
-.proDiv .r{padding: 3rpx 10rpx;font-size: 20rpx;color: #000000;background-image: linear-gradient(-269deg, #FCBF0A 0%, #FFDC00 100%);}
+.proDiv .r{padding: 3rpx 10rpx;font-size: 20rpx;color: #000000;background-image: linear-gradient(-269deg, #FCBF0A 0%, #FFDC00 100%);font-weight: bold;}
 .proBtns{border-radius: 44rpx;overflow: hidden;height: 88rpx;}
 .proBtns .l{width: 240rpx;height: 88rpx;background: #333333;}
 .proBtns .r{width: 240rpx;height: 88rpx;background: #E83221;}

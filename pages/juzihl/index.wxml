@@ -2,7 +2,7 @@
 <view>
   <view class="juzihl-wrap">
     <view style="display:flex;justify-content: space-between;align-item:center;">
-      <view class="mtitle">桔集</view>
+      <view class="mtitle">桔子换礼</view>
       <view class="location" bindtap="toCityList">{{locationName}}
         <image style="width:16rpx;height:10rpx;margin-left:10rpx;" src="../../images/sort-down.png" wx:if="{{locationName}}"></image>
       </view>

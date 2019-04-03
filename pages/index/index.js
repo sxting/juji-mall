@@ -957,6 +957,7 @@ Page({
           providerId: res.id,
           pageNo: 1
         });
+        wx.setStorageSync('providerId', res.id ? res.id : '');
         console.log('--------选择省市县确认服务商信息后重新加载首页数据---------');
         that.getIndexData();
         var obj = {

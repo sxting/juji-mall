@@ -34,7 +34,8 @@ Page({
       this.setData({ 
         curTabIndex: thisIndex, 
         role: thisStatus,
-        userlistInfor: []
+        userlistInfor: [],
+        pageNo: 1
       });
       getPersonListInfor.call(self);//get我的用户信息
     },

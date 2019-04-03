@@ -205,7 +205,7 @@ Page({
     return {
       title: JSON.parse(wx.getStorageSync('userinfo')).nickName +'给您分享了桔集小程序，一起享受好店优惠吧！',
       path: '/pages/index/index?inviteCode=' + wx.getStorageSync('inviteCode'),
-      imageUrl: '/images/shareMinPro.png'
+      imageUrl: 'https://upic.juniuo.com/file/picture/26PTWGQU8nHo/resize_0_0/mode_fill'
     }
   }
 })

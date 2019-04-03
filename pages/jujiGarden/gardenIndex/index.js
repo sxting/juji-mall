@@ -44,9 +44,9 @@ Page({
             } else { //token不存在 登陆
                 this.mainFnc(options);
             }
-        } else if (option.scene) {
+        } else if (options.scene) {
             console.log('小程序码进来');
-            let scene = decodeURIComponent(option.scene);
+            let scene = decodeURIComponent(options.scene);
             this.setData({ sceneId: scene });
             wx.request({
                 url: constant.apiUrl + '/qr/getBySceneId.json?sceneId=' + scene,

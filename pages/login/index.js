@@ -106,6 +106,7 @@ Page({
     },
     nextPage:function(){
       console.log("走下一步");
+      console.log('pageType===='+this.data.pageType);
       if (this.data.pageType==0) {
         wx.switchTab({
           url: '/pages/index/index'
@@ -117,7 +118,7 @@ Page({
         });
       }
       if (this.data.pageType==2) {
-        wx.switchTab({
+        wx.reLaunch({
           url: '/pages/jujiGarden/gardenIndex/index?openid=' + this.data.sharePersonOpenId
         });
       }
@@ -127,7 +128,7 @@ Page({
             url: '/pages/comDetail/index?id=' + this.data.shareProductId + '&storeid='
           });
         }else{//邀新
-          wx.switchTab({
+          wx.reLaunch({
             url: '/pages/jujiGarden/gardenIndex/index?openid=' + this.data.sharePersonOpenId
           });
         }
@@ -140,7 +141,7 @@ Page({
       }
       // 邀新首页
       if(this.data.pageType==5){
-        wx.switchTab({
+        wx.reLaunch({
           url: '/pages/jujiGarden/gardenIndex/index?openid=' + this.data.pageData.openid
         });
       }

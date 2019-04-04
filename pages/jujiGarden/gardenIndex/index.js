@@ -76,7 +76,7 @@ Page({
         let self = this;
         return {
             title: JSON.parse(wx.getStorageSync('userinfo')).nickName + '邀请您桔园结义成为桔长，购物返利最高可享40%商品返利',
-            path: 'pages/login/index?path=/pages/jujiGarden/gardenIndex/index&params=' + wx.getStorageSync('openid'),
+            path: 'pages/login/index?pagetype=5&openid=' + wx.getStorageSync('openid'),
             imageUrl: '/images/banner-invent.png',
         }
     },

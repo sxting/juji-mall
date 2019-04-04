@@ -42,7 +42,7 @@ Page({
     next: function() {
         wx.getSetting({
             success: (res) => {
-                console.log(res.authSetting['scope.userInfo']);
+                console.log('userInfoStatus='+res.authSetting['scope.userInfo']);
                 if (res.authSetting['scope.userInfo']) {
                     if(this.data.pageType==3){
                         this.getValueByscene(this.data.scene,1);

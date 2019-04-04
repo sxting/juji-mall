@@ -33,30 +33,47 @@
         <view class="tx-r total" wx:if="{{orderInfo.status=='CREATED'||orderInfo.status=='CLOSE'}}">合计：<text wx:if="{{orderInfo.amount>0}}">{{format.toFix(orderInfo.amount)}}元</text><text wx:if="{{orderInfo.point>0&&orderInfo.amount>0}}">+</text><text wx:if="{{orderInfo.point>0}}">{{orderInfo.point}}桔子</text></view>
         <view class="tx-r total" wx:else>合计：<text wx:if="{{orderInfo.paidAmount>0}}">{{format.toFix(orderInfo.paidAmount)}}元</text><text wx:if="{{orderInfo.paidPoint>0&&orderInfo.paidAmount>0}}">+</text><text wx:if="{{orderInfo.paidPoint>0}}">{{orderInfo.paidPoint}}桔子</text></view>
     </view>
-    <view class="ctrl plr15 ub ub-ac ub-pj">
+    <view class="ctrl plr15 ub ub-ac ub-pj" wx:if="{{orderInfo.status!='CREATED'}}">
         <view class="status">{{format.formatStatus(orderInfo.status)}}</view>
-        <view wx:if="{{orderInfo.status=='CREATED'}}" class="pay" bindtap="toPay" data-id="{{orderInfo.orderId}}">立即支付</view>
         <view wx:if="{{orderInfo.status=='CONSUME'}}" class="btn" bindtap="toComment" data-id="{{orderInfo.orderId}}" data-pid="{{orderInfo.orderItemList[0].productId}}">立即评价</view>
         <view class="txt" wx:if="{{orderInfo.status=='PAID'}}">您已成功付款，请到店展示消费码消费</view>
     </view>
-    <view class="orderInfo2" wx:if="{{orderInfo.status=='PAID'}}">
+    <view class="orderInfo2" wx:if="{{orderInfo.status=='PAID'&&voucherInfo.validDays>0}}">
         <view class="barDiv">
             <view class="tx-c">{{orderInfo.vouchers[0].voucherCode}}</view>
             <canvas canvas-id="barcode"></canvas>
             <view class="div ub ub ub-ac ub-pj">
-                <view class="txt">剩余有效天数：{{voucherInfo.validDays}}天</view>
+                <view class="txt">剩余有效天数：{{voucherInfo.validDays<=0?'已过期':voucherInfo.validDays+'天'}}</view>
                 <view class="txt">可核销{{voucherInfo.totalNum}}次，已核销{{voucherInfo.usedNum}}次</view>
             </view>
         </view>
     </view>
+
+    <view class="orderInfo4" wx:if="{{orderInfo.status=='PAID'&&(voucherInfo.validDays<=0||voucherInfo.validDays==null)}}">
+        <view wx:for="{{vouchers}}" wx:for-index="index" class="code {{index<voucherInfo.usedNum?'d':''}}">券码：{{item.voucherCode}}</view>
+        <view class="div ub ub ub-ac ub-pj">
+            <view class="txt1">剩余有效天数：已过期</view>
+            <view class="c">|</view>
+            <view class="txt1">可核销{{voucherInfo.totalNum}}次，已核销{{voucherInfo.usedNum}}次</view>
+        </view>
+    </view>
+
+    <view class="orderInfo4" wx:if="{{orderInfo.status=='CONSUME'||orderInfo.status=='FINISH'}}">
+        <view class="code d" wx:for="{{vouchers}}">券码：{{item.voucherCode}}</view>
+        <view class="txt">可核销{{voucherInfo.totalNum}}次，已核销{{voucherInfo.usedNum}}次</view>
+    </view>
+
     <view class="ub ub-ac tkDiv plr15 mt10" wx:if="{{orderInfo.status=='PAID'}}">
         <image class="udb" src="../../images/tuikuan.png"></image>
-        <view class="txt ub-f1">未使用可联系平台申请退款</view>
+        <view class="txt ub-f1">有限期内未使用将自动退款</view>
         <view class="btn ub ub-ac ub-pc" bindtap="reFund">退款</view>
     </view>
     <view class="orderInfo3 plr15 mt10">
         <view class="tit">订单信息</view>
         <view class="txt" style="position:relative">订单编号：{{orderInfo.orderId}} <view class="btn ub ub-ac ub-pc" bindtap="copyBtn">复制</view></view>
         <view class="txt">下单时间：{{orderInfo.dateCreated}}</view>
+    </view>
+    <view class="btnWrap" wx:if="{{orderInfo.status=='CREATED'}}">
+        <view class="payBtn" bindtap="toPay" data-id="{{orderInfo.orderId}}">立即付款</view>
     </view>
 </view>

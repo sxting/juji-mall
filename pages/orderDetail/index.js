@@ -9,7 +9,8 @@ Page({
     amount: 0,
     preOrderStr:'',
     constant: constant,
-    voucherInfo:{}
+    voucherInfo:{},
+    vouchers:[]
   },
   onLoad: function(options) {
     wx.setNavigationBarTitle({title: '订单详情'});
@@ -35,7 +36,7 @@ Page({
       success:(res) => {
         if (res.confirm) {
           wx.switchTab({
-            url: '../user/index',
+            url: '../user/index'
           })
         } else if (res.cancel) {
           console.log('用户点击取消');
@@ -49,7 +50,11 @@ Page({
         this.setData({orderInfo: res});
         this.setData({preOrderStr:res.preOrderStr});
         if(res.status=='PAID'){
-          barcode('barcode', res.vouchers[0].voucherCode, 664, 136);
+          this.getListVoucher(res.vouchers[0].voucherCode);
+        }
+        this.setData({vouchers:res.vouchers});
+        if(res.status=='CONSUME'||res.status=='FINISH'){
+          console.log('已完成的订单');
           this.getListVoucher(res.vouchers[0].voucherCode);
         }
       },
@@ -73,6 +78,15 @@ Page({
     service.listVouchers(obj).subscribe({
       next: res => {
         this.setData({voucherInfo: res[0]});
+
+        if(this.orderInfo.status=='PAID'&&this.data.voucherInfo.validDays>0){
+          this.getListVoucher(res.vouchers[0].voucherCode);
+          barcode('barcode', this.data.orderInfo.vouchers[0].voucherCode, 664, 136);
+        }
+        if(this.orderInfo.status=='PAID'&&(this.data.voucherInfo.validDays<=0||this.data.voucherInfo.validDays==null)){
+          this.getListVoucher(res.vouchers[0].voucherCode);
+        }
+
       },
       error: err => console.log(err),
       complete: () => wx.hideToast()

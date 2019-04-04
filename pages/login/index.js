@@ -173,7 +173,8 @@ Page({
                         appId: constant.APPID,
                         isMock: false, //测试标记
                         inviteCode: obj.inviteCode,
-                        rawData: obj.rawData
+                        rawData: obj.rawData,
+                        sceneId: this.data.scene
                     },
                     header: {
                         'content-type': 'application/json',

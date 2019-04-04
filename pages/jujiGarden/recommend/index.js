@@ -67,7 +67,7 @@ Page({
             this.closeModal();
             return {
                 title: JSON.parse(wx.getStorageSync('userinfo')).nickName + '分享给您一个心动商品，快来一起体验吧！',
-                path: '/pages/comDetail/index?id=' + this.data.productId + '&storeid=&sceneid='+this.data.sceneId,
+                path: '/pages/login/index?pagetype=4&pid=' + this.data.productId + '&storeid=&sceneid='+this.data.sceneId,
                 imageUrl: constant.basePicUrl + this.data.productInfo.picId + '/resize_360_360/mode_fill'
             }
         }
@@ -178,7 +178,7 @@ Page({
             console.log('scene111='+this.data.sceneId);
             this.drawCanvas(scenepicid);
         }else{
-            jugardenService.getQrCode({ productId:this.data.productId,path: 'pages/comDetail/index'}).subscribe({
+            jugardenService.getQrCode({ productId:this.data.productId,path: 'pages/login/index'}).subscribe({
                 next: res => {
                     var sceneId = res.senceId;
                     var scenePicId = res.picId;

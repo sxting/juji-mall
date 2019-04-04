@@ -38,13 +38,13 @@ Page({
             this.closeModal();
             return {
                 title: JSON.parse(wx.getStorageSync('userinfo')).nickName + '邀请您桔园结义成为桔长，购物返利最高可享40%商品返利',
-                path: '/pages/jujiGarden/gardenIndex/index?openId=' + wx.getStorageSync('openid'),
+                path: '/pages/login/index?pagetype=5&openid=' + wx.getStorageSync('openid'),
                 imageUrl: '/images/banner-invent.png',
             }
         }
     },
     createShare: function() {
-        service.getQrCode({ productId: '', path: 'pages/jujiGarden/gardenIndex/index' }).subscribe({
+        service.getQrCode({ productId: 'invitenew', path: 'pages/login/index' }).subscribe({
             next: res => {
                 var picId = res;
                 wx.downloadFile({

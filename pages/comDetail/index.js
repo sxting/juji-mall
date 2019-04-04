@@ -33,218 +33,45 @@ Page({
     nickName:'',
     lat:'',
     lng:'',
-    share:0,
+    share:0,//首页分享按钮进入值为1
   },
-  onLoad: function(option) {
-    // var userImgUrl = JSON.parse(wx.getStorageSync('userinfo')).avatar;
-    // this.setData({userImgUrl:userImgUrl});
-    if(option.share){
-      this.setData({share:option.share});
+  onLoad: function(options) {
+    if (options.share) {
+      this.setData({share: options.share});
     }
     wx.setNavigationBarTitle({title: '商品详情'});
-    console.log(option);
-    if (!option.id) {
-      if (option.scene) {
-        let scene = decodeURIComponent(option.scene);
-        this.setData({sceneId: scene});
-        wx.request({
-          url: constant.apiUrl + '/qr/getBySceneId.json?sceneId='+scene,
-          method: 'GET',
-          header: {
-            'content-type': 'application/json',
-          },
-          success: (res) => {
-              this.setData({
-                productId: res.data.data.productId
-              });
-              if (wx.getStorageSync('token')) {
-                console.log('token存在');
-                this.getItemInfo();
-                //查询用户橘子
-                this.getPointBalance();
-                //查询新用户见面礼
-                service.isNewer().subscribe({
-                  next: res2 => {
-                    console.log(res2);
-                    this.setData({
-                      isShowNewerGet: res2
-                    });
-                    if (res2) {
-                      service.newerGet().subscribe({
-                        next: res3 => {
-                          console.log(res3);
-                          this.getPointBalance();
-                        }
-                      });
-                    }
-
-                  },
-                  error: err => console.log(err)
-                });
-
-              } else {
-                console.log('token不存在');
-                //新用户 授权 登录 跳转
-                this.mainFnc(option,1);
-              }
-          }
-        });
-
-        // service.getComIdByscence({ sceneId: scene }).subscribe({
-        //   next: res => {
-        //     this.setData({
-        //       productId: res.productId
-        //     });
-        //     if (wx.getStorageSync('token')) {
-        //       console.log('token存在');
-        //       this.getItemInfo();
-        //       //查询用户橘子
-        //       this.getPointBalance();
-        //     } else {
-        //       console.log('token不存在');
-        //       //新用户 授权 登录 跳转
-        //       this.mainFnc(option,1);
-        //     }
-        //   },
-        //   error: err => console.log(err),
-        //   complete: () => wx.hideToast()
-        // });
-
-      }else{
-        wx.showToast({
-          title: '发生错误，未找到商品id',
-          icon: 'none'
-        });
-        this.gohomepage();
-        return;
-      }
-
-    }else{
-      this.setData({
-        productId: option.id,
-        storeId: option.storeid
-      });
-      if(option.sceneid){
-        this.setData({sceneId: option.sceneid})
-      }
-      console.log('sceneId='+this.data.sceneId);
-      if (wx.getStorageSync('token')) {
-        console.log('token存在');
-        this.getItemInfo();
-        //查询用户橘子
-        this.getPointBalance();
-        //查询新用户见面礼
-        service.isNewer().subscribe({
-          next: res2 => {
-            console.log(res2)
-            this.setData({
-              isShowNewerGet: res2
-            });
-            if (res2){
-              service.newerGet().subscribe({
-                next: res3 => {
-                  console.log(res3);
-                  this.getPointBalance();
-                }
-              });
-            }
-
-          },
-          error: err => console.log(err)
-        });
-      } else {
-        console.log('token不存在');
-        //新用户 授权 登录 跳转
-        this.mainFnc(option,2);
-      }
+    console.log(JSON.stringify(options));
+    this.setData({productId: options.id});
+    if(options.storeid){
+      this.setData({storeId: options.storeid});
     }
-
-
+    if(options.sceneid){
+      this.setData({sceneId: options.sceneid});
+    }
+    // 查询商品详情
+    this.getItemInfo();
+    //查询用户橘子
+    this.getPointBalance();
+    //查询新用户见面礼
+    this.getNewGift();
   },
-  mainFnc: function (option,type){
-    let that = this;
-    new Promise(function (resolve, reject) {
-      console.log('Promise is ready!');
-      wx.getSetting({
-        success: (res) => {
-          console.log(res.authSetting['scope.userInfo']);
-          if (!res.authSetting['scope.userInfo']) {
-              wx.reLaunch({url: '/pages/login/index?fromPage=comDetail&productId=' + that.data.productId + '&inviteCode=' + option.inviteCode});
-          } else { //如果已经授权
-            //判断rowData是否存在
-            // if (wx.getStorageSync('rawData')) { //如果存在
-              resolve();
-            // } else { //如果不存在rowData
-            //   reject('未获取rawData');
-            // }
-          }
-        }
-      });
-    }).then(function () {
-
-      return new Promise(function (resolve1, reject1) {
-        wx.login({
-          success: res => {
-            console.log('code: ' + res.code);
-            console.log(constant.APPID);
-            resolve1(res.code);
-          }
+  getNewGift:function(){
+    service.isNewer().subscribe({
+      next: res2 => {
+        console.log(res2);
+        this.setData({
+          isShowNewerGet: res2
         });
-
-      })
-    }).then(function (code) {
-      if(type==1){
-        var requestObj = {
-          code: code,
-          appId: constant.APPID,
-          isMock: false, //测试标记
-          sceneId: that.data.sceneId,
-          rawData: wx.getStorageSync('rawData')
+        if (res2) {
+          service.newerGet().subscribe({
+            next: res3 => {
+              console.log(res3);
+              this.getPointBalance();
+            }
+          });
         }
-      }else{
-        var requestObj = {
-          code: code,
-          appId: constant.APPID,
-          isMock: false, //测试标记
-          inviteCode: option.inviteCode,
-          rawData: wx.getStorageSync('rawData')
-        }
-      }
-      wx.request({
-        url: constant.apiUrl + '/user/login.json',
-        method: 'GET',
-        data: requestObj,
-        header: {
-          'content-type': 'application/json',
-        },
-        success: (res1) => {
-          console.log(res1);
-
-          if (res1.data.errorCode == '200') {
-            wx.setStorageSync('token', res1.data.data.token);
-            wx.setStorageSync('openid', res1.data.data.openId);
-            wx.setStorageSync('inviteCode', res1.data.data.inviteCode);
-            wx.setStorageSync('userinfo', JSON.stringify(res1.data.data));
-
-            that.getItemInfo();
-            //查询用户橘子
-            that.getPointBalance();
-
-          } else {
-            wx.showModal({
-              title: '错误',
-              content: '登录失败，错误码:' + res1.data.errorCode + ' 返回错误: ' + res1.data.errorInfo
-            });
-          }
-        }
-      });
-
-    }).catch(function (err) {
-      console.log(err);
-      wx.showModal({
-        title: '错误',
-        content: err
-      });
+      },
+      error: err => console.log(err)
     });
   },
   previewImage: function (e) {
@@ -457,11 +284,6 @@ Page({
     wx.switchTab({
       url: '/pages/index/index'
     });
-    //getCurrentPages() 函数用于获取当前页面栈的实例，以数组形式按栈的顺序给出，第一个元素为首页，最后一个元素为当前页面
-    // wx.navigateBack({
-    //   delta: getCurrentPages().length,
-    //   url: '/pages/index/index'
-    // });
   },
   toCommentList: function() {
     wx.navigateTo({
@@ -493,11 +315,9 @@ Page({
   onShareAppMessage: function(res) {
     this.share();
     this.setData({ isShowModal: true });
-    var str = JSON.stringify({ id: this.data.productId, storeid: this.data.storeId, inviteCode: wx.getStorageSync('inviteCode')});
     return {
       title: JSON.parse(wx.getStorageSync('userinfo')).nickName+'分享给您一个心动商品，快来一起体验吧！',
-      path: '/pages/login/index?path=/pages/comDetail/index&params=' + str
-      // imageUrl:constant.basePicUrl+this.data.productInfo.picId+'/resize_360_360/mode_fill'
+      path: '/pages/login/index?pagetype=1&pid=' + this.data.productId+'&storeid='+this.data.storeId+'&invitecode='+wx.getStorageSync('inviteCode')
     }
   },
   toCommentDetail: function(event) {
@@ -550,7 +370,7 @@ Page({
       this.setData({isShowModal:true});
   },
   getQrCode: function() {
-      service.getQrCode({ productId:this.data.productId,path: 'pages/comDetail/index'}).subscribe({
+      service.getQrCode({ productId:this.data.productId,path: 'pages/login/index'}).subscribe({
           next: res => {
             var picId = res;
             wx.downloadFile({

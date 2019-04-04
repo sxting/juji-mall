@@ -26,118 +26,19 @@ Page({
         minInvitedMemberCount: 0, //邀请几个人就可以成为桔长
         bindPhoneNumber: false, //是否绑定手机号码 是true 不是false
     },
-
     onLoad: function(options) {
-        let self = this;
         wx.setNavigationBarTitle({ title: '桔园' });
-        if (options.params) { //分享点进来
-            let self = this;
+        if (options.openid) {
             console.log('分享点进来');
-            self.setData({
-                openId: options.params,
+            this.setData({
+                openId: options.openid,
                 switchFun: true
             })
-           this.getUserInfor(); //用户信息，是否绑定手机号码
-
-            // if (wx.getStorageSync('token')) { //token存在
-            //     console.log(wx.getStorageSync('token') + ' /token存在');
-            //     // getGardenInfor.call(self);//get首页信息,获取分销角色
-            // } else { //token不存在 登陆
-            //     this.mainFnc(options);
-            // }
-        } else if (options.scene) {
-            console.log('小程序码进来');
-            let scene = decodeURIComponent(options.scene);
-            this.setData({ sceneId: scene });
-            wx.request({
-                url: constant.apiUrl + '/qr/getBySceneId.json?sceneId=' + scene,
-                method: 'GET',
-                header: {
-                    'content-type': 'application/json',
-                },
-                success: (res) => {
-                  console.log(JSON.stringify(res));
-                  self.setData({
-                      openId: res.openId,
-                      switchFun: true
-                  });
-                  this.getUserInfor(); //用户信息，是否绑定手机号码
-                  // if (wx.getStorageSync('token')) { //token存在
-                  //     console.log(wx.getStorageSync('token') + ' /token存在');
-                  //     this.getUserInfor(); //用户信息，是否绑定手机号码
-                  //     // getGardenInfor.call(self);//get首页信息,获取分销角色
-                  // } else { //token不存在 登陆
-                  //     this.mainFnc(options);
-                  // }
-                }
-            });
+           this.getUserInfor();
         } else {
           this.getUserInfor(); //用户信息，是否绑定手机号码
         }
     },
-
-    // 登陆
-    // mainFnc: function(option) {
-    //     let self = this;
-    //     wx.getSetting({
-    //         success: (res) => {
-    //             console.log(res.authSetting['scope.userInfo'] + ' haha');
-    //             if (!res.authSetting['scope.userInfo']) {
-    //                 wx.reLaunch({ url: '/pages/login/index?fromPage=jujiGarden/gardenIndex&openId=' + self.data.openId });
-    //             } else { //如果已经授权
-    //                 wx.login({
-    //                     success: function(result) {
-    //                         wx.getUserInfo({
-    //                             withCredentials: true,
-    //                             success: function(res) {
-    //                                 if (result.code) {
-    //                                     let requestObj = {
-    //                                         code: result.code,
-    //                                         appId: constant.APPID,
-    //                                         isMock: false, //测试标记
-    //                                         inviteCode: '',
-    //                                         rawData: res.rawData
-    //                                     }
-    //                                     wx.request({
-    //                                         url: constant.apiUrl + '/user/login.json',
-    //                                         method: 'GET',
-    //                                         data: requestObj,
-    //                                         header: {
-    //                                             'content-type': 'application/json',
-    //                                         },
-    //                                         success: (res1) => {
-    //                                             console.log(res1);
-    //                                             if (res1.data.errorCode == '200') {
-    //                                                 wx.setStorageSync('token', res1.data.data.token);
-    //                                                 wx.setStorageSync('openid', res1.data.data.openId);
-    //                                                 wx.setStorageSync('inviteCode', res1.data.data.inviteCode);
-    //                                                 wx.setStorageSync('userinfo', JSON.stringify(res1.data.data));
-    //                                                 self.getUserInfor(); //用户信息，是否绑定手机号码
-    //                                             } else {
-    //                                                 wx.showModal({
-    //                                                     title: '错误',
-    //                                                     content: '登录失败，错误码:' + res1.data.errorCode + ' 返回错误: ' + res1.data.errorInfo
-    //                                                 });
-    //                                             }
-    //                                         }
-    //                                     });
-    //                                 } else {
-    //                                     console.log('获取用户登录态失败！' + result.errMsg)
-    //                                 }
-    //                             },
-    //                             fail: function() {}
-    //                         });
-    //                     },
-    //                     fail: function(res) {
-    //                         console.log('获取用户登录态失败！o' + res)
-    //                     },
-    //                     complete: function(res) {},
-    //                 });
-    //             }
-    //         }
-    //     });
-    // },
-
     onShow: function() {
         let self = this;
         if (wx.getStorageSync('token')) { //token存在

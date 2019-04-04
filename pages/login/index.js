@@ -29,34 +29,30 @@ Page({
         console.log(JSON.stringify(options));
         if (options.pagetype) {
             this.setData({ pageType: options.pagetype });
-        } else {
-          if (options.scene) {
-            console.log("扫码进入")
-            this.setData({scene:decodeURIComponent(options.scene)});
-            this.setData({ pageType: 3 });
-          } else {
-            console.log("直接进入")
-            this.setData({ pageType: 0 });
-          }
+        }
+        if (options.scene) {
+          console.log("扫码进入");
+          this.setData({scene:decodeURIComponent(options.scene)});
+          this.setData({ pageType: 3 });
         }
         this.setData({ pageData: options });
         // 小程序码进来的话
         this.next();
     },
-    next: function(options) {
+    next: function() {
         wx.getSetting({
             success: (res) => {
                 console.log(res.authSetting['scope.userInfo']);
                 if (res.authSetting['scope.userInfo']) {
                     if(this.data.pageType==3){
-                        this.getValueByscene(options.scene,1);
+                        this.getValueByscene(this.data.scene,1);
                     }else{
                         this.nextPage();
                     }
                 } else {
                   this.setData({showPageLoading: false});
                   if(this.data.pageType==3){
-                    this.getValueByscene(options.scene,2);
+                    this.getValueByscene(this.data.scene,2);
                   }
                 }
             }

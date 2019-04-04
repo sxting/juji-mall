@@ -47,7 +47,8 @@ Page({
                     if(this.data.pageType==3){
                         this.getValueByscene(this.data.scene,1);
                     }else{
-                        this.nextPage();
+                        // 正常用户先登录再进行下一步;
+                        this.preLogin1("");
                     }
                 } else {
                   this.setData({showPageLoading: false});
@@ -82,7 +83,8 @@ Page({
             }
         });
     },
-    preLogin1: function(options, inviteCode) {
+    // 已授权调
+    preLogin1: function(inviteCode) {
         var obj = {
             rawData: '',
             inviteCode: inviteCode
@@ -91,6 +93,7 @@ Page({
             this.nextPage();
         });
     },
+    // 未授权调
     preLogin2: function(rawData, inviteCode) {
         var obj = {
             rawData: rawData,
@@ -101,7 +104,7 @@ Page({
         });
     },
     nextPage:function(){
-      console.log("走下一步");
+      console.log("走下一页");
       console.log('pageType===='+this.data.pageType);
       if (this.data.pageType==0) {
         wx.switchTab({
@@ -147,7 +150,7 @@ Page({
             wx.setStorageSync('rawData', e.detail.rawData);
             var rawData = e.detail.rawData;
             console.log('pageType===='+this.data.pageType);
-            var invitecode = this.data.pageData.invitecode;
+            var invitecode = this.data.pageData.invitecode?this.data.pageData.invitecode:'';
             this.preLogin2(rawData, invitecode);
         }
     },
@@ -178,6 +181,7 @@ Page({
                     success: (res1) => {
                         console.log(res1);
                         if (res1.data.errorCode == '200') {
+                            console.log('登录成功，拿到token');
                             wx.setStorageSync('token', res1.data.data.token);
                             wx.setStorageSync('openid', res1.data.data.openId);
                             wx.setStorageSync('inviteCode', res1.data.data.inviteCode);

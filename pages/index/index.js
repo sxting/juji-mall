@@ -863,7 +863,7 @@ Page({
     return {
       title: '桔集：聚集优质好店，体验美好生活！',
       imageUrl: 'https://upic.juniuo.com/file/picture/26PTWGQU8nHo/resize_0_0/mode_fill',
-      path: '/pages/login/index?incode=' + wx.getStorageSync('inviteCode')
+      path: '/pages/login/index?invitecode=' + wx.getStorageSync('inviteCode')
     }
   },
   //已知省市代码，获取该地点的服务商信息，然后更新首页数据

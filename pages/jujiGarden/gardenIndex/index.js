@@ -30,20 +30,21 @@ Page({
     onLoad: function(options) {
         let self = this;
         wx.setNavigationBarTitle({ title: '桔园' });
-        if (options.openId) { //分享点进来
+        if (options.params) { //分享点进来
             let self = this;
             console.log('分享点进来');
             self.setData({
-                openId: options.openId,
+                openId: options.params,
                 switchFun: true
             })
-            if (wx.getStorageSync('token')) { //token存在
-                console.log(wx.getStorageSync('token') + ' /token存在');
-                this.getUserInfor(); //用户信息，是否绑定手机号码
-                // getGardenInfor.call(self);//get首页信息,获取分销角色
-            } else { //token不存在 登陆
-                this.mainFnc(options);
-            }
+           this.getUserInfor(); //用户信息，是否绑定手机号码
+
+            // if (wx.getStorageSync('token')) { //token存在
+            //     console.log(wx.getStorageSync('token') + ' /token存在');
+            //     // getGardenInfor.call(self);//get首页信息,获取分销角色
+            // } else { //token不存在 登陆
+            //     this.mainFnc(options);
+            // }
         } else if (options.scene) {
             console.log('小程序码进来');
             let scene = decodeURIComponent(options.scene);
@@ -60,81 +61,82 @@ Page({
                       openId: res.openId,
                       switchFun: true
                   });
-                  if (wx.getStorageSync('token')) { //token存在
-                      console.log(wx.getStorageSync('token') + ' /token存在');
-                      this.getUserInfor(); //用户信息，是否绑定手机号码
-                      // getGardenInfor.call(self);//get首页信息,获取分销角色
-                  } else { //token不存在 登陆
-                      this.mainFnc(options);
-                  }
+                  this.getUserInfor(); //用户信息，是否绑定手机号码
+                  // if (wx.getStorageSync('token')) { //token存在
+                  //     console.log(wx.getStorageSync('token') + ' /token存在');
+                  //     this.getUserInfor(); //用户信息，是否绑定手机号码
+                  //     // getGardenInfor.call(self);//get首页信息,获取分销角色
+                  // } else { //token不存在 登陆
+                  //     this.mainFnc(options);
+                  // }
                 }
             });
         } else {
-            this.getUserInfor(); //用户信息，是否绑定手机号码
+          this.getUserInfor(); //用户信息，是否绑定手机号码
         }
     },
 
     // 登陆
-    mainFnc: function(option) {
-        let self = this;
-        wx.getSetting({
-            success: (res) => {
-                console.log(res.authSetting['scope.userInfo'] + ' haha');
-                if (!res.authSetting['scope.userInfo']) {
-                    wx.reLaunch({ url: '/pages/login/index?fromPage=jujiGarden/gardenIndex&openId=' + self.data.openId });
-                } else { //如果已经授权
-                    wx.login({
-                        success: function(result) {
-                            wx.getUserInfo({
-                                withCredentials: true,
-                                success: function(res) {
-                                    if (result.code) {
-                                        let requestObj = {
-                                            code: result.code,
-                                            appId: constant.APPID,
-                                            isMock: false, //测试标记
-                                            inviteCode: '',
-                                            rawData: res.rawData
-                                        }
-                                        wx.request({
-                                            url: constant.apiUrl + '/user/login.json',
-                                            method: 'GET',
-                                            data: requestObj,
-                                            header: {
-                                                'content-type': 'application/json',
-                                            },
-                                            success: (res1) => {
-                                                console.log(res1);
-                                                if (res1.data.errorCode == '200') {
-                                                    wx.setStorageSync('token', res1.data.data.token);
-                                                    wx.setStorageSync('openid', res1.data.data.openId);
-                                                    wx.setStorageSync('inviteCode', res1.data.data.inviteCode);
-                                                    wx.setStorageSync('userinfo', JSON.stringify(res1.data.data));
-                                                    self.getUserInfor(); //用户信息，是否绑定手机号码
-                                                } else {
-                                                    wx.showModal({
-                                                        title: '错误',
-                                                        content: '登录失败，错误码:' + res1.data.errorCode + ' 返回错误: ' + res1.data.errorInfo
-                                                    });
-                                                }
-                                            }
-                                        });
-                                    } else {
-                                        console.log('获取用户登录态失败！' + result.errMsg)
-                                    }
-                                },
-                                fail: function() {}
-                            });
-                        },
-                        fail: function(res) {
-                            console.log('获取用户登录态失败！o' + res)
-                        },
-                        complete: function(res) {},
-                    });
-                }
-            }
-        });
-    },
+    // mainFnc: function(option) {
+    //     let self = this;
+    //     wx.getSetting({
+    //         success: (res) => {
+    //             console.log(res.authSetting['scope.userInfo'] + ' haha');
+    //             if (!res.authSetting['scope.userInfo']) {
+    //                 wx.reLaunch({ url: '/pages/login/index?fromPage=jujiGarden/gardenIndex&openId=' + self.data.openId });
+    //             } else { //如果已经授权
+    //                 wx.login({
+    //                     success: function(result) {
+    //                         wx.getUserInfo({
+    //                             withCredentials: true,
+    //                             success: function(res) {
+    //                                 if (result.code) {
+    //                                     let requestObj = {
+    //                                         code: result.code,
+    //                                         appId: constant.APPID,
+    //                                         isMock: false, //测试标记
+    //                                         inviteCode: '',
+    //                                         rawData: res.rawData
+    //                                     }
+    //                                     wx.request({
+    //                                         url: constant.apiUrl + '/user/login.json',
+    //                                         method: 'GET',
+    //                                         data: requestObj,
+    //                                         header: {
+    //                                             'content-type': 'application/json',
+    //                                         },
+    //                                         success: (res1) => {
+    //                                             console.log(res1);
+    //                                             if (res1.data.errorCode == '200') {
+    //                                                 wx.setStorageSync('token', res1.data.data.token);
+    //                                                 wx.setStorageSync('openid', res1.data.data.openId);
+    //                                                 wx.setStorageSync('inviteCode', res1.data.data.inviteCode);
+    //                                                 wx.setStorageSync('userinfo', JSON.stringify(res1.data.data));
+    //                                                 self.getUserInfor(); //用户信息，是否绑定手机号码
+    //                                             } else {
+    //                                                 wx.showModal({
+    //                                                     title: '错误',
+    //                                                     content: '登录失败，错误码:' + res1.data.errorCode + ' 返回错误: ' + res1.data.errorInfo
+    //                                                 });
+    //                                             }
+    //                                         }
+    //                                     });
+    //                                 } else {
+    //                                     console.log('获取用户登录态失败！' + result.errMsg)
+    //                                 }
+    //                             },
+    //                             fail: function() {}
+    //                         });
+    //                     },
+    //                     fail: function(res) {
+    //                         console.log('获取用户登录态失败！o' + res)
+    //                     },
+    //                     complete: function(res) {},
+    //                 });
+    //             }
+    //         }
+    //     });
+    // },
 
     onShow: function() {
         let self = this;
@@ -173,7 +175,7 @@ Page({
         let self = this;
         return {
             title: JSON.parse(wx.getStorageSync('userinfo')).nickName + '邀请您桔园结义成为桔长，购物返利最高可享40%商品返利',
-            path: '/pages/jujiGarden/gardenIndex/index?openId=' + wx.getStorageSync('openid'),
+            path: 'pages/login/index?path=/pages/jujiGarden/gardenIndex/index&params=' + wx.getStorageSync('openid'),
             imageUrl: '/images/banner-invent.png',
         }
     },
@@ -356,7 +358,6 @@ function joinDistributor(data) {
     jugardenService.joinDistributor(data).subscribe({
         next: res => {
             if (res) {
-                console.log('加入进桔园啦啦啦');
                 if (res.role == 'MEMBER' || res.role == 'UNDEFINED') { //桔民
                     this.data.juminNumList = [];
                     this.data.hadNumber = parseInt(res.invitedLeaderCount) + parseInt(res.invitedMemberCount);

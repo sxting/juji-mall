@@ -36,7 +36,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 28,
+			"current": 29,
 			"list": [
 				{
 					"id": 0,
@@ -191,8 +191,8 @@
 				},
 				{
 					"id": -1,
-					"name": "我的用户",
-					"pathName": "pages/jujiGarden/myUser/index",
+					"name": "活动列表",
+					"pathName": "pages/activities/project-list/index",
 					"query": "",
 					"scene": null
 				},
@@ -236,6 +236,13 @@
 					"name": "模拟分享",
 					"pathName": "pages/login/index",
 					"query": "path=/pages/index/index&params={\"inviteCode\":\"573f68c3547449109c5b1e94c3ac38fd\"}",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "活动商品详情",
+					"pathName": "pages/activities/project-detail/index",
+					"query": "",
 					"scene": null
 				}
 			]

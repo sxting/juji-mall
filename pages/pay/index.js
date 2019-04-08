@@ -80,7 +80,30 @@ Page({
         });
         resolve();
       } else {
-        reject('options.q不存在');
+        // reject('options.q不存在');
+        options.q = 'https://juji-dev.juniuo.com/qrm/212345678.htm';//测试用
+        var link = decodeURIComponent(options.q);
+        console.log(link);
+        let arr = link.split('/qrm/');
+        console.log(arr);//['https://juji-dev.juniuo.com','212345678.htm']
+        if (arr[0]) {
+          that.setData({
+            payUrl: arr[0]
+          });
+          wx.setStorageSync('payUrl', arr[0]);
+        } else {
+          that.setData({
+            payUrl: that.data.payUrl
+          });
+        }
+        let arr1 = arr[1].split('.htm');
+        console.log(arr1);//['212345678']
+        console.log('qrcode: ' + arr1[0]);
+        that.setData({
+          url: link,
+          qrcode: arr1[0]
+        });
+        resolve();
       }
     }).then(function () {
       return new Promise(function (resolve1, reject1) {
@@ -195,6 +218,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    // wx.setStorageSync('scene','1011');//测试用
     let scene = wx.getStorageSync('scene');
     if (scene == '1011' || scene == '1012' || scene == '1013') {//扫描二维码场景值
       return ;

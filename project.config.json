@@ -191,8 +191,8 @@
 				},
 				{
 					"id": -1,
-					"name": "我的用户",
-					"pathName": "pages/jujiGarden/myUser/index",
+					"name": "活动列表",
+					"pathName": "pages/activities/project-list/index",
 					"query": "",
 					"scene": null
 				},

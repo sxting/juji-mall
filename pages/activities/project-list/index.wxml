@@ -1,2 +1,31 @@
 <!--pages/activities/project-list/index.wxml-->
-<text>pages/activities/project-list/index.wxml</text>
+ <view class="juzihl-wrap">
+  <view class='fixed-button ub ub-ac' style='position: fixed;'>
+    <image class='type-icon' src='/images/kanjia-icon.png'></image>
+    <text>我的砍价</text>
+  </view>
+  <view>
+    <view class="mtitle">优惠砍价</view>
+    <view class="subtitle">让低价好物一目了然</view>
+  </view>
+  <view class="jingxuanlist" wx:for='{{ productList }}'>
+    <image class="productImg" bindtap="toComDetail" data-id="{{item.productId}}" data-storeid="{{item.nearStore.id}}" lazy-load="true" src="https://upic.juniuo.com/file/picture/26P0-gcWPfk_/resize_0_0/mode_fill" mode="widthFix"></image>
+    <view class="dis-wrap jc-sb">
+      <view class="from">德川家望京店</view>
+      <view class="dis">距你119km</view>
+    </view>
+    <view class="pro-name" bindtap="toComDetail" data-id="{{item.productId}}" data-storeid="{{item.nearStore.id}}" style="margin-top:8rpx">【德川家】超值寿司拼盘14粒只需49元一份</view>
+    <view class="price-wrap jc-sb">
+      <view class="p-wrap">
+        <view class="now-price">22元</view>
+        <view class="old-price">88元</view>
+      </view>
+    </view>
+    <view class="ub ub-ac jc-sb" style="padding: 0 30rpx 30rpx 30rpx;">
+      <view class="ub ub-ac ub-f1" style="margin-top:20rpx">
+        <text class="count">已砍20件</text>
+      </view>
+      <button class="ctrlbtn buyBtn2" bindtap="toComDetail">{{sceneType == 'PINTUAN'? '一键开团': '发起砍价'}}</button>
+    </view>
+  </view>
+</view>

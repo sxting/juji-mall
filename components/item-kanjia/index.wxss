@@ -1,4 +1,9 @@
-/* shared/component/item-kanjia/index.wxss */
 .kanjia-container {
+  font-family: PingFangSC-Regular;
   background-color: #fff;
+  text-align: left;
+}
+.product-name {
+  font-size: 30rpx;
+  color: #333333;
 }

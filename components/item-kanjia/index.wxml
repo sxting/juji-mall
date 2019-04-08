@@ -1,3 +1,3 @@
 <view class="kanjia-container">
-  <view>{{productInfo.productName}}</view>
+  <view class='product-name'>{{productInfo.productName}}</view>
 </view>

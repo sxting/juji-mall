@@ -12,7 +12,7 @@
   </view>
 
   <!-- 活动状态 -->
-  <view>
+  <view class='w-100'>
     <kanjia wx:if="{{type === 'kanjia'}}" product-info="{{productInfo}}"></kanjia>
   </view>
 

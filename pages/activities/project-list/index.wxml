@@ -1,6 +1,7 @@
 <!--pages/activities/project-list/index.wxml-->
+<wxs src="../../../utils/numFr.wxs" module="format" />
  <view class="juzihl-wrap">
-  <view class='fixed-button ub ub-ac' style='position: fixed;'>
+  <view class='fixed-button ub ub-ac' style='position: fixed;' catchtap='switchToOrderListPage'>
     <image class='type-icon' src='/images/kanjia-icon.png'></image>
     <text>我的砍价</text>
   </view>
@@ -8,7 +9,7 @@
     <view class="mtitle">优惠砍价</view>
     <view class="subtitle">让低价好物一目了然</view>
   </view>
-  <view class="jingxuanlist" wx:for='{{ productList }}'>
+  <view class="jingxuanlist" wx:for='{{ productList }}' wx:key='item' data-productid='{{item.productId}}' catchtap='checkProductDetail'>
     <image class="productImg" bindtap="toComDetail" data-id="{{item.productId}}" data-storeid="{{item.nearStore.id}}" lazy-load="true" src="https://upic.juniuo.com/file/picture/26P0-gcWPfk_/resize_0_0/mode_fill" mode="widthFix"></image>
     <view class="dis-wrap jc-sb">
       <view class="from">德川家望京店</view>

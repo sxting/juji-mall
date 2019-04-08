@@ -8,7 +8,7 @@
         </swiper-item>
       </block>
     </swiper>
-    <view class="typePop" wx:if="{{share}}">返回首页</view>
+    <view class="typePop" wx:if="{{share}}" bindtap="gohomepage">返回首页</view>
   </view>
 
   <!-- 活动状态 -->
@@ -157,6 +157,24 @@
     </button>
     <view style='width: 470rpx; height: 90rpx;'>
 
+    </view>
+  </view>
+
+
+  <view class="modal1 ub ub-ver" hidden="{{isShowModal}}">
+    <view class="div ub-f1 ub ub-ac ub-pc">
+        <view style="width:100%;height:100%;background-color:rgba(0,0,0,0.3);position:absolute;z-index:1;top: 0;left: 0" bindtap="closeModal"></view>
+        <view class="canvas">
+            <canvas canvas-id="myCanvas"></canvas>
+        </view>
+    </view>
+    <view class="bott ub ub-ac">
+        <button class="ub-f1 ub ub-ac ub-pc left ub-ver" open-type="share">
+            <image class="share" src="../../../images/share_friend.png" style="width:117rpx;height:118rpx"></image>
+        </button>
+        <button class="ub-f1 ub ub-ac ub-pc right ub-ver" bindtap="savePic" data-type="1">
+            <image class="share" src="../../../images/share_save.png" style="width:94rpx;height:118rpx"></image>
+        </button>
     </view>
   </view>
 </view>

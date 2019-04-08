@@ -51,6 +51,9 @@ Page({
     // 查询商品详情
     this.getItemInfo();
   },
+  onShow: function () {
+    //评论列表
+  },
   previewImage: function (e) {
     var arr = [];
     var url = constant.basePicUrl + e.currentTarget.dataset.url + '/resize_0_0/mode_fill';
@@ -59,12 +62,6 @@ Page({
       urls: arr // 需要预览的图片http链接列表
     })
   },
-  //关闭新用户见面礼
-  closeGetNewer: function () {
-    this.setData({
-      isShowNewerGet: false
-    });
-  },
   toMap: function (e) {
     if (e.currentTarget.dataset.lat && e.currentTarget.dataset.lng) {
       wx.navigateTo({
@@ -72,90 +69,19 @@ Page({
       });
     }
   },
-  toBuy: function () {
-    console.log('下单前sceneId=' + this.data.sceneId);
-    service.getProQrCode({ productId: this.data.productId, path: 'pages/comDetail/index' }).subscribe({
-      next: res => {
-        var sceneId = res.senceId;
-        this.setData({ sceneId: sceneId });
-        console.log('接口生成sceneId=' + this.data.sceneId);
-        this.buyProduct();
-      },
-      error: err => {
-        errDialog(err);
-        wx.hideLoading();
-      },
-      complete: () => wx.hideToast()
-    });
-  },
-  buyProduct: function () {
-    if (this.data.productInfo.type == 'PRODUCT' && this.data.productInfo.point > 0 && this.data.productInfo.price > 0) {
-      if (this.data.productInfo.price > 0 && this.data.pointBalance >= this.data.productInfo.point) {
-        this.toCreateOrder();
-      } else {
-        this.toGetPoint();
-      }
-    }
-    if (this.data.productInfo.type == 'PRODUCT' && this.data.productInfo.point == 0 && this.data.productInfo.price > 0) {
-      this.toCreateOrderByRmb();
-    }
-    if (this.data.productInfo.type == 'POINT') {
-      this.toCreateOrderByPoint();
-    }
-    if (this.data.pointBalance < this.data.productInfo.point || !this.data.pointBalance) {
-      this.toGetPoint();
-    }
-  },
-  toPro: function (e) {
-    wx.navigateTo({
-      url: '/pages/jujiGarden/recommend/index?productid=' + e.currentTarget.dataset.id
-    });
-  },
+  
   callPhone: function () {
     wx.makePhoneCall({
       phoneNumber: '4000011139',
     });
   },
-  //收集formid做推送
-  collectFormIds: function (e) {
-    service.collectFormIds({
-      formId: e.detail.formId
-    }).subscribe({
-      next: res => {
-        console.log(res)
-      }
-    });
-  },
+ 
   toMerchantsList: function () {
     wx.navigateTo({
       url: '/pages/merchantsCanUse/index?id=' + this.data.productId
     });
   },
-  toCreateOrder: function () { //跳转订单确认 桔子和人民币组合订单
-    wx.navigateTo({
-      url: '/pages/payOrder/index?paytype=1&id=' + this.data.productId + '&storeid=' + this.data.storeId + '&sceneid=' + this.data.sceneId
-    });
-  },
-  toCreateOrderByPoint: function () { //只用桔子下单
-    wx.navigateTo({
-      url: '/pages/payOrder/index?paytype=2&id=' + this.data.productId + '&storeid=' + this.data.storeId + '&sceneid=' + this.data.sceneId
-    });
-  },
-  toCreateOrderByRmb: function () { //人民币优惠购买
-    wx.navigateTo({
-      url: '/pages/payOrder/index?paytype=3&id=' + this.data.productId + '&storeid=' + this.data.storeId + '&sceneid=' + this.data.sceneId
-    });
-  },
-  toCreateOrderByOriPrice: function () { //原价购买
-    wx.navigateTo({
-      url: '/pages/payOrder/index?paytype=4&id=' + this.data.productId + '&storeid=' + this.data.storeId + '&sceneid=' + this.data.sceneId
-    });
-  },
-  toGetPoint: function () { //跳转到任务页面赚桔子
-    wx.switchTab({
-      url: '../juzi/index'
-    });
-  },
+ 
   toComDetail: function (e) {
     var id = e.currentTarget.dataset.id;
     var storeid = e.currentTarget.dataset.storeid;
@@ -163,12 +89,9 @@ Page({
       url: '/pages/comDetail/index?id=' + id + '&storeid=' + storeid
     });
   },
-  onShow: function () {
-    //评论列表
-  },
   call: function () {
     wx.makePhoneCall({
-      phoneNumber: this.data.store.phone // 仅为示例，并非真实的电话号码
+      phoneNumber: this.data.store.phone 
     })
   },
   getItemInfo: function () {
@@ -242,11 +165,6 @@ Page({
   toCommentList: function () {
     wx.navigateTo({
       url: '/pages/commentList/index?id=' + this.data.productId
-    });
-  },
-  toShareCard: function () {
-    wx.navigateTo({
-      url: '/pages/shareCard/index?merchantId=' + this.data.merchantId
     });
   },
   share: function () {
@@ -328,10 +246,7 @@ Page({
               this.setData({ erwmImg: res1.tempFilePath });
               var info = this.data.productInfo;
               wx.hideLoading();
-              var point = info.point == null || info.point == 0 ? '' : info.point + '桔子';
-              var price = info.price == null || info.price == 0 ? '' : Number(info.price / 100).toFixed(2) + '元';
-              var link = (info.price != null && info.point != 0) && (info.point != null && info.point != 0) ? '+' : '';
-              var price1 = point + link + price;
+              var price1 = Number(info.price / 100).toFixed(2) + '元';
               var name = info.productName;
               var price2 = Number(info.originalPrice / 100).toFixed(2) + '元';
               var storeLen = info.productStores.length;
@@ -354,7 +269,7 @@ Page({
     var size = { w: 260, h: 424 };
     var context = wx.createCanvasContext('myCanvas');
     context.drawImage(this.data.shareBg, 0, 0, size.w, size.h);
-    context.drawImage("../../images/logo.png", 20, 18, 20, 21);
+    context.drawImage("../../../images/logo.png", 20, 18, 20, 21);
     setText(context, "“桔”美好生活，集好店优惠", 52, 35, "#000", 15, 'left');
     context.drawImage(this.data.headImg, 10, 52, size.w - 20, 138);
     rectPath(context, 10, 190, size.w - 20, 134);
@@ -362,17 +277,17 @@ Page({
     drawText(context, name, 20, 230, 50, 216);//商品名字
     setText(context, "适用" + storeLen + "家门店", size.w - 20, 210, "#999", 10, 'right');//适用门店
 
-    context.drawImage("../../images/price.png", 20, 263, 30, 13);
+    context.drawImage("../../../images/price.png", 20, 263, 30, 13);
     setText(context, price1, 55, 275, '#E83221', 14, 'left');//价格
     setText(context, "原价:" + price2, size.w - 20, 275, '#999', 10, 'right');//原价
 
-    context.drawImage("../../images/gou.png", 20, 293, 10, 10);
+    context.drawImage("../../../images/gou.png", 20, 293, 10, 10);
     setText(context, "可退款", 35, 302, '#999', 9, 'left');
-    context.drawImage("../../images/gou.png", 80, 293, 10, 10);
+    context.drawImage("../../../images/gou.png", 80, 293, 10, 10);
     setText(context, "可转赠", 95, 302, '#999', 9, 'left');
 
     rectPath(context, 0, 334, size.w, 88);
-    context.drawImage('../../images/erbg.png', 70, 387, 103, 18);
+    context.drawImage('../../../images/erbg.png', 70, 387, 103, 18);
     setText(context, "长按识别小程序码", 77, 400, '#333', 11, 'left');
 
 

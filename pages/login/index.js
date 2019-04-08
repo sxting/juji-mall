@@ -7,16 +7,6 @@ Page({
         openId: '',
         showPageLoading: true,
         noPath: false,
-        pageInfo: [{
-            type: 0,
-            path: '/pages/index/index' //首页
-        }, {
-            type: 1,
-            path: '/pages/comDetail/index' //商品详情
-        }, {
-            type: 2,
-            path: '/pages/jujiGarden/gardenIndex/index' //桔园邀新首页
-        }],
         pageType: 0, //3为扫码进来
         pageData: {},
         pageFromCode: 1,//1为商品详情，2为邀新，默认1
@@ -29,34 +19,31 @@ Page({
         console.log(JSON.stringify(options));
         if (options.pagetype) {
             this.setData({ pageType: options.pagetype });
-        } else {
-          if (options.scene) {
-            console.log("扫码进入")
-            this.setData({scene:decodeURIComponent(options.scene)});
-            this.setData({ pageType: 3 });
-          } else {
-            console.log("直接进入")
-            this.setData({ pageType: 0 });
-          }
+        }
+        if (options.scene) {
+          console.log("扫码进入");
+          this.setData({scene:decodeURIComponent(options.scene)});
+          this.setData({ pageType: 3 });
         }
         this.setData({ pageData: options });
         // 小程序码进来的话
         this.next();
     },
-    next: function(options) {
+    next: function() {
         wx.getSetting({
             success: (res) => {
-                console.log(res.authSetting['scope.userInfo']);
+                console.log('userInfoStatus='+res.authSetting['scope.userInfo']);
                 if (res.authSetting['scope.userInfo']) {
                     if(this.data.pageType==3){
-                        this.getValueByscene(options.scene,1);
+                        this.getValueByscene(this.data.scene,1);
                     }else{
-                        this.nextPage();
+                        // 正常用户先登录再进行下一步;
+                        this.preLogin1("",this.data.scene);
                     }
                 } else {
                   this.setData({showPageLoading: false});
                   if(this.data.pageType==3){
-                    this.getValueByscene(options.scene,2);
+                    this.getValueByscene(this.data.scene,2);
                   }
                 }
             }
@@ -86,26 +73,30 @@ Page({
             }
         });
     },
-    preLogin1: function(options, inviteCode) {
+    // 已授权调
+    preLogin1: function(inviteCode,scene) {
         var obj = {
             rawData: '',
-            inviteCode: inviteCode
+            inviteCode: inviteCode,
+            scene:scene
         };
         this.login(obj).then(() => {
             this.nextPage();
         });
     },
-    preLogin2: function(rawData, inviteCode) {
+    // 未授权调
+    preLogin2: function(rawData, inviteCode,scene) {
         var obj = {
             rawData: rawData,
-            inviteCode: inviteCode
+            inviteCode: inviteCode,
+            scene:scene
         };
         this.login(obj).then(() => {
             this.nextPage();
         });
     },
     nextPage:function(){
-      console.log("走下一步");
+      console.log("走下一页");
       console.log('pageType===='+this.data.pageType);
       if (this.data.pageType==0) {
         wx.switchTab({
@@ -151,8 +142,8 @@ Page({
             wx.setStorageSync('rawData', e.detail.rawData);
             var rawData = e.detail.rawData;
             console.log('pageType===='+this.data.pageType);
-            var invitecode = this.data.pageData.invitecode;
-            this.preLogin2(rawData, invitecode);
+            var invitecode = this.data.pageData.invitecode?this.data.pageData.invitecode:'';
+            this.preLogin2(rawData, invitecode,this.data.scene);
         }
     },
     login: function(obj) {
@@ -174,7 +165,8 @@ Page({
                         appId: constant.APPID,
                         isMock: false, //测试标记
                         inviteCode: obj.inviteCode,
-                        rawData: obj.rawData
+                        rawData: obj.rawData,
+                        sceneId: obj.scene
                     },
                     header: {
                         'content-type': 'application/json',
@@ -182,6 +174,7 @@ Page({
                     success: (res1) => {
                         console.log(res1);
                         if (res1.data.errorCode == '200') {
+                            console.log('登录成功，拿到token');
                             wx.setStorageSync('token', res1.data.data.token);
                             wx.setStorageSync('openid', res1.data.data.openId);
                             wx.setStorageSync('inviteCode', res1.data.data.inviteCode);

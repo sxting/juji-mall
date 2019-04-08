@@ -99,7 +99,7 @@ Page({
   toBuy:function(){
     console.log('下单前sceneId='+this.data.sceneId);
     service.getProQrCode({ productId:this.data.productId,path: 'pages/comDetail/index'}).subscribe({
-        next: res => {
+        next: res => { 
             var sceneId = res.senceId;
             this.setData({sceneId:sceneId});
             console.log('接口生成sceneId='+this.data.sceneId);
@@ -113,20 +113,23 @@ Page({
     });
   },
   buyProduct:function(){
-      if(this.data.productInfo.type=='PRODUCT'&&this.data.productInfo.point>0&&this.data.productInfo.price>0){
-        if(this.data.productInfo.price>0&&this.data.pointBalance>=this.data.productInfo.point){
+      var point = this.data.productInfo.point==null?0:this.data.productInfo.point;
+      var price = this.data.productInfo.price==null?0:this.data.productInfo.price;
+      var type = this.data.productInfo.type;
+      if(type=='PRODUCT'&&point>0&&price>0){
+        if(price>0&&this.data.pointBalance>=point){
           this.toCreateOrder();
         }else{
           this.toGetPoint();
         }
       }
-      if(this.data.productInfo.type=='PRODUCT'&&this.data.productInfo.point==0&&this.data.productInfo.price>0){
+      if(type=='PRODUCT'&&point==0&&price>0){
         this.toCreateOrderByRmb();
       }
-      if(this.data.productInfo.type=='POINT'){
+      if(type=='POINT'){
         this.toCreateOrderByPoint();
       }
-      if(this.data.pointBalance<this.data.productInfo.point||!this.data.pointBalance){
+      if(this.data.pointBalance<point||!this.data.pointBalance){
         this.toGetPoint();
       }
   },
@@ -137,7 +140,7 @@ Page({
   },
   callPhone: function () {
     wx.makePhoneCall({
-      phoneNumber: '4000011139',
+      phoneNumber: '4000011139'
     });
   },
   //收集formid做推送
@@ -382,7 +385,7 @@ Page({
                     wx.hideLoading();
                     var point = info.point==null||info.point==0?'':info.point+'桔子';
                     var price = info.price==null||info.price==0?'':Number(info.price/100).toFixed(2)+'元';
-                    var link = (info.price!=null&&info.point!=0)&&(info.point!=null&&info.point!=0)?'+':'';
+                    var link = (info.price!=null&&info.price!=0)&&(info.point!=null&&info.point!=0)?'+':'';
                     var price1 = point + link + price;
                     var name = info.productName;
                     var price2 = Number(info.originalPrice / 100).toFixed(2) + '元';

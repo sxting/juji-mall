@@ -1,7 +1,8 @@
-import { errDialog, loading,barcode} from '../../utils/util';
+import { errDialog, loading,barcode,formatDate} from '../../utils/util';
 import { service} from '../../service';
 import { constant} from '../../utils/constant';
 var app = getApp();
+var timer = null;
 Page({
   data: {
     orderId:'',
@@ -9,7 +10,9 @@ Page({
     amount: 0,
     preOrderStr:'',
     constant: constant,
-    voucherInfo:{}
+    voucherInfo:{},
+    vouchers:[],
+    validEndDate:''
   },
   onLoad: function(options) {
     wx.setNavigationBarTitle({title: '订单详情'});
@@ -35,7 +38,7 @@ Page({
       success:(res) => {
         if (res.confirm) {
           wx.switchTab({
-            url: '../user/index',
+            url: '../user/index'
           })
         } else if (res.cancel) {
           console.log('用户点击取消');
@@ -49,7 +52,13 @@ Page({
         this.setData({orderInfo: res});
         this.setData({preOrderStr:res.preOrderStr});
         if(res.status=='PAID'){
-          barcode('barcode', res.vouchers[0].voucherCode, 664, 136);
+          if(!timer){
+            this.getListVoucher(res.vouchers[0].voucherCode);
+          }
+        }
+        this.setData({vouchers:res.vouchers});
+        if(res.status=='CONSUME'||res.status=='FINISH'){
+          console.log('已完成的订单');
           this.getListVoucher(res.vouchers[0].voucherCode);
         }
       },
@@ -73,6 +82,17 @@ Page({
     service.listVouchers(obj).subscribe({
       next: res => {
         this.setData({voucherInfo: res[0]});
+        console.log(res[0].validEndDate);
+        // var timestamp = new Date(res[0].validEndDate+':123').getTime()+2000;
+        // console.log(timestamp);
+        // var dealDate =  formatDate(timestamp);
+        this.setData({validEndDate:res[0].validEndDate.substring(0,10)});
+        if(this.data.orderInfo.status=='PAID'&&this.data.voucherInfo.validDays>0){
+          barcode('barcode', this.data.orderInfo.vouchers[0].voucherCode, 664, 136);
+          // timer = setInterval(()=>{
+          //   this.getData(this.data.orderId);
+          // },1000)
+        }
       },
       error: err => console.log(err),
       complete: () => wx.hideToast()
@@ -80,6 +100,7 @@ Page({
   },
   toPay: function() {
     var payInfo = JSON.parse(this.data.preOrderStr);
+    var that = this;
     wx.requestPayment({
       timeStamp: payInfo.timeStamp,
       nonceStr: payInfo.nonceStr,
@@ -87,7 +108,7 @@ Page({
       signType: payInfo.signType,
       paySign: payInfo.paySign,
       success(res2) {
-        this.getData(this.data.orderId);
+        that.getData(that.data.orderId);
       },
       fail(res2) {
         if (res2.errMsg == 'requestPayment:fail cancel') {

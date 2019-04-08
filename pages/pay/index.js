@@ -55,7 +55,6 @@ Page({
       //   accountpaystatus: true
       // });
       console.log('Promise is ready!');
-      // options.q = 'https://juji-dev.juniuo.com/qrm/212345678.htm';//测试用
       if (options.q) {
         console.log(options.q);
         var link = decodeURIComponent(options.q);
@@ -81,7 +80,34 @@ Page({
         });
         resolve();
       } else {
-        reject('options.q不存在');
+        wx.showModal({
+          title: '警告',
+          content: '该二维码用于系统测试，请勿支付',
+        });
+        // reject('options.q不存在');
+        options.q = 'https://juji-dev.juniuo.com/qrm/212345678.htm';//测试用
+        var link = decodeURIComponent(options.q);
+        console.log(link);
+        let arr = link.split('/qrm/');
+        console.log(arr);//['https://juji-dev.juniuo.com','212345678.htm']
+        if (arr[0]) {
+          that.setData({
+            payUrl: arr[0]
+          });
+          wx.setStorageSync('payUrl', arr[0]);
+        } else {
+          that.setData({
+            payUrl: that.data.payUrl
+          });
+        }
+        let arr1 = arr[1].split('.htm');
+        console.log(arr1);//['212345678']
+        console.log('qrcode: ' + arr1[0]);
+        that.setData({
+          url: link,
+          qrcode: arr1[0]
+        });
+        resolve();
       }
     }).then(function () {
       return new Promise(function (resolve1, reject1) {
@@ -196,7 +222,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    // wx.setStorageSync('scene','1011');//测试用
+    wx.setStorageSync('scene','1011');//测试用
     let scene = wx.getStorageSync('scene');
     if (scene == '1011' || scene == '1012' || scene == '1013') {//扫描二维码场景值
       return ;
@@ -508,8 +534,7 @@ Page({
       if (this.data.seledAccount) {//如果用户勾选了余额支付
         //此处判断余额付款和组合付款的情况 余额付款直接跳转到结果页面 组合支付还要到当前页的另一层
         if (Number(this.data.amount) > this.data.balance) {//如果输入金额比用户余额多
-          console.log('如果输入金额比用户余额多');
-          // console.log(Number(this.data.amount).toFixed(2));
+            console.log('如果输入金额比用户余额多');
           if (this.data.recommendStatus == '0' || !this.data.recommendStatus) {//显示储值支付
             this.getPayment(Number(this.data.amount).toFixed(2));
             this.setData({
@@ -520,6 +545,7 @@ Page({
               showSelectCard: true
             });
           } else if (this.data.recommendStatus == '1') {//只能微信支付 直接调用微信支付 不再显示中间推荐储值页
+            //如果勾选了余额支付 在组合支付的情况下 无论储值支付是否开启 都直接微信支付
             this.setData({
               accountpaystatus: true//显示支付loading
             });

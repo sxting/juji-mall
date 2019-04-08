@@ -239,10 +239,10 @@
 					"scene": null
 				},
 				{
-					"id": -1,
+					"id": 29,
 					"name": "活动商品详情",
 					"pathName": "pages/activities/project-detail/index",
-					"query": "",
+					"query": "share=0&id=2019040214333468912847070&storeid=111554088175153650",
 					"scene": null
 				}
 			]

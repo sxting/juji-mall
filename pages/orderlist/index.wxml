@@ -8,7 +8,7 @@
     </view>
     <view class="main ub-f1 p10">
         <view class="orderItem" wx:for="{{orderlist}}" wx:for-item="item" wx:key="unique">
-            <image class="expire" src="../../images/expire.png" wx:if="{{item.voucherValidEndDays<=0}}"></image>
+            <image class="expire" src="../../images/expire.png" wx:if="{{item.voucherValidEndDays&&item.voucherValidEndDays<=0}}"></image>
             <view class="ub ub-ac ub-pj top">
                 <view class="status">{{ format.formatStatus(item.status)}}</view>
                 <!-- <view class="restTime" wx:if="{{item.status=='PAID'}}">有效期至{{item.vouchers}}</view> -->

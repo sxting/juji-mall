@@ -18,7 +18,7 @@ Page({
       title: options.sceneType == 'PINTUAN'? '拼团列表': '砍价列表'
     });
     this.setData({
-      sceneType: options.sceneType
+      // sceneType: options.sceneType
     })
 
   },

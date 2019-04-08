@@ -32,14 +32,13 @@ page{box-sizing:border-box;height: 100%;background-color: #fbfbfb}
 .explain-text image{
   width: 30rpx;
   height: 30rpx;
-  margin-top: 28rpx
+  margin-top: -15rpx
 }
 .explain-text .text-infor{
   width: 648rpx;
   line-height: 40rpx;
-  position: absolute;
-  left: 74rpx;
-  top: 20rpx
+  margin-left: 20rpx;
+  margin-top: 20rpx
 }
 /* 未找到start */
 .space-box {

@@ -508,8 +508,7 @@ Page({
       if (this.data.seledAccount) {//如果用户勾选了余额支付
         //此处判断余额付款和组合付款的情况 余额付款直接跳转到结果页面 组合支付还要到当前页的另一层
         if (Number(this.data.amount) > this.data.balance) {//如果输入金额比用户余额多
-          console.log('如果输入金额比用户余额多');
-          // console.log(Number(this.data.amount).toFixed(2));
+            console.log('如果输入金额比用户余额多');
           if (this.data.recommendStatus == '0' || !this.data.recommendStatus) {//显示储值支付
             this.getPayment(Number(this.data.amount).toFixed(2));
             this.setData({
@@ -520,6 +519,7 @@ Page({
               showSelectCard: true
             });
           } else if (this.data.recommendStatus == '1') {//只能微信支付 直接调用微信支付 不再显示中间推荐储值页
+            //如果勾选了余额支付 在组合支付的情况下 无论储值支付是否开启 都直接微信支付
             this.setData({
               accountpaystatus: true//显示支付loading
             });

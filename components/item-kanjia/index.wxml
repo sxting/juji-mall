@@ -1,3 +1,14 @@
+<wxs module="filter" src="../../utils/numFr.wxs"></wxs>
 <view class="kanjia-container">
   <view class='product-name'>{{productInfo.productName}}</view>
+  <view class="ub ub-fe jc-sb" style="margin-top:20rpx;">
+    <view class="ub ub-fe">
+        <view style="display:flex;align-items: flex-end;">
+            <view style="font-size:38rpx;color: #E83221;font-weight:bold;line-height:38rpx;" wx:if="{{productInfo.price>0}}">{{filter.toFix(productInfo.price)}}</view>
+            <view style="font-size:24rpx;color: #E83221;font-weight:bold;line-height:24rpx;margin-bottom:4rpx;" wx:if="{{productInfo.price>0}}">元</view>
+        </view>
+        <view style="font-size: 24rpx;color: #999999;text-decoration:line-through;margin-left:25rpx;line-height:28rpx;">{{filter.toFix(productInfo.originalPrice)}} 元</view>
+    </view>
+    <view class="ub ub-ac" style="font-size: 24rpx;color: #999999;">已砍{{productInfo.soldNum}}件</view>
+  </view>
 </view>

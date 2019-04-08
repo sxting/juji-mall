@@ -21,6 +21,7 @@ Page({
     },
     onLoad: function() {
         new app.ToastPannel();
+        wx.hideShareMenu();
         wx.setNavigationBarTitle({ title: '邀新素材' });
     },
     previewImage: function(event) {

@@ -58,12 +58,8 @@ Page({
         }
         this.setData({vouchers:res.vouchers});
         if(res.status=='CONSUME'||res.status=='FINISH'){
-          if(timer){
-            clearInterval(timer);
-          }else{
-            console.log('已完成的订单');
-            this.getListVoucher(res.vouchers[0].voucherCode);
-          }
+          console.log('已完成的订单');
+          this.getListVoucher(res.vouchers[0].voucherCode);
         }
       },
       error: err => console.log(err),
@@ -93,9 +89,9 @@ Page({
         this.setData({validEndDate:res[0].validEndDate.substring(0,10)});
         if(this.data.orderInfo.status=='PAID'&&this.data.voucherInfo.validDays>0){
           barcode('barcode', this.data.orderInfo.vouchers[0].voucherCode, 664, 136);
-          timer = setInterval(()=>{
-            this.getData();
-          },1000)
+          // timer = setInterval(()=>{
+          //   this.getData(this.data.orderId);
+          // },1000)
         }
       },
       error: err => console.log(err),
@@ -104,6 +100,7 @@ Page({
   },
   toPay: function() {
     var payInfo = JSON.parse(this.data.preOrderStr);
+    var that = this;
     wx.requestPayment({
       timeStamp: payInfo.timeStamp,
       nonceStr: payInfo.nonceStr,
@@ -111,7 +108,7 @@ Page({
       signType: payInfo.signType,
       paySign: payInfo.paySign,
       success(res2) {
-        this.getData(this.data.orderId);
+        that.getData(that.data.orderId);
       },
       fail(res2) {
         if (res2.errMsg == 'requestPayment:fail cancel') {

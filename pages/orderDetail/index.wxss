@@ -1,7 +1,7 @@
 page{box-sizing:border-box;height:100%;background-color:#fbfbfb}
 .orderInfo1{background-color:#fff;position:relative;overflow:hidden;margin-bottom:20rpx;padding-bottom:0!important}
 .orderInfo1 .info{padding:30rpx;background-color:#fbfbfb;border-radius:10rpx}
-.orderInfo1 .total{font-size:26rpx;color:#333;padding-right:30rpx;padding-top:30rpx;padding-bottom:40rpx;}
+.orderInfo1 .total{font-size:26rpx;color:#333;padding-right:30rpx;padding-top:30rpx;padding-bottom:30rpx;}
 .goodImg{width:220rpx;height:220rpx;border-radius:8rpx;border:1rpx #eee solid;}
 .goodMsg{margin-left:20rpx;position:relative;}
 .goodTit{font-size:28rpx;}

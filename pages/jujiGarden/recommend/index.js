@@ -22,6 +22,7 @@ Page({
     },
     onLoad: function(options) {
         new app.ToastPannel();
+        wx.hideShareMenu();
         wx.setNavigationBarTitle({ title: '商品推荐' });
         if (options.productid) {
             this.setData({ productId: options.productid });

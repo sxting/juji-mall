@@ -83,15 +83,12 @@ Page({
       next: res => {
         this.setData({voucherInfo: res[0]});
         console.log(res[0].validEndDate);
-        // var timestamp = new Date(res[0].validEndDate+':123').getTime()+2000;
-        // console.log(timestamp);
-        // var dealDate =  formatDate(timestamp);
         this.setData({validEndDate:res[0].validEndDate.substring(0,10)});
         if(this.data.orderInfo.status=='PAID'&&this.data.voucherInfo.validDays>0){
           barcode('barcode', this.data.orderInfo.vouchers[0].voucherCode, 664, 136);
           // timer = setInterval(()=>{
           //   this.getData(this.data.orderId);
-          // },1000)
+          // },1200);
         }
       },
       error: err => console.log(err),

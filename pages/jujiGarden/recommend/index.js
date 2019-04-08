@@ -150,7 +150,7 @@ Page({
                               success: (obj) => {
                                 if (obj.statusCode === 200) {
                                   this.setData({userImg:obj.tempFilePath});
-                                  this.createProImg(sceneId,scenepicid);
+                                  this.createProImg(scenepicid);
                                 }else{
                                   wx.hideLoading();
                                 }
@@ -177,9 +177,10 @@ Page({
     },
     createProImg: function(sceneId,scenepicid) {
         console.log(sceneId);
-        if(sceneId){
+        if(scenepicid){
             this.setData({sceneId:sceneId});
             console.log('scene111='+this.data.sceneId);
+            console.log(constant.basePicUrl + this.data.sceneId + '/resize_200_200/mode_fill');
             this.drawCanvas(scenepicid);
         }else{
             jugardenService.getQrCode({ productId:this.data.productId,path: 'pages/login/index'}).subscribe({
@@ -188,6 +189,8 @@ Page({
                     var scenePicId = res.picId;
                     this.setData({sceneId:sceneId});
                     console.log('scene222='+this.data.sceneId);
+                    console.log('scenePicId='+scenePicId);
+                    console.log(constant.basePicUrl + scenePicId + '/resize_200_200/mode_fill');
                     this.drawCanvas(scenePicId);
                 },
                 error: err => {

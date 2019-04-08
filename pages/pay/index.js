@@ -80,6 +80,10 @@ Page({
         });
         resolve();
       } else {
+        wx.showModal({
+          title: '警告',
+          content: '该二维码用于系统测试，请勿支付',
+        });
         // reject('options.q不存在');
         options.q = 'https://juji-dev.juniuo.com/qrm/212345678.htm';//测试用
         var link = decodeURIComponent(options.q);
@@ -218,7 +222,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    // wx.setStorageSync('scene','1011');//测试用
+    wx.setStorageSync('scene','1011');//测试用
     let scene = wx.getStorageSync('scene');
     if (scene == '1011' || scene == '1012' || scene == '1013') {//扫描二维码场景值
       return ;

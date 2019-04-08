@@ -13,7 +13,7 @@
 
   <!-- 活动状态 -->
   <view>
-    <kanjia product-info="{{productInfo}}"></kanjia>
+    <kanjia wx:if="{{type === 'kanjia'}}" product-info="{{productInfo}}"></kanjia>
   </view>
 
   <view class="yongkaxuzhi-wrap" style="margin-top:20rpx;">

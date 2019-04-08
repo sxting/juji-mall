@@ -34,13 +34,14 @@ Page({
     lat: '',
     lng: '',
     share: 0,//首页分享按钮进入值为1
+    type: ''
   },
   onLoad: function (options) {
     if (options.share) {
       this.setData({ share: options.share });
     }
     wx.setNavigationBarTitle({ title: '商品详情' });
-    this.setData({ productId: options.id });
+    this.setData({ productId: options.id, type: options.type ? options.type : '' });
     if (options.storeid) {
       this.setData({ storeId: options.storeid });
     }

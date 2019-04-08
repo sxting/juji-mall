@@ -98,43 +98,18 @@ Page({
     nextPage:function(){
       console.log("走下一页");
       console.log('pageType===='+this.data.pageType);
-      if (this.data.pageType==0) {
-        wx.switchTab({
-          url: '/pages/index/index'
-        });
-      }
-      if (this.data.pageType==1) {
-        wx.reLaunch({
-          url: '/pages/comDetail/index?id=' + this.data.pageData.pid + '&storeid=' + this.data.pageData.storeid
-        });
-      }
-      if (this.data.pageType==2) {
-        wx.reLaunch({
-          url: '/pages/jujiGarden/gardenIndex/index?openid=' + this.data.sharePersonOpenId
-        });
-      }
-      if (this.data.pageType==3) {
-        if(this.data.pageFromCode==1){//商品详情
-          wx.reLaunch({
-            url: '/pages/comDetail/index?id=' + this.data.shareProductId + '&storeid='
-          });
-        }else{//邀新
-          wx.reLaunch({
-            url: '/pages/jujiGarden/gardenIndex/index?openid=' + this.data.sharePersonOpenId
-          });
-        }
-      }
-      // 分销返利页
-      if(this.data.pageType==4){
-        wx.reLaunch({
-          url: '/pages/comDetail/index?id=' + this.data.pageData.pid + '&storeid=' + this.data.pageData.storeid + '&sceneid=' + this.data.pageData.sceneid
-        });
-      }
-      // 邀新首页
-      if(this.data.pageType==5){
-        wx.reLaunch({
-          url: '/pages/jujiGarden/gardenIndex/index?openid=' + this.data.pageData.openid
-        });
+      switch(this.data.pageType){
+        case 0:wx.switchTab({url: '/pages/index/index'});break;
+        case 1:wx.reLaunch({url: '/pages/comDetail/index?id=' + this.data.pageData.pid + '&storeid=' + this.data.pageData.storeid});break;
+        case 2:wx.reLaunch({url: '/pages/jujiGarden/gardenIndex/index?openid=' + this.data.sharePersonOpenId});break;
+        case 3:if(this.data.pageFromCode==1){
+                  wx.reLaunch({url: '/pages/comDetail/index?id=' + this.data.shareProductId + '&storeid='});
+               }else{//邀新
+                  wx.reLaunch({url: '/pages/jujiGarden/gardenIndex/index?openid=' + this.data.sharePersonOpenId});
+               }
+               break;
+        case 4:wx.reLaunch({url: '/pages/comDetail/index?id=' + this.data.pageData.pid + '&storeid=' + this.data.pageData.storeid + '&sceneid=' + this.data.pageData.sceneid});break;
+        case 5:wx.reLaunch({url: '/pages/jujiGarden/gardenIndex/index?openid=' + this.data.pageData.openid});break;
       }
     },
     getUserInfo: function(e) {

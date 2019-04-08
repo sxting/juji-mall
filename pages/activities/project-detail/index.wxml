@@ -1,2 +1,1 @@
-<!--pages/activities/project-detail/index.wxml-->
-<text>pages/activities/project-detail/index.wxml</text>
+<wxs module="filter" src="../../../utils/numFr.wxs"></wxs>

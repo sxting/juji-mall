@@ -96,6 +96,16 @@ function getUrlParma(url, name) {
     return null;
 }
 
+// 根据时间戳格式化日期
+function formatDate(stortime) {
+    var time = new Date(stortime);
+    var y = time.getFullYear();
+    var m = time.getMonth() + 1;
+    var d = time.getDate();
+    return y+'-'+(m<9?'0'+m:m)+'-'+(d<9?'0'+d:d);
+}
+
+
 function delBlank(value) {
     return String(value).replace(/(^\s*)|(\s*$)/g, "");
 }
@@ -114,5 +124,6 @@ module.exports = {
     checkMobile:checkMobile,
     barcode: barc,
     delBlank:delBlank,
-    showAlert: showAlert
+    showAlert: showAlert,
+    formatDate:formatDate
 }

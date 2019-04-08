@@ -50,16 +50,16 @@
     </view>
 
     <view class="orderInfo4" wx:if="{{orderInfo.status=='PAID'&&(voucherInfo.validDays<=0||voucherInfo.validDays==null)}}">
-        <view wx:for="{{vouchers}}" wx:for-index="index" class="code {{index<voucherInfo.usedNum?'d':''}}">券码：{{item.voucherCode}}</view>
+        <view wx:for="{{vouchers}}" wx:for-index="index" class="code {{index<voucherInfo.usedNum?'d':''}}" wx:key="unique">券码：{{item.voucherCode}}</view>
         <view class="div ub ub ub-ac ub-pj">
-            <view class="txt1">剩余有效天数：已过期</view>
+            <view class="txt1">已于{{validEndDate}}到期</view>
             <view class="c">|</view>
             <view class="txt1">可核销{{voucherInfo.totalNum}}次，已核销{{voucherInfo.usedNum}}次</view>
         </view>
     </view>
 
     <view class="orderInfo4" wx:if="{{orderInfo.status=='CONSUME'||orderInfo.status=='FINISH'}}">
-        <view class="code d" wx:for="{{vouchers}}">券码：{{item.voucherCode}}</view>
+        <view class="code d" wx:for="{{vouchers}}" wx:key="unique">券码：{{item.voucherCode}}</view>
         <view class="txt">可核销{{voucherInfo.totalNum}}次，已核销{{voucherInfo.usedNum}}次</view>
     </view>
 

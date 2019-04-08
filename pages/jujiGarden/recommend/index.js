@@ -164,7 +164,10 @@ Page({
                     }
                });
             },
-            error: err => console.log(err),
+            error: err => {
+              wx.hideLoading();
+              errDialog('获取商品信息失败');
+            },
             complete: () => wx.hideToast()
         })
     },
@@ -202,9 +205,9 @@ Page({
                     this.setData({ erwmImg: res1.tempFilePath });
                     var info = this.data.productInfo;
                     wx.hideLoading();
-                    var point = info.point==0?'':info.point+'桔子';
-                    var price = info.price==0?'':Number(info.price/100).toFixed(2)+'元';
-                    var link = info.price!=0&&info.point!=0?'+':'';
+                    var point = info.point==null||info.point==0?'':info.point+'桔子';
+                    var price = info.price==null||info.price==0?'':Number(info.price/100).toFixed(2)+'元';
+                    var link = (info.price!=null&&info.price!=0)&&(info.point!=null&&info.point!=0)?'+':'';
                     var price1 = point + link + price;
                     var name = info.productName;
                     var price2 = Number(info.originalPrice / 100).toFixed(2) + '元';

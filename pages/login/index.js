@@ -7,16 +7,6 @@ Page({
         openId: '',
         showPageLoading: true,
         noPath: false,
-        pageInfo: [{
-            type: 0,
-            path: '/pages/index/index' //首页
-        }, {
-            type: 1,
-            path: '/pages/comDetail/index' //商品详情
-        }, {
-            type: 2,
-            path: '/pages/jujiGarden/gardenIndex/index' //桔园邀新首页
-        }],
         pageType: 0, //3为扫码进来
         pageData: {},
         pageFromCode: 1,//1为商品详情，2为邀新，默认1
@@ -48,7 +38,7 @@ Page({
                         this.getValueByscene(this.data.scene,1);
                     }else{
                         // 正常用户先登录再进行下一步;
-                        this.preLogin1("");
+                        this.preLogin1("",this.data.scene);
                     }
                 } else {
                   this.setData({showPageLoading: false});
@@ -84,20 +74,22 @@ Page({
         });
     },
     // 已授权调
-    preLogin1: function(inviteCode) {
+    preLogin1: function(inviteCode,scene) {
         var obj = {
             rawData: '',
-            inviteCode: inviteCode
+            inviteCode: inviteCode,
+            scene:scene
         };
         this.login(obj).then(() => {
             this.nextPage();
         });
     },
     // 未授权调
-    preLogin2: function(rawData, inviteCode) {
+    preLogin2: function(rawData, inviteCode,scene) {
         var obj = {
             rawData: rawData,
-            inviteCode: inviteCode
+            inviteCode: inviteCode,
+            scene:scene
         };
         this.login(obj).then(() => {
             this.nextPage();
@@ -151,7 +143,7 @@ Page({
             var rawData = e.detail.rawData;
             console.log('pageType===='+this.data.pageType);
             var invitecode = this.data.pageData.invitecode?this.data.pageData.invitecode:'';
-            this.preLogin2(rawData, invitecode);
+            this.preLogin2(rawData, invitecode,this.data.scene);
         }
     },
     login: function(obj) {
@@ -174,7 +166,7 @@ Page({
                         isMock: false, //测试标记
                         inviteCode: obj.inviteCode,
                         rawData: obj.rawData,
-                        sceneId: this.data.scene
+                        sceneId: obj.scene
                     },
                     header: {
                         'content-type': 'application/json',

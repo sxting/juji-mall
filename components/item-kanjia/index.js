@@ -7,6 +7,10 @@ Component({
     productInfo: {
       type: Object,
       value: {}
+    },
+    btn: {
+      type: Boolean,
+      value: false
     }
   },
 

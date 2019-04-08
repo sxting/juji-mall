@@ -1,5 +1,11 @@
 <wxs module="filter" src="../../utils/numFr.wxs"></wxs>
-<view class="kanjia-container">
+<view wx:if="{{btn}}">
+  <view class='jc-sb'>
+    <view>直接购买</view>
+    <view>发起砍价</view>
+  </view>
+</view>
+<view class="kanjia-container" wx:else>
   <view class='product-name'>{{productInfo.productName}}</view>
   <view class="ub ub-fe jc-sb" style="margin-top:20rpx;">
     <view class="ub ub-fe">

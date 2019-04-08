@@ -57,7 +57,7 @@ swiper{display:block;width:100%;height:340rpx;box-sizing:border-box;overflow:hid
 .padr10{padding-right:10rpx;}
 .padl10{padding-left:10rpx;}
 .pubuItem .card{width:100%;border-radius:5px;background:#fff;box-sizing:border-box;}
-.pubuItem .plimg{width:100%;height:185rpx;border-radius:10rpx;}
+.pubuItem .plimg{width:100%;height:185rpx;border-radius:10rpx;position: relative;}
 .pubuname{font-size:28rpx;color:#333;display:-webkit-box;overflow:hidden;text-overflow:ellipsis;-webkit-line-clamp:2;-webkit-box-orient:vertical;margin-top:10rpx;}
 .pububox{display:flex;align-items:center;justify-content:space-between;margin-top:18rpx;}
 .ex-juzi{display:flex;align-items:center;}
@@ -135,4 +135,17 @@ swiper{display:block;width:100%;height:340rpx;box-sizing:border-box;overflow:hid
 .phoneInner view {
   font-size: 24rpx;
   color: #333;
+}
+
+.ysqMark{
+  width:100%;height:100%;position:absolute;top:0;left:0;background: rgba(0,0,0,.5);
+}
+.ysqMark image{
+  width: 140rpx;
+  height: 62rpx;
+  position:absolute;
+  top:50%;
+  left:50%;
+  margin-left: -70rpx;
+  margin-top: -31rpx;
 }

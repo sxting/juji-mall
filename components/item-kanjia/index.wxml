@@ -1,2 +1,3 @@
-<!--shared/component/item-kanjia/index.wxml-->
-<text>shared/component/item-kanjia/index.wxml</text>
+<view class="kanjia-container">
+  <view>{{productInfo.productName}}</view>
+</view>

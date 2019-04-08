@@ -1,3 +1,5 @@
 {
-  "usingComponents": {}
+  "usingComponents": {
+    "kanjia": "../../../components/item-kanjia/index"
+  }
 }

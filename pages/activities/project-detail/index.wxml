@@ -12,7 +12,9 @@
   </view>
 
   <!-- 活动状态 -->
-  <view></view>
+  <view>
+    <kanjia product-info="{{productInfo}}"></kanjia>
+  </view>
 
   <view class="yongkaxuzhi-wrap" style="margin-top:20rpx;">
     <view class="yongkaxuzhi">

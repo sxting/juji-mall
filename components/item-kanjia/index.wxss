@@ -1,1 +1,4 @@
 /* shared/component/item-kanjia/index.wxss */
+.kanjia-container {
+  background-color: #fff;
+}

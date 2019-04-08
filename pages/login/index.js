@@ -116,7 +116,9 @@ Page({
         if (e.detail.userInfo) {
             wx.setStorageSync('rawData', e.detail.rawData);
             var rawData = e.detail.rawData;
+            console.log('点击授权登录按钮');
             console.log('pageType===='+this.data.pageType);
+            console.log(JSON.stringify(this.data.pageData));
             var invitecode = this.data.pageData.invitecode?this.data.pageData.invitecode:'';
             this.preLogin2(rawData, invitecode,this.data.scene);
         }
@@ -132,6 +134,8 @@ Page({
             });
         }).then(function(code) {
             return new Promise(function(resolve2, reject2) {
+                console.log("登录请求inviteCode="+obj.inviteCode);
+                console.log("登录请求scene="+obj.scene);
                 wx.request({
                     url: constant.apiUrl + '/user/login.json',
                     method: 'GET',

@@ -1,4 +1,7 @@
 var filters = {
+  toNum: function (value) {
+    return Number(value);
+  },
   toFix: function(value) {
     return Number(value / 100).toFixed(2);
   },
@@ -46,6 +49,7 @@ var initArr = function(len){
 }
 
 module.exports = {
+  toNum: filters.toNum,
   toFix: filters.toFix,
   formatStatus:formatStatus,
   toInt: filters.toInt,

@@ -13,7 +13,8 @@
 
   <!-- 活动状态 -->
   <view class='w-100'>
-    <kanjia wx:if="{{type === 'kanjia'}}" product-info="{{productInfo}}" btn="{{false}}"></kanjia>
+    <item-collage wx:if="{{type === 'SPLICED'}}" fleg='content' collageInforData="{{productInfo}}"></item-collage>
+    <kanjia wx:if="{{type === 'BARGAIN'}}" product-info="{{productInfo}}" btn="{{false}}"></kanjia>
   </view>
 
   <view class="yongkaxuzhi-wrap" style="margin-top:20rpx;">
@@ -156,7 +157,8 @@
         <view class="home">分享</view>
     </button>
     <view style='width: 470rpx; height: 90rpx;'>
-      <kanjia wx:if="{{type === 'kanjia'}}" product-info="{{productInfo}}" btn="{{true}}"></kanjia>
+      <item-collage wx:if="{{type === 'SPLICED'}}" fleg='' collageInforData="{{productInfo}}"></item-collage>
+      <kanjia wx:if="{{type === 'BARGAIN'}}" product-info="{{productInfo}}" btn="{{true}}"></kanjia>
     </view>
   </view>
 

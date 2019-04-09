@@ -1,12 +1,3 @@
-.kanjia-container {
-  font-family: PingFangSC-Regular;
-  background-color: #fff;
-  padding: 30rpx;
-}
-.product-name {
-  font-size: 30rpx;
-  color: #333333;
-}
 .jc-sb { justify-content: space-between; display: flex}
 .ub { display: -webkit-flex; display: flex; position: relative; }
 .ub-ver { -webkit-flex-direction: column; flex-direction: column; }
@@ -21,3 +12,29 @@
 .ub-f2{-webkit-flex:2;flex:2;}
 .ub-f3{-webkit-flex:3;flex:3;}
 .ub-f4{-webkit-flex:4;flex:4;}
+.kanjia-container {
+  font-family: PingFangSC-Regular;
+  background-color: #fff;
+  padding: 30rpx;
+}
+.product-name {
+  font-size: 30rpx;
+  color: #333333;
+}
+.bt-btn {
+  display: flex;
+}
+.btn-l, .btn-r {
+  width: 240rpx;
+  height: 88rpx;
+  line-height: 88rpx;
+  text-align: center;
+  font-size: 28rpx;
+  color: #FFFFFF;
+  background-color: #333333;
+  border-radius: 44rpx 0 0 44rpx;
+}
+.btn-r {
+  background: #E83221;
+  border-radius: 0 44rpx 44rpx 0;
+}

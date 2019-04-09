@@ -1,11 +1,5 @@
 <wxs module="filter" src="../../utils/numFr.wxs"></wxs>
-<view wx:if="{{btn}}">
-  <view class='jc-sb'>
-    <view>直接购买</view>
-    <view>发起砍价</view>
-  </view>
-</view>
-<view class="kanjia-container" wx:else>
+<view class="kanjia-container" wx:if="{{!btn}}">
   <view class='product-name'>{{productInfo.productName}}</view>
   <view class="ub ub-fe jc-sb" style="margin-top:20rpx;">
     <view class="ub ub-fe">
@@ -16,5 +10,11 @@
         <view style="font-size: 24rpx;color: #999999;text-decoration:line-through;margin-left:25rpx;line-height:28rpx;">{{filter.toFix(productInfo.originalPrice)}} 元</view>
     </view>
     <view class="ub ub-ac" style="font-size: 24rpx;color: #999999;">已砍{{productInfo.soldNum}}件</view>
+  </view>
+</view>
+<view wx:else>
+  <view class='bt-btn'>
+    <view class='btn-l'>直接购买</view>
+    <view class='btn-r'>发起砍价</view>
   </view>
 </view>

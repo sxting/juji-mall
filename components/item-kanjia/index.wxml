@@ -19,8 +19,8 @@
     </view>
     <view class='kanjia-jindu' wx:if="{{status !== 'init'}}">
       <view class='rate-line'>
-        <view class='rate-line1'></view>
-        <view style='width: 300rpx' class='rate-line2 {{((status === "fail") || (!self && status === "success")) ? "rate-line3" : ""}}'><text></text></view>
+        <view class='rate-line1 {{(status === "fail") ? "rate-line4" : ""}}'></view>
+        <view style='width: 300rpx' class='rate-line2 {{(status === "fail") ? "rate-line3" : ""}}'><text></text></view>
       </view>
       <view class='price-box'>
         <text class='fl'>已砍¥55.00</text>
@@ -49,7 +49,7 @@
           <view class='friend-time'>{{item.date}}</view>
         </view>
         <view class='fr friend-price'>
-          <icon class='jn-icon icon-home_kanjia'></icon> 帮砍<text>{{item.bargainPrice/100}}元</text>
+          帮砍<text>{{item.bargainPrice/100}}元</text>
         </view>
       </view>
     </view>

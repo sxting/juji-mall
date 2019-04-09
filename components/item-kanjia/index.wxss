@@ -25,6 +25,7 @@
   color: #333333;
 }
 .bd {
+  padding-bottom: 30rpx;
   background: #FFFFFF;
   box-shadow: 0 5rpx 5rpx 3rpx rgba(229,229,229,0.50);
   border-radius: 10rpx;
@@ -57,7 +58,6 @@
 .kanjia-jindu {
   width: 630rpx;
   margin: 0 auto;
-  padding-bottom: 30rpx;
   padding-top: 10rpx;
 }
 .rate-line {
@@ -93,6 +93,9 @@
 .rate-line3 {
   background: #CCCCCC;
 }
+.rate-line4 {
+  background: #F2F2F2;
+}
 .price-box {
   font-size: 24rpx;
   overflow: hidden;
@@ -104,6 +107,65 @@
   padding: 2rpx 6rpx;
 }
 
+.btn-active {
+  background: #E83221;
+  border-radius: 44rpx;
+  width: 580rpx;
+  height: 88rpx;
+  text-align: center;
+  line-height: 88rpx;
+  font-size: 30rpx;
+  color: #FFFFFF;
+  margin: 50rpx auto 10rpx;
+}
+.kanjia-status {
+  font-size: 28rpx;
+  color: #333;
+  text-align: center;
+  padding-top: 20rpx;
+}
+
+.friends {
+  background-color: #fff;
+  margin-top: 20rpx;
+}
+.sub-title2-box {
+  padding: 28rpx 0;
+}
+.sub-title2 {
+  font-size: 30rpx;
+  color: #333;
+  height: 28rpx;
+  line-height: 28rpx;
+  font-weight: bold;
+}
+.friends-list {
+  padding: 30rpx 30rpx 0;
+}
+.friend-item {
+  height: 110rpx;
+  font-size: 28rpx;
+  color: #666666;
+}
+.friend-img {
+  padding-top: 4rpx;
+}
+.friend-item image {
+  width: 70rpx;
+  height: 70rpx;
+  border-radius: 50%;
+  margin-right: 20rpx;
+}
+.friend-time {
+  font-size: 24rpx;
+  color: #999999;
+}
+.friend-price {
+  line-height: 70rpx;
+}
+.friend-price text {
+  color: #ff6600;
+}
 
 
 

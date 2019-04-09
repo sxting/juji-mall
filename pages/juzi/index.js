@@ -157,6 +157,7 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function() {
+    this.getInfo();
     service.currentPoint().subscribe({
       next: res => {
         console.log(res);
@@ -203,8 +204,8 @@ Page({
     this.share(obj);
     return {
       title: JSON.parse(wx.getStorageSync('userinfo')).nickName +'给您分享了桔集小程序，一起享受好店优惠吧！',
-      path: '/pages/index/index?inviteCode=' + wx.getStorageSync('inviteCode'),
-      imageUrl: '/images/shareMinPro.png'
+      path: '/pages/login/index?invitecode=' + wx.getStorageSync('inviteCode'),
+      imageUrl: 'https://upic.juniuo.com/file/picture/26PTWGQU8nHo/resize_0_0/mode_fill'
     }
   }
 })

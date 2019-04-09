@@ -30,13 +30,11 @@ Page({
         });
       }
       wx.request({
-        url: this.data.payUrl + '/mini/getCardsByOpenid.json',
+        url: this.data.payUrl + '/mini/mycard.json',
         method: 'GET',
-        data: {
-          openid: wx.getStorageSync('openid')
-        },
         header: {
-          'content-type': 'application/json'
+          'content-type': 'application/json',
+          'Access-Token': wx.getStorageSync('accessToken')
         },
         success: (res) => {
           console.log(res);

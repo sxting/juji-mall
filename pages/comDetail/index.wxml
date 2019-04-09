@@ -23,16 +23,16 @@
             </view>
             <view class="ub ub-fe jc-sb" style="margin-top:10rpx;">
                 <view class="ub ub-fe">
-                    <view style="display:flex;align-items: flex-end;" wx:if="{{productInfo.type=='POINT'}}">
+                    <!-- <view style="display:flex;align-items: flex-end;" wx:if="{{productInfo.type=='POINT'}}">
                         <view style="font-size:38rpx;color: #E83221;font-weight:bold;line-height:38rpx;">{{productInfo.point}}</view>
                         <view style="font-size:24rpx;color: #E83221;font-weight:bold;line-height:24rpx;margin-bottom:4rpx;">桔子</view>
-                    </view>
-                    <view style="display:flex;align-items: flex-end;" wx:else>
-                        <view style="font-size:38rpx;color: #E83221;font-weight:bold;line-height:38rpx;" wx:if="{{productInfo.point!=0}}">{{productInfo.point}}</view>
-                        <view style="font-size:24rpx;color: #E83221;font-weight:bold;line-height:24rpx;margin-bottom:4rpx;" wx:if="{{productInfo.point!=0}}">桔子</view>
-                        <view style="font-size:24rpx;color: #E83221;font-weight:bold;line-height:24rpx;margin-bottom:4rpx;" wx:if="{{productInfo.point!=0}}">+</view>
-                        <view style="font-size:38rpx;color: #E83221;font-weight:bold;line-height:38rpx;">{{filter.toFix(productInfo.price)}}</view>
-                        <view style="font-size:24rpx;color: #E83221;font-weight:bold;line-height:24rpx;margin-bottom:4rpx;">元</view>
+                    </view> -->
+                    <view style="display:flex;align-items: flex-end;">
+                        <view style="font-size:38rpx;color: #E83221;font-weight:bold;line-height:38rpx;" wx:if="{{productInfo.point>0}}">{{productInfo.point}}</view>
+                        <view style="font-size:24rpx;color: #E83221;font-weight:bold;line-height:24rpx;margin-bottom:4rpx;" wx:if="{{productInfo.point>0}}">桔子</view>
+                        <view style="font-size:24rpx;color: #E83221;font-weight:bold;line-height:24rpx;margin-bottom:4rpx;" wx:if="{{productInfo.point>0&&productInfo.price>0}}">+</view>
+                        <view style="font-size:38rpx;color: #E83221;font-weight:bold;line-height:38rpx;" wx:if="{{productInfo.price>0}}">{{filter.toFix(productInfo.price)}}</view>
+                        <view style="font-size:24rpx;color: #E83221;font-weight:bold;line-height:24rpx;margin-bottom:4rpx;" wx:if="{{productInfo.price>0}}">元</view>
                     </view>
                     <view style="font-size: 24rpx;color: #999999;text-decoration:line-through;margin-left:25rpx;line-height:24rpx;">{{filter.toFix(productInfo.originalPrice)}} 元</view>
                     <view class="proDiv ub ub-ac" wx:if="{{productInfo.distributor}}">
@@ -46,6 +46,7 @@
             </view>
         </view>
     </view>
+    <image style="width:100rpx;height:100rpx;display:none" src="{{userImgUrl}}"></image>
     <view class="yongkaxuzhi-wrap" style="margin-top:20rpx;">
         <view class="yongkaxuzhi">
             <view style="font-size: 30rpx;color: #333333;font-weight: bolder;">购买须知</view>
@@ -103,7 +104,7 @@
             </view>
             <view class="content">{{item.content}}</view>
             <view class="imglist" wx:if="{{item.imgIds.length > 0}}">
-                <image wx:for="{{filter.toSplitImgs(item.imgIds)}}" wx:for-item='it' wx:key="unique" src="{{it?'https://upic.juniuo.com/file/picture/' + it + '/resize_320_0/mode_fill':''}}"></image>
+                <image wx:for="{{filter.toSplitImgs(item.imgIds)}}" wx:for-item='it' wx:key="unique" data-url="{{it}}" bindtap="previewImage" src="{{it?'https://upic.juniuo.com/file/picture/' + it + '/resize_320_0/mode_fill':''}}"></image>
             </view>
         </view>
     </view>
@@ -218,16 +219,17 @@
             </view>
             <view class="ub-f1 ub ub-ver ub-ac ub-pc r" bindtap="toPro" data-id="{{productInfo.productId}}">
               <text class="txt1">推广</text>
-              <text class="txt2">赚￥{{filter.toFix(productInfo.distributorSalesRebate)}}元</text>
+              <text class="txt2">赚{{filter.toFix(productInfo.distributorSalesRebate)}}元</text>
             </view>
           </view>
         </form>
         <!-- 判断用户橘子足不足  和是否只能原价购买 -->
         <form bindsubmit="collectFormIds" report-submit="true" wx:else>
             <!-- 如果是桔子和人民币组合购买 -->
-            <!-- 2.27日修改的逻辑 -->
-            <view class="footerBtnWrap" wx:if="{{productInfo.type=='PRODUCT'&&productInfo.point>0&&productInfo.price>0}}">
-                <button form-type="submit" class="yuanjia-xiadan" bindtap="toCreateOrder" wx:if="{{productInfo.price>0&&pointBalance>=productInfo.point}}">
+            <!-- 4月02日修改的逻辑 -->
+            <view class="footerBtnWrap" wx:if="{{productInfo.point>0&&productInfo.price>0}}">
+                <button wx:if="{{!productInfo.stock}}" class="noStock">已售罄</button>
+                <button form-type="submit" class="yuanjia-xiadan" bindtap="toCreateOrder" wx:if="{{productInfo.stock&&productInfo.price>0&&pointBalance>=productInfo.point}}">
                     <view>
                         <view style="font-size: 24rpx;font-weight:bold;line-height:34rpx;font-weight:bolder;">{{productInfo.point}}桔子+{{filter.toFix(productInfo.price)}}元</view>
                         <view style="font-size: 18rpx;line-height:22rpx;text-align:center;">立即兑换</view>
@@ -241,25 +243,27 @@
                 </button>
             </view>
             <!-- 如果是只能人民币购买的商品 -->
-            <view class="footerBtnWrap" wx:if="{{productInfo.type=='PRODUCT'&&productInfo.point==0&&productInfo.price>0}}">
-                <button form-type="submit" class="yuanjia-xiadan" bindtap="toCreateOrderByRmb">
+            <view class="footerBtnWrap" wx:if="{{productInfo.type=='PRODUCT'&&!productInfo.point&&productInfo.price>0}}">
+                <button wx:if="{{!productInfo.stock}}" class="noStock">已售罄</button>
+                <button wx:else form-type="submit" class="yuanjia-xiadan" bindtap="toCreateOrderByRmb">
                     <view>
                         <view style="font-size: 24rpx;font-weight:bold;line-height:34rpx;font-weight:bolder;">{{filter.toFix(productInfo.price)}}元</view>
                         <view style="font-size: 18rpx;line-height:22rpx;text-align:center;">立即购买</view>
                     </view>
                 </button>
             </view>
-            <!-- 如果是桔子换礼商品 -->
-            <view class="footerBtnWrap" wx:if="{{productInfo.type=='POINT'}}">
+            <!-- 如果只能用桔子兑换的商品 -->
+            <view class="footerBtnWrap" wx:if="{{productInfo.type=='POINT'&&!productInfo.price}}">
+                <button wx:if="{{!productInfo.stock}}" class="noStock">已售罄</button>
                 <!-- 如果桔子充足 -->
-                <button form-type="submit" class="yuanjia-xiadan" bindtap="toCreateOrderByPoint" wx:if="{{pointBalance>=productInfo.point}}">
+                <button form-type="submit" class="yuanjia-xiadan" bindtap="toCreateOrderByPoint" wx:if="{{productInfo.stock&&pointBalance>=productInfo.point}}">
                     <view>
                         <view style="font-size: 24rpx;font-weight:bold;line-height:34rpx;font-weight:bolder;">{{productInfo.point}} 桔子</view>
                         <view style="font-size: 18rpx;line-height:22rpx;text-align:center;">立即兑换</view>
                     </view>
                 </button>
                 <!-- 如果桔子不足 跳转到任务 -->
-                <button form-type="submit" class="yuanjia-xiadan" bindtap="toGetPoint" wx:if="{{pointBalance<productInfo.point||!pointBalance}}">
+                <button form-type="submit" class="yuanjia-xiadan" bindtap="toGetPoint" wx:if="{{productInfo.stock&&pointBalance<productInfo.point||!pointBalance}}">
                     <view>
                         <view style="font-size: 24rpx;font-weight:bold;line-height:34rpx;font-weight:bolder;">桔子不足</view>
                         <view style="font-size: 18rpx;line-height:22rpx;">赚桔子</view>
@@ -292,16 +296,10 @@
         </view>
         <view class="bott ub ub-ac">
             <button class="ub-f1 ub ub-ac ub-pc left ub-ver" open-type="share">
-                <image class="icon" src="../../images/icon_friend.png"></image>
-                <text class="txt1">分享给好友</text>
-            </button>
-            <button class="ub-f1 ub ub-ac ub-pc center ub-ver" bindtap="savePic" data-type="2">
-                <image class="icon" src="../../images/icon_circle.png"></image>
-                <text class="txt2">分享朋友圈</text>
+                <image class="share" src="../../images/share_friend.png" style="width:117rpx;height:118rpx"></image>
             </button>
             <button class="ub-f1 ub ub-ac ub-pc right ub-ver" bindtap="savePic" data-type="1">
-                <image class="icon" src="../../images/icon_save.png"></image>
-                <text class="txt1">保存图片</text>
+                <image class="share" src="../../images/share_save.png" style="width:94rpx;height:118rpx"></image>
             </button>
         </view>
     </view>

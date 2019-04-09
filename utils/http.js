@@ -94,7 +94,7 @@ function http_request(
               }).then(function (code) {
 
                   wx.request({
-                    url: 'https://c.juniuo.com/shopping/user/login.json',
+                    url: constant.apiUrl+'/user/login.json',
                     method: 'GET',
                     data: {
                       code: code,
@@ -117,7 +117,7 @@ function http_request(
                         });
                         wx.showModal({
                           title: '登录令牌过期',
-                          content: '已重新登录并返回首页获取位置等信息',
+                          content: '已重新登录并返回首页',
                         });
                       } else {
                         wx.showModal({

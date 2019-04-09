@@ -1,7 +1,7 @@
 {
   "pages": [
-    "pages/index/index",
     "pages/login/index",
+    "pages/index/index",
     "pages/user/index",
     "pages/myTrade/index",
     "pages/myComment/index",
@@ -18,7 +18,6 @@
     "pages/bindPhone/index",
     "pages/merchantsCanUse/index",
     "pages/article/index",
-    "pages/jujipay/index",
     "pages/pay/index",
     "pages/payrecord/index",
     "pages/cardlist/index",
@@ -36,7 +35,11 @@
     "pages/search/index",
     "pages/map/index",
     "pages/myCards/index",
-    "pages/myRecord/index"
+    "pages/myRecord/index",
+    "pages/activities/project-detail/index",
+    "pages/activities/project-list/index",
+    "pages/payDetail/index",
+    "pages/mypayDetail/index"
   ],
   "permission": {
     "scope.userLocation": {

@@ -63,7 +63,7 @@
         </view>
       </view>
 <!-- current-item-id="{{selectCardId}}" -->
-      <swiper class="swiper-container cardList" indicator-color="#fff" display-multiple-items="{{cardList.length<2?1:2}}" next-margin="100rpx" >
+      <swiper wx:if="{{cardList.length>0}}" class="swiper-container cardList" indicator-color="#fff" display-multiple-items="{{cardList.length<2?1:2}}" next-margin="100rpx" >
         <swiper-item style="box-sizing:border-box;padding-right:20rpx;overflow:hidden;" wx:for="{{cardList}}" wx:key="unique"  data-item="{{item}}" data-index="{{index}}" item-id="{{item.prepayRuleId}}" bindtap="changeSelectCard">
         <view class="card {{selectCardId==item.prepayRuleId&&paytype==='recommend'?'selectCard':''}}">
           <view class="yu-e-Title {{selectCardId==item.prepayRuleId&&paytype==='recommend'?'cardTitle':''}}">储值{{item.pay}}元</view>

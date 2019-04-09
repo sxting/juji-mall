@@ -34,7 +34,8 @@ Page({
       this.setData({ 
         curTabIndex: thisIndex, 
         role: thisStatus,
-        userlistInfor: []
+        userlistInfor: [],
+        pageNo: 1
       });
       getPersonListInfor.call(self);//get我的用户信息
     },
@@ -47,8 +48,8 @@ Page({
     },
 
     //上拉加载更多
-    scrolltolower: function () {
-      console.log(this.data.pageNo)
+    onReachBottom: function () {
+      console.log(this.data.pageNo + '/' + this.data.ifBottom)
       if (this.data.ifBottom){
         return;
       }
@@ -57,7 +58,6 @@ Page({
       })
       getPersonListInfor.call(this); //获取砍价列表信息
     },
-
 });
 
 //  获取用户信息列表

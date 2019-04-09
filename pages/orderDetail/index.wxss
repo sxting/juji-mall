@@ -1,7 +1,7 @@
 page{box-sizing:border-box;height:100%;background-color:#fbfbfb}
 .orderInfo1{background-color:#fff;position:relative;overflow:hidden;margin-bottom:20rpx;padding-bottom:0!important}
 .orderInfo1 .info{padding:30rpx;background-color:#fbfbfb;border-radius:10rpx}
-.orderInfo1 .total{font-size:26rpx;color:#333;padding-right:30rpx;padding-top:30rpx;padding-bottom:40rpx;}
+.orderInfo1 .total{font-size:26rpx;color:#333;padding-right:30rpx;padding-top:30rpx;padding-bottom:30rpx;}
 .goodImg{width:220rpx;height:220rpx;border-radius:8rpx;border:1rpx #eee solid;}
 .goodMsg{margin-left:20rpx;position:relative;}
 .goodTit{font-size:28rpx;}
@@ -33,3 +33,15 @@ page{box-sizing:border-box;height:100%;background-color:#fbfbfb}
 .orderInfo3 .txt{line-height:50rpx;font-size:26rpx;color:#999;}
 .orderInfo3 .btn{width:70rpx;height:40rpx;border:#999 1rpx solid;border-radius:4rpx;font-size:22rpx;color:#333;position:absolute;top:0;right:20rpx;}
 canvas{width:664rpx;height:136rpx;margin: 0 auto;}
+.btnWrap{padding-left: 30rpx;padding-right: 30rpx;margin-top: 100rpx;}
+.payBtn{border-radius:50rpx;width:100r%;height:88rpx;text-align:center;line-height:88rpx;font-size:30rpx;color:#333;background-image:linear-gradient(-90deg,#FFDC00 0%,#FCBF0A 100%);font-weight: bold;}
+.orderInfo4{background-color: #fbfbfb;padding: 20rpx 30rpx 25rpx;}
+.orderInfo4 view.code{text-align: center;font-size: 32rpx;line-height: 60rpx;color: #666;}
+.orderInfo4 view.d{text-decoration: line-through;}
+.orderInfo4 view.txt{text-align: center;font-size: 24rpx;line-height: 40rpx;color: #999;margin-top: 15rpx;}
+
+.orderInfo4 .div{width:550rpx;margin:0 auto;height: 30rpx;margin-top: 10rpx;}
+
+.orderInfo4 .div .c{width: 60rpx;text-align: center;color: #999;font-size: 24rpx;}
+
+.orderInfo4 view.txt1{text-align: center;font-size: 24rpx;line-height: 40rpx;color: #999;}

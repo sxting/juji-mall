@@ -23,7 +23,8 @@ Page({
     cardList: [],
     selectCardId: '',
     paytype: 'recommend',
-    recommend: '1',
+    recommend: '1',//默认选中储值支付 0则默认微信支付
+    recommendStatus: '0',//默认开启储值推荐也就是可以到第二页 为'1'则不展示第二页直接支付
     discount: 0, //储值折扣
     url: '',
     qrcode:'',
@@ -34,6 +35,7 @@ Page({
     type:'',
     accountFlag: false,
     balance: 0,
+    givingMoney: 0,
     accountpaystatus: false,//余额支付等待中效果标记
     payUrl: 'https://juji.juniuo.com'
   },
@@ -53,7 +55,6 @@ Page({
       //   accountpaystatus: true
       // });
       console.log('Promise is ready!');
-      // options.q = 'https://juji-dev.juniuo.com/qrm/212345678.htm';//测试用
       if (options.q) {
         console.log(options.q);
         var link = decodeURIComponent(options.q);
@@ -79,7 +80,34 @@ Page({
         });
         resolve();
       } else {
-        reject('options.q不存在');
+        wx.showModal({
+          title: '警告',
+          content: '该二维码用于系统测试，请勿支付',
+        });
+        // reject('options.q不存在');
+        options.q = 'https://juji-dev.juniuo.com/qrm/212345678.htm';//测试用
+        var link = decodeURIComponent(options.q);
+        console.log(link);
+        let arr = link.split('/qrm/');
+        console.log(arr);//['https://juji-dev.juniuo.com','212345678.htm']
+        if (arr[0]) {
+          that.setData({
+            payUrl: arr[0]
+          });
+          wx.setStorageSync('payUrl', arr[0]);
+        } else {
+          that.setData({
+            payUrl: that.data.payUrl
+          });
+        }
+        let arr1 = arr[1].split('.htm');
+        console.log(arr1);//['212345678']
+        console.log('qrcode: ' + arr1[0]);
+        that.setData({
+          url: link,
+          qrcode: arr1[0]
+        });
+        resolve();
       }
     }).then(function () {
       return new Promise(function (resolve1, reject1) {
@@ -115,9 +143,11 @@ Page({
                 headImg: res.data.data.headImg,
                 merchantId: res.data.data.merchantId,
                 recommend: res.data.data.recommend,
+                recommendStatus: res.data.data.recommendStatus,
                 storeId: res.data.data.storeId,
                 storeName: res.data.data.storeName,
-                type: res.data.data.type
+                type: res.data.data.type,
+                paytype: res.data.data.recommend == '1' ? 'recommend' : 'thirdpay'
               })
               // that.getAccount();
               wx.request({
@@ -192,7 +222,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    // wx.setStorageSync('scene','1011');//测试用
+    wx.setStorageSync('scene','1011');//测试用
     let scene = wx.getStorageSync('scene');
     if (scene == '1011' || scene == '1012' || scene == '1013') {//扫描二维码场景值
       return ;
@@ -296,7 +326,7 @@ Page({
       url: that.data.payUrl +'/customer/order/miniPreOrder.json',
       method: 'POST',
       data: {
-        choosenType: that.data.paytype,
+        choosenType: orderObj.choosenType,
         givingMoney: Number(orderObj.givingMoney),
         orderPay: Number(orderObj.orderPay),
         pay: Number(orderObj.pay),
@@ -336,7 +366,8 @@ Page({
                 
               }
               that.setData({
-                toPayStatus: false
+                toPayStatus: false,//取消正在支付状态
+                accountpaystatus: false//取消loading状态
               });
 
             }
@@ -348,7 +379,8 @@ Page({
             content: res.data.errorInfo,
           })
           that.setData({
-            toPayStatus: false
+            toPayStatus: false,//取消正在支付状态
+            accountpaystatus: false//取消loading状态
           });
         }
       }
@@ -502,17 +534,31 @@ Page({
       if (this.data.seledAccount) {//如果用户勾选了余额支付
         //此处判断余额付款和组合付款的情况 余额付款直接跳转到结果页面 组合支付还要到当前页的另一层
         if (Number(this.data.amount) > this.data.balance) {//如果输入金额比用户余额多
-          this.getPayment(this.data.dAmount);
-          this.setData({
-            dAmount : Number(this.data.amount).toFixed(2),//保存一个接口传入需要用的amount
-            amount : Number(Number(this.data.amount) - this.data.balance).toFixed(2),
-            showBalanceWrap : false,
-            showFocus : false,
-            showSelectCard : true
-          });
+            console.log('如果输入金额比用户余额多');
+          if (this.data.recommendStatus == '0' || !this.data.recommendStatus) {//显示储值支付
+            this.getPayment(Number(this.data.amount).toFixed(2));
+            this.setData({
+              dAmount: Number(this.data.amount).toFixed(2),//保存一个接口传入需要用的amount
+              amount: Number(Number(this.data.amount) - this.data.balance).toFixed(2),
+              showBalanceWrap: false,
+              showFocus: false,
+              showSelectCard: true
+            });
+          } else if (this.data.recommendStatus == '1') {//只能微信支付 直接调用微信支付 不再显示中间推荐储值页
+            //如果勾选了余额支付 在组合支付的情况下 无论储值支付是否开启 都直接微信支付
+            this.setData({
+              accountpaystatus: true//显示支付loading
+            });
+            let orderObj = {};
+            orderObj.choosenType = 'account';
+            orderObj.orderPay = Number(this.data.amount);
+            orderObj.pay = Number(Number(this.data.amount) - this.data.balance).toFixed(2);
+            orderObj.givingMoney = 0;
+            this.wxpay(orderObj);
+          }
         } else {//如果用户余额充足，可以执行余额支付
           this.setData({
-            accountpaystatus : true
+            accountpaystatus: true//显示支付loading
           });
           let orderObj = {};
           this.data.paytype ? orderObj.choosenType = this.data.paytype : orderObj;
@@ -521,17 +567,34 @@ Page({
           this.accountPay(orderObj);
         }
       } else {
-        //如果没有勾选 
+        console.log('如果没有勾选余额支付');
+        //如果没有勾选余额支付
         this.setData({
           amount: Number(this.data.amount).toFixed(2),
           dAmount: Number(this.data.amount).toFixed(2)
         });
-        this.getPayment(this.data.dAmount);
-        this.setData({
-          showBalanceWrap: false,
-          showFocus: false,
-          showSelectCard: true
-        });
+        console.log(this.data.dAmount);
+        
+        //判断是否优先储值支付
+        if (this.data.recommendStatus == '0' || !this.data.recommendStatus){//显示储值支付
+          this.getPayment(this.data.dAmount);
+          this.setData({
+            showBalanceWrap: false,
+            showFocus: false,
+            showSelectCard: true
+          });
+        } else if (this.data.recommendStatus == '1'){//只能微信支付 直接调用微信支付 不再显示中间推荐储值页
+          this.setData({
+            accountpaystatus: true//显示支付loading
+          });
+          let orderObj = {};
+          orderObj.choosenType = 'thirdpay';
+          orderObj.orderPay = Number(this.data.dAmount);
+          orderObj.pay = Number(this.data.dAmount);
+          orderObj.givingMoney = 0;
+          this.wxpay(orderObj);
+        }
+        
       }
     }
   },

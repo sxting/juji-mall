@@ -4,7 +4,22 @@ Component({
    * 组件的属性列表
    */
   properties: {
-
+    pintuanListInfor: {
+      type: Array,
+      value: ['','']
+    },
+    headPortraitList: {
+      type: Array,
+      value: ['', '']
+    },
+    fleg: {
+      type: String,
+      value: ''
+    },
+    collageInforData: {
+      type: Object,
+      value: {}
+    }
   },
 
   /**

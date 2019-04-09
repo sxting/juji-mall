@@ -5,9 +5,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    sceneType: 'PINTUAN',//查看进入的是什么场景类型
-    productList: ['','',''],
-  
+    sceneType: 'SPLICED',//查看进入的是什么场景类型
+    productList: [{ productId: '2019032112085491710951447' }, { productId: '2019032112085491710951447' }, { productId: '2019032112085491710951447'}],
   },
 
   /**
@@ -15,10 +14,10 @@ Page({
    */
   onLoad: function (options) {
     wx.setNavigationBarTitle({ 
-      title: options.sceneType == 'PINTUAN'? '拼团列表': '砍价列表'
+      title: options.sceneType == 'SPLICED'? '拼团列表': '砍价列表'
     });
     this.setData({
-      // sceneType: options.sceneType
+      sceneType: options.sceneType
     })
 
   },
@@ -55,8 +54,9 @@ Page({
    * 到项目详情
    */
   checkProductDetail: function(e){
+    console.log(e.currentTarget.dataset.productid);
     wx.navigateTo({
-      url: '/pages/activities/project-detail/index?sceneType=' + this.data.sceneType + '&productId=' + e.currentTarget.dataset.productid
+      url: '/pages/activities/project-detail/index?type=' + this.data.sceneType + '&id=' + e.currentTarget.dataset.productid
     });
   },
 })

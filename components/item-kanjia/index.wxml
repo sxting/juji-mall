@@ -72,3 +72,35 @@
     <view class='btn-r' bindtap='startKanjia'>重新发起砍价</view>
   </view>
 </view>
+
+<view class='kanjia-normal-alert'>
+  <view class='alert1' wx:if="{{showAlert1}}">
+    <view class='alert1-box'>
+      <image src='/images/jinbi.png'></image>
+      <view>已成功为您砍掉<text class='alert1-price'>{{price1/100}}</text>元</view>
+      <view>分享给好友多砍几刀吧</view>
+      <button class='alert1-share' open-type="share" data-type='share2'>分享加速砍价吧</button>
+    </view>
+    <image class='icon-close1' src='/images/newerGetClose.png' bindtap='closeAlert1'></image>
+  </view>
+
+  <view class='alert2' wx:if="{{showAlert2}}">
+    <view class='alert2-box'>
+      <view class='alert2-title'>已成功帮砍{{price1/100}}元</view>
+      <view class='alert2-tip'>参加该砍价活动可享{{(bargainDetail.activityItem.originalPrice - bargainDetail.activityItem.activityPrice) / 100}}元优惠，快去邀请好友砍价吧！</view>
+      <view class='alert2-product'>
+        <image src='/images/jinbi.png'></image>
+        <view class='alert2-product-r fl'>
+          <view class='alert2-product-name'>发型总监亲自动手为您做设计哦砍价</view>
+          <view class='alert2-product-rb'>
+            <text class='alert2-price'><text>{{bargainDetail.activityItem.activityPrice/100}}</text>元</text>
+            <text class='alert2-origin-price'>{{bargainDetail.activityItem.originalPrice/100}}元</text>
+          </view>
+        </view>
+      </view>
+      <view class='alert2-btn' bindtap='startKanjia'>我也要发起砍价</view>
+      <view bindtap='lookOthers'>浏览其他项目</view>
+    </view>
+    <image class='icon-close1' src='/images/newerGetClose.png' bindtap='closeAlert2'></image>
+  </view>
+</view>

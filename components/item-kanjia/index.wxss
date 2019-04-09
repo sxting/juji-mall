@@ -167,7 +167,121 @@
   color: #ff6600;
 }
 
+.alert1, .alert2 {
+  background: rgba(51,51,51,0.50);
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  text-align: center;
+  z-index: 100;
+}
+.alert1-box {
+  width: 560rpx;
+  height: 560rpx;
+  background: #FFFFFF;
+  border-radius: 20rpx;
+  margin-top: 270rpx;
+  margin-left: 92rpx;
+  font-size: 28rpx;
+  color: #333333;
+  line-height: 46rpx;
+}
+.alert1-box image {
+  width: 169rpx;
+  height: 177rpx;
+  margin-top: 70rpx;
+  margin-bottom: 40rpx;
+}
+.alert1-price {
+  font-family: "PingFangSC-Semibold";
+  font-size: 32rpx;
+  color: #E83221;
+}
+.alert1-share, .alert2-btn {
+  background: #E83221;
+  border-radius: 50rpx;
+  width: 480rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  text-align: center;
+  color: #fff;
+  font-size: 30rpx;
+  margin-top: 40rpx;
+}
+.icon-close1 {
+  margin-top: 76rpx;
+  width: 50rpx;
+  height: 50rpx;
+}
 
+.alert2-box {
+  width: 550rpx;
+  height: 646rpx;
+  padding: 50rpx 0;
+  box-sizing: border-box;
+  background-color: #fff;
+  border-radius: 20rpx;
+  margin-left: 100rpx;
+  margin-top: 240rpx;
+  font-size: 28rpx;
+  color: #999999;
+}
+.alert2-title {
+  font-size: 32rpx;
+  color: #E83221; 
+}
+.alert2-tip {
+  padding: 20rpx 50rpx 30rpx;
+  color: #666666;
+}
+.alert2-product {
+  background: #fbfbfb;
+  height: 180rpx;
+  text-align: left;
+  position: relative;
+}
+.alert2-product image {
+  width: 220rpx;
+  height: 140rpx;
+  border-radius: 10rpx;
+  margin: 20rpx;
+  float: left;
+}
+.alert2-product-r {
+  width: 290rpx;
+}
+.alert2-product-name {
+  color: #111111;
+  padding-top: 10rpx;
+  padding-right: 10rpx;
+  line-height: 44rpx;
+}
+.alert2-product-rb {
+  position: absolute;
+  bottom: 10rpx;
+}
+.alert2-price {
+  color: #E83221;
+  font-size: 24rpx;
+  font-family: "PingFangSC-Semibold";
+}
+.alert2-price text {
+  font-size: 38rpx;
+}
+.alert2-origin-price {
+  font-size: 26rpx;
+  color: #666666;
+  text-decoration: line-through;
+  padding-left: 36rpx;
+}
+.alert2-btn {
+  margin: 40rpx auto 30rpx;
+}
+.alert2 .icon-close1 {
+  margin-top: 40rpx;
+}
 
 
 .bt-btn {

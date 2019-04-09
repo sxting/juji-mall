@@ -1,4 +1,9 @@
 // pages/activities/project-list/index.js
+var util = require('../../../utils/util.js');
+import { constant } from '../../../utils/constant';
+import { errDialog, loading } from '../../../utils/util';
+import { activitiesService } from '../shared/service.js'
+
 Page({
 
   /**
@@ -6,48 +11,46 @@ Page({
    */
   data: {
     sceneType: 'SPLICED',//查看进入的是什么场景类型
-    productList: [{ productId: '2019032112085491710951447' }, { productId: '2019032112085491710951447' }, { productId: '2019032112085491710951447'}],
+    productList: [],
+    pageNo: 1,
+    providerId: wx.getStorageSync('providerId'),
+    ifBottom: false
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    let self = this;
     wx.setNavigationBarTitle({ 
       title: options.sceneType == 'SPLICED'? '拼团列表': '砍价列表'
     });
     this.setData({
       sceneType: options.sceneType
     })
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
+    getActivityList.call(self);//获取活动列表
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-    console.log('加载');
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
+    if (this.data.ifBottom){//已经到底部了
+      console.log('加载over');
+      return;
+    }else{
+      this.setData({
+        pageNo: this.data.pageNo + 1
+      })
+      getActivityList.call(this); //获取砍价列表信息
+    }
   },
 
   /**
    * 跳转我的砍价或者我的拼团页面
    */
   switchToOrderListPage: function(){
-
+    
   },
 
   /**
@@ -59,4 +62,53 @@ Page({
       url: '/pages/activities/project-detail/index?type=' + this.data.sceneType + '&id=' + e.currentTarget.dataset.productid
     });
   },
+
 })
+
+//获取活动列表信息
+function getActivityList(){
+  let self = this;
+  let data = { 
+    providerId: self.data.providerId,
+    activityType: self.data.sceneType,
+    pageNo: self.data.pageNo,
+    pageSize: 10
+  }
+  activitiesService.activityList(data).subscribe({
+    next: res => {
+      if(res){
+        console.log(res);
+        let data = [
+          {
+            "activityId": "2019022815535077320763005",
+            "activityPrice": 1000,
+            "activityType": "BARGAIN",
+            "cover": "26P0-gcWPfk_",
+            "originalPrice": 8800,
+            "participantQuantity": 10,
+            "productId": "string",
+            "productName": "【德川家】超值寿司拼盘14粒只需49元一份",
+            "stock": 20
+          },
+          {
+            "activityId": "2019022815535077320763005",
+            "activityPrice": 1000,
+            "activityType": "BARGAIN",
+            "cover": "26P0-gcWPfk_",
+            "originalPrice": 8800,
+            "participantQuantity": 10,
+            "productId": "string",
+            "productName": "【德川家】超值寿司拼盘14粒只需49元一份",
+            "stock": 20
+          }
+        ]
+        self.setData({
+          productList: self.data.productList.concat(data),
+          ifBottom: res.length == 0 ? true : false
+        })
+      }
+    },
+    error: err => errDialog(err),
+    complete: () => wx.hideToast()
+  })
+}

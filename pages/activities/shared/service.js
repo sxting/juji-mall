@@ -9,6 +9,11 @@ activitiesService.activity = (data) => {
   return http.get(url, data);
 }
 
+// 活动列表 /activity/consumer/activities.json
+activitiesService.activityList = (data) => {
+  let url = API + '/activity/consumer/activities.json';
+  return http.get(url, data);
+}
 
 module.exports = {
   activitiesService: activitiesService

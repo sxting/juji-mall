@@ -1,25 +1,28 @@
 // shared/component/item-kanjia/index.js
 Component({
-  /**
-   * 组件的属性列表
-   */
   properties: {
     productInfo: {
       type: Object,
       value: {}
+    },
+    btn: {
+      type: Boolean,
+      value: false
     }
   },
 
-  /**
-   * 组件的初始数据
-   */
   data: {
-
+    showAlert1: false,
+    showAlert2: false,
+    status: 'ing', //未开始 init，砍价中 ing，砍价失败 fail，砍价成功 success
+    shared: true,
+    self: true, //是否活动发起者
+    help: true, //是否已帮砍
+    hours: 23,
+    minites: 20,
+    seconds: 58,
   },
 
-  /**
-   * 组件的方法列表
-   */
   methods: {
 
   }

@@ -430,7 +430,6 @@ Page({
       context.drawImage('../../images/erbg.png', 70, 387, 103, 18);
       setText(context,"长按识别小程序码", 77, 400,'#333',11,'left');
 
-
       context.save();
       context.beginPath();
       context.arc(35, 375, 25, 0, Math.PI * 2, false);
@@ -439,7 +438,9 @@ Page({
       context.restore();
 
       context.drawImage(this.data.erwmImg, size.w - 80, 342.5, 70, 70);
-      setText(context,this.data.nickName, 70, 360,"#333",12,'left');
+      var name = this.data.nickName;
+      var nickName = name.length>8?name.substring(0,8)+'...':name;
+      setText(context,nickName, 70, 360,"#333",12,'left');
       setText(context,"私藏好物，分享给你", 70, 379,'#666',11,'left');
       context.draw();
   },

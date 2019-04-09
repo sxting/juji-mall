@@ -123,6 +123,7 @@ Page({
     },
     getUserInfo: function(e) {
         if (e.detail.userInfo) {
+            console.log(JSON.stringify(e.detail.userInfo));
             wx.setStorageSync('rawData', e.detail.rawData);
             var rawData = e.detail.rawData;
             console.log('点击授权登录按钮');

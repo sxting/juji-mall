@@ -1,20 +1,74 @@
 <wxs module="filter" src="../../utils/numFr.wxs"></wxs>
 <view class="kanjia-container" wx:if="{{!btn}}">
-  <view class='product-name'>{{productInfo.productName}}</view>
-  <view class="ub ub-fe jc-sb" style="margin-top:20rpx;">
-    <view class="ub ub-fe">
-        <view style="display:flex;align-items: flex-end;">
-            <view style="font-size:38rpx;color: #E83221;font-weight:bold;line-height:38rpx;" wx:if="{{productInfo.price>0}}">{{filter.toFix(productInfo.price)}}</view>
-            <view style="font-size:24rpx;color: #E83221;font-weight:bold;line-height:24rpx;margin-bottom:4rpx;" wx:if="{{productInfo.price>0}}">元</view>
-        </view>
-        <view style="font-size: 24rpx;color: #999999;text-decoration:line-through;margin-left:25rpx;line-height:28rpx;">{{filter.toFix(productInfo.originalPrice)}} 元</view>
+  <view class='{{ status === "init" ? "" : "bd" }}'>
+    <view class='timer' wx:if="{{status === 'ing'}}">
+      <text>{{hours}}</text>:<text>{{minites}}</text>:<text>{{seconds}}</text>后结束
     </view>
-    <view class="ub ub-ac" style="font-size: 24rpx;color: #999999;">已砍{{productInfo.soldNum}}件</view>
+    <view class='{{ status === "init" ? "" : "pd30" }}'>
+      <view class='product-name'>{{productInfo.productName}}</view>
+      <view class="ub ub-fe jc-sb" style="margin-top:20rpx;">
+        <view class="ub ub-fe">
+            <view style="display:flex;align-items: flex-end;">
+                <view style="font-size:38rpx;color: #E83221;font-weight:bold;line-height:38rpx;" wx:if="{{productInfo.price>0}}">{{filter.toFix(productInfo.price)}}</view>
+                <view style="font-size:24rpx;color: #E83221;font-weight:bold;line-height:24rpx;margin-bottom:4rpx;" wx:if="{{productInfo.price>0}}">元</view>
+            </view>
+            <view style="font-size: 24rpx;color: #999999;text-decoration:line-through;margin-left:25rpx;line-height:28rpx;">{{filter.toFix(productInfo.originalPrice)}} 元</view>
+        </view>
+        <view class="ub ub-ac" style="font-size: 24rpx;color: #999999;">已砍{{productInfo.soldNum}}件</view>
+      </view>
+    </view>
+    <view class='kanjia-jindu' wx:if="{{status !== 'init'}}">
+      <view class='rate-line'>
+        <view class='rate-line1'></view>
+        <view style='width: 300rpx' class='rate-line2 {{((status === "fail") || (!self && status === "success")) ? "rate-line3" : ""}}'><text></text></view>
+      </view>
+      <view class='price-box'>
+        <text class='fl'>已砍¥55.00</text>
+        <text class='fr'><text style='color: #999'>当前价格: </text> <text style='font-size: 28rpx'>99.00</text>元</text>
+      </view>
+    </view>
+    <view class='others-btn' wx:if="{{!self}}">
+      <view class='btn-active' wx:if="{{status === 'ing' && !help}}" bindtap='helpKJ'>帮好友砍一刀</view>
+      <view class='btn-active' wx:elif="{{ help || status === 'fail' || status === 'success' }}" bindtap='startKanjia'>
+        我也要发起砍价
+      </view>
+      <view class='kanjia-status'>
+        <text wx:if="{{status === 'success'}}">本次砍价已成功</text>
+        <text wx:elif="{{status === 'fail'}}">本次砍价已结束</text>
+      </view>
+    </view>
+  </view>
+  <!-- 好友助力 -->
+  <view class='friends' wx:if="{{status !== 'init'}}">
+    <view class='sub-title2-box'><view class='sub-title2'>好友助力</view></view>
+    <view class='friends-list'>
+      <view class='friend-item' wx:for="{{bargainDetail.bargainRecord}}">
+        <view class='friend-img fl'><image src='{{item.avatarUrl ? item.avatarUrl : juniuImg}}'></image></view>
+        <view class='fl'>
+          <view>{{item.nickName}}</view>
+          <view class='friend-time'>{{item.date}}</view>
+        </view>
+        <view class='fr friend-price'>
+          <icon class='jn-icon icon-home_kanjia'></icon> 帮砍<text>{{item.bargainPrice/100}}元</text>
+        </view>
+      </view>
+    </view>
   </view>
 </view>
 <view wx:else>
-  <view class='bt-btn'>
-    <view class='btn-l'>直接购买</view>
-    <view class='btn-r'>发起砍价</view>
+  <view class='bt-btn' wx:if="{{status === 'init'}}">
+    <view class='btn-l' bindtap='onlyBuy' data-type='1'>直接购买</view>
+    <view class='btn-r' bindtap='startKanjia'>发起砍价</view>
+  </view>
+  <view class='bt-btn' wx:elif="{{ self && status === 'ing'}}">
+    <view class='btn-l' bindtap='onlyBuy' data-type='2'>以此价格购买</view>
+    <view class='btn-r' open-type='share' data-type='share2'>邀请好友帮砍</view>
+  </view>
+  <view class='bt-btn' wx:elif="{{ self && status === 'success'}}">
+    <view class='btn' bindtap='onlyBuy'>砍价成功，立即支付</view>
+  </view>
+  <view class='bt-btn' wx:elif="{{ self && status === 'fail'}}">
+    <view class='btn-l btn-fail'>砍价失败</view>
+    <view class='btn-r' bindtap='startKanjia'>重新发起砍价</view>
   </view>
 </view>

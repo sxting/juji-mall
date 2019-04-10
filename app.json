@@ -37,9 +37,7 @@
     "pages/myCards/index",
     "pages/myRecord/index",
     "pages/activities/project-detail/index",
-    "pages/activities/project-list/index",
-    "pages/payDetail/index",
-    "pages/mypayDetail/index"
+    "pages/activities/project-list/index"
   ],
   "permission": {
     "scope.userLocation": {

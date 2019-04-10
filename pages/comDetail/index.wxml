@@ -154,10 +154,10 @@
                                 <view style="font-size: 28rpx;color: #E83221;font-weight:bold;" wx:if="{{item.point>0&&item.price>0}}">+</view>
                                 <view style="font-size: 28rpx;color: #E83221;font-weight:bold;display:flex;align-items:center;" wx:if="{{item.price>0}}">{{filter.toFix(item.price)}}<text style="font-size: 22rpx;color: #E83221;font-weight:bold;">元</text></view>
                             </view>
-                            <view class="ub ub-ac" style="font-size: 22rpx;color: #999999;">
+                            <!-- <view class="ub ub-ac" style="font-size: 22rpx;color: #999999;">
                                 <image src="../../images/soldCount.png" style="width:24rpx;height: 22rpx;margin-right:10rpx;"></image>
                                 已售{{item.soldNum}}件
-                            </view>
+                            </view> -->
                         </view>
                         <!-- <view class="ub ub-ac ub-pj" style="margin-top:10rpx;">
                 <view class="old-price">{{filter.toFix(item.originalPrice)}}元</view>
@@ -177,10 +177,10 @@
                                 <view style="font-size: 28rpx;color: #E83221;font-weight:bold;" wx:if="{{item.point>0&&item.price>0}}">+</view>
                                 <view style="font-size: 28rpx;color: #E83221;font-weight:bold;display:flex;align-items:center;" wx:if="{{item.price>0}}">{{filter.toFix(item.price)}}<text style="font-size: 22rpx;color: #E83221;font-weight:bold;">元</text></view>
                             </view>
-                            <view class="ub ub-ac" style="font-size: 22rpx;color: #999999;">
+                            <!-- <view class="ub ub-ac" style="font-size: 22rpx;color: #999999;">
                                 <image src="../../images/soldCount.png" style="width:24rpx;height: 22rpx;margin-right:10rpx;"></image>
                                 已售{{item.soldNum}}件
-                            </view>
+                            </view> -->
                         </view>
                         <!-- <view class="ub ub-ac ub-pj" style="margin-top:10rpx;">
                 <view class="old-price">{{filter.toFix(item.originalPrice)}}元</view>

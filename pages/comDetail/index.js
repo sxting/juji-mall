@@ -34,6 +34,7 @@ Page({
     lat:'',
     lng:'',
     share:0,//首页分享按钮进入值为1
+    showMoreXuZhi: false//购买须知折叠显示
   },
   onLoad: function(options) {
     if (options.share) {
@@ -73,6 +74,11 @@ Page({
       },
       error: err => console.log(err)
     });
+  },
+  toggoleXuzhi: function(){
+    this.setData({
+      showMoreXuZhi: !this.data.showMoreXuZhi
+    })
   },
   previewImage: function (e) {
     var arr = [];

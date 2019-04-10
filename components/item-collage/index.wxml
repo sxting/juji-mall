@@ -1,18 +1,17 @@
 <!--shared/component/item-collage/index.wxml-->
-
+<wxs src="../../utils/numFr.wxs" module="format" />
 <!-- 中间内容 -->
 <view class='content-box' wx:if="{{fleg=='content'}}">
   <view class='title-infor'>
     <view class='collage-infor'><text class='collage-numbers'>2人团</text><text>好友拼团·人满拼团成功·人不满退款</text></view>
-    <view class='name-collage'>【德川家】超值寿司拼盘14粒只需49元一份</view>
+    <view class='name-collage'>{{collageInforData.productName}}</view>
     <view class='price-infor clearfix'>
-      <text class='fl'>20.00元</text>
-      <text class='fl original-price'>88元</text>
-      <text>已砍20件</text>
+      <text class='fl'>{{format.toFix(collageInforData.price)}}元</text>
+      <text class='fl original-price'>{{format.toFix(collageInforData.originalPrice)}}元</text>
+      <text>已拼{{collageInforData.soldNum}}件</text>
     </view>
     <!-- 各种情况判断 -->
     <view class='situation-box'>
-
       <!--拼团中 自己进入 或者 他人进入-->
       <view class='last-time'>
         剩余时间
@@ -35,7 +34,7 @@
       <view class='text-describe'>该团已成功，可选择开团或参与其他团</view>
 
       <!-- 自己进入 已经拼团成功 -->
-      <view class='text-describe'>该团已成功，请到<text style='color:#E83221'>我的订单</text>中查</view>
+      <view class='text-describe'>该团已成功，请到<text style='color:#E83221' catchtap='switchToMineOrderList'>我的订单</text>中查</view>
     </view>
   </view>
 
@@ -74,10 +73,10 @@
 
 
   <!-- 拼团中  自己进入-->
-  <!-- <button type='share' class='btns group-buying'>邀请好友拼团</button> -->
+  <button class="btns group-buying" open-type="share">邀请好友拼团</button>
 
   <!-- 拼团中 他人进入 -->
-  <view class="proBtns ub ub-ac">
+  <!-- <view class="proBtns ub ub-ac">
     <view class="kaituan btns-pro ub-f1 ub ub-ver ub-ac ub-pc l">
       <text class="txt1">我要开团</text>
     </view>
@@ -85,5 +84,5 @@
       <text class="txt1">20.00</text>
       <text class="txt2">一键开团</text>
     </view>
-  </view>
+  </view> -->
 </view>

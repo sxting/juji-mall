@@ -183,11 +183,11 @@
 					"scene": null
 				},
 				{
-          "id": 29,
-          "name": "活动商品详情 --pintuan",
-          "pathName": "pages/activities/project-detail/index",
-          "query": "share=0&id=2019040214333468912847070&storeid=111554088175153650&type=SPLICED",
-          "scene": null
+					"id": 29,
+					"name": "活动商品详情 --pintuan",
+					"pathName": "pages/activities/project-detail/index",
+					"query": "share=0&id=2019040214333468912847070&storeid=111554088175153650&type=SPLICED",
+					"scene": null
 				},
 				{
 					"id": -1,
@@ -242,7 +242,7 @@
 					"id": 29,
 					"name": "活动商品详情 --kanjia",
 					"pathName": "pages/activities/project-detail/index",
-					"query": "share=0&id=2019040214333468912847070&storeid=111554088175153650&type=BARGAIN",
+					"query": "share=0&id=2019022815535077320763005&storeid=&type=BARGAIN",
 					"scene": null
 				}
 			]

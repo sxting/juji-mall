@@ -99,13 +99,8 @@ page { height: 100%; }
 .noStock{ width: 440rpx; height: 88rpx;background: #DEDEDE;color: #999999;font-size: 34rpx; border-radius: 44px; line-height: 80rpx; text-align: center; margin-left: 2px; display: flex;  align-items: center; justify-content: center; }
 .xuzhiInner{position:relative;background: #FBFBFB;border-radius: 10px;padding:30rpx;margin-top:30rpx;overflow: hidden;transition: all .3s ease;}
 .to160H{height: 160rpx;}
-.arrowBtn{width:24rpx;height:16rpx;position:absolute;top: 40rpx;right: 30rpx;transition: all .3s ease;}
-.arrowDown{
-  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAQCAMAAAA7+k+nAAAAVFBMVEUAAACAgICYmJiYmJiZmZmYmJiZmZmXl5eYmJiYmJiYmJiUlJSTk5OQkJCYmJiYmJiYmJiZmZmYmJiYmJiYmJiZmZmYmJiYmJiYmJiYmJiZmZmZmZl/DJJkAAAAG3RSTlMABLf358SUX08/JxsUC/Hu3dnQqaSYhoF0bzLKIni4AAAAh0lEQVQY02WQWQ7EIAxDQwq0QPe99f3vOVQziEnxl+UklvJIKSr1pNaEMg/GEsO077w1YAozuJN5x5hjjR+xKtG/YvSPuTXs/8BC31/nehw5P9C75JsKV/IXqiZv1UAtXdIZ9363JwntGGKzG7DTSxu09xpbSWfBNGGR5NK/mYEkxJyolayzPv/sBkEYs8fzAAAAAElFTkSuQmCC) no-repeat;
-  background-size: 100% 100%;
-}
+.arrowBtnWrap{width: 40rpx;height: 40rpx;position:absolute;top: 30rpx;right: 20rpx;display: flex;align-items: center;justify-content: center;}
+.arrowBtn{width:24rpx;height:16rpx;transition: all .3s ease;}
 .arrowTop{
-  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAQCAMAAAA7+k+nAAAAVFBMVEUAAACAgICYmJiYmJiZmZmYmJiZmZmXl5eYmJiYmJiYmJiUlJSTk5OQkJCYmJiYmJiYmJiZmZmYmJiYmJiYmJiZmZmYmJiYmJiYmJiYmJiZmZmZmZl/DJJkAAAAG3RSTlMABLf358SUX08/JxsUC/Hu3dnQqaSYhoF0bzLKIni4AAAAh0lEQVQY02WQWQ7EIAxDQwq0QPe99f3vOVQziEnxl+UklvJIKSr1pNaEMg/GEsO077w1YAozuJN5x5hjjR+xKtG/YvSPuTXs/8BC31/nehw5P9C75JsKV/IXqiZv1UAtXdIZ9363JwntGGKzG7DTSxu09xpbSWfBNGGR5NK/mYEkxJyolayzPv/sBkEYs8fzAAAAAElFTkSuQmCC) no-repeat;
-  background-size: 100% 100%;
   transform: rotate(180deg);
 }

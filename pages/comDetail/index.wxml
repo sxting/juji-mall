@@ -51,7 +51,10 @@
         <view class="yongkaxuzhi">
             <view style="font-size: 30rpx;color: #333333;font-weight: bolder;">购买须知</view>
             <view class="xuzhiInner {{showMoreXuZhi?'':'to160H'}}">
-                <view class="arrowBtn arrowDown {{showMoreXuZhi?'arrowTop':''}}" bindtap="toggoleXuzhi"></view>
+              <view class="arrowBtnWrap" bindtap="toggoleXuzhi">
+                <image src="../../images/icon_drop.png" class="arrowBtn {{showMoreXuZhi?'arrowTop':''}}"></image>
+              </view>
+                
                 <view style="margin-bottom: 30rpx;" wx:for="{{note}}" wx:key="{{index}}">
                     <view style="display:flex;align-items:center;" wx:if="{{item.title}}">
                         <view style="width:8rpx;height:8rpx;border-radius:50%;background: #FCBF0A;margin-right:20rpx;"></view>

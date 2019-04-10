@@ -174,15 +174,17 @@ function getData() {
 
       // status: 'init', //未开始 init，砍价中 ing，砍价失败 fail，砍价成功 success
       let status = 'init'
-      switch (res.bargainStatus) {
-        case "BARGAINING": status = 'ing';
+      switch (res.orderDigest.activityOrderStatus) {
+        case "IN_PROGRESS": status = 'ing';
           break;
-        case "BARGAIN_SUCCESS": status = 'success';
+        case "WAIT_PAY": status = 'success';
+          break;
+        case "FAIL": status = 'fail'
       }
 
       /* 倒计时start */
-      if (res.bargainEndTime) {
-        let time2 = new Date(res.bargainEndTime.replace(/-/g, '/')).getTime() - new Date().getTime();
+      if (res.orderDigest.expirationTime) {
+        let time2 = new Date(res.orderDigest.expirationTime.replace(/-/g, '/')).getTime() - new Date().getTime();
         if (time2 <= 0) {
           self.data.hours = '00';
           self.data.minites = '00';
@@ -231,8 +233,8 @@ function getData() {
       /* 倒计时end */
 
       this.setData({
-        bargainDetail: res,
-        activityOrderId: res.orderNo ? res.orderNo : '',
+        resData: res,
+        activityOrderId: res.orderDigest ? res.orderDigest.activityOrderId : '',
         status: status,
         help: res.remainBargainCount == 0 ? true : false,
         self: (!res.initiator && !res.bargainStatus) || (res.initiator && res.bargainStatus)

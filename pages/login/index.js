@@ -7,7 +7,7 @@ Page({
         openId: '',
         showPageLoading: true,
         noPath: false,
-        pageType: 0, //3为扫码进来
+        pageType: 0, //0为首页，1为商品详情页分享，3位扫码进来，4为素材分享，5为桔长首页分享
         pageData: {},
         pageFromCode: 1,//1为商品详情，2为邀新，默认1
         sharePersonOpenId:'',
@@ -98,50 +98,36 @@ Page({
     nextPage:function(){
       console.log("走下一页");
       console.log('pageType===='+this.data.pageType);
-      if (this.data.pageType==0) {
-        wx.switchTab({
-          url: '/pages/index/index'
-        });
+      if(this.data.pageType==0){
+        wx.switchTab({url: '/pages/index/index'});
       }
-      if (this.data.pageType==1) {
-        wx.reLaunch({
-          url: '/pages/comDetail/index?id=' + this.data.pageData.pid + '&storeid=' + this.data.pageData.storeid
-        });
+      if(this.data.pageType==1){
+        wx.reLaunch({url: '/pages/comDetail/index?id=' + this.data.pageData.pid + '&storeid=' + this.data.pageData.storeid});
       }
-      if (this.data.pageType==2) {
-        wx.reLaunch({
-          url: '/pages/jujiGarden/gardenIndex/index?openid=' + this.data.sharePersonOpenId
-        });
+      if(this.data.pageType==2){
+        wx.reLaunch({url: '/pages/jujiGarden/gardenIndex/index?openid=' + this.data.sharePersonOpenId});
       }
-      if (this.data.pageType==3) {
-        if(this.data.pageFromCode==1){//商品详情
-          wx.reLaunch({
-            url: '/pages/comDetail/index?id=' + this.data.shareProductId + '&storeid='
-          });
-        }else{//邀新
-          wx.reLaunch({
-            url: '/pages/jujiGarden/gardenIndex/index?openid=' + this.data.sharePersonOpenId
-          });
-        }
+      if(this.data.pageType==3){
+       if(this.data.pageFromCode==1){
+          wx.reLaunch({url: '/pages/comDetail/index?id=' + this.data.shareProductId + '&storeid='});
+       }else{//邀新
+          wx.reLaunch({url: '/pages/jujiGarden/gardenIndex/index?openid=' + this.data.sharePersonOpenId});
+       }
       }
-      // 分销返利页
       if(this.data.pageType==4){
-        wx.reLaunch({
-          url: '/pages/comDetail/index?id=' + this.data.pageData.pid + '&storeid=' + this.data.pageData.storeid + '&sceneid=' + this.data.pageData.sceneid
-        });
+        wx.reLaunch({url: '/pages/comDetail/index?id=' + this.data.pageData.pid + '&storeid=' + this.data.pageData.storeid + '&sceneid=' + this.data.pageData.sceneid});
       }
-      // 邀新首页
       if(this.data.pageType==5){
-        wx.reLaunch({
-          url: '/pages/jujiGarden/gardenIndex/index?openid=' + this.data.pageData.openid
-        });
+        wx.reLaunch({url: '/pages/jujiGarden/gardenIndex/index?openid=' + this.data.pageData.openid});
       }
     },
     getUserInfo: function(e) {
         if (e.detail.userInfo) {
             wx.setStorageSync('rawData', e.detail.rawData);
             var rawData = e.detail.rawData;
+            console.log('点击授权登录按钮');
             console.log('pageType===='+this.data.pageType);
+            console.log(JSON.stringify(this.data.pageData));
             var invitecode = this.data.pageData.invitecode?this.data.pageData.invitecode:'';
             this.preLogin2(rawData, invitecode,this.data.scene);
         }
@@ -157,6 +143,8 @@ Page({
             });
         }).then(function(code) {
             return new Promise(function(resolve2, reject2) {
+                console.log("登录请求inviteCode="+obj.inviteCode);
+                console.log("登录请求scene="+obj.scene);
                 wx.request({
                     url: constant.apiUrl + '/user/login.json',
                     method: 'GET',

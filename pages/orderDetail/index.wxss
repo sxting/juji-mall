@@ -45,3 +45,10 @@ canvas{width:664rpx;height:136rpx;margin: 0 auto;}
 .orderInfo4 .div .c{width: 60rpx;text-align: center;color: #999;font-size: 24rpx;}
 
 .orderInfo4 view.txt1{text-align: center;font-size: 24rpx;line-height: 40rpx;color: #999;}
+.txt6{font-size: 28rpx;color: #333333;}
+.div4 .text{font-size: 24rpx;color: #666666;}
+.div4{width: :100%;height: 70rpx;border-top:#eee solid 1rpx;}
+.txt5{font-size: 24rpx;margin-right: 10rpx;}
+
+.orderInfo8{background-color:#fff;padding-top:20rpx;}
+.orderInfo8 .tit{line-height:50rpx;color:#333;font-size:28rpx;font-weight:bold;}

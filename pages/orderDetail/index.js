@@ -13,9 +13,11 @@ Page({
     voucherInfo:{},
     vouchers:[],
     validEndDate:'',
-    isTimeOpen:false
+    isTimeOpen:false,
+    storeInfo:{}
   },
   onLoad: function(options) {
+    clearInterval(timer);
     wx.setNavigationBarTitle({title: '订单详情'});
     wx.hideShareMenu();
     this.getData(options.id);
@@ -52,6 +54,7 @@ Page({
       next: res => {
         this.setData({orderInfo: res});
         this.setData({preOrderStr:res.preOrderStr});
+        this.setData({storeInfo:res.orderItemList[0]})
         if(res.status=='PAID'){
           if(!this.data.isTimeOpen){
             this.getListVoucher(res.vouchers[0].voucherCode);
@@ -81,9 +84,27 @@ Page({
       }
     });
   },
+  toMap: function(e){
+    console.log(e);
+    if (e.currentTarget.dataset.lat && e.currentTarget.dataset.lng){
+      wx.navigateTo({
+        url: '/pages/map/index?lat=' + e.currentTarget.dataset.lat + '&lng=' + e.currentTarget.dataset.lng,
+      });
+    }
+  },
+  toMerchantsList:function(){
+    wx.navigateTo({
+      url: '/pages/merchantsCanUse/index?id=' + this.data.orderInfo.productId
+    });
+  },
+  callPhone: function (e) {
+    wx.makePhoneCall({
+      phoneNumber: e.currentTarget.dataset.tel
+    });
+  },
   onUnload:function(){
-    this.setData({isTimeOpen:false});
     clearInterval(timer);
+    this.setData({isTimeOpen:false});
   },
   getListVoucher:function(code){
     var obj = {

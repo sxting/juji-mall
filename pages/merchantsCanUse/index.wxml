@@ -4,7 +4,7 @@
       <view class="item ub ub-ac" wx:for="{{merchantsList}}" wx:key="{{index}}">
         <view class="ub-f1">
           <view class="name">{{item.name}}</view>
-          <view class="address">
+          <view class="address" bindtap="toMap" data-lng="{{item.lng}}" data-lat="{{item.lat}}">
             <image src="../../images/location.png" class="icon1"></image>{{item.address}}
           </view>
           <view class="phone" bindtap="callPhone" data-phone="{{item.phone}}">

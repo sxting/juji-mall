@@ -38,19 +38,19 @@
         <view wx:if="{{orderInfo.status=='CONSUME'}}" class="btn" bindtap="toComment" data-id="{{orderInfo.orderId}}" data-pid="{{orderInfo.orderItemList[0].productId}}">立即评价</view>
         <view class="txt" wx:if="{{orderInfo.status=='PAID'}}">您已成功付款，请到店展示消费码消费</view>
     </view>
-    <view class="orderInfo2" wx:if="{{orderInfo.status=='PAID'&&voucherInfo.validDays>0}}">
+    <view class="orderInfo2" wx:if="{{orderInfo.status=='PAID'&&voucherInfo.validDays>=0}}">
         <view class="barDiv">
             <view class="tx-c">{{orderInfo.vouchers[0].voucherCode}}</view>
             <canvas canvas-id="barcode"></canvas>
             <view class="div ub ub ub-ac ub-pj">
-                <view class="txt">剩余有效天数：{{voucherInfo.validDays<=0?'已过期':voucherInfo.validDays+'天'}}</view>
+                <view class="txt">剩余有效天数：{{voucherInfo.validDays<0?'已过期':voucherInfo.validDays+'天'}}</view>
                 <view class="txt">可核销{{voucherInfo.totalNum}}次，已核销{{voucherInfo.usedNum}}次</view>
             </view>
         </view>
     </view>
 
-    <view class="orderInfo4" wx:if="{{orderInfo.status=='PAID'&&(voucherInfo.validDays<=0||voucherInfo.validDays==null)}}">
-        <view wx:for="{{vouchers}}" wx:for-index="index" class="code {{index<voucherInfo.usedNum?'d':''}}" wx:key="unique">券码：{{item.voucherCode}}</view>
+    <view class="orderInfo4" wx:if="{{orderInfo.status=='PAID'&&(voucherInfo.validDays<0||voucherInfo.validDays==null)}}">
+        <view wx:for="{{vouchers}}" wx:for-index="index" class="code {{item.voucherStatus=='USED'?'d':''}}" wx:key="unique">券码：{{item.voucherCode}}</view>
         <view class="div ub ub ub-ac ub-pj">
             <view class="txt1">已于{{validEndDate}}到期</view>
             <view class="c">|</view>

@@ -257,7 +257,9 @@ Page({
       context.restore();
 
       context.drawImage(this.data.erwmImg, size.w - 80, 342.5, 70, 70);
-      var nickName = JSON.parse(wx.getStorageSync('userinfo')).nickName;
+      var name = JSON.parse(wx.getStorageSync('userinfo')).nickName;
+      var nickName = name.length>8?name.substring(0,8)+'...':name;
+      setText(context,nickName, 70, 360,"#333",12,'left');
       setText(context,nickName, 70, 360,"#333",12,'left');
       setText(context,"私藏好物，分享给你", 70, 379,'#666',11,'left');
       context.draw();

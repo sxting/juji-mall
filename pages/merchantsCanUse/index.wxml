@@ -4,8 +4,12 @@
       <view class="item ub ub-ac" wx:for="{{merchantsList}}" wx:key="{{index}}">
         <view class="ub-f1">
           <view class="name">{{item.name}}</view>
-          <view class="time">{{item.address}}</view>
-          <view class="phone" bindtap="callPhone" data-phone="{{item.phone}}"><image src="../../images/call.png" class="call"></image>{{item.phone}}</view>
+          <view class="address">
+            <image src="../../images/location.png" class="icon1"></image>{{item.address}}
+          </view>
+          <view class="phone" bindtap="callPhone" data-phone="{{item.phone}}">
+            <image src="../../images/dianhua.png" class="icon2"></image>{{item.phone}}
+          </view>
         </view>
       </view>
     </view>

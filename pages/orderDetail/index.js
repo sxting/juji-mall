@@ -12,7 +12,8 @@ Page({
     constant: constant,
     voucherInfo:{},
     vouchers:[],
-    validEndDate:''
+    validEndDate:'',
+    isTimeOpen:false
   },
   onLoad: function(options) {
     wx.setNavigationBarTitle({title: '订单详情'});
@@ -52,14 +53,20 @@ Page({
         this.setData({orderInfo: res});
         this.setData({preOrderStr:res.preOrderStr});
         if(res.status=='PAID'){
-          if(!timer){
+          if(!this.data.isTimeOpen){
             this.getListVoucher(res.vouchers[0].voucherCode);
           }
         }
         this.setData({vouchers:res.vouchers});
         if(res.status=='CONSUME'||res.status=='FINISH'){
           console.log('已完成的订单');
-          this.getListVoucher(res.vouchers[0].voucherCode);
+          clearInterval(timer);
+          this.setData({isTimeOpen:false});
+          console.log('关闭定时器');
+          console.log(timer);
+          if(!this.data.isTimeOpen){
+            this.getListVoucher(res.vouchers[0].voucherCode);
+          }
         }
       },
       error: err => console.log(err),
@@ -74,6 +81,10 @@ Page({
       }
     });
   },
+  onUnload:function(){
+    this.setData({isTimeOpen:false});
+    clearInterval(timer);
+  },
   getListVoucher:function(code){
     var obj = {
       code:code,
@@ -84,11 +95,12 @@ Page({
         this.setData({voucherInfo: res[0]});
         console.log(res[0].validEndDate);
         this.setData({validEndDate:res[0].validEndDate.substring(0,10)});
-        if(this.data.orderInfo.status=='PAID'&&this.data.voucherInfo.validDays>0){
+        if(this.data.orderInfo.status=='PAID'&&this.data.voucherInfo.validDays>=0){
           barcode('barcode', this.data.orderInfo.vouchers[0].voucherCode, 664, 136);
-          // timer = setInterval(()=>{
-          //   this.getData(this.data.orderId);
-          // },1200);
+          timer = setInterval(()=>{
+            this.setData({isTimeOpen:true});
+            this.getData(this.data.orderId);
+          },1200);
         }
       },
       error: err => console.log(err),

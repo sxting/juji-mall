@@ -59,10 +59,9 @@ Page({
   checkProductDetail: function(e){
     console.log(e.currentTarget.dataset.productid);
     wx.navigateTo({
-      url: '/pages/activities/project-detail/index?type=' + this.data.sceneType + '&id=' + e.currentTarget.dataset.productid
+      url: '/pages/activities/project-detail/index?type=' + this.data.sceneType + '&id=' + e.currentTarget.dataset.productid + '&activityId=' + e.currentTarget.dataset.activityid
     });
   },
-
 })
 
 //获取活动列表信息
@@ -78,32 +77,8 @@ function getActivityList(){
     next: res => {
       if(res){
         console.log(res);
-        let data = [
-          {
-            "activityId": "2019022815535077320763005",
-            "activityPrice": 1000,
-            "activityType": "BARGAIN",
-            "cover": "26P0-gcWPfk_",
-            "originalPrice": 8800,
-            "participantQuantity": 10,
-            "productId": "string",
-            "productName": "【德川家】超值寿司拼盘14粒只需49元一份",
-            "stock": 20
-          },
-          {
-            "activityId": "2019022815535077320763005",
-            "activityPrice": 1000,
-            "activityType": "BARGAIN",
-            "cover": "26P0-gcWPfk_",
-            "originalPrice": 8800,
-            "participantQuantity": 10,
-            "productId": "string",
-            "productName": "【德川家】超值寿司拼盘14粒只需49元一份",
-            "stock": 20
-          }
-        ]
         self.setData({
-          productList: self.data.productList.concat(data),
+          productList: self.data.productList.concat(res),
           ifBottom: res.length == 0 ? true : false
         })
       }

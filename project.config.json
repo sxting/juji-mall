@@ -177,8 +177,8 @@
 				},
 				{
 					"id": -1,
-					"name": "提现详情",
-					"pathName": "pages/jujiGarden/withdrawDetail/index",
+					"name": "我的拼团",
+					"pathName": "pages/activities/my-collage/index",
 					"query": "",
 					"scene": null
 				},

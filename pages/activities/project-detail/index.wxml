@@ -152,13 +152,13 @@
         <image src="../../../images/shouye.png" style="width:40rpx;height:40rpx;"></image>
         <view class="home">首页</view>
     </view>
-    <button class="homeWrap toBg" bindtap="showShare">
+    <button class="homeWrap toBg" open-type='share'>
         <image src="../../../images/fenxiang.png" style="width:40rpx;height:40rpx;" open-type="share"></image>
         <view class="home">分享</view>
     </button>
     <view style='width: 470rpx; height: 90rpx;'>
       <item-collage wx:if="{{type === 'SPLICED'}}" fleg='' collageInforData="{{productInfo}}"></item-collage>
-      <kanjia wx:if="{{type === 'BARGAIN'}}" product-info="{{productInfo}}" btn="{{true}}"></kanjia>
+      <kanjia wx:if="{{type === 'BARGAIN'}}" product-info="{{productInfo}}" res-data="{{resData}}" btn="{{true}}"></kanjia>
     </view>
   </view>
 </view>

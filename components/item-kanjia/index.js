@@ -8,6 +8,10 @@ Component({
       type: Object,
       value: {}
     },
+    resData: {
+      type: Object,
+      value: {}
+    },
     btn: {
       type: Boolean,
       value: false

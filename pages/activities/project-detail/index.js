@@ -34,14 +34,20 @@ Page({
     shared: 0,//首页分享按钮进入值为1
     type: '',
     activityOrderId: '',
-    activityId: ''
+    activityId: '',
+    resData: '',
   },
   onLoad: function (options) {
     if (options.shared) {
       this.setData({ shared: options.shared });
     }
     wx.setNavigationBarTitle({ title: '商品详情' });
-    this.setData({ productId: options.id, type: options.type ? options.type : '' });
+    // 2019041017405721382048345
+    this.setData({ 
+      productId: options.id, 
+      activityId: options.activityId,
+      type: options.type ? options.type : '' 
+    });
     if (options.storeid) {
       this.setData({ storeId: options.storeid });
     }
@@ -53,6 +59,38 @@ Page({
   },
   onShow: function () {
     //评论列表
+  },
+  onShareAppMessage(res) {
+    console.log(res);
+    if (res.from === 'button' && res.target.dataset.type === 'share2') {
+      // 分享砍价
+      return {
+        title: JSON.parse(wx.getStorageSync('userinfo')).nickName + '分享给您一个心动商品，快来一起体验吧！',
+        path: '/pages/login/index?pagetype=projectDetail&type=' + this.data.type + '&activityId=' + this.data.activityId + '&activityOrderId=' + this.data.activityOrderId,
+        success: function (res) {
+          console.log(res);
+          this.setData({
+            showAlert1: true,
+            showAlert2: false
+          });
+        },
+        fail: function (res) {
+          console.log(res);
+        }
+      }
+    } else {
+      // 分享商品
+      return {
+        title: JSON.parse(wx.getStorageSync('userinfo')).nickName + '分享给您一个心动商品，快来一起体验吧！',
+        path: '/pages/login/index?pagetype=projectDetail&type=' + this.data.type + '&activityId=' + this.data.activityId,
+        success: function (res) {
+          console.log(res);
+        },
+        fail: function (res) {
+          console.log(res);
+        }
+      }
+    }
   },
   previewImage: function (e) {
     var arr = [];
@@ -127,41 +165,19 @@ Page({
     this.share();
     return {
       title: JSON.parse(wx.getStorageSync('userinfo')).nickName + '分享给您一个心动商品，快来一起体验吧！',
-      path: '/pages/login/index?pagetype=1&pid=' + this.data.productId + '&storeid=' + this.data.storeId + '&invitecode=' + wx.getStorageSync('inviteCode')
-    }
-  },
-  onShareAppMessage(res) {
-    if (res.from === 'button' && res.target.dataset.type === 'share2') {
-      // 分享砍价
-      return {
-        title: '武切维奇',
-        path: "/pages/login/index?type=share&storeId=" + wx.getStorageSync(constant.STORE_INFO) + "&orderNo=" + this.data.orderNo + "&activityId=" + this.data.activityId,
-        success: function (res) {
-          console.log(res);
-          this.setData({
-            showAlert1: true,
-            showAlert2: false
-          });
-        },
-        fail: function (res) {
-          console.log(res);
-        }
-      }
-    } else {
-      // 分享商品
-      return {
-        title: '',
-        path: "/pages/login/login?type=share&storeId=" + wx.getStorageSync(constant.STORE_INFO) + "&activityId=" + this.data.activityId,
-        success: function (res) {
-          console.log(res);
-        },
-        fail: function (res) {
-          console.log(res);
-        }
+      path: '/pages/login/index?pagetype=projectDetail&type=' + this.data.type + '&activityId=' + this.data.activityId + '&activityOrderId=' + this.data.activityOrderId,
+      success: function (res) {
+        console.log(res);
+        this.setData({
+          showAlert1: true,
+          showAlert2: false
+        });
+      },
+      fail: function (res) {
+        console.log(res);
       }
     }
   },
-
 
   toCommentDetail: function (event) {
     wx.navigateTo({
@@ -198,7 +214,8 @@ function getItemInfo() {
           showPics: picsStrArr,
           isShowData: true,
           lat: res.product.store.lat,
-          lng: res.product.store.lng
+          lng: res.product.store.lng,
+          resData: res
         });
       }).catch(function (err) {
         that.setData({
@@ -212,7 +229,8 @@ function getItemInfo() {
           showPics: picsStrArr,
           isShowData: true,
           lat: res.product.store.lat,
-          lng: res.product.store.lng
+          lng: res.product.store.lng,
+          resData: res
         });
       })
 

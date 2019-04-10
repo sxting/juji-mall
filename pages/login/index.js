@@ -120,6 +120,14 @@ Page({
       if(this.data.pageType==5){
         wx.reLaunch({url: '/pages/jujiGarden/gardenIndex/index?openid=' + this.data.pageData.openid});
       }
+
+      if (this.data.pageType == 'projectDetail') {
+        if (this.data.pageData.type == 'BARGAIN' && this.data.pageData.activityOrderId) {
+          wx.reLaunch({ url: '/pages/activities/project-detail/index?type=' + this.data.pageData.type + '&activityId=' + this.data.pageData.activityId + '&activityOrderId=' + this.data.pageData.activityOrderId });
+        } else {
+          wx.reLaunch({ url: '/pages/activities/project-detail/index?type=' + this.data.pageData.type + '&activityId=' + this.data.pageData.activityId });
+        }
+      }
     },
     getUserInfo: function(e) {
         if (e.detail.userInfo) {

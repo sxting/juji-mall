@@ -242,7 +242,7 @@
 					"id": 29,
 					"name": "活动商品详情 --kanjia",
 					"pathName": "pages/activities/project-detail/index",
-					"query": "share=0&id=2019022815535077320763005&storeid=&type=BARGAIN",
+					"query": "share=0&activityId=2019041017405721382048345&storeid=&type=BARGAIN",
 					"scene": null
 				}
 			]

@@ -29,7 +29,7 @@ Page({
         });
       }
       wx.request({
-        url: this.data.payUrl +'/mini/orderRecords.json',
+        url: this.data.payUrl +'/mini/payRecords.json',
         method: 'GET',
         data: {
           merchantId: options.merchantId
@@ -42,7 +42,7 @@ Page({
           console.log(res);
           if (res.data.errorCode == '0') {
             this.setData({
-              recordList: res.data.data
+              recordList: res.data.data.list
             });
             console.log(this.data.recordList)
           } else {
@@ -55,7 +55,7 @@ Page({
       })
     }else{
       wx.showModal({
-        title: '网络错误',
+        title: '系统错误',
         content: '未能获取到商户信息',
       });
       return ;
@@ -82,11 +82,6 @@ Page({
         url: '/pages/index/index',
       })
     }
-  },
-  toPayDetail: function (e) {
-    wx.navigateTo({
-      url: '/pages/payDetail/index?id=' + e.currentTarget.dataset.id,
-    })
   },
 
   /**

@@ -1,8 +1,5 @@
 .recordlist {
   z-index: 999999;
-  padding: 0 30rpx;
-  background: #fff;
-  box-sizing: border-box;
 }
 
 .main_record .item .chong {
@@ -10,7 +7,8 @@
 }
 
 .main_record .item {
-  padding: 30rpx 0;
+  height: 136rpx;
+  background: #fff;
   position: relative;
 }
 .border::after{
@@ -23,7 +21,7 @@
   transform: scale(0.5);
   transform-origin: 0 0;
   box-sizing: border-box;
-  border-bottom: 2rpx solid #f6f6f6;
+  border: 2rpx solid #f6f6f6;
 }
 
 .main_record .item .tit {
@@ -57,18 +55,4 @@
   height:40rpx;
   margin:0 auto;
   display: block;
-}
-.money,.money .syb{
-  font-size: 28rpx;
-  color: #333;
-  text-align: right;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-}
-.type{
-  font-size: 24rpx;
-  color: #999;
-  text-align: right;
-  margin-top: 16rpx;
 }

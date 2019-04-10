@@ -50,5 +50,5 @@ canvas{width:664rpx;height:136rpx;margin: 0 auto;}
 .div4{width:100%;height: 70rpx;border-top:#eee solid 1rpx;}
 .txt5{font-size: 24rpx;margin-right: 10rpx;}
 
-.orderInfo8{background-color:#fff;padding-top:20rpx;}
+.orderInfo8{background-color:#fff;padding-top:20rpx;padding-bottom: 12rpx;}
 .orderInfo8 .tit{line-height:50rpx;color:#333;font-size:28rpx;font-weight:bold;}

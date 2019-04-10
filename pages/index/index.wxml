@@ -58,7 +58,7 @@
                   <view style="font-size: 22rpx;color: #E83221;font-weight:bold;" wx:if="{{item.price>0}}">元</view>
                 </view>
                 <!-- <view class="old-price">{{filter.toFix(item.originalPrice)}}元</view> -->
-                <view class="ub ub-ac count"><image src="../../images/soldCount.png" style="width:24rpx;height: 22rpx;margin-right:10rpx;"></image>{{item.soldNum}}件</view>
+                <!-- <view class="ub ub-ac count"><image src="../../images/soldCount.png" style="width:24rpx;height: 22rpx;margin-right:10rpx;"></image>已售{{item.soldNum}}件</view> -->
               </view>
             </view>
           </view>
@@ -86,7 +86,7 @@
                   <view style="font-size: 22rpx;color: #E83221;font-weight:bold;" wx:if="{{item.price>0}}">元</view>
                 </view>
                 <!-- <view class="old-price">{{filter.toFix(item.originalPrice)}}元</view> -->
-                <view class="ub ub-ac count"><image src="../../images/soldCount.png" style="width:24rpx;height: 22rpx;margin-right:10rpx;"></image>{{item.soldNum}}件</view>
+                <!-- <view class="ub ub-ac count"><image src="../../images/soldCount.png" style="width:24rpx;height: 22rpx;margin-right:10rpx;"></image>已售{{item.soldNum}}件</view> -->
               </view>
             </view>
           </view>

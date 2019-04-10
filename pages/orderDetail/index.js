@@ -94,7 +94,7 @@ Page({
   },
   toMerchantsList:function(){
     wx.navigateTo({
-      url: '/pages/merchantsCanUse/index?id=' + this.data.orderInfo.productId
+      url: '/pages/merchantsCanUse/index?id=' + this.data.storeInfo.productId
     });
   },
   callPhone: function (e) {

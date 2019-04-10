@@ -10,7 +10,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    sceneType: 'SPLICED',//查看进入的是什么场景类型
+    sceneType: 'BARGAIN',//查看进入的是什么场景类型    SPLICED
     productList: [],
     pageNo: 1,
     providerId: wx.getStorageSync('providerId'),

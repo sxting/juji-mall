@@ -39,6 +39,7 @@ Component({
   },
 
   ready: function () {
+    console.log(this.data.resData)
     // getData.call(this);
   },
 
@@ -166,14 +167,7 @@ function getData() {
   componentService.activity(data).subscribe({
     next: res => {
       console.log(res);
-      if (res.cover.imageUrl) {
-        res.cover.imageUrl = `${constant.OSS_IMAGE_URL}${res.cover.imageUrl}/resize_375_259/mode_fill`;
-      }
-      if (res.picColl) {
-        res.picColl.forEach(function (item) {
-          item.imageUrl = `${constant.OSS_IMAGE_URL}${item.imageUrl}/resize_345_240/mode_fill`
-        })
-      }
+    
       if (res.currentPrice) {
         res.yikan = NP.minus(res.activityItem.originalPrice, res.currentPrice)
       }

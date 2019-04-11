@@ -1,5 +1,7 @@
 // shared/component/item-kanjia/index.js
 import { componentService } from '../shared/service';
+import { errDialog, loading } from '../../utils/util';
+import { constant } from '../../utils/constant';
 
 let timer;
 Component({
@@ -44,48 +46,16 @@ Component({
   },
 
   methods: {
-    onShareAppMessage(res) {
-      if (res.from === 'button' && res.target.dataset.type === 'share2') {
-        // 分享砍价
-        return {
-          title: '武切维奇',
-          path: "/pages/login/login?type=share&storeId=" + wx.getStorageSync(constant.STORE_INFO) + "&orderNo=" + this.data.orderNo + "&activityId=" + this.data.activityId,
-          success: function (res) {
-            console.log(res);
-            this.setData({
-              showAlert1: true,
-              showAlert2: false
-            });
-          },
-          fail: function (res) {
-            console.log(res);
-          }
-        }
-      } else {
-        // 分享商品
-        return {
-          title: '',
-          path: "/pages/login/login?type=share&storeId=" + wx.getStorageSync(constant.STORE_INFO) + "&activityId=" + this.data.activityId,
-          success: function (res) {
-            console.log(res);
-          },
-          fail: function (res) {
-            console.log(res);
-          }
-        }
-      }
-    },
-
     onlyBuy() {
-      let orderNo = this.data.bargainDetail.orderNo;
-      let bargainDetail = JSON.stringify(this.data.bargainDetail);
+      let orderNo = this.data.bargainDetail.orderNo; 
+      let resData = JSON.stringify(this.data.resData); 
       if (e.currentTarget.dataset.type == '1') {
         wx.navigateTo({
-          url: `/pages/kanjia/submit/submit?storeId=${this.data.storeId}&bargainDetail=${bargainDetail}`,
+          url: `/pages/payOrder/index?resData=${resData}`,
         })
       } else {
         wx.navigateTo({
-          url: `/pages/kanjia/submit/submit?orderNo=${orderNo}&storeId=${this.data.storeId}&bargainDetail=${bargainDetail}`,
+          url: `/pages/payOrder/index?activityOrderId=${this.data.activityOrderId}&resData=${resData}`,
         })
       }
     },
@@ -99,6 +69,7 @@ Component({
       let data = {
         activityId: this.data.activityId
       };
+      console.log(data)
       componentService.initiateBargain(data).subscribe({
         next: res => {
           if (res) {
@@ -243,7 +214,7 @@ function getData() {
         activityOrderId: res.orderDigest ? res.orderDigest.activityOrderId : '',
         status: status,
         help: res.remainBargainCount == 0 ? true : false,
-        self: (!res.initiator && !res.bargainStatus) || (res.initiator && res.bargainStatus)
+        self: (!res.orderDigest) || (res.orderDigest && res.orderDigest.isInitiator)
       })
     },
     error: err => {

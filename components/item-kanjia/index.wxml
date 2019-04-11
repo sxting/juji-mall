@@ -91,7 +91,7 @@
       <view class='alert2-product'>
         <image src='/images/jinbi.png'></image>
         <view class='alert2-product-r fl'>
-          <view class='alert2-product-name'>发型总监亲自动手为您做设计哦砍价</view>
+          <view class='alert2-product-name'>{{productInfo.productName}}</view>
           <view class='alert2-product-rb'>
             <text class='alert2-price'><text>{{bargainDetail.activityItem.activityPrice/100}}</text>元</text>
             <text class='alert2-origin-price'>{{bargainDetail.activityItem.originalPrice/100}}元</text>

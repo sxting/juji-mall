@@ -140,7 +140,7 @@
   font-weight: bold;
 }
 .friends-list {
-  padding: 30rpx 30rpx 0;
+  padding-top: 10rpx;
 }
 .friend-item {
   height: 110rpx;
@@ -151,20 +151,21 @@
   padding-top: 4rpx;
 }
 .friend-item image {
-  width: 70rpx;
-  height: 70rpx;
+  width: 80rpx;
+  height: 80rpx;
   border-radius: 50%;
   margin-right: 20rpx;
+}
+.nick-name {
+  color: #333;
 }
 .friend-time {
   font-size: 24rpx;
   color: #999999;
+  padding-top:15rpx;
 }
 .friend-price {
   line-height: 70rpx;
-}
-.friend-price text {
-  color: #ff6600;
 }
 
 .alert1, .alert2 {

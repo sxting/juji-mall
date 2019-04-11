@@ -2,6 +2,7 @@
 import { componentService } from '../shared/service';
 import { errDialog, loading } from '../../utils/util';
 import { constant } from '../../utils/constant';
+var NP = require('../../utils/number-precision.js');
 
 let timer;
 Component({
@@ -41,14 +42,11 @@ Component({
   },
 
   ready: function () {
-    console.log(this.data.resData)
-    // getData.call(this);
     dataFun.call(this, this.data.resData)
   },
 
   methods: {
-    onlyBuy() {
-      let orderNo = this.data.bargainDetail.orderNo; 
+    onlyBuy(e) {
       let resData = JSON.stringify(this.data.resData); 
       if (e.currentTarget.dataset.type == '1') {
         wx.navigateTo({
@@ -157,8 +155,8 @@ function getData() {
 
 function dataFun(res) {
   let self = this;
-  if (res.currentPrice) {
-    res.yikan = NP.minus(res.activityItem.originalPrice, res.currentPrice)
+  if (res.orderDigest && res.orderDigest.currentSalesPrice) {
+    res.yikan = NP.minus(res.originalPrice, res.orderDigest.currentSalesPrice)
   }
 
   // status: 'init', //未开始 init，砍价中 ing，砍价失败 fail，砍价成功 success

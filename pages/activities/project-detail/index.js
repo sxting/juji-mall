@@ -61,7 +61,8 @@ Page({
     //评论列表
   },
   onShareAppMessage(res) {
-    console.log(res + '0000');
+    console.log(res);
+    // this.share();
     if (res.from === 'button' && res.target.dataset.type === 'share2') {
       // 分享砍价
       return {

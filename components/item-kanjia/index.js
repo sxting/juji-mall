@@ -42,13 +42,11 @@ Component({
   },
 
   ready: function () {
-    console.log(this.data.resData)
-    // getData.call(this);
     dataFun.call(this, this.data.resData)
   },
 
   methods: {
-    onlyBuy() {
+    onlyBuy(e) {
       let resData = JSON.stringify(this.data.resData); 
       if (e.currentTarget.dataset.type == '1') {
         wx.navigateTo({

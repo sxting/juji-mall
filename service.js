@@ -186,6 +186,18 @@ service.getProQrCode = (data) => {
   return http.get(url, data);
 }
 
+// 拼团支付
+service.splicedPayment = (data) => {
+  let url = api + '/activity/consumer/spliced/payment.json';
+  return http.get(url, data);
+}
+
+// 砍价支付
+service.bargainPayment = (data) => {
+  let url = api + '/activity/consumer/bargain/payment.json';
+  return http.get(url, data);
+}
+
 module.exports = {
   service: service
 }

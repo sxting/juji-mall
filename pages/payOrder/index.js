@@ -1,6 +1,8 @@
 import {service} from '../../service';
 import {constant} from '../../utils/constant';
+import { errDialog, loading, showAlert } from '../../utils/util'
 var app = getApp();
+
 Page({
   data: {
     productId: '',
@@ -14,19 +16,26 @@ Page({
     sceneId:"",
     pointBalance: 0,
     alreadyPay: false,
-    showProduct:false
+    showProduct:false,
+    activityId: '', //拼团或者砍价的活动id
+    activityOrderId: '',//拼团或者砍价活动订单id
+    type: '',//场景类型
   },
   onLoad: function(options) {
     wx.setNavigationBarTitle({
       title: '订单确认',
     });
     wx.hideShareMenu();
+    console.log(options);
     if (options.id && options.paytype) {
       this.setData({
-        productId: options.id,
-        storeId: options.storeid,
+        productId: options.id ? options.id : '',
+        storeId: options.storeid ? options.storeid: '',
         paytype: options.paytype,
-        sceneId:options.sceneid
+        sceneId:options.sceneid,
+        activityId: options.activityId,
+        activityOrderId: options.activityOrderId,
+        type: options.type
       });
       this.getItemInfo();
       //查询用户橘子
@@ -115,7 +124,7 @@ Page({
       error: err => console.log(err)
     });
   },
-  toPay: function() {
+  toPay: function(e) {
     console.log('-------点击测试-------');
     var that = this;
     if (that.data.alreadyPay) {
@@ -613,7 +622,43 @@ Page({
           });
         }
       })
-    }else{
+    } else if (that.data.paytype == 5){
+      if (e.currentTarget.dataset.type == 'SPLICED'){
+        let data = { 
+          activityId: that.data.activityId, 
+          activityOrderId: that.data.activityOrderId
+        };
+        service.splicedPayment(data).subscribe({
+          next: res => {
+            console.log(res);
+            var payInfo = JSON.parse(res1.payInfo);
+            wx.requestPayment({
+              timeStamp: payInfo.timeStamp,
+              nonceStr: payInfo.nonceStr,
+              package: payInfo.package,
+              signType: payInfo.signType,
+              paySign: payInfo.paySign,
+              success(res2) {
+                
+              },
+              fail(res2) {
+                if (res2.errMsg == 'requestPayment:fail cancel') {
+                  wx.showToast({
+                    title: '用户取消支付',
+                    icon: 'none'
+                  });
+                  
+                }
+              }
+            });
+          },
+          error: err => errDialog(err),
+          complete: () => wx.hideToast()
+        })
+      }else{
+        // bargainPayment
+      }
+    } else{
       wx.showModal({
         title: '错误',
         content: '支付类型错误',

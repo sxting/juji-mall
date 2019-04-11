@@ -23,11 +23,17 @@
         <view class="goodAmount" wx:if="{{paytype==4}}">{{filter.toFix(productInfo.originalPrice)}}<text style="font-family: PingFangSC-Medium;font-size:28rpx;">元</text>
         </view>
 
+        <!-- 拼团砍价进来 -->
+        <view class="goodAmount" wx:if="{{paytype==5}}">
+          {{filter.toFix(productInfo.price)}}
+          <text style="font-family: PingFangSC-Medium;font-size:28rpx;">元</text>
+          <text class='original-price'>{{filter.toFix(productInfo.originalPrice)}}元</text>
+        </view>
       </view>
     </view>
   </view>
 
-  <view class="plr15" style="background:#fff;">
+  <view class="plr15" style="background:#fff;" wx:if="{{paytype!=5}}">
     <view class="ub ub-ac ub-pj item">
       <view class="itemTit ub ub-ac">购买数量</view>
       <view class="numberCtrl ub ub-ac">
@@ -49,7 +55,7 @@
   </view>
 </view>
 <view class="btn_bottom ub ub-ac plr15" wx:if="{{showProduct}}">
-  <view class="ub-f1" style="font-family: PingFangSC-Medium;font-size: 30rpx;font-weight:bold"  wx:if="{{paytype==3}}">金额：
+  <view class="ub-f1" style="font-family: PingFangSC-Medium;font-size: 30rpx;font-weight:bold"  wx:if="{{(paytype==3)||(paytype==5)}}">金额：
     <text style="font-size: 30rpx;color: #E83121;">{{filter.toFix(productInfo.price*count)}}元</text>
   </view>
   <view class="ub-f1" style="font-family: PingFangSC-Medium;font-size: 30rpx;font-weight:bold"  wx:if="{{paytype==4}}">金额：
@@ -60,6 +66,7 @@
   </view>
   <form bindsubmit="collectFormIds" report-submit="true" >
     <button form-type="submit" class="btn_common ub-f1 ub ub-ac ub-pc" wx:if="{{paytype==1||paytype==3||paytype==4}}" bindtap="toPay">确认支付</button>
+    <button form-type="submit" class="btn_common ub-f1 ub ub-ac ub-pc" data-type="{{type}}" wx:if="{{paytype==5}}" bindtap="toPay">确认支付</button>
     <!-- 如果是桔子换礼类型显示兑换 -->
     <button form-type="submit" class="btn_common ub-f1 ub ub-ac ub-pc" wx:if="{{paytype==2}}" bindtap="toPay">确认兑换</button>
   </form>

@@ -171,12 +171,9 @@ Component({
     payImmediately(e){
       console.log(e.currentTarget.dataset.productid);
       wx.navigateTo({
-        url: '/pages/payOrder/index?id=' + e.currentTarget.dataset.productid + '&paytype==3',
-      })
+        url: '/pages/payOrder/index?id=' + e.currentTarget.dataset.productid + '&paytype=5' + '&sceneid=' + e.currentTarget.dataset.sceneId + '&activityId=' + this.data.activityId + '&activityOrderId=' + this.data.activityOrderId + '&type=SPLICED',
+      })      
     }
-
-// paytype=2 & id=2019022720003453911227326& storeid=null& sceneid=
-
   }
 })
 

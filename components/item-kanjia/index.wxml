@@ -9,12 +9,12 @@
       <view class="ub ub-fe jc-sb" style="margin-top:20rpx;">
         <view class="ub ub-fe">
             <view style="display:flex;align-items: flex-end;">
-                <view style="font-size:38rpx;color: #E83221;font-weight:bold;line-height:38rpx;" wx:if="{{productInfo.price>0}}">{{filter.toFix(productInfo.price)}}</view>
-                <view style="font-size:24rpx;color: #E83221;font-weight:bold;line-height:24rpx;margin-bottom:4rpx;" wx:if="{{productInfo.price>0}}">元</view>
+                <view style="font-size:38rpx;color: #E83221;font-weight:bold;line-height:38rpx;" wx:if="{{resData.activityPrice>0}}">{{filter.toFix(resData.activityPrice)}}</view>
+                <view style="font-size:24rpx;color: #E83221;font-weight:bold;line-height:24rpx;margin-bottom:4rpx;" wx:if="{{resData.activityPrice>0}}">元</view>
             </view>
-            <view style="font-size: 24rpx;color: #999999;text-decoration:line-through;margin-left:25rpx;line-height:28rpx;">{{filter.toFix(productInfo.originalPrice)}} 元</view>
+            <view style="font-size: 24rpx;color: #999999;text-decoration:line-through;margin-left:25rpx;line-height:28rpx;">{{filter.toFix(resData.originalPrice)}} 元</view>
         </view>
-        <view class="ub ub-ac" style="font-size: 24rpx;color: #999999;">已砍{{productInfo.soldNum}}件</view>
+        <view class="ub ub-ac" style="font-size: 24rpx;color: #999999;">已砍{{resData.participantQuantity}}件</view>
       </view>
     </view>
     <view class='kanjia-jindu' wx:if="{{status !== 'init'}}">
@@ -42,14 +42,14 @@
   <view class='friends' wx:if="{{status !== 'init'}}">
     <view class='sub-title2-box'><view class='sub-title2'>好友助力</view></view>
     <view class='friends-list'>
-      <view class='friend-item' wx:for="{{bargainDetail.bargainRecord}}">
-        <view class='friend-img fl'><image src='{{item.avatarUrl ? item.avatarUrl : juniuImg}}'></image></view>
+      <view class='friend-item' wx:for="{{resData.orderDigest.progresses}}">
+        <view class='friend-img fl'><image src='{{item.avatar}}'></image></view>
         <view class='fl'>
           <view>{{item.nickName}}</view>
-          <view class='friend-time'>{{item.date}}</view>
+          <view class='friend-time'>{{item.participationTime}}</view>
         </view>
         <view class='fr friend-price'>
-          帮砍<text>{{item.bargainPrice/100}}元</text>
+          帮砍<text>{{item.bargainAmount/100}}元</text>
         </view>
       </view>
     </view>
@@ -87,14 +87,14 @@
   <view class='alert2' wx:if="{{showAlert2}}">
     <view class='alert2-box'>
       <view class='alert2-title'>已成功帮砍{{price1/100}}元</view>
-      <view class='alert2-tip'>参加该砍价活动可享{{(bargainDetail.activityItem.originalPrice - bargainDetail.activityItem.activityPrice) / 100}}元优惠，快去邀请好友砍价吧！</view>
+      <view class='alert2-tip'>参加该砍价活动可享{{filter.toFix((resData.originalPrice - resData.activityPrice) / 100)}}元优惠，快去邀请好友砍价吧！</view>
       <view class='alert2-product'>
         <image src='/images/jinbi.png'></image>
         <view class='alert2-product-r fl'>
           <view class='alert2-product-name'>{{productInfo.productName}}</view>
           <view class='alert2-product-rb'>
-            <text class='alert2-price'><text>{{bargainDetail.activityItem.activityPrice/100}}</text>元</text>
-            <text class='alert2-origin-price'>{{bargainDetail.activityItem.originalPrice/100}}元</text>
+            <text class='alert2-price'><text>{{resData.activityPrice/100}}</text>元</text>
+            <text class='alert2-origin-price'>{{resData.originalPrice/100}}元</text>
           </view>
         </view>
       </view>

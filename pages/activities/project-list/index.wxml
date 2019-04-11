@@ -2,11 +2,15 @@
 <wxs src="../../../utils/numFr.wxs" module="format" />
  <view class="juzihl-wrap">
   <view class='fixed-button ub ub-ac' style='position: fixed;' wx:if="{{sceneType == 'BARGAIN'}}" catchtap='switchToOrderListPage'>
-    <image class='type-icon' src='/images/kanjia-icon.png'></image>
+    <view class='type-icon'>
+      <image src='/images/kanjia-icon.png'></image>
+    </view>
     <text>我的砍价</text>
   </view>
   <view class='fixed-button ub ub-ac' style='position: fixed;' wx:if="{{sceneType == 'SPLICED'}}" catchtap='switchToOrderListPage'>
-    <image class='type-icon' src='/images/kanjia-icon.png'></image>
+    <view class='type-icon'>
+      <image src='/images/pintuan-icon-my.png'></image>
+    </view>
     <text>我的拼团</text>
   </view>
   <view>

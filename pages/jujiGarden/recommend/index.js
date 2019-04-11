@@ -14,6 +14,7 @@ Page({
         erwmImg: '',
         headImg: '',
         isShowModal: true,
+        isTransparnet:false,
         sceneId: '',
         scenepicid: '',
         userImg: '',
@@ -73,60 +74,17 @@ Page({
             }
         }
     },
-    /**保存素材**/
-    saveImagesToPhone: function(e) {
-        var imageIds = e.currentTarget.dataset.imgs;
-        var desc = e.currentTarget.dataset.desc;
-        var that = this;
-        wx.setClipboardData({
-            data: desc,
-            success: (res) => {
-                wx.getSetting({
-                    success(res) {
-                        if (!res.authSetting['scope.writePhotosAlbum']) {
-                            wx.authorize({
-                                scope: 'scope.writePhotosAlbum',
-                                success: (res) => {
-                                    that.saveFile(imageIds);
-                                }
-                            })
-                        } else {
-                            that.saveFile(imageIds);
-                        }
-                    },
-                    fail() {
-                        console.log("getSetting: fail");
-                    }
-                });
-            }
-        });
-    },
-    saveFile: function(imageIds) {
-        var imgIndex = 0;
-        for (var i = 0; i < imageIds.length; i++) {
-            var imgId = imageIds[i];
-            wx.downloadFile({
-                url: constant.basePicUrl + imageIds[i] + '/resize_0_0/mode_fill',
-                success: (res) => {
-                    wx.saveImageToPhotosAlbum({
-                        filePath: res.tempFilePath,
-                        success: (res) => {
-                            imgIndex++;
-                            if (imgIndex == imageIds.length) {
-                                this.showToast("图片已下载到微信相册，文案已复制到剪贴板")
-                            }
-                        },
-                        fail: (res) => {
-                            console.log(res);
-                        }
-                    });
-                }
-            });
-        }
+    //保存素材
+    saveMaterial:function(e){
+        this.produceImg(e,1)
     },
     //生成图文
-    shareToCircle: function(e) {
-        wx.showLoading({ title: '生成分享图片' });
+    produceImg: function(e,type) {
+        if(type==1){
+            wx.showLoading({ title: '正在下载图片' });
+        }else{
+            wx.showLoading({ title: '生成分享图片' });
+        }
         var productId = e.currentTarget.dataset.productid;
         this.setData({ productId: productId });
         var imageId = e.currentTarget.dataset.img;
@@ -150,7 +108,7 @@ Page({
                         if (res.statusCode === 200) {
                             ready++;
                             this.setData({ headImg: res.tempFilePath });
-                            this.startDrawImg(ready);
+                            this.startDrawImg(ready,e,type);
                         } else {
                             wx.hideLoading();
                         }
@@ -164,7 +122,7 @@ Page({
                         if (obj.statusCode === 200) {
                             ready++;
                             this.setData({ userImg: obj.tempFilePath });
-                            this.startDrawImg(ready);
+                            this.startDrawImg(ready,e,type);
                         } else {
                             wx.hideLoading();
                         }
@@ -184,7 +142,7 @@ Page({
                             if (obj.statusCode === 200) {
                                 ready++;
                                 this.setData({ erwmImg: obj.tempFilePath });
-                                this.startDrawImg(ready);
+                                this.startDrawImg(ready,e,type);
                             } else {
                                 wx.hideLoading();
                             }
@@ -207,7 +165,7 @@ Page({
                                     if (obj.statusCode === 200) {
                                         ready++;
                                         this.setData({ erwmImg: obj.tempFilePath });
-                                        this.startDrawImg(ready);
+                                        this.startDrawImg(ready,e,type);
                                     } else {
                                         wx.hideLoading();
                                     }
@@ -231,9 +189,9 @@ Page({
         })
     },
     closeModal: function() {
-        this.setData({ isShowModal: true });
+        this.setData({ isShowModal: true,isTransparnet:false });
     },
-    startDrawImg: function(ready) {
+    startDrawImg: function(ready,e,type) {
         console.log('ready===='+ready);
         if (ready == 3) {
             var info = this.data.productInfo;
@@ -244,11 +202,11 @@ Page({
             var name = info.productName;
             var price2 = Number(info.originalPrice / 100).toFixed(2) + '元';
             var storeLen = info.productStores.length;
-            this.drawImage(info.merchantName, name, '', price1, price2, storeLen);
+            this.drawImage(info.merchantName, name, '', price1, price2, storeLen,e,type);
         }
     },
     //参数依次是storeName,desc,现价,原价,门店数
-    drawImage: function(merchant, name, desc, price1, price2, storeLen) {
+    drawImage: function(merchant, name, desc, price1, price2, storeLen,e,type) {
         var size = { w: 260, h: 424 };
         var context = wx.createCanvasContext('myCanvas');
         context.drawImage(this.data.shareBg, 0, 0, size.w, size.h);
@@ -286,13 +244,22 @@ Page({
         setText(context, nickName, 70, 360, "#333", 12, 'left');
         setText(context, nickName, 70, 360, "#333", 12, 'left');
         setText(context, "私藏好物，分享给你", 70, 379, '#666', 11, 'left');
-        this.setData({ isShowModal: false });
+        if(type==1){
+            this.setData({ isTransparnet: true });
+        }else{
+            this.setData({ isShowModal: false });
+        }
         context.draw(false, () => {
+            console.log("绘图结束");
             wx.hideLoading();
+            if(type==1){
+                setTimeout(()=>{
+                    this.savePic(e,type);
+                },100)
+            }
         });
     },
-    savePic: function(e) {
-        var type = e.currentTarget.dataset.type;
+    savePic: function(e,type) {
         var that = this;
         wx.canvasToTempFilePath({
             canvasId: 'myCanvas',
@@ -303,21 +270,13 @@ Page({
                             wx.authorize({
                                 scope: 'scope.writePhotosAlbum',
                                 success() {
-                                    that.saveAsPhoto(res.tempFilePath, type);
-                                },
-                                fail() {
-                                    wx.openSetting({
-                                        success: function() {
-                                            console.log("openSetting: success");
-                                        },
-                                        fail: function() {
-                                            console.log("openSetting: fail");
-                                        }
-                                    });
+                                    console.log(res.tempFilePath);
+                                    that.saveAsPhoto(res.tempFilePath,e,type);
                                 }
                             })
                         } else {
-                            that.saveAsPhoto(res.tempFilePath, type);
+                            console.log(res.tempFilePath);
+                            that.saveAsPhoto(res.tempFilePath,e,type);
                         }
                     },
                     fail() {
@@ -330,25 +289,59 @@ Page({
             }
         });
     },
-    saveAsPhoto: function(imgUrl, type) {
+    saveAsPhoto: function(imgUrl,e,type) {
         wx.saveImageToPhotosAlbum({
             filePath: imgUrl,
             success: (res) => {
                 this.closeModal();
-                if (type == 1) {
-                    wx.showToast({
-                        title: "已保存至相册",
-                        icon: "success"
-                    });
-                } else {
-                    errDialog('图文海报已保存到微信本地相册，打开微信发送给朋友吧!');
-                }
+                wx.showToast({
+                    title: "已保存至相册",
+                    icon: "success"
+                });
             },
             fail: function(res) {
                 console.log(res);
             }
-        })
-    }
+        });
+        if(type==1){
+            this.saveImages(e);
+        }
+    },
+    /**保存图片**/
+    saveImages: function(e) {
+        var imageIds = e.currentTarget.dataset.imgs;
+        var desc = e.currentTarget.dataset.desc;
+        this.saveFile(imageIds);
+        wx.setClipboardData({
+            data: desc,
+            success: (res) => {
+
+            }
+        });
+    },
+    saveFile: function(imageIds) {
+        var imgIndex = 0;
+        for (var i = 0; i < imageIds.length; i++) {
+            var imgId = imageIds[i];
+            wx.downloadFile({
+                url: constant.basePicUrl + imageIds[i] + '/resize_0_0/mode_fill',
+                success: (res) => {
+                    wx.saveImageToPhotosAlbum({
+                        filePath: res.tempFilePath,
+                        success: (res) => {
+                            imgIndex++;
+                            if (imgIndex == imageIds.length) {
+                                this.showToast("图片已下载到微信相册，文案已复制到剪贴板")
+                            }
+                        },
+                        fail: (res) => {
+                            console.log(res);
+                        }
+                    });
+                }
+            });
+        }
+    },
 })
 
 function setText(ctx, str, x, y, color, size, align) {

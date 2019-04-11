@@ -1,5 +1,5 @@
 <wxs module="filter" src="../../utils/numFr.wxs"></wxs>
-<view class="container {{isShowModal?'':'ovh'}}" wx:if="{{isShowData}}">
+<view class="container {{isShowModal?'':'ovh'}} {{showJcModal?'noscroll':''}}" wx:if="{{isShowData}}">
     <view class="swiper-wrap">
         <swiper class="img-wrap" autoplay="true" interval="3000">
             <block wx:for="{{showPics}}" wx:key="{{index}}">
@@ -44,27 +44,47 @@
                     <image src="../../images/soldCount.png" style="width:24rpx;height: 22rpx;margin-right:10rpx;"></image>已售{{productInfo.soldNum}}件
                 </view>
             </view>
+
+
+            <!-- 加入群聊 -->
+            <view class="joinClubWrap" wx:if="{{showJoinClub}}">
+              <view class="jcTitle">戳一下进入福利群</view>
+              <view class="jcInner ub ub-ac">
+                <image src="../../images/group.png" class="jcImg"></image>
+                <view class="jcRight">
+                    <view class="jcName">{{welfareGroup.title}}</view>
+                    <view class="jcHongBaoWrap ub ub-ac">
+                      <image src="../../images/hongbao.png" class="jcHongBao"></image>
+                      <view class="jcHongBaoText">{{welfareGroup.info}}</view>
+                    </view>
+                </view>
+              </view>
+              
+              <button class="jcBtn" bindtap="showJcModal">戳一下</button>
+            </view>
         </view>
     </view>
     <image style="width:100rpx;height:100rpx;display:none" src="{{userImgUrl}}"></image>
     <view class="yongkaxuzhi-wrap" style="margin-top:20rpx;">
         <view class="yongkaxuzhi">
             <view style="font-size: 30rpx;color: #333333;font-weight: bolder;">购买须知</view>
-            <view class="xuzhiInner {{showMoreXuZhi?'':'to160H'}}">
-              <view class="arrowBtnWrap" bindtap="toggoleXuzhi">
+            <view class="xuzhiBorder">
+              <!-- <view class="arrowBtnWrap">
                 <image src="../../images/icon_drop.png" class="arrowBtn {{showMoreXuZhi?'arrowTop':''}}"></image>
-              </view>
+              </view> -->
+              <view class="xuzhiInner">
                 
-                <view style="margin-bottom: 30rpx;" wx:for="{{note}}" wx:key="{{index}}">
+                <view class="{{index+1 == note.length?'':'mb20'}}" wx:for="{{note}}" wx:key="{{index}}">
                     <view style="display:flex;align-items:center;" wx:if="{{item.title}}">
-                        <view style="width:8rpx;height:8rpx;border-radius:50%;background: #FCBF0A;margin-right:20rpx;"></view>
-                        <view style="font-size: 28rpx;color: #666666;">{{item.title}}</view>
+                        <view class="y-point"></view>
+                        <view style="font-size: 28rpx;color: #999999;">{{item.title}}</view>
                     </view>
                     <view wx:for="{{item.content}}" wx:for-index="idx" wx:for-item="it" wx:key="{{idx}}" style="display:flex;align-items:flex-start;margin-top:10rpx;">
-                        <view style="width:8rpx;height:8rpx;border-radius:50%;background: #999999;margin-right:20rpx;margin-top:12rpx;"></view>
-                        <view style="font-size: 24rpx;color: #999999;width:98%;">{{it}}</view>
+                        <view class="gray-point"></view>
+                        <view style="font-size: 24rpx;color: #333333;width:98%;">{{it}}</view>
                     </view>
                 </view>
+              </view>
             </view>
         </view>
     </view>
@@ -123,27 +143,6 @@
     </view>
     <view class="yongkaxuzhi-wrap" style="margin-top:20rpx;background:#fff;padding: 30rpx 20rpx;" wx:if="{{recommendCount>0}}">
         <view style="font-size: 30rpx;color: #333333;font-weight: bolder;">同店推荐</view>
-        <!-- <view class="yongkaxuzhi">
-      <view style="font-size: 30rpx;color: #333333;font-weight: bolder;">同店推荐</view>
-      <view class="tuiList">
-        <view class="tuiItem row jc-sb {{index==recommendList.length-1?'':'b-b-1px'}}" wx:for="{{recommendList}}" wx:key="{{index}}">
-          <view class="tuiRow">
-            <view class="ub jc-sb" style="align-items:flex-start;">
-              <view class="tuiName">{{item.productName}}</view>
-              <view class="tuiExe" wx:if="{{item.type=='POINT'}}">{{item.point}}桔子</view>
-              <view class="tuiExe" wx:else>{{item.point}}桔子+{{filter.toFix(item.price)}}元</view>
-            </view>
-            <view class="row jc-sb mt10">
-              <view class="tuiPrice">已售{{item.soldNum}}件</view>
-              <view class="tuiCount">{{filter.toFix(item.originalPrice)}} 元</view>
-            </view>
-          </view>
-          <view class="huanliBtn" wx:if="{{item.type=='POINT'}}" data-id="{{item.productId}}" data-storeid="{{item.nearStore.id}}" bindtap="toComDetail">桔子换礼</view>
-          <view class="huanliBtn" wx:else data-id="{{item.productId}}" data-storeid="{{item.nearStore.id}}" bindtap="toComDetail">去购买</view>
-        </view>
-
-      </view>
-    </view> -->
         <view class="pubu">
             <view class="pubuItem">
                 <view class="cardWrap padr10">
@@ -195,6 +194,12 @@
             </view>
         </view>
     </view>
+
+    <!-- 成为桔长推广商品获得返利 -->
+    <view wx:if="{{distributorRole=='MEMBER'}}" class="ub ub-ac ub-pc" style="width: 100%;padding-top: 10rpx;padding-bottom: 30rpx;background:#fff;margin-top:20rpx;">
+      <image src="https://upic.juniuo.com/file/picture/26TLh7P53Nip/resize_0_0/mode_fill" style="width:693rpx;height:175rpx;" bindtap="openJztgModal"></image>
+    </view>
+
     <view class="phoneWrap">
         <view class="phoneView ub ub-ac" bindtap="callPhone">
             <image src="../../images/logo_main.png" style="width:80rpx;height:80rpx;"></image>
@@ -313,6 +318,76 @@
             <image src="../../images/newerGetBtn.png" class="newerGetBtn" bindtap="closeGetNewer"></image>
             <image src="../../images/newerGetClose.png" class="newerGetClose" bindtap="closeGetNewer"></image>
         </view>
+    </view>
+
+
+    <view class="jcModalWrap" wx:if="{{showJcModal}}">
+      <view class="jcModal">
+      <image src="https://upic.juniuo.com/file/picture/26TNbptnW_Qp/resize_0_0/mode_fill" style="width:100%;height: 236rpx;border-top-left-radius: 20rpx;border-top-right-radius: 20rpx;"></image>
+      <view class="jcModalText" style="margin-top:57rpx;">点击下方“去回复”按钮，并发送</view>
+      <view class="jcModalText" style="margin-top:6rpx;">数字“{{welfareGroup.code}}”邀请你进群</view>
+      <view class="jcModalBtnWrap"><button class="jcModalBtn" open-type='contact' session-from='weapp'>去回复</button></view>
+      
+      <image src="../../images/newerGetClose.png" class="jcModalClose" bindtap="closeJcModal"></image>
+      </view>
+      
+    </view>
+
+    <view class="jztgModalWrap" wx:if="{{showJztgModal}}">
+      <view class="jztgModal">
+      <image src="https://upic.juniuo.com/file/picture/26TNPtfOma6y/resize_0_0/mode_fill" style="width:100%;height: 200rpx;border-top-left-radius: 20rpx;border-top-right-radius: 20rpx;"></image>
+      <view class="jztgModalContent">
+        <view class="ub ub-ac">
+          <view class="point1"></view>
+          <view class="jztgModalTitle">如何成为桔长</view>
+        </view>
+        <view style="font-size: 24rpx;color: #666666;margin-left: 25rpx;margin-top: 20rpx;">成功邀请10名新人，即可获得桔长资格</view>
+        <view class="ub ub-ac mt30">
+          <view class="point1"></view>
+          <view class="jztgModalTitle">桔长专属权益</view>
+        </view>
+        <view class="ub ub-fs mt30">
+          <view class="ub ub-ac">
+            <view class="point2"></view>
+            <view class="jztgModalTitle2">专享低价：</view>
+          </view>
+          <view class="jztgModalText">可享受桔长超低专属折扣，自购超级省钱</view>
+        </view>
+        <view class="ub ub-fs mt20">
+          <view class="ub ub-ac">
+            <view class="point2"></view>
+            <view class="jztgModalTitle2">推广赚钱：</view>
+          </view>
+          <view class="jztgModalText">推广商品，平均可获得15%的商品返利</view>
+        </view>
+        <view class="ub ub-fs mt20">
+          <view class="ub ub-ac">
+            <view class="point2"></view>
+            <view class="jztgModalTitle2">免费体验：</view>
+          </view>
+          <view class="jztgModalText">桔长可享受更多免费体验吃喝玩乐游的机会</view>
+        </view>
+        <view class="ub ub-fs mt20">
+          <view class="ub ub-ac">
+            <view class="point2"></view>
+            <view class="jztgModalTitle2">专属培训：</view>
+          </view>
+          <view class="jztgModalText">可享受专属营销推广培训，平台专业运营人员手把手传授</view>
+        </view>
+        <view class="ub ub-fs mt20">
+          <view class="ub ub-ac">
+            <view class="point2"></view>
+            <view class="jztgModalTitle2">轻松推广：</view>
+          </view>
+          <view class="jztgModalText">推广素材可由平台小编编写，一键保存转发即可</view>
+        </view>
+      </view>
+      
+      <view class="jztgModalBtnWrap"><button class="jztgModalBtn" bindtap="openJztgShare">立即邀请好友</button></view>
+      
+      <image src="../../images/newerGetClose.png" class="jztgModalClose" bindtap="closeJztgModal"></image>
+      </view>
+      
     </view>
 </view>
 <import src="../../components/toast/toast.wxml" />

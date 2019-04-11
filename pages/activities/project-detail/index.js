@@ -62,6 +62,7 @@ Page({
   },
   onShareAppMessage(res) {
     console.log(res);
+    // this.share();
     if (res.from === 'button' && res.target.dataset.type === 'share2') {
       // 分享砍价
       return {
@@ -155,24 +156,6 @@ Page({
       error: err => console.log(err),
       complete: () => wx.hideToast()
     })
-  },
- 
-  onShareAppMessage: function (res) {
-    this.share();
-    return {
-      title: JSON.parse(wx.getStorageSync('userinfo')).nickName + '分享给您一个心动商品，快来一起体验吧！',
-      path: '/pages/login/index?pagetype=projectDetail&type=' + this.data.type + '&activityId=' + this.data.activityId + '&activityOrderId=' + this.data.activityOrderId,
-      success: function (res) {
-        console.log(res);
-        this.setData({
-          showAlert1: true,
-          showAlert2: false
-        });
-      },
-      fail: function (res) {
-        console.log(res);
-      }
-    }
   },
 
   toCommentDetail: function (event) {

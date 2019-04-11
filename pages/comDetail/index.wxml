@@ -68,21 +68,23 @@
     <view class="yongkaxuzhi-wrap" style="margin-top:20rpx;">
         <view class="yongkaxuzhi">
             <view style="font-size: 30rpx;color: #333333;font-weight: bolder;">购买须知</view>
-            <view class="xuzhiInner {{showMoreXuZhi?'':'to160H'}}">
-              <view class="arrowBtnWrap" bindtap="toggoleXuzhi">
+            <view class="xuzhiBorder">
+              <!-- <view class="arrowBtnWrap">
                 <image src="../../images/icon_drop.png" class="arrowBtn {{showMoreXuZhi?'arrowTop':''}}"></image>
-              </view>
+              </view> -->
+              <view class="xuzhiInner">
                 
-                <view style="margin-bottom: 30rpx;" wx:for="{{note}}" wx:key="{{index}}">
+                <view class="{{index+1 == note.length?'':'mb20'}}" wx:for="{{note}}" wx:key="{{index}}">
                     <view style="display:flex;align-items:center;" wx:if="{{item.title}}">
                         <view class="y-point"></view>
-                        <view style="font-size: 28rpx;color: #666666;">{{item.title}}</view>
+                        <view style="font-size: 28rpx;color: #999999;">{{item.title}}</view>
                     </view>
                     <view wx:for="{{item.content}}" wx:for-index="idx" wx:for-item="it" wx:key="{{idx}}" style="display:flex;align-items:flex-start;margin-top:10rpx;">
                         <view class="gray-point"></view>
-                        <view style="font-size: 24rpx;color: #999999;width:98%;">{{it}}</view>
+                        <view style="font-size: 24rpx;color: #333333;width:98%;">{{it}}</view>
                     </view>
                 </view>
+              </view>
             </view>
         </view>
     </view>

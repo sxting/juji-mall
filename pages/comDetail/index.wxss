@@ -678,19 +678,25 @@ page {
   align-items: center;
   justify-content: center;
 }
-
-.xuzhiInner {
+.xuzhiBorder{
   position: relative;
   background: #fbfbfb;
   border-radius: 10px;
   padding: 30rpx;
   margin-top: 30rpx;
-  overflow: hidden;
+}
+.xuzhiInner {
+  background: #fbfbfb;
+  /* overflow: hidden; */
   transition: all 0.3s ease;
 }
 
 .to160H {
-  height: 160rpx;
+  height: 180rpx;
+}
+
+.mb20{
+  margin-bottom: 20rpx;
 }
 
 .arrowBtnWrap {

@@ -50,11 +50,11 @@ Component({
       let resData = JSON.stringify(this.data.resData); 
       if (e.currentTarget.dataset.type == '1') {
         wx.navigateTo({
-          url: `/pages/payOrder/index?resData=${resData}`,
+          url: `/pages/payOrder/index?id=${this.data.resData.productId}&paytype=6&resData=${resData}`,
         })
       } else {
         wx.navigateTo({
-          url: `/pages/payOrder/index?activityOrderId=${this.data.activityOrderId}&resData=${resData}`,
+          url: `/pages/payOrder/index?id=${this.data.resData.productId}&paytype=6&activityOrderId=${this.data.activityOrderId}&resData=${resData}`,
         })
       }
     },

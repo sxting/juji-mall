@@ -20,6 +20,7 @@ Page({
     activityId: '', //拼团或者砍价的活动id
     activityOrderId: '',//拼团或者砍价活动订单id
     type: '',//场景类型
+    kanjiaData: ''
   },
   onLoad: function(options) {
     wx.setNavigationBarTitle({
@@ -27,6 +28,11 @@ Page({
     });
     wx.hideShareMenu();
     console.log(options);
+    if (options.resData) {
+      this.setData({
+        kanjiaData: JSON.parse(options.resData)
+      })
+    }
     if (options.id && options.paytype) {
       this.setData({
         productId: options.id ? options.id : '',
@@ -631,7 +637,7 @@ Page({
         service.splicedPayment(data).subscribe({
           next: res => {
             console.log(res);
-            var payInfo = JSON.parse(res1.payInfo);
+            var payInfo = JSON.parse(res.payInfo);
             wx.requestPayment({
               timeStamp: payInfo.timeStamp,
               nonceStr: payInfo.nonceStr,
@@ -646,8 +652,7 @@ Page({
                   wx.showToast({
                     title: '用户取消支付',
                     icon: 'none'
-                  });
-                  
+                  }); 
                 }
               }
             });
@@ -658,6 +663,37 @@ Page({
       }else{
         // bargainPayment
       }
+    } else if (that.data.paytype == 6) {
+      let data = {
+        activityOrderId: that.data.activityOrderId
+      };
+      service.bargainPayment(data).subscribe({
+        next: res => {
+          console.log(res);
+          var payInfo = JSON.parse(res1.payInfo);
+          wx.requestPayment({
+            timeStamp: payInfo.timeStamp,
+            nonceStr: payInfo.nonceStr,
+            package: payInfo.package,
+            signType: payInfo.signType,
+            paySign: payInfo.paySign,
+            success(res2) {
+
+            },
+            fail(res2) {
+              if (res2.errMsg == 'requestPayment:fail cancel') {
+                wx.showToast({
+                  title: '用户取消支付',
+                  icon: 'none'
+                });
+
+              }
+            }
+          });
+        },
+        error: err => errDialog(err),
+        complete: () => wx.hideToast()
+      })
     } else{
       wx.showModal({
         title: '错误',

@@ -45,6 +45,7 @@ Page({
         }
     },
     createShare: function() {
+        wx.showLoading({title: '生成分享图片'});
         service.getQrCode({ productId: 'invitenew', path: 'pages/login/index' }).subscribe({
             next: res => {
                 var picId = res;
@@ -73,7 +74,9 @@ Page({
         var context = wx.createCanvasContext('myCanvas');
         context.drawImage(this.data.shareBg, 0, 0, size.w, size.h);
         context.drawImage(this.data.erwmImg, 82, 239, 85, 85);
-        context.draw();
+        context.draw(false,function(){
+            wx.hideLoading();
+        });
     },
     /**保存素材**/
     saveImagesToPhone: function(e) {

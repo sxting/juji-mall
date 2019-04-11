@@ -388,7 +388,6 @@ Page({
                 if (res1.statusCode === 200) {
                     this.setData({erwmImg:res1.tempFilePath});
                     var info = this.data.productInfo;
-                    wx.hideLoading();
                     var point = info.point==null||info.point==0?'':info.point+'桔子';
                     var price = info.price==null||info.price==0?'':Number(info.price/100).toFixed(2)+'元';
                     var link = (info.price!=null&&info.price!=0)&&(info.point!=null&&info.point!=0)?'+':'';
@@ -448,7 +447,9 @@ Page({
       var nickName = name.length>8?name.substring(0,8)+'...':name;
       setText(context,nickName, 70, 360,"#333",12,'left');
       setText(context,"私藏好物，分享给你", 70, 379,'#666',11,'left');
-      context.draw();
+      context.draw(true,function(){
+        wx.hideLoading();
+      });
   },
   savePic: function(e) {
       var type = e.currentTarget.dataset.type;

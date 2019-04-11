@@ -79,15 +79,20 @@ Component({
     onlyBuy() {
       let orderNo = this.data.bargainDetail.orderNo;
       let bargainDetail = JSON.stringify(this.data.bargainDetail);
-      wx.navigateTo({
-        url: `/pages/kanjia/submit/submit?orderNo=${orderNo}&storeId=${this.data.storeId}&bargainDetail=${bargainDetail}`,
-      })
+      if (e.currentTarget.dataset.type == '1') {
+        wx.navigateTo({
+          url: `/pages/kanjia/submit/submit?storeId=${this.data.storeId}&bargainDetail=${bargainDetail}`,
+        })
+      } else {
+        wx.navigateTo({
+          url: `/pages/kanjia/submit/submit?orderNo=${orderNo}&storeId=${this.data.storeId}&bargainDetail=${bargainDetail}`,
+        })
+      }
     },
 
     // 发起砍价 
     startKanjia() {
       this.setData({
-        showAlert1: true,
         showAlert2: false
       });
 
@@ -98,6 +103,7 @@ Component({
         next: res => {
           if (res) {
             this.setData({
+              showAlert1: true,
               activityOrderId: res
             })
             doBargain.call(this);
@@ -130,8 +136,8 @@ Component({
     },
 
     lookOthers() {
-      wx.switchTab({
-        url: '/pages/home/home',
+      wx.navigateTo({
+        url: '/pages/activities/project-list/index?sceneType=BARGAIN',
       })
     }
   }
@@ -183,7 +189,7 @@ function getData() {
       }
 
       /* 倒计时start */
-      if (res.orderDigest.expirationTime) {
+      if (res.orderDigest && res.orderDigest.expirationTime) {
         let time2 = new Date(res.orderDigest.expirationTime.replace(/-/g, '/')).getTime() - new Date().getTime();
         if (time2 <= 0) {
           self.data.hours = '00';

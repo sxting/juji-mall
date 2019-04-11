@@ -34,7 +34,12 @@ Page({
     lat:'',
     lng:'',
     share:0,//首页分享按钮进入值为1
-    showMoreXuZhi: false//购买须知折叠显示
+    showMoreXuZhi: false,//购买须知折叠显示
+    showJoinClub: true,//显示“戳一下加入福利群”模态窗口
+    showJcModal: false,//显示“去回复”模态窗口
+    showJztgModal: false,//显示“桔长推广”模态窗口
+    distributorRole:'',//桔长还是桔园身份
+    welfareGroup: {}//“戳一下加入福利群”数据对象
   },
   onLoad: function(options) {
     if (options.share) {
@@ -55,6 +60,33 @@ Page({
     this.getPointBalance();
     //查询新用户见面礼
     this.getNewGift();
+  },
+  openJztgShare: function(){
+    this.setData({
+      showJztgModal: false
+    })
+    this.showShare();
+  },
+  openJztgModal: function(){
+    this.setData({
+      showJztgModal: true
+    })
+  },
+  closeJztgModal: function(){
+    this.setData({
+      showJztgModal: false
+    })
+  },
+  showJcModal: function(){
+    console.log("showJcModal");
+    this.setData({
+      showJcModal: true
+    })
+  },
+  closeJcModal: function(){
+    this.setData({
+      showJcModal: false
+    })
   },
   getNewGift:function(){
     service.isNewer().subscribe({
@@ -249,6 +281,9 @@ Page({
             commentCount: res.commentCount,
             recommendCount: res.recommendList.length,
             note: result,
+            showJoinClub: res.welfareGroup?true: false,
+            distributorRole: res.distributorRole,
+            welfareGroup: res.welfareGroup,
             showPics: picsStrArr,
             isShowData: true,
             lat: res.store.lat,
@@ -266,6 +301,9 @@ Page({
             store: res.store,
             commentCount: res.commentCount,
             recommendCount: res.recommendList.length,
+            showJoinClub: res.welfareGroup ? true : false,
+            distributorRole: res.distributorRole,
+            welfareGroup: res.welfareGroup,
             showPics: picsStrArr,
             isShowData: true,
             lat: res.store.lat,

@@ -69,10 +69,6 @@ Page({
         path: '/pages/login/index?pagetype=projectDetail&type=' + this.data.type + '&activityId=' + this.data.activityId + '&activityOrderId=' + this.data.activityOrderId,
         success: function (res) {
           console.log(res);
-          this.setData({
-            showAlert1: true,
-            showAlert2: false
-          });
         },
         fail: function (res) {
           console.log(res);
@@ -194,7 +190,7 @@ function getItemInfo() {
     activityType: this.data.type
   }).subscribe({
     next: res => {
-      var picsStrArr = res.product.product.picIds.split(',');
+      var picsStrArr = res.cover.split(',');
       picsStrArr.forEach(function (item, index) {
         picsStrArr[index] = constant.basePicUrl + item + '/resize_751_420/mode_fill'
       });
@@ -213,8 +209,8 @@ function getItemInfo() {
           note: result,
           showPics: picsStrArr,
           isShowData: true,
-          lat: res.product.store.lat,
-          lng: res.product.store.lng,
+          lat: res.product.store ? res.product.store.lat : '',
+          lng: res.product.store ? res.product.store.lng : '',
           resData: res
         });
       }).catch(function (err) {

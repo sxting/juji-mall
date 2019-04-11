@@ -170,7 +170,7 @@ function getItemInfo() {
   activitiesService.activity({
     activityId: this.data.activityId,
     activityOrderId: this.data.activityOrderId ? this.data.activityOrderId : '',
-    activityType: 'BARGAIN'
+    activityType: this.data.type
   }).subscribe({
     next: res => {
       var picsStrArr = res.cover.split(',');

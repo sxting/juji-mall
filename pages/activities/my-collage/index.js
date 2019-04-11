@@ -5,6 +5,8 @@ Page({
    * 页面的初始数据
    */
   data: {
+    portraitUrl: '/images/unkonw-icon.png',
+    headPortraitList: ['',''],//拼团中 参团的头像
 
   },
 

@@ -13,7 +13,7 @@
 
   <!-- 活动状态 -->
   <view class='w-100'>
-    <item-collage wx:if="{{type === 'SPLICED'}}" fleg='content' collageInforData="{{productInfo}}"></item-collage>
+    <item-collage wx:if="{{type === 'SPLICED'}}" fleg='content' collageInforData="{{productInfo}}" resData="{{resData}}" activityOrderId="{{activityOrderId}}" activityId="{{activityId}}"></item-collage>
     <kanjia wx:if="{{type === 'BARGAIN'}}" product-info="{{productInfo}}" activity-order-id="{{activityOrderId}}" activity-id="{{activityId}}" res-data="{{resData}}" btn="{{false}}"></kanjia>
   </view>
 
@@ -157,7 +157,7 @@
         <view class="home">分享</view>
     </button>
     <view style='width: 470rpx; height: 90rpx;'>
-      <item-collage wx:if="{{type === 'SPLICED'}}" fleg='' collageInforData="{{productInfo}}"></item-collage>
+      <item-collage wx:if="{{type === 'SPLICED'}}" fleg='' collageInforData="{{productInfo}}" resData="{{resData}}" activityOrderId="{{activityOrderId}}" activityId="{{activityId}}"></item-collage>
       <kanjia wx:if="{{type === 'BARGAIN'}}"  product-info="{{productInfo}}" activity-order-id="{{activityOrderId}}" activity-id="{{activityId}}" res-data="{{resData}}" btn="{{true}}"></kanjia>
     </view>
   </view>

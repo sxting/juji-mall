@@ -52,10 +52,10 @@
               <view class="jcInner ub ub-ac">
                 <image src="../../images/group.png" class="jcImg"></image>
                 <view class="jcRight">
-                    <view class="jcName">德川家吃喝玩乐福利群</view>
+                    <view class="jcName">{{welfareGroup.title}}</view>
                     <view class="jcHongBaoWrap ub ub-ac">
                       <image src="../../images/hongbao.png" class="jcHongBao"></image>
-                      <view class="jcHongBaoText">恭喜发财，大吉大利</view>
+                      <view class="jcHongBaoText">{{welfareGroup.info}}</view>
                     </view>
                 </view>
               </view>
@@ -196,7 +196,7 @@
     </view>
 
     <!-- 成为桔长推广商品获得返利 -->
-    <view class="ub ub-ac ub-pc" style="width: 100%;padding-top: 10rpx;padding-bottom: 30rpx;background:#fff;margin-top:20rpx;">
+    <view wx:if="{{distributorRole=='MEMBER'}}" class="ub ub-ac ub-pc" style="width: 100%;padding-top: 10rpx;padding-bottom: 30rpx;background:#fff;margin-top:20rpx;">
       <image src="https://upic.juniuo.com/file/picture/26TLh7P53Nip/resize_0_0/mode_fill" style="width:693rpx;height:175rpx;" bindtap="openJztgModal"></image>
     </view>
 
@@ -325,7 +325,7 @@
       <view class="jcModal">
       <image src="https://upic.juniuo.com/file/picture/26TNbptnW_Qp/resize_0_0/mode_fill" style="width:100%;height: 236rpx;border-top-left-radius: 20rpx;border-top-right-radius: 20rpx;"></image>
       <view class="jcModalText" style="margin-top:57rpx;">点击下方“去回复”按钮，并发送</view>
-      <view class="jcModalText" style="margin-top:6rpx;">数字“111”邀请你进群</view>
+      <view class="jcModalText" style="margin-top:6rpx;">数字“{{welfareGroup.code}}”邀请你进群</view>
       <view class="jcModalBtnWrap"><button class="jcModalBtn" open-type='contact' session-from='weapp'>去回复</button></view>
       
       <image src="../../images/newerGetClose.png" class="jcModalClose" bindtap="closeJcModal"></image>
@@ -383,7 +383,7 @@
         </view>
       </view>
       
-      <view class="jztgModalBtnWrap"><button class="jztgModalBtn">立即邀请好友</button></view>
+      <view class="jztgModalBtnWrap"><button class="jztgModalBtn" bindtap="openJztgShare">立即邀请好友</button></view>
       
       <image src="../../images/newerGetClose.png" class="jztgModalClose" bindtap="closeJztgModal"></image>
       </view>

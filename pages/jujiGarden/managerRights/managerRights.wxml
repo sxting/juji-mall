@@ -1,6 +1,5 @@
-<!--pages/jujiGarden/managerRights/managerRights.wxml-->
 <view class='page'>
-  <image src='/images/manager-bg.png'></image>
+  <!-- <image src='/images/manager-bg.png'></image> -->
   <view class='title title-1'>
     <text>桔长自购省钱</text>
     <text>桔长购买商品可返利高达40%，购物省钱</text>

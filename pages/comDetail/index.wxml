@@ -47,7 +47,7 @@
 
 
             <!-- 加入群聊 -->
-            <view class="joinClubWrap" wx:if="{{showJoinClub}}">
+            <view class="joinClubWrap" wx:if="{{showJoinClub}}" bindtap="showJcModal">
               <view class="jcTitle">戳一下进入福利群</view>
               <view class="jcInner ub ub-ac">
                 <image src="../../images/group.png" class="jcImg"></image>
@@ -60,7 +60,7 @@
                 </view>
               </view>
               
-              <button class="jcBtn" bindtap="showJcModal">戳一下</button>
+              <button class="jcBtn">戳一下</button>
             </view>
         </view>
     </view>

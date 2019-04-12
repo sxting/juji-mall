@@ -8,7 +8,8 @@ Page({
       tablist: [{ name: '已邀桔长', status: 'LEADER' }, { name: '已邀桔民', status: 'MEMBER' }],
       curTabIndex: 0,
       constant: constant,
-      isShowTips: true,//显示最上面的tips
+      isShowTips1: true,//显示最上面的tips
+      isShowTips2: true,
       userlistInfor: [],
       role: 'LEADER',
       pageNo: 1,
@@ -41,9 +42,14 @@ Page({
     },
 
     // 关闭tips
-    closeTips(){
+    closeTips1(){
       this.setData({
-        isShowTips: !this.data.isShowTips
+        isShowTips1: false
+      })
+    },
+    closeTips2(){
+      this.setData({
+        isShowTips2: false
       })
     },
 

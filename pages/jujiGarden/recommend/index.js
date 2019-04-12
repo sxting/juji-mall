@@ -289,6 +289,16 @@ Page({
                 console.log(res);
             }
         });
+        if(type==1){
+            var desc = e.currentTarget.dataset.desc;
+            wx.setClipboardData({
+                data: desc,
+                success: (res) => {
+                    wx.hideLoading();
+                }
+            });
+
+        }
     },
     saveAsPhoto: function(imgUrl,e,type) {
         wx.saveImageToPhotosAlbum({
@@ -325,13 +335,7 @@ Page({
                         success: (res) => {
                             imgIndex++;
                             if (imgIndex == imageIds.length) {
-                                wx.setClipboardData({
-                                    data: desc,
-                                    success: (res) => {
-                                        wx.hideLoading();
-                                        this.showToast("图片已下载到微信相册，文案已复制到剪贴板")
-                                    }
-                                });
+                                this.showToast("图片已下载到微信相册，文案已复制到剪贴板")
                             }
                         },
                         fail: (res) => {

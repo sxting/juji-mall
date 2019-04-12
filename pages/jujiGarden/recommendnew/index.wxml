@@ -13,7 +13,7 @@
         </view>
         <view class="ctrl ub ub-ac plr15">
             <view class="ub-f1 ub ub-ac"></view>
-            <view class="ctrlbtn ub ub-ac" catchtap='saveImages' data-imgs="{{info.imageIds}}" data-desc="{{descrtion}}">
+            <view class="ctrlbtn ub ub-ac" catchtap='saveMatrial' data-imgs="{{info.imageIds}}" data-desc="{{descrtion}}">
                 <image class="wxIcon" src="../../../images/icon_02.png" mode="aspectFit"></image>
                 保存素材
             </view>
@@ -23,7 +23,21 @@
             </view>
         </view>
     </view>
-    <view class="modal1 ub ub-ver" hidden="{{isShowModal}}">
+    <view class="modal1 ub ub-ver" style="left:100%">
+        <view class="div ub-f1 ub ub-ac ub-pc">
+            <view class="canvas">
+                <canvas canvas-id="myCanvas1"></canvas>
+            </view>
+        </view>
+    </view>
+    <view class="modal1 ub ub-ver" style="left:-100%">
+        <view class="div ub-f1 ub ub-ac ub-pc">
+            <view class="canvas">
+                <canvas canvas-id="myCanvas2"></canvas>
+            </view>
+        </view>
+    </view>
+    <view class="modal1 ub ub-ver {{isShowModal?'uhide':''}} {{isTransparnet?'transparent':''}}">
         <view class="div ub-f1 ub ub-ac ub-pc">
             <view style="width:100%;height:100%;background-color:rgba(0,0,0,0.3);position:absolute;z-index:1;top: 0;left: 0" bindtap="closeModal"></view>
             <view class="canvas">
@@ -34,7 +48,7 @@
             <button class="ub-f1 ub ub-ac ub-pc left ub-ver" open-type="share">
                 <image class="share udb" src="../../../images/share_friend.png" style="width:117rpx;height:118rpx"></image>
             </button>
-            <button class="ub-f1 ub ub-ac ub-pc right ub-ver" bindtap="savePic" data-type="1">
+            <button class="ub-f1 ub ub-ac ub-pc right ub-ver" bindtap="saveCanvasImg">
                 <image class="share udb" src="../../../images/share_save.png" style="width:94rpx;height:118rpx"></image>
             </button>
         </view>

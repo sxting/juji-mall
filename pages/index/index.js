@@ -252,27 +252,69 @@ Page({
     }).then(function(result) {
       console.log('-----查询代理商信息-----');
       console.log(result);
-      if (result == 1) {
-        console.log('根据定位查询代理商信息');
+      return new Promise(function (resolve5, reject5){
+        if (result == 1) {
+          console.log('根据定位查询代理商信息');
 
-        var obj = {
-          latitude: wx.getStorageSync('curLatitude'),
-          longitude: wx.getStorageSync('curLongitude')
-        }
-        //获取服务商信息 并加载首页数据
-        service.getSelectProviderByLoc(obj).subscribe({
-          next: res => {
-            console.log('----------服务商信息---------');
-            console.log(res);
-            if (res.id) { //如果存在服务商
+          var obj = {
+            latitude: wx.getStorageSync('curLatitude'),
+            longitude: wx.getStorageSync('curLongitude')
+          }
+          //获取服务商信息 并加载首页数据
+          service.getSelectProviderByLoc(obj).subscribe({
+            next: res => {
+              console.log('----------服务商信息---------');
+              console.log(res);
+              if (res.id) { //如果存在服务商
+                wx.setStorageSync('providerId', res.id ? res.id : '');
+                that.setData({
+                  providerId: res.id
+                });
+                that.getIndexData();
+                //根据位置查询附近精选
+                var obj1 = {
+                  providerId: that.data.providerId,
+                  type: 'PRODUCT',
+                  sortField: 'IDX',
+                  sortOrder: 'ASC',
+                  pageNo: that.data.pageNo,
+                  pageSize: that.data.pageSize,
+                  longitude: wx.getStorageSync('curLongitude'),
+                  latitude: wx.getStorageSync('curLatitude')
+                };
+                that.getRecommendPage(obj1);
+              } else { //如果不存在服务商 显示当前地区暂未开通
+                // wx.showModal({
+                //   title: '错误',
+                //   content: '当前位置不存在服务商'
+                // });
+                that.setData({
+                  showPageLoading: false
+                });
+              }
+            }
+          });
+        } else if (result == 2) {
+          console.log('不切换定位名称 继续使用用户选择的外地城市');
+          var obj = {
+            provinceCode: that.data.locationPcode,
+            cityCode: that.data.locationCode,
+            areaCode: '',
+          };
+          //选择省市县确认服务商信息
+          service.getSelectHotCity(obj).subscribe({
+            next: res => {
+              console.log('--------选择省市县确认服务商信息---------');
+              console.log(res);
               wx.setStorageSync('providerId', res.id ? res.id : '');
               that.setData({
-                providerId: res.id
+                providerId: res.id,
+                pageNo: 1
               });
+              console.log('--------选择省市县确认服务商信息后重新加载首页数据---------');
               that.getIndexData();
-              //根据位置查询附近精选
-              var obj1 = {
-                providerId: that.data.providerId,
+              var obj = {
+                providerId: res.id,
                 type: 'PRODUCT',
                 sortField: 'IDX',
                 sortOrder: 'ASC',
@@ -281,49 +323,13 @@ Page({
                 longitude: wx.getStorageSync('curLongitude'),
                 latitude: wx.getStorageSync('curLatitude')
               };
-              that.getRecommendPage(obj1);
-            } else { //如果不存在服务商
-              wx.showModal({
-                title: '错误',
-                content: '当前位置不存在服务商'
-              });
-            }
-          }
-        });
-      } else if (result == 2) {
-        console.log('不切换定位名称 继续使用用户选择的外地城市');
-        var obj = {
-          provinceCode: that.data.locationPcode,
-          cityCode: that.data.locationCode,
-          areaCode: '',
-        };
-        //选择省市县确认服务商信息
-        service.getSelectHotCity(obj).subscribe({
-          next: res => {
-            console.log('--------选择省市县确认服务商信息---------');
-            console.log(res);
-            wx.setStorageSync('providerId', res.id ? res.id : '');
-            that.setData({
-              providerId: res.id,
-              pageNo: 1
-            });
-            console.log('--------选择省市县确认服务商信息后重新加载首页数据---------');
-            that.getIndexData();
-            var obj = {
-              providerId: res.id,
-              type: 'PRODUCT',
-              sortField: 'IDX',
-              sortOrder: 'ASC',
-              pageNo: that.data.pageNo,
-              pageSize: that.data.pageSize,
-              longitude: wx.getStorageSync('curLongitude'),
-              latitude: wx.getStorageSync('curLatitude')
-            };
-            that.getRecommendPage(obj);
-          },
-          error: err => console.log(err)
-        });
-      }
+              that.getRecommendPage(obj);
+            },
+            error: err => console.log(err)
+          });
+        }
+      })
+      
 
     }).catch(function(err) {
       console.log(err);
@@ -428,10 +434,15 @@ Page({
                   };
                   that.getRecommendPage(obj);
                 } else { //如果不存在服务商
-                  wx.showToast({
-                    title: '当前位置不存在服务商',
-                    icon: 'none'
-                  })
+                  that.setData({
+                    showPageLoading: false,
+                    providerId: '',
+                    pageNo: 1
+                  });
+                  // wx.showToast({
+                  //   title: '当前位置不存在服务商',
+                  //   icon: 'none'
+                  // })
                 }
               }
             });

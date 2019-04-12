@@ -65,7 +65,7 @@
         </view>
     </view>
     <image style="width:100rpx;height:100rpx;display:none" src="{{userImgUrl}}"></image>
-    <view class="yongkaxuzhi-wrap" style="margin-top:20rpx;">
+    <view class="yongkaxuzhi-wrap" style="margin-top:0;">
         <view class="yongkaxuzhi">
             <view style="font-size: 30rpx;color: #333333;font-weight: bolder;">购买须知</view>
             <view class="xuzhiBorder">

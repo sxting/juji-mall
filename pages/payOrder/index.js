@@ -40,7 +40,7 @@ Page({
         paytype: options.paytype,
         sceneId:options.sceneid,
         activityId: options.activityId,
-        activityOrderId: options.activityOrderId,
+        activityOrderId: options.activityOrderId ? options.activityOrderId : '',
         type: options.type
       });
       this.getItemInfo();
@@ -664,9 +664,12 @@ Page({
         // bargainPayment
       }
     } else if (that.data.paytype == 6) {
-      let data = {
-        activityOrderId: that.data.activityOrderId
-      };
+      let data = {};
+      if (that.data.activityOrderId) {
+        data = {
+          activityOrderId: that.data.activityOrderId
+        }
+      }
       service.bargainPayment(data).subscribe({
         next: res => {
           console.log(res);

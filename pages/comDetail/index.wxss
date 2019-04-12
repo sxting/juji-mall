@@ -747,6 +747,7 @@ page {
 .jcTitle {
   font-size: 30rpx;
   color: #333;
+  font-weight: bold;
 }
 
 .jcName {
@@ -807,12 +808,12 @@ page {
 }
 
 .jcModalClose {
-  width: 36rpx;
-  height: 36rpx;
+  width: 50rpx;
+  height: 50rpx;
   position: absolute;
   bottom: -84rpx;
   left: 50%;
-  margin-left: -18rpx;
+  margin-left: -25rpx;
   z-index: 999999999;
 }
 
@@ -885,7 +886,7 @@ page {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 30rpx;
+  margin-top: 16rpx;
 }
 
 .jztgModalBtn {

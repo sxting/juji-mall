@@ -36,6 +36,7 @@ Page({
     activityOrderId: '',
     activityId: '',
     resData: '',
+    aa: 'a'
   },
   onLoad: function (options) {
     if (options.shared) {

@@ -15,10 +15,6 @@ Component({
       type: Object,
       value: {}
     },
-    btn: {
-      type: Boolean,
-      value: false
-    },
     activityOrderId: {
       type: String,
       value: ''
@@ -26,7 +22,7 @@ Component({
     activityId: {
       type: String,
       value: ''
-    }
+    },
   },
 
   data: {
@@ -39,6 +35,7 @@ Component({
     hours: 23,
     minites: 20,
     seconds: 58,
+    aaaa: 1
   },
 
   ready: function () {
@@ -46,6 +43,11 @@ Component({
   },
 
   methods: {
+    click() {
+      this.setData({
+        aaaa: 2
+      })
+    },
     onlyBuy(e) {
       let resData = JSON.stringify(this.data.resData); 
       if (e.currentTarget.dataset.type == '1') {
@@ -161,13 +163,17 @@ function dataFun(res) {
 
   // status: 'init', //未开始 init，砍价中 ing，砍价失败 fail，砍价成功 success
   let status = 'init'
-  switch (res.orderDigest.activityOrderStatus) {
-    case "IN_PROGRESS": status = 'ing';
-      break;
-    case "WAIT_PAY": status = 'success';
-      break;
-    case "FAIL": status = 'fail'
+  if (res.orderDigest) {
+    switch (res.orderDigest.activityOrderStatus) {
+      case "IN_PROGRESS": status = 'ing';
+        break;
+      case "WAIT_PAY": status = 'success';
+        break;
+      case "FAIL": status = 'fail'
+    }
   }
+
+  console.log(status);
 
   /* 倒计时start */
   if (res.orderDigest && res.orderDigest.expirationTime) {
@@ -226,4 +232,6 @@ function dataFun(res) {
     help: res.remainBargainCount == 0 ? true : false,
     self: (!res.orderDigest) || (res.orderDigest && res.orderDigest.isInitiator)
   })
+
+  console.log(this.data.status)
 }

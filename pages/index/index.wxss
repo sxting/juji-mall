@@ -22,6 +22,11 @@
 swiper{display:block;width:100%;height:340rpx;box-sizing:border-box;overflow:hidden;box-shadow:0 5px 5px 0 rgba(229,229,229,0.50);}
 .slide-image{width:100%;height:340rpx;display:block;box-sizing:border-box;border-radius:10rpx;}
 
+.menulist{width:100%;padding-left: 20rpx;padding-right: 20rpx;height: 150rpx;width: 100%;box-sizing:border-box;background-color: #fff}
+.menulist .menuitem{width:170rpx; height: 150rpx;}
+.icon_home{display: block;width: 64rpx;height: 64rpx;}
+.menulist .tx-c{font-size: 28rpx;margin-top: 10rpx;color: #666;}
+
 /* .slide-image {
   width: 100%;
   display: block;
@@ -63,7 +68,7 @@ swiper{display:block;width:100%;height:340rpx;box-sizing:border-box;overflow:hid
 .ex-juzi{display:flex;align-items:center;}
 
 /*************juzi****************/
-.juzihl-wrap{background:#fff;padding:40rpx 30rpx 0 30rpx;}
+.juzihl-wrap{background:#fff;padding:30rpx 30rpx 0 30rpx;}
 .mtitle{font-size:36rpx;color:#333;font-weight:bold;}
 .subtitle{font-size:24rpx;color:#999;margin-left:20rpx;}
 .mRow{display:flex;}

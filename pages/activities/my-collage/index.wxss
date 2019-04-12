@@ -112,7 +112,8 @@ page {
 }
 .jc-sb { justify-content: space-between; }
 .btns {
-  text-align: center
+  text-align: center;
+  margin-top: 40rpx
 }
 .btns text{
   font-family: PingFangSC-Medium;
@@ -133,10 +134,43 @@ page {
   border: 1rpx solid #E83221;
   color: #E83221;
 }
-.head-portrait-box{
+.title-text{
+  text-align: center
+}
+.situation-box{
   text-align: center;
-  width: 100%;
-  height: 100rpx
+}
+.situation-box .text-describe{
+  font-family: PingFangSC-Regular;
+  font-size: 30rpx;
+  color: #333333;
+  letter-spacing: 0;
+  margin-top: 30rpx;
+  margin-bottom: 60rpx;
+  display: block
+}
+.situation-box .text-describe text{
+  color: #E83221;
+}
+.last-time{
+  font-family: PingFangSC-Regular;
+  font-size: 28rpx;
+  color: #333333;
+  margin-bottom: 30rpx
+}
+.last-time text{
+  display: inline-block;
+  background-color: #E83221;
+  border-radius: 10rpx; 
+  width: 44rpx;
+  height: 40rpx;
+  font-family: SFNSDisplay;
+  font-size: 26rpx;
+  color: #FFFFFF;
+  letter-spacing: 0;
+}
+.head-portrait-box{
+  text-align: center
 }
 .head-portrait-box .head-portrait{
   display: inline-block;
@@ -167,4 +201,11 @@ page {
   width: 62rpx;
   left: 0;
   top: 12rpx
+}
+.head-portrait .bg-colonel{
+  position: absolute;
+  bottom: 13rpx;
+  width:64rpx;
+  height:28rpx;
+  left: 20rpx
 }

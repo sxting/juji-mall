@@ -7,6 +7,9 @@ Page({
   data: {
     portraitUrl: '/images/unkonw-icon.png',
     headPortraitList: ['',''],//拼团中 参团的头像
+    restHour: '00',
+    restMinute: '00',
+    restSecond: '00',
 
   },
 

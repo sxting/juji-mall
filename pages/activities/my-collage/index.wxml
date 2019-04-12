@@ -15,40 +15,33 @@
       </view>
       <!-- 拼团详情页面 -->
       <view class='collage-box'>
-        <!-- 拼团失败 -->
         <view class='status-collage'>
           <view class='title-text'>
-            <image src=''></image>
+            <!-- <image src=''></image> -->
             <text>拼团失败/拼团成功</text>
           </view> 
-
-          <view class='head-portrait-box ub-ac'>
-              <view class='head-portrait' wx:for="{{ headPortraitList }}" wx:for-index="index">
-                <image src='{{ portraitUrl }}'></image>
-                <view class='bg-colonel' wx:if="{{index === 0}}">
-                  <image src='/images/colonel-bg.png'></image><text>团长</text>
-                </view>
+          <view class='situation-box'>
+              <view class='last-time'>
+                <text>{{restHour}}</text> : <text>{{restMinute}}</text> : <text>{{restSecond}}</text>
+              </view>
+              <view class='text-describe'>还差<text>1</text>人，赶快邀请好友来拼团吧</view>
+              <view class='head-portrait-box'>
+                  <view class='head-portrait' wx:for="{{ headPortraitList }}" wx:for-index="index">
+                    <image src='{{ portraitUrl }}'></image>
+                    <view class='bg-colonel' wx:if="{{index === 0}}">
+                      <image src='/images/colonel-bg.png'></image><text>团长</text>
+                    </view>
+                  </view>
               </view>
           </view>
-
-          <!-- btn -->
           <view class='btns'>
             <text class='success-btn'>去使用</text>
             <text class='ing-btn'>邀请好友拼团</text>
             <text class='fail-btn'>查看退款</text>
           </view>
         </view>
-
-
-        <!-- 拼团中 -->
-
-
-        <!-- 拼团成功 -->
-      
-        
       </view>
     </view>
-
     <view class="yongkaxuzhi-wrap" style="margin-top:20rpx;">
         <view class="yongkaxuzhi">
             <view style="font-size: 30rpx;color: #333333;font-weight: bolder;">门店信息</view>

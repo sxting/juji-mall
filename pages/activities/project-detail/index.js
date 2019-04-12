@@ -61,7 +61,7 @@ Page({
     //评论列表
   },
   onShareAppMessage(res) {
-    console.log(res);
+    console.log(res + '00');
     // this.share();
     if (res.from === 'button' && res.target.dataset.type === 'share2') {
       // 分享砍价
@@ -74,6 +74,12 @@ Page({
         fail: function (res) {
           console.log(res);
         }
+      }
+    } else if (res.target.dataset.type === 'pintuan'){
+      return {
+        title: '嗨！便宜一起拼￥' + this.data.productInfo.price/100 + '【' + this.data.productInfo.productName +'】',
+        path: '/pages/login/index?pagetype=projectDetail&type=' + this.data.type + '&activityId=' + this.data.activityId + '&activityOrderId=' + this.data.activityOrderId,
+        imageUrl: constant.basePicUrl + this.data.productInfo.picId + '/resize_751_420/mode_fill',
       }
     } else {
       // 分享商品
@@ -157,24 +163,6 @@ Page({
       complete: () => wx.hideToast()
     })
   },
- 
-  // onShareAppMessage: function (res) {
-  //   this.share();
-  //   return {
-  //     title: JSON.parse(wx.getStorageSync('userinfo')).nickName + '分享给您一个心动商品，快来一起体验吧！',
-  //     path: '/pages/login/index?pagetype=projectDetail&type=' + this.data.type + '&activityId=' + this.data.activityId + '&activityOrderId=' + this.data.activityOrderId,
-  //     success: function (res) {
-  //       console.log(res);
-  //       this.setData({
-  //         showAlert1: true,
-  //         showAlert2: false
-  //       });
-  //     },
-  //     fail: function (res) {
-  //       console.log(res);
-  //     }
-  //   }
-  // },
 
   toCommentDetail: function (event) {
     wx.navigateTo({

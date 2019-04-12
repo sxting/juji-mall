@@ -631,23 +631,26 @@ Page({
         service.splicedPayment(data).subscribe({
           next: res => {
             console.log(res);
-            var payInfo = JSON.parse(res1.payInfo);
+            var payInfo = JSON.parse(res.payInfo);
             wx.requestPayment({
               timeStamp: payInfo.timeStamp,
               nonceStr: payInfo.nonceStr,
               package: payInfo.package,
               signType: payInfo.signType,
               paySign: payInfo.paySign,
-              success(res2) {
+              success(res) {
                 
               },
-              fail(res2) {
-                if (res2.errMsg == 'requestPayment:fail cancel') {
+              fail(res) {
+                if (res.errMsg == 'requestPayment:fail cancel') {
                   wx.showToast({
                     title: '用户取消支付',
                     icon: 'none'
                   });
-                  
+                  that.toMyOrder();
+                  that.setData({
+                    alreadyPay: false
+                  });
                 }
               }
             });

@@ -54,8 +54,6 @@ Component({
     restHour: '00',
     restMinute: '00',
     restSecond: '00',
-
-
   },
 
   ready: function () {
@@ -63,27 +61,6 @@ Component({
     console.log(this.data.activityOrderId);
     console.log(this.data.activityId);
     let self = this;
-
-    // {
-    //   activityId(string, optional): 活动id,
-    //     activityOrderId(string, optional): 活动订单id,
-    //       activityOrderStatus(string, optional): 活动订单状态 = ['IN_PROGRESS', 'WAIT_PAY', 'SUCCESS', 'FAIL']stringEnum: "IN_PROGRESS", "WAIT_PAY", "SUCCESS", "FAIL",
-    //         activityPrice(integer, optional): 活动价格,
-    //           activityType(string, optional): 活动类型 = ['BARGAIN', 'SEC_KILL', 'SPLICED']stringEnum: "BARGAIN", "SEC_KILL", "SPLICED",
-    //             allowParticipate(boolean, optional): 是否允许参与,
-    //               cover(string, optional): 首图,
-    //                 expirationTime(string, optional): 过期时间,
-    //                   initiationTime(string, optional): 发起时间,
-    //                     isInitiator(integer, optional): 是否为发起者,
-    //                       originalPrice(integer, optional): 商品原价,
-    //                         participantQuantity(integer, optional): 参与数量,
-    //                           participateCount(integer, optional): 参与数量,
-    //                             productId(string, optional): 商品id,
-    //                               productName(string, optional): 商品名称,
-    //                                 progresses(Array[活动进度详情], optional): 活动进度详情,
-    //                                   rules(Array[ActivityRuleDetail], optional): 活动规则,
-    //                                     stock(integer, optional): 商品库存
-    // }
 
     // 是否有其他参团者的活动
     if (this.data.resData.otherDigests){
@@ -107,11 +84,7 @@ Component({
 
     /** 拼团数据 **/
     let countDownTime = '';
-    let haha = "2019-04-11 16:33:57";//模拟假的
-
-    // let expireTime = this.data.resData.orderDigest && this.data.resData.orderDigest != null ? this.data.resData.orderDigest.expirationTime.replace(/-/g, '/') : '';
-    let expireTime = haha.replace(/-/g, '/');//模拟假的
-
+    let expireTime = this.data.resData.orderDigest && this.data.resData.orderDigest != null ? this.data.resData.orderDigest.expirationTime.replace(/-/g, '/') : '';
     if (expireTime){
       let time = new Date(expireTime).getTime() - new Date().getTime();
       console.log(time);
@@ -125,7 +98,6 @@ Component({
           (minutes.toString().length < 2 ? '0' + minutes : minutes) + ':' +
           (seconds.toString().length < 2 ? '0' + seconds : seconds);
       }
-      console.log(countDownTime);
       this.setData({
         restHour: countDownTime.substring(0, 2),
         restMinute: countDownTime.substring(3, 5),

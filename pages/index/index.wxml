@@ -3,7 +3,7 @@
   <image src="../../images/pageLoading.gif" class="pageLoadingImg"></image>
   <view class="pageLoadingTip" style="color:#666666;font-size: 30rpx;">桔美好生活，集好店优惠</view>
 </view>
-<view class="{{(slideShowList.length>0||pointProductList.length>0||recommendPage.length>0)?'':'homeTabPage'}} {{isShowNewerGet?'noscroll':''}}" wx:else>
+<view class="{{(slideShowList.length>0||recommendPage.length>0)?'':'homeTabPage'}} {{isShowNewerGet?'noscroll':''}}" wx:else>
 
   <view wx:if="{{slideShowList.length>0||pointProductList.length>0||recommendPage.length>0}}">
     <view class="toperWrap {{pointProductList.length>0?'pb30':''}}">
@@ -23,76 +23,23 @@
       </view>
     </view>
 
-    <view style="background:#fff;padding:10rpx 30rpx 40rpx 30rpx;" wx:if="{{pointProductList.length>0}}">
-      <!-- <view class="mtitle">桔子换礼</view> -->
-      <view class="ub ub-fe jc-sb">
-        <view class="ub ub-fe">
-          <view class="mtitle">桔子换礼</view>
-          <view class="subtitle">让生活“换”然一新</view>
-        </view>
-        <view class="moreWrap" wx:if="{{locationName&&pointProductList.length>0}}" bindtap="toJuzihl">
-          <view class="more">更多</view>
-          <image src="../../images/arrow-right.png" style="width:10rpx;height:18rpx;"></image>
-        </view>
+    <view class="menulist ub ub-ac ub-pj">
+      <view class="menuitem ub ub-ver ub-ac ub-pc" bindtap="toPath" data-page="/pages/juzihl/index">
+        <image class="icon_home" src="../../images/icon_home1.png"></image>
+        <view class="tx-c">桔子换礼</view>
       </view>
-      <view class="pubu">
-        <view class="pubuItem">
-          <view class="cardWrap padr10">
-            <view class="card" wx:for="{{pointProductList}}" wx:key="unique" bindtap="toComDetail" data-id="{{item.productId}}" data-storeid="{{item.nearStore.id}}" wx:if="{{index%2 == 0}}">
-              <image src="https://upic.juniuo.com/file/picture/{{item.picId}}/resize_0_0/mode_fill" lazy-load="true" mode="widthFix" class="plimg">
-
-              <!-- 已售罄标识 -->
-              <view class="ysqMark" wx:if="{{!item.stock}}">
-                <image src="../../images/ysq.png"></image>
-              </view>
-
-              </image>
-
-              <view class="pubuname">{{item.productName}}</view>
-              <view class="pububox">
-                <view class="ex-juzi">
-                  <view style="font-size: 28rpx;color: #E83221;font-weight:bold;" wx:if="{{item.point>0}}">{{item.point}}</view>
-                  <view style="font-size: 22rpx;color: #E83221;font-weight:bold;" wx:if="{{item.point>0}}">桔子</view>
-                  <view style="font-size: 22rpx;color: #E83221;font-weight:bold;" wx:if="{{item.point>0&&item.price>0}}">+</view>
-                  <view style="font-size: 28rpx;color: #E83221;font-weight:bold;" wx:if="{{item.price>0}}">{{filter.toFix(item.price)}}</view>
-                  <view style="font-size: 22rpx;color: #E83221;font-weight:bold;" wx:if="{{item.price>0}}">元</view>
-                </view>
-                <!-- <view class="old-price">{{filter.toFix(item.originalPrice)}}元</view> -->
-                <view class="ub ub-ac count"><image src="../../images/soldCount.png" style="width:24rpx;height: 22rpx;margin-right:10rpx;"></image>{{item.soldNum}}件</view>
-              </view>
-            </view>
-          </view>
-        </view>
-
-        <view class="pubuItem">
-          <view class="cardWrap padl10">
-            <view class="card" wx:for="{{pointProductList}}" wx:key="unique" bindtap="toComDetail" data-id="{{item.productId}}" data-storeid="{{item.nearStore.id}}" wx:if="{{index%2!=0}}">
-              <image src="https://upic.juniuo.com/file/picture/{{item.picId}}/resize_0_0/mode_fill" lazy-load="true" mode="widthFix" class="plimg">
-              
-              <!-- 已售罄标识 -->
-              <view class="ysqMark" wx:if="{{!item.stock}}">
-                <image src="../../images/ysq.png"></image>
-              </view>
-              
-              </image>
-              
-              <view class="pubuname">{{item.productName}}</view>
-              <view class="pububox">
-                <view class="ex-juzi">
-                  <view style="font-size: 28rpx;color: #E83221;font-weight:bold;" wx:if="{{item.point>0}}">{{item.point}}</view>
-                  <view style="font-size: 22rpx;color: #E83221;font-weight:bold;" wx:if="{{item.point>0}}">桔子</view>
-                  <view style="font-size: 22rpx;color: #E83221;font-weight:bold;" wx:if="{{item.point>0&&item.price>0}}">+</view>
-                  <view style="font-size: 28rpx;color: #E83221;font-weight:bold;" wx:if="{{item.price>0}}">{{filter.toFix(item.price)}}</view>
-                  <view style="font-size: 22rpx;color: #E83221;font-weight:bold;" wx:if="{{item.price>0}}">元</view>
-                </view>
-                <!-- <view class="old-price">{{filter.toFix(item.originalPrice)}}元</view> -->
-                <view class="ub ub-ac count"><image src="../../images/soldCount.png" style="width:24rpx;height: 22rpx;margin-right:10rpx;"></image>{{item.soldNum}}件</view>
-              </view>
-            </view>
-          </view>
-        </view>
-
+      <view class="menuitem ub ub-ver ub-ac ub-pc" bindtap="toPath" data-page="/pages/activities/project-list/index?sceneType=SPLICED">
+        <image class="icon_home" src="../../images/icon_home2.png"></image>
+        <view class="tx-c">特价拼团</view>
       </view>
+      <view class="menuitem ub ub-ver ub-ac ub-pc" bindtap="toPath" data-page="/pages/activities/project-list/index?sceneType=BARGAIN">
+        <image class="icon_home" src="../../images/icon_home3.png"></image>
+        <view class="tx-c">超值砍价</view>
+      </view>
+      <!-- <view class="menuitem ub ub-ver ub-ac ub-pc" bindtap="toPath" data-page="/pages/juzihl/index">
+        <image class="icon_home" src="../../images/icon_home4.png"></image>
+        <view class="tx-c">限时秒杀</view>
+      </view> -->
     </view>
 
     <!-- 桔子球 -->
@@ -105,7 +52,7 @@
       </view>
     </view>
 
-    <view class="juzihl-wrap" style="{{pointProductList.length>0?'margin-top:20rpx;':''}}padding-bottom:30rpx">
+    <view class="juzihl-wrap" style="padding-bottom:30rpx">
       <view class="ub ub-fe">
         <view class="mtitle">精选推荐</view>
         <view class="subtitle" style="margin-top:10rpx;">精选好物，先到先得</view>

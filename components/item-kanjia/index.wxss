@@ -14,6 +14,12 @@
 .ub-f4{-webkit-flex:4;flex:4;}
 .fl {float: left}
 .fr {float: right}
+.btn-box {
+  position: fixed;
+  bottom: 15rpx;
+  right: 30rpx;
+  z-index:100;
+}
 
 .kanjia-container {
   font-family: PingFangSC-Regular;

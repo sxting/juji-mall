@@ -24,3 +24,22 @@ page{box-sizing:border-box;height:100%;background-color:#f5f5f5}
   text-decoration:line-through;
   margin-left: 25rpx
 }
+.ty6 {
+  background: #E83221;
+  color: #fff;
+}
+.kanjia-price {
+  padding: 0 30rpx;
+  background-color: #fff;
+}
+.kjp-item {
+  border-bottom: 1px solid #EEEEEE;
+  font-size: 28rpx;
+  color: #333333;
+  height: 120rpx;
+  line-height: 120rpx;
+}
+.kjp-item text:last-child {
+  float: right;
+  font-family: "PingFangSC-Medium";
+}

@@ -37,6 +37,10 @@ Page({
     isFirstShow: true,
     isLoadedBalance: true
   },
+  toPath: function(e) {
+      var targetUrl = e.currentTarget.dataset['page'];
+      wx.navigateTo({ url: targetUrl })
+  },
   onLoad: function(options) {
     console.log(options);
     wx.setNavigationBarTitle({
@@ -691,12 +695,6 @@ Page({
     wx.switchTab({
       url: '../juzi/index',
     })
-  },
-  //点击更多 跳转到桔子换礼列表页
-  toJuzihl: function() {
-    wx.navigateTo({
-      url: '../juzihl/index'
-    });
   },
   //跳转选择城市
   toCityList: function() {

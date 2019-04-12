@@ -41,7 +41,7 @@
     </view>
   </view>
 
-  <view class='kanjia-price'>
+  <view class='kanjia-price' wx:if="{{paytype==6}}">
     <view class='kjp-item'>
       <text>原价</text>
       <text>{{filter.toFix(productInfo.originalPrice)}}元</text>

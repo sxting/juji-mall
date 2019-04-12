@@ -8,7 +8,6 @@
               <view class="goodTit">【德川家】超值寿司拼盘14粒只需49元一份</view>
               <view class="collage-num">2人团</view>
               <view class="goodAmount">
-                  <!-- <text>{{format.toFix(100)}}元</text> -->
                   <text>10.00元</text><text class='origin'>88.00元</text>
               </view>
           </view>
@@ -18,9 +17,9 @@
         <view class='status-collage'>
           <view class='title-text'>
             <!-- <image src=''></image> -->
-            <text>拼团失败/拼团成功</text>
+            <text wx:if="{{(activityStatus == 'SUCCESS')||(activityStatus == 'FAIL')}}">{{activityStatus == 'SUCCESS'? '拼团成功':'拼团失败'}}</text>
           </view> 
-          <view class='situation-box'>
+          <view class='situation-box' wx:if="{{activityStatus == 'IN_PROGRESS'}}">
               <view class='last-time'>
                 <text>{{restHour}}</text> : <text>{{restMinute}}</text> : <text>{{restSecond}}</text>
               </view>
@@ -35,9 +34,9 @@
               </view>
           </view>
           <view class='btns'>
-            <text class='success-btn'>去使用</text>
-            <text class='ing-btn'>邀请好友拼团</text>
-            <text class='fail-btn'>查看退款</text>
+            <text class='success-btn' wx:if="{{activityStatus == 'SUCCESS'}}" bindtap='switchToOrderDetailPage'>去使用</text>
+            <button class="ing-btn" open-type="share"  data-type="pintuan" wx:if="{{activityStatus == 'IN_PROGRESS'}}" >邀请好友拼团</button>
+            <text class='fail-btn' wx:if="{{activityStatus == 'FAIL'}}"  bindtap='switchToOrderDetailPage'>查看退款</text>
           </view>
         </view>
       </view>

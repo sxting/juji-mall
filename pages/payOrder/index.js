@@ -673,7 +673,7 @@ Page({
       service.bargainPayment(data).subscribe({
         next: res => {
           console.log(res);
-          var payInfo = JSON.parse(res1.payInfo);
+          var payInfo = JSON.parse(res.payInfo);
           wx.requestPayment({
             timeStamp: payInfo.timeStamp,
             nonceStr: payInfo.nonceStr,
@@ -681,7 +681,9 @@ Page({
             signType: payInfo.signType,
             paySign: payInfo.paySign,
             success(res2) {
-
+              wx.redirectTo({
+                url: '/pages/orderDetail/index?id=' + res.orderId,
+              });
             },
             fail(res2) {
               if (res2.errMsg == 'requestPayment:fail cancel') {

@@ -34,9 +34,9 @@ Page({
                 openId: options.openid,
                 switchFun: true
             })
-           this.getUserInfor();
+            this.getUserInfor();
         } else {
-          this.getUserInfor(); //用户信息，是否绑定手机号码
+            this.getUserInfor(); //用户信息，是否绑定手机号码
         }
     },
     onShow: function() {
@@ -64,20 +64,19 @@ Page({
         }
     },
 
-    /**   跳转页面  */
+    /**   跳转页面  ***/
     toPage: function(e) {
         let role = e.currentTarget.dataset.role ? e.currentTarget.dataset.role : '';
         let page = role ? e.currentTarget.dataset.page + '?role=' + role : e.currentTarget.dataset.page;
         wx.navigateTo({ url: page });
     },
 
-    /*** 用户点击右上角分享  ***/
+    /*** 用户分享  ***/
     onShareAppMessage: function() {
-        let self = this;
         return {
             title: JSON.parse(wx.getStorageSync('userinfo')).nickName + '邀请您桔园结义成为桔长，购物返利最高可享40%商品返利',
-          path: 'pages/login/index?pagetype=5&openid=' + wx.getStorageSync('openid') + '&invitecode='+  wx.getStorageSync('inviteCode'),
-            imageUrl: '/images/banner-invent.png',
+            path: 'pages/login/index?pagetype=2&openid=' + wx.getStorageSync('openid') + '&invitecode=' + wx.getStorageSync('inviteCode'),
+            imageUrl: '/images/banner-invent.png'
         }
     },
 

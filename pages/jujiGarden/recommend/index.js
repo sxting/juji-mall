@@ -206,7 +206,7 @@ Page({
         }
     },
     //参数依次是storeName,desc,现价,原价,门店数
-    drawImage: function(merchant, name, desc, price1, price2, storeLen,e,type) {
+    drawImage: function(merchant, name, desc, price1, price2, storeLen, e, type) {
         var size = { w: 260, h: 424 };
         var context = wx.createCanvasContext('myCanvas');
         context.drawImage(this.data.shareBg, 0, 0, size.w, size.h);
@@ -251,11 +251,12 @@ Page({
         }
         context.draw(false, () => {
             console.log("绘图结束");
-            wx.hideLoading();
             if(type==1){
                 setTimeout(()=>{
                     this.savePic(e,type);
                 },100)
+            }else{
+                wx.hideLoading();
             }
         });
     },
@@ -294,10 +295,9 @@ Page({
             filePath: imgUrl,
             success: (res) => {
                 this.closeModal();
-                wx.showToast({
-                    title: "已保存至相册",
-                    icon: "success"
-                });
+                if(type!=1){
+                    wx.showToast({title: "已保存至相册",icon: "success"});
+                }
             },
             fail: function(res) {
                 console.log(res);
@@ -311,15 +311,9 @@ Page({
     saveImages: function(e) {
         var imageIds = e.currentTarget.dataset.imgs;
         var desc = e.currentTarget.dataset.desc;
-        this.saveFile(imageIds);
-        wx.setClipboardData({
-            data: desc,
-            success: (res) => {
-
-            }
-        });
+        this.saveFile(imageIds,desc);
     },
-    saveFile: function(imageIds) {
+    saveFile: function(imageIds,desc) {
         var imgIndex = 0;
         for (var i = 0; i < imageIds.length; i++) {
             var imgId = imageIds[i];
@@ -331,7 +325,13 @@ Page({
                         success: (res) => {
                             imgIndex++;
                             if (imgIndex == imageIds.length) {
-                                this.showToast("图片已下载到微信相册，文案已复制到剪贴板")
+                                wx.setClipboardData({
+                                    data: desc,
+                                    success: (res) => {
+                                        wx.hideLoading();
+                                        this.showToast("图片已下载到微信相册，文案已复制到剪贴板")
+                                    }
+                                });
                             }
                         },
                         fail: (res) => {

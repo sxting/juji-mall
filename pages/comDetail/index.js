@@ -68,9 +68,13 @@ Page({
     this.showShare();
   },
   openJztgModal: function(){
-    this.setData({
-      showJztgModal: true
-    })
+    if(this.data.distributorRole=='MEMBER'){
+      this.setData({
+        showJztgModal: true
+      });
+    }else{
+      this.showShare();
+    }
   },
   closeJztgModal: function(){
     this.setData({

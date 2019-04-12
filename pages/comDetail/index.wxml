@@ -108,7 +108,7 @@
             </view>
         </view>
     </view>
-    <view class="yongkaxuzhi-wrap" style="margin-top:20rpx;">
+    <view class="yongkaxuzhi-wrap" style="margin-top:20rpx;" wx:if="{{commentCount>0}}">
         <view class="yongkaxuzhi row jc-sb">
             <view style="font-size: 30rpx;color: #333333;font-weight: bolder;">走心评价({{commentCount}})</view>
             <view class="row" bindtap="toCommentList" wx:if="{{commentCount>2}}">
@@ -196,11 +196,11 @@
     </view>
 
     <!-- 成为桔长推广商品获得返利 -->
-    <view wx:if="{{distributorRole=='MEMBER'}}" class="ub ub-ac ub-pc" style="width: 100%;padding-top: 10rpx;padding-bottom: 30rpx;background:#fff;margin-top:20rpx;">
+    <view class="ub ub-ac ub-pc" style="width: 100%;padding-top: 10rpx;padding-bottom: 30rpx;background:#fff;margin-top:20rpx;">
       <image src="https://upic.juniuo.com/file/picture/26TLh7P53Nip/resize_0_0/mode_fill" style="width:693rpx;height:175rpx;" bindtap="openJztgModal"></image>
     </view>
 
-    <view class="phoneWrap">
+    <!-- <view class="phoneWrap">
         <view class="phoneView ub ub-ac" bindtap="callPhone">
             <image src="../../images/logo_main.png" style="width:80rpx;height:80rpx;"></image>
             <view class="phoneInner">
@@ -210,7 +210,7 @@
                 </view>
             </view>
         </view>
-    </view>
+    </view> -->
     <view class="footer">
         <view class="homeWrap" bindtap="gohomepage">
             <image src="../../images/shouye.png" style="width:40rpx;height:40rpx;"></image>

@@ -40,13 +40,14 @@ Page({
         if (res.from === 'button') {
             this.closeModal();
             return {
-                title: JSON.parse(wx.getStorageSync('userinfo')).nickName + '邀请您桔园结义成为桔长，购物返利最高可享40%商品返利',
+                title: '我在桔集免费吃喝玩乐还能赚钱，邀你组队一起赚钱！',
                 path: '/pages/login/index?pagetype=2&openid=' + wx.getStorageSync('openid') + '&invitecode='+wx.getStorageSync('inviteCode'),
                 imageUrl: '/images/banner-invent.png',
             }
         }
     },
     createShare: function() {
+        this.closeModal();
         wx.showLoading({title: '生成分享图片'});
         service.getQrCode({ productId: 'invitenew', path: 'pages/login/index' }).subscribe({
             next: res => {
@@ -73,7 +74,7 @@ Page({
     },
     drawImage: function(imgBg) {
         var size = { w: 250, h: 445 };
-        var context = wx.createCanvasContext('myCanvas');
+        var context = wx.createCanvasContext('myCanvas0');
         context.drawImage(imgBg, 0, 0, size.w, size.h);
         context.drawImage(this.data.erwmImg, 96, 255, 60, 60);
         this.setData({ isShowModal: false });
@@ -141,7 +142,7 @@ Page({
                 if (res.statusCode === 200) {
                     console.log("下载完第"+(index+1)+"个背景");
                     var size = { w: 250, h: 445 };
-                    var context = wx.createCanvasContext('myCanvas');
+                    var context = wx.createCanvasContext('myCanvas'+index);
                     context.drawImage(res.tempFilePath, 0, 0, size.w, size.h);
                     if(index==0){
                         context.drawImage(this.data.erwmImg, 96, 300, 60, 60);
@@ -154,30 +155,34 @@ Page({
                     }
                     this.setData({ isTransparnet: true });
                     context.draw(false,()=>{
-                        wx.canvasToTempFilePath({
-                            canvasId: 'myCanvas',
-                            success: (res)=> {
-                                wx.saveImageToPhotosAlbum({
-                                    filePath: res.tempFilePath,
-                                    success: (res) => {
-                                        this.closeModal();
-                                        if(index==2){
-                                            wx.hideLoading();
-                                            this.showToast("图片已下载到微信相册，文案已复制到剪贴板");
-                                            return;
+                        setTimeout(()=>{
+                            wx.canvasToTempFilePath({
+                                canvasId: 'myCanvas'+index,
+                                success: (res)=> {
+                                    wx.saveImageToPhotosAlbum({
+                                        filePath: res.tempFilePath,
+                                        success: (res) => {
+                                            this.closeModal();
+                                            if(index==2){
+                                                wx.hideLoading();
+                                                this.showToast("图片已下载到微信相册，文案已复制到剪贴板");
+                                                return;
+                                            }
+                                            var next = index+1;
+                                            this.downloadFile(next);
+                                        },
+                                        fail: function(res) {
+                                            console.log("保存失败")
+                                            console.log(res);
                                         }
-                                        var next = index+1;
-                                        this.downloadFile(next);
-                                    },
-                                    fail: function(res) {
-                                        console.log(res);
-                                    }
-                                })
-                            },
-                            fail: function(res) {
-                                console.log(res);
-                            }
-                        });
+                                    })
+                                },
+                                fail: function(res) {
+                                    console.log("canvas转化成路径失败");
+                                    console.log(res);
+                                }
+                            });
+                        },200);
                     });
                 } else {
                     wx.hideLoading();
@@ -207,7 +212,7 @@ Page({
     },
     savePic: function() {
         wx.canvasToTempFilePath({
-            canvasId: 'myCanvas',
+            canvasId: 'myCanvas0',
             success: (res) => {
                 wx.saveImageToPhotosAlbum({
                     filePath: res.tempFilePath,

@@ -74,7 +74,7 @@ Page({
     /*** 用户分享  ***/
     onShareAppMessage: function() {
         return {
-            title: JSON.parse(wx.getStorageSync('userinfo')).nickName + '邀请您桔园结义成为桔长，购物返利最高可享40%商品返利',
+            title: '我在桔集免费吃喝玩乐还能赚钱，邀你组队一起赚钱！',
             path: 'pages/login/index?pagetype=2&openid=' + wx.getStorageSync('openid') + '&invitecode=' + wx.getStorageSync('inviteCode'),
             imageUrl: '/images/banner-invent.png'
         }

@@ -104,7 +104,7 @@ Page({
       if(this.data.pageType==1){
         wx.reLaunch({url: '/pages/comDetail/index?id=' + this.data.pageData.pid + '&storeid=' + this.data.pageData.storeid});
       }
-      if(this.data.pageType==2){
+      if(this.data.pageType==2||this.data.pageType==5){
         wx.reLaunch({url: '/pages/jujiGarden/gardenIndex/index?openid=' + this.data.pageData.openid});
       }
       if(this.data.pageType==3){

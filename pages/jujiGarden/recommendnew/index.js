@@ -110,7 +110,7 @@ Page({
         });
     },
     saveImages: function(e) {
-        wx.showLoading({title: '正在保存图片'});
+        wx.showToast({title: '正在保存图片',icon: 'loading',duration: 30000});
         service.getQrCode({ productId: 'invitenew', path: 'pages/login/index' }).subscribe({
             next: res => {
                 var picId = res;
@@ -128,9 +128,9 @@ Page({
             },
             error: err => {
                 errDialog(err);
-                wx.hideLoading();
+                wx.hideToast();
             },
-            complete: () => wx.hideToast()
+            complete: () => {}
         });
 
     },
@@ -164,7 +164,7 @@ Page({
                                         success: (res) => {
                                             this.closeModal();
                                             if(index==2){
-                                                wx.hideLoading();
+                                                wx.hideToast();
                                                 this.showToast("图片已下载到微信相册，文案已复制到剪贴板");
                                                 return;
                                             }
@@ -185,7 +185,7 @@ Page({
                         },200);
                     });
                 } else {
-                    wx.hideLoading();
+                    wx.hideToast();
                 }
             }
         });

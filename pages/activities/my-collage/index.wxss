@@ -192,7 +192,8 @@ page {
 }
 .head-portrait-box .head-portrait image{
   width: 99rpx;
-  height: 99rpx
+  height: 99rpx;
+  border-radius: 50%
 }
 .head-portrait .bg-colonel image{
   width: 64rpx;
@@ -216,4 +217,10 @@ page {
   width:64rpx;
   height:28rpx;
   left: 20rpx
+}
+.fail-text{
+  font-family: PingFangSC-Regular;
+  font-size: 30rpx;
+  color: #999999;
+  margin: 40rpx 0 50rpx;
 }

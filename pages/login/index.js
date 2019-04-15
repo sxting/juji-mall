@@ -120,11 +120,13 @@ Page({
       if(this.data.pageType==5){
         wx.reLaunch({url: '/pages/jujiGarden/gardenIndex/index?openid=' + this.data.pageData.openid});
       }
-
       if (this.data.pageType == 'projectDetail') {
         if (this.data.pageData.type == 'BARGAIN' && this.data.pageData.activityOrderId) {
           wx.reLaunch({ url: '/pages/activities/project-detail/index?type=' + this.data.pageData.type + '&activityId=' + this.data.pageData.activityId + '&activityOrderId=' + this.data.pageData.activityOrderId });
-        } else {
+        } else if (this.data.pageData.type == 'SPLICED' ){//拼团
+          console.log('拼团分享进入');
+          wx.reLaunch({ url: '/pages/activities/project-detail/index?type=' + this.data.pageData.type + '&activityId=' + this.data.pageData.activityId + '&activityOrderId=' + this.data.pageData.activityOrderId + '&progressId=' + this.data.pageData.progressId});
+        }else {
           wx.reLaunch({ url: '/pages/activities/project-detail/index?type=' + this.data.pageData.type + '&activityId=' + this.data.pageData.activityId });
         }
       }

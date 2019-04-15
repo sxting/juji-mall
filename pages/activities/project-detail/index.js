@@ -36,7 +36,9 @@ Page({
     activityOrderId: '',
     activityId: '',
     resData: '',
-    aa: 'a'
+    aa: 'a',
+    activityOrderId: '',
+    progressId: '',
   },
   onLoad: function (options) {
     if (options.shared) {
@@ -44,9 +46,12 @@ Page({
     }
     wx.setNavigationBarTitle({ title: '商品详情' });
     // 2019041017405721382048345
+    console.log(options);
     this.setData({ 
       productId: options.id, 
       activityId: options.activityId,
+      activityOrderId: options.activityOrderId ? options.activityOrderId : '',
+      progressId: options.progressId ? options.progressId : '',
       type: options.type ? options.type : '' 
     });
     if (options.storeid) {
@@ -77,6 +82,7 @@ Page({
         }
       }
     } else if (res.target.dataset.type === 'pintuan'){
+      console.log('/pages/login/index?pagetype=projectDetail&type=' + this.data.type + '&activityId=' + this.data.activityId + '&activityOrderId=' + this.data.activityOrderId);
       return {
         title: '嗨！便宜一起拼￥' + this.data.productInfo.price/100 + '【' + this.data.productInfo.productName +'】',
         path: '/pages/login/index?pagetype=projectDetail&type=' + this.data.type + '&activityId=' + this.data.activityId + '&activityOrderId=' + this.data.activityOrderId,
@@ -177,7 +183,8 @@ function getItemInfo() {
   activitiesService.activity({
     activityId: this.data.activityId,
     activityOrderId: this.data.activityOrderId ? this.data.activityOrderId : '',
-    activityType: this.data.type
+    activityType: this.data.type,
+    progressId: this.data.progressId
   }).subscribe({
     next: res => {
       var picsStrArr = res.cover.split(',');

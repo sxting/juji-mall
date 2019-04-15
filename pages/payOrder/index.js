@@ -647,7 +647,7 @@ Page({
               success(res) {
                 console.log(res);
                 wx.redirectTo({
-                  url: '/pages/activities/my-collage/index',
+                  url: '/pages/activities/my-collage/index?progressId=' + res.progressId + '&activityOrderId=' + res.activityOrderId + '&activityType=SPLICED' + '&activityId=' + that.data.activityId,
                 });
               },
               fail(res) {

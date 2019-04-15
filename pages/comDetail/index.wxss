@@ -938,6 +938,7 @@ page {
 .jztgModalTitle {
   font-size: 28rpx;
   color: #333;
+  font-weight: bold;
 }
 
 .jztgModalTitle2 {

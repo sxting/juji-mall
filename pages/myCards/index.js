@@ -9,7 +9,6 @@ Page({
   data: {
     cardList: [],
     current: 0,
-    payUrl: 'https://juji.juniuo.com',
     noCards: false
   },
 
@@ -19,7 +18,7 @@ Page({
   onLoad: function(options) {
     if (wx.getStorageSync('openid')) {
       wx.request({
-        url: this.data.payUrl + '/mini/getCardsByOpenid.json',
+        url: constant.jujipayUrl + '/mini/getCardsByOpenid.json',
         method: 'GET',
         data: {
           openid: wx.getStorageSync('openid')

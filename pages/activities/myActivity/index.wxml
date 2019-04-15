@@ -1,28 +1,32 @@
+<wxs src="../../../utils/numFr.wxs" module="format" />
 <view class="fullScreen">
     <view class="main p10">
         <view class="orderItem" wx:for="{{orderlist}}" wx:for-item="item" wx:key="unique">
             <view class="ub ub-ac ub-pj top">
                 <view class="type">拼团</view>
-                <view class="status">拼团中</view>
+                <view class="doing" wx:if="{{item.progresses.length<item.participantQuantity}}">拼团中</view>
+                <view class="done" wx:if="{{item.progresses.length==item.participantQuantity}}">拼团成功</view>
             </view> 
-            <view class="ub ub-ac info">
-                <image class="goodImg udb" src="{{constant.basePicUrl}}26PwF_9ACZdy/resize_180_180/mode_fill"></image>
+            <view class="ub ub-ac info" bindtap="toDetail" data-id="{{item.activityId}}">
+                <image class="goodImg udb" src="{{constant.basePicUrl}}{{item.cover}}/resize_180_180/mode_fill"></image>
                 <view class="ub-f1 goodMsg">
-                    <view class="goodTit">兰溪小馆团购套餐</view>
-                    <view class="storeName">2人团·还差1人成团</view>
+                    <view class="goodTit">{{item.productName}}</view>
+                    <view class="storeName">{{item.participantQuantity}}人团</view>
                     <!-- 混合支付 -->
                     <view class="goodAmount">
-                        <text>20.00元</text><text class="origin">30.00元</text>
+                        <text>{{format.toFix(item.currentSalesPrice)}}元</text><text class="origin">{{format.toFix(item.originalPrice)}}元</text>
                     </view>
                 </view>
             </view>
-            <view class="ctrl plr15 ub ub-ac ub-pj">
+            <view class="ctrl plr15 ub ub-ac ub-pj" wx:if="{{item.progresses.length<item.participantQuantity}}">
+                <child dataFromParent='{{item.expirationTime}}'></child>
+                <view class="yao ub ub-ac ub-pc">邀请好友拼团</view>
+            </view>
+            <view class="ctrl plr15 ub ub-ac ub-pj" wx:if="{{item.progresses.length==item.participantQuantity}}">
                 <view class="left">
-                  <text>{{restHour}}</text> : <text>{{restMinute}}</text> : <text>{{restSecond}}</text>
-                    后结束
+                  <text class="headImg"></text>
                 </view>
-                <view class="use" data-id="{{item.id}}">去使用</view>
-                <!-- <view class="right" data-id="{{item.id}}">邀请好友拼团</view> -->
+                <view class="use ub ub-ac ub-pc" bindtap="toDetail" data-id="{{item.activityId}}">去使用</view>
             </view>
         </view>
         <view class="nodataDiv ub ub-ac ub-ver" hidden="{{!isShowNodata}}">

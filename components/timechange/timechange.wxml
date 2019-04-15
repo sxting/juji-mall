@@ -1,0 +1,9 @@
+<view name="timechange">
+    <block class="txt">
+        <text class="num">{{restHour}}</text>
+        <text class="line">:</text> 
+        <text class="num">{{restMinute}}</text>
+        <text class="line">:</text> 
+        <text class="num">{{restSecond}}</text><text class="txt">后结束</text>
+    </block>
+</view>

@@ -9,8 +9,8 @@
       <view class="ub ub-fe jc-sb" style="margin-top:20rpx;">
         <view class="ub ub-fe">
             <view style="display:flex;align-items: flex-end;">
-                <view style="font-size:38rpx;color: #E83221;font-weight:bold;line-height:38rpx;" wx:if="{{resData.activityPrice>0}}">{{filter.toFix(resData.activityPrice)}}</view>
-                <view style="font-size:24rpx;color: #E83221;font-weight:bold;line-height:24rpx;margin-bottom:4rpx;" wx:if="{{resData.activityPrice>0}}">元</view>
+                <view style="font-size:38rpx;color: #E83221;font-weight:bold;line-height:38rpx;" wx:if="{{resData.activityPrice>=0}}">{{filter.toFix(resData.activityPrice)}}</view>
+                <view style="font-size:24rpx;color: #E83221;font-weight:bold;line-height:24rpx;margin-bottom:4rpx;" wx:if="{{resData.activityPrice>=0}}">元</view>
             </view>
             <view style="font-size: 24rpx;color: #999999;text-decoration:line-through;margin-left:25rpx;line-height:28rpx;">{{filter.toFix(resData.originalPrice)}} 元</view>
         </view>

@@ -1,0 +1,33 @@
+<view class="fullScreen">
+    <view class="main p10">
+        <view class="orderItem" wx:for="{{orderlist}}" wx:for-item="item" wx:key="unique">
+            <view class="ub ub-ac ub-pj top">
+                <view class="type">拼团</view>
+                <view class="status">拼团中</view>
+            </view> 
+            <view class="ub ub-ac info">
+                <image class="goodImg udb" src="{{constant.basePicUrl}}26PwF_9ACZdy/resize_180_180/mode_fill"></image>
+                <view class="ub-f1 goodMsg">
+                    <view class="goodTit">兰溪小馆团购套餐</view>
+                    <view class="storeName">2人团·还差1人成团</view>
+                    <!-- 混合支付 -->
+                    <view class="goodAmount">
+                        <text>20.00元</text><text class="origin">30.00元</text>
+                    </view>
+                </view>
+            </view>
+            <view class="ctrl plr15 ub ub-ac ub-pj">
+                <view class="left">您已成功付款，请到店展示消费码消费</view>
+                <view class="use" data-id="{{item.id}}">去使用</view>
+                <!-- <view class="right" data-id="{{item.id}}">邀请好友拼团</view> -->
+            </view>
+        </view>
+        <view class="nodataDiv ub ub-ac ub-ver" hidden="{{!isShowNodata}}">
+            <image class="nodataImg" src="../../../images/null2.png"></image>
+            <view class="nodataTxt">
+              <view>您还没有相关的订单</view>
+              <view style="font-size:24rpx;color:#999;margin-top:20rpx;" bindtap="toIndex">去首页逛逛吧</view>
+            </view>
+        </view>
+    </view>
+</view>

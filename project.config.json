@@ -36,7 +36,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 29,
+			"current": 30,
 			"list": [
 				{
 					"id": 0,
@@ -242,7 +242,13 @@
 					"id": 29,
 					"name": "活动商品详情 --kanjia",
 					"pathName": "pages/activities/project-detail/index",
-					"query": "type=BARGAIN&id=2019041017311672721244908&activityId=2019041117372787614090107",
+					"query": "type=BARGAIN&id=2019041111452089448916591&activityId=2019041118201108011599658",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "拼团列表",
+					"pathName": "pages/activities/project-list/index",
 					"scene": null
 				}
 			]

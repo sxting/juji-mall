@@ -53,8 +53,10 @@ Page({
   /**
    * 跳转我的砍价或者我的拼团页面
    */
-  switchToOrderListPage: function(){
-    
+  switchToOrderListPage: function(e){
+    wx.navigateTo({
+      url: '/pages/activities/myActivity/index?type=' + e.currentTarget.dataset.type
+    });
   },
 
   /**

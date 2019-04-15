@@ -17,3 +17,18 @@
 .phoneInner view{font-size:24rpx;color:#333;}
 
 .bindBtn{background:transparent;padding:0;}
+.userGrid{
+padding: 50rpx 40rpx 0 40rpx;
+margin: 0;
+background: transparent;
+}
+.userGridIcon{
+  width:40rpx;
+  height: 40rpx;
+}
+.userGridText{
+  font-size: 24rpx;
+color: #333333;
+margin-top: 20rpx;
+line-height: 30rpx;
+}

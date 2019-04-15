@@ -1,120 +1,116 @@
 <wxs src="../../../utils/numFr.wxs" module="format" />
 <view class="wrap">
+
     <!-- 普通用户进入 1、普通用户 从没申请  2、桔民 从没申请过  -->
-    <view class="wrap page-content new-page-1" wx:if="{{(role == 'UNDEFINED' && !applyLeader) || (role == 'MEMBER' && !applyLeader)}}">
-      <view class='group-title-home'>
-        <view class='btn-manger' bindtap="toPage" data-page="/pages/jujiGarden/managerRights/managerRights">桔长权益</view>
-        <view class='title-home-page home-title'>邀请{{minInvitedMemberCount}}人可成为桔长</view>
-        <view class='home-title'>单单享返利 件件享优惠</view>
-      </view>
-      <image src='/images/group-start.png' class='group-gift t180'></image>
-      <view class='btn-box-invent t480'>
-        <image src='/images/sure-btn.png' class='sure-btn applyToManager'></image>
-        <text class='text' bindtap="apply" wx:if='{{bindPhoneNumber}}'>申请成为桔长<text class='iconfont icon-right'></text></text>
-        <button class="share-btn" wx:else='{{!bindPhoneNumber}}' open-type="getPhoneNumber" bindgetphonenumber="getUserPhoneNumber">申请成为桔长<text class='iconfont icon-right'></text></button>
-      </view>
-      <view class='btn-new-person-box t375'>
-        <view class='btn-new-person height453'>
-          <view class='list-box'>
-            <view class='list-infortext mb35'>
-              <image src='/images/invent-icon.png' class='icon-type'></image>
-              <image src='/images/01-one.png' class='icon-num'></image>
-              <text class='text-detail'>邀请{{minInvitedMemberCount}}名新人入队</text>
-            </view>
-            <view class='list-infortext mb35'>
-              <image src='/images/right-icon.png' class='icon-type'></image>
-              <image src='/images/02-two.png' class='icon-num'></image>
-              <text class='text-detail'>获得桔长资格</text>
-            </view>
-            <view class='list-infortext mb35'>
-              <image src='/images/sale-money-icon.png' class='icon-type'></image>
-              <image src='/images/03-three.png' class='icon-num'></image>
-              <text class='text-detail'>推广商品最高得40%返利</text>
-            </view>
+    <view class="main" wx:if="{{(role == 'UNDEFINED' && !applyLeader) || (role == 'MEMBER' && !applyLeader)}}">
+        <view class="toper1">
+          <image class="udb topBg1" src="../../../images/ytop1.png" mode="scaleToFill"></image>
+          <view class="topCon1">
+              <image class="juzhang1" src="../../../images/juzhang1.png"></image>
+              <view class="tx-c">成功邀请{{minInvitedMemberCount}}名新人，即可获得桔长资格</view>
+          </view>
+          <view class="menuDiv" style="background-color: #fff;">
+              <view class="menulist ub ub-ac ub-pj">
+                <view class="item ub ub-ver ub-ac ub-pc">
+                  <image class="icon_menu" src="../../../images/icon_menu2.png"></image>
+                  <view class="tx-c">零囤货</view>
+                </view>
+                <view class="item ub ub-ver ub-ac ub-pc">
+                  <image class="icon_menu" src="../../../images/icon_menu1.png"></image>
+                  <view class="tx-c">零风险</view>
+                </view>
+                <view class="item ub ub-ver ub-ac ub-pc">
+                  <image class="icon_menu" src="../../../images/icon_menu3.png"></image>
+                  <view class="tx-c">零压力</view>
+                </view>
+              </view>
+              <button class="btn1" style="color:#333;background-color:#ffdc00;" bindtap="apply" wx:if='{{bindPhoneNumber}}'>立即邀请新人</button>
+              <button class="btn1" style="color:#333;background-color:#ffdc00;" wx:else='{{!bindPhoneNumber}}' open-type="getPhoneNumber" bindgetphonenumber="getUserPhoneNumber">申请成为桔长</button>
           </view>
         </view>
-      </view>
-      <image src='/images/group-bottom.png' class='group-bottom'></image>
+        <view class="txtCon">
+          <view class="txtTit">
+            <image class="titbg" src="../../../images/titbg.png"></image>
+            <view class="tittext">桔长专属权益</view>
+          </view>
+          <view class="titTxt">专享低价</view>
+          <view class="conTxt">可享受桔长超低专属折扣，自购超级省钱</view>
+          <view class="titTxt">推广赚钱</view>
+          <view class="conTxt">推广商品，平均可获得15%的商品返利</view>
+          <view class="titTxt">免费体验</view>
+          <view class="conTxt">桔长可享受更多免费体验吃喝玩乐游的机会</view>
+          <view class="titTxt">专属培训</view>
+          <view class="conTxt">可享受专属营销推广培训，平台专业运营人员手把手传授</view>
+          <view class="titTxt">轻松推广</view>
+          <view class="conTxt">推广素材可由平台小编编写，一键保存转发即可</view>
+        </view>
     </view>
 
     <!-- 桔员进入 桔民 申请过-->
-    <view class="wrap page-content new-page-2" wx:if="{{role == 'MEMBER' && applyLeader}}">
-      <view class='group-title-box'>
-        <view class='btn-manger' bindtap="toPage" data-page="/pages/jujiGarden/managerRights/managerRights">桔长权益</view>
-        <image src='/images/group-check.png' class='group-title'></image>
-        <view class='check-progress'>
+    <view class="main" wx:if="{{role == 'MEMBER' && applyLeader}}">
+        <view class="toper1">
+          <image class="udb topBg1" src="../../../images/ytop1.png" mode="scaleToFill"></image>
+          <view style="height:20rpx"></view>
+          <view class='progressDiv' style="background:#fff">
               <view class='clearfix my-team'>
                   <view class='fl'>
-                    <text style='font-weight:bold;'>我的队伍 </text>
-                    <text class='num'><text style='color:#F35308'>{{ hadNumber }}</text>/{{minInvitedMemberCount}}</text>
+                    <text style='font-weight:bold;font-size:30rpx'>我的队伍 </text>
+                    <text class='num'><text style='color:#ffdc00'>{{ hadNumber }}</text>/{{minInvitedMemberCount}}</text>
                   </view>
                   <view class='fr' wx:if='{{hadNumber != 0}}'>
-                      <text catchtap="toPage" data-page="/pages/jujiGarden/userInfor/userInfor" data-role='{{role}}'>查看桔民</text>
+                      <text catchtap="toPage" data-page="/pages/jujiGarden/userInfor/userInfor" data-role='{{role}}' style="font-size:26rpx">查看桔民</text>
                       <text class='iconfont icon-right'></text>
                   </view>
               </view>
-              <view class='progress-box'>
+              <view class='progress-box' style="margin-top:50rpx">
                   <text wx:for="{{ juminNumList }}" wx:key="item" class="{{item == 'yes'? 'had-number' : ''}}"></text>
               </view>
-          </view>    
-      </view>
-      <image src='/images/group-gift.png' class='group-gift'></image>
-      <view class='btn-box-invent'>
-        <image src='/images/sure-btn.png' class='sure-btn'></image>
-        <button class="share-btn" open-type="share">邀请新人加入桔园<text class='iconfont icon-right'></text></button>
-      </view>
-      <view class='btn-new-person-box'>
-        <view class='btn-new-person'>
-          <view class='list-box'>
-            <view class='list-infortext'>
-              <image src='/images/invent-icon.png' class='icon-type'></image>
-              <image src='/images/01-one.png' class='icon-num'></image>
-              <text class='text-detail'>邀请{{minInvitedMemberCount}}名新人入队</text>
-            </view>
-            <view class='list-infortext'>
-              <image src='/images/right-icon.png' class='icon-type'></image>
-              <image src='/images/02-two.png' class='icon-num'></image>
-              <text class='text-detail'>获得桔长资格</text>
-            </view>
-            <view class='list-infortext'>
-              <image src='/images/sale-money-icon.png' class='icon-type'></image>
-              <image src='/images/03-three.png' class='icon-num'></image>
-              <text class='text-detail'>推广商品最高得40%返利</text>
-            </view>
+              <view class="remark3" style="margin-top:24rpx">成功邀请{{minInvitedMemberCount}}名新人，即可获得桔长资格</view>
+              <button class="btn1" style="color:#333;background-color:#ffdc00;margin-top:50rpx" open-type="share">邀请新人加入桔园</button>
           </view>
         </view>
-      </view>
-      <image src='/images/group-bottom.png' class='group-bottom'></image>
+
+        <view class="txtCon">
+          <view class="txtTit">
+            <image class="titbg" src="../../../images/titbg.png"></image>
+            <view class="tittext">桔长专属权益</view>
+          </view>
+          <view class="titTxt">专享低价</view>
+          <view class="conTxt">可享受桔长超低专属折扣，自购超级省钱</view>
+          <view class="titTxt">推广赚钱</view>
+          <view class="conTxt">推广商品，平均可获得15%的商品返利</view>
+          <view class="titTxt">免费体验</view>
+          <view class="conTxt">桔长可享受更多免费体验吃喝玩乐游的机会</view>
+          <view class="titTxt">专属培训</view>
+          <view class="conTxt">可享受专属营销推广培训，平台专业运营人员手把手传授</view>
+          <view class="titTxt">轻松推广</view>
+          <view class="conTxt">推广素材可由平台小编编写，一键保存转发即可</view>
+        </view>
     </view>
 
-     <!-- 桔长进入实名认证 -->
-    <view class='page new-page-3' wx:if="{{role == 'LEADER' && !isAuthed}}">
-      <image class="title-page3" src="/images/group-sucess.png"></image>
-      <view class='title-text'>接下来开启您的推广赚钱之旅</view>
-      <image src='/images/orange-icon1.png' class='orange-icon orange-2'></image>
-      <image src='/images/orange-icon2.png' class='orange-icon orange-1'></image>
-      <view class='authentication-box'>
-        <view class='authentication-progress-box'>
-          <image src='/images/airport-icon.png' class='airport'></image>
-          <image src='/images/popo-icon.png' class='popo'></image>
-          <view class='authentication-progress'>
-            <view class='my-team'>
-              <input class='wechat-no' placeholder='请填写您的微信账号' value='{{ wechatId }}' bindinput="dataChange" data-type='wechatid' maxlength='20' placeholder-class='placeholder'></input>
-              <input class='wechat-name' placeholder='请填写您的微信实名认证姓名' value='{{ name }}' bindinput="dataChange" data-type='name' maxlength='8' placeholder-class='placeholder'></input>
-              <view>请如实填写以上信息，推广获得的收入将自动提现到微信零钱</view>
-              <view class='btn-box' bindtap='submitUserInfor'>
-                <image src='../../../images/sure-btn.png' class='sure-btn'></image>
-                <text>确定</text>
-              </view>
+    <!-- 桔长进入实名认证 -->
+    <view class="main" wx:if="{{role == 'LEADER' && !isAuthed}}">
+        <view class="toper2">
+            <image class="udb topBg2" src="../../../images/ytop2.png" mode="scaleToFill"></image>
+            <view class="topCon2">
+                <image class="juzhang2" src="../../../images/juzhang2.png"></image>
+                <view class="tx-c">接下来开启您的推广赚钱之旅！</view>
             </view>
-          </view>
         </view>
-      </view>
-      <image src='/images/sucess-bottom.png' class='group-bottom'></image>
+        <view class="form">
+            <view class="item">
+                <input type="text" placeholder="请填写您的微信账号" value='{{ wechatId }}' data-type='wechatid' maxlength='20' bindinput="dataChange" focus="true" class="bindInput" />
+            </view>
+            <view class="item" style="margin-top:50rpx;">
+                <input type="text" placeholder="请填写您的微信实名认证姓名" value='{{ name }}' data-type='name' maxlength='8' bindinput="dataChange" class="bindInput" />
+            </view>
+            <view class="remark2">请如实填写以上信息，推广获得的收入将自动提现到微信零钱</view>
+            <button class="btn2" style="color:#333;background-color:#ffdc00;" bindtap='submitUserInfor'>确定</button>
+        </view>
     </view>
 
     <!-- 桔长进入 -->
-    <view class="page" wx:if="{{role == 'LEADER' && isAuthed}}">
+    <view class="main1" wx:if="{{role == 'LEADER' && isAuthed}}">
         <view class="toper">
             <image class="udb topBg" src="../../../images/topBg.png" mode="scaleToFill"></image>
             <view class="topCon" style="padding:30rpx;">
@@ -154,9 +150,10 @@
                 </view>
             </view>
         </view>
-        <view class="udb plr15 invent-btn-box" style="margin-top:20rpx;">
-          <button class="share-btn" open-type="share"></button>
-          <image class="banner" src="/images/banner.png" mode="widthFix"></image>
+        <view class="udb" style="margin-top:20rpx;">
+          <button class="shareBtn" open-type="share">
+            <image class="banner" src="/images/banner.png" mode="widthFix"></image>
+          </button>
         </view>
         <view style="margin-top:20rpx;" class="menu ub">
             <view class="ub-f1 ub ub-ver ub-ac ub-pc" bindtap="toPage" data-page="/pages/jujiGarden/recommend/index">

@@ -1,509 +1,67 @@
-.toper {
-  height: 400rpx;
-}
+page{background-color: #ffffff;}
+.wrap{height: 100%;}
+.toper { height: 400rpx; }
+.qdBtn { background-image: linear-gradient(-90deg, #494849 0%, #2d2d2d 100%); border-radius: 33rpx; width: 140rpx; height: 48rpx; line-height: 48rpx; position: absolute; right: 30rpx; top: 60rpx; font-size: 24rpx; color: #fff; z-index: 999; }
+.topBg { position: absolute; width: 100%; height: 400rpx; z-index: 0; }
+.topCon { position: relative; z-index: 1; }
+.balance { font-size: 60rpx; color: #000; font-weight: bold; }
+.remark { margin-top: 5rpx; color: #333; font-size: 24rpx; }
+.turnover { margin-top: 20rpx; }
+.turnover .line { height: 50rpx; width: 1rpx; border-left: #666 1rpx solid; }
+.balance1 { font-size: 38rpx; font-weight: bold; }
+.orderBtnsNum { font-size: 34rpx; color: #333; font-weight: bold; }
+.line { height: 60rpx; width: 2rpx; border-left: #eee 2rpx solid; }
+.orderBtnsText { font-size: 24rpx; color: #666; margin-top: 10rpx; }
+.banner { display: block; width: 100%; border-radius: 10rpx; }
+.userBox { margin: 0 30rpx; background: #fff; box-shadow: 0 0 5rpx 0 rgba(228, 228, 228, 0.50); border-radius: 10rpx; position: relative; z-index: 3; margin-top: -50px; }
+.user { width: 315rpx; height: 160rpx; text-align: center; }
+.menu { margin: 0 30rpx; }
+.menu .ub-f1 { background: #fff; box-shadow: 0 0 6rpx 0 rgba(228, 228, 228, 0.50); border-radius: 10rpx; padding: 10rpx; }
+.menu .ub-f1.r { margin-left: 20rpx; height: 160rpx; }
+.menu .ub-f1 image { display: block; width: 43rpx; height: 43rpx; }
+.menu .ub-f1 .product-icon { width: 46rpx; height: 46rpx }
+.menu .ub-f1 text { font-size: 28rpx; color: #333; margin-top: 20rpx; }
 
-.qdBtn {
-  background-image: linear-gradient(-90deg, #494849 0%, #2d2d2d 100%);
-  border-radius: 33rpx;
-  width: 140rpx;
-  height: 48rpx;
-  line-height: 48rpx;
-  position: absolute;
-  right: 30rpx;
-  top: 60rpx;
-  font-size: 24rpx;
-  color: #fff;
-  z-index: 999;
-}
+.main{height:100%;background:#ffffff;box-sizing:border-box;}
+.main1{height:100%;background:#fbfbfb;box-sizing:border-box;}
+.toper2 { height: 200rpx; }
+.topBg2 { position: absolute; width: 100%; height: 200rpx; z-index: 0;left: 0;top: 0 }
+.topCon2 { position: relative; z-index: 1; text-align: center;padding: 50rpx;}
+.topCon2 view{font-size: 30rpx;margin-top: 10rpx;}
+.juzhang2{width: 340rpx;height: 41rpx;display: inline-block;}
+.form{padding: 50rpx;margin-top: 30rpx;}
+.form .item{width: 100%;height: 88rpx;}
+.bindInput{width:100%;height:88rpx;line-height:88rpx;padding-left:30rpx;background:#f5f5f5;border-radius:100rpx;box-sizing:border-box;font-size:28rpx;}
+.remark2{margin-top: 30rpx;line-height: 40rpx;font-size: 24rpx;color: #999;text-align: justify;}
+button.btn2{height:88rpx;border-radius:50rpx;font-size:34rpx;display:flex;justify-content:center;align-items:center;margin-top:80rpx;}
 
-.topBg {
-  position: absolute;
-  width: 100%;
-  height: 400rpx;
-  z-index: 0;
-}
+.toper1 {padding:0 30rpx 20rpx;}
+.topBg1 { position: absolute; width: 100%; height: 303rpx; z-index: 0;top: 0;left: 0 }
+.topCon1 { position: relative; z-index: 1; text-align: center;padding: 40rpx;}
+.topCon1 view{font-size: 30rpx;margin-top: 10rpx;}
+.juzhang1{width: 420rpx;height: 44rpx;display: inline-block;}
 
-.topCon {
-  position: relative;
-  z-index: 1;
-}
+.menuDiv{padding-left: 30rpx;padding-right: 30rpx;height: 394rpx; box-shadow:0 6rpx 6rpx 5rpx rgba(229,229,229,0.50);width: 100%;box-sizing:border-box;position: relative;z-index: 10;border-radius: 20rpx;}
+.menulist{width:100%; height: 240rpx;}
+.menulist .item{width:170rpx; height: 240rpx;}
+.icon_menu{display: block;width: 100rpx;height: 100rpx;}
+.menulist .tx-c{font-size: 28rpx;margin-top: 20rpx;color: #666;}
+button.btn1{height:88rpx;border-radius:50rpx;font-size:34rpx;display:flex;justify-content:center;align-items:center;margin-top:10rpx;}
 
-.balance {
-  font-size: 60rpx;
-  color: #000;
-  font-weight: bold;
-}
+.txtCon{padding: 30rpx;}
+.txtTit{height: 60rpx;position: relative;width: 540rpx;margin: 0 auto 30rpx;}
+.titbg{display: block;width: 540rpx;height: 10rpx;position: absolute;top: 25rpx;left: 0;z-index: 0;}
+.tittext{width: 100%;text-align: center;font-size: 38rpx;color: #333;z-index: 1;line-height: 60rpx;height: 60rpx;font-weight: bold;}
+.titTxt{font-size:30rpx;line-height: 44rpx;color: #666;text-align: justify;position: relative;margin-top: 12rpx;padding-left: 40rpx;font-weight: bold;}
+.titTxt::before{content: "●";color: #ffdc00;position: absolute;left: 0;top: 0;font-size: 26rpx}
+.conTxt{font-size:28rpx;line-height: 42rpx;color: #999;text-align: justify;position: relative;padding-left: 40rpx;margin-top: 8rpx;margin-bottom: 30rpx;}
 
-.remark {
-  margin-top: 5rpx;
-  color: #333;
-  font-size: 24rpx;
-}
-
-.turnover {
-  margin-top: 20rpx;
-}
-
-.turnover .line {
-  height: 50rpx;
-  width: 1rpx;
-  border-left: #666 1rpx solid;
-}
-
-.balance1 {
-  font-size: 38rpx;
-  font-weight: bold;
-}
-
-.orderBtnsNum {
-  font-size: 34rpx;
-  color: #333;
-  font-weight:bold;
-}
-.line{
-  height:60rpx;
-  width:2rpx;
-  border-left:#eee 2rpx solid;
-}
-.orderBtnsText {
-  font-size: 24rpx;
-  color: #666;
-  margin-top: 10rpx;
-}
-
-.banner {
-  display: block;
-  width: 100%;
-  border-radius: 10rpx;
-}
-
-.userBox {
-  margin: 0 30rpx;
-  background: #fff;
-  box-shadow: 0 0 5rpx 0 rgba(228, 228, 228, 0.50);
-  border-radius: 10rpx;
-  position: relative;
-  z-index: 3;
-  margin-top: -50px;
-}
-
-.user {
-  width: 315rpx;
-  height: 160rpx;
-  text-align: center;
-}
-
-.menu {
-  margin: 0 30rpx;
-}
-
-.menu .ub-f1 {
-  background: #fff;
-  box-shadow: 0 0 6rpx 0 rgba(228, 228, 228, 0.50);
-  border-radius: 10rpx;
-  padding: 10rpx;
-}
-
-.menu .ub-f1.r {
-  margin-left: 20rpx;
-  height: 160rpx;
-}
-
-.menu .ub-f1 image {
-  display: block;
-  width: 43rpx;
-  height: 43rpx;
-}
-.menu .ub-f1 .product-icon{
-  width: 46rpx;
-  height: 46rpx
-}
-.menu .ub-f1 text {
-  font-size: 28rpx;
-  color: #333;
-  margin-top: 20rpx;
-}
-
-.wrap {
-  width: 100%;
-  height: 100%;
-}
-
-.page {
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  position: relative;
-}
-
-.pageBg {
-  width: 100%;
-  height: 100%;
-  display: block;
-}
-
-.btn-manger {
-  position: fixed;
-  font-family: "黑体";
-  font-size: 24rpx;
-  color: #6a3c12;
-  text-align: center;
-  line-height: 50rpx;
-  background-color: #ffc520;
-  top: 18rpx;
-  right: 0;
-  width: 140rpx;
-  height: 50rpx;
-  border-radius: 25rpx 0 0 25rpx;
-}
-
-
-.btn-box-invent  .iconfont {
-  font-size:38rpx;
-  font-weight:bolder;
-  position: absolute;
-  color: #fff;
-}
-
-.check-progress {
-  width: 540rpx;
-  height: 212rpx;
-  padding: 53rpx 75rpx 0 75rpx;
-  position: absolute;
-  top: 102rpx;
-  left: 50%;
-  margin-left: -345rpx;
-  font-family: "黑体";
-  font-size: 28rpx;
-  color: #6a3c12;
-  text-align: center;
-}
-
-.progress-box {
-  margin-top: 50rpx;
-  width: 540rpx;
-  display: flex
-}
-
-.progress-box text {
-  display: inline-block;
-  flex:1;
-  height: 12rpx;
-  background: #ffeda0;
-  margin-right: 5rpx;
-}
-
-.progress-box text:first-of-type {
-  border-radius: 6rpx 0 0 6rpx;
-}
-
-.progress-box text:last-of-type {
-  border-radius: 0 6rpx 6rpx 0;
-  margin-right: 0rpx;
-}
-
-.progress-box text.had-number {
-  background: #fe5201;
-}
-
-.check-progress .my-team {
-  font-family: "黑体";
-  font-size: 30rpx;
-  color: #6a3c12;
-  text-align: center;
-}
-
-.check-progress .my-team .num {
-  font-family: Helvetica;
-  font-size: 40rpx;
-  color: #6a3c12;
-}
-
-.page .juyuan {
-  position: absolute;
-  top: 41.5%;
-  width: 400rpx;
-  height: 80rpx;
-  left: 50%;
-  margin-left: -200rpx;
-}
-
-.juyuan .share-btn {
-  font-family: "黑体";
-  font-size: 30rpx;
-  color: #fff;
-  text-align: center;
-  line-height: 80rpx;
-  background-color: rgba(0, 0, 0, 0);
-  font-weight: bold;
-  /* IE6和部分IE7内核的浏览器(如QQ浏览器)会读懂，但解析为透明 */
-}
-
-
-.btn-box {
-  width: 100%;
-  height: 90rpx;
-  text-align: center;
-  margin-top: 35rpx;
-  position: relative;
-}
-
-.btn-box .sure-btn {
-  width: 500rpx;
-  height: 90rpx;
-}
-
-.btn-box text {
-  position: absolute;
-  font-family: PingFangSC-Medium;
-  font-size: 34rpx;
-  color: #fff;
-  top: 0;
-  left: 0;
-  width: 100%;
-  line-height: 85rpx;
-}
-.placeholder {
-  color: #FF8800;
-}
-.invent-btn-box{
-  position: relative
-}
-.invent-btn-box .share-btn{
-  position: absolute;
-  width: 690rpx;
-  height: 140rpx;
-  padding: 0!important;
-  background-color: rgba(0, 0, 0, 0);
-  opacity: 1!important;
-}
-
-/* 新样式 */
-.page-content{
-  width: 100%;
-  height: 100%;
-  position: relative;
-}
-.new-page-1{
-    background-image: linear-gradient(180deg, #FDF4DE 0%, #FDD37F 100%);
-}
-.new-page-2{
-    background-image: linear-gradient(180deg, #FFEBB6 0%, #FDD37F 100%);
-}
-.new-page-3{
-    background-image: linear-gradient(180deg, #FDF4DE 0%, #FDD37F 100%);
-}
-.group-title-box{
-  padding:40rpx 30rpx 0 30rpx;
-  position: relative;
-}
-.group-title{
-  width: 100%;
-  height: 328rpx;
-}
-.group-gift{
-  position: absolute;
-  width: 100%;
-  height: 282rpx;
-  top: 190rpx;
-}
-.group-bottom{
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  height: 180rpx;
-}
-.btn-new-person-box{
-  padding: 0 30rpx;
-  position: relative;
-  top: 200rpx;
-}
-.btn-new-person{
-  width: 100%;
-  height: 493rpx;
-  background: #FFFBF0;
-  box-shadow: 0 0 10rpx 0 #FCBE3E;
-  border-radius: 10rpx;
-}
-.list-box{
-  padding-top: 40rpx;
-}
-.list-box .list-infortext {
-  font-family: PingFangSC-Medium;
-  font-size: 30rpx;
-  color: #85460D;
-  text-align: left;
-  padding-left: 55rpx;
-  position: relative;
-  margin-bottom: 30rpx;
-}
-.list-box .list-infortext:last-of-type{
-  margin-bottom: 0
-}
-.list-infortext .icon-type{
-  width: 92rpx;
-  height: 90rpx;
-}
-.list-infortext .icon-num{
-  width: 44rpx;
-  height: 29rpx;
-  margin:0 22rpx 0 32rpx;
-  position: absolute;
-  top: 40rpx;
-}
-.list-infortext .text-detail{
-  position: absolute;
-  left: 240rpx;
-  top: 32rpx;
-}
-.btn-box-invent{
-  position: absolute;
-  width: 500rpx;
-  height: 90rpx;
-  left: 50%;
-  margin-left: -250rpx;
-  top: 465rpx;
-}
-.btn-box-invent image{
-  width: 100%;
-  height: 100%;
-}
-.btn-box-invent .share-btn{
-  font-family: PingFangSC-Semibold;
-  font-size: 34rpx;
-  color: #FFFFFF;
-  text-align: center;
-  line-height: 85rpx;
-  position: absolute;
-  top: 0;
-  width: 100%;
-  background-color: rgba(0, 0, 0, 0);
-  opacity: 1!important;
-}
-.home-title{
-  font-family: PingFangSC-Semibold;
-  font-size: 30rpx;
-  color: #FF5A00;
-  letter-spacing: 0;
-  text-align: center;
-}
-.title-home-page{
-  font-size: 66rpx;
-}
-.group-title-home{
-  padding:80rpx 75rpx 0;
-}
-.t375{
-  top:389rpx;
-}
-.t180{
-  top: 180rpx;
-  height: 296rpx
-}
-.height453{
-  height: 453rpx
-}
-.t480{
-  top: 480rpx
-}
-.t480 .text{
-  display: block;
-  font-family: PingFangSC-Medium;
-  font-size: 34rpx;
-  color: #FFFFFF;
-  text-align:center;
-  line-height:85rpx;
-  position:absolute;
-  width:100%;
-  top:0;
-  left:0;
-}
-.list-box .mb35{
-  margin-bottom: 30rpx
-}
-.title-page3{
-  width: 100%;
-  height: 139rpx;
-}
-.authentication-box{
-  padding: 0 60rpx;
-  border-radius: 20rpx; 
-  margin-top:170rpx;
-}
-.authentication-progress-box{
-  width: 100%;
-  height: 680rpx;
-  background-color: #FDF3D7;
-  position: relative
-}
-.authentication-progress {
-  position: absolute;
-  top: 116rpx;
-  width: 530rpx;
-  height: auto;
-  font-family: PingFangSC-Regular;
-  font-size: 24rpx;
-  color: #76400f;
-  letter-spacing: 0;
-  left: 50%;
-  margin-left: -265rpx;
-}
-
-.authentication-progress .my-team {
-  width: 100%;
-}
-
-.authentication-progress .my-team input {
-  height: 90rpx;
-  width: 500rpx;
-  background-color: #fff;
-  border-radius: 10rpx;
-  padding-left: 30rpx;
-  font-family: PingFangSC-Regular;
-  font-size: 30rpx;
-  color: #85460d;
-  background: #FFFFFF;
-  border: 2rpx solid rgba(255,136,0,0.66);
-}
-
-.authentication-progress .my-team input:last-of-type {
-  margin: 30rpx 0;
-}
-.airport{
-  position: absolute;
-  width: 374rpx;
-  height: 234rpx;
-  top: -150rpx;
-  left: 50%;
-  margin-left: -187rpx
-}
-.new-page-3 .title-text{
-  font-family: PingFangSC-Medium;
-  font-size: 30rpx;
-  color: #FF5A00;
-  letter-spacing: 0;
-  text-align: center;
-  margin-top: 30rpx;
-}
-.popo{
-  position: absolute;
-  width: 50rpx;
-  height: 87rpx;
-  top: -67rpx;
-  right: -18rpx
-}
-.orange-icon{
-  position: absolute;
-}
-.orange-1{
-  width: 46rpx;
-  height: 54rpx;
-  left:74rpx;
-  margin-top:40rpx;
-}
-.orange-2{
-  width: 68rpx;
-  height: 52rpx;
-  right: 44rpx;
-  margin-top:-10rpx;
-}
+.progressDiv { width: 100%; height: 390rpx; padding: 35rpx 30rpx;font-size: 28rpx; color: #333; box-shadow:0 6rpx 6rpx 5rpx rgba(229,229,229,0.50); box-sizing:border-box;position: relative;z-index: 10;border-radius: 20rpx;}
+.progress-box { margin-top: 50rpx; width: 100%; display: flex }
+.progress-box text { display: inline-block; width: 54rpx; height: 12rpx; background: #ccc; margin-right: 5rpx; }
+.progress-box text:first-of-type { border-radius: 6rpx 0 0 6rpx; }
+.progress-box text:last-of-type { border-radius: 0 6rpx 6rpx 0; margin-right: 0rpx; }
+.progress-box text.had-number { background: #ffdc00; }
+.progressDiv .my-team {font-size: 30rpx; color: #333; text-align: center; }
+.progressDiv .my-team .num { font-family: Helvetica; font-size: 40rpx; color: #333; }
+.remark3{font-size: 24rpx;color: #666666;}

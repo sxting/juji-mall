@@ -15,48 +15,14 @@ page{box-sizing:border-box;height: 100%;background-color: #fbfbfb}
 .income text.r{margin-left: 40rpx}
 .time{position: absolute;top: 36rpx;right: 20rpx;font-size: 20rpx;color: #999}
 .nodataDiv{padding-top: 260rpx;}
-.explain-text-box{
-  padding: 0 30rpx;
-  height: 120rpx;
-  background-color: #FDF6D8;
-  font-family: PingFangSC-Regular;
-  font-size: 24rpx;
-  color: #533900;
-  letter-spacing: 0;
-  text-align: left;
-  position: relative;
-}
-.explain-text{
-  width: 100%;
-}
-.explain-text image{
-  width: 30rpx;
-  height: 30rpx;
-  margin-top: -15rpx
-}
-.explain-text .text-infor{
-  width: 648rpx;
-  line-height: 40rpx;
-  margin-left: 20rpx;
-  margin-top: 20rpx
-}
+
+.explain-text-box{padding:0 30rpx;height:120rpx;background-color:#FDF6D8;font-size:24rpx;color:#533900;letter-spacing:0;text-align:left;position:relative;}
+.explain-text{width:100%;}
+.explain-text image{width:30rpx;height:30rpx;margin-top:-15rpx}
+.explain-text .text-infor{line-height:40rpx;margin-left:20rpx;margin-top:20rpx;height:120rpx;}
+
 /* 未找到start */
-.space-box {
-  text-align: center;
-  padding-top: 180rpx; 
-}
-.space-bg {
-    width: 240rpx;
-    height: 153rpx;
-    margin: 0 auto;    
-}
-.space-bg image {
-  width: 100%;
-  height: 100%;
-}
-.space-text {
-  font-family: PingFangSC-Regular;
-  font-size: 30rpx;
-  color: #333333;
-  padding-top: 60rpx;
-}
+.space-box{text-align:center;padding-top:180rpx;}
+.space-bg{width:240rpx;height:153rpx;margin:0 auto;}
+.space-bg image{width:100%;height:100%;}
+.space-text{font-family:PingFangSC-Regular;font-size:30rpx;color:#333333;padding-top:60rpx;}

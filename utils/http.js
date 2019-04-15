@@ -60,81 +60,9 @@ function http_request(
             if (res.data.errorCode === 'LOGIN_EXPIRE' || res.data.errorCode === 'token error'){
               console.log('调用重新登录');
 
-              new Promise(function (resolve, reject) {
-                console.log('Promise is ready!');
-                wx.getSetting({
-                  success: (res) => {
-                    console.log(res.authSetting['scope.userInfo']);
-                    if (!res.authSetting['scope.userInfo']) {
-                      wx.reLaunch({
-                        url: '/pages/login/index'
-                      });
-                    } else { //如果已经授权
-                      //判断rowData是否存在
-                      // if (wx.getStorageSync('rawData')) { //如果存在
-                        resolve();
-                      // } else { //如果不存在rowData
-                      //   reject('未获取rawData');
-                      // }
-                    }
-                  }
-                });
-              }).then(function () {
-
-                return new Promise(function (resolve1, reject1) {
-                  wx.login({
-                    success: res => {
-                      console.log('code: ' + res.code);
-                      console.log(constant.APPID);
-                      resolve1(res.code);
-                    }
-                  });
-
-                })
-              }).then(function (code) {
-
-                  wx.request({
-                    url: constant.apiUrl+'/user/login.json',
-                    method: 'GET',
-                    data: {
-                      code: code,
-                      appId: constant.APPID,
-                      isMock: false, //测试标记
-                      rawData: wx.getStorageSync('rawData')
-                    },
-                    header: {
-                      'content-type': 'application/json',
-                    },
-                    success: (res1) => {
-                      console.log(res1);
-
-                      if (res1.data.errorCode == '200') {
-                        wx.setStorageSync('token', res1.data.data.token);
-                        wx.setStorageSync('openid', res1.data.data.openId);
-                        wx.setStorageSync('userinfo', JSON.stringify(res1.data.data));
-                        wx.switchTab({
-                          url: '/pages/index/index',
-                        });
-                        wx.showModal({
-                          title: '登录令牌过期',
-                          content: '已重新登录并返回首页',
-                        });
-                      } else {
-                        wx.showModal({
-                          title: '错误',
-                          content: '登录失败，错误码:' + res1.data.errorCode + ' 返回错误: ' + res1.data.errorInfo
-                        });
-                      }
-                    }
-                  })
-
-                }).catch(function (err) {
-                  console.log(err);
-                  wx.showModal({
-                    title: '错误',
-                    content: err
-                  });
-                });
+              wx.reLaunch({
+                url: '/pages/login/index?isToken=0',
+              });
               
             }else{
               return listener.error(res.data.errorInfo);

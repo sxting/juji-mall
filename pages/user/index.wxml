@@ -69,8 +69,36 @@
     </view>
   </view>
 
-  <view style="margin-top:20rpx;" class="userBox">
-    <view class="ub ub-ac ub-pj" style="padding:30rpx;" bindtap="toPage" data-page="/pages/myCards/index">
+  <view style="margin-top:20rpx;padding-bottom:50rpx;" class="userBox">
+    <view class="ub ub-ac ub-pj">
+      <view class="userGrid ub ub-ver ub-ac" bindtap="toPage" data-page="/pages/activities/myActivity/index?type=BARGAIN">
+        <image class="userGridIcon" src="../../images/icon_my1.png"></image>
+        <view class="userGridText">我的砍价</view>
+      </view>
+      <view class="userGrid ub ub-ver ub-ac" bindtap="toPage" data-page="/pages/activities/myActivity/index?type=SPLICED">
+        <image class="userGridIcon" src="../../images/icon_my2.png"></image>
+        <view class="userGridText">我的拼团</view>
+      </view>
+      <view class="userGrid ub ub-ver ub-ac" bindtap="toPage" data-page="/pages/activities/myActivity/index?type=SEC_KILL">
+        <image class="userGridIcon" src="../../images/icon_my3.png"></image>
+        <view class="userGridText">我的秒杀</view>
+      </view>
+    </view>
+    <view class="ub ub-ac ub-pj">
+      <view class="userGrid ub ub-ver ub-ac" bindtap="toPage" data-page="/pages/myCards/index">
+        <image class="userGridIcon" src="../../images/icon_my4.png"></image>
+        <view class="userGridText">我的卡包</view>
+      </view>
+      <view class="userGrid ub ub-ver ub-ac" bindtap="toPage" data-page="/pages/myComment/index">
+        <image class="userGridIcon" src="../../images/icon_my5.png"></image>
+        <view class="userGridText">我的评价</view>
+      </view>
+      <button class="userGrid ub ub-ver ub-ac" open-type='contact' session-from='weapp'>
+        <image class="userGridIcon" src="../../images/icon_my6.png"></image>
+        <view class="userGridText">在线客服</view>
+      </button>
+    </view>
+    <!-- <view class="ub ub-ac ub-pj" style="padding:30rpx;" bindtap="toPage" data-page="/pages/myCards/index">
       <view class="itemTxt">我的卡包</view>
       <image src="../../images/arrow-right.png" style="width:12rpx;height:22rpx;"></image>
     </view>
@@ -89,7 +117,7 @@
         <button class='kefu tx-l udb' open-type='contact' session-from='weapp'>客服</button>
       </view>
       <image src="../../images/arrow-right.png" style="width:12rpx;height:22rpx;"></image>
-    </view>
+    </view> -->
   </view>
 
   <view class="phoneWrap">

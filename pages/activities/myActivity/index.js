@@ -14,21 +14,31 @@ Page({
         amount: 0,
         restHour:'10',
         restMinute:'00',
-        restSecond:'00'
+        restSecond:'00',
+        activityTxt:''
     },
     onLoad: function(options) {
         wx.setNavigationBarTitle({ title: options.type == 'SPLICED' ? '我的拼团' : '我的砍价' });
+        this.setData({activityTxt:options.type == 'SPLICED' ? '拼团' : '砍价'});
         this.setData({type:options.type});
         this.getData(options.type,1)
     },
     toDetail: function(e) {
+        var activityId = e.currentTarget.dataset.activityid;
+        var activityOrderId = e.currentTarget.dataset.activityorderid;
+        var productId = e.currentTarget.dataset.productid;
         var id = e.currentTarget.dataset.id;
-        wx.navigateTo({ url: "/pages/orderDetail/index?id=" + id });
+        var activityType = e.currentTarget.dataset.activitytype;
+        wx.navigateTo({ url: "../project-detail/index?id=" + productId +'&activityId='+activityId+'&activityOrderId='+activityOrderId+'&type=' +activityType});
+    },
+    toUse:function(){
+        var activityOrderId = e.currentTarget.dataset.activityorderid;
+        wx.navigateTo({ url: "../project-detail/index?id=" + activityOrderId});
     },
     getData: function(type, pageNo) {
         var obj = {
             providerId:wx.getStorageSync('providerId'),
-            activityType: 'SPLICED',
+            activityType: type,
             pageNo: pageNo,
             pageSize: 10
         }

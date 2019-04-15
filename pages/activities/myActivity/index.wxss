@@ -20,7 +20,8 @@ page{box-sizing:border-box;height: 100%;background-color: #fbfbfb}
 .goodAmount text.origin{margin-left:30rpx;font-size:24rpx;color:#999;text-decoration:line-through}
 .goodMsg .num{position: absolute;bottom: 10rpx;right: 20rpx;color: #999;font-size: 22rpx;}
 .orderItem .ctrl{height: 106rpx;}
-.orderItem .ctrl .left{font-size: 24rpx;color: #999;}
+.orderItem .ctrl .left{font-size: 26rpx;color: #E83221;}
+.orderItem .ctrl .left text{display:inline-block;background-color:#E83221;border-radius:10rpx;width:44rpx;height:40rpx;line-height: 40rpx;font-size:26rpx;color:#FFFFFF;letter-spacing:0;text-align: center;}
 .orderItem .ctrl .right{border: 1rpx solid #999999;border-radius: 50rpx;width: 160rpx;height: 50rpx;text-align: center;line-height: 50rpx;font-size: 24rpx;color: #333;}
 .orderItem .ctrl .use{background: #E83221;border-radius: 50rpx;width: 180rpx;height: 66rpx;text-align: center;line-height: 66rpx;font-size: 28rpx;color: #fff;}
 

@@ -32,6 +32,7 @@ Page({
    */
   onLoad: function (options) {
     let self = this;
+    console.log(options);
     this.setData({
       progressId: options.progressId ? options.progressId : '',
       activityId: options.activityId ? options.activityId : '',
@@ -95,8 +96,8 @@ Page({
 function getItemInfo() {
   let that = this;
   let data = {
-    progressId: '2019041515140058718608180',
-    activityId: '2019041216025009299833691',
+    progressId: this.data.progressId,
+    activityId: this.data.activityId,
     activityOrderId: this.data.activityOrderId ? this.data.activityOrderId : '',
     activityType: 'SPLICED'
   }

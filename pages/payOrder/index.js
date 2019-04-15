@@ -644,10 +644,9 @@ Page({
               package: payInfo.package,
               signType: payInfo.signType,
               paySign: payInfo.paySign,
-              success(res) {
-                console.log(res);
+              success(res1) {
                 wx.redirectTo({
-                  url: '/pages/activities/my-collage/index?progressId=' + res.progressId + '&activityOrderId=' + res.activityOrderId + '&activityType=SPLICED' + '&activityId=' + that.data.activityId,
+                  url: '/pages/activities/my-collage/index?progressId=' + res.progressId + '&activityOrderId=' + that.data.activityOrderId + '&activityType=SPLICED' + '&activityId=' + that.data.activityId,
                 });
               },
               fail(res) {

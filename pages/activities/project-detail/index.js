@@ -4,6 +4,7 @@ import { activitiesService } from '../shared/service';
 import { constant } from '../../../utils/constant';
 import { errDialog, loading } from '../../../utils/util';
 var app = getApp();
+
 Page({
   data: {
     productId: '',

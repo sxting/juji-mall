@@ -46,7 +46,7 @@
             <image wx:for='{{item.picArr}}' wx:for-item="picArr" src='{{picArr? picArr : portraitUrl}}'></image>
           </view>
           <text class='text-infor'>还差{{item.resNum}}人拼团成功</text>
-          <text data-groupid='{{item.groupId}}' class='btn-cantuan' data-productid="{{collageInforData.productId}}" catchtap='payImmediately'>去参团</text>
+          <text data-activityorderid='{{item.activityOrderId}}' data-activityid='{{item.activityId}}' class='btn-cantuan' data-productid="{{item.productId}}" catchtap='onGoJoinCollageClick'>去参团</text>
         </view>
       </view>
     </view>

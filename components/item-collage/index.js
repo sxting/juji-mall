@@ -61,19 +61,22 @@ Component({
     console.log(this.data.activityOrderId);
     console.log(this.data.activityId);
     let self = this;
-
     // 是否有其他参团者的活动
-    if (this.data.resData.otherDigests){
+    if (this.data.resData.otherDigests) {
       this.data.resData.otherDigests.forEach(function (item) {
         let picArr = [];
-        item.resNum = (item.totalPeopleCount - item.groupPeopleCount) ? (item.totalPeopleCount - item.groupPeopleCount) : 0;
-        picArr.push(item.picUrl);
+        item.progresses.forEach(function(list){
+          picArr.push(list.avatar);
+        })
+        item.resNum = (2 - picArr.length) ? (2 - picArr.length) : 0;
         for (let i = 0; i < item.resNum; i++) {
           picArr.push('');
         }
         item.picArr = picArr;
       })
     }
+    console.log(this.data.resData.otherDigests);
+
     this.setData({
       pintuanListInfor: this.data.resData.otherDigests,//其他正在参团的小伙伴
       orderStatus: this.data.resData.orderDigest ? this.data.resData.orderDigest.activityOrderStatus : '',//订单状态
@@ -136,7 +139,9 @@ Component({
 
     /****  去参团 ****/
     onGoJoinCollageClick(e){
-
+      wx.navigateTo({
+        url: '/pages/payOrder/index?id=' + e.currentTarget.dataset.productid + '&paytype=5' + '&activityId=' + e.currentTarget.dataset.activityid + '&activityOrderId=' + e.currentTarget.dataset.activityorderid + '&type=SPLICED',
+      })
     },
 
     /****  一键开团 ****/

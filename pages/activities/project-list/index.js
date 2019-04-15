@@ -10,10 +10,10 @@ Page({
    * 页面的初始数据
    */
   data: {
-    sceneType: 'BARGAIN',//查看进入的是什么场景类型  BARGAIN  SPLICED
+    sceneType: 'SPLICED',//查看进入的是什么场景类型  BARGAIN  SPLICED
     productList: [],
     pageNo: 1,
-    providerId: wx.getStorageSync('providerId'),
+    providerId: '',
     ifBottom: false
   },
 
@@ -26,8 +26,12 @@ Page({
       title: options.sceneType == 'SPLICED'? '拼团列表': '砍价列表'
     });
     this.setData({
-      sceneType: options.sceneType
+      sceneType: options.sceneType,
+      providerId: wx.getStorageSync('providerId'),
     })
+    console.log(this.data.providerId);
+    console.log(wx.getStorageSync('providerId'));
+
     getActivityList.call(self);//获取活动列表
   },
 

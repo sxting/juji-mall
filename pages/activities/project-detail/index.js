@@ -4,6 +4,7 @@ import { activitiesService } from '../shared/service';
 import { constant } from '../../../utils/constant';
 import { errDialog, loading } from '../../../utils/util';
 var app = getApp();
+
 Page({
   data: {
     productId: '',
@@ -45,8 +46,6 @@ Page({
       this.setData({ shared: options.shared });
     }
     wx.setNavigationBarTitle({ title: '商品详情' });
-    // 2019041017405721382048345
-    console.log(options);
     this.setData({ 
       productId: options.id, 
       activityId: options.activityId,
@@ -63,9 +62,7 @@ Page({
     // 查询商品详情
     getItemInfo.call(this);
   },
-  onShow: function () {
-    //评论列表
-  },
+  onShow: function () {},
   onShareAppMessage(res) {
     console.log(res + '00');
     // this.share();

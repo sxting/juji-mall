@@ -1,6 +1,7 @@
 import { service } from '../../../service';
 import { constant } from '../../../utils/constant';
 import { errDialog, loading } from '../../../utils/util';
+import { activitiesService } from '../shared/service.js'
 var app = getApp();
 Page({
     data: {
@@ -10,11 +11,14 @@ Page({
         pageNo: 1,
         status: '',
         isFinall: false,
-        amount: 0
+        amount: 0,
+        restHour:'00',
+        restMinute:'00',
+        restSecond:'00'
     },
     onLoad: function(options) {
         wx.setNavigationBarTitle({ title: options.type == 'SPLICED' ? '我的拼团' : '我的砍价' });
-        // this.getData(options.type,1)
+        this.getData(options.type,1)
     },
     toDetail: function(e) {
         var id = e.currentTarget.dataset.id;
@@ -24,11 +28,11 @@ Page({
     getData: function(type, pageNo) {
         var obj = {
             providerId:wx.getStorageSync('providerId'),
-            activityType: type,
+            activityType: 'SPLICED',
             pageNo: pageNo,
             pageSize: 10
         }
-        service.orderlist(obj).subscribe({
+        activitiesService.myOrder(obj).subscribe({
             next: res => {
                 if (res.content.length < 10) {
                     console.log("到底了");

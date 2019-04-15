@@ -34,6 +34,12 @@ Page({
     lat:'',
     lng:'',
     share:0,//首页分享按钮进入值为1
+    showMoreXuZhi: false,//购买须知折叠显示
+    showJoinClub: true,//显示“戳一下加入福利群”模态窗口
+    showJcModal: false,//显示“去回复”模态窗口
+    showJztgModal: false,//显示“桔长推广”模态窗口
+    distributorRole:'',//桔长还是桔园身份
+    welfareGroup: {}//“戳一下加入福利群”数据对象
   },
   onLoad: function(options) {
     if (options.share) {
@@ -55,6 +61,37 @@ Page({
     //查询新用户见面礼
     this.getNewGift();
   },
+  openJztgShare: function(){
+    this.setData({
+      showJztgModal: false
+    })
+    this.showShare();
+  },
+  openJztgModal: function(){
+    if(this.data.distributorRole=='MEMBER'){
+      this.setData({
+        showJztgModal: true
+      });
+    }else{
+      this.showShare();
+    }
+  },
+  closeJztgModal: function(){
+    this.setData({
+      showJztgModal: false
+    })
+  },
+  showJcModal: function(){
+    console.log("showJcModal");
+    this.setData({
+      showJcModal: true
+    })
+  },
+  closeJcModal: function(){
+    this.setData({
+      showJcModal: false
+    })
+  },
   getNewGift:function(){
     service.isNewer().subscribe({
       next: res2 => {
@@ -73,6 +110,11 @@ Page({
       },
       error: err => console.log(err)
     });
+  },
+  toggoleXuzhi: function(){
+    this.setData({
+      showMoreXuZhi: !this.data.showMoreXuZhi
+    })
   },
   previewImage: function (e) {
     var arr = [];
@@ -243,6 +285,9 @@ Page({
             commentCount: res.commentCount,
             recommendCount: res.recommendList.length,
             note: result,
+            showJoinClub: res.welfareGroup?true: false,
+            distributorRole: res.distributorRole,
+            welfareGroup: res.welfareGroup,
             showPics: picsStrArr,
             isShowData: true,
             lat: res.store.lat,
@@ -260,6 +305,9 @@ Page({
             store: res.store,
             commentCount: res.commentCount,
             recommendCount: res.recommendList.length,
+            showJoinClub: res.welfareGroup ? true : false,
+            distributorRole: res.distributorRole,
+            welfareGroup: res.welfareGroup,
             showPics: picsStrArr,
             isShowData: true,
             lat: res.store.lat,
@@ -382,7 +430,6 @@ Page({
                 if (res1.statusCode === 200) {
                     this.setData({erwmImg:res1.tempFilePath});
                     var info = this.data.productInfo;
-                    wx.hideLoading();
                     var point = info.point==null||info.point==0?'':info.point+'桔子';
                     var price = info.price==null||info.price==0?'':Number(info.price/100).toFixed(2)+'元';
                     var link = (info.price!=null&&info.price!=0)&&(info.point!=null&&info.point!=0)?'+':'';
@@ -442,7 +489,9 @@ Page({
       var nickName = name.length>8?name.substring(0,8)+'...':name;
       setText(context,nickName, 70, 360,"#333",12,'left');
       setText(context,"私藏好物，分享给你", 70, 379,'#666',11,'left');
-      context.draw();
+      context.draw(true,function(){
+        wx.hideLoading();
+      });
   },
   savePic: function(e) {
       var type = e.currentTarget.dataset.type;

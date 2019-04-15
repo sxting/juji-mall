@@ -1,13 +1,64 @@
-<view style="background:#fff;padding:30rpx 0;">
-  <view class="text">方法1：新用户首次进入桔集赠送30桔子。</view>
-  <!-- <image src="../../images/article_1.png" class="center" style="width:690rpx;height:1260rpx;"></image> -->
-  <view class="text">方法2：每日签到可以获得桔子，每次最多获得20个桔子。</view>
-  <!-- <image src="../../images/article_2.jpeg" class="center" style="width:690rpx;height:900rpx;"></image> -->
-  <view class="text">方法3：每次分享商品给朋友，可以获得5个桔子。</view>
-  <!-- <image src="../../images/article_3.png" class="center" style="width:690rpx;height:680rpx"></image> -->
-  <view class="text">方法4：消费后评价获得桔子，图文最多获得20个桔子。</view>
-  <!-- <image src="../../images/article_4.png" class="center" style="width:690rpx;height:980rpx"></image> -->
-  <view class="text">方法5：通过桔集支付获得桔子，消费1元获得1个桔子。</view>
-  <!-- <image src="../../images/article_5.png" class="center" style="width:690rpx;height:940rpx"></image> -->
-  <view class="text">更多桔子玩法敬请期待～</view>
+<view class="main">
+    <view class="toper2">
+        <image class="udb topBg2" src="../../images/ytop2.png" mode="scaleToFill"></image>
+        <view class="topCon2">
+            <image class="juzhang2" src="../../images/juzhang2.png"></image>
+            <view class="tx-c">接下来开启您的推广赚钱之旅！</view>
+        </view>
+    </view>
+    <view class="form">
+        <view class="item">
+            <input type="text" placeholder="请填写您的微信账号" name="phone" bindinput="dataChange1" maxlength="11" focus="true" class="bindInput" />
+        </view>
+        <view class="item" style="margin-top:50rpx;">
+            <input type="text" placeholder="请填写您的微信实名认证姓名" name="authCode" bindinput="dataChange2" class="bindInput" />
+        </view>
+        <view class="remark">请如实填写以上信息，推广获得的收入将自动提现到微信零钱</view>
+        <button class="btn2" style="color:#333;background-color:#ffdc00;">确定</button>
+    </view>
 </view>
+
+<!-- <view class="main">
+    <view class="toper1">
+      <image class="udb topBg1" src="../../images/ytop1.png" mode="scaleToFill"></image>
+      <view class="topCon1">
+          <image class="juzhang1" src="../../images/juzhang1.png"></image>
+          <view class="tx-c">成功邀请10名新人，即可获得桔长资格</view>
+      </view>
+      <view class="menuDiv" style="background-color: #fff;">
+          <view class="menulist ub ub-ac ub-pj">
+            <view class="item ub ub-ver ub-ac ub-pc">
+              <image class="icon_menu" src="../../images/icon_menu2.png"></image>
+              <view class="tx-c">零囤货</view>
+            </view>
+            <view class="item ub ub-ver ub-ac ub-pc">
+              <image class="icon_menu" src="../../images/icon_menu1.png"></image>
+              <view class="tx-c">零风险</view>
+            </view>
+            <view class="item ub ub-ver ub-ac ub-pc">
+              <image class="icon_menu" src="../../images/icon_menu3.png"></image>
+              <view class="tx-c">零压力</view>
+            </view>
+          </view>
+          <button class="btn1" style="color:#333;background-color:#ffdc00;">立即邀请新人</button>
+      </view>
+    </view>
+    <view class="txtCon">
+      <view class="txtTit">
+        <image class="titbg" src="../../images/titbg.png"></image>
+        <view class="tittext">桔长专属权益</view>
+      </view>
+      <view class="titTxt">专享低价</view>
+      <view class="conTxt">可享受桔长超低专属折扣，自购超级省钱</view>
+      <view class="titTxt">推广赚钱</view>
+      <view class="conTxt">推广商品，平均可获得15%的商品返利</view>
+      <view class="titTxt">实收金额对账</view>
+      <view class="conTxt">桔长可享受更多免费体验吃喝玩乐游的机会</view>
+      <view class="titTxt">免费体验</view>
+      <view class="conTxt">可享受桔长超低专属折扣，自购超级省钱</view>
+      <view class="titTxt">专属培训</view>
+      <view class="conTxt">可享受专属营销推广培训，平台专业运营人员手把手传授</view>
+      <view class="titTxt">轻松推广</view>
+      <view class="conTxt">推广素材可由平台小编编写，一键保存转发即可</view>
+    </view>
+</view> -->

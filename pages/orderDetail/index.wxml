@@ -68,11 +68,26 @@
         <view class="txt ub-f1">有限期内未使用将自动退款</view>
         <view class="btn ub ub-ac ub-pc" bindtap="reFund">退款</view>
     </view>
+
+    <view class="orderInfo8 plr15 mt10">
+        <view class="tit">门店信息</view>
+        <view class="txt4 ub ub-ac" style="margin-top:20rpx">
+            <view class="txt6 ub-f1">{{storeInfo.extMap.nearStore.name}}</view>
+            <view class="ub ub-ac txt5" bindtap="toMerchantsList">适用{{storeInfo.extMap.applyStoreCount}}家门店<image style="width:12rpx;height:22rpx;margin-left:10rpx;" src="../../images/arrow-right.png"></image></view>
+        </view>
+        <view class="div4 ub ub-ac" style="margin-top:20rpx">
+            <image style="width:20rpx;height:23rpx;margin-right:10rpx;" src="../../images/location1.png"></image>
+            <view class="text ub-f1" bindtap="toMap" data-lng="{{storeInfo.extMap.nearStore.lng}}" data-lat="{{storeInfo.extMap.nearStore.lat}}">{{storeInfo.extMap.nearStore.address}}</view>
+            <image style="width:30rpx;height:30rpx;" src="../../images/dianhua1.png" bindtap="callPhone" data-tel="{{storeInfo.extMap.nearStore.phone}}"></image>
+        </view>
+    </view>
+
     <view class="orderInfo3 plr15 mt10">
         <view class="tit">订单信息</view>
         <view class="txt" style="position:relative">订单编号：{{orderInfo.orderId}} <view class="btn ub ub-ac ub-pc" bindtap="copyBtn">复制</view></view>
         <view class="txt">下单时间：{{orderInfo.dateCreated}}</view>
     </view>
+
     <view class="btnWrap" wx:if="{{orderInfo.status=='CREATED'}}">
         <view class="payBtn" bindtap="toPay" data-id="{{orderInfo.orderId}}">立即付款</view>
     </view>

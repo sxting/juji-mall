@@ -4,11 +4,13 @@
       <view class="item ub ub-ac" wx:for="{{merchantsList}}" wx:key="{{index}}">
         <view class="ub-f1">
           <view class="name">{{item.name}}</view>
-          <view class="address">
-            <image src="../../images/location.png" class="icon1"></image>{{item.address}}
+          <view class="ub address" bindtap="toMap" data-lng="{{item.lng}}" data-lat="{{item.lat}}">
+            <image src="../../images/location.png" class="icon1"></image>
+            <view class="txt ub-f1">{{item.address}}</view>
           </view>
-          <view class="phone" bindtap="callPhone" data-phone="{{item.phone}}">
-            <image src="../../images/dianhua.png" class="icon2"></image>{{item.phone}}
+          <view class="ub phone" bindtap="callPhone" data-phone="{{item.phone}}">
+            <image src="../../images/dianhua.png" class="icon2"></image>
+            <view class="txt ub-f1">{{item.phone}}</view>
           </view>
         </view>
       </view>

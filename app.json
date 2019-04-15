@@ -39,7 +39,9 @@
     "pages/activities/project-detail/index",
     "pages/activities/project-list/index",
     "pages/activities/myActivity/index",
-    "pages/activities/my-collage/index"
+    "pages/activities/my-collage/index",
+    "pages/payDetail/index",
+    "pages/mypayDetail/index"
   ],
   "permission": {
     "scope.userLocation": {

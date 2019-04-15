@@ -763,6 +763,7 @@ Page({
       sortArray: ['ASC', 'ASC', 'ASC', 'DESC']
     });
     this.getIndexData();
+    this.currentPoint();
     //根据位置查询附近精选
     var obj = {
       providerId: that.data.providerId,

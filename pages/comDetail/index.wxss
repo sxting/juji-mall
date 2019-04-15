@@ -20,7 +20,7 @@ page {
 .typePop {
   width: 140rpx;
   height: 60rpx;
-  background: #fcbf0a;
+  background: #ffdb00;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -227,7 +227,7 @@ page {
 .yuanjia-xiadan {
   width: 440rpx;
   height: 88rpx;
-  background-image: linear-gradient(-269deg, #ffdc00 0%, #fcbf0a 100%);
+  background: #ffdb00;
   border-radius: 44px;
   color: #333;
   line-height: 80rpx;

@@ -11,7 +11,7 @@
         <view class="typePop" wx:if="{{productInfo.type=='POINT'}}">桔子换礼</view>
     </view>
     <view class="businessInfo-wrap">
-        <view class="businessInfo">
+        <view class="businessInfo" style="padding-bottom:{{showJoinClub?'10rpx':'30rpx'}};">
             <view style="display:flex;justify-content: space-between;align-items: flex-start;">
                 <view class="title">
                     {{productInfo.productName}}

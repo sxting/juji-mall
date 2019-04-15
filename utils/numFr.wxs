@@ -1,6 +1,6 @@
 var filters = {
   toNum: function (value) {
-    return Number(value);
+    return Number(value).toFixed(2);
   },
   toFix: function(value) {
     return Number(value / 100).toFixed(2);

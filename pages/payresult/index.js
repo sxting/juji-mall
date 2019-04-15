@@ -16,6 +16,7 @@ Page({
     payUrl: 'https://juji.juniuo.com',
     showDetail: false,
     recommendList: [],
+    type:'',
     point: 0,
     preBalance: 0,
     balance: 0,
@@ -64,6 +65,7 @@ Page({
            console.log(res);
            if(res.data.errorCode=='0'){
              this.setData({
+               type: res.data.data.type,
                zhuheAmount: res.data.data.wxPayMoney && res.data.data.wxPayMoney > 0 && res.data.data.prepayMoney > 0 ? (Number(res.data.data.prepayMoney) + Number(res.data.data.wxPayMoney)).toFixed(2) : res.data.data.prepayMoney,
                aMoney: res.data.data.givingMoney ? (Number(res.data.data.addMoney) - Number(res.data.data.givingMoney)).toFixed(2) : res.data.data.addMoney,
                givingMoney: res.data.data.givingMoney ? res.data.data.givingMoney:0,

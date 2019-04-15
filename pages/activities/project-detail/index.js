@@ -36,7 +36,7 @@ Page({
     activityOrderId: '',
     activityId: '',
     resData: '',
-    aa: 'a'
+    self: ''
   },
   onLoad: function (options) {
     if (options.shared) {
@@ -47,7 +47,8 @@ Page({
     this.setData({ 
       productId: options.id, 
       activityId: options.activityId,
-      type: options.type ? options.type : '' 
+      type: options.type ? options.type : '',
+      activityOrderId: options.activityOrderId ? options.activityOrderId : '',
     });
     if (options.storeid) {
       this.setData({ storeId: options.storeid });
@@ -96,6 +97,17 @@ Page({
       }
     }
   },
+
+  onStartKanjia(e) {
+    console.log(e.detail);
+    if (e.detail) {
+      this.setData({
+        activityOrderId: e.detail.activityOrderId
+      })
+    }
+  },
+
+
   previewImage: function (e) {
     var arr = [];
     var url = constant.basePicUrl + e.currentTarget.dataset.url + '/resize_0_0/mode_fill';
@@ -174,6 +186,7 @@ Page({
 
 function getItemInfo() {
   let that = this;
+  console.log(this.data.activityOrderId);
   activitiesService.activity({
     activityId: this.data.activityId,
     activityOrderId: this.data.activityOrderId ? this.data.activityOrderId : '',
@@ -201,7 +214,9 @@ function getItemInfo() {
           isShowData: true,
           lat: res.product.store ? res.product.store.lat : '',
           lng: res.product.store ? res.product.store.lng : '',
-          resData: res
+          resData: res,
+          activityOrderId: res.orderDigest ? res.orderDigest.activityOrderId : '',
+          self: (!res.orderDigest) || (res.orderDigest && res.orderDigest.isInitiator)
         });
       }).catch(function (err) {
         that.setData({
@@ -216,7 +231,9 @@ function getItemInfo() {
           isShowData: true,
           lat: res.product.store.lat,
           lng: res.product.store.lng,
-          resData: res
+          resData: res,
+          activityOrderId: res.orderDigest ? res.orderDigest.activityOrderId : '',
+          self: (!res.orderDigest) || (res.orderDigest && res.orderDigest.isInitiator)
         });
       })
 

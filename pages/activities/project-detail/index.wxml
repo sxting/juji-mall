@@ -14,7 +14,7 @@
   <!-- 活动状态 -->
   <view class='w-100'>
     <item-collage wx:if="{{type === 'SPLICED'}}" fleg='content' collageInforData="{{productInfo}}" resData="{{resData}}" activityOrderId="{{activityOrderId}}" activityId="{{activityId}}"></item-collage>
-    <kanjia wx:if="{{type === 'BARGAIN'}}" product-info="{{productInfo}}" activity-order-id="{{activityOrderId}}" activity-id="{{activityId}}" res-data="{{resData}}"></kanjia>
+    <kanjia wx:if="{{type === 'BARGAIN'}}" product-info="{{productInfo}}" activity-order-id="{{activityOrderId}}" activity-id="{{activityId}}" res-data="{{resData}}" bind:myevent="onStartKanjia"></kanjia>
   </view>
 
   <view class="yongkaxuzhi-wrap" style="margin-top:20rpx;">
@@ -147,7 +147,7 @@
     </view>
   </view>
 
-  <view class="footer">
+  <view class="footer" wx:if="{{!(type === 'BARGAIN' && !self)}}">
     <view class="homeWrap" bindtap="gohomepage">
         <image src="../../../images/shouye.png" style="width:40rpx;height:40rpx;"></image>
         <view class="home">首页</view>

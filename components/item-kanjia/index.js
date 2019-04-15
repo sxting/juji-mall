@@ -35,7 +35,6 @@ Component({
     hours: 23,
     minites: 20,
     seconds: 58,
-    aaaa: 1
   },
 
   ready: function () {
@@ -43,11 +42,6 @@ Component({
   },
 
   methods: {
-    click() {
-      this.setData({
-        aaaa: 2
-      })
-    },
     onlyBuy(e) {
       let resData = JSON.stringify(this.data.resData); 
       if (e.currentTarget.dataset.type == '1') {
@@ -70,7 +64,6 @@ Component({
       let data = {
         activityId: this.data.activityId
       };
-      console.log(data)
       componentService.initiateBargain(data).subscribe({
         next: res => {
           if (res) {
@@ -78,6 +71,11 @@ Component({
               showAlert1: true,
               activityOrderId: res
             })
+            const myEventDetail = {
+              activityOrderId: this.data.activityOrderId
+            } // detail对象，提供给事件监听函数
+            const myEventOption = {} // 触发事件的选项
+            this.triggerEvent('myevent', myEventDetail, myEventOption)
             doBargain.call(this);
           }
         },
@@ -157,7 +155,7 @@ function getData() {
 
 function dataFun(res) {
   let self = this;
-  if (res.orderDigest && res.orderDigest.currentSalesPrice) {
+  if (res.orderDigest) {
     res.yikan = NP.minus(res.originalPrice, res.orderDigest.currentSalesPrice)
   }
 
@@ -172,8 +170,6 @@ function dataFun(res) {
       case "FAIL": status = 'fail'
     }
   }
-
-  console.log(status);
 
   /* 倒计时start */
   if (res.orderDigest && res.orderDigest.expirationTime) {
@@ -233,5 +229,5 @@ function dataFun(res) {
     self: (!res.orderDigest) || (res.orderDigest && res.orderDigest.isInitiator)
   })
 
-  console.log(this.data.status)
+  console.log(res)
 }

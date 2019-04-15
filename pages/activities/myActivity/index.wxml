@@ -17,7 +17,10 @@
                 </view>
             </view>
             <view class="ctrl plr15 ub ub-ac ub-pj">
-                <view class="left">您已成功付款，请到店展示消费码消费</view>
+                <view class="left">
+                  <text>{{restHour}}</text> : <text>{{restMinute}}</text> : <text>{{restSecond}}</text>
+                    后结束
+                </view>
                 <view class="use" data-id="{{item.id}}">去使用</view>
                 <!-- <view class="right" data-id="{{item.id}}">邀请好友拼团</view> -->
             </view>

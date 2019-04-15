@@ -321,7 +321,7 @@
     </view>
 
 
-    <view class="jcModalWrap" wx:if="{{showJcModal}}">
+    <view class="jcModalWrap" hidden="{{!showJcModal}}">
       <view class="jcModal">
       <image src="https://upic.juniuo.com/file/picture/26TNbptnW_Qp/resize_530_236/mode_fill" style="width:100%;height: 236rpx;border-top-left-radius: 20rpx;border-top-right-radius: 20rpx;"></image>
       <view class="jcModalText" style="margin-top:57rpx;">点击下方“去回复”按钮，并发送</view>

@@ -46,19 +46,22 @@ Page({
    * 去订单详情页面
    */
   switchToOrderDetailPage: function () {
-    wx.navigateTo({ 
-      url: 'pages/orderDetail/index?id=' + this.data.orderId + '&storeid=' + this.data.storeId
-    })
+    let self = this;
+    console.log(this.data.activityOrderId + '/' + this.data.progressId);
+    wx.navigateTo({
+      url: '/pages/orderDetail/index?id=' + self.data.activityOrderId + '&storeid=' + self.data.storeId
+    });
   },
 
   /**
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
+    let self = this;
     return {
       title: '嗨！便宜一起拼￥' + this.data.productInfo.activityPrice / 100 + '【' + this.data.productInfo.productName + '】',
-      path: '/pages/login/index?pagetype=projectDetail&type=' + this.data.activityType + '&activityId=' + this.data.activityId + '&activityOrderId=' + this.data.activityOrderId + '&progressId=' + this.data.progressId,
-      imageUrl: constant.basePicUrl + this.data.productInfo.cover + '/resize_751_420/mode_fill',
+      path: '/pages/login/index?pagetype=projectDetail&type=' + self.data.activityType + '&activityId=' + self.data.activityId + '&activityOrderId=' + self.data.activityOrderId + '&progressId=' + self.data.progressId,
+      imageUrl: constant.basePicUrl + self.data.productInfo.cover + '/resize_751_420/mode_fill',
     }
   },
 
@@ -148,25 +151,18 @@ function getItemInfo() {
         }
 
         /** 参团的人 **/
-        let picArrImages = [];
         if (res.orderDigest && res.orderDigest.progresses.length != 0){
-          res.orderDigest.progresses.forEach(function (item) {
-            let picArr = [];
-            picArr.push(item.avatar);
-            item.resNum = (2 - res.orderDigest.progresses.length) ? (2 - res.orderDigest.progresses.length) : 0;
-            for (let i = 0; i < item.resNum; i++) {
-              picArr.push('');
-            }
-            picArrImages = picArr;
-          })
+          let resNum = 2 - res.orderDigest.progresses.length;
+          for (let i = 0; i < resNum; i++) {
+            res.orderDigest.progresses.push({});
+          }
         }
-        console.log(picArrImages);
         that.setData({
           productInfo: res,
           productOrderInfo: res.orderDigest,
           store: res.product.store,
           storeId: res.product.store.id,
-          headPortraitList: picArrImages,
+          headPortraitList: res.orderDigest.progresses,
           productId: res.orderDigest ? res.orderDigest.productId : '',
           activityStatus: res.orderDigest? res.orderDigest.activityOrderStatus : '',
         })

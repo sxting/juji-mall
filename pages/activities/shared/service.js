@@ -15,6 +15,11 @@ activitiesService.activityList = (data) => {
   return http.get(url, data);
 }
 
+activitiesService.myOrder = (data) =>{
+	let url = API + '/activity/consumer/orders.json';
+	return http.get(url, data);
+}
+
 module.exports = {
   activitiesService: activitiesService
 }

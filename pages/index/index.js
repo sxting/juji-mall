@@ -385,6 +385,7 @@ Page({
           })
           return;
         }
+        this.currentPoint();
         //如果没有更换城市 有两种情况 一种是由其他城市切回所在城市 一种是由其他页面回退到本页面
         if (this.data.locationCode == wx.getStorageSync('selectCode')) {
           return;
@@ -498,6 +499,7 @@ Page({
 
       }
     } else { //不存在 定位获取
+      this.currentPoint();
       if (this.data.isFirstShow) {
         this.setData({
           isFirstShow: false

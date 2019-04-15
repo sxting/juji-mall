@@ -15,6 +15,7 @@
   box-shadow: 0 0 5rpx 1rpx #E83221;
   border-radius: 45rpx 0 0 45rpx;
   line-height: 84rpx;
+  z-index: 1000
 }
 
 .fixed-button .type-icon{

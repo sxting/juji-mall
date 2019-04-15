@@ -143,7 +143,8 @@ page {
   color: #E83221;
 }
 .title-text{
-  text-align: center
+  text-align: center;
+  margin-bottom: 50rpx
 }
 .situation-box{
   text-align: center;

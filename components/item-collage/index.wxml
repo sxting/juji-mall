@@ -20,13 +20,13 @@
         </view>
         <view class='head-portrait-box'>
             <view class='head-portrait' wx:for="{{ headPortraitList }}" wx:for-index="index">
-              <image src='{{ portraitUrl }}'></image>
+              <image src='{{ item.avatar? item.avatar : portraitUrl }}'></image>
               <view class='bg-colonel' wx:if="{{index === 0}}">
                 <image src='/images/colonel-bg.png'></image><text>团长</text>
               </view>
             </view>
         </view>
-        <view class='text-describe'>还差{{(orderInfor.participateCount - orderInfor.participantQuantity)? orderInfor.participateCount - orderInfor.participantQuantity : 0}}人拼团成功</view>
+        <view class='text-describe'>还差{{resNum? resNum : 0}}人拼团成功</view>
       </view>
       <!-- 该团失败 -->
       <view class='text-describe'  wx:if="{{orderStatus == 'FAIL'}}">该团已失败，可选择开团或参与其他团</view>
@@ -55,16 +55,16 @@
 <!-- 底部按钮模块 -->
 <view class='btn-box' wx:else>
   <!-- 一键开团 -->
-  <view class='group-buying btns' wx:if="{{(orderStatus != 'IN_PROGRESS') || (orderStatus != 'FAIL') || (orderStatus != 'SUCCESS')}}" data-productid="{{collageInforData.productId}}" catchtap='payImmediately'>一键开团 {{format.toFix(resData.activityPrice)}}元</view>
+  <view class='group-buying btns' wx:if="{{orderStatus == ''}}" data-productid="{{collageInforData.productId}}" catchtap='payImmediately'>一键开团 {{format.toFix(resData.activityPrice)}}元</view>
 
   <!-- 1、进入 库存不足 拼团失败 2、拼团成功，进入库存不足  无论自己或者他人-->
   <view class='low-stocks btns' wx:if="{{(orderStatus == 'FAIL' || orderStatus == 'SUCCESS') && orderStock == 0}}">库存不足，可选择参团</view>
 
   <!-- 他人进入 已经拼团成功  -->
-  <view class='group-buying btns' wx:if="{{orderStatus == 'SUCCESS' && isInitiator == 0}}">我来开这个团</view>
+  <view class='group-buying btns' wx:if="{{orderStatus == 'SUCCESS' && isInitiator == 0}}"  data-productid="{{collageInforData.productId}}" catchtap='payImmediately'>我来开这个团</view>
 
   <!-- 自己进入，已经拼团失败 重新开团 -->
-  <view class='group-buying btns' wx:if="{{ orderStatus == 'FAIL' && isInitiator == 1 }}">重新开这个团</view>
+  <view class='group-buying btns' wx:if="{{ orderStatus == 'FAIL' && isInitiator == 1 }}"  data-productid="{{collageInforData.productId}}" catchtap='payImmediately'>重新开这个团</view>
 
   <!-- 拼团中  自己进入 -->
   <button class="btns group-buying" open-type="share"  data-type="pintuan" wx:if="{{ orderStatus == 'IN_PROGRESS' && isInitiator == 1 }}">邀请好友拼团</button>

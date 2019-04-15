@@ -54,6 +54,7 @@ Component({
     restHour: '00',
     restMinute: '00',
     restSecond: '00',
+    resNum: 0
   },
 
   ready: function () {
@@ -75,9 +76,20 @@ Component({
         item.picArr = picArr;
       })
     }
-    console.log(this.data.resData.otherDigests);
+
+    // 正在参团的人
+    if (this.data.resData.orderDigest && this.data.resData.orderDigest.progresses){
+      let resNum = 2 - this.data.resData.orderDigest.progresses.length;
+      for(let j = 0; j < resNum; j++){
+        this.data.resData.orderDigest.progresses.push({});
+      }
+      this.setData({
+        resNum: resNum
+      })
+    }
 
     this.setData({
+      headPortraitList: this.data.resData.orderDigest.progresses ? this.data.resData.orderDigest.progresses : [],
       pintuanListInfor: this.data.resData.otherDigests,//其他正在参团的小伙伴
       orderStatus: this.data.resData.orderDigest ? this.data.resData.orderDigest.activityOrderStatus : '',//订单状态
       isInitiator: this.data.resData.orderDigest ? this.data.resData.orderDigest.isInitiator : 1,//是否为发起者 (判断进入是自己还是他人)

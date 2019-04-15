@@ -151,14 +151,16 @@
   margin-right: 40rpx;
   width:99rpx;
   height:99rpx;
-  position: relative
+  position: relative;
+  border-radius: 50%;
 }
 .head-portrait-box .head-portrait:last-of-type{
   margin-right: 0
 }
 .head-portrait-box .head-portrait image{
   width: 99rpx;
-  height: 99rpx
+  height: 99rpx;
+  border-radius: 50%
 }
 .head-portrait .bg-colonel image{
   width: 64rpx;

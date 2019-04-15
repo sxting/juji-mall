@@ -62,7 +62,10 @@ Page({
     // 查询商品详情
     getItemInfo.call(this);
   },
-  onShow: function () {},
+  onShow: function () {
+    // 查询商品详情
+    getItemInfo.call(this);
+  },
   onShareAppMessage(res) {
     console.log(res + '00');
     // this.share();

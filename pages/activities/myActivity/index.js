@@ -7,22 +7,22 @@ Page({
     data: {
         constant: constant,
         isShowNodata: false,
-        orderlist: [{},{}],
+        orderlist: [],
         pageNo: 1,
-        status: '',
+        type: '',
         isFinall: false,
         amount: 0,
-        restHour:'00',
+        restHour:'10',
         restMinute:'00',
         restSecond:'00'
     },
     onLoad: function(options) {
         wx.setNavigationBarTitle({ title: options.type == 'SPLICED' ? '我的拼团' : '我的砍价' });
+        this.setData({type:options.type});
         this.getData(options.type,1)
     },
     toDetail: function(e) {
         var id = e.currentTarget.dataset.id;
-        var status = e.currentTarget.dataset.status;
         wx.navigateTo({ url: "/pages/orderDetail/index?id=" + id });
     },
     getData: function(type, pageNo) {
@@ -34,16 +34,16 @@ Page({
         }
         activitiesService.myOrder(obj).subscribe({
             next: res => {
-                if (res.content.length < 10) {
+                if (res.length < 10) {
                     console.log("到底了");
                     this.setData({ isFinall: true });
                 } else {
                     this.setData({ isFinall: false });
                 }
                 if (pageNo == 1) {
-                    this.setData({ orderlist: res.content });
+                    this.setData({ orderlist: res });
                 } else {
-                    this.setData({ orderlist: this.data.orderlist.concat(res.content) });
+                    this.setData({ orderlist: this.data.orderlist.concat(res) });
                 }
                 this.setData({ isShowNodata: this.data.orderlist.length == 0 });
             },
@@ -54,7 +54,7 @@ Page({
     //下拉刷新
     onPullDownRefresh() {
         this.setData({ pageNo: 1 });
-        this.getData(this.data.status, 1);
+        this.getData(this.data.type, 1);
     },
 
     //上拉加载
@@ -63,6 +63,6 @@ Page({
             return;
         }
         var pageNo = this.data.pageNo + 1;
-        this.getData(this.data.status, pageNo);
+        this.getData(this.data.type, pageNo);
     }
 });

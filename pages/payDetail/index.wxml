@@ -117,7 +117,7 @@
     <view class="item" wx:if="{{dataInfo.type=='recommend'}}">
       <view class="label">本次储值金额</view>
       <view class="value">
-        {{dataInfo.addMoney?dataInfo.addMoney:0}}
+        {{dataInfo.addMoney?filter.toNum(dataInfo.addMoney-dataInfo.givingMoney):0}}
       </view>
     </view>
     <view class="item" wx:if="{{dataInfo.type=='recommend'}}">

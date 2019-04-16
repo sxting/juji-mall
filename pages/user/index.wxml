@@ -76,7 +76,7 @@
         <view class="userGridText">我的砍价</view>
       </view>
       <view class="userGrid ub ub-ver ub-ac" bindtap="toPage" data-page="/pages/activities/myActivity/index?type=SPLICED">
-        <image class="userGridIcon" src="../../images/icon_my2.png"></image>
+        <image class="userGridIcon" width="width" src="../../images/icon_my2.png"></image>
         <view class="userGridText">我的拼团</view>
       </view>
       <view class="userGrid ub ub-ver ub-ac" bindtap="toPage" data-page="/pages/activities/myActivity/index?type=SEC_KILL">

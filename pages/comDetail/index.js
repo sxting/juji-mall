@@ -118,7 +118,7 @@ Page({
   },
   previewImage: function (e) {
     var arr = [];
-    var url = constant.basePicUrl + e.currentTarget.dataset.url + '/resize_0_0/mode_fill';
+    var url = constant.basePicUrl + e.currentTarget.dataset.url + '/resize_0_0/mode_fill/format_webp/quality_0';
     arr.push(url);
     wx.previewImage({
       urls: arr // 需要预览的图片http链接列表
@@ -270,7 +270,7 @@ Page({
         console.log(res);
         var picsStrArr = res.product.picIds.split(',');
         picsStrArr.forEach(function(item,index){
-          picsStrArr[index] = constant.basePicUrl + item + '/resize_751_420/mode_fill'
+          picsStrArr[index] = constant.basePicUrl + item + '/resize_751_420/mode_fill/format_webp/quality_0'
         });
         new Promise(function(resolve,reject){
           let str = JSON.parse(res.product.note);
@@ -379,7 +379,7 @@ Page({
   // 点击分享
   showShare:function(){
     console.log('生成分享图片');
-    console.log(constant.basePicUrl+this.data.productInfo.picId+'/resize_750_420/mode_fill');
+    console.log(constant.basePicUrl + this.data.productInfo.picId +'/resize_750_420/mode_fill/format_webp/quality_0');
     service.userInfo({ openId: wx.getStorageSync('openid') }).subscribe({
         next: res => {
             this.setData({
@@ -388,7 +388,7 @@ Page({
             });
             wx.showLoading({title: '生成分享图片'});
             wx.downloadFile({
-              url: constant.basePicUrl+this.data.productInfo.picId+'/resize_750_420/mode_fill',
+              url: constant.basePicUrl + this.data.productInfo.picId +'/resize_750_420/mode_fill/format_webp/quality_0',
               success: (res) => {
                 if (res.statusCode === 200) {
                     this.setData({headImg:res.tempFilePath});
@@ -425,7 +425,7 @@ Page({
           next: res => {
             var picId = res;
             wx.downloadFile({
-              url: constant.basePicUrl+picId+'/resize_200_200/mode_fill',
+              url: constant.basePicUrl + picId +'/resize_200_200/mode_fill/format_webp/quality_0',
               success: (res1) => {
                 if (res1.statusCode === 200) {
                     this.setData({erwmImg:res1.tempFilePath});

@@ -50,13 +50,13 @@ Page({
     })
   },
   getData: function(orderId) {
-    service.orderInfo({orderId: orderId}).subscribe({
+    service.orderInfo({orderId: orderId,lng:wx.getStorageSync('curLongitude'),lat:wx.getStorageSync('curLatitude')}).subscribe({
       next: res => {
         this.setData({orderInfo: res});
         this.setData({preOrderStr:res.preOrderStr});
         this.setData({storeInfo:res.orderItemList[0]})
         if(res.status=='PAID'){
-          if(!this.data.isTimeOpen){
+          if(!this.data.isTimeOpen&&res.vouchers.length>0){
             this.getListVoucher(res.vouchers[0].voucherCode);
           }
         }
@@ -67,7 +67,7 @@ Page({
           this.setData({isTimeOpen:false});
           console.log('关闭定时器');
           console.log(timer);
-          if(!this.data.isTimeOpen){
+          if(!this.data.isTimeOpen&&res.vouchers.length>0){
             this.getListVoucher(res.vouchers[0].voucherCode);
           }
         }

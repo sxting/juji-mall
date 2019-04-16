@@ -89,13 +89,14 @@ Component({
     }
 
     this.setData({
-      headPortraitList: this.data.resData.orderDigest.progresses ? this.data.resData.orderDigest.progresses : [],
+      headPortraitList: this.data.resData.orderDigest&&this.data.resData.orderDigest.progresses ? this.data.resData.orderDigest.progresses : [],
       pintuanListInfor: this.data.resData.otherDigests,//其他正在参团的小伙伴
       orderStatus: this.data.resData.orderDigest ? this.data.resData.orderDigest.activityOrderStatus : '',//订单状态
       isInitiator: this.data.resData.orderDigest ? this.data.resData.orderDigest.isInitiator : 1,//是否为发起者 (判断进入是自己还是他人)
       orderStock: this.data.resData.orderDigest ? this.data.resData.orderDigest.stock : 0,//查看此活动的库存
       orderInfor: this.data.resData.orderDigest,//订单信息
     })
+    console.log(this.data.resData.otherDigests.length);
 
     /** 拼团数据 **/
     let countDownTime = '';

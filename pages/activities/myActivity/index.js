@@ -31,9 +31,12 @@ Page({
         var activityType = e.currentTarget.dataset.activitytype;
         wx.navigateTo({ url: "../project-detail/index?id=" + productId +'&activityId='+activityId+'&activityOrderId='+activityOrderId+'&type=' +activityType});
     },
-    toUse:function(){
+    toUse:function(e){
         var activityOrderId = e.currentTarget.dataset.activityorderid;
-        wx.navigateTo({ url: "../project-detail/index?id=" + activityOrderId});
+        wx.navigateTo({ url: "/pages/orderDetail/index?id=" + activityOrderId});
+    },
+    toPay:function(){
+
     },
     getData: function(type, pageNo) {
         var obj = {

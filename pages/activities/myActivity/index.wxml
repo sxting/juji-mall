@@ -2,34 +2,55 @@
 <view class="fullScreen">
     <view class="main p10">
         <view class="orderItem" wx:for="{{orderlist}}" wx:for-item="item" wx:key="unique">
-            <view class="ub ub-ac ub-pj top">
-                <view class="type">{{activityTxt}}</view>
-                <view class="doing" wx:if="{{item.progresses.length<item.participantQuantity}}">{{activityTxt}}中</view>
-                <view class="done" wx:if="{{item.progresses.length==item.participantQuantity}}">{{activityTxt}}成功</view>
+            <view class="ub ub-ac ub-pj top" wx:if="{{type == 'SPLICED'}}">
+                <view class="type">拼团</view>
+                <view class="doing" wx:if="{{item.progresses.length<item.participantQuantity}}">拼团中</view>
+                <view class="done" wx:if="{{item.progresses.length==item.participantQuantity}}">拼团成功</view>
+            </view> 
+            <view class="ub ub-ac ub-pj top" wx:if="{{type == 'BARGAIN'}}">
+                <view class="type">砍价</view>
+                <view class="doing" wx:if="{{item.activityPrice<item.currentSalesPrice}}">砍价中</view>
+                <view class="done" wx:if="{{item.activityPrice==item.currentSalesPrice}}">砍价成功</view>
             </view> 
             <view class="ub ub-ac info" bindtap="toDetail" data-activityorderid="{{item.activityOrderId}}" data-activitytype="{{item.activityType}}" data-productid="{{item.productId}}" data-activityid="{{item.activityId}}">
                 <image class="goodImg udb" src="{{constant.basePicUrl}}{{item.cover}}/resize_180_180/mode_fill"></image>
                 <view class="ub-f1 goodMsg">
                     <view class="goodTit">{{item.productName}}</view>
-                    <view class="storeName">{{item.participantQuantity}}人团</view>
+                    <view class="storeName" wx:if="{{type == 'SPLICED'}}">{{item.participantQuantity}}人团</view>
+                    <view class="storeName" wx:if="{{type == 'BARGAIN'}}">已砍{{item.participantQuantity}}件</view>
                     <view class="goodAmount">
                         <text>{{format.toFix(item.currentSalesPrice)}}元</text><text class="origin">{{format.toFix(item.originalPrice)}}元</text>
                     </view>
                 </view>
             </view>
-            <view class="ctrl plr15 ub ub-ac ub-pj" wx:if="{{item.progresses.length<item.participantQuantity}}">
-                <view wx:if="{{type == 'SPLICED'}}">
+            <view class="elseTxt plr15 ub ub-ac ub-pj" wx:if="{{type == 'BARGAIN'}}">
+                <view class="ub-f1">
                     <child dataFromParent='{{item.expirationTime}}'></child>
                 </view>
-                <view class="yao ub ub-ac ub-pc">邀请好友{{activityTxt}}</view>
+                <view class="total">合计：{{format.toFix(item.originalPrice-item.currentSalesPrice)}}元</view>
             </view>
-            <view class="ctrl plr15 ub ub-ac ub-pj" wx:if="{{item.progresses.length==item.participantQuantity}}">
-                <view class="left">
-                  <text class="headImg"></text>
+            <block wx:if="{{type == 'SPLICED'}}">
+                <view class="ctrl plr15 ub ub-ac ub-pj" wx:if="{{item.progresses.length<item.participantQuantity}}">
+                    <view>
+                        <child dataFromParent='{{item.expirationTime}}'></child>
+                    </view>
+                    <view class="yao ub ub-ac ub-pc">邀请好友拼团</view>
                 </view>
-                <view wx:if="{{type == 'SPLICED'}}" class="use ub ub-ac ub-pc" bindtap="toUse" data-activityorderid="{{item.activityOrderId}}">去使用</view>
-                <view wx:if="{{type == 'BARGAIN'}}" class="use ub ub-ac ub-pc" bindtap="toUse" data-activityorderid="{{item.activityOrderId}}">立即付款</view>
-            </view>
+                <view class="ctrl plr15 ub ub-ac ub-pj" wx:if="{{item.progresses.length==item.participantQuantity}}">
+                    <view class="left">
+                      <image wx:for="{{item.progresses}}" wx:for-item="it" class="headImg" :src="it.avatar"></image>
+                    </view>
+                    <view class="use ub ub-ac ub-pc" bindtap="toUse" data-activityorderid="{{item.activityOrderId}}">去使用</view>
+                </view>
+            </block>
+            <block wx:if="{{type == 'BARGAIN'}}">
+                <view class="ctrl plr15 ub ub-ac ub-pj">
+                    <view class="ub-f1 tip" wx:if="{{item.activityPrice==item.currentSalesPrice}}">您发起的砍价活动已成功，请立即支付</view>
+                    <view class="ub-f1 tip" wx:if="{{item.activityPrice<item.currentSalesPrice}}">请分享好友帮忙砍</view>
+                    <view class="yao1 ub ub-ac ub-pc" wx:if="item.activityPrice<item.currentSalesPrice">邀请好友帮忙砍</view>
+                    <view class="use ub ub-ac ub-pc" bindtap="toPay">立即付款</view>
+                </view>
+            </block>
         </view>
         <view class="nodataDiv ub ub-ac ub-ver" hidden="{{!isShowNodata}}">
             <image class="nodataImg" src="../../../images/null2.png"></image>

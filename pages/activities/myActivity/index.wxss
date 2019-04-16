@@ -11,7 +11,7 @@ page{box-sizing:border-box;height: 100%;background-color: #fbfbfb}
 .orderItem .top .type{font-size: 30rpx;color: #999;}
 .orderItem .top .done{font-size: 30rpx;color: #333;}
 .orderItem .top .doing{font-size: 30rpx;color: #E83221;}
-.orderItem .info{padding: 30rpx;padding-bottom: 40rpx;border-bottom: 1rpx #eee solid;}
+.orderItem .info{padding: 30rpx;padding-bottom: 20rpx;}
 .orderItem .total{font-size: 24rpx;color: #333;padding-right: 30rpx;padding-top:30rpx;padding-bottom:40rpx;}
 .goodImg{width: 180rpx;height: 180rpx;border-radius: 8rpx;border:1rpx #eee solid;}
 .goodMsg{margin-left: 20rpx;}
@@ -20,18 +20,20 @@ page{box-sizing:border-box;height: 100%;background-color: #fbfbfb}
 .goodAmount{font-size:26rpx;margin-top:48rpx;color:#333;font-weight:bold;}
 .goodAmount text.origin{margin-left:30rpx;font-size:24rpx;color:#999;text-decoration:line-through}
 .goodMsg .num{position: absolute;bottom: 10rpx;right: 20rpx;color: #999;font-size: 22rpx;}
-.orderItem .ctrl{height: 106rpx;}
+.orderItem .ctrl{height: 106rpx;border-top: 1rpx #eee solid;margin-top: 20rpx;}
 .orderItem .ctrl .left{font-size: 26rpx;color: #E83221;}
 .orderItem .ctrl .left text{display:inline-block;background-color:#E83221;border-radius:10rpx;width:44rpx;height:40rpx;line-height: 40rpx;font-size:26rpx;color:#FFFFFF;letter-spacing:0;text-align: center;}
-.orderItem .ctrl .left text.headImg{display:inline-block;border-radius:60rpx;width:60rpx;height:60rpx;margin-right: 20rpx;}
+.orderItem .ctrl .left .headImg{display:block;border-radius:60rpx;width:60rpx;height:60rpx;margin-right: 20rpx;}
 .orderItem .ctrl .right{border: 1rpx solid #999999;border-radius: 50rpx;width: 160rpx;height: 50rpx;text-align: center;line-height: 50rpx;font-size: 24rpx;color: #333;}
 .orderItem .ctrl .use{background: #E83221;border-radius: 50rpx;width: 180rpx;height: 66rpx;font-size: 28rpx;color: #fff;}
 .orderItem .ctrl .yao{background: #ffffff;border-radius: 50rpx;width: 180rpx;height: 66rpx;font-size: 24rpx;color: #E83221;border:1rpx #E83221 solid;}
+.orderItem .ctrl .yao1{background: #ffffff;border-radius: 50rpx;width: 200rpx;height: 66rpx;font-size: 24rpx;color: #E83221;border:1rpx #E83221 solid;margin-right: 20rpx;}
+.orderItem .ctrl .tip{font-size: 22rpx;color: #999999;}
 .item{height: 100rpx;background-color: #fff;border-bottom: 1rpx #eee solid;}
 .itemTit{font-size: 28rpx;}
 .numberCtrl .ctlbtn{color: #999;width: 40rpx;height: 40rpx;display: block;background-color: #f5f5f5;}
 .numberCtrl .num{width: 60rpx;height:40rpx;text-align: center;font-size: 24rpx;color: #333;background-color: #f5f5f5;line-height: 40rpx;margin: 0 10rpx;}
-
+.elseTxt{height: 60rpx;}
 .nodataDiv{padding-top: 260rpx;}
-
+.total{font-size: 24rpx;color: #333333;}
 .expire{position: absolute;width: 93rpx;height: 87rpx;display: block;right: 0;top: 0}

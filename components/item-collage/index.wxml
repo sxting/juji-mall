@@ -74,7 +74,7 @@
     <view class="kaituan btns-pro ub-f1 ub ub-ver ub-ac ub-pc l" data-productid="{{collageInforData.productId}}" catchtap='payImmediately'>
       <text class="txt1">我要开团</text>
     </view>
-    <view class="kaituan-ing btns-pro ub-f1 ub ub-ver ub-ac ub-pc r" data-productid="{{collageInforData.productId}}">
+    <view class="kaituan-ing btns-pro ub-f1 ub ub-ver ub-ac ub-pc r" data-productid="{{collageInforData.productId}}" catchtap='payImmediately'>
       <text class="txt1">{{format.toFix(collageInforData.price)}}</text>
       <text class="txt2">一键参团</text>
     </view>

@@ -12,7 +12,6 @@ page{box-sizing:border-box;height: 100%;background-color: #fbfbfb}
 .orderItem .top .done{font-size: 30rpx;color: #333;}
 .orderItem .top .doing{font-size: 30rpx;color: #E83221;}
 .orderItem .info{padding: 30rpx;padding-bottom: 20rpx;}
-.orderItem .total{font-size: 24rpx;color: #333;padding-right: 30rpx;padding-top:30rpx;padding-bottom:40rpx;}
 .goodImg{width: 180rpx;height: 180rpx;border-radius: 8rpx;border:1rpx #eee solid;}
 .goodMsg{margin-left: 20rpx;}
 .goodTit{font-size: 28rpx;}

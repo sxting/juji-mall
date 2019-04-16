@@ -20,7 +20,8 @@ Page({
     activityId: '', //拼团或者砍价的活动id
     activityOrderId: '',//拼团或者砍价活动订单id
     type: '',//场景类型
-    kanjiaData: ''
+    kanjiaData: '',
+    splicedRuleId: ''
   },
   onLoad: function(options) {
     wx.setNavigationBarTitle({
@@ -41,6 +42,7 @@ Page({
         sceneId:options.sceneid,
         activityId: options.activityId,
         activityOrderId: options.activityOrderId ? options.activityOrderId : '',
+        splicedRuleId: options.splicedRuleId ? options.splicedRuleId : '',
         type: options.type
       });
       this.getItemInfo();
@@ -632,7 +634,8 @@ Page({
       if (e.currentTarget.dataset.type == 'SPLICED'){
         let data = { 
           activityId: that.data.activityId, 
-          activityOrderId: that.data.activityOrderId
+          activityOrderId: that.data.activityOrderId,
+          splicedRuleId: that.data.splicedRuleId
         };
         service.splicedPayment(data).subscribe({
           next: res => {

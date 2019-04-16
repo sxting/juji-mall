@@ -152,7 +152,7 @@ Component({
     /****  去参团 ****/
     onGoJoinCollageClick(e){
       wx.navigateTo({
-        url: '/pages/payOrder/index?id=' + e.currentTarget.dataset.productid + '&paytype=5' + '&activityId=' + e.currentTarget.dataset.activityid + '&activityOrderId=' + e.currentTarget.dataset.activityorderid + '&type=SPLICED',
+        url: '/pages/payOrder/index?id=' + e.currentTarget.dataset.productid + '&paytype=5' + '&activityId=' + e.currentTarget.dataset.activityid + '&activityOrderId=' + e.currentTarget.dataset.activityorderid + '&type=SPLICED&splicedRuleId=' + this.data.resData.rules[0].splicedRuleId,
       })
     },
 
@@ -160,7 +160,7 @@ Component({
     payImmediately(e){
       console.log(e.currentTarget.dataset.productid);
       wx.navigateTo({
-        url: '/pages/payOrder/index?id=' + e.currentTarget.dataset.productid + '&paytype=5' + '&sceneid=' + e.currentTarget.dataset.sceneId + '&activityId=' + this.data.activityId + '&activityOrderId=' + this.data.activityOrderId + '&type=SPLICED',
+        url: '/pages/payOrder/index?id=' + e.currentTarget.dataset.productid + '&paytype=5' + '&sceneid=' + e.currentTarget.dataset.sceneId + '&activityId=' + this.data.activityId + '&activityOrderId=' + this.data.activityOrderId + '&type=SPLICED&splicedRuleId=' + this.data.resData.rules[0].splicedRuleId,
       })      
     }
   }

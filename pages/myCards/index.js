@@ -16,6 +16,34 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    
+
+  },
+  toRecord: function(e) {
+    console.log(e);
+    wx.navigateTo({
+      url: '/pages/myRecord/index?merchantId=' + e.currentTarget.dataset.mid,
+    })
+  },
+  toggleCard: function(e) { //切换卡片高度
+    console.log(this.data.current);
+    console.log(e);
+    this.setData({
+      current: e.currentTarget.dataset.index
+    });
+    console.log(this.data.current);
+  },
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady: function() {
+
+  },
+
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function() {
     if (wx.getStorageSync('openid')) {
       wx.request({
         url: constant.jujipayUrl + '/mini/getCardsByOpenid.json',
@@ -64,34 +92,6 @@ Page({
         noCards: true
       });
     }
-
-  },
-  toRecord: function(e) {
-    console.log(e);
-    wx.navigateTo({
-      url: '/pages/myRecord/index?merchantId=' + e.currentTarget.dataset.mid,
-    })
-  },
-  toggleCard: function(e) { //切换卡片高度
-    console.log(this.data.current);
-    console.log(e);
-    this.setData({
-      current: e.currentTarget.dataset.index
-    });
-    console.log(this.data.current);
-  },
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function() {
-
   },
 
   /**

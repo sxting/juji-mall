@@ -39,7 +39,7 @@
     <view class="item">
       <view class="label">支付方式</view>
       <view class="value" wx:if="{{dataInfo.type=='recommend'}}">储值支付</view>
-      <view class="value" wx:if="{{dataInfo.type=='account'&&(!dataInfo.wxPayMoney||dataInfo.wxPayMoney=='0.00')}}">预存支付</view>
+      <view class="value" wx:if="{{dataInfo.type=='account'&&(!dataInfo.wxPayMoney||filter.toNum(dataInfo.wxPayMoney)==0)}}">预存支付</view>
       <view class="value" wx:if="{{dataInfo.type=='account'&&filter.toNum(dataInfo.wxPayMoney)!=0}}">组合支付</view>
       <view class="value" wx:if="{{dataInfo.type=='thirdpay'&&dataInfo.payType=='wxpay'}}">微信支付</view>
       <view class="value" wx:if="{{dataInfo.type=='thirdpay'&&dataInfo.payType=='alipay'}}">支付宝支付</view>
@@ -74,7 +74,7 @@
     <view class="item" wx:if="{{dataInfo.type=='recommend'}}">
       <view class="label">储值金额</view>
       <view class="value">
-        {{dataInfo.addMoney?dataInfo.addMoney:0}}
+        {{dataInfo.addMoney?filter.toNum(dataInfo.addMoney-dataInfo.givingMoney):0}}
       </view>
     </view>
     <view class="item" wx:if="{{dataInfo.type=='recommend'}}">
@@ -117,7 +117,7 @@
     <view class="item" wx:if="{{dataInfo.type=='recommend'}}">
       <view class="label">本次储值金额</view>
       <view class="value">
-        {{dataInfo.addMoney?dataInfo.addMoney:0}}
+        {{dataInfo.addMoney?filter.toNum(dataInfo.addMoney-dataInfo.givingMoney):0}}
       </view>
     </view>
     <view class="item" wx:if="{{dataInfo.type=='recommend'}}">

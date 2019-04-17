@@ -83,10 +83,6 @@
         <image class="userGridIcon" mode="aspectFit" src="../../images/icon_my5.png"></image>
         <view class="userGridText">我的评价</view>
       </view>
-      <!-- <view class="userGrid ub ub-ver ub-ac" bindtap="toPage" data-page="/pages/activities/myActivity/index?type=SEC_KILL">
-        <image class="userGridIcon" mode="aspectFit" src="../../images/icon_my3.png"></image>
-        <view class="userGridText">我的秒杀</view>
-      </view> -->
     </view>
     <view class="ub ub-ac ub-pj">
       <view class="userGrid ub ub-ver ub-ac" bindtap="toPage" data-page="/pages/myCards/index">
@@ -97,6 +93,10 @@
         <image class="userGridIcon" mode="aspectFit" src="../../images/icon_my6.png"></image>
         <view class="userGridText">在线客服</view>
       </button>
+      <view class="userGrid ub ub-ver ub-ac">
+        <view class="userGridIcon"></view>
+        <view class="userGridText" style="color:#fff">在线客服</view>
+      </view>
     </view>
     <!-- <view class="ub ub-ac ub-pj" style="padding:30rpx;" bindtap="toPage" data-page="/pages/myCards/index">
       <view class="itemTxt">我的卡包</view>

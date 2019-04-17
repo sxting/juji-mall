@@ -41,7 +41,7 @@
     <view class='head-name'>小伙伴正在拼团，可直接参与</view>
     <view class='detail-infor'>
       <view class='list-box'>
-        <view class='detail-pintuan ub ub-ac' wx:key="unique" wx:for='{{pintuanListInfor}}'>
+        <view class='detail-pintuan ub ub-ac' wx:key="unique" wx:for='{{pintuanListInfor}}' wx:if="{{item.resNum>0}}">
           <view class='images-box'>
             <image wx:for='{{item.picArr}}' wx:key="unique" wx:for-item="picArr" src='{{picArr? picArr : portraitUrl}}'></image>
           </view>
@@ -74,8 +74,8 @@
     <view class="kaituan btns-pro ub-f1 ub ub-ver ub-ac ub-pc l" data-productid="{{collageInforData.productId}}" catchtap='payImmediately'>
       <text class="txt1">我要开团</text>
     </view>
-    <view class="kaituan-ing btns-pro ub-f1 ub ub-ver ub-ac ub-pc r" data-productid="{{collageInforData.productId}}" catchtap='payImmediately'>
-      <text class="txt1">{{format.toFix(collageInforData.price)}}</text>
+    <view class="kaituan-ing btns-pro ub-f1 ub ub-ver ub-ac ub-pc r" data-activityorderid='{{collageInforData.activityOrderId}}' data-activityid='{{collageInforData.activityId}}' data-productid="{{collageInforData.productId}}" catchtap='onGoJoinCollageClick'>
+      <text class="txt1">{{format.toFix(collageInforData.price)}}元</text>
       <text class="txt2">一键参团</text>
     </view>
   </view>

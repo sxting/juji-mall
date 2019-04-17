@@ -198,6 +198,12 @@ service.bargainPayment = (data) => {
   return http.get(url, data);
 }
 
+service.activity = (data) => {
+  let url = api + '/activity/consumer/activity.json';
+  return http.get(url, data);
+}
+
+
 module.exports = {
   service: service
 }

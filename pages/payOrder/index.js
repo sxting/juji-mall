@@ -57,8 +57,11 @@ Page({
           activityOrderId: options.activityOrderId ? options.activityOrderId : '',
           splicedRuleId: options.splicedRuleId ? options.splicedRuleId : ''
         })
+      this.getActivityInfo();
+    }else{
+      this.getItemInfo();
     }
-    this.getItemInfo();
+
     //查询用户橘子
     this.getPointBalance();
   },
@@ -79,13 +82,33 @@ Page({
     });
   },
   getPointBalance: function() {
-
     service.getPointBalance().subscribe({
       next: res => {
         console.log('--------查询桔子余额-------');
         console.log(res);
         this.setData({
           pointBalance: res
+        });
+      },
+      error: err => console.log(err),
+      complete: () => wx.hideToast()
+    })
+  },
+  getActivityInfo:function(){
+    service.activity({
+      activityId: this.data.activityId,
+      activityOrderId: this.data.activityOrderId,
+      activityType: this.data.orderBizType,
+      progressId: ''
+    }).subscribe({
+      next: res => {
+        console.log(res);
+        this.setData({
+          productInfo: res.product.product,
+          store: res.product.store,
+          price: res.activityPrice,
+          point: '',
+          showProduct: true
         });
       },
       error: err => console.log(err),

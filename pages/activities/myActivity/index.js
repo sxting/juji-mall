@@ -30,6 +30,9 @@ Page({
         var productId = e.currentTarget.dataset.productid;
         var id = e.currentTarget.dataset.id;
         var activityType = e.currentTarget.dataset.activitytype;
+        if(activityType=="SPLICED")
+        wx.navigateTo({ url: "../my-collage/index?id=" + productId + '&activityId=' + activityId + '&activityOrderId=' + activityOrderId + '&activityType=' + activityType });
+        else
         wx.navigateTo({ url: "../project-detail/index?id=" + productId + '&activityId=' + activityId + '&activityOrderId=' + activityOrderId + '&type=' + activityType });
     },
     toOrderDetail: function(e) {
@@ -50,6 +53,9 @@ Page({
                     this.setData({ isFinall: true });
                 } else {
                     this.setData({ isFinall: false });
+                }
+                for(var i=0;i<res.length;i++){
+                    res[i].productName = res[i].productName.length>30?res[i].productName.substring(0,30)+'...':res[i].productName
                 }
                 if (pageNo == 1) {
                     this.setData({ orderlist: res });

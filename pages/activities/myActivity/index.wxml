@@ -30,7 +30,7 @@
                     <view>
                         <child dataFromParent='{{item.expirationTime}}'></child>
                     </view>
-                    <button class="yao ub ub-ac ub-pc" open-type="share" data-id="{{item.activityId}}" data-pic="{{item.cover}}" data-aoid="{{item.activityOrderId}}">邀请好友拼团</button>
+                    <button class="yao ub ub-ac ub-pc" open-type="share" data-id="{{item.activityId}}" data-pic="{{item.cover}}" data-aoid="{{item.activityOrderId}}" data-productname="{{item.productName}}" data-price="{{format.toFix(item.activityPrice)}}">邀请好友拼团</button>
                 </view>
                 <view class="ctrl plr15 ub ub-ac ub-pj" wx:if="{{item.activityOrderStatus == 'SUCCESS'}}">
                     <view class="left ub ub-ac">
@@ -50,7 +50,7 @@
                 <view class="ctrl plr15 ub ub-ac ub-pj">
                     <view class="ub-f1 tip" wx:if="{{item.activityOrderStatus == 'SUCCESS'}}">您发起的砍价活动已成功，请立即支付</view>
                     <view class="ub-f1 tip" wx:if="{{item.activityOrderStatus == 'IN_PROGRESS'}}">请分享好友帮忙砍</view>
-                    <button class="yao1 ub ub-ac ub-pc" wx:if="{{item.activityOrderStatus == 'IN_PROGRESS'}}" open-type="share" data-id="{{item.activityId}}" data-pic="{{item.cover}}" data-aoid="{{item.activityOrderId}}">邀请好友帮忙砍</button>
+                    <button class="yao1 ub ub-ac ub-pc" wx:if="{{item.activityOrderStatus == 'IN_PROGRESS'}}" open-type="share" data-id="{{item.activityId}}" data-pic="{{item.cover}}" data-aoid="{{item.activityOrderId}}" data-productname="{{item.productName}}" data-price="{{format.toFix(item.activityPrice)}}">邀请好友帮忙砍</button>
                     <view class="use ub ub-ac ub-pc" bindtap="toOrderDetail" data-orderid="{{item.orderId}}">立即付款</view>
                 </view>
             </block>

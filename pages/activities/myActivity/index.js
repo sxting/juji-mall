@@ -81,18 +81,18 @@ Page({
         var activityId = res.target.dataset.id;
         var activityOrderId = res.target.dataset.aoid;
         var picId = res.target.dataset.pic;
-        console.log('开始分享');
-        console.log(activityId);
+        var productName = res.target.dataset.productname;
+        var price = res.target.dataset.price;
         if (this.data.type=='SPLICED') {
             return {
-                title: nickName + '分享给您一个心动商品，快来一起体验吧！',
+                title: '嗨！便宜一起拼￥' + price + '【' + productName + '】',
                 path: '/pages/login/index?pagetype=5&type=SPLICED&activityId=' + activityId + '&activityOrderId=' + activityOrderId + '&invitecode=' + wx.getStorageSync('inviteCode'),
                 imageUrl: constant.basePicUrl + picId + '/resize_560_420/mode_fill'
             }
         }
         if (this.data.type === 'BARGAIN') {
             return {
-                title: '嗨！便宜一起拼￥' + this.data.productInfo.price / 100 + '【' + this.data.productInfo.productName + '】',
+                title: nickName + '分享给您一个心动商品，快来一起体验吧！',
                 path: '/pages/login/index?pagetype=5&type=BARGAIN&activityId=' + activityId + '&activityOrderId=' + activityOrderId + '&invitecode=' + wx.getStorageSync('inviteCode'),
                 imageUrl: constant.basePicUrl + picId + '/resize_560_420/mode_fill'
             }

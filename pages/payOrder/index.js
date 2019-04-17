@@ -21,12 +21,16 @@ Page({
     activityOrderId: '',//拼团或者砍价活动订单id
     type: '',//场景类型
     kanjiaData: '',
-    splicedRuleId: ''
+    splicedRuleId: '',
+    orderBizType:'NORMAL'
   },
   onLoad: function(options) {
-    wx.setNavigationBarTitle({
-      title: '订单确认',
-    });
+    console.log("确认订单页面");
+    console.log(JSON.stringify(options));
+    if(options.orderType){
+      this.setData({orderBizType:options.orderType});
+    }
+    wx.setNavigationBarTitle({title: '订单确认'});
     wx.hideShareMenu();
     console.log(options);
     if (options.resData) {
@@ -39,25 +43,24 @@ Page({
         productId: options.id ? options.id : '',
         storeId: options.storeid ? options.storeid: '',
         paytype: options.paytype,
-        sceneId:options.sceneid,
-        activityId: options.activityId,
-        activityOrderId: options.activityOrderId ? options.activityOrderId : '',
-        splicedRuleId: options.splicedRuleId ? options.splicedRuleId : '',
-        type: options.type
-      });
-      this.getItemInfo();
-      //查询用户橘子
-      this.getPointBalance();
-    } else {
-      wx.showModal({
-        title: '错误',
-        content: '当前商品错误id=' + options.id + ' paytype=' + options.paytype,
-      })
-      wx.navigateBack({
-        delta: 1
+        sceneId: options.sceneid?options.sceneid:''
       });
     }
-
+    if(options.type){
+        this.setData({
+          type: options.type
+        })
+    }
+    if(options.activityId){
+        this.setData({
+          activityId: options.activityId,
+          activityOrderId: options.activityOrderId ? options.activityOrderId : '',
+          splicedRuleId: options.splicedRuleId ? options.splicedRuleId : ''
+        })
+    }
+    this.getItemInfo();
+    //查询用户橘子
+    this.getPointBalance();
   },
   //收集formid做推送
   collectFormIds: function (e) {
@@ -135,6 +138,7 @@ Page({
   toPay: function(e) {
     console.log('-------点击测试-------');
     var that = this;
+    console.log('是否支付'+that.data.alreadyPay);
     if (that.data.alreadyPay) {
       return;
     } else {
@@ -179,7 +183,8 @@ Page({
                     payPoint: that.data.productInfo.point * that.data.count,
                     payType: 'MIX',
                     providerId: that.data.productInfo.providerId,
-                    providerName: that.data.productInfo.providerName
+                    providerName: that.data.productInfo.providerName,
+                    orderBizType:that.data.orderBizType
                   };
                   service.saveOrder(orderObj).subscribe({
                     next: res1 => {
@@ -313,7 +318,8 @@ Page({
                     payPoint: that.data.productInfo.point * that.data.count,
                     payType: 'POINT',
                     providerId: that.data.productInfo.providerId,
-                    providerName: that.data.productInfo.providerName
+                    providerName: that.data.productInfo.providerName,
+                    orderBizType:that.data.orderBizType
                   };
                   service.saveOrder(orderObj).subscribe({
                     next: res1 => {
@@ -420,7 +426,8 @@ Page({
                   payPoint: 0,
                   payType: 'WECHAT',
                   providerId: that.data.productInfo.providerId,
-                  providerName: that.data.productInfo.providerName
+                  providerName: that.data.productInfo.providerName,
+                  orderBizType:that.data.orderBizType
                 };
                 service.saveOrder(orderObj).subscribe({
                   next: res1 => {
@@ -543,7 +550,8 @@ Page({
                   payPoint: 0,
                   payType: 'WECHAT',
                   providerId: that.data.productInfo.providerId,
-                  providerName: that.data.productInfo.providerName
+                  providerName: that.data.productInfo.providerName,
+                  orderBizType:that.data.orderBizType
                 };
                 service.saveOrder(orderObj).subscribe({
                   next: res1 => {
@@ -631,7 +639,7 @@ Page({
         }
       })
     } else if (that.data.paytype == 5){
-      if (e.currentTarget.dataset.type == 'SPLICED'){
+      if (this.data.orderBizType == 'SPLICED'){
         let data = { 
           activityId: that.data.activityId, 
           activityOrderId: that.data.activityOrderId,

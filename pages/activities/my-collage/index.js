@@ -60,8 +60,8 @@ Page({
     let self = this;
     return {
       title: '嗨！便宜一起拼￥' + this.data.productInfo.activityPrice / 100 + '【' + this.data.productInfo.productName + '】',
-      path: '/pages/login/index?pagetype=projectDetail&type=' + self.data.activityType + '&activityId=' + self.data.activityId + '&activityOrderId=' + self.data.activityOrderId + '&progressId=' + self.data.progressId,
-      imageUrl: constant.basePicUrl + self.data.productInfo.cover + '/resize_751_420/mode_fill',
+      path: '/pages/login/index?pagetype=5&type=' + self.data.activityType + '&activityId=' + self.data.activityId + '&activityOrderId=' + self.data.activityOrderId + '&progressId=' + self.data.progressId,
+      imageUrl: constant.basePicUrl + self.data.productInfo.cover + '/resize_560_420/mode_fill',
     }
   },
 

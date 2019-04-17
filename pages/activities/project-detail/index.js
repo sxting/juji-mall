@@ -72,7 +72,7 @@ Page({
       // 分享砍价
       return {
         title: JSON.parse(wx.getStorageSync('userinfo')).nickName + '分享给您一个心动商品，快来一起体验吧！',
-        path: '/pages/login/index?pagetype=projectDetail&type=' + this.data.type + '&activityId=' + this.data.activityId + '&activityOrderId=' + this.data.activityOrderId,
+        path: '/pages/login/index?pagetype=5&type=' + this.data.type + '&activityId=' + this.data.activityId + '&activityOrderId=' + this.data.activityOrderId + '&invitecode=' + wx.getStorageSync('inviteCode'),
         success: function (res) {
           console.log(res);
         },
@@ -81,17 +81,17 @@ Page({
         }
       }
     } else if (res.target.dataset.type === 'pintuan'){
-      console.log('/pages/login/index?pagetype=projectDetail&type=' + this.data.type + '&activityId=' + this.data.activityId + '&activityOrderId=' + this.data.activityOrderId);
+      console.log('/pages/login/index?pagetype=5&type=' + this.data.type + '&activityId=' + this.data.activityId + '&activityOrderId=' + this.data.activityOrderId);
       return {
         title: '嗨！便宜一起拼￥' + this.data.productInfo.price/100 + '【' + this.data.productInfo.productName +'】',
-        path: '/pages/login/index?pagetype=projectDetail&type=' + this.data.type + '&activityId=' + this.data.activityId + '&activityOrderId=' + this.data.activityOrderId,
+        path: '/pages/login/index?pagetype=5&type=' + this.data.type + '&activityId=' + this.data.activityId + '&activityOrderId=' + this.data.activityOrderId + '&invitecode=' + wx.getStorageSync('inviteCode'),
         imageUrl: constant.basePicUrl + this.data.productInfo.picId + '/resize_751_420/mode_fill',
       }
     } else {
       // 分享商品
       return {
         title: JSON.parse(wx.getStorageSync('userinfo')).nickName + '分享给您一个心动商品，快来一起体验吧！',
-        path: '/pages/login/index?pagetype=projectDetail&type=' + this.data.type + '&activityId=' + this.data.activityId,
+        path: '/pages/login/index?pagetype=5&type=' + this.data.type + '&activityId=' + this.data.activityId + '&invitecode=' + wx.getStorageSync('inviteCode'),
         success: function (res) {
           console.log(res);
         },

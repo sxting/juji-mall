@@ -12,32 +12,33 @@ Page({
         type: '',
         isFinall: false,
         amount: 0,
-        restHour:'10',
-        restMinute:'00',
-        restSecond:'00',
-        activityTxt:''
+        restHour: '10',
+        restMinute: '00',
+        restSecond: '00',
+        activityTxt: ''
     },
     onLoad: function(options) {
+        wx.hideShareMenu();
         wx.setNavigationBarTitle({ title: options.type == 'SPLICED' ? '我的拼团' : '我的砍价' });
-        this.setData({activityTxt:options.type == 'SPLICED' ? '拼团' : '砍价'});
-        this.setData({type:options.type});
-        this.getData(options.type,1)
+        this.setData({ activityTxt: options.type == 'SPLICED' ? '拼团' : '砍价' });
+        this.setData({ type: options.type });
+        this.getData(options.type, 1)
     },
-    toDetail: function(e) {
+    toProjectDetail: function(e) {
         var activityId = e.currentTarget.dataset.activityid;
         var activityOrderId = e.currentTarget.dataset.activityorderid;
         var productId = e.currentTarget.dataset.productid;
         var id = e.currentTarget.dataset.id;
         var activityType = e.currentTarget.dataset.activitytype;
-        wx.navigateTo({ url: "../project-detail/index?id=" + productId +'&activityId='+activityId+'&activityOrderId='+activityOrderId+'&type=' +activityType});
+        wx.navigateTo({ url: "../project-detail/index?id=" + productId + '&activityId=' + activityId + '&activityOrderId=' + activityOrderId + '&type=' + activityType });
     },
-    toUse:function(){
-        var activityOrderId = e.currentTarget.dataset.activityorderid;
-        wx.navigateTo({ url: "../project-detail/index?id=" + activityOrderId});
+    toOrderDetail: function(e) {
+        var orderid = e.currentTarget.dataset.orderid;
+        wx.navigateTo({ url: "/pages/orderDetail/index?id=" + orderid });
     },
     getData: function(type, pageNo) {
         var obj = {
-            providerId:wx.getStorageSync('providerId'),
+            providerId: wx.getStorageSync('providerId'),
             activityType: type,
             pageNo: pageNo,
             pageSize: 10
@@ -62,17 +63,39 @@ Page({
         })
     },
     //下拉刷新
-    onPullDownRefresh() {
+    onPullDownRefresh:function() {
         this.setData({ pageNo: 1 });
         this.getData(this.data.type, 1);
     },
 
     //上拉加载
-    onReachBottom() {
+    onReachBottom:function() {
         if (this.data.isFinall) {
             return;
         }
         var pageNo = this.data.pageNo + 1;
         this.getData(this.data.type, pageNo);
-    }
+    },
+    onShareAppMessage:function(res) {
+        var nickName = JSON.parse(wx.getStorageSync('userinfo')).nickName;
+        var activityId = res.target.dataset.id;
+        var activityOrderId = res.target.dataset.aoid;
+        var picId = res.target.dataset.pic;
+        var productName = res.target.dataset.productname;
+        var price = res.target.dataset.price;
+        if (this.data.type=='SPLICED') {
+            return {
+                title: '嗨！便宜一起拼￥' + price + '【' + productName + '】',
+                path: '/pages/login/index?pagetype=5&type=SPLICED&activityId=' + activityId + '&activityOrderId=' + activityOrderId + '&invitecode=' + wx.getStorageSync('inviteCode'),
+                imageUrl: constant.basePicUrl + picId + '/resize_560_420/mode_fill'
+            }
+        }
+        if (this.data.type === 'BARGAIN') {
+            return {
+                title: nickName + '分享给您一个心动商品，快来一起体验吧！',
+                path: '/pages/login/index?pagetype=5&type=BARGAIN&activityId=' + activityId + '&activityOrderId=' + activityOrderId + '&invitecode=' + wx.getStorageSync('inviteCode'),
+                imageUrl: constant.basePicUrl + picId + '/resize_560_420/mode_fill'
+            }
+        }
+    },
 });

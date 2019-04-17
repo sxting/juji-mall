@@ -29,6 +29,7 @@ Page({
     userImg:'',
     sceneId:'',
     isShowNewerGet: false,
+    isShowProfit:true,
     userImgUrl:'../../images/shareBg.png',
     nickName:'',
     lat:'',
@@ -365,10 +366,14 @@ Page({
    */
   onShareAppMessage: function(res) {
     this.share();
-    this.setData({ isShowModal: true });
+    this.setData({ isShowModal: true,isShowProfit:false });
+    var that = this;
+    setTimeout(()=>{
+      that.setData({isShowProfit:true});
+    },200);
     return {
       title: JSON.parse(wx.getStorageSync('userinfo')).nickName+'分享给您一个心动商品，快来一起体验吧！',
-      path: '/pages/login/index?pagetype=1&pid=' + this.data.productId+'&storeid='+this.data.storeId+'&invitecode='+wx.getStorageSync('inviteCode')
+      path: '/pages/login/index?pagetype=1&pid=' + that.data.productId+'&storeid='+that.data.storeId+'&invitecode='+wx.getStorageSync('inviteCode')
     }
   },
   toCommentDetail: function(event) {

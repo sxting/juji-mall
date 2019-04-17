@@ -26,7 +26,7 @@ Page({
   },
   onLoad: function(options) {
     console.log("确认订单页面");
-    console.log(JSON.stringify(options));
+    console.log(options);
     if(options.orderType){
       this.setData({orderBizType:options.orderType});
     }

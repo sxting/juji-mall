@@ -14,6 +14,9 @@
 .ub-f4{-webkit-flex:4;flex:4;}
 .fl {float: left}
 .fr {float: right}
+.btn-box button {
+  color: #fff;
+}
 .btn-box {
   position: fixed;
   bottom: 15rpx;

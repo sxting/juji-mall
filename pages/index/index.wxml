@@ -95,16 +95,18 @@
             </view>
           </view>
         </view>
-        <view class="ub ub-ac jc-sb" style="padding: 0 30rpx 30rpx 30rpx;">
-          <view class="ub ub-ac ub-f1" style="margin-top:20rpx">
-            <image src="../../images/soldCount.png" style="width:24rpx;height: 22rpx;"></image>
-            <text class="count">已售{{item.soldNum}}件</text>
+        <form bindsubmit="collectFormIds" report-submit="true">
+          <view class="ub ub-ac jc-sb" style="padding: 0 30rpx 30rpx 30rpx;">
+              <view class="ub ub-ac ub-f1" style="margin-top:20rpx">
+                <image src="../../images/soldCount.png" style="width:24rpx;height: 22rpx;"></image>
+                <text class="count">已售{{item.soldNum}}件</text>
+              </view>
+              <button form-type="submit" class="ctrlbtn sharBtn" wx:if="{{!item.distributor}}" bindtap="toComDetailAndShare" data-id="{{item.productId}}" data-storeid="{{item.nearStore.id}}">分享</button>
+              <button form-type="submit" class="ctrlbtn buyBtn1" wx:if="{{!item.distributor}}" bindtap="toComDetail" data-id="{{item.productId}}" data-storeid="{{item.nearStore.id}}">购买</button>
+              <button form-type="submit" class="ctrlbtn buyBtn2" wx:if="{{item.distributor}}" bindtap="toComDetail" data-id="{{item.productId}}" data-storeid="{{item.nearStore.id}}">购买</button>
+              <button form-type="submit" class="ctrlbtn proBtn1" wx:if="{{item.distributor}}" bindtap="toPro" data-id="{{item.productId}}">推广</button>
           </view>
-          <button class="ctrlbtn sharBtn" wx:if="{{!item.distributor}}" bindtap="toComDetailAndShare" data-id="{{item.productId}}" data-storeid="{{item.nearStore.id}}">分享</button>
-          <button class="ctrlbtn buyBtn1" wx:if="{{!item.distributor}}" bindtap="toComDetail" data-id="{{item.productId}}" data-storeid="{{item.nearStore.id}}">购买</button>
-          <button class="ctrlbtn buyBtn2" wx:if="{{item.distributor}}" bindtap="toComDetail" data-id="{{item.productId}}" data-storeid="{{item.nearStore.id}}">购买</button>
-          <button class="ctrlbtn proBtn1" wx:if="{{item.distributor}}" bindtap="toPro" data-id="{{item.productId}}">推广</button>
-        </view>
+        </form>
       </view>
     </view>
 

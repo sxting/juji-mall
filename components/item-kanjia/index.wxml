@@ -5,7 +5,7 @@
       <text>{{hours}}</text>:<text>{{minites}}</text>:<text>{{seconds}}</text>后结束
     </view>
     <view class='{{ status === "init" ? "" : "pd30" }}'>
-      <view class='product-name' bindtap='startKanjia'>{{productInfo.productName}}</view>
+      <view class='product-name'>{{productInfo.productName}}</view>
       <view class="ub ub-fe jc-sb" style="margin-top:20rpx;">
         <view class="ub ub-fe">
             <view style="display:flex;align-items: flex-end;">
@@ -29,9 +29,9 @@
     </view>
     <view class='others-btn' wx:if="{{!self}}">
       <view class='btn-active' wx:if="{{status === 'ing' && !help}}" bindtap='helpKJ'>帮好友砍一刀</view>
-      <view class='btn-active' wx:elif="{{ help || status === 'fail' || status === 'success' }}" bindtap='startKanjia'>
-        我也要发起砍价
-      </view>
+      <form bindsubmit="collectFormIds" report-submit="true" wx:elif="{{ help || status === 'fail' || status === 'success' }}">
+        <button form-type="submit" class='btn-active' bindtap='startKanjia'>我也要发起砍价</button>
+      </form>
       <view class='kanjia-status'>
         <text wx:if="{{status === 'success'}}">本次砍价已成功</text>
         <text wx:elif="{{status === 'fail'}}">本次砍价已结束</text>
@@ -56,21 +56,23 @@
   </view>
 </view>
 <view class="btn-box">
-  <view class='bt-btn' wx:if="{{status === 'init'}}">
-    <view class='btn-l' bindtap='onlyBuy' data-type='1'>直接购买</view>
-    <view class='btn-r' bindtap='startKanjia'>发起砍价</view>
-  </view>
-  <view class='bt-btn' wx:elif="{{ self && status === 'ing'}}">
-    <view class='btn-l' bindtap='onlyBuy' data-type='2'>以此价格购买</view>
-    <button class='btn-r' style='color:#fff' open-type='share' data-type='share2'>邀请好友帮砍</button>
-  </view>
-  <view class='bt-btn' wx:elif="{{ self && status === 'success'}}">
-    <view class='btn' bindtap='onlyBuy'>砍价成功，立即支付</view>
-  </view>
-  <view class='bt-btn' wx:elif="{{ self && status === 'fail'}}">
-    <view class='btn-l btn-fail'>砍价失败</view>
-    <view class='btn-r' bindtap='startKanjia'>重新发起砍价</view>
-  </view>
+  <form bindsubmit="collectFormIds" report-submit="true">
+    <view class='bt-btn' wx:if="{{status === 'init'}}">
+      <view class='btn-l' bindtap='onlyBuy' data-type='1'>直接购买</view>
+      <button form-type="submit" class='btn-r' bindtap='startKanjia'>发起砍价</button>
+    </view>
+    <view class='bt-btn' wx:elif="{{ self && status === 'ing'}}">
+      <view class='btn-l' bindtap='onlyBuy' data-type='2'>以此价格购买</view>
+      <button class='btn-r' style='color:#fff' open-type='share' data-type='share2'>邀请好友帮砍</button>
+    </view>
+    <view class='bt-btn' wx:elif="{{ self && status === 'success'}}">
+      <view class='btn' bindtap='onlyBuy'>砍价成功，立即支付</view>
+    </view>
+    <view class='bt-btn' wx:elif="{{ self && status === 'fail'}}">
+      <view class='btn-l btn-fail'>砍价失败</view>
+      <button form-type="submit" class='btn-r' bindtap='startKanjia'>重新发起砍价</button>
+    </view>
+  </form>
 </view>
 
 <view class='kanjia-normal-alert'>
@@ -98,7 +100,9 @@
           </view>
         </view>
       </view>
-      <view class='alert2-btn' bindtap='startKanjia'>我也要发起砍价</view>
+      <form bindsubmit="collectFormIds" report-submit="true">
+        <button form-type="submit" class='alert2-btn' bindtap='startKanjia'>我也要发起砍价</button>
+      </form>
       <view bindtap='lookOthers'>浏览其他项目</view>
     </view>
     <image class='icon-close1' src='/images/newerGetClose.png' bindtap='closeAlert2'></image>

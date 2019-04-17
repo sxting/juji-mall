@@ -2,6 +2,7 @@
 import { componentService } from '../shared/service';
 import { errDialog, loading } from '../../utils/util';
 import { constant } from '../../utils/constant';
+import { service } from '../../service';
 var NP = require('../../utils/number-precision.js');
 
 let timer;
@@ -42,6 +43,19 @@ Component({
   },
 
   methods: {
+
+    //收集formid做推送
+    collectFormIds: function (e) {
+      console.log(e.detail);
+      service.collectFormIds({
+        formId: e.detail.formId
+      }).subscribe({
+        next: res => {
+          console.log(res)
+        }
+      });
+    },
+    
     onlyBuy(e) {
       let resData = JSON.stringify(this.data.resData); 
       if (e.currentTarget.dataset.type == '1') {

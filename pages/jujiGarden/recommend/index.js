@@ -70,7 +70,7 @@ Page({
             return {
                 title: JSON.parse(wx.getStorageSync('userinfo')).nickName + '分享给您一个心动商品，快来一起体验吧！',
                 path: '/pages/login/index?pagetype=4&pid=' + this.data.productId + '&storeid=&sceneid=' + this.data.sceneId + '&invitecode=' + wx.getStorageSync('inviteCode'),
-                imageUrl: constant.basePicUrl + this.data.productInfo.picId + '/resize_360_360/mode_fill'
+              imageUrl: constant.basePicUrl + this.data.productInfo.picId + '/resize_360_360/mode_filt/format_jpg/quality_0'
             }
         }
     },
@@ -103,7 +103,7 @@ Page({
 
                 //下载商品图片
                 wx.downloadFile({
-                    url: constant.basePicUrl + imageId + '/resize_750_420/mode_fill',
+                  url: constant.basePicUrl + imageId + '/resize_750_420/mode_filt/format_jpg/quality_0',
                     success: (res) => {
                         if (res.statusCode === 200) {
                             ready++;
@@ -137,7 +137,7 @@ Page({
                     this.setData({ sceneId: sceneId });
 
                     wx.downloadFile({
-                        url: constant.basePicUrl + scenepicid + '/resize_200_200/mode_fill',
+                      url: constant.basePicUrl + scenepicid + '/resize_200_200/mode_filt/format_jpg/quality_0',
                         success: (obj) => {
                             if (obj.statusCode === 200) {
                                 ready++;
@@ -157,10 +157,10 @@ Page({
                             this.setData({ sceneId: sceneId });
                             console.log('scene222=' + this.data.sceneId);
                             console.log('scenePicId=' + scenePicId);
-                            console.log(constant.basePicUrl + scenePicId + '/resize_200_200/mode_fill');
+                          console.log(constant.basePicUrl + scenePicId + '/resize_200_200/mode_filt/format_jpg/quality_0');
 
                             wx.downloadFile({
-                                url: constant.basePicUrl + scenePicId + '/resize_200_200/mode_fill',
+                              url: constant.basePicUrl + scenePicId + '/resize_200_200/mode_filt/format_jpg/quality_0',
                                 success: (obj) => {
                                     if (obj.statusCode === 200) {
                                         ready++;
@@ -328,7 +328,7 @@ Page({
         for (var i = 0; i < imageIds.length; i++) {
             var imgId = imageIds[i];
             wx.downloadFile({
-                url: constant.basePicUrl + imageIds[i] + '/resize_0_0/mode_fill',
+              url: constant.basePicUrl + imageIds[i] + '/resize_0_0/mode_filt/format_jpg/quality_0',
                 success: (res) => {
                     wx.saveImageToPhotosAlbum({
                         filePath: res.tempFilePath,

@@ -2,7 +2,7 @@
 <view wx:if="{{showProduct}}">
   <view class="tradeInfo" style="padding:20rpx 30rpx;">
     <view class="p15 ub info" style="align-items:flex-start;">
-      <image class="goodImg udb" src="{{productInfo.picId?'https://upic.juniuo.com/file/picture/'+productInfo.picId+'/resize_220_200/mode_fill':''}}" lazy-load="true" mode="widthFix"></image>
+      <image class="goodImg udb" src="{{productInfo.picId?'https://upic.juniuo.com/file/picture/'+productInfo.picId+'/resize_220_200/mode_filt/format_jpg/quality_70':''}}" lazy-load="true" mode="widthFix"></image>
       <view class="ub ub-ver ub-pj goodMsg">
         <view>
           <view class="goodTit">{{productInfo.productName}}</view>

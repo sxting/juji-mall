@@ -53,7 +53,7 @@ Page({
             next: res => {
                 var picId = res;
                 wx.downloadFile({
-                    url: constant.basePicUrl + picId + '/resize_200_200/mode_fill',
+                  url: constant.basePicUrl + picId + '/resize_200_200/mode_filt/format_jpg/quality_0',
                     success: (obj) => {
                         if (obj.statusCode === 200) {
                             this.setData({ erwmImg: obj.tempFilePath });
@@ -115,7 +115,7 @@ Page({
             next: res => {
                 var picId = res;
                 wx.downloadFile({
-                    url: constant.basePicUrl + picId + '/resize_200_200/mode_fill',
+                  url: constant.basePicUrl + picId + '/resize_200_200/mode_filt/format_jpg/quality_0',
                     success: (obj) => {
                         if (obj.statusCode === 200) {
                             this.setData({ erwmImg: obj.tempFilePath });
@@ -137,7 +137,7 @@ Page({
 
     downloadFile:function(index){
         wx.downloadFile({
-            url: constant.basePicUrl + this.data.canvasBg[index]+'/resize_750_1334/mode_fill',
+          url: constant.basePicUrl + this.data.canvasBg[index] +'/resize_750_1334/mode_filt/format_jpg/quality_0',
             success: (res) => {
                 if (res.statusCode === 200) {
                     console.log("下载完第"+(index+1)+"个背景");

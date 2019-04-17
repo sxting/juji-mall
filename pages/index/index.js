@@ -876,7 +876,7 @@ Page({
     this.share(obj);
     return {
       title: '桔集：聚集优质好店，体验美好生活！',
-      imageUrl: 'https://upic.juniuo.com/file/picture/26PTWGQU8nHo/resize_400_320/mode_fill',
+      imageUrl: 'https://upic.juniuo.com/file/picture/26PTWGQU8nHo/resize_400_320/mode_filt/format_jpg/quality_0',
       path: '/pages/login/index?invitecode=' + wx.getStorageSync('inviteCode')
     }
   },

@@ -26,7 +26,7 @@
     <view class="pro-name">{{item.productName}}</view>
     <view class="price-wrap jc-sb">
       <view class="p-wrap">
-        <view class="now-price">{{ format.toFix(item.activityPrice) }}元</view>
+        <view class="now-price">{{ format.toFix(item.activityPrice) }}<text style="font-size:24rpx">元</text></view>
         <view class="old-price">{{ format.toFix(item.originalPrice) }}元</view>
       </view>
     </view>

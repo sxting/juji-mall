@@ -1,6 +1,6 @@
 <wxs module="filter" src="../../utils/numFr.wxs"></wxs>
 <view class="kanjia-container">
-  <view class='{{ status === "init" ? "" : "bd" }} {{ status === "fail" ? "basow" : "" }}'>
+  <view class='{{ status === "init" ? "" : "bd" }} {{ status === "fail"||status==="success" ? "basow" : "" }}'>
     <view class='timer' wx:if="{{status === 'ing'}}">
       <text>{{hours}}</text>:<text>{{minites}}</text>:<text>{{seconds}}</text>后结束
     </view>

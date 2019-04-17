@@ -10,7 +10,7 @@ page{box-sizing:border-box;height: 100%;background-color: #fbfbfb}
 .orderItem .top{height: 88rpx;border-bottom: 1rpx #eee solid;padding-left: 30rpx;padding-right: 30rpx;}
 .orderItem .top .type{font-size: 30rpx;color: #999;}
 .orderItem .top .done{font-size: 30rpx;color: #333;}
-.orderItem .top .doing{font-size: 30rpx;color: #E83221;}
+.orderItem .top .doing{font-size: 30rpx;color: #E83221;font-weight: bold}
 .orderItem .top .dofail{font-size: 30rpx;color: #999;}
 .orderItem .info{padding: 30rpx;padding-bottom: 20rpx;}
 .goodImg{width: 180rpx;height: 180rpx;border-radius: 8rpx;border:1rpx #eee solid;}

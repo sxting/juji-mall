@@ -3,6 +3,7 @@ import { service } from '../../../service';
 import { activitiesService } from '../shared/service';
 import { constant } from '../../../utils/constant';
 import { errDialog, loading } from '../../../utils/util';
+var NP = require('../../../utils/number-precision.js');
 var app = getApp();
 Page({
   data: {
@@ -202,6 +203,9 @@ function getItemInfo() {
       picsStrArr.forEach(function (item, index) {
         picsStrArr[index] = constant.basePicUrl + item + '/resize_751_420/mode_fill'
       });
+      if (res.orderDigest) {
+        res.yikan = NP.minus(res.originalPrice, res.orderDigest.currentSalesPrice)
+      }
       new Promise(function (resolve, reject) {
         let str = JSON.parse(res.product.product.note);
         resolve(str);

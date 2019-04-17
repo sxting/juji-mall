@@ -23,7 +23,7 @@
         <view style='width: {{resData.yikan/(resData.originalPrice - resData.activityPrice) * 630}}rpx' class='rate-line2 {{(status === "fail") ? "rate-line3" : ""}}'><text></text></view>
       </view>
       <view class='price-box'>
-        <text class='fl'>已砍¥{{resData.yikan/100}}</text>
+        <text class='fl' wx:if="{{resData.yikan}}">已砍¥{{resData.yikan/100}}</text>
         <text class='fr'><text style='color: #999'>当前价格: </text> <text style='font-size: 28rpx;font-weight:bold'>{{resData.orderDigest.currentSalesPrice/100}}</text>元</text>
       </view>
     </view>

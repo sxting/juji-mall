@@ -4,7 +4,7 @@
         <swiper class="img-wrap" autoplay="true" interval="3000">
             <block wx:for="{{showPics}}" wx:key="{{index}}">
                 <swiper-item>
-                    <image mode="aspectFit" src="{{item}}" class="slide-image" lazy-load="true" />
+                    <image mode="aspectFit" src="{{item?'https://upic.juniuo.com/file/picture/' + item + '/resize_751_420/mode_filt/format_jpg/quality_70':''}}" data-url="{{item}}" bindtap="previewImage" class="slide-image" lazy-load="true" />
                 </swiper-item>
             </block>
         </swiper>
@@ -137,7 +137,7 @@
             <view style="font-size: 30rpx;color: #333333;font-weight: bolder;">详细信息</view>
             <view style="margin-top:30rpx;" wx:for="{{description}}" wx:key="{{index}}">
                 <view wx:if="item.content.length>0" wx:for="{{item.content}}" wx:for-item="item2" wx:for-index="index2" wx:key="{{index2}}" style="font-size: 26rpx;line-height:40rpx;color: #333;margin-top:30rpx;">{{item2}}</view>
-                <image style="width:100%;height:{{despImgHeightValues[(index+1)*(index1+1)-1]}}rpx;margin-top:30rpx;" mode="widthFix" wx:for="{{item.picIds}}" wx:for-item="item1" wx:for-index="index1" wx:key="{{index1}}" src="https://upic.juniuo.com/file/picture/{{item1}}/resize_0_0/mode_fill" bindload="desImgLoad" lazy-load="true"></image>
+                <image style="width:100%;height:{{despImgHeightValues[(index+1)*(index1+1)-1]}}rpx;margin-top:30rpx;" mode="widthFix" wx:for="{{item.picIds}}" wx:for-item="item1" wx:for-index="index1" wx:key="{{index1}}" src="https://upic.juniuo.com/file/picture/{{item1}}/resize_0_0/mode_fill" data-url="{{item1}}" bindtap="previewImage" bindload="desImgLoad" lazy-load="true"></image>
             </view>
         </view>
     </view>

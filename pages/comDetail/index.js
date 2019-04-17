@@ -270,9 +270,6 @@ Page({
       next: res => {
         console.log(res);
         var picsStrArr = res.product.picIds.split(',');
-        picsStrArr.forEach(function(item,index){
-          picsStrArr[index] = constant.basePicUrl + item + '/resize_751_420/mode_filt/format_jpg/quality_70'
-        });
         new Promise(function(resolve,reject){
           let str = JSON.parse(res.product.note);
           resolve(str);

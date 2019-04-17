@@ -51,10 +51,12 @@ Page({
           type: options.type
         })
     }
+    this.setData({
+      activityOrderId: options.activityOrderId ? options.activityOrderId : ''
+    })
     if(options.activityId){
         this.setData({
           activityId: options.activityId,
-          activityOrderId: options.activityOrderId ? options.activityOrderId : '',
           splicedRuleId: options.splicedRuleId ? options.splicedRuleId : ''
         })
       this.getActivityInfo();

@@ -36,6 +36,7 @@ Component({
     hours: 23,
     minites: 20,
     seconds: 58,
+    price1: 0,
   },
 
   ready: function () {

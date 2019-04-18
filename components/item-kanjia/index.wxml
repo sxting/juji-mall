@@ -81,7 +81,7 @@
       <image src='/images/jinbi.png'></image>
       <view>已成功为您砍掉<text class='alert1-price'>{{price1/100}}</text>元</view>
       <view>分享给好友多砍几刀吧</view>
-      <button class='alert1-share' open-type="share" data-type='share2'>分享加速砍价吧</button>
+      <button class='alert1-share' open-type="share" data-type='share2' bindtap='closeAlert1'>分享加速砍价吧</button>
     </view>
     <image class='icon-close1' src='/images/newerGetClose.png' bindtap='closeAlert1'></image>
   </view>

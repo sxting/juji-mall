@@ -39,3 +39,4 @@ page{box-sizing:border-box;height: 100%;background-color: #fbfbfb}
 .total{font-size: 24rpx;color: #333333;}
 .expire{position: absolute;width: 93rpx;height: 87rpx;display: block;right: 0;top: 0}
 button{margin: 0;}
+.lastTxt{font-size: 26rpx;color: #E83221;margin-left: 12rpx;display: inline-block;}

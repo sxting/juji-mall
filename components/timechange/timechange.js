@@ -14,6 +14,7 @@ Component({
     restSecond: '00',
   },
   ready: function () {
+    console.log("倒计时组件");
     console.log(this.data.dataFromParent)
     var expireTime = this.data.dataFromParent;
     let expireDate = expireTime.replace(/-/g, '/');

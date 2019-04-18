@@ -1,4 +1,4 @@
 @import '../../app.wxss';
 .num{display:inline-block;background-color:#E83221;border-radius:10rpx;width:44rpx;height:40rpx;line-height: 40rpx;font-size:26rpx;color:#FFFFFF;letter-spacing:0;text-align: center;}
-.txt{font-size: 26rpx;color: #E83221;margin-left: 12rpx;display: inline-block;}
+.div{height: 40rpx;}
 .line{display: inline-block;width: 20rpx;text-align: center;line-height: 40rpx;font-size: 24rpx;color: #E83221;}

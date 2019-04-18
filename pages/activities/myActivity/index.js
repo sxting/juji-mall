@@ -85,6 +85,7 @@ Page({
     onShareAppMessage:function(res) {
         var nickName = JSON.parse(wx.getStorageSync('userinfo')).nickName;
         var activityId = res.target.dataset.id;
+        var gender = JSON.parse(wx.getStorageSync('userinfo')).gender==1?'他':'她';
         var activityOrderId = res.target.dataset.aoid;
         var picId = res.target.dataset.pic;
         var productName = res.target.dataset.productname;
@@ -97,8 +98,9 @@ Page({
             }
         }
         if (this.data.type === 'BARGAIN') {
+            var oprice = res.target.dataset.oprice;
             return {
-                title: nickName + '分享给您一个心动商品，快来一起体验吧！',
+                title: nickName + '邀请你帮'+gender+'砍价，' + price + '元得原价'+oprice+'元的' + productName,
                 path: '/pages/login/index?pagetype=5&type=BARGAIN&activityId=' + activityId + '&activityOrderId=' + activityOrderId + '&invitecode=' + wx.getStorageSync('inviteCode'),
                 imageUrl: constant.basePicUrl + picId + '/resize_560_420/mode_fill'
             }

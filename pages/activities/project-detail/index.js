@@ -66,43 +66,34 @@ Page({
     // 查询商品详情
     getItemInfo.call(this);
   },
-  onShareAppMessage(res) {
-    console.log(res + '00');
-    // this.share();
+  onShareAppMessage:function(res) {
+    var nickName = JSON.parse(wx.getStorageSync('userinfo')).nickName;
+    var activityId = this.data.activityId;
+    var gender = JSON.parse(wx.getStorageSync('userinfo')).gender==1?'他':'她';
+    var activityOrderId = this.data.activityOrderId;
+    var picId = this.data.resData.cover;
+    var productName = this.data.resData.productName;
+    var price = Number(this.data.resData.activityPrice/100).toFixed(2);
+    var oprice = Number(this.data.resData.originalPrice/100).toFixed(2);
+    if (res.from === 'button' && res.target.dataset.type === 'pintuan') {
+        return {
+            title: '嗨！便宜一起拼￥' + price + '【' + productName + '】',
+            path: '/pages/login/index?pagetype=5&type=SPLICED&activityId=' + activityId + '&activityOrderId=' + activityOrderId + '&invitecode=' + wx.getStorageSync('inviteCode'),
+            imageUrl: constant.basePicUrl + picId + '/resize_560_420/mode_fill'
+        }
+    }
     if (res.from === 'button' && res.target.dataset.type === 'share2') {
-      // 分享砍价
-      return {
-        title: JSON.parse(wx.getStorageSync('userinfo')).nickName + '分享给您一个心动商品，快来一起体验吧！',
-        path: '/pages/login/index?pagetype=5&type=' + this.data.type + '&activityId=' + this.data.activityId + '&activityOrderId=' + this.data.activityOrderId + '&invitecode=' + wx.getStorageSync('inviteCode'),
-        success: function (res) {
-          console.log(res);
-        },
-        fail: function (res) {
-          console.log(res);
+        return {
+            title: nickName+'邀请你帮'+gender+'砍价，'+price+'元得原价'+oprice+'元的'+productName,
+            path: '/pages/login/index?pagetype=5&type=BARGAIN&activityId=' + activityId + '&activityOrderId=' + activityOrderId + '&invitecode=' + wx.getStorageSync('inviteCode'),
+            imageUrl: constant.basePicUrl + picId + '/resize_560_420/mode_fill'
         }
-      }
-    } else if (res.target.dataset.type === 'pintuan'){
-      console.log('/pages/login/index?pagetype=5&type=' + this.data.type + '&activityId=' + this.data.activityId + '&activityOrderId=' + this.data.activityOrderId);
-      return {
-        title: '嗨！便宜一起拼￥' + this.data.productInfo.price/100 + '【' + this.data.productInfo.productName +'】',
-        path: '/pages/login/index?pagetype=5&type=' + this.data.type + '&activityId=' + this.data.activityId + '&activityOrderId=' + this.data.activityOrderId + '&invitecode=' + wx.getStorageSync('inviteCode'),
-        imageUrl: constant.basePicUrl + this.data.productInfo.picId + '/resize_751_420/mode_fill',
-      }
-    } else {
-      // 分享商品
-      return {
-        title: JSON.parse(wx.getStorageSync('userinfo')).nickName + '分享给您一个心动商品，快来一起体验吧！',
-        path: '/pages/login/index?pagetype=5&type=' + this.data.type + '&activityId=' + this.data.activityId + '&invitecode=' + wx.getStorageSync('inviteCode'),
-        success: function (res) {
-          console.log(res);
-        },
-        fail: function (res) {
-          console.log(res);
-        }
-      }
+    }
+    return {
+      title: nickName + '分享给您一个心动商品，快来一起体验吧！',
+      path: '/pages/login/index?pagetype=5&type=' + this.data.type + '&activityId=' + this.data.activityId + '&invitecode=' + wx.getStorageSync('inviteCode')
     }
   },
-
   onStartKanjia(e) {
     console.log(e.detail);
     if (e.detail) {

@@ -244,6 +244,11 @@ function dataFun(res) {
     help: !res.orderDigest.allowParticipate ? true : false,
     self: (!res.orderDigest) || (res.orderDigest && res.orderDigest.isInitiator)
   })
+  if (res.orderDigest) {
+    this.setData({
+      help: !res.orderDigest.allowParticipate ? true : false,
+    })
+  }
 
   console.log(res)
 }

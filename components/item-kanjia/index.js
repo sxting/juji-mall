@@ -243,7 +243,6 @@ function dataFun(res) {
     resData: res,
     activityOrderId: res.orderDigest ? res.orderDigest.activityOrderId : '',
     status: status,
-    help: !res.orderDigest.allowParticipate ? true : false,
     self: (!res.orderDigest) || (res.orderDigest && res.orderDigest.isInitiator)
   })
   if (res.orderDigest) {

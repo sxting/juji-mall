@@ -39,7 +39,8 @@ Page({
     resData: '',
     activityOrderId: '',
     progressId: '',
-    self: ''
+    self: '',
+    showCom: false,
   },
   onLoad: function (options) {
     if (options.shared) {
@@ -63,6 +64,9 @@ Page({
     getItemInfo.call(this);
   },
   onShow: function () {
+    this.setData({
+      showCom: false
+    })
     // 查询商品详情
     getItemInfo.call(this);
   },
@@ -190,6 +194,9 @@ function getItemInfo() {
     progressId: this.data.progressId
   }).subscribe({
     next: res => {
+      that.setData({
+        showCom: true
+      })
       var picsStrArr = res.cover.split(',');
       picsStrArr.forEach(function (item, index) {
         picsStrArr[index] = constant.basePicUrl + item + '/resize_751_420/mode_fill'

@@ -94,7 +94,10 @@ Component({
             doBargain.call(this);
           }
         },
-        error: err => errDialog(err),
+        error: err => {
+          getData.call(this);
+          errDialog(err);
+        },
         complete: () => wx.hideToast()
       })
     },
@@ -173,7 +176,6 @@ function dataFun(res) {
   if (res.orderDigest) {
     res.yikan = NP.minus(res.originalPrice, res.orderDigest.currentSalesPrice)
   }
-  console.log(res.yikan);
 
   // status: 'init', //未开始 init，砍价中 ing，砍价失败 fail，砍价成功 success
   let status = 'init'
@@ -241,7 +243,6 @@ function dataFun(res) {
     resData: res,
     activityOrderId: res.orderDigest ? res.orderDigest.activityOrderId : '',
     status: status,
-    help: !res.orderDigest.allowParticipate ? true : false,
     self: (!res.orderDigest) || (res.orderDigest && res.orderDigest.isInitiator)
   })
   if (res.orderDigest) {

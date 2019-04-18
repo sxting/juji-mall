@@ -28,9 +28,9 @@
       </view>
     </view>
     <view class='others-btn' wx:if="{{!self}}">
-      <view class='btn-active' wx:if="{{status === 'ing' && !help}}" bindtap='helpKJ'>帮好友砍一刀</view>
-      <form bindsubmit="collectFormIds" report-submit="true" wx:elif="{{ help || status === 'fail' || status === 'success' }}">
-        <button form-type="submit" class='btn-active' bindtap='startKanjia'>我也要发起砍价</button>
+      <form bindsubmit="collectFormIds" report-submit="true">
+        <button form-type="submit" class='btn-active' wx:if="{{status === 'ing' && !help}}" bindtap='helpKJ'>帮好友砍一刀</button>
+        <button form-type="submit" wx:elif="{{ help || status === 'fail' || status === 'success' }}" class='btn-active' bindtap='startKanjia'>我也要发起砍价</button>
       </form>
       <view class='kanjia-status'>
         <text wx:if="{{status === 'success'}}">本次砍价已成功</text>
@@ -91,7 +91,7 @@
       <view class='alert2-title'>已成功帮砍{{price1/100}}元</view>
       <view class='alert2-tip'>参加该砍价活动可享{{filter.toFix(resData.originalPrice - resData.activityPrice)}}元优惠，快去邀请好友砍价吧！</view>
       <view class='alert2-product'>
-        <image src='/images/jinbi.png'></image>
+        <image src='{{"https://upic.juniuo.com/file/picture/"+resData.cover+"/resize_220_140/mode_fill"}}'></image>
         <view class='alert2-product-r fl'>
           <view class='alert2-product-name'>{{productInfo.productName}}</view>
           <view class='alert2-product-rb'>

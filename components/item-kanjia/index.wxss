@@ -284,7 +284,7 @@
   color: #111111;
   padding-top: 10rpx;
   padding-right: 10rpx;
-  line-height: 44rpx;
+  line-height: 40rpx;
 }
 .alert2-product-rb {
   position: absolute;

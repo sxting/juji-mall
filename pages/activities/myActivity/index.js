@@ -1,7 +1,7 @@
 import { service } from '../../../service';
 import { constant } from '../../../utils/constant';
 import { errDialog, loading } from '../../../utils/util';
-import { activitiesService } from '../shared/service.js'
+import { activitiesService } from '../shared/service.js';
 var app = getApp();
 Page({
     data: {
@@ -31,9 +31,9 @@ Page({
         var id = e.currentTarget.dataset.id;
         var activityType = e.currentTarget.dataset.activitytype;
         if(activityType=="SPLICED")
-        wx.navigateTo({ url: "../my-collage/index?id=" + productId + '&activityId=' + activityId + '&activityOrderId=' + activityOrderId + '&activityType=' + activityType });
+            wx.navigateTo({ url: "../my-collage/index?id=" + productId + '&activityId=' + activityId + '&activityOrderId=' + activityOrderId + '&activityType=' + activityType });
         else
-        wx.navigateTo({ url: "../project-detail/index?id=" + productId + '&activityId=' + activityId + '&activityOrderId=' + activityOrderId + '&type=' + activityType });
+            wx.navigateTo({ url: "../project-detail/index?id=" + productId + '&activityId=' + activityId + '&activityOrderId=' + activityOrderId + '&type=' + activityType });
     },
     toOrderDetail: function(e) {
         var orderid = e.currentTarget.dataset.orderid;

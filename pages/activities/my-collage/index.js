@@ -37,8 +37,9 @@ Page({
         });
     },
     onShareAppMessage: function() {
+        var price = Number(this.data.productInfo.activityPrice/100).toFixed(2);
         return {
-            title: '嗨！便宜一起拼￥' + this.data.productInfo.activityPrice / 100 + '【' + this.data.productInfo.productName + '】',
+            title: '嗨！便宜一起拼￥' + price + '【' + this.data.productInfo.productName + '】',
             path: '/pages/login/index?pagetype=5&type=' + this.data.activityType + '&activityId=' + this.data.activityId + '&activityOrderId=' + this.data.activityOrderId + '&progressId=' + this.data.progressId,
             imageUrl: constant.basePicUrl + this.data.productInfo.cover + '/resize_560_420/mode_fill',
         }

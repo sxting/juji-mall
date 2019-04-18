@@ -241,9 +241,14 @@ function dataFun(res) {
     resData: res,
     activityOrderId: res.orderDigest ? res.orderDigest.activityOrderId : '',
     status: status,
-    help: res.remainBargainCount == 0 ? true : false,
+    help: !res.orderDigest.allowParticipate ? true : false,
     self: (!res.orderDigest) || (res.orderDigest && res.orderDigest.isInitiator)
   })
+  if (res.orderDigest) {
+    this.setData({
+      help: !res.orderDigest.allowParticipate ? true : false,
+    })
+  }
 
   console.log(res)
 }

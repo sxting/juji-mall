@@ -17,7 +17,7 @@
     <kanjia wx:if="{{type === 'BARGAIN' && showCom}}" product-info="{{productInfo}}" activity-order-id="{{activityOrderId}}" activity-id="{{activityId}}" res-data="{{resData}}" bind:myevent="onStartKanjia"></kanjia>
   </view>
 
-  <view class="yongkaxuzhi-wrap" style="margin-top:20rpx;">
+  <view class="yongkaxuzhi-wrap">
     <view class="yongkaxuzhi">
       <view style="font-size: 30rpx;color: #333333;font-weight: bolder;">购买须知</view>
       <view style="background: #FBFBFB;border-radius: 10px;padding:30rpx 30rpx 10rpx 30rpx;margin-top:30rpx;">

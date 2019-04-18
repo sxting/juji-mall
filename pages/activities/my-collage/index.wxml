@@ -14,22 +14,28 @@
       </view>
       <!-- 拼团详情页面 -->
       <view class='collage-box'>
-        <view class='status-collage'>
+        <view class='status-collage' style="{{activityStatus == 'SUCCESS'||activityStatus == 'FAIL'?'padding-top:30rpx':''}}">
           <view class='title-text'>
-            <text wx:if="{{(activityStatus == 'SUCCESS')||(activityStatus == 'FAIL')}}">{{activityStatus == 'SUCCESS'? '拼团成功':'拼团失败'}}</text>
-          </view> 
+            <view class="ub ub-ac ub-pc txt11" wx:if="{{activityStatus == 'SUCCESS'}}"><image mode="aspectFit" class="statusIcon" src="/images/success-icon.png"></image>拼团成功</view>
+            <view class="ub ub-ac ub-pc txt11" wx:if="{{activityStatus == 'FAIL'}}"><image mode="aspectFit" class="statusIcon" src="/images/fail-icon.png"></image>拼团失败</view>
+          </view>
           <view class='situation-box'>
               <view class='fail-text' wx:if="{{activityStatus == 'FAIL'}}">拼团失败，支付款项将原路返回</view>
               <view wx:if="{{activityStatus == 'IN_PROGRESS'}}">
+
+                <view class="txtTit">
+                  <image class="titbg" src="../../../images/pint.png"></image>
+                  <view class="tittext">距结束时间仅剩</view>
+                </view>
+
                 <view wx:if="{{productOrderInfo}}"><child dataFromParent='{{productOrderInfo.expirationTime}}'></child></view>
                 <view class='text-describe'>还差<text>1</text>人，赶快邀请好友来拼团吧</view>
               </view>
               <view class='head-portrait-box'>
                   <view class='head-portrait' wx:for="{{ headPortraitList }}" wx:for-index="index" wx:key="unique">
-                    <image src='{{ item.avatar? item.avatar : portraitUrl }}'></image>
-                    <view class='bg-colonel' wx:if="{{index === 0}}">
-                      <image src='/images/colonel-bg.png'></image><text>团长</text>
-                    </view>
+                    <image class="headImg" src='{{ item.avatar? item.avatar : portraitUrl }}'></image>
+                    <image class="leaderBg" src='/images/colonel-bg.png' wx:if="{{index === 0}}"></image>
+                    <view class="leaderTxt" wx:if="{{index === 0}}">团长</view>
                   </view>
               </view>
           </view>

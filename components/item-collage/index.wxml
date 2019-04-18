@@ -3,10 +3,10 @@
 <!-- 中间内容 -->
 <view class='content-box' wx:if="{{fleg=='content'}}">
   <view class='title-infor'>
-    <view class='collage-infor'><text class='collage-numbers'>2人团</text><text>好友拼团·人满拼团成功·人不满退款</text></view>
+    <view class='collage-infor ub ub-ac'><view class='collage-numbers'>2人团</view><text>好友拼团·人满拼团成功·人不满退款</text></view>
     <view class='name-collage'>{{collageInforData.productName}}</view>
     <view class='price-infor clearfix'>
-      <text class='fl'>{{format.toFix(resData.activityPrice)}}元</text>
+      <text class='fl'>{{format.toFix(resData.activityPrice)}}<text style="font-size:24rpx">元</text></text>
       <text class='fl original-price'>{{format.toFix(collageInforData.originalPrice)}}元</text>
       <text>已拼{{collageInforData.soldNum}}件</text>
     </view>
@@ -42,7 +42,7 @@
     <view class='detail-infor'>
       <view class='list-box'>
         <view class='detail-pintuan ub ub-ac' wx:key="unique" wx:for='{{pintuanListInfor}}' wx:if="{{item.resNum>0}}">
-          <view class='images-box'>
+          <view class='images-box' style="height:76rpx">
             <image wx:for='{{item.picArr}}' wx:key="unique" wx:for-item="picArr" src='{{picArr? picArr : portraitUrl}}'></image>
           </view>
           <text class='text-infor'>还差{{item.resNum}}人拼团成功</text>

@@ -118,10 +118,9 @@
   color: #E83221;
   font-family: "PingFangSC-Medium";
 }
-.price-box .fl {
+.price-box .l {
   border: 1rpx solid #E83221;
   padding: 2rpx 6rpx;
-  margin-left: 2rpx;
 }
 
 .btn-active {

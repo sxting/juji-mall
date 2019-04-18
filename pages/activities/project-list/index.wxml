@@ -2,7 +2,7 @@
 <wxs src="../../../utils/numFr.wxs" module="format" />
  <view class="juzihl-wrap">
   <view class='fixed-button ub ub-ac' style='position: fixed;' wx:if="{{sceneType == 'BARGAIN'}}" data-type="{{sceneType}}" catchtap='switchToOrderListPage'>
-    <view class='type-icon'>
+    <view class='type-icon kanjia-icon'>
       <image src='/images/kanjia-icon.png'></image>
     </view>
     <text>我的砍价</text>

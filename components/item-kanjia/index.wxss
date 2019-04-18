@@ -284,7 +284,12 @@
   color: #111111;
   padding-top: 10rpx;
   padding-right: 10rpx;
-  line-height: 40rpx;
+  line-height: 44rpx;
+  overflow:hidden; 
+  text-overflow:ellipsis;
+  display:-webkit-box; 
+  -webkit-box-orient:vertical;
+  -webkit-line-clamp:2;
 }
 .alert2-product-rb {
   position: absolute;

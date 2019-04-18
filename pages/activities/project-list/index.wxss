@@ -32,6 +32,12 @@
   width: 50rpx;
   height: 35rpx;
   border-radius: 50%;
+  padding-top: 14rpx;
+}
+.fixed-button .kanjia-icon image {
+  width: 45rpx;
+  height: 45rpx;
+  padding-top: 12rpx;
 }
 
 .fixed-button text{

@@ -1,5 +1,5 @@
 /* pages/activities/project-list/index.wxss */
-
+page{height: 100%;background-color: #fff;}
 .juzihl-wrap {
   background: #fff;
   padding: 40rpx 30rpx 30rpx 30rpx;
@@ -201,5 +201,6 @@
   height: 100rpx;
   font-size:24rpx;
   color:#999;
-  text-align: center
+  text-align: center;
+  background-color: #fff;
 }

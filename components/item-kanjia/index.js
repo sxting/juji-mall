@@ -65,7 +65,7 @@ Component({
         })
       } else {
         wx.navigateTo({
-          url: `/pages/payOrder/index?id=${this.data.resData.productId}&paytype=6&activityOrderId=${this.data.activityOrderId}&resData=${resData}`,
+          url: `/pages/payOrder/index?id=${this.data.resData.productId}&paytype=6&orderType=BARGAIN&activityOrderId=${this.data.activityOrderId}&resData=${resData}`,
         })
       }
     },

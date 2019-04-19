@@ -52,10 +52,10 @@
             </block>
             <block wx:if="{{type == 'BARGAIN'&&item.activityOrderStatus != 'FAIL'}}">
                 <view class="ctrl plr15 ub ub-ac ub-pj">
-                    <view class="ub-f1 tip" wx:if="{{item.activityOrderStatus == 'SUCCESS'}}">您发起的砍价活动已成功，请立即支付</view>
-                    <view class="ub-f1 tip" wx:if="{{item.activityOrderStatus == 'IN_PROGRESS'||item.activityOrderStatus=='WAIT_PAY'}}">请分享好友帮忙砍</view>
+                    <view class="ub-f1 tip" wx:if="{{item.activityOrderStatus == 'SUCCESS'||item.activityOrderStatus=='WAIT_PAY'}}">您发起的砍价活动已成功，请立即支付</view>
+                    <view class="ub-f1 tip" wx:if="{{item.activityOrderStatus == 'IN_PROGRESS'}}">请分享好友帮忙砍</view>
                     <button class="yao1 ub ub-ac ub-pc" wx:if="{{item.activityOrderStatus == 'IN_PROGRESS'}}" open-type="share" data-id="{{item.activityId}}" data-pic="{{item.cover}}" data-aoid="{{item.activityOrderId}}" data-productname="{{item.productName}}" data-price="{{format.toFix(item.activityPrice)}}" data-oprice="{{format.toFix(item.originalPrice)}}">邀请好友帮忙砍</button>
-                    <view class="use ub ub-ac ub-pc" bindtap="toOrderDetail" data-orderid="{{item.orderId}}">立即付款</view>
+                    <view class="use ub ub-ac ub-pc" bindtap="toPayOrder" data-aorderid="{{item.activityOrderId}}" data-productid="{{item.productId}}" data-activityid="{{item.activityId}}">立即付款</view>
                 </view>
             </block>
         </view>

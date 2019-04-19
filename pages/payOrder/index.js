@@ -110,7 +110,8 @@ Page({
           store: res.product.store,
           price: res.activityPrice,
           point: '',
-          showProduct: true
+          showProduct: true,
+          kanjiaData: res
         });
       },
       error: err => console.log(err),

@@ -39,6 +39,12 @@ Page({
         var orderid = e.currentTarget.dataset.orderid;
         wx.navigateTo({ url: "/pages/orderDetail/index?id=" + orderid });
     },
+    toPayOrder:function(e){
+        var productId = e.currentTarget.dataset.productid;
+        var aorderid = e.currentTarget.dataset.aorderid;
+        var activityId = e.currentTarget.dataset.activityid;
+        wx.navigateTo({ url: "/pages/payOrder/index?paytype=6&orderType=BARGAIN&id=" + productId +'&activityOrderId='+aorderid + '&activityId=' + activityId });
+    },
     getData: function(type, pageNo) {
         var obj = {
             providerId: wx.getStorageSync('providerId'),

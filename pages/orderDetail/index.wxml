@@ -4,7 +4,7 @@
         <view class="ub ub-ac info" wx:for="{{orderInfo.orderItemList}}" wx:key="{{index}}" data-id="{{item.productId}}" bindtap="toComDetail">
             <image class="goodImg udb" src="{{constant.basePicUrl}}{{item.picId}}/resize_220_200/mode_fill"></image>
             <view class="ub-f1 goodMsg">
-                <view class="goodTit">{{item.productName}}</view>
+                <view class="goodTit">{{format.toEllipsis(item.productName)}}</view>
                 <view class="storeName">{{item.merchantName}}</view>
                 <!-- 混合支付 -->
                 <view class="goodAmount" wx:if="{{orderInfo.payType=='MIX'&&(orderInfo.status=='CREATED'||orderInfo.status=='CLOSE')}}">

@@ -14,7 +14,8 @@ Page({
     vouchers:[],
     validEndDate:'',
     isTimeOpen:false,
-    storeInfo:{}
+    storeInfo:{},
+    productType:''
   },
   onLoad: function(options) {
     clearInterval(timer);
@@ -24,8 +25,10 @@ Page({
     this.setData({orderId: options.id});
   },
   toComDetail:function(e){
-    var id = e.currentTarget.dataset['id'];
-    wx.navigateTo({url: "/pages/comDetail/index?id=" + id});
+    // var id = e.currentTarget.dataset['id'];
+    // if(this.data.orderInfo.orderBizType=='SPLICED'){
+    //   wx.navigateTo({url: "/pages/comDetail/index?id=" + id});
+    // }
   },
   toComment: function(e) {
     var id = e.currentTarget.dataset['id'];

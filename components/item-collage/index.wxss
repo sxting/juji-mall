@@ -8,7 +8,7 @@
 .price-infor .original-price { font-size: 28rpx; color: #999999; text-decoration: line-through; margin-left: 20rpx; }
 .price-infor text:last-of-type { font-size: 24rpx; color: #999999; letter-spacing: 0; float: right }
 .price-infor text:first-of-type { font-size: 38rpx; color: #E83221; }
-.pintuan-person { padding: 0 30rpx 40rpx; background-color: #fff;}
+.pintuan-person { padding: 0 30rpx 20rpx; background-color: #fff;}
 .pintuan-person .head-name { font-size: 30rpx; color: #333333; padding: 30rpx 0 }
 .pintuan-person .detail-infor { box-shadow: 0 0 6rpx 5rpx rgba(229, 229, 229, 0.50); border-radius: 10rpx; padding: 0 30rpx; }
 .pintuan-person .detail-infor .list-box { width: 100%; }
@@ -23,12 +23,11 @@
 .last-time { font-size: 28rpx; color: #333333; margin-bottom: 30rpx }
 .last-time text { display: inline-block; background-color: #E83221; border-radius: 10rpx; width: 44rpx; height: 40rpx; font-family: SFNSDisplay; font-size: 26rpx; color: #FFFFFF; letter-spacing: 0; }
 .head-portrait-box { text-align: center }
-.head-portrait-box .head-portrait { display: inline-block; margin-right: 40rpx; width: 99rpx; height: 99rpx; position: relative; border-radius: 50%; }
-.head-portrait-box .head-portrait:last-of-type { margin-right: 0 }
-.head-portrait-box .head-portrait image { width: 99rpx; height: 99rpx; border-radius: 50% }
-.head-portrait .bg-colonel image { width: 64rpx; height: 28rpx; }
-.head-portrait .bg-colonel text { font-size: 18rpx; color: #FFFFFF; letter-spacing: 0; text-align: center; position: absolute; display: inline-block; width: 62rpx; left: 0; top: 12rpx }
-.head-portrait .bg-colonel { position: absolute; bottom: 13rpx; width: 64rpx; height: 28rpx; left: 20rpx }
+.head-portrait-box .head-portrait{display:inline-block;margin-right:40rpx;width:100rpx;height:100rpx;position:relative}
+.head-portrait-box .head-portrait:last-of-type{margin-right:0}
+.head-portrait-box .head-portrait .headImg{width:100rpx;height:100rpx;border-radius:50%;z-index: 0}
+.head-portrait-box .head-portrait .leaderBg{width:64rpx;height:28rpx;z-index: 1;position: absolute;left: 50%;bottom: 0rpx;left: 18rpx;}
+.head-portrait-box .head-portrait .leaderTxt{width:64rpx;height:28rpx;z-index: 1;font-size:18rpx;color:#fff;position: absolute;left: 18rpx;bottom: 0rpx;text-align: center;line-height: 26rpx;}
 .btns { width: 470rpx; height: 88rpx; line-height: 88rpx; font-size: 30rpx; letter-spacing: 0; text-align: center; border-radius: 44rpx; }
 .group-buying { background-color: #FFDB00; color: #333333; }
 .low-stocks { background-color: #DEDEDE; color: #999999; }

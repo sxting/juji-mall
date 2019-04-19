@@ -54,12 +54,6 @@ Page({
                 }else{
                   this.setData({isFinall:false});
                 }
-                for(var i=0;i<res.content.length;i++){
-                    for(var j=0;j<res.content[i].orderItemList.length;j++){
-                        var pName = res.content[i].orderItemList[j].productName;
-                        res.content[i].orderItemList[j].productName = pName.length>30?pName.substring(0,30)+'...':pName;
-                    }
-                }
                 if(pageNo==1){
                   this.setData({ orderlist:res.content});
                 }else{

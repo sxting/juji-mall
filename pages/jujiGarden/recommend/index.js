@@ -81,9 +81,9 @@ Page({
     //生成图文
     produceImg: function(e,type) {
         if(type==1){
-            wx.showLoading({ title: '正在下载图片' });
+            wx.showToast({title: '正在保存图片',icon: 'loading',duration: 30000});
         }else{
-            wx.showLoading({ title: '生成分享图片' });
+            wx.showToast({title: '生成分享图片',icon: 'loading',duration: 30000});
         }
         var productId = e.currentTarget.dataset.productid;
         this.setData({ productId: productId });
@@ -110,8 +110,12 @@ Page({
                             this.setData({ headImg: res.tempFilePath });
                             this.startDrawImg(ready,e,type);
                         } else {
-                            wx.hideLoading();
+                            wx.hideToast();
                         }
+                    },
+                    fail: (err) => {
+                        wx.hideToast();
+                        console.log('商品图片下载失败');
                     }
                 });
 
@@ -124,10 +128,11 @@ Page({
                             this.setData({ userImg: obj.tempFilePath });
                             this.startDrawImg(ready,e,type);
                         } else {
-                            wx.hideLoading();
+                            wx.hideToast();
                         }
                     },
                     fail: (err) => {
+                        wx.hideToast();
                         console.log('头像下载失败');
                     }
                 });
@@ -144,7 +149,7 @@ Page({
                                 this.setData({ erwmImg: obj.tempFilePath });
                                 this.startDrawImg(ready,e,type);
                             } else {
-                                wx.hideLoading();
+                                wx.hideToast();
                             }
                         }
                     });
@@ -167,25 +172,24 @@ Page({
                                         this.setData({ erwmImg: obj.tempFilePath });
                                         this.startDrawImg(ready,e,type);
                                     } else {
-                                        wx.hideLoading();
+                                        wx.hideToast();
                                     }
                                 }
                             });
                         },
                         error: err => {
                             errDialog(err);
-                            wx.hideLoading();
+                            wx.hideToast();
                         },
                         complete: () => wx.hideToast()
                     });
                 }
-
             },
             error: err => {
-                wx.hideLoading();
+                wx.hideToast();
                 errDialog('获取商品信息失败');
             },
-            complete: () => wx.hideToast()
+            complete: () => {}
         })
     },
     closeModal: function() {
@@ -256,7 +260,7 @@ Page({
                     this.savePic(e,type);
                 },100)
             }else{
-                wx.hideLoading();
+                wx.hideToast();
             }
         });
     },
@@ -294,10 +298,9 @@ Page({
             wx.setClipboardData({
                 data: desc,
                 success: (res) => {
-                    wx.hideLoading();
+
                 }
             });
-
         }
     },
     saveAsPhoto: function(imgUrl,e,type) {
@@ -339,6 +342,7 @@ Page({
                             }
                         },
                         fail: (res) => {
+                            wx.hideToast();
                             console.log(res);
                         }
                     });

@@ -19,6 +19,12 @@ var filters = {
   },
   toFloor:function(value){
     return value > 999 ? Math.floor(value/1000)+'k':value;
+  },
+  toEllipsis:function(value){
+    return value.length>30?value.substring(0,30)+'...':value;
+  }
+  toEllipsis1:function(value){
+    return value.length>24?value.substring(0,24)+'...':value;
   }
 }
 
@@ -59,5 +65,7 @@ module.exports = {
   toDis: filters.toDis,
   toSplitImgs: filters.toSplitImgs,
   toFloor: filters.toFloor,
+  toEllipsis: filters.toEllipsis,
+  toEllipsis1: filters.toEllipsis1,
   initArr: initArr
 }

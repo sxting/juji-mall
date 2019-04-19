@@ -16,7 +16,7 @@ Page({
         productInfo: {}, //商品详情
         orderId: '',
         store: {}, //
-        activityStatus: 'IN_PROGRESS',
+        activityStatus: '',
         progressId: '',
         storeId: '',
         productId: ''

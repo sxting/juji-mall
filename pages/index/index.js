@@ -44,7 +44,7 @@ Page({
   onLoad: function(options) {
     console.log(options);
     wx.setNavigationBarTitle({
-      title: '桔集'
+      title: '桔 集'
     });
     wx.showShareMenu({
       withShareTicket: true

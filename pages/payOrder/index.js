@@ -693,14 +693,20 @@ Page({
                     icon: 'none'
                   });
                   that.toMyOrder();
-                  that.setData({
-                    alreadyPay: false
-                  });
+                  that.setData({alreadyPay: false});
                 }
               }
             });
           },
-          error: err => errDialog(err),
+          error: err => {
+              wx.showModal({
+                title: '支付失败',
+                content: err,
+              });
+              that.setData({
+                alreadyPay: false
+              });
+          },
           complete: () => wx.hideToast()
         })
       }
@@ -732,11 +738,20 @@ Page({
                   title: '用户取消支付',
                   icon: 'none'
                 });
+                that.setData({alreadyPay: false});
               }
             }
           });
         },
-        error: err => errDialog(err),
+        error: err => {
+            wx.showModal({
+              title: '支付失败',
+              content: err,
+            });
+            that.setData({
+              alreadyPay: false
+            });
+        },
         complete: () => wx.hideToast()
       })
     } else{

@@ -1,5 +1,5 @@
 page{box-sizing:border-box;height: 100%;background-color: #fbfbfb}
-
+.main{height: 100%;}
 .tablist{height: 100rpx;background-color: #fff}
 .tablist .tabItem{position: relative;font-size: 28rpx;color: #333;padding:0 40rpx;height: 100rpx;line-height: 100rpx;text-align: center;}
 .tablist .tabItem .line{width:72rpx;height: 4rpx;background-color: #FFDC00;border-radius: 2rpx;position:absolute;bottom: 16rpx;left: 50%;margin-left: -36rpx;display: none;}

@@ -95,7 +95,8 @@ Page({
     }
     return {
       title: nickName + '分享给您一个心动商品，快来一起体验吧！',
-      path: '/pages/login/index?pagetype=5&type=' + this.data.type + '&activityId=' + this.data.activityId + '&invitecode=' + wx.getStorageSync('inviteCode')
+      path: '/pages/login/index?pagetype=5&type=' + this.data.type + '&activityId=' + this.data.activityId + '&invitecode=' + wx.getStorageSync('inviteCode'),
+      imageUrl: constant.basePicUrl + picId + '/resize_560_420/mode_fill'
     }
   },
   onStartKanjia(e) {

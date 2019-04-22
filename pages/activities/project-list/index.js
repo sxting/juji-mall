@@ -12,6 +12,7 @@ Page({
   data: {
     sceneType: 'SPLICED',//查看进入的是什么场景类型  BARGAIN  SPLICED
     productList: [],
+    isShowNodata: false,
     pageNo: 1,
     providerId: '',
     ifBottom: false
@@ -87,6 +88,7 @@ function getActivityList(){
           productList: self.data.productList.concat(res),
           ifBottom: res.length == 0 ? true : false
         })
+        this.setData({ isShowNodata: this.data.productList.length == 0 });
       }
     },
     error: err => errDialog(err),

@@ -48,10 +48,10 @@ Component({
         resNum: 0
     },
     ready: function() {
+        console.log('活动信息');
         console.log(this.data.resData);
         console.log(this.data.activityOrderId);
         console.log(this.data.activityId);
-        console.log('活动信息='+JSON.stringify(this.data.collageInforData));
         let self = this;
         // 是否有其他参团者的活动
         if (this.data.resData.otherDigests) {

@@ -61,7 +61,7 @@ Component({
       let resData = JSON.stringify(this.data.resData); 
       if (e.currentTarget.dataset.type == '1') {
         wx.navigateTo({
-          url: `/pages/payOrder/index?id=${this.data.resData.productId}&paytype=4&storeid=`,
+          url: `/pages/payOrder/index?id=${this.data.resData.productId}&paytype=3&storeid=`,
         })
       } else {
         wx.navigateTo({

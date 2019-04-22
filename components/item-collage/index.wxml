@@ -73,9 +73,12 @@
     <view class="kaituan btns-pro ub-f1 ub ub-ver ub-ac ub-pc l" data-productid="{{collageInforData.productId}}" catchtap='createCollage'>
       <text class="txt1">我要开团</text>
     </view>
-    <view class="kaituan-ing btns-pro ub-f1 ub ub-ver ub-ac ub-pc r" data-activityorderid='{{resData.orderDigest.activityOrderId}}' data-activityid='{{resData.activityId}}' data-productid="{{collageInforData.productId}}" catchtap='joinCollage'>
+    <view wx:if="{{resData.orderDigest.orderId==''}}" class="kaituan-ing btns-pro ub-f1 ub ub-ver ub-ac ub-pc r" data-activityorderid='{{resData.orderDigest.activityOrderId}}' data-activityid='{{resData.activityId}}' data-productid="{{collageInforData.productId}}" catchtap='joinCollage'>
       <text class="txt1">{{format.toFix(resData.activityPrice)}}元</text>
       <text class="txt2">一键参团{{resData.activityOrderId}}</text>
+    </view>
+    <view wx:if="{{resData.orderDigest.orderId!=''}}" class="kaituan-ing btns-pro ub-f1 ub ub-ver ub-ac ub-pc r" data-activityorderid='{{resData.orderDigest.activityOrderId}}' data-activityid='{{resData.activityId}}' data-productid="{{collageInforData.productId}}" catchtap='joinCollage'>
+      <text class="topay">去支付</text>
     </view>
   </view>
 </view>

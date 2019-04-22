@@ -34,3 +34,4 @@
 .btns-pro { height: 88rpx; }
 .proBtns .kaituan { width: 240rpx; background: #FFDB00; border-radius: 44rpx 0 0 44rpx; font-size: 28rpx; color: #333333; }
 .proBtns .kaituan-ing { background-color: #E83221; border-radius: 0 44rpx 44rpx 0; font-size: 24rpx; color: #FFFFFF; }
+.topay{font-size: 32rpx;}

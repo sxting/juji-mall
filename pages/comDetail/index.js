@@ -177,9 +177,10 @@ Page({
       }
   },
   toPro:function(e){
-    wx.navigateTo({
-      url: '/pages/jujiGarden/recommend/index?productid='+e.currentTarget.dataset.id
-    });
+    this.showShare();
+    // wx.navigateTo({
+    //   url: '/pages/jujiGarden/recommend/index?productid='+e.currentTarget.dataset.id
+    // });
   },
   callPhone: function () {
     wx.makePhoneCall({

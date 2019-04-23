@@ -35,6 +35,7 @@ Page({
     lat:'',
     lng:'',
     share:0,//首页分享按钮进入值为1
+    promo:0,//首页推广按钮进入值为1
     showMoreXuZhi: false,//购买须知折叠显示
     showJoinClub: true,//显示“戳一下加入福利群”模态窗口
     showJcModal: false,//显示“去回复”模态窗口
@@ -45,6 +46,9 @@ Page({
   onLoad: function(options) {
     if (options.share) {
       this.setData({share: options.share});
+    }
+    if (options.promo) {
+      this.setData({promo: options.promo});
     }
     wx.setNavigationBarTitle({title: '商品详情'});
     console.log(JSON.stringify(options));
@@ -295,6 +299,9 @@ Page({
           if(that.data.share==1){
             that.showShare();
           }
+          if(that.data.promo==1){
+            that.showShare();
+          }
         }).catch(function(err){
           that.setData({
             commentList: res.commentList,
@@ -315,8 +322,10 @@ Page({
           if(that.data.share==1){
             that.showShare();
           }
+          if(that.data.promo==1){
+            that.showShare();
+          }
         })
-        
       },
       error: err => console.log(err),
       complete: () => wx.hideToast()

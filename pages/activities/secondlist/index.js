@@ -8,6 +8,7 @@ Page({
         sceneType: 'SEC_KILL',
         productList: [],
         isShowNodata: false,
+        curIndex:1,
         pageNo: 1,
         providerId: '',
         ifBottom: false
@@ -27,6 +28,10 @@ Page({
             })
             this.getActivityList(); //获取砍价列表信息
         }
+    },
+    activeTab:function(e){
+        var index = e.currentTarget.dataset.index;
+        this.setData({curIndex:index});
     },
     getActivityList: function() {
         let data = {

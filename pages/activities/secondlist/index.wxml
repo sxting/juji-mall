@@ -7,9 +7,13 @@
     </view>
     <text>我的秒杀</text>
   </view>
-  <view>
+  <view class="toper">
     <view class="mtitle">限时秒杀</view>
     <view class="subtitle">限时秒杀，手慢无！</view>
+    <div class="tabs">
+      <view class="item ub ub-ac ub-pc {{curIndex==1?'on':''}}" bindtap="activeTab" data-index="1">正在秒杀</view>
+      <view class="item ub ub-ac ub-pc {{curIndex==2?'on':''}}" bindtap="activeTab" data-index="2">即将开始</view>
+    </div>
   </view>
   <view class="jingxuanlist" wx:for='{{ productList }}' wx:key='item' data-productid='{{item.productId}}' data-activityid="{{item.activityId}}" catchtap='checkProductDetail'>
     <image class="productImg" bindtap="toComDetail" src="{{item.cover?'https://upic.juniuo.com/file/picture/'+item.cover+'/resize_0_0/mode_fill':''}}"></image>

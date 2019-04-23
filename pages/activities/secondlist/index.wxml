@@ -1,0 +1,43 @@
+<!--pages/activities/project-list/index.wxml-->
+<wxs src="../../../utils/numFr.wxs" module="format" />
+ <view class="juzihl-wrap">
+  <view class='fixed-button ub ub-ac' style='position: fixed;' catchtap='switchToOrderListPage'>
+    <view class='type-icon kanjia-icon'>
+      <image src='/images/kanjia-icon.png'></image>
+    </view>
+    <text>我的秒杀</text>
+  </view>
+  <view>
+    <view class="mtitle">限时秒杀</view>
+    <view class="subtitle">限时秒杀，手慢无！</view>
+  </view>
+  <view class="jingxuanlist" wx:for='{{ productList }}' wx:key='item' data-productid='{{item.productId}}' data-activityid="{{item.activityId}}" catchtap='checkProductDetail'>
+    <image class="productImg" bindtap="toComDetail" src="{{item.cover?'https://upic.juniuo.com/file/picture/'+item.cover+'/resize_0_0/mode_fill':''}}"></image>
+    <!-- <view class="dis-wrap jc-sb">
+      <view class="from">德川家望京店</view>
+      <view class="dis">距你119km</view>
+    </view> -->
+    <view class="pro-name">{{item.productName}}</view>
+    <view class="price-wrap jc-sb">
+      <view class="p-wrap">
+        <view class="now-price">{{ format.toFix(item.activityPrice) }}<text style="font-size:24rpx">元</text></view>
+        <view class="old-price">{{ format.toFix(item.originalPrice) }}元</view>
+      </view>
+    </view>
+    <view class="ub ub-ac jc-sb" style="padding: 0 30rpx 30rpx 30rpx;">
+      <view class="ub ub-ac ub-f1" style="margin-top:20rpx">
+        <text class="count">件</text>
+      </view>
+      <button class="ctrlbtn buyBtn2" bindtap="toComDetail">抢购</button>
+    </view>
+  </view>
+  <view class="nodataDiv ub ub-ac ub-ver" hidden="{{!isShowNodata}}" style="position:fixed;top:300rpx;bottom:100rpx;left:0;width:100%;padding-top:130rpx;">
+      <image class="nodataImg" src="../../../images/null6.png" mode="aspectFill"></image>
+      <view class="nodataTxt">
+        <view>暂无秒杀活动</view>
+      </view>
+  </view>
+</view>
+<text class='had-bottom' wx:if="{{ ifBottom }}">我也是有底线哒~</text>
+
+

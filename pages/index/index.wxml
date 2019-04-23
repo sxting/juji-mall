@@ -36,10 +36,10 @@
         <image class="icon_home" src="../../images/icon_home3.png"></image>
         <view class="tx-c">超值砍价</view>
       </view>
-      <!-- <view class="menuitem ub ub-ver ub-ac ub-pc" bindtap="toPath" data-page="/pages/juzihl/index">
+      <view class="menuitem ub ub-ver ub-ac ub-pc" bindtap="toPath" data-page="/pages/activities/secondlist/index">
         <image class="icon_home" src="../../images/icon_home4.png"></image>
         <view class="tx-c">限时秒杀</view>
-      </view> -->
+      </view>
     </view>
 
     <!-- 桔子球 -->

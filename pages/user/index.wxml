@@ -79,9 +79,9 @@
         <image class="userGridIcon" mode="aspectFit" src="../../images/icon_my2.png"></image>
         <view class="userGridText">我的拼团</view>
       </view>
-      <view class="userGrid ub ub-ver ub-ac" bindtap="toPage" data-page="/pages/myComment/index">
-        <image class="userGridIcon" mode="aspectFit" src="../../images/icon_my5.png"></image>
-        <view class="userGridText">我的评价</view>
+      <view class="userGrid ub ub-ver ub-ac" bindtap="toPage" data-page="/pages/activities/mySecond/index">
+        <image class="userGridIcon" mode="aspectFit" src="../../images/icon_my3.png"></image>
+        <view class="userGridText">我的秒杀</view>
       </view>
     </view>
     <view class="ub ub-ac ub-pj">
@@ -89,35 +89,15 @@
         <image class="userGridIcon" mode="aspectFit" src="../../images/icon_my4.png"></image>
         <view class="userGridText">我的卡包</view>
       </view>
+      <view class="userGrid ub ub-ver ub-ac" bindtap="toPage" data-page="/pages/myComment/index">
+        <image class="userGridIcon" mode="aspectFit" src="../../images/icon_my5.png"></image>
+        <view class="userGridText">我的评价</view>
+      </view>
       <button class="userGrid ub ub-ver ub-ac" open-type='contact' session-from='weapp'>
         <image class="userGridIcon" mode="aspectFit" src="../../images/icon_my6.png"></image>
         <view class="userGridText">在线客服</view>
       </button>
-      <view class="userGrid ub ub-ver ub-ac">
-        <view class="userGridIcon"></view>
-        <view class="userGridText" style="color:#fff">在线客服</view>
-      </view>
     </view>
-    <!-- <view class="ub ub-ac ub-pj" style="padding:30rpx;" bindtap="toPage" data-page="/pages/myCards/index">
-      <view class="itemTxt">我的卡包</view>
-      <image src="../../images/arrow-right.png" style="width:12rpx;height:22rpx;"></image>
-    </view>
-    <view style="padding:0 30rpx;">
-      <view style="height:2rpx;background:#eeeeee;transform: scaleY(0.5);"></view>
-    </view>
-    <view class="ub ub-ac ub-pj" style="padding:30rpx;" bindtap="toPage" data-page="/pages/myComment/index">
-      <view class="itemTxt">我的评价</view>
-      <image src="../../images/arrow-right.png" style="width:12rpx;height:22rpx;"></image>
-    </view>
-    <view style="padding:0 30rpx;">
-      <view style="height:2rpx;background:#eeeeee;transform: scaleY(0.5);"></view>
-    </view>
-    <view class="ub ub-ac ub-pj plr15">
-      <view class="ub-f1">
-        <button class='kefu tx-l udb' open-type='contact' session-from='weapp'>客服</button>
-      </view>
-      <image src="../../images/arrow-right.png" style="width:12rpx;height:22rpx;"></image>
-    </view> -->
   </view>
 
   <view class="phoneWrap">

@@ -38,7 +38,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 29,
+			"current": 33,
 			"list": [
 				{
 					"id": 0,
@@ -266,6 +266,12 @@
 					"name": "我的拼团",
 					"pathName": "pages/index/index",
 					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "限时秒杀",
+					"pathName": "pages/activities/secondlist/index",
 					"scene": null
 				}
 			]

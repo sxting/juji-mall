@@ -199,19 +199,6 @@ function getGardenInfor() {
                 if (res.role == 'MEMBER') { // 1、邀请进来的是桔民 return 2、邀请进来的是其他的 加入桔园 applyLeader=false;
                     this.data.juminNumList = [];
                     this.data.hadNumber = parseInt(res.invitedLeaderCount) + parseInt(res.invitedMemberCount);
-                    if (this.data.hadNumber > 0) {
-                        for (let i = 0; i < this.data.hadNumber; i++) {
-                            let list = 'yes';
-                            this.data.juminNumList.push(list);
-                        }
-                        for (let j = 0; j < (res.minInvitedMemberCount - parseInt(this.data.hadNumber)); j++) {
-                            this.data.juminNumList.push('');
-                        }
-                    } else {
-                        for (let j = 0; j < res.minInvitedMemberCount; j++) {
-                            this.data.juminNumList.push('');
-                        }
-                    }
                 } else if (res.role == 'UNDEFINED' && this.data.switchFun) {
                     self.setData({ applyLeader: false })
                     let data = {

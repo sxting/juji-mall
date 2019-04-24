@@ -63,7 +63,8 @@
                   </view>
               </view>
               <view class='progress-box' style="margin-top:50rpx">
-                  <text wx:for="{{ juminNumList }}" wx:key="item" class="{{item == 'yes'? 'had-number' : ''}}"></text>
+                  <text wx:for="{{ hadNumber }}" wx:key="unique" class="had-number"></text>
+                  <text wx:for="{{ minInvitedMemberCount - hadNumber }}" wx:key="unique"></text>
               </view>
               <view class="remark3" style="margin-top:24rpx">成功邀请{{minInvitedMemberCount}}名新人，即可获得桔长资格</view>
               <button class="btn1" style="color:#333;background-color:#ffdc00;margin-top:50rpx" open-type="share">邀请新人加入桔园</button>

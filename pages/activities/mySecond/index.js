@@ -9,7 +9,6 @@ Page({
         isShowNodata: false,
         orderlist: [],
         pageNo: 1,
-        type: '',
         isFinall: false,
         amount: 0,
         restHour: '10',
@@ -19,10 +18,8 @@ Page({
     },
     onLoad: function(options) {
         wx.hideShareMenu();
-        wx.setNavigationBarTitle({ title: options.type == 'SPLICED' ? '我的拼团' : '我的砍价' });
-        this.setData({ activityTxt: options.type == 'SPLICED' ? '拼团' : '砍价' });
-        this.setData({ type: options.type });
-        this.getData(options.type, 1)
+        wx.setNavigationBarTitle({title:'我的秒杀'});
+        this.getData(1)
     },
     toProjectDetail: function(e) {
         var activityId = e.currentTarget.dataset.activityid;
@@ -45,10 +42,10 @@ Page({
         var activityId = e.currentTarget.dataset.activityid;
         wx.navigateTo({ url: "/pages/payOrder/index?paytype=6&orderType=BARGAIN&id=" + productId +'&activityOrderId='+aorderid + '&activityId=' + activityId });
     },
-    getData: function(type, pageNo) {
+    getData: function(pageNo) {
         var obj = {
             providerId: wx.getStorageSync('providerId'),
-            activityType: type,
+            activityType: 'SEC_KILL',
             pageNo: pageNo,
             pageSize: 10
         }

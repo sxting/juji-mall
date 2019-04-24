@@ -5,7 +5,6 @@ import { activitiesService } from '../shared/service.js'
 
 Page({
     data: {
-        sceneType: 'SEC_KILL',
         productList: [],
         isShowNodata: false,
         curIndex:1,
@@ -36,7 +35,7 @@ Page({
     getActivityList: function() {
         let data = {
             providerId: this.data.providerId,
-            activityType: 'BARGAIN',
+            activityType: 'SEC_KILL',
             pageNo: this.data.pageNo,
             pageSize: 10
         }

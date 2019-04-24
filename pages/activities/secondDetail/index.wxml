@@ -1,5 +1,5 @@
 <wxs module="filter" src="../../../utils/numFr.wxs"></wxs>
-<view class="container {{isShowModal?'':'ovh'}} {{showJcModal?'noscroll':''}}" wx:if="{{isShowData}}">
+<view class="container" wx:if="{{isShowData}}">
     <view class="swiper-wrap">
         <swiper class="img-wrap" autoplay="true" interval="3000">
             <block wx:for="{{showPics}}" wx:key="{{index}}">
@@ -18,13 +18,7 @@
             </view>
             <view class="ub ub-fe jc-sb" style="margin-top:10rpx;">
                 <view class="ub ub-fe">
-                    <view style="display:flex;align-items: flex-end;">
-                        <view style="font-size:38rpx;color: #E83221;font-weight:bold;line-height:38rpx;" wx:if="{{productInfo.point>0}}">{{productInfo.point}}</view>
-                        <view style="font-size:24rpx;color: #E83221;font-weight:bold;line-height:24rpx;margin-bottom:4rpx;" wx:if="{{productInfo.point>0}}">桔子</view>
-                        <view style="font-size:24rpx;color: #E83221;font-weight:bold;line-height:24rpx;margin-bottom:4rpx;" wx:if="{{productInfo.point>0&&productInfo.price>0}}">+</view>
-                        <view style="font-size:38rpx;color: #E83221;font-weight:bold;line-height:38rpx;" wx:if="{{productInfo.price>0}}">{{filter.toFix(productInfo.price)}}</view>
-                        <view style="font-size:24rpx;color: #E83221;font-weight:bold;line-height:24rpx;margin-bottom:4rpx;" wx:if="{{productInfo.price>0}}">元</view>
-                    </view>
+                    <view style="font-size:38rpx;color: #E83221;font-weight:bold;line-height:38rpx;">{{filter.toFix(productInfo.price)}}<text style="font-size:24rpx;">元</text></view>
                     <view style="font-size: 24rpx;color: #999999;text-decoration:line-through;margin-left:25rpx;line-height:24rpx;">{{filter.toFix(productInfo.originalPrice)}} 元</view>
                 </view>
                 <view class="ub ub-ac" style="font-size: 24rpx;color: #999999;">
@@ -52,7 +46,7 @@
             </view>
         </view>
     </view>
-    <view class="yongkaxuzhi-wrap" style="margin-top:20rpx;">
+    <view class="conDiv1" style="margin-top:20rpx;">
         <view class="yongkaxuzhi">
             <view style="font-size: 30rpx;color: #333333;font-weight: bolder;">门店信息</view>
             <view class="row jc-sb" style="margin-top:30rpx;">
@@ -72,7 +66,7 @@
             </view>
         </view>
     </view>
-    <view class="yongkaxuzhi-wrap" style="margin-top:20rpx;" wx:if="{{commentCount>0}}">
+    <view class="conDiv1" style="margin-top:20rpx;" wx:if="{{commentCount>0}}">
         <view class="yongkaxuzhi row jc-sb">
             <view style="font-size: 30rpx;color: #333333;font-weight: bolder;">走心评价({{commentCount}})</view>
             <view class="row" bindtap="toCommentList" wx:if="{{commentCount>2}}">
@@ -96,7 +90,7 @@
             </view>
         </view>
     </view>
-    <view class="yongkaxuzhi-wrap" style="margin-top:20rpx;">
+    <view class="conDiv1" style="margin-top:20rpx;">
         <view class="yongkaxuzhi">
             <view style="font-size: 30rpx;color: #333333;font-weight: bolder;">详细信息</view>
             <view style="margin-top:30rpx;" wx:for="{{description}}" wx:key="{{index}}">
@@ -105,7 +99,7 @@
             </view>
         </view>
     </view>
-    <view class="yongkaxuzhi-wrap" style="margin-top:20rpx;background:#fff;padding: 30rpx 20rpx;" wx:if="{{recommendCount>0}}">
+    <view class="conDiv1" style="margin-top:20rpx;background:#fff;padding: 30rpx 20rpx;" wx:if="{{recommendCount>0}}">
         <view style="font-size: 30rpx;color: #333333;font-weight: bolder;">同店推荐</view>
         <view class="pubu">
             <view class="pubuItem">
@@ -135,11 +129,7 @@
             <view class="home">分享</view>
         </button>
         <form bindsubmit="collectFormIds" report-submit="true">
-            <view class="footerBtnWrap">
-                <button form-type="submit" class="yuanjia-xiadan" bindtap="toCreateOrderByRmb">
-                    <view style="font-size: 18rpx;line-height:22rpx;text-align:center;">开始时提醒我</view>
-                </button>
-            </view>
+            <button form-type="submit" class="btn btn1" bindtap="toCreateOrderByRmb">一键秒杀</button>
         </form>
     </view>
 </view>

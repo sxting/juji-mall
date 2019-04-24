@@ -42,6 +42,7 @@
     "pages/activities/my-collage/index",
     "pages/payDetail/index",
     "pages/activities/secondlist/index",
+    "pages/activities/secondDetail/index",
     "pages/activities/mySecond/index",
     "pages/mypayDetail/index"
   ],

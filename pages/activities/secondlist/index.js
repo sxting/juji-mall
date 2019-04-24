@@ -60,9 +60,10 @@ Page({
         });
     },
     checkProductDetail: function(e) {
-        console.log(e.currentTarget.dataset.productid);
+        var pid = e.currentTarget.dataset.productid;
+        var status = e.currentTarget.dataset.status;
         wx.navigateTo({
-            url: '/pages/activities/secondDetail/index?type=BARGAIN&id=' + e.currentTarget.dataset.productid + '&activityId=' + e.currentTarget.dataset.activityid
+            url: '/pages/activities/secondDetail/index?type=BARGAIN&id=' + pid +'&status='+status + '&activityId=' + e.currentTarget.dataset.activityid
         });
     }
 });

@@ -19,6 +19,7 @@ Page({
         recommendCount: 0,
         pointBalance: 0,
         note: [],
+        activityStatus: '',
         despImgHeightValues: [],
         isShowData: false,
         isHiddenClose: false,
@@ -43,7 +44,7 @@ Page({
             activityId: options.activityId,
             activityOrderId: options.activityOrderId ? options.activityOrderId : '',
             progressId: options.progressId ? options.progressId : '',
-            type: options.type ? options.type : ''
+            activityStatus: options.status ? options.status : ''
         });
         if (options.storeid) {
             this.setData({ storeId: options.storeid });
@@ -70,23 +71,16 @@ Page({
         var productName = this.data.resData.productName;
         var price = Number(this.data.resData.activityPrice / 100).toFixed(2);
         var oprice = Number(this.data.resData.originalPrice / 100).toFixed(2);
-        if (res.from === 'button' && res.target.dataset.type === 'pintuan') {
+        if (res.from === 'button') {
             return {
-                title: '嗨！便宜一起拼￥' + price + '【' + productName + '】',
-                path: '/pages/login/index?pagetype=5&type=SPLICED&activityId=' + activityId + '&activityOrderId=' + activityOrderId + '&invitecode=' + wx.getStorageSync('inviteCode'),
-                imageUrl: constant.basePicUrl + picId + '/resize_560_420/mode_fill'
-            }
-        }
-        if (res.from === 'button' && res.target.dataset.type === 'share2') {
-            return {
-                title: nickName + '邀请你帮' + gender + '砍价，' + price + '元得原价' + oprice + '元的' + productName,
-                path: '/pages/login/index?pagetype=5&type=BARGAIN&activityId=' + activityId + '&activityOrderId=' + activityOrderId + '&invitecode=' + wx.getStorageSync('inviteCode'),
+                title: nickName + '正在秒杀' + price + '的【' + productName + '】，快来帮助' + gender + '吧',
+                path: '/pages/login/index?pagetype=6&type=SPLICED&activityId=' + activityId + '&activityOrderId=' + activityOrderId + '&invitecode=' + wx.getStorageSync('inviteCode'),
                 imageUrl: constant.basePicUrl + picId + '/resize_560_420/mode_fill'
             }
         }
         return {
             title: nickName + '分享给您一个心动商品，快来一起体验吧！',
-            path: '/pages/login/index?pagetype=5&type=' + this.data.type + '&activityId=' + this.data.activityId + '&invitecode=' + wx.getStorageSync('inviteCode'),
+            path: '/pages/login/index?pagetype=6&type=' + this.data.type + '&activityId=' + this.data.activityId + '&invitecode=' + wx.getStorageSync('inviteCode'),
             imageUrl: constant.basePicUrl + picId + '/resize_560_420/mode_fill'
         }
     },
@@ -171,8 +165,9 @@ Page({
         console.log(this.data.activityOrderId);
         activitiesService.activity({
             activityId: this.data.activityId,
-            activityOrderId: this.data.activityOrderId ? this.data.activityOrderId : '',
+            activityOrderId: this.data.activityOrderId,
             activityType: 'SEC_KILL',
+            activityStatus: this.data.activityStatus,
             progressId: this.data.progressId
         }).subscribe({
             next: res => {
@@ -236,4 +231,22 @@ Page({
             url: '/pages/commentDetail/index?id=' + event.currentTarget.dataset.comid
         });
     },
+    toSecondKill:function() {
+        wx.navigateTo({
+            url: '/pages/payOrder/index?paytype=5&orderType=SEC_KILL&id=' + this.data.productId + '&activityId=' + this.data.activityId + '&splicedRuleId=' + this.data.resData.rules[0].secKillRuleId
+        })
+    },
+    toRemainMe:function(){
+        activitiesService.remain({
+            activityId: this.data.activityId
+        }).subscribe({
+            next: res => {
+              wx.showToast({title: '提醒成功',icon:'success'});
+            },
+            error: err => {
+              wx.showToast({title: '系统错误'});
+            },
+            complete: () => wx.hideToast()
+        })
+    }
 });

@@ -19,6 +19,17 @@ activitiesService.myOrder = (data) =>{
 	let url = API + '/activity/consumer/orders.json';
 	return http.get(url, data);
 }
+// 秒杀提醒
+activitiesService.myOrder = (data) =>{
+	let url = API + '/secKill/remain.json';
+	return http.get(url, data);
+}
+
+// 秒杀支付
+activitiesService.myOrder = (data) =>{
+	let url = API + '/secKill/pay.json';
+	return http.post(url, data);
+}
 
 module.exports = {
   activitiesService: activitiesService

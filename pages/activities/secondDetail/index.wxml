@@ -18,8 +18,8 @@
             </view>
             <view class="ub ub-fe jc-sb" style="margin-top:10rpx;">
                 <view class="ub ub-fe">
-                    <view style="font-size:38rpx;color: #E83221;font-weight:bold;line-height:38rpx;">{{filter.toFix(productInfo.price)}}<text style="font-size:24rpx;">元</text></view>
-                    <view style="font-size: 24rpx;color: #999999;text-decoration:line-through;margin-left:25rpx;line-height:24rpx;">{{filter.toFix(productInfo.originalPrice)}} 元</view>
+                    <view style="font-size:38rpx;color: #E83221;font-weight:bold;line-height:38rpx;">{{filter.toFix(resData.activityPrice)}}<text style="font-size:24rpx;">元</text></view>
+                    <view style="font-size: 24rpx;color: #999999;text-decoration:line-through;margin-left:25rpx;line-height:24rpx;">{{filter.toFix(resData.originalPrice)}} 元</view>
                 </view>
                 <view class="ub ub-ac" style="font-size: 24rpx;color: #999999;">
                     <image src="/images/soldCount.png" style="width:24rpx;height: 22rpx;margin-right:10rpx;"></image>已售{{productInfo.soldNum}}件
@@ -129,7 +129,10 @@
             <view class="home">分享</view>
         </button>
         <form bindsubmit="collectFormIds" report-submit="true">
-            <button form-type="submit" class="btn btn1" bindtap="toCreateOrderByRmb">一键秒杀</button>
+            <button wx:if="{{activityStatus=='STARTED'&&resData.stock>0}}" form-type="submit" class="btn btn1" bindtap="toSecondKill">一键秒杀</button>
+            <button wx:if="{{activityStatus=='READY'}}" class="btn btn1" bindtap="toRemainMe">开始时提醒我</button>
+            <button wx:if="{{activityStatus=='ENDED'}}" class="btn btn2">活动已结束</button>
+            <button wx:if="{{activityStatux=='STARTED'&&resData.stock==0}}" class="btn btn2">已抢光</button>
         </form>
     </view>
 </view>

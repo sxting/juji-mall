@@ -15,8 +15,7 @@ Page({
     validEndDate:'',
     isTimeOpen:false,
     storeInfo:{},
-    productType:'',
-    productProgress:'0.00'
+    productType:''
   },
   onLoad: function(options) {
     clearInterval(timer);
@@ -59,9 +58,9 @@ Page({
         this.setData({orderInfo: res});
         this.setData({preOrderStr:res.preOrderStr});
         this.setData({storeInfo:res.orderItemList[0]});
-        this.setData({productProgress:(resData.rules[0].soldStock*100/resData.rules[0].activityStock)});
         if(res.status=='PAID'){
           if(!this.data.isTimeOpen&&res.vouchers.length>0){
+            console.log("获取核销码信息")
             this.getListVoucher(res.vouchers[0].voucherCode);
           }
         }

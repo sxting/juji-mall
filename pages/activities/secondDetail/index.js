@@ -33,6 +33,8 @@ Page({
         progressId: '',
         self: '',
         showCom: false,
+        ruleInfo:{},
+        productProgress:'0.00'
     },
     onLoad: function(options) {
         if (options.shared) {
@@ -200,8 +202,9 @@ Page({
                         lng: res.product.store ? res.product.store.lng : '',
                         resData: res,
                         activityOrderId: res.orderDigest ? res.orderDigest.activityOrderId : '',
-                        self: (!res.orderDigest) || (res.orderDigest && res.orderDigest.isInitiator)
+                        ruleInfo:res.rules[0]
                     });
+                    this.setData({productProgress:(res.rules[0].soldStock*100)/res.rules[0].activityStock});
                 }).catch(function(err) {
                     that.setData({
                         commentList: res.product.commentList,
@@ -217,8 +220,9 @@ Page({
                         lng: res.product.store.lng,
                         resData: res,
                         activityOrderId: res.orderDigest ? res.orderDigest.activityOrderId : '',
-                        self: (!res.orderDigest) || (res.orderDigest && res.orderDigest.isInitiator)
+                        ruleInfo:res.rules[0]
                     });
+                    this.setData({productProgress:(res.rules[0].soldStock*100)/res.rules[0].activityStock});
                 })
 
             },

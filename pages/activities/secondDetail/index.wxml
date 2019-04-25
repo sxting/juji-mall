@@ -16,10 +16,11 @@
             </view>
             <view class="b ub ub-pj">
                 <view class="left ub ub-ac ub-pc">已抢{{resData.rules[0].soldStock}}件</view>
-                <view class="number">{{filter.toFix(resData.rules[0].soldStock*100/resData.rules[0].activityStock)}}%</view>
+                <view class="number">{{productProgress}}%</view>
             </view>
         </view>
-        <!-- <view class="status1 ub ub-ac ub-pc">已抢光</view> -->
+        <view wx:if="{{activityStatus=='STARTED'&&ruleInfo.balanceStock==0}}" class="status1 ub ub-ac ub-pc">已抢光</view>
+        <view wx:if="{{activityStatus=='ENDED'}}" class="status1 ub ub-ac ub-pc">已结束</view>
         <view class="status2 ub ub-ver ub-ac ub-pc" wx:if="{{resData.expectGmtEnd}}">
             <view class="txt">距活动开始还有</view>
             <child dataFromParent='{{resData.expectGmtEnd}}'></child>
@@ -36,6 +37,12 @@
                     <view class="price2">{{filter.toFix(resData.originalPrice)}}元</view>
                 </view>
             </view>
+        </view>
+    </view>
+    <view class="userDivWrap plr15" wx:if="{{resData.participateUserList.length>0}}">
+        <view class="userDiv ub ub-ac plr15">
+            <image class="headImg" wx:for="{{resData.participateUserList}}" src="{{item}}" wx:for-index="index" style="{{index==0?'margin-left:0':''}}"></image>
+            <view class="ub-f1 partiNum">已有30人参与秒杀</view>
         </view>
     </view>
     <view class="conDiv1" style="margin-top:0;">
@@ -120,10 +127,10 @@
             <view class="home">分享</view>
         </button>
         <form bindsubmit="collectFormIds" report-submit="true">
-            <button wx:if="{{activityStatus=='STARTED'&&resData.stock>0}}" form-type="submit" class="btn btn1" bindtap="toSecondKill">一键秒杀</button>
+            <button wx:if="{{activityStatus=='STARTED'&&ruleInfo.balanceStock>0}}" form-type="submit" class="btn btn1" bindtap="toSecondKill">一键秒杀</button>
             <button wx:if="{{activityStatus=='READY'}}" class="btn btn1" bindtap="toRemainMe">开始时提醒我</button>
             <button wx:if="{{activityStatus=='ENDED'}}" class="btn btn2">活动已结束</button>
-            <button wx:if="{{activityStatux=='STARTED'&&resData.stock==0}}" class="btn btn2">已抢光</button>
+            <button wx:if="{{activityStatux=='STARTED'&&ruleInfo.balanceStock==0}}" class="btn btn2">已抢光</button>
         </form>
     </view>
 </view>

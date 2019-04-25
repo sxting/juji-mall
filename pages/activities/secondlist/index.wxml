@@ -1,12 +1,6 @@
 <!--pages/activities/project-list/index.wxml-->
 <wxs src="../../../utils/numFr.wxs" module="format" />
  <view class="juzihl-wrap">
-  <view class='fixed-button ub ub-ac' style='position: fixed;' catchtap='switchToOrderListPage'>
-    <view class='type-icon kanjia-icon'>
-      <image src='/images/kanjia-icon.png'></image>
-    </view>
-    <text>我的秒杀</text>
-  </view>
   <view class="toper">
     <view class="mtitle">限时秒杀</view>
     <view class="subtitle">限时秒杀，手慢无！</view>

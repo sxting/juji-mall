@@ -85,7 +85,7 @@ Page({
           citylist: res
         });
       },
-      error: err => errDialog(err),
+      error: err => console.log(err),
       complete: () => wx.hideToast()
     })
 

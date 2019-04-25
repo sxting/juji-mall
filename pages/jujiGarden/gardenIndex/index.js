@@ -121,7 +121,7 @@ Page({
                         })
                     }
                 },
-                error: err => errDialog(err),
+                error: err => console.log(err),
                 complete: () => wx.hideToast()
             })
         }
@@ -139,7 +139,7 @@ Page({
                 getGardenInfor.call(self); //get用户信息身份
                 console.log(this.data.bindPhoneNumber);
             },
-            error: err => errDialog(err),
+            error: err => console.log(err),
             complete: () => wx.hideToast()
         })
     },
@@ -156,7 +156,7 @@ Page({
                 console.log(this.data.phone);
                 bindPhone.call(self); //授权以后绑定手机号码
             },
-            error: err => errDialog(err),
+            error: err => console.log(err),
             complete: () => wx.hideToast()
         })
     },
@@ -183,7 +183,7 @@ function bindPhone() {
             }
             joinDistributor.call(self, data); //加入桔园
         },
-        error: err => errDialog(err),
+        error: err => console.log(err),
         complete: () => wx.hideToast()
     })
 }
@@ -234,7 +234,7 @@ function getGardenInfor() {
                 })
             }
         },
-        error: err => errDialog(err),
+        error: err => console.log(err),
         complete: () => wx.hideToast()
     })
 }
@@ -272,7 +272,7 @@ function joinDistributor(data) {
                 })
             }
         },
-        error: err => errDialog(err),
+        error: err => console.log(err),
         complete: () => wx.hideToast()
     })
 }

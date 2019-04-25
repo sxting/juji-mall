@@ -15,7 +15,8 @@ Page({
     validEndDate:'',
     isTimeOpen:false,
     storeInfo:{},
-    productType:''
+    productType:'',
+    productProgress:'0.00'
   },
   onLoad: function(options) {
     clearInterval(timer);
@@ -57,7 +58,8 @@ Page({
       next: res => {
         this.setData({orderInfo: res});
         this.setData({preOrderStr:res.preOrderStr});
-        this.setData({storeInfo:res.orderItemList[0]})
+        this.setData({storeInfo:res.orderItemList[0]});
+        this.setData({productProgress:(resData.rules[0].soldStock*100/resData.rules[0].activityStock)});
         if(res.status=='PAID'){
           if(!this.data.isTimeOpen&&res.vouchers.length>0){
             this.getListVoucher(res.vouchers[0].voucherCode);

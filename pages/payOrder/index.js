@@ -755,7 +755,7 @@ Page({
         complete: () => wx.hideToast()
       })
     } else if(that.data.paytype == 7){
-      service.secondKillPayment({
+      service.secKillPay({
         productId: that.data.productId,
         activityId:that.data.activityId
       }).subscribe({
@@ -768,13 +768,11 @@ Page({
             package: payInfo.package,
             signType: payInfo.signType,
             paySign: payInfo.paySign,
-            success(res2) {
-              wx.redirectTo({
-                url: '/pages/orderDetail/index?id=' + res.orderId,
-              });
+            success(obj) {
+              wx.redirectTo({url: '/pages/orderDetail/index?id=' + res.orderId});
             },
-            fail(res2) {
-              if (res2.errMsg == 'requestPayment:fail cancel') {
+            fail(obj) {
+              if (obj.errMsg == 'requestPayment:fail cancel') {
                 wx.showToast({
                   title: '用户取消支付',
                   icon: 'none'

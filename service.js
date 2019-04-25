@@ -200,9 +200,9 @@ service.activity = (data) => {
 }
 
 // 秒杀支付
-service.secondKillPayment = (data) => {
-  let url = api + '/seckill/pay.json';
-  return http.post(url, data);
+service.secKillPay = (data) => {
+  let url = api + '/secKill/pay.json';
+  return http.get(url, data);
 }
 
 module.exports = {

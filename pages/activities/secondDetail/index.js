@@ -48,12 +48,6 @@ Page({
             progressId: options.progressId ? options.progressId : '',
             activityStatus: options.status ? options.status : ''
         });
-        if (options.storeid) {
-            this.setData({ storeId: options.storeid });
-        }
-        if (options.sceneid) {
-            this.setData({ sceneId: options.sceneid });
-        }
         // 查询商品详情
         this.getData();
     },
@@ -175,7 +169,8 @@ Page({
             next: res => {
                 that.setData({
                     showCom: true
-                })
+                });
+                that.setData({productProgress:(res.rules[0].soldStock*100)/res.rules[0].activityStock});
                 var picsStrArr = res.cover.split(',');
                 picsStrArr.forEach(function(item, index) {
                     picsStrArr[index] = constant.basePicUrl + item + '/resize_751_420/mode_fill'
@@ -204,7 +199,6 @@ Page({
                         activityOrderId: res.orderDigest ? res.orderDigest.activityOrderId : '',
                         ruleInfo:res.rules[0]
                     });
-                    this.setData({productProgress:(res.rules[0].soldStock*100)/res.rules[0].activityStock});
                 }).catch(function(err) {
                     that.setData({
                         commentList: res.product.commentList,
@@ -222,7 +216,6 @@ Page({
                         activityOrderId: res.orderDigest ? res.orderDigest.activityOrderId : '',
                         ruleInfo:res.rules[0]
                     });
-                    this.setData({productProgress:(res.rules[0].soldStock*100)/res.rules[0].activityStock});
                 })
 
             },

@@ -21,8 +21,8 @@
         </view>
         <view wx:if="{{activityStatus=='STARTED'&&ruleInfo.balanceStock==0}}" class="status1 ub ub-ac ub-pc">已抢光</view>
         <view wx:if="{{activityStatus=='ENDED'}}" class="status1 ub ub-ac ub-pc">已结束</view>
-        <view class="status2 ub ub-ver ub-ac ub-pc" wx:if="{{resData.expectGmtEnd}}">
-            <view class="txt">距活动开始还有</view>
+        <view wx:if="{{activityStatus=='STARTED'&&ruleInfo.balanceStock>0}}" class="status2 ub ub-ver ub-ac ub-pc">
+            <view class="txt">距活动结束还有</view>
             <child dataFromParent='{{resData.expectGmtEnd}}'></child>
         </view>
     </view>
@@ -41,8 +41,8 @@
     </view>
     <view class="userDivWrap plr15" wx:if="{{resData.participateUserList.length>0}}">
         <view class="userDiv ub ub-ac plr15">
-            <image class="headImg" wx:for="{{resData.participateUserList}}" src="{{item}}" wx:for-index="index" style="{{index==0?'margin-left:0':''}}"></image>
-            <view class="ub-f1 partiNum">已有30人参与秒杀</view>
+            <image class="headImg" wx:for="{{resData.participateUserList}}" src="{{item}}" wx:for-index="index" style="{{index==0?'margin-left:0':''}}" wx:key="unique"></image>
+            <view class="ub-f1 partiNum">已有{{resData.participateUserList.length}}人参与秒杀</view>
         </view>
     </view>
     <view class="conDiv1" style="margin-top:0;">

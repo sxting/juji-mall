@@ -6,6 +6,13 @@ Component({
       observer: function (newVal, oldVal, changedPath) {
 
       }
+    },
+    customeClass:{
+      type: String,
+      value: "",
+      observer: function (newVal, oldVal, changedPath) {
+
+      }
     }
   },
   data: { 

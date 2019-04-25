@@ -20,8 +20,8 @@ activitiesService.myOrder = (data) =>{
 	return http.get(url, data);
 }
 // 秒杀提醒
-activitiesService.myOrder = (data) =>{
-	let url = api + '/activity/secKill/remain.json';
+activitiesService.remain = (data) =>{
+	let url = api + '/activity/seckill/remain.json';
 	return http.get(url, data);
 }
 

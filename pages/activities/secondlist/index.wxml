@@ -15,13 +15,28 @@
       <view class="from">德川家望京店</view>
       <view class="dis">距你119km</view>
     </view> -->
+
+    <view class="time ub ub-ac plr15">
+      <view class="b ub ub-pj ub-f1">
+          <view class="left ub ub-ac ub-pc">已抢{{item.activityStock - item.balanceStock}}件</view>
+          <view class="number">{{format.toFix(item.balanceStock)}}%</view>
+      </view>
+      <view class="restTime ub ub-ac ub-pc">
+          <view class="txt">剩余</view>
+          <child dataFromParent='{{item.expectGmtEnd}}' customeClass="block"></child>
+      </view>
+    </view>  
+
     <view class="pro-name">{{item.productName}}</view>
     <view class="price-wrap jc-sb">
       <view class="p-wrap ub-f1">
         <view class="now-price">{{ format.toFix(item.activityPrice) }}<text style="font-size:24rpx">元</text></view>
         <view class="old-price">{{ format.toFix(item.originalPrice) }}元</view>
       </view>
-      <button class="ctrlbtn" bindtap="toComDetail">抢购</button>
+      <button wx:if="{{item.activityStatus=='STARTED'&&item.balanceStock> 0}}" class="ctrlbtn" bindtap="toComDetail">抢购</button>
+      <button wx:if="{{item.activityStatus=='STARTED'&&item.balanceStock==0}}" class="ctrlbtn1" bindtap="toComDetail">已抢光</button>
+      <button wx:if="{{item.activityStatus=='READY'}}" class="ctrlbtn" bindtap="toComDetail">提醒我</button>
+      <button wx:if="{{item.activityStatus=='ENDED'}}" class="ctrlbtn1">已结束</button>
     </view>
   </view>
   <view class="nodataDiv ub ub-ac ub-ver" hidden="{{!isShowNodata}}" style="position:fixed;top:300rpx;bottom:100rpx;left:0;width:100%;padding-top:130rpx;">

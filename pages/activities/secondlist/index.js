@@ -45,7 +45,7 @@ Page({
                     console.log(res);
                     this.setData({
                         productList: this.data.productList.concat(res),
-                        ifBottom: res.length == 0 ? true : false
+                        ifBottom: res.length < 10 ? true : false
                     })
                     this.setData({ isShowNodata: this.data.productList.length == 0 });
                 }

@@ -34,7 +34,8 @@ Page({
         self: '',
         showCom: false,
         ruleInfo:{},
-        productProgress:'0.00'
+        productProgress:'0.00',
+        isBack:false
     },
     onLoad: function(options) {
         if (options.shared) {
@@ -51,12 +52,14 @@ Page({
         // 查询商品详情
         this.getData();
     },
+    onHide:function(){
+        this.setData({isBack:true});
+    },
     onShow: function() {
-        this.setData({
-            showCom: false
-        })
-        // 查询商品详情
-        this.getData();
+        this.setData({showCom: false})
+        if(this.data.isBack){
+            this.getData();// 返回刷新
+        }
     },
     onShareAppMessage: function(res) {
         var nickName = JSON.parse(wx.getStorageSync('userinfo')).nickName;

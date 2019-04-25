@@ -38,7 +38,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 33,
+			"current": 34,
 			"list": [
 				{
 					"id": 0,
@@ -272,6 +272,14 @@
 					"id": -1,
 					"name": "限时秒杀",
 					"pathName": "pages/activities/secondlist/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "秒杀详情",
+					"pathName": "pages/activities/secondDetail/index",
+					"query": "activityId=2019042417475780991670144&activityOrderId=&activityType=SEC_KILL&activityStatus=STARTED&progressId=",
 					"scene": null
 				}
 			]

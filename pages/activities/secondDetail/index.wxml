@@ -9,6 +9,18 @@
             </block>
         </swiper>
     </view>
+    <view class="secondInfo ub">
+        <view class="ub-f1 progress">
+            <view class="t ub ub-ac">
+                <image class="clock" src="/images/clock.png"></image>限时秒杀抢购中
+            </view>
+            <view class="b ub ub-pj">
+                <view class="left ub ub-ac ub-pc">已抢30件</view>
+                <view class="number">20%</view>
+            </view>
+        </view>
+        <view class="status ub ub-ac ub-pc">已抢光</view>
+    </view>
     <view class="businessInfo-wrap">
         <view class="businessInfo" style="padding-bottom:{{showJoinClub?'10rpx':'30rpx'}};">
             <view style="display:flex;justify-content: space-between;align-items: flex-start;">

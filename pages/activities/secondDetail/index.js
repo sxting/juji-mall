@@ -233,8 +233,8 @@ Page({
     },
     toSecondKill:function() {
         wx.navigateTo({
-            url: '/pages/payOrder/index?paytype=5&orderType=SEC_KILL&id=' + this.data.productId + '&activityId=' + this.data.activityId + '&splicedRuleId=' + this.data.resData.rules[0].secKillRuleId
-        })
+            url: '/pages/payOrder/index?paytype=7&orderType=SEC_KILL&id=' + this.data.productId + '&activityId=' + this.data.activityId + '&splicedRuleId=' + this.data.resData.rules[0].secKillRuleId
+        });
     },
     toRemainMe:function(){
         activitiesService.remain({

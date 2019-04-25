@@ -1,6 +1,5 @@
 {
   "usingComponents": {
-    "kanjia": "../../../components/item-kanjia/index",
-    "item-collage": "../../../components/item-collage/index"
+    "child": "../../../components/timechange/timechange"
   }
 }

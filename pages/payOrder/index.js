@@ -667,7 +667,7 @@ Page({
     } else if (that.data.paytype == 5){
       if (this.data.orderBizType == 'SPLICED'){
         let data = { 
-          activityId: that.data.activityId, 
+          activityId: that.data.activityId,
           activityOrderId: that.data.activityOrderId,
           splicedRuleId: that.data.splicedRuleId
         };
@@ -718,6 +718,44 @@ Page({
         }
       }
       service.bargainPayment(data).subscribe({
+        next: res => {
+          console.log(res);
+          var payInfo = JSON.parse(res.payInfo);
+          wx.requestPayment({
+            timeStamp: payInfo.timeStamp,
+            nonceStr: payInfo.nonceStr,
+            package: payInfo.package,
+            signType: payInfo.signType,
+            paySign: payInfo.paySign,
+            success(res2) {
+              wx.redirectTo({
+                url: '/pages/orderDetail/index?id=' + res.orderId,
+              });
+            },
+            fail(res2) {
+              if (res2.errMsg == 'requestPayment:fail cancel') {
+                wx.showToast({
+                  title: '用户取消支付',
+                  icon: 'none'
+                });
+                that.setData({alreadyPay: false});
+              }
+            }
+          });
+        },
+        error: err => {
+            wx.showModal({
+              title: '支付失败',
+              content: err,
+            });
+            that.setData({
+              alreadyPay: false
+            });
+        },
+        complete: () => wx.hideToast()
+      })
+    } else if(that.data.paytype == 7){
+      service.secondKillPayment({activityOrderId: that.data.activityOrderId}).subscribe({
         next: res => {
           console.log(res);
           var payInfo = JSON.parse(res.payInfo);

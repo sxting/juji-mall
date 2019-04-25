@@ -1,9 +1,5 @@
-import {
-  constant
-} from 'utils/constant';
-import {
-  http
-} from 'utils/http';
+import {constant} from 'utils/constant';
+import {http} from 'utils/http';
 let service = {};
 let api = constant.apiUrl;
 let jujipay = constant.jujipayUrl;
@@ -203,6 +199,11 @@ service.activity = (data) => {
   return http.get(url, data);
 }
 
+// 秒杀支付
+service.secondKillPayment = (data) => {
+  let url = api + '/secKill/pay.json';
+  return http.post(url, data);
+}
 
 module.exports = {
   service: service

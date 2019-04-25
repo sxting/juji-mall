@@ -1,34 +1,28 @@
 import { constant } from '../../../utils/constant';
 import { http } from '../../../utils/http';
 let activitiesService = {};
-let API = constant.apiUrl;
+let api = constant.apiUrl;
 
 // 活动商品详情 /activity/consumer/activity.json
 activitiesService.activity = (data) => {
-  let url = API + '/activity/consumer/activity.json';
+  let url = api + '/activity/consumer/activity.json';
   return http.get(url, data);
 }
 
 // 活动列表 /activity/consumer/activities.json
 activitiesService.activityList = (data) => {
-  let url = API + '/activity/consumer/activities.json';
+  let url = api + '/activity/consumer/activities.json';
   return http.get(url, data);
 }
 
 activitiesService.myOrder = (data) =>{
-	let url = API + '/activity/consumer/orders.json';
+	let url = api + '/activity/consumer/orders.json';
 	return http.get(url, data);
 }
 // 秒杀提醒
 activitiesService.myOrder = (data) =>{
-	let url = API + '/secKill/remain.json';
+	let url = api + '/activity/secKill/remain.json';
 	return http.get(url, data);
-}
-
-// 秒杀支付
-activitiesService.myOrder = (data) =>{
-	let url = API + '/secKill/pay.json';
-	return http.post(url, data);
 }
 
 module.exports = {

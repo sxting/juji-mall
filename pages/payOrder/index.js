@@ -755,7 +755,10 @@ Page({
         complete: () => wx.hideToast()
       })
     } else if(that.data.paytype == 7){
-      service.secondKillPayment({activityOrderId: that.data.activityOrderId}).subscribe({
+      service.secondKillPayment({
+        productId: that.data.productId,
+        activityId:that.data.activityId
+      }).subscribe({
         next: res => {
           console.log(res);
           var payInfo = JSON.parse(res.payInfo);

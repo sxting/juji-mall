@@ -2,7 +2,7 @@
 <view class="main">
     <view class="orderInfo1 p10">
         <view class="ub ub-ac info" wx:for="{{orderInfo.orderItemList}}" wx:key="{{index}}" data-id="{{item.productId}}" bindtap="toComDetail">
-            <image class="goodImg udb" src="{{constant.basePicUrl}}{{item.picId}}/resize_220_200/mode_fill"></image>
+            <image class="goodImg udb" src="{{constant.basePicUrl}}{{item.picId}}/resize_220_200/mode_filt/format_jpg/quality_70"></image>
             <view class="ub-f1 goodMsg">
                 <view class="goodTit">{{format.toEllipsis(item.productName)}}</view>
                 <view class="storeName">{{item.merchantName}}</view>
@@ -43,7 +43,7 @@
             <view class="tx-c">{{orderInfo.vouchers[0].voucherCode}}</view>
             <canvas canvas-id="barcode"></canvas>
             <view class="div ub ub ub-ac ub-pj">
-                <view class="txt">剩余有效天数：{{voucherInfo.validDays<0?'已过期':voucherInfo.validDays+'天'}}</view>
+                <view class="txt">有效期至：{{validEndDate}}</view>
                 <view class="txt">可核销{{voucherInfo.totalNum}}次，已核销{{voucherInfo.usedNum}}次</view>
             </view>
         </view>

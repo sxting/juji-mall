@@ -121,7 +121,7 @@ Page({
                         })
                     }
                 },
-                error: err => errDialog(err),
+                error: err => console.log(err),
                 complete: () => wx.hideToast()
             })
         }
@@ -139,7 +139,7 @@ Page({
                 getGardenInfor.call(self); //get用户信息身份
                 console.log(this.data.bindPhoneNumber);
             },
-            error: err => errDialog(err),
+            error: err => console.log(err),
             complete: () => wx.hideToast()
         })
     },
@@ -156,7 +156,7 @@ Page({
                 console.log(this.data.phone);
                 bindPhone.call(self); //授权以后绑定手机号码
             },
-            error: err => errDialog(err),
+            error: err => console.log(err),
             complete: () => wx.hideToast()
         })
     },
@@ -183,7 +183,7 @@ function bindPhone() {
             }
             joinDistributor.call(self, data); //加入桔园
         },
-        error: err => errDialog(err),
+        error: err => console.log(err),
         complete: () => wx.hideToast()
     })
 }
@@ -199,19 +199,6 @@ function getGardenInfor() {
                 if (res.role == 'MEMBER') { // 1、邀请进来的是桔民 return 2、邀请进来的是其他的 加入桔园 applyLeader=false;
                     this.data.juminNumList = [];
                     this.data.hadNumber = parseInt(res.invitedLeaderCount) + parseInt(res.invitedMemberCount);
-                    if (this.data.hadNumber > 0) {
-                        for (let i = 0; i < this.data.hadNumber; i++) {
-                            let list = 'yes';
-                            this.data.juminNumList.push(list);
-                        }
-                        for (let j = 0; j < (res.minInvitedMemberCount - parseInt(this.data.hadNumber)); j++) {
-                            this.data.juminNumList.push('');
-                        }
-                    } else {
-                        for (let j = 0; j < res.minInvitedMemberCount; j++) {
-                            this.data.juminNumList.push('');
-                        }
-                    }
                 } else if (res.role == 'UNDEFINED' && this.data.switchFun) {
                     self.setData({ applyLeader: false })
                     let data = {
@@ -247,7 +234,7 @@ function getGardenInfor() {
                 })
             }
         },
-        error: err => errDialog(err),
+        error: err => console.log(err),
         complete: () => wx.hideToast()
     })
 }
@@ -285,7 +272,7 @@ function joinDistributor(data) {
                 })
             }
         },
-        error: err => errDialog(err),
+        error: err => console.log(err),
         complete: () => wx.hideToast()
     })
 }

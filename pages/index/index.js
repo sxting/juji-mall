@@ -1,10 +1,6 @@
 var QQMapWX = require('../../lib/qqmap-wx-jssdk.min.js');
-import {
-  constant
-} from '../../utils/constant';
-import {
-  service
-} from '../../service';
+import {constant} from '../../utils/constant';
+import {service} from '../../service';
 var app = getApp();
 Page({
   data: {
@@ -18,24 +14,24 @@ Page({
     dotsActiveColor: '#FFDC00',
     swiperH: '', //swiper高度
     nowIdx: 0, //当前swiper索引
-    slideShowList: [{}],
+    slideShowList: [],
     pointProductList: [],
     recommendPage: [],
     sortIndex: 1,
     pageNo: 1,
     pageSize: 5,
     sortArray: ['ASC', 'ASC', 'ASC', 'DESC'],
-    providerId: '',
+    providerId: '1',
     isShowNewerGet: false,
     pointBalance: 0,
     imageWidth: '200rpx',
     sortField: 'IDX',
     pullUpFlag: true,
     showPageLoading: true, //首页加载过程中标记 当最后一层的pageComment返回之后设置为false
-    // citylist: [],
     citylist: [],
     isFirstShow: true,
-    isLoadedBalance: true
+    isLoadedBalance: true,
+    locationStatus: true //定位状态
   },
   toPath: function(e) {
       var targetUrl = e.currentTarget.dataset['page'];
@@ -43,9 +39,7 @@ Page({
   },
   onLoad: function(options) {
     console.log(options);
-    wx.setNavigationBarTitle({
-      title: '桔 集'
-    });
+    wx.setNavigationBarTitle({title: '桔 集'});
     wx.showShareMenu({
       withShareTicket: true
     });
@@ -95,7 +89,7 @@ Page({
           citylist: res
         });
       },
-      error: err => errDialog(err),
+      error: err => console.log(err),
       complete: () => wx.hideToast()
     })
 
@@ -105,14 +99,23 @@ Page({
         type: 'wgs84',
         success: function(res) { //res是经纬度
           console.log(res);
+          that.setData({
+            locationStatus: true
+          });
           wx.setStorageSync('curLatitude', res.latitude);
           wx.setStorageSync('curLongitude', res.longitude);
+          // wx.setStorageSync('curLatitude', '40.95933');
+          // wx.setStorageSync('curLongitude', '116.29845');
           console.log('--------位置调用成功--------');
           resolve3(res);
+          // resolve3({ latitude: '40.95933', longitude:'116.29845'});
         },
         fail: function(err) {
           console.log('---------位置调用失败或是被拒绝--------');
           console.log(err);
+          that.setData({
+            locationStatus: false
+          });
           reject3('您没有授权获取您的地理位置，无法获取附近的优惠信息，您可以在小程序设置界面（「右上角」 - 「关于」 - 「右上角」 - 「设置」）中设置对该小程序的授权状态，并在授权之后重启小程序。');
         }
       })
@@ -269,15 +272,15 @@ Page({
             next: res => {
               console.log('----------服务商信息---------');
               console.log(res);
+              wx.setStorageSync('providerId', res.id ? res.id : '');
               if (res.id) { //如果存在服务商
-                wx.setStorageSync('providerId', res.id ? res.id : '');
                 that.setData({
                   providerId: res.id
                 });
                 that.getIndexData();
                 //根据位置查询附近精选
                 var obj1 = {
-                  providerId: that.data.providerId,
+                  providerId: res.id,
                   type: 'PRODUCT',
                   sortField: 'IDX',
                   sortOrder: 'ASC',
@@ -293,6 +296,7 @@ Page({
                 //   content: '当前位置不存在服务商'
                 // });
                 that.setData({
+                  providerId:'',
                   showPageLoading: false
                 });
               }
@@ -312,22 +316,32 @@ Page({
               console.log(res);
               wx.setStorageSync('providerId', res.id ? res.id : '');
               that.setData({
-                providerId: res.id,
                 pageNo: 1
               });
               console.log('--------选择省市县确认服务商信息后重新加载首页数据---------');
-              that.getIndexData();
-              var obj = {
-                providerId: res.id,
-                type: 'PRODUCT',
-                sortField: 'IDX',
-                sortOrder: 'ASC',
-                pageNo: that.data.pageNo,
-                pageSize: that.data.pageSize,
-                longitude: wx.getStorageSync('curLongitude'),
-                latitude: wx.getStorageSync('curLatitude')
-              };
-              that.getRecommendPage(obj);
+              if (res.id){
+                that.setData({
+                  providerId: res.id
+                });
+                that.getIndexData();
+                var obj = {
+                  providerId: res.id,
+                  type: 'PRODUCT',
+                  sortField: 'IDX',
+                  sortOrder: 'ASC',
+                  pageNo: that.data.pageNo,
+                  pageSize: that.data.pageSize,
+                  longitude: wx.getStorageSync('curLongitude'),
+                  latitude: wx.getStorageSync('curLatitude')
+                };
+                that.getRecommendPage(obj);
+              }else{
+                that.setData({
+                  providerId: '',
+                  showPageLoading: false
+                });
+              }
+              
             },
             error: err => console.log(err)
           });
@@ -375,6 +389,8 @@ Page({
             locationPcode: wx.getStorageSync('selectPcode'),
             locationName: wx.getStorageSync('selectCityName')
           });
+          console.log('------------pullUpFlag-------------');
+          console.log(this.data.pullUpFlag);
           if (this.data.isFirstShow) {
             this.setData({
               isFirstShow: false
@@ -402,10 +418,13 @@ Page({
         } else {
           this.setData({
             showPageLoading: true,
+            pullUpFlag: true,
             locationCode: wx.getStorageSync('locationCode'),
             locationPcode: wx.getStorageSync('locationPcode'),
             locationName: wx.getStorageSync('locationName')
           });
+          console.log('------------pullUpFlag-------------');
+          console.log(this.data.pullUpFlag);
           var curLatitude = wx.getStorageSync('curLatitude'),
             curLongitude = wx.getStorageSync('curLongitude');
           if (curLatitude && curLongitude) { //已经定位了并且有经纬度的情况
@@ -550,7 +569,6 @@ Page({
     });
   },
   share: function(obj) {
-
     service.share(obj).subscribe({
       next: res => {
         console.log('---------分享接口返回--------');
@@ -612,11 +630,19 @@ Page({
       url: '/pages/comDetail/index?share=0&id=' + id + '&storeid=' + storeid
     });
   },
+  // 分享
   toComDetailAndShare: function(e) {
     var id = e.currentTarget.dataset.id;
     var storeid = e.currentTarget.dataset.storeid;
     wx.navigateTo({
       url: '/pages/comDetail/index?share=1&id=' + id + '&storeid=' + storeid
+    });
+  },
+  //推广
+  toPro: function(e) {
+    var id = e.currentTarget.dataset.id;
+    wx.navigateTo({
+      url: '/pages/comDetail/index?promo=1&id=' + id
     });
   },
   //切换筛选的升序和降序
@@ -726,15 +752,10 @@ Page({
       url: '../citylist/index'
     });
   },
-  toPro: function(e) {
-    wx.navigateTo({
-      url: '/pages/jujiGarden/recommend/index?productid=' + e.currentTarget.dataset.id
-    });
-  },
   //上拉加载
   onReachBottom() {
     //判断是否还可以上拉
-    if (this.data.pullUpFlag) {
+    if (this.data.pullUpFlag && this.data.providerId) {
       let that = this;
       let p = ++this.data.pageNo;
       console.log('page:' + p);
@@ -770,7 +791,6 @@ Page({
       return;
     }
 
-
   },
   //下拉刷新
   onPullDownRefresh() {
@@ -782,33 +802,37 @@ Page({
       pageNo: 1,
       sortArray: ['ASC', 'ASC', 'ASC', 'DESC']
     });
-    this.getIndexData();
     this.currentPoint();
-    //根据位置查询附近精选
-    var obj = {
-      providerId: that.data.providerId,
-      type: 'PRODUCT',
-      sortField: 'IDX',
-      sortOrder: 'ASC',
-      pageNo: that.data.pageNo,
-      pageSize: that.data.pageSize,
-      longitude: wx.getStorageSync('curLongitude'),
-      latitude: wx.getStorageSync('curLatitude')
-    };
-    service.getRecommendPage(obj).subscribe({
-      next: res => {
-        console.log(res);
-        this.setData({
-          recommendPage: res.list
-        });
-      },
-      error: err => console.log(err),
-      complete: () => {
-        setTimeout(() => {
-          wx.stopPullDownRefresh()
-        }, 1000);
-      }
-    });
+    if(this.data.providerId){
+      this.getIndexData();
+      //根据位置查询附近精选
+      var obj = {
+        providerId: that.data.providerId,
+        type: 'PRODUCT',
+        sortField: 'IDX',
+        sortOrder: 'ASC',
+        pageNo: that.data.pageNo,
+        pageSize: that.data.pageSize,
+        longitude: wx.getStorageSync('curLongitude'),
+        latitude: wx.getStorageSync('curLatitude')
+      };
+      service.getRecommendPage(obj).subscribe({
+        next: res => {
+          console.log(res);
+          this.setData({
+            recommendPage: res.list
+          });
+        },
+        error: err => console.log(err),
+        complete: () => {
+          setTimeout(() => {
+            wx.stopPullDownRefresh()
+          }, 1000);
+        }
+      });
+    }else{
+      wx.stopPullDownRefresh();
+    }
   },
   //根据服务商id（providerId）获取首页轮播图地址和桔子换礼的推荐
   getIndexData: function() {
@@ -885,7 +909,7 @@ Page({
     this.share(obj);
     return {
       title: '桔集：聚集优质好店，体验美好生活！',
-      imageUrl: 'https://upic.juniuo.com/file/picture/26PTWGQU8nHo/resize_400_320/mode_fill',
+      imageUrl: '/images/shareImg.png',
       path: '/pages/login/index?invitecode=' + wx.getStorageSync('inviteCode')
     }
   },

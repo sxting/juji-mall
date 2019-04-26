@@ -58,7 +58,7 @@ button.btn1{height:88rpx;border-radius:50rpx;font-size:34rpx;display:flex;justif
 
 .progressDiv { width: 100%; height: 390rpx; padding: 35rpx 30rpx;font-size: 28rpx; color: #333; box-shadow:0 6rpx 6rpx 5rpx rgba(229,229,229,0.50); box-sizing:border-box;position: relative;z-index: 10;border-radius: 20rpx;}
 .progress-box { margin-top: 50rpx; width: 100%; display: flex }
-.progress-box text { display: inline-block; width: 54rpx; height: 12rpx; background: #ccc; margin-right: 5rpx; }
+.progress-box text { display: inline-block; height: 12rpx; background: #ccc; margin-right: 5rpx;flex:1; }
 .progress-box text:first-of-type { border-radius: 6rpx 0 0 6rpx; }
 .progress-box text:last-of-type { border-radius: 0 6rpx 6rpx 0; margin-right: 0rpx; }
 .progress-box text.had-number { background: #ffdc00; }

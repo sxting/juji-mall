@@ -4,7 +4,7 @@
         <swiper class="img-wrap" autoplay="true" interval="3000">
             <block wx:for="{{showPics}}" wx:key="{{index}}">
                 <swiper-item>
-                    <image mode="aspectFit" src="{{item}}" class="slide-image" lazy-load="true" />
+                    <image mode="aspectFit" src="{{item?'https://upic.juniuo.com/file/picture/' + item + '/resize_751_420/mode_filt/format_jpg/quality_70':''}}" data-url="{{item}}" bindtap="previewImage" class="slide-image" lazy-load="true" />
                 </swiper-item>
             </block>
         </swiper>
@@ -128,7 +128,7 @@
             </view>
             <view class="content">{{item.content}}</view>
             <view class="imglist" wx:if="{{item.imgIds.length > 0}}">
-                <image wx:for="{{filter.toSplitImgs(item.imgIds)}}" wx:for-item='it' wx:key="unique" data-url="{{it}}" bindtap="previewImage" src="{{it?'https://upic.juniuo.com/file/picture/' + it + '/resize_320_0/mode_lfit/format_webp/quality_60':''}}"></image>
+                <image wx:for="{{filter.toSplitImgs(item.imgIds)}}" wx:for-item='it' wx:key="unique" data-url="{{it}}" bindtap="previewImage" src="{{it?'https://upic.juniuo.com/file/picture/' + it + '/resize_320_320/mode_filt/format_jpg/quality_70':''}}"></image>
             </view>
         </view>
     </view>
@@ -137,7 +137,7 @@
             <view style="font-size: 30rpx;color: #333333;font-weight: bolder;">详细信息</view>
             <view style="margin-top:30rpx;" wx:for="{{description}}" wx:key="{{index}}">
                 <view wx:if="item.content.length>0" wx:for="{{item.content}}" wx:for-item="item2" wx:for-index="index2" wx:key="{{index2}}" style="font-size: 26rpx;line-height:40rpx;color: #333;margin-top:30rpx;">{{item2}}</view>
-                <image style="width:100%;height:{{despImgHeightValues[(index+1)*(index1+1)-1]}}rpx;margin-top:30rpx;" mode="widthFix" wx:for="{{item.picIds}}" wx:for-item="item1" wx:for-index="index1" wx:key="{{index1}}" src="https://upic.juniuo.com/file/picture/{{item1}}/resize_0_0/mode_lfit/format_webp/quality_60" bindload="desImgLoad" lazy-load="true"></image>
+                <image style="width:100%;height:{{despImgHeightValues[(index+1)*(index1+1)-1]}}rpx;margin-top:30rpx;" mode="widthFix" wx:for="{{item.picIds}}" wx:for-item="item1" wx:for-index="index1" wx:key="{{index1}}" src="https://upic.juniuo.com/file/picture/{{item1}}/resize_0_0/mode_fill" data-url="{{item1}}" bindtap="previewImage" bindload="desImgLoad" lazy-load="true"></image>
             </view>
         </view>
     </view>
@@ -147,7 +147,7 @@
             <view class="pubuItem">
                 <view class="cardWrap padr10">
                     <view class="card" wx:for="{{recommendList}}" wx:key="{{index}}" bindtap="toComDetail" data-id="{{item.productId}}" data-storeid="{{item.nearStore.id}}" wx:if="{{index%2 == 0}}">
-                        <image src="https://upic.juniuo.com/file/picture/{{item.picId}}/resize_330_185/mode_fill/format_webp/quality_0" lazy-load="true" mode="widthFix" class="plimg"></image>
+                        <image src="https://upic.juniuo.com/file/picture/{{item.picId}}/resize_330_185/mode_filt/format_jpg/quality_70" lazy-load="true" mode="widthFix" class="plimg"></image>
                         <view class="pubuname">{{item.productName}}</view>
                         <view class="ub ub-ac ub-pj" style="margin-top:10rpx;">
                             <view class="ex-juzi">
@@ -172,7 +172,7 @@
             <view class="pubuItem">
                 <view class="cardWrap padl10">
                     <view class="card" wx:for="{{recommendList}}" wx:key="{{index}}" bindtap="toComDetail" data-id="{{item.productId}}" data-storeid="{{item.nearStore.id}}" wx:if="{{index%2!=0}}">
-                        <image src="https://upic.juniuo.com/file/picture/{{item.picId}}/resize_330_185/mode_fill/format_webp/quality_0" lazy-load="true" mode="widthFix" class="plimg"></image>
+                        <image src="https://upic.juniuo.com/file/picture/{{item.picId}}/resize_330_185/mode_filt/format_jpg/quality_70" lazy-load="true" mode="widthFix" class="plimg"></image>
                         <view class="pubuname">{{item.productName}}</view>
                         <view class="ub ub-ac ub-pj" style="margin-top:10rpx;">
                             <view class="ex-juzi">
@@ -197,7 +197,7 @@
 
     <!-- 成为桔长推广商品获得返利 -->
     <view class="ub ub-ac ub-pc" style="width: 100%;padding-top: 10rpx;padding-bottom: 30rpx;background:#fff;margin-top:20rpx;">
-      <image src="https://upic.juniuo.com/file/picture/26TLh7P53Nip/resize_693_175/mode_fill/format_webp/quality_0" style="width:693rpx;height:175rpx;" bindtap="openJztgModal"></image>
+      <image src="../../images/mjuzhang.png" style="width:693rpx;height:175rpx;" bindtap="openJztgModal"></image>
     </view>
 
     <!-- <view class="phoneWrap">
@@ -335,7 +335,7 @@
 
     <view class="jztgModalWrap" wx:if="{{showJztgModal}}">
       <view class="jztgModal">
-      <image src="https://upic.juniuo.com/file/picture/26TNPtfOma6y/resize_640_200/mode_fill/format_webp/quality_0" style="width:100%;height: 200rpx;border-top-left-radius: 20rpx;border-top-right-radius: 20rpx;"></image>
+      <image src="../../images/mjuzhangtop.png" style="width:100%;height: 200rpx;border-top-left-radius: 20rpx;border-top-right-radius: 20rpx;"></image>
       <view class="jztgModalContent">
         <view class="ub ub-ac">
           <view class="point1"></view>

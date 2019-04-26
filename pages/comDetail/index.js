@@ -35,6 +35,7 @@ Page({
     lat:'',
     lng:'',
     share:0,//首页分享按钮进入值为1
+    promo:0,//首页推广按钮进入值为1
     showMoreXuZhi: false,//购买须知折叠显示
     showJoinClub: true,//显示“戳一下加入福利群”模态窗口
     showJcModal: false,//显示“去回复”模态窗口
@@ -45,6 +46,9 @@ Page({
   onLoad: function(options) {
     if (options.share) {
       this.setData({share: options.share});
+    }
+    if (options.promo) {
+      this.setData({promo: options.promo});
     }
     wx.setNavigationBarTitle({title: '商品详情'});
     console.log(JSON.stringify(options));
@@ -177,9 +181,10 @@ Page({
       }
   },
   toPro:function(e){
-    wx.navigateTo({
-      url: '/pages/jujiGarden/recommend/index?productid='+e.currentTarget.dataset.id
-    });
+    this.showShare();
+    // wx.navigateTo({
+    //   url: '/pages/jujiGarden/recommend/index?productid='+e.currentTarget.dataset.id
+    // });
   },
   callPhone: function () {
     wx.makePhoneCall({
@@ -270,9 +275,6 @@ Page({
       next: res => {
         console.log(res);
         var picsStrArr = res.product.picIds.split(',');
-        picsStrArr.forEach(function(item,index){
-          picsStrArr[index] = constant.basePicUrl + item + '/resize_751_420/mode_fill'
-        });
         new Promise(function(resolve,reject){
           let str = JSON.parse(res.product.note);
           resolve(str);
@@ -297,6 +299,9 @@ Page({
           if(that.data.share==1){
             that.showShare();
           }
+          if(that.data.promo==1){
+            that.showShare();
+          }
         }).catch(function(err){
           that.setData({
             commentList: res.commentList,
@@ -317,8 +322,10 @@ Page({
           if(that.data.share==1){
             that.showShare();
           }
+          if(that.data.promo==1){
+            that.showShare();
+          }
         })
-        
       },
       error: err => console.log(err),
       complete: () => wx.hideToast()
@@ -384,7 +391,7 @@ Page({
   // 点击分享
   showShare:function(){
     console.log('生成分享图片');
-    console.log(constant.basePicUrl+this.data.productInfo.picId+'/resize_750_420/mode_fill');
+    console.log(constant.basePicUrl + this.data.productInfo.picId +'/resize_750_420/mode_filt/format_jpg/quality_70');
     service.userInfo({ openId: wx.getStorageSync('openid') }).subscribe({
         next: res => {
             this.setData({
@@ -393,7 +400,7 @@ Page({
             });
             wx.showLoading({title: '生成分享图片'});
             wx.downloadFile({
-              url: constant.basePicUrl+this.data.productInfo.picId+'/resize_750_420/mode_fill',
+              url: constant.basePicUrl + this.data.productInfo.picId +'/resize_750_420/mode_filt/format_jpg/quality_70',
               success: (res) => {
                 if (res.statusCode === 200) {
                     this.setData({headImg:res.tempFilePath});
@@ -430,7 +437,7 @@ Page({
           next: res => {
             var picId = res;
             wx.downloadFile({
-              url: constant.basePicUrl+picId+'/resize_200_200/mode_fill',
+              url: constant.basePicUrl + picId +'/resize_200_200/mode_filt/format_jpg/quality_0',
               success: (res1) => {
                 if (res1.statusCode === 200) {
                     this.setData({erwmImg:res1.tempFilePath});

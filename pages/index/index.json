@@ -3,5 +3,5 @@
     "enablePullDownRefresh": true,
     "backgroundColor": "#FFDC00",
     "backgroundColorTop": "#FFDC00",
-    "backgroundColorBottom" : "#FFFFFF"
+    "backgroundColorBottom" : "#F6F6F6"
 }

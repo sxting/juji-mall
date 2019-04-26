@@ -14,7 +14,7 @@ Page({
     dotsActiveColor: '#FFDC00',
     swiperH: '', //swiper高度
     nowIdx: 0, //当前swiper索引
-    slideShowList: [{}],
+    slideShowList: [],
     pointProductList: [],
     recommendPage: [],
     sortIndex: 1,
@@ -26,7 +26,6 @@ Page({
     pointBalance: 0,
     imageWidth: '200rpx',
     sortField: 'IDX',
-    isShowModal:true,
     pullUpFlag: true,
     showPageLoading: true, //首页加载过程中标记 当最后一层的pageComment返回之后设置为false
     citylist: [],

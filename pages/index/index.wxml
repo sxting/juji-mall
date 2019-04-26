@@ -3,7 +3,7 @@
   <image src="../../images/pageLoading.gif" class="pageLoadingImg"></image>
   <view class="pageLoadingTip" style="color:#666666;font-size: 30rpx;">桔美好生活，集好店优惠</view>
 </view>
-<view class="{{(providerId&&(slideShowList.length>0||pointProductList.length>0||recommendPage.length>0))?'':'homeTabPage'}} {{isShowNewerGet?'noscroll':''}}  {{isShowModal?'':'ovh'}}" wx:else>
+<view class="{{(providerId&&(slideShowList.length>0||pointProductList.length>0||recommendPage.length>0))?'':'homeTabPage'}} {{isShowNewerGet?'noscroll':''}}" wx:else>
 
   <view wx:if="{{providerId&&(slideShowList.length>0||pointProductList.length>0||recommendPage.length>0)}}">
     <view class="toperWrap {{pointProductList.length>0?'pb30':''}}">

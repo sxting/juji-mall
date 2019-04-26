@@ -270,10 +270,10 @@ Page({
               console.log('----------服务商信息---------');
               console.log(res);
               wx.setStorageSync('providerId', res.id ? res.id : '');
-              that.setData({
-                providerId: res.id ? res.id : ''
-              });
               if (res.id) { //如果存在服务商
+                that.setData({
+                  providerId: res.id
+                });
                 that.getIndexData();
                 //根据位置查询附近精选
                 var obj1 = {
@@ -313,11 +313,13 @@ Page({
               console.log(res);
               wx.setStorageSync('providerId', res.id ? res.id : '');
               that.setData({
-                providerId: res.id ? res.id : '',
                 pageNo: 1
               });
               console.log('--------选择省市县确认服务商信息后重新加载首页数据---------');
               if (res.id){
+                that.setData({
+                  providerId: res.id
+                });
                 that.getIndexData();
                 var obj = {
                   providerId: res.id,
@@ -384,6 +386,8 @@ Page({
             locationPcode: wx.getStorageSync('selectPcode'),
             locationName: wx.getStorageSync('selectCityName')
           });
+          console.log('------------pullUpFlag-------------');
+          console.log(this.data.pullUpFlag);
           if (this.data.isFirstShow) {
             this.setData({
               isFirstShow: false
@@ -411,10 +415,13 @@ Page({
         } else {
           this.setData({
             showPageLoading: true,
+            pullUpFlag: true,
             locationCode: wx.getStorageSync('locationCode'),
             locationPcode: wx.getStorageSync('locationPcode'),
             locationName: wx.getStorageSync('locationName')
           });
+          console.log('------------pullUpFlag-------------');
+          console.log(this.data.pullUpFlag);
           var curLatitude = wx.getStorageSync('curLatitude'),
             curLongitude = wx.getStorageSync('curLongitude');
           if (curLatitude && curLongitude) { //已经定位了并且有经纬度的情况

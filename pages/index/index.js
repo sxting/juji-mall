@@ -269,15 +269,15 @@ Page({
             next: res => {
               console.log('----------服务商信息---------');
               console.log(res);
+              wx.setStorageSync('providerId', res.id ? res.id : '');
+              that.setData({
+                providerId: res.id ? res.id : ''
+              });
               if (res.id) { //如果存在服务商
-                wx.setStorageSync('providerId', res.id ? res.id : '');
-                that.setData({
-                  providerId: res.id
-                });
                 that.getIndexData();
                 //根据位置查询附近精选
                 var obj1 = {
-                  providerId: that.data.providerId,
+                  providerId: res.id,
                   type: 'PRODUCT',
                   sortField: 'IDX',
                   sortOrder: 'ASC',
@@ -330,6 +330,11 @@ Page({
                   latitude: wx.getStorageSync('curLatitude')
                 };
                 that.getRecommendPage(obj);
+              }else{
+                that.setData({
+                  providerId: '',
+                  showPageLoading: false
+                });
               }
               
             },

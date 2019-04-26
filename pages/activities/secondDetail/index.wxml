@@ -25,9 +25,9 @@
             <view class="txt">距活动结束还有</view>
             <child dataFromParent='{{resData.expectGmtEnd}}' customeClass="block"></child>
         </view>
-        <view wx:if="{{activityStatus=='READY'}}" class="status2 ub ub-ver ub-ac ub-pc">
+        <view wx:if="{{activityStatus=='READY'&&ruleInfo.balanceStock>0}}" class="status2 ub ub-ver ub-ac ub-pc">
             <view class="txt">距活动开始还有</view>
-            <child dataFromParent='{{resData.expectGmtSTART}}' customeClass="red"></child>
+            <child dataFromParent='{{resData.expectGmtStart}}' customeClass="red"></child>
         </view>
     </view>
     <view class="businessInfo-wrap">

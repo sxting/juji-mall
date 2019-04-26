@@ -1,5 +1,5 @@
 page{height:100%;background-color:#fff;}
-.juzihl-wrap{background:#fff;padding:40rpx 30rpx 30rpx 30rpx;height: 100%;box-sizing:border-box;}
+.main{background:#fff;padding:40rpx 30rpx 30rpx 30rpx;height: 100%;box-sizing:border-box;overflow: auto;}
 .fixed-button{position:fixed;right:30rpx;top:70%;width:210rpx;height:84rpx;background:#E83221;box-shadow:0 0 5rpx 1rpx #E83221;border-radius:45rpx 0 0 45rpx;line-height:84rpx;z-index:1000}
 .fixed-button .type-icon{width:66rpx;height:66rpx;border-radius:50%;background-color:#FFFFFF;margin:0 10rpx;line-height:66rpx;text-align:center}
 .fixed-button .type-icon image{width:50rpx;height:35rpx;border-radius:50%;padding-top:14rpx;}
@@ -14,7 +14,7 @@ page{height:100%;background-color:#fff;}
 .labels-wrap{display:flex;align-items:center;margin-top:20rpx;}
 .label{width:86rpx;height:34rpx;background:#d4d4d4;border-radius:4rpx;display:flex;justify-content:center;align-items:center;font-size:20rpx;color:#fff;margin-right:20rpx;}
 .label-active{background:#ffdc00;color:#333;}
-.productItem{box-shadow:0 5px 5px 3px rgba(229,229,229,0.50);border-radius:10rpx;margin-top:30rpx;padding-bottom: 20rpx;}
+.productItem{box-shadow:0 5px 5px 3px rgba(229,229,229,0.50);border-radius:10rpx;margin-top:30rpx;padding-bottom: 20rpx;margin-bottom: 30rpx;}
 .productItem .productImg{width:100%;height:387rpx;border-top-left-radius:10rpx;border-top-right-radius:10rpx;}
 .dis-wrap{display:flex;align-items:center;margin-top:10rpx;padding:0 30rpx;}
 .from{font-size:22rpx;color:#999;}
@@ -26,8 +26,12 @@ page{height:100%;background-color:#fff;}
 .now-text{font-size:24rpx;line-height:24rpx;color:#e83221;font-weight:bold;margin-bottom:3rpx;}
 .old-price{font-size:22rpx;color:#999;text-decoration:line-through;margin-left:20rpx;}
 .count{font-size:24rpx;color:#999;}
-.ctrlbtn{width:120rpx;height:54rpx;font-size:26rpx;display:flex;align-items:center;justify-content:center;padding:0;box-sizing:border-box;background:#e83221;border-radius:6rpx;color:#fff;}
-.ctrlbtn1{width:120rpx;height:54rpx;font-size:26rpx;display:flex;align-items:center;justify-content:center;padding:0;box-sizing:border-box;background: #dedede;color:#999;border-radius:6rpx;}
+.ctrlbtn{width:120rpx;height:54rpx;font-size:26rpx;display:flex;align-items:center;justify-content:center;padding:0;box-sizing:border-box;border-radius:6rpx;}
+.ctrlbtn0{background:#e83221;color:#fff;}
+.ctrlbtn1{background:#ffdb00;color:#333;}
+.ctrlbtn2{background:#dedede;color:#999;}
+
+.clock1{display: block;width: 27rpx;height: 26rpx;margin-right: 6rpx;}
 .had-bottom{display:block;line-height:100rpx;width:100%;height:100rpx;font-size:24rpx;color:#999;text-align:center;background-color:#fff;}
 
 .toper{position: relative;}
@@ -38,6 +42,9 @@ page{height:100%;background-color:#fff;}
 .time{margin-top: 16rpx;}
 .time .b{background: #FDF2E3;width: 400rpx;height: 30rpx;border-radius: 20rpx;}
 .time .b .left{color: #ffffff;background: #E83221;width: 180rpx;border-radius: 20rpx;font-size: 20rpx;height: 30rpx;}
+.time .right{color: #999;font-size: 24rpx;height: 30rpx;line-height: 30rpx;}
 .time .b .number{width: 80rpx;color: #333;font-size: 20rpx;line-height: 30rpx;text-align: center;}
 .restTime{margin-left: 30rpx;}
 .restTime .txt{font-size: 24rpx;color: #333333;margin-right: 12rpx;}
+
+.restTime1 .txt{font-size: 24rpx;color: #333333;margin-right: 12rpx;}

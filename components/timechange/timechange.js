@@ -29,10 +29,17 @@ Component({
   },
   methods: {
     timeChange: function(expireTime){
-      let countDownTime = '';
       if (expireTime){
+        console.log(expireTime);
+        this.formatTime(expireTime);
+        setInterval(()=>{
+          this.formatTime(expireTime);
+        },1000);
+      }
+    },
+    formatTime:function(expireTime){
+        let countDownTime = '';
         let time = new Date(expireTime).getTime() - new Date().getTime();
-        console.log(time);
         if (time <= 0) {
           countDownTime = '00:00:00'
         } else {
@@ -48,26 +55,6 @@ Component({
           restMinute: countDownTime.substring(3, 5),
           restSecond: countDownTime.substring(6)
         })
-        /* 倒计时 */
-        let downTime = '2000/01/01';
-        let timer = setInterval(() => {
-          if (new Date(downTime + ' ' + countDownTime).getHours().toString() === '0' && new Date(downTime + ' ' + countDownTime).getMinutes().toString() === '0' && new Date(downTime + ' ' + countDownTime).getSeconds().toString() === '0') {
-            countDownTime = '00:00:00';
-            clearInterval(timer);
-          } else {
-            let times = new Date(new Date(downTime + ' ' + countDownTime).getTime() - 1000);
-            countDownTime =
-              (times.getHours().toString().length < 2 ? '0' + times.getHours() : times.getHours()) + ':' +
-              (times.getMinutes().toString().length < 2 ? '0' + times.getMinutes() : times.getMinutes()) + ':' +
-              (times.getSeconds().toString().length < 2 ? '0' + times.getSeconds() : times.getSeconds());
-          }
-          this.setData({
-            restHour: countDownTime.substring(0, 2),
-            restMinute: countDownTime.substring(3, 5),
-            restSecond: countDownTime.substring(6)
-          })
-        }, 1000)
-      }
     }
   }
 })

@@ -13,7 +13,8 @@ Page({
         pageNo2: 1,
         providerId: '',
         ifBottom: false,
-        curActivityStatus:'STARTED'
+        curActivityStatus:'STARTED',
+        isBack:false
     },
     onLoad: function(options) {
         wx.setNavigationBarTitle({ title: '限时秒杀' });
@@ -21,6 +22,15 @@ Page({
         console.log(this.data.providerId);
         this.getActivityList('STARTED'); //获取活动列表
         this.getActivityList('READY'); //获取活动列表
+    },
+    onHide: function() {
+        this.setData({ isBack: true });
+    },
+    onShow: function() {
+        if (this.data.isBack) {
+            this.getActivityList('STARTED'); //获取活动列表
+            this.getActivityList('READY'); //获取活动列表
+        }
     },
     onReachBottom: function() {
         if(this.data.curActivityStatus=='STARTED'){
@@ -66,7 +76,7 @@ Page({
                     console.log(res);
                     if(status=='STARTED'){
                         for(var i=0;i<res.length;i++){
-                            res[i].progressNum = Number(100 - res[i].balanceStock*100/res[i].activityStock).toFixed(0);
+                            res[i].progressNum = Math.round(100 - res[i].balanceStock*100/res[i].activityStock);
                         }
                         this.setData({
                             productList1: this.data.productList1.concat(res),
@@ -86,16 +96,11 @@ Page({
             complete: () => wx.hideToast()
         })
     },
-    switchToOrderListPage: function(e) {
-        wx.navigateTo({
-            url: '/pages/activities/mySecond/index?type=' + e.currentTarget.dataset.type
-        });
-    },
     toDetail: function(e) {
         var pid = e.currentTarget.dataset.productid;
         var status = e.currentTarget.dataset.status;
         wx.navigateTo({
-            url: '/pages/activities/secondDetail/index?type=BARGAIN&id=' + pid +'&status='+status + '&activityId=' + e.currentTarget.dataset.activityid
+            url: '/pages/activities/secondDetail/index?id=' + pid +'&status='+status + '&activityId=' + e.currentTarget.dataset.activityid
         });
     }
 });

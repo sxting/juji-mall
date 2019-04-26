@@ -52,7 +52,7 @@
       </view>
     </view>
 
-    <view class="juzihl-wrap" wx:if="{{recommendPage.length>0}}" style="{{pointProductList.length>0?'margin-top:20rpx;':''}}padding-bottom:30rpx">
+    <view class="juzihl-wrap" wx:if="{{recommendPage.length>0}}" style="{{pointProductList.length>0?'padding-top:20rpx;':''}}padding-bottom:30rpx">
       <view class="ub ub-fe">
         <view class="mtitle">精选推荐</view>
         <view class="subtitle" style="margin-top:10rpx;">精选好物，先到先得</view>
@@ -74,12 +74,12 @@
         </view>
       </view>
       <view class="jingxuanlist" wx:for="{{recommendPage}}" wx:for-index='index' wx:key="unique">
-        <image class="productImg" bindtap="toComDetail" data-id="{{item.productId}}" data-storeid="{{item.nearStore.id}}" lazy-load="true" src="https://upic.juniuo.com/file/picture/{{item.picId}}/resize_690_387/mode_filt/format_jpg/quality_70" mode="widthFix"></image>
+        <image class="productImg" bindtap="toNextDetail" data-type="{{item.currentActivityType}}" data-actid="{{item.currentActivityId}}" data-id="{{item.productId}}" data-storeid="{{item.nearStore.id}}" lazy-load="true" src="https://upic.juniuo.com/file/picture/{{item.picId}}/resize_690_387/mode_filt/format_jpg/quality_70" mode="widthFix"></image>
         <view class="dis-wrap jc-sb">
           <view class="from">{{item.merchantName}}</view>
           <view class="dis">距你{{filter.toDis(item.nearDist)}}km</view>
         </view>
-        <view class="pro-name" bindtap="toComDetail" data-id="{{item.productId}}" data-storeid="{{item.nearStore.id}}" style="margin-top:8rpx">{{item.productName}}</view>
+        <view class="pro-name" bindtap="toNextDetail" data-type="{{item.currentActivityType}}" data-actid="{{item.currentActivityId}}" data-id="{{item.productId}}" data-storeid="{{item.nearStore.id}}" style="margin-top:8rpx">{{item.productName}}</view>
         <view class="price-wrap jc-sb">
           <view class="p-wrap">
             <view class="now-price" wx:if="{{item.point>0}}">{{item.point}}</view>
@@ -92,6 +92,9 @@
               <view class="l">赚</view>
               <view class="r">￥{{filter.toFix(item.distributorSalesRebate)}}</view>
             </view>
+            <view class="mark1" wx:if="{{item.currentActivityType=='SPLICED'}}">特价拼团</view>
+            <view class="mark2" wx:if="{{item.currentActivityType=='BARGAIN'}}">超值砍价</view>
+            <view class="mark3" wx:if="{{item.currentActivityType=='SEC_KILL'}}">限时秒杀</view>
           </view>
         </view>
         <form bindsubmit="collectFormIds" report-submit="true">
@@ -100,10 +103,14 @@
                 <image src="../../images/soldCount.png" style="width:24rpx;height: 22rpx;"></image>
                 <text class="count">已售{{item.soldNum}}件</text>
               </view>
-              <button form-type="submit" class="ctrlbtn sharBtn" wx:if="{{!item.distributor}}" bindtap="toComDetailAndShare" data-id="{{item.productId}}" data-storeid="{{item.nearStore.id}}">分享</button>
-              <button form-type="submit" class="ctrlbtn buyBtn1" wx:if="{{!item.distributor}}" bindtap="toComDetail" data-id="{{item.productId}}" data-storeid="{{item.nearStore.id}}">购买</button>
-              <button form-type="submit" class="ctrlbtn buyBtn2" wx:if="{{item.distributor}}" bindtap="toComDetail" data-id="{{item.productId}}" data-storeid="{{item.nearStore.id}}">购买</button>
-              <button form-type="submit" class="ctrlbtn proBtn1" wx:if="{{item.distributor}}" bindtap="toPro" data-id="{{item.productId}}">推广</button>
+              <button form-type="submit" class="ctrlbtn sharBtn" wx:if="{{!item.distributor&&!item.currentActivityType}}" bindtap="toComDetailAndShare" data-id="{{item.productId}}" data-storeid="{{item.nearStore.id}}">分享</button>
+              <button form-type="submit" class="ctrlbtn buyBtn1" wx:if="{{!item.distributor&&!item.currentActivityType}}" bindtap="toComDetail" data-id="{{item.productId}}" data-storeid="{{item.nearStore.id}}">购买</button>
+              <button form-type="submit" class="ctrlbtn buyBtn2" wx:if="{{item.distributor&&!item.currentActivityType}}" bindtap="toComDetail" data-id="{{item.productId}}" data-storeid="{{item.nearStore.id}}">购买</button>
+              <button form-type="submit" class="ctrlbtn proBtn1" wx:if="{{item.distributor&&!item.currentActivityType}}" bindtap="toPro" data-id="{{item.productId}}">推广</button>
+
+              <button form-type="submit" class="buyBtn3" wx:if="{{item.currentActivityType=='SPLICED'}}" bindtap="toNextDetail" data-type="{{item.currentActivityType}}" data-actid="{{item.currentActivityId}}" data-id="{{item.productId}}">一键开团</button>
+              <button form-type="submit" class="buyBtn3" wx:if="{{item.currentActivityType=='BARGAIN'}}" bindtap="toNextDetail" data-type="{{item.currentActivityType}}" data-actid="{{item.currentActivityId}}" data-id="{{item.productId}}">发起砍价</button>
+              <button form-type="submit" class="buyBtn4" wx:if="{{item.currentActivityType=='SEC_KILL'}}" bindtap="toNextDetail" data-type="{{item.currentActivityType}}" data-actid="{{item.currentActivityId}}" data-id="{{item.productId}}">抢 购</button>
           </view>
         </form>
       </view>

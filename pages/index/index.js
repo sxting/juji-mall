@@ -621,6 +621,29 @@ Page({
       url: '/pages' + link
     });
   },
+  toNextDetail:function(e){
+    var type = e.currentTarget.dataset.type;
+    var id = e.currentTarget.dataset.id;
+    var storeid = e.currentTarget.dataset.storeid;
+    var actId = e.currentTarget.dataset.actid;
+    if(type=='SPLICED'){
+      wx.navigateTo({
+        url: '/pages/activities/project-detail/index?type=SPLICED&id=' + id + '&activityId=' + actId
+      });
+    }else if(type=="BARGAIN"){
+      wx.navigateTo({
+        url: '/pages/activities/project-detail/index?type=BARGAIN&id=' + id + '&activityId=' + actId
+      });
+    }else if(type=="SEC_KILL"){
+      wx.navigateTo({
+        url: '/pages/activities/secondDetail/index?id=' + id + '&activityId=' + actId
+      });
+    }else{
+      wx.navigateTo({
+        url: '/pages/comDetail/index?share=0&id=' + id + '&storeid=' + storeid
+      });
+    }
+  },
   //跳转到商品详情
   toComDetail: function(e) {
     var id = e.currentTarget.dataset.id;

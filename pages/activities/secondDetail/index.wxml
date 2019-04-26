@@ -15,8 +15,8 @@
                 <image class="clock" src="/images/clock.png"></image>限时秒杀{{activityStatus=='STARTED'?'抢购中':'即将开始'}}
             </view>
             <view class="b ub ub-pj">
-                <view class="left ub ub-ac ub-pc" wx:if="{{activityStatus!='READY'}}">已抢{{ruleInfo.soldStock}}件</view>
-                <view class="number" wx:if="{{ruleInfo.balanceStock!=0}}">{{productProgress}}%</view>
+                <view class="left ub ub-ac ub-pc" style="width:{{productProgress}}%" wx:if="{{activityStatus!='READY'}}">已抢{{ruleInfo.soldStock}}件</view>
+                <view class="number" wx:if="{{productProgress<80}}">{{productProgress}}%</view>
             </view>
         </view>
         <view wx:if="{{activityStatus=='STARTED'&&ruleInfo.balanceStock==0}}" class="status1 ub ub-ac ub-pc">已抢光</view>
@@ -133,7 +133,7 @@
         <form bindsubmit="collectFormIds" report-submit="true">
             <button wx:if="{{activityStatus=='STARTED'&&ruleInfo.balanceStock>0}}" form-type="submit" class="btn btn1" bindtap="toSecondKill">一键秒杀</button>
             <button wx:if="{{activityStatus=='READY'&&!remind}}" class="btn btn1" bindtap="toRemainMe">开始时提醒我</button>
-            <button wx:if="{{activityStatus=='READY'&&remind}}" class="btn btn2">已提醒</button>
+            <button wx:if="{{activityStatus=='READY'&&remind}}" class="btn btn2">已设置提醒</button>
             <button wx:if="{{activityStatus=='ENDED'}}" class="btn btn2">活动已结束</button>
             <button wx:if="{{activityStatux=='STARTED'&&ruleInfo.balanceStock==0}}" class="btn btn2">已抢光</button>
         </form>

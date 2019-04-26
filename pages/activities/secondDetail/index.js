@@ -27,13 +27,11 @@ Page({
         lat: '',
         lng: '',
         shared: 0, //首页分享按钮进入值为1
-        activityOrderId: '',
-        activityId: '',
         resData: '',
         activityOrderId: '',
         progressId: '',
         ruleInfo: {},
-        productProgress: '0.00',
+        productProgress: 0,
         remind: false,
         isBack: false
     },
@@ -44,10 +42,7 @@ Page({
         wx.setNavigationBarTitle({ title: '商品详情' });
         this.setData({
             productId: options.id,
-            activityId: options.activityId,
-            activityOrderId: options.activityOrderId ? options.activityOrderId : '',
-            progressId: options.progressId ? options.progressId : '',
-            activityStatus: options.status ? options.status : ''
+            activityId: options.activityId
         });
         // 查询商品详情
         this.getData();
@@ -67,14 +62,6 @@ Page({
         return {
             title: price + '元秒杀'+productName+'，手慢无！',
             path: '/pages/login/index?pagetype=6&type=' + this.data.type + '&activityId=' + this.data.activityId + '&invitecode=' + wx.getStorageSync('inviteCode'),
-        }
-    },
-    onStartKanjia(e) {
-        console.log(e.detail);
-        if (e.detail) {
-            this.setData({
-                activityOrderId: e.detail.activityOrderId
-            })
         }
     },
     previewImage: function(e) {
@@ -131,16 +118,13 @@ Page({
         console.log(this.data.activityOrderId);
         activitiesService.activity({
             activityId: this.data.activityId,
-            activityOrderId: this.data.activityOrderId,
-            activityType: 'SEC_KILL',
-            activityStatus: this.data.activityStatus,
-            progressId: this.data.progressId
+            activityType: 'SEC_KILL'
         }).subscribe({
             next: res => {
                 that.setData({
                     showCom: true
                 });
-                that.setData({ productProgress: Number((res.rules[0].soldStock * 100) / res.rules[0].activityStock).toFixed(0) });
+                that.setData({ productProgress: Math.round((res.rules[0].soldStock * 100) / res.rules[0].activityStock) });
                 var picsStrArr = res.cover.split(',');
                 picsStrArr.forEach(function(item, index) {
                     picsStrArr[index] = constant.basePicUrl + item + '/resize_751_420/mode_fill'
@@ -164,8 +148,8 @@ Page({
                         lat: res.product.store ? res.product.store.lat : '',
                         lng: res.product.store ? res.product.store.lng : '',
                         resData: res,
-                        activityOrderId: res.orderDigest ? res.orderDigest.activityOrderId : '',
-                        ruleInfo: res.rules[0]
+                        ruleInfo: res.rules[0],
+                        activityStatus:res.activityStatus
                     });
                 }).catch(function(err) {
                     that.setData({
@@ -182,8 +166,8 @@ Page({
                         lat: res.product.store.lat,
                         lng: res.product.store.lng,
                         resData: res,
-                        activityOrderId: res.orderDigest ? res.orderDigest.activityOrderId : '',
-                        ruleInfo: res.rules[0]
+                        ruleInfo: res.rules[0],
+                        activityStatus:res.activityStatus
                     });
                 })
             },

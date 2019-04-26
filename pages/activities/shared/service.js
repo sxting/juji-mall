@@ -21,7 +21,7 @@ activitiesService.myOrder = (data) =>{
 }
 // 秒杀提醒
 activitiesService.remain = (data) =>{
-	let url = api + '/secKill/remain.json';
+	let url = api + '/secKill/remind.json';
 	return http.get(url, data);
 }
 

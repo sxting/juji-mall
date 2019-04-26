@@ -35,6 +35,7 @@ Page({
         showCom: false,
         ruleInfo:{},
         productProgress:'0.00',
+        remind:false,
         isBack:false
     },
     onLoad: function(options) {
@@ -106,19 +107,11 @@ Page({
             });
         }
     },
-
-    callPhone: function() {
-        wx.makePhoneCall({
-            phoneNumber: '4000011139',
-        });
-    },
-
     toMerchantsList: function() {
         wx.navigateTo({
             url: '/pages/merchantsCanUse/index?id=' + this.data.productId
         });
     },
-
     toComDetail: function(e) {
         var id = e.currentTarget.dataset.id;
         var storeid = e.currentTarget.dataset.storeid;
@@ -147,17 +140,6 @@ Page({
         wx.navigateTo({
             url: '/pages/commentList/index?id=' + this.data.productId
         });
-    },
-    share: function() {
-        var obj = {
-            type: 'SHARE_PRODUCT',
-            sharePath: '/pages/index/index'
-        };
-        service.share(obj).subscribe({
-            next: res => {},
-            error: err => console.log(err),
-            complete: () => wx.hideToast()
-        })
     },
     getData: function() {
         let that = this;
@@ -196,6 +178,7 @@ Page({
                         note: result,
                         showPics: picsStrArr,
                         isShowData: true,
+                        remind:res.isRemind,
                         lat: res.product.store ? res.product.store.lat : '',
                         lng: res.product.store ? res.product.store.lng : '',
                         resData: res,
@@ -213,6 +196,7 @@ Page({
                         recommendCount: res.product.recommendList.length,
                         showPics: picsStrArr,
                         isShowData: true,
+                        remind:res.isRemind,
                         lat: res.product.store.lat,
                         lng: res.product.store.lng,
                         resData: res,
@@ -241,6 +225,7 @@ Page({
             activityId: this.data.activityId
         }).subscribe({
             next: res => {
+              this.setData({remind:true})
               wx.showToast({title: '提醒成功',icon:'success'});
             },
             error: err => {

@@ -66,7 +66,7 @@ Page({
                     console.log(res);
                     if(status=='STARTED'){
                         for(var i=0;i<res.length;i++){
-                            res[i].progressNum = Number(100 - res[i].balanceStock*100/res[i].activityStock).toFixed(2);
+                            res[i].progressNum = Number(100 - res[i].balanceStock*100/res[i].activityStock).toFixed(0);
                         }
                         this.setData({
                             productList1: this.data.productList1.concat(res),

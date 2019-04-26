@@ -15,7 +15,7 @@
     <view class="time ub ub-ac plr15">
       <view class="b ub ub-pj ub-f1">
           <view class="left ub ub-ac ub-pc">已抢{{item.activityStock - item.balanceStock}}件</view>
-          <view class="number">{{item.progressNum}}%</view>
+          <view class="number" wx:if="{{item.balanceStock!=0}}">{{item.progressNum}}%</view>
       </view>
       <view class="restTime ub ub-ac ub-pc">
           <view class="txt">剩余</view>

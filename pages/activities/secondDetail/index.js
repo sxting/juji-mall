@@ -155,14 +155,11 @@ Page({
                 that.setData({
                     showCom: true
                 });
-                that.setData({ productProgress: (res.rules[0].soldStock * 100) / res.rules[0].activityStock });
+                that.setData({ productProgress: Number((res.rules[0].soldStock * 100) / res.rules[0].activityStock).toFixed(0) });
                 var picsStrArr = res.cover.split(',');
                 picsStrArr.forEach(function(item, index) {
                     picsStrArr[index] = constant.basePicUrl + item + '/resize_751_420/mode_fill'
                 });
-                if (res.orderDigest) {
-                    res.yikan = NP.minus(res.originalPrice, res.orderDigest.currentSalesPrice)
-                }
                 new Promise(function(resolve, reject) {
                     let str = JSON.parse(res.product.product.note);
                     resolve(str);
@@ -204,7 +201,6 @@ Page({
                         ruleInfo: res.rules[0]
                     });
                 })
-
             },
             error: err => console.log(err),
             complete: () => wx.hideToast()

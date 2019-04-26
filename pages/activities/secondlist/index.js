@@ -46,6 +46,11 @@ Page({
     activeTab:function(e){
         var index = e.currentTarget.dataset.index;
         this.setData({curIndex:index});
+        if(index==1){
+            this.setData({ isShowNodata: this.data.productList1.length == 0 });
+        }else{
+            this.setData({ isShowNodata: this.data.productList2.length == 0 });
+        }
     },
     getActivityList: function(status) {
         let data = {
@@ -60,17 +65,20 @@ Page({
                 if (res) {
                     console.log(res);
                     if(status=='STARTED'){
+                        for(var i=0;i<res.length;i++){
+                            res[i].progressNum = Number(100 - res[i].balanceStock*100/res[i].activityStock).toFixed(2);
+                        }
                         this.setData({
                             productList1: this.data.productList1.concat(res),
                             ifBottom1: res.length < 10 ? true : false
                         });
                         this.setData({ isShowNodata: this.data.productList1.length == 0 });
                     }else{
+
                         this.setData({
                             productList2: this.data.productList2.concat(res),
                             ifBottom2: res.length < 10 ? true : false
                         });
-                        this.setData({ isShowNodata: this.data.productList2.length == 0 });
                     }
                 }
             },

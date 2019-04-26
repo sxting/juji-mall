@@ -12,10 +12,10 @@
     <view class="secondInfo ub">
         <view class="ub-f1 progress">
             <view class="t ub ub-ac">
-                <image class="clock" src="/images/clock.png"></image>限时秒杀抢购中
+                <image class="clock" src="/images/clock.png"></image>限时秒杀{{activityStatus=='STARTED'?'抢购中':'即将开始'}}
             </view>
             <view class="b ub ub-pj">
-                <view class="left ub ub-ac ub-pc">已抢{{resData.rules[0].soldStock}}件</view>
+                <view class="left ub ub-ac ub-pc" wx:if="{{activityStatus!='READY'}}">已抢{{resData.rules[0].soldStock}}件</view>
                 <view class="number">{{productProgress}}%</view>
             </view>
         </view>

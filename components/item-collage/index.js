@@ -1,5 +1,4 @@
 import { componentService } from '../shared/service';
-
 Component({
     properties: {
         pintuanListInfor: {
@@ -131,10 +130,6 @@ Component({
             }, 1000)
         }
     },
-
-    /**
-     * 组件的方法列表
-     */
     methods: {
         toMyOrderList() {
             wx.navigateTo({

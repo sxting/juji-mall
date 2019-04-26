@@ -221,7 +221,7 @@ Page({
         });
     },
     toRemainMe: function() {
-        activitiesService.remain({
+        activitiesService.remind({
             activityId: this.data.activityId
         }).subscribe({
             next: res => {

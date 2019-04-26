@@ -15,7 +15,7 @@
     <view class="time ub ub-ac plr15">
       <view class="b ub ub-pj ub-f1">
           <view class="left ub ub-ac ub-pc">已抢{{item.activityStock - item.balanceStock}}件</view>
-          <view class="number">{{format.toFix(item.balanceStock)}}%</view>
+          <view class="number">{{item.progressNum}}%</view>
       </view>
       <view class="restTime ub ub-ac ub-pc">
           <view class="txt">剩余</view>
@@ -38,7 +38,7 @@
     <image class="productImg" bindtap="toComDetail" src="{{item.cover?'https://upic.juniuo.com/file/picture/'+item.cover+'/resize_0_0/mode_fill':''}}"></image>
     <view class="time ub ub-ac plr15">
       <view class="restTime1 ub ub-ac ub-f1">
-          <view class="txt">距离开始还有</view>
+          <view class="txt">距开始还有</view>
           <child dataFromParent='{{item.expectGmtStart}}' customeClass="red"></child>
       </view>
       <view class="right ub ub-ac ub-pc">{{item.totalRemindNum}}人已设置提醒</view>

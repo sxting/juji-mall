@@ -30,7 +30,7 @@ Page({
                 this.setData({
                     pageNo1: this.data.pageNo1 + 1
                 })
-                this.getActivityList(this.data.curActivityStatu); //获取砍价列表信息
+                this.getActivityList('STARTED');
             }
         }else{
             if (this.data.ifBottom2) { //已经到底部了
@@ -39,7 +39,7 @@ Page({
                 this.setData({
                     pageNo1: this.data.pageNo2 + 1
                 })
-                this.getActivityList(this.data.curActivityStatu); //获取砍价列表信息
+                this.getActivityList('READY');
             }
         }
     },

@@ -7,6 +7,7 @@ var NP = require('../../../utils/number-precision.js');
 var app = getApp();
 Page({
     data: {
+        activityId:'',
         productId: '',
         storeId: '',
         showPics: [],
@@ -31,8 +32,6 @@ Page({
         resData: '',
         activityOrderId: '',
         progressId: '',
-        self: '',
-        showCom: false,
         ruleInfo: {},
         productProgress: '0.00',
         remind: false,
@@ -57,31 +56,17 @@ Page({
         this.setData({ isBack: true });
     },
     onShow: function() {
-        this.setData({ showCom: false })
         if (this.data.isBack) {
             this.getData(); // 返回刷新
         }
     },
     onShareAppMessage: function(res) {
-        var nickName = JSON.parse(wx.getStorageSync('userinfo')).nickName;
-        var activityId = this.data.activityId;
-        var gender = JSON.parse(wx.getStorageSync('userinfo')).gender == 1 ? '他' : '她';
-        var activityOrderId = this.data.activityOrderId;
         var picId = this.data.resData.cover;
         var productName = this.data.resData.productName;
         var price = Number(this.data.resData.activityPrice / 100).toFixed(2);
-        var oprice = Number(this.data.resData.originalPrice / 100).toFixed(2);
-        if (res.from === 'button') {
-            return {
-                title: nickName + '正在秒杀' + price + '的【' + productName + '】，快来帮助' + gender + '吧',
-                path: '/pages/login/index?pagetype=6&type=SPLICED&activityId=' + activityId + '&activityOrderId=' + activityOrderId + '&invitecode=' + wx.getStorageSync('inviteCode'),
-                imageUrl: constant.basePicUrl + picId + '/resize_560_420/mode_fill'
-            }
-        }
         return {
-            title: nickName + '分享给您一个心动商品，快来一起体验吧！',
+            title: price + '元秒杀'+productName+'，手慢无！',
             path: '/pages/login/index?pagetype=6&type=' + this.data.type + '&activityId=' + this.data.activityId + '&invitecode=' + wx.getStorageSync('inviteCode'),
-            imageUrl: constant.basePicUrl + picId + '/resize_560_420/mode_fill'
         }
     },
     onStartKanjia(e) {

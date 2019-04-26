@@ -105,7 +105,7 @@
       </view>
     </view>
 
-    <view class="juzihl-wrap" style="{{pointProductList.length>0?'margin-top:20rpx;':''}}padding-bottom:30rpx">
+    <view class="juzihl-wrap" wx:if="{{recommendPage.length>0}}" style="{{pointProductList.length>0?'margin-top:20rpx;':''}}padding-bottom:30rpx">
       <view class="ub ub-fe">
         <view class="mtitle">精选推荐</view>
         <view class="subtitle" style="margin-top:10rpx;">精选好物，先到先得</view>

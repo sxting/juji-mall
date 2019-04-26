@@ -33,10 +33,10 @@ Page({
         progressId: '',
         self: '',
         showCom: false,
-        ruleInfo:{},
-        productProgress:'0.00',
-        remind:false,
-        isBack:false
+        ruleInfo: {},
+        productProgress: '0.00',
+        remind: false,
+        isBack: false
     },
     onLoad: function(options) {
         if (options.shared) {
@@ -53,13 +53,13 @@ Page({
         // 查询商品详情
         this.getData();
     },
-    onHide:function(){
-        this.setData({isBack:true});
+    onHide: function() {
+        this.setData({ isBack: true });
     },
     onShow: function() {
-        this.setData({showCom: false})
-        if(this.data.isBack){
-            this.getData();// 返回刷新
+        this.setData({ showCom: false })
+        if (this.data.isBack) {
+            this.getData(); // 返回刷新
         }
     },
     onShareAppMessage: function(res) {
@@ -155,7 +155,7 @@ Page({
                 that.setData({
                     showCom: true
                 });
-                that.setData({productProgress:(res.rules[0].soldStock*100)/res.rules[0].activityStock});
+                that.setData({ productProgress: (res.rules[0].soldStock * 100) / res.rules[0].activityStock });
                 var picsStrArr = res.cover.split(',');
                 picsStrArr.forEach(function(item, index) {
                     picsStrArr[index] = constant.basePicUrl + item + '/resize_751_420/mode_fill'
@@ -178,12 +178,12 @@ Page({
                         note: result,
                         showPics: picsStrArr,
                         isShowData: true,
-                        remind:res.isRemind,
+                        remind: res.isRemind,
                         lat: res.product.store ? res.product.store.lat : '',
                         lng: res.product.store ? res.product.store.lng : '',
                         resData: res,
                         activityOrderId: res.orderDigest ? res.orderDigest.activityOrderId : '',
-                        ruleInfo:res.rules[0]
+                        ruleInfo: res.rules[0]
                     });
                 }).catch(function(err) {
                     that.setData({
@@ -196,12 +196,12 @@ Page({
                         recommendCount: res.product.recommendList.length,
                         showPics: picsStrArr,
                         isShowData: true,
-                        remind:res.isRemind,
+                        remind: res.isRemind,
                         lat: res.product.store.lat,
                         lng: res.product.store.lng,
                         resData: res,
                         activityOrderId: res.orderDigest ? res.orderDigest.activityOrderId : '',
-                        ruleInfo:res.rules[0]
+                        ruleInfo: res.rules[0]
                     });
                 })
 
@@ -215,21 +215,24 @@ Page({
             url: '/pages/commentDetail/index?id=' + event.currentTarget.dataset.comid
         });
     },
-    toSecondKill:function() {
+    toSecondKill: function() {
         wx.navigateTo({
             url: '/pages/payOrder/index?paytype=7&orderType=SEC_KILL&id=' + this.data.productId + '&activityId=' + this.data.activityId + '&splicedRuleId=' + this.data.resData.rules[0].secKillRuleId
         });
     },
-    toRemainMe:function(){
+    toRemainMe: function() {
         activitiesService.remain({
             activityId: this.data.activityId
         }).subscribe({
             next: res => {
-              this.setData({remind:true})
-              wx.showToast({title: '提醒成功',icon:'success'});
+                this.setData({ remind: true })
+                wx.showToast({
+                    title: "提醒成功",
+                    icon: "success"
+                });
             },
             error: err => {
-              wx.showToast({title: '系统错误'});
+                wx.showToast({ title: '系统错误' });
             },
             complete: () => wx.hideToast()
         })

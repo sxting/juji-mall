@@ -1,3 +1,4 @@
+var timer = null;
 Component({
   properties: {
     dataFromParent: {
@@ -27,12 +28,15 @@ Component({
     let expireDate = expireTime.replace(/-/g, '/');
     this.timeChange(expireDate);
   },
+  detached:function(){
+    clearInterval(timer);
+  },
   methods: {
     timeChange: function(expireTime){
       if (expireTime){
         console.log(expireTime);
         this.formatTime(expireTime);
-        setInterval(()=>{
+        timer = setInterval(()=>{
           this.formatTime(expireTime);
         },1000);
       }

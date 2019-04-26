@@ -21,7 +21,7 @@ Page({
     pageNo: 1,
     pageSize: 5,
     sortArray: ['ASC', 'ASC', 'ASC', 'DESC'],
-    providerId: '',
+    providerId: '1',
     isShowNewerGet: false,
     pointBalance: 0,
     imageWidth: '200rpx',
@@ -31,7 +31,8 @@ Page({
     showPageLoading: true, //首页加载过程中标记 当最后一层的pageComment返回之后设置为false
     citylist: [],
     isFirstShow: true,
-    isLoadedBalance: true
+    isLoadedBalance: true,
+    locationStatus: true //定位状态
   },
   onLoad: function(options) {
     console.log(options);
@@ -95,14 +96,23 @@ Page({
         type: 'wgs84',
         success: function(res) { //res是经纬度
           console.log(res);
+          that.setData({
+            locationStatus: true
+          });
           wx.setStorageSync('curLatitude', res.latitude);
           wx.setStorageSync('curLongitude', res.longitude);
+          // wx.setStorageSync('curLatitude', '40.95933');
+          // wx.setStorageSync('curLongitude', '116.29845');
           console.log('--------位置调用成功--------');
           resolve3(res);
+          // resolve3({ latitude: '40.95933', longitude:'116.29845'});
         },
         fail: function(err) {
           console.log('---------位置调用失败或是被拒绝--------');
           console.log(err);
+          that.setData({
+            locationStatus: false
+          });
           reject3('您没有授权获取您的地理位置，无法获取附近的优惠信息，您可以在小程序设置界面（「右上角」 - 「关于」 - 「右上角」 - 「设置」）中设置对该小程序的授权状态，并在授权之后重启小程序。');
         }
       })
@@ -283,6 +293,7 @@ Page({
                 //   content: '当前位置不存在服务商'
                 // });
                 that.setData({
+                  providerId:'',
                   showPageLoading: false
                 });
               }
@@ -302,22 +313,25 @@ Page({
               console.log(res);
               wx.setStorageSync('providerId', res.id ? res.id : '');
               that.setData({
-                providerId: res.id,
+                providerId: res.id ? res.id : '',
                 pageNo: 1
               });
               console.log('--------选择省市县确认服务商信息后重新加载首页数据---------');
-              that.getIndexData();
-              var obj = {
-                providerId: res.id,
-                type: 'PRODUCT',
-                sortField: 'IDX',
-                sortOrder: 'ASC',
-                pageNo: that.data.pageNo,
-                pageSize: that.data.pageSize,
-                longitude: wx.getStorageSync('curLongitude'),
-                latitude: wx.getStorageSync('curLatitude')
-              };
-              that.getRecommendPage(obj);
+              if (res.id){
+                that.getIndexData();
+                var obj = {
+                  providerId: res.id,
+                  type: 'PRODUCT',
+                  sortField: 'IDX',
+                  sortOrder: 'ASC',
+                  pageNo: that.data.pageNo,
+                  pageSize: that.data.pageSize,
+                  longitude: wx.getStorageSync('curLongitude'),
+                  latitude: wx.getStorageSync('curLatitude')
+                };
+                that.getRecommendPage(obj);
+              }
+              
             },
             error: err => console.log(err)
           });
@@ -721,7 +735,7 @@ Page({
   //上拉加载
   onReachBottom() {
     //判断是否还可以上拉
-    if (this.data.pullUpFlag) {
+    if (this.data.pullUpFlag && this.data.providerId) {
       let that = this;
       let p = ++this.data.pageNo;
       console.log('page:' + p);
@@ -768,33 +782,37 @@ Page({
       pageNo: 1,
       sortArray: ['ASC', 'ASC', 'ASC', 'DESC']
     });
-    this.getIndexData();
     this.currentPoint();
-    //根据位置查询附近精选
-    var obj = {
-      providerId: that.data.providerId,
-      type: 'PRODUCT',
-      sortField: 'IDX',
-      sortOrder: 'ASC',
-      pageNo: that.data.pageNo,
-      pageSize: that.data.pageSize,
-      longitude: wx.getStorageSync('curLongitude'),
-      latitude: wx.getStorageSync('curLatitude')
-    };
-    service.getRecommendPage(obj).subscribe({
-      next: res => {
-        console.log(res);
-        this.setData({
-          recommendPage: res.list
-        });
-      },
-      error: err => console.log(err),
-      complete: () => {
-        setTimeout(() => {
-          wx.stopPullDownRefresh()
-        }, 1000);
-      }
-    });
+    if(this.data.providerId){
+      this.getIndexData();
+      //根据位置查询附近精选
+      var obj = {
+        providerId: that.data.providerId,
+        type: 'PRODUCT',
+        sortField: 'IDX',
+        sortOrder: 'ASC',
+        pageNo: that.data.pageNo,
+        pageSize: that.data.pageSize,
+        longitude: wx.getStorageSync('curLongitude'),
+        latitude: wx.getStorageSync('curLatitude')
+      };
+      service.getRecommendPage(obj).subscribe({
+        next: res => {
+          console.log(res);
+          this.setData({
+            recommendPage: res.list
+          });
+        },
+        error: err => console.log(err),
+        complete: () => {
+          setTimeout(() => {
+            wx.stopPullDownRefresh()
+          }, 1000);
+        }
+      });
+    }else{
+      wx.stopPullDownRefresh();
+    }
   },
   //根据服务商id（providerId）获取首页轮播图地址和桔子换礼的推荐
   getIndexData: function() {

@@ -73,7 +73,7 @@ Page({
             longitude: e.currentTarget.dataset.lng,
             name: this.data.store.name,
             address: this.data.store.address,
-            scale: 20
+            scale: 10
         });
     },
     toMerchantsList: function() {

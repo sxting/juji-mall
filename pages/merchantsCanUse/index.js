@@ -24,12 +24,13 @@ Page({
     })
   },
   toMap: function(e){
-    console.log(e);
-    if (e.currentTarget.dataset.lat && e.currentTarget.dataset.lng){
-      wx.navigateTo({
-        url: '/pages/map/index?lat=' + e.currentTarget.dataset.lat + '&lng=' + e.currentTarget.dataset.lng,
-      });
-    }
+    wx.openLocation({
+        latitude: e.currentTarget.dataset.lat,
+        longitude: e.currentTarget.dataset.lng,
+        name: e.currentTarget.dataset.name,
+        address: e.currentTarget.dataset.address,
+        scale: 10
+    });
   },
   callPhone:function(e){
     console.log(e.currentTarget.dataset.phone);

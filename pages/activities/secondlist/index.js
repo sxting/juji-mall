@@ -5,13 +5,13 @@ import { activitiesService } from '../shared/service.js'
 
 Page({
     data: {
+        providerId: '',
         productList1: [],
         productList2: [],
         isShowNodata: false,
         curIndex:1,
         pageNo1: 1,
         pageNo2: 1,
-        providerId: '',
         ifBottom: false,
         curActivityStatus:'STARTED',
         isBack:false
@@ -19,12 +19,19 @@ Page({
     onLoad: function(options) {
         wx.setNavigationBarTitle({ title: '限时秒杀' });
         this.setData({providerId: wx.getStorageSync('providerId')});
-        console.log(this.data.providerId);
         this.getActivityList('STARTED'); //获取活动列表
         this.getActivityList('READY'); //获取活动列表
     },
     onHide: function() {
-        this.setData({ isBack: true });
+        this.setData({ 
+            productList1: [],
+            productList2: [],
+            isShowNodata: false,
+            pageNo1: 1,
+            pageNo2: 1,
+            ifBottom: false,
+            isBack: true
+        });
     },
     onShow: function() {
         if (this.data.isBack) {
@@ -84,7 +91,6 @@ Page({
                         });
                         this.setData({ isShowNodata: this.data.productList1.length == 0 });
                     }else{
-
                         this.setData({
                             productList2: this.data.productList2.concat(res),
                             ifBottom2: res.length < 10 ? true : false
@@ -98,9 +104,9 @@ Page({
     },
     toDetail: function(e) {
         var pid = e.currentTarget.dataset.productid;
-        var status = e.currentTarget.dataset.status;
+        var activityid = e.currentTarget.dataset.activityid;
         wx.navigateTo({
-            url: '/pages/activities/secondDetail/index?id=' + pid +'&status='+status + '&activityId=' + e.currentTarget.dataset.activityid
+            url: '/pages/activities/secondDetail/index?id=' + pid + '&activityId=' + activityid
         });
     }
 });

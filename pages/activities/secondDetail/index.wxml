@@ -37,15 +37,20 @@
             </view>
             <view class="ub ub-fe jc-sb" style="margin-top:10rpx;">
                 <view class="ub ub-fe">
-                    <view class="price1">{{filter.toFix(resData.activityPrice)}}<text style="font-size:24rpx;">元</text></view>
-                    <view class="price2">{{filter.toFix(resData.originalPrice)}}元</view>
+                    <view class="price1" wx:if="{{resData.activityPoint>0}}">{{resData.activityPoint}}</view>
+                    <view class="price2" wx:if="{{resData.activityPoint>0}}">桔子</view>
+                    <view class="price2" wx:if="{{resData.activityPoint>0&&resData.activityPrice>0}}">+</view>
+                    <view class="price1" wx:if="{{resData.activityPrice>0}}">{{filter.toFix(resData.activityPrice)}}</view>
+                    <view class="price2" wx:if="{{resData.activityPrice>0}}">元</view>
+                    <view class="price3">{{filter.toFix(resData.originalPrice)}}元</view>
                 </view>
             </view>
         </view>
     </view>
     <view class="userDivWrap plr15" wx:if="{{resData.participateUserList.length>0}}">
         <view class="userDiv ub ub-ac plr15">
-            <image class="headImg" wx:for="{{resData.participateUserList}}" src="{{item}}" wx:for-index="index" style="{{index==0?'margin-left:0':''}}" wx:key="unique"></image>
+            <image class="headImg" wx:for="{{resData.participateUserList}}" src="{{item}}" wx:for-index="index" wx:if="{{index<8}}" style="{{index==0?'margin-left:0':''}}" wx:key="unique"></image>
+            <view class="headImg1" wx:if="{{resData.participateUserList.length>8}}">●●●</view>
             <view class="ub-f1 partiNum">已有{{resData.participateUserList.length}}人参与秒杀</view>
         </view>
     </view>
@@ -122,7 +127,7 @@
         </view>
     </view>
     <view class="footer">
-        <view class="homeWrap" bindtap="gohomepage">
+        <view class="homeWrap" bindtap="toIndex">
             <image src="/images/shouye.png" style="width:40rpx;height:40rpx;"></image>
             <view class="home">首页</view>
         </view>
@@ -135,7 +140,7 @@
             <button wx:if="{{activityStatus=='READY'&&!remind}}" class="btn btn1" bindtap="toRemainMe">开始时提醒我</button>
             <button wx:if="{{activityStatus=='READY'&&remind}}" class="btn btn2">已设置提醒</button>
             <button wx:if="{{activityStatus=='ENDED'}}" class="btn btn2">活动已结束</button>
-            <button wx:if="{{activityStatux=='STARTED'&&ruleInfo.balanceStock==0}}" class="btn btn2">已抢光</button>
+            <button wx:if="{{activityStatus=='STARTED'&&ruleInfo.balanceStock==0}}" class="btn btn2">抢光啦</button>
         </form>
     </view>
 </view>

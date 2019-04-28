@@ -9,7 +9,6 @@ Page({
     data: {
         activityId:'',
         productId: '',
-        storeId: '',
         showPics: [],
         commentList: [],
         productInfo: {},
@@ -23,13 +22,9 @@ Page({
         activityStatus: '',
         despImgHeightValues: [],
         isShowData: false,
-        isHiddenClose: false,
         lat: '',
         lng: '',
-        shared: 0, //首页分享按钮进入值为1
         resData: '',
-        activityOrderId: '',
-        progressId: '',
         ruleInfo: {},
         productProgress: 0,
         remind: false,
@@ -61,7 +56,7 @@ Page({
         var price = Number(this.data.resData.activityPrice / 100).toFixed(2);
         return {
             title: price + '元秒杀'+productName+'，手慢无！',
-            path: '/pages/login/index?pagetype=6&type=' + this.data.type + '&activityId=' + this.data.activityId + '&invitecode=' + wx.getStorageSync('inviteCode'),
+            path: '/pages/login/index?pagetype=6&pid='+this.data.productId+'&activityId=' + this.data.activityId + '&invitecode=' + wx.getStorageSync('inviteCode'),
         }
     },
     previewImage: function(e) {
@@ -73,11 +68,13 @@ Page({
         })
     },
     toMap: function(e) {
-        if (e.currentTarget.dataset.lat && e.currentTarget.dataset.lng) {
-            wx.navigateTo({
-                url: '/pages/map/index?lat=' + e.currentTarget.dataset.lat + '&lng=' + e.currentTarget.dataset.lng,
-            });
-        }
+        wx.openLocation({
+            latitude: e.currentTarget.dataset.lat,
+            longitude: e.currentTarget.dataset.lng,
+            name: this.data.store.name,
+            address: this.data.store.address,
+            scale: 20
+        });
     },
     toMerchantsList: function() {
         wx.navigateTo({
@@ -103,7 +100,7 @@ Page({
             despImgHeightValues: arr
         });
     },
-    gohomepage: function() {
+    toIndex: function() {
         wx.switchTab({
             url: '/pages/index/index'
         });
@@ -115,7 +112,6 @@ Page({
     },
     getData: function() {
         let that = this;
-        console.log(this.data.activityOrderId);
         activitiesService.activity({
             activityId: this.data.activityId,
             activityType: 'SEC_KILL'

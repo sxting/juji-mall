@@ -26,8 +26,10 @@
     <view class="pro-name">{{item.productName}}</view>
     <view class="price-wrap jc-sb">
       <view class="p-wrap ub-f1">
-        <view class="now-price">{{ format.toFix(item.activityPrice) }}<text style="font-size:24rpx">元</text></view>
-        <view class="old-price">{{ format.toFix(item.originalPrice) }}元</view>
+        <view class="now-price" wx:if="{{item.activityPoint>0}}">{{item.activityPoint}}桔子</view>
+        <view class="now-price" wx:if="{{item.activityPoint>0&&item.activityPrice>0}}">+</view>
+        <view class="now-price" wx:if="{{item.activityPrice>0}}">{{format.toFix(item.activityPrice)}}元</view>
+        <view class="old-price">{{format.toFix(item.originalPrice)}}元</view>
       </view>
       <button wx:if="{{item.activityStatus=='STARTED'&&item.balanceStock>0}}" class="ctrlbtn ctrlbtn0" bindtap="toComDetail">抢购</button>
       <button wx:if="{{item.activityStatus=='STARTED'&&item.balanceStock==0}}" class="ctrlbtn ctrlbtn2" bindtap="toComDetail">已抢光</button>
@@ -47,18 +49,20 @@
     <view class="pro-name">{{item.productName}}</view>
     <view class="price-wrap jc-sb">
       <view class="p-wrap ub-f1">
-        <view class="now-price">{{ format.toFix(item.activityPrice) }}<text style="font-size:24rpx">元</text></view>
-        <view class="old-price">{{ format.toFix(item.originalPrice) }}元</view>
+        <view class="now-price" wx:if="{{item.activityPoint>0}}">{{item.activityPoint}}桔子</view>
+        <view class="now-price" wx:if="{{item.activityPoint>0&&item.activityPrice>0}}">+</view>
+        <view class="now-price" wx:if="{{item.activityPrice>0}}">{{format.toFix(item.activityPrice)}}元</view>
+        <view class="old-price">{{format.toFix(item.originalPrice)}}元</view>
       </view>
       <button wx:if="{{item.activityStatus=='READY'&&!item.remind}}" class="ctrlbtn ctrlbtn1 ub ub-ac ub-pc" bindtap="toComDetail" style="font-size:26rpx;width:150rpx;"><image class="clock1" src="/images/clock1.png"></image>提醒我</button>
       <button wx:if="{{item.activityStatus=='ENDED'}}" class="ctrlbtn ctrlbtn2">已结束</button>
-      <button wx:if="{{item.activityStatus=='READY'&&item.remind}}" class="ctrlbtn ctrlbtn2">已提醒</button>
+      <button wx:if="{{item.activityStatus=='READY'&&item.remind}}" class="ctrlbtn ctrlbtn3">已设置提醒</button>
     </view>
   </view>
   <view class="nodataDiv ub ub-ac ub-ver" hidden="{{!isShowNodata}}" style="position:fixed;top:300rpx;bottom:100rpx;left:0;width:100%;padding-top:130rpx;">
-      <image class="nodataImg" src="../../../images/null6.png" mode="aspectFill"></image>
+      <image class="nodataImg" src="/images/null6.png" mode="aspectFill"></image>
       <view class="nodataTxt">
-        <view>暂无秒杀活动</view>
+        <view>暂无{{curIndex==1?'正在进行的':'即将开始的'}}商品</view>
       </view>
   </view>
 </view>

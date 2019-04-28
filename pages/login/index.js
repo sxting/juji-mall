@@ -109,8 +109,10 @@ Page({
       }
       if(this.data.pageType==3){
        if(this.data.pageFromCode==1){
+          //商品扫码 
           wx.reLaunch({url: '/pages/comDetail/index?id=' + this.data.shareProductId + '&storeid='});
-       }else{//邀新
+       }else{
+          //邀新扫码
           wx.reLaunch({url: '/pages/jujiGarden/gardenIndex/index?openid=' + this.data.sharePersonOpenId});
        }
       }
@@ -126,6 +128,9 @@ Page({
         }else {
           wx.reLaunch({ url: '/pages/activities/project-detail/index?type=' + this.data.pageData.type + '&activityId=' + this.data.pageData.activityId });
         }
+      }
+      if(this.data.pageType==6){
+        wx.reLaunch({url: '/pages/activities/secondDetail/index?id=' + this.data.pageData.pid + '&activityId=' + this.data.pageData.activityId});
       }
     },
     getUserInfo: function(e) {

@@ -40,7 +40,7 @@
     </view>
     <view class="orderInfo2" wx:if="{{orderInfo.status=='PAID'&&voucherInfo.validDays>=0}}">
         <view class="barDiv">
-            <view class="tx-c">{{orderInfo.vouchers[0].voucherCode}}</view>
+            <view class="tx-c" style="position:relative">{{orderInfo.vouchers[0].voucherCode}}<view class="copybtn ub ub-ac ub-pc" style="top:35rpx;" data-str="{{orderInfo.vouchers[0].voucherCode}}" bindtap="copyBtn">复制</view></view>
             <canvas canvas-id="barcode"></canvas>
             <view class="div ub ub ub-ac ub-pj">
                 <view class="txt">有效期至：{{validEndDate}}</view>
@@ -84,7 +84,7 @@
 
     <view class="orderInfo3 plr15 mt10">
         <view class="tit">订单信息</view>
-        <view class="txt" style="position:relative">订单编号：{{orderInfo.orderId}} <view class="btn ub ub-ac ub-pc" bindtap="copyBtn">复制</view></view>
+        <view class="txt" style="position:relative">订单编号：{{orderInfo.orderId}} <view class="copybtn ub ub-ac ub-pc" data-str="{{orderInfo.orderId}}" bindtap="copyBtn">复制</view></view>
         <view class="txt">下单时间：{{orderInfo.dateCreated}}</view>
     </view>
 

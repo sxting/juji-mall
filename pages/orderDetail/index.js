@@ -78,7 +78,7 @@ Page({
   },
   copyBtn: function (e) {
     wx.setClipboardData({
-      data: this.data.orderInfo.orderId,
+      data: e.currentTarget.dataset.str,
       success: (res) => {
         wx.showToast({title: '复制成功'});
       }

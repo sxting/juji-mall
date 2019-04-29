@@ -27,7 +27,7 @@ Page({
         bindPhoneNumber: false, //是否绑定手机号码 是true 不是false
     },
     onLoad: function(options) {
-        wx.setNavigationBarTitle({ title: '桔园' });
+        wx.setNavigationBarTitle({ title: '桔 园' });
         if (options.openid) {
             console.log('分享点进来');
             this.setData({
@@ -56,6 +56,7 @@ Page({
                 applyLeader: true,
                 parentId: this.data.openId
             });
+            wx.setStorageSync('isLeaderAlert',1);
             let data = {
                 parentId: this.data.openId,
                 applyLeader: this.data.applyLeader

@@ -96,6 +96,13 @@
     </view>
     <view style="padding:20rpx 0 30rpx 0;font-size: 24rpx;color: #999999;">你有{{pointBalance}}个桔子</view>
   </view>
+  
+  <view class="remarkw">
+    <view class="remarks" wx:if="{{paytype==7}}">
+      <view class="remark">*秒杀成功以支付成功为准，下单不支付有可能秒杀失败</view>
+      <view class="remark">*秒杀商品不可退款</view>
+    </view>
+  </view>
 
 </view>
 <view class="btn_bottom ub ub-ac plr15" wx:if="{{showProduct}}">

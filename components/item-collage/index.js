@@ -1,4 +1,3 @@
-import { componentService } from '../shared/service';
 Component({
     properties: {
         pintuanListInfor: {

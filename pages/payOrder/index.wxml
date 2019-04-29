@@ -2,7 +2,7 @@
 <view wx:if="{{showProduct}}">
   <view class="tradeInfo" style="padding:20rpx 30rpx;">
     <view class="p15 ub info" style="align-items:flex-start;">
-      <image class="goodImg udb" src="{{productInfo.picId?'https://upic.juniuo.com/file/picture/'+productInfo.picId+'/resize_220_200/mode_filt/format_jpg/quality_70':''}}" lazy-load="true" mode="widthFix"></image>
+      <image class="goodImg udb" src="{{productInfo.picId?'https://upic.juniuo.com/file/picture/'+productInfo.picId+'/resize_220_200/mode_filt/format_jpg/quality_70':''}}" lazy-load="true" mode="scaleFit"></image>
       <view class="ub ub-ver ub-pj goodMsg">
         <view>
           <view class="goodTit">{{productInfo.productName}}</view>
@@ -76,6 +76,7 @@
     </view>
     <view class="line" wx:if="{{paytype==1||paytype==2}}"></view>
   </view>
+
   <view class="plr15" style="background:#fff;padding-top:30rpx;" wx:if="{{paytype==1||paytype==2}}">
     <view class="ub ub-ac ub-pj">
       <view class="itemTit ub ub-ac">使用桔子</view>
@@ -85,6 +86,17 @@
     </view>
     <view style="padding:20rpx 0 30rpx 0;font-size: 24rpx;color: #999999;">你有{{pointBalance}}个桔子</view>
   </view>
+
+  <view class="plr15" style="background:#fff;padding-top:30rpx;" wx:if="{{paytype==7&&kanjiaData.activityPoint>0}}">
+    <view class="ub ub-ac ub-pj">
+      <view class="itemTit ub ub-ac">使用桔子</view>
+      <view class="discountAmount">-{{kanjiaData.activityPoint}}
+        <text style="font-size: 24rpx;color: #151515;">桔子</text>
+      </view>
+    </view>
+    <view style="padding:20rpx 0 30rpx 0;font-size: 24rpx;color: #999999;">你有{{pointBalance}}个桔子</view>
+  </view>
+
 </view>
 <view class="btn_bottom ub ub-ac plr15" wx:if="{{showProduct}}">
   <view class="ub-f1" wx:if="{{paytype==3}}">金额：

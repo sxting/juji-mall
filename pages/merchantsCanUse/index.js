@@ -29,7 +29,7 @@ Page({
         longitude: e.currentTarget.dataset.lng,
         name: e.currentTarget.dataset.name,
         address: e.currentTarget.dataset.address,
-        scale: 10
+        scale: 15
     });
   },
   callPhone:function(e){

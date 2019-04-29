@@ -784,7 +784,7 @@ Page({
         },
         error: err => {
             wx.showModal({
-              title: '支付失败',
+              title: '提示',
               content: err,
             });
             that.setData({

@@ -62,7 +62,7 @@
   <view class="nodataDiv ub ub-ac ub-ver" hidden="{{!isShowNodata}}" style="position:fixed;top:300rpx;bottom:100rpx;left:0;width:100%;padding-top:130rpx;">
       <image class="nodataImg" src="/images/null6.png" mode="aspectFill"></image>
       <view class="nodataTxt">
-        <view>暂无{{curIndex==1?'正在进行的':'即将开始的'}}商品</view>
+        <view>暂无相关的秒杀商品</view>
       </view>
   </view>
 </view>

@@ -24,7 +24,7 @@
         </view>
 
         <!-- 拼团进来 -->
-        <view class="goodAmount" wx:if="{{paytype==5||paytype==7}}">
+        <view class="goodAmount" wx:if="{{paytype==5}}">
           {{filter.toFix(price)}}
           <text style="font-size:28rpx;">元</text>
           <text class='original-price'>{{filter.toFix(productInfo.originalPrice)}}元</text>
@@ -35,6 +35,15 @@
           {{filter.toFix(kanjiaData.activityPrice)}}
           <text style="font-size:28rpx;">元</text>
           <text class='original-price'>{{filter.toFix(kanjiaData.originalPrice)}}元</text>
+        </view>
+
+        <view class="goodAmount" wx:if="{{paytype==7}}">
+          <text style="font-size:30rpx;" wx:if="{{kanjiaData.activityPoint>0}}">{{kanjiaData.activityPoint}}</text>
+          <text style="font-size:28rpx;" wx:if="{{kanjiaData.activityPoint>0}}">桔子</text>
+          <text style="font-size:28rpx;" wx:if="{{kanjiaData.activityPoint>0&&kanjiaData.activityPrice>0}}">+</text>
+          <text style="font-size:30rpx;" wx:if="{{kanjiaData.activityPrice>0}}">{{filter.toFix(kanjiaData.activityPrice)}}</text>
+          <text style="font-size:28rpx;" wx:if="{{kanjiaData.activityPrice>0}}">元</text>
+          <text style="margin-left: 10rpx;font-size: 24rpx;color: #999999;text-decoration:line-through">{{filter.toFix(kanjiaData.originalPrice)}}元</text>
         </view>
 
       </view>
@@ -56,13 +65,13 @@
     </view>
   </view>
 
-  <view class="plr15" style="background:#fff;" wx:if="{{paytype!=5 && paytype!=6}}">
+  <view class="plr15" style="background:#fff;" wx:if="{{paytype!=5 && paytype!=6 && paytype!=7}}">
     <view class="ub ub-ac ub-pj item">
       <view class="itemTit ub ub-ac">购买数量</view>
       <view class="numberCtrl ub ub-ac">
-        <image class="ctlbtn" src="../../images/ion-del.png" bindtap="delNumber"></image>
+        <image class="ctlbtn" src="/images/ion-del.png" bindtap="delNumber"></image>
         <view class="num uds">{{count}}</view>
-        <image class="ctlbtn" src="../../images/ion-add.png" bindtap="addNumber"></image>
+        <image class="ctlbtn" src="/images/ion-add.png" bindtap="addNumber"></image>
       </view>
     </view>
     <view class="line" wx:if="{{paytype==1||paytype==2}}"></view>

@@ -47,7 +47,7 @@
               <text wx:if="{{item.paidPoint>0&&item.paidAmount>0}}">+</text>
               <text wx:if="{{item.paidPoint>0}}">{{item.paidPoint}}桔子</text>
             </view>
-            <view class="ctrl plr15 ub ub-ac ub-pj" hidden="{{item.status=='REFUND'||item.status=='CLOSE'}}">
+            <view class="ctrl plr15 ub ub-ac ub-pj" wx:if="{{item.status=='PAID'||item.status=='CREATED'||item.status=='CONSUME'}}">
                 <view wx:if="{{item.status=='PAID'}}" class="left">您已成功付款，请到店展示消费码消费</view>
                 <view wx:if="{{item.status=='CREATED'}}" class="left">请在下单后5分钟内付款，超时将自动关闭</view>
                 <view wx:if="{{item.status=='CONSUME'}}" class="left">您已成功消费，老铁给个评价再走呗～</view>

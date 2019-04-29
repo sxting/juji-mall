@@ -18,7 +18,7 @@ Page({
         wx.navigateTo({ url: page });
     },
     onLoad: function() {
-        wx.setNavigationBarTitle({ title: '我的' });
+        wx.setNavigationBarTitle({ title: '我 的' });
         this.getInfo();
     },
     getInfo: function() {

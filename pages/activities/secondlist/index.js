@@ -23,7 +23,7 @@ Page({
         this.getActivityList('READY'); //获取活动列表
     },
     onHide: function() {
-        this.setData({ 
+        this.setData({
             productList1: [],
             productList2: [],
             isShowNodata: false,

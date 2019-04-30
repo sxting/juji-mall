@@ -372,7 +372,11 @@ Page({
                 console.log('selectPcode: ' + wx.getStorageSync('selectPcode'));
                 console.log('selectCityName: ' + wx.getStorageSync('selectCityName'));
                 //此处应该判断用户有没有再次更换城市 如果没有更换城市不再次查询
-                wx.setStorageSync('locationCode', wx.getStorageSync('selectCode'));
+                // wx.setStorageSync('locationCode', wx.getStorageSync('selectCode'));
+              if (this.data.locationCode == wx.getStorageSync('selectCode')) {
+                console.log('没有查询且返回了');
+                return;
+              } else {
                 this.setData({
                     showPageLoading: true,
                     sortIndex: 1,
@@ -392,6 +396,7 @@ Page({
                     return;
                 }
                 this.getDataByCity(); //获取所选城市的服务商Id
+              }
             } else {
                 console.log('用户使用定位城市：' + this.data.locationName);
                 if (this.data.isFirstShow) {
@@ -400,9 +405,10 @@ Page({
                     })
                     return;
                 }
-                this.currentPoint();
+                console.log('用户使用定位城市并向下');
                 //如果没有更换城市 有两种情况 一种是由其他城市切回所在城市 一种是由其他页面回退到本页面
                 if (this.data.locationCode == wx.getStorageSync('selectCode')) {
+                    console.log('没有查询且返回了');
                     return;
                 } else {
                     this.setData({

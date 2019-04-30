@@ -110,6 +110,10 @@ Page({
     clearInterval(timer);
     this.setData({isTimeOpen:false});
   },
+  onHide:function(){
+    clearInterval(timer);
+    this.setData({isTimeOpen:false});
+  },
   getListVoucher:function(code){
     var obj = {
       code:code,

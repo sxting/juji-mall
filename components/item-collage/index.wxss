@@ -4,7 +4,7 @@
 .title-infor .collage-infor { font-size: 24rpx; color: #999999; }
 .title-infor .collage-infor .collage-numbers { width: 76rpx; height: 36rpx; font-size: 22rpx; color: #333333; text-align: center; line-height: 36rpx; background-color: #FFDB00; margin-right: 20rpx; }
 .name-collage { font-size: 30rpx; color: #333333; margin-top: 27rpx }
-.price-infor { line-height: 50rpx; margin-top: 15rpx; }
+.price-infor { line-height: 50rpx; margin-top: 15rpx; font-weight:bold;}
 .price-infor .original-price { font-size: 28rpx; color: #999999; text-decoration: line-through; margin-left: 20rpx; }
 .price-infor text:last-of-type { font-size: 24rpx; color: #999999; letter-spacing: 0; float: right }
 .price-infor text:first-of-type { font-size: 38rpx; color: #E83221; }
@@ -28,10 +28,10 @@
 .head-portrait-box .head-portrait .headImg{width:100rpx;height:100rpx;border-radius:50%;z-index: 0}
 .head-portrait-box .head-portrait .leaderBg{width:64rpx;height:28rpx;z-index: 1;position: absolute;left: 50%;bottom: 0rpx;left: 18rpx;}
 .head-portrait-box .head-portrait .leaderTxt{width:64rpx;height:28rpx;z-index: 1;font-size:18rpx;color:#fff;position: absolute;left: 18rpx;bottom: 0rpx;text-align: center;line-height: 26rpx;}
-.btns { width: 470rpx; height: 88rpx; line-height: 88rpx; font-size: 30rpx; letter-spacing: 0; text-align: center; border-radius: 44rpx; }
-.group-buying { background-color: #FFDB00; color: #333333; }
-.low-stocks { background-color: #DEDEDE; color: #999999; }
-.btns-pro { height: 88rpx; }
-.proBtns .kaituan { width: 240rpx; background: #FFDB00; border-radius: 44rpx 0 0 44rpx; font-size: 28rpx; color: #333333; }
-.proBtns .kaituan-ing { background-color: #E83221; border-radius: 0 44rpx 44rpx 0; font-size: 24rpx; color: #FFFFFF; }
+.btns { width: 470rpx; height: 88rpx; line-height: 88rpx; font-size: 30rpx; letter-spacing: 0; text-align: center; border-radius: 44rpx;font-weight: bold;color: #fff }
+.group-buying { background-color: #E83221;}
+.low-stocks { background-color: #DEDEDE;}
+.btns-pro { height: 88rpx;font-weight: bold;color: #fff; }
+.proBtns .kaituan { width: 240rpx; background: #E83221; border-radius: 44rpx 0 0 44rpx; font-size: 28rpx; color: #fff; }
+.proBtns .kaituan-ing { background: #E83221; border-radius: 0 44rpx 44rpx 0; font-size: 24rpx; color: #fff; }
 .topay{font-size: 32rpx;}

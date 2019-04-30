@@ -25,19 +25,19 @@
 
     <view class="menulist ub ub-ac ub-pj">
       <view class="menuitem ub ub-ver ub-ac ub-pc" bindtap="toPath" data-page="/pages/juzihl/index">
-        <image class="icon_home" src="../../images/icon_home1.png"></image>
+        <image class="icon_home" src="../../images/icon_home1.png" mode="widthFix"></image>
         <view class="tx-c">桔子换礼</view>
       </view>
       <view class="menuitem ub ub-ver ub-ac ub-pc" bindtap="toPath" data-page="/pages/activities/project-list/index?sceneType=SPLICED">
-        <image class="icon_home" src="../../images/icon_home2.png"></image>
+        <image class="icon_home" src="../../images/icon_home2.png" mode="widthFix"></image>
         <view class="tx-c">特价拼团</view>
       </view>
       <view class="menuitem ub ub-ver ub-ac ub-pc" bindtap="toPath" data-page="/pages/activities/project-list/index?sceneType=BARGAIN">
-        <image class="icon_home" src="../../images/icon_home3.png"></image>
+        <image class="icon_home" src="../../images/icon_home3.png" mode="widthFix"></image>
         <view class="tx-c">超值砍价</view>
       </view>
       <view class="menuitem ub ub-ver ub-ac ub-pc" bindtap="toPath" data-page="/pages/activities/secondlist/index">
-        <image class="icon_home" src="../../images/icon_home4.png"></image>
+        <image class="icon_home" src="../../images/icon_home4.png" mode="widthFix"></image>
         <view class="tx-c">限时秒杀</view>
       </view>
     </view>

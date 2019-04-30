@@ -29,7 +29,7 @@ page { height: 100%; }
 .secondInfo .progress .b .number{width: 80rpx;color: #fff;font-size: 20rpx;line-height: 26rpx;text-align: center;font-weight: bold;}
 
 .statusBg{width: 250rpx;height: 115rpx;position: absolute;top: 0;right: 0;display: block;z-index: 0}
-.secondInfo .status1{width: 250rpx;height: 115rpx;font-size: 38rpx;color: #333333;position: relative;z-index: 1}
+.secondInfo .status1{width: 250rpx;height: 115rpx;font-size: 38rpx;color: #333333;position: relative;z-index: 1;font-weight: bold;}
 .secondInfo .status2{width: 250rpx;height: 115rpx;position: relative;z-index: 1}
 .secondInfo .status2 .txt{text-align: center;font-size: 24rpx;color: #333333;margin-bottom: 10rpx;}
 

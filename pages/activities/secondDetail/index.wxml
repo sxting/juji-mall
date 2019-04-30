@@ -48,16 +48,16 @@
             </view>
         </view>
     </view>
-    <view style="padding:10rpx 0;width:100%;background:#fff;" wx:if="{{resData.participantQuantity>0}}">
+    <view style="padding:10rpx 0;width:100%;background:#fff;" wx:if="{{resData.participateUserList.length>0}}">
         <view class="userDivWrap plr15">
             <view class="userDiv ub ub-ac plr15">
                 <image class="headImg" wx:for="{{resData.participateUserList}}" src="{{item}}" wx:for-index="index" wx:if="{{index<10}}" style="{{index==0?'margin-left:0':''}}" wx:key="unique"></image>
-                <view class="headImg1" wx:if="{{resData.participantQuantity>10}}">●●●</view>
-                <view class="ub-f1 partiNum">已有{{resData.participantQuantity}}人参与秒杀</view>
+                <view class="headImg1" wx:if="{{resData.participateUserList.length>10}}">●●●</view>
+                <view class="ub-f1 partiNum">已有{{resData.participateUserList.length}}人参与秒杀</view>
             </view>
         </view>
     </view>
-    <view class="conDiv1" style="{{resData.participantQuantity==0?'margin-top:20rpx':'margin-top:0'}}">
+    <view class="conDiv1" style="{{resData.participateUserList.length==0?'margin-top:20rpx':'margin-top:0'}}">
         <view class="yongkaxuzhi">
             <view style="font-size: 30rpx;color: #333333;font-weight: bolder;">购买须知</view>
             <view class="xuzhiBorder">

@@ -110,7 +110,7 @@
 
               <button form-type="submit" class="buyBtn3" wx:if="{{item.currentActivityType=='SPLICED'}}" bindtap="toNextDetail" data-type="{{item.currentActivityType}}" data-actid="{{item.currentActivityId}}" data-id="{{item.productId}}">一键开团</button>
               <button form-type="submit" class="buyBtn3" wx:if="{{item.currentActivityType=='BARGAIN'}}" bindtap="toNextDetail" data-type="{{item.currentActivityType}}" data-actid="{{item.currentActivityId}}" data-id="{{item.productId}}">发起砍价</button>
-              <button form-type="submit" class="buyBtn4" wx:if="{{item.currentActivityType=='SEC_KILL'}}" bindtap="toNextDetail" data-type="{{item.currentActivityType}}" data-actid="{{item.currentActivityId}}" data-id="{{item.productId}}">抢 购</button>
+              <button form-type="submit" class="buyBtn4" wx:if="{{item.currentActivityType=='SEC_KILL'}}" bindtap="toNextDetail" data-type="{{item.currentActivityType}}" data-actid="{{item.currentActivityId}}" data-id="{{item.productId}}">抢购</button>
           </view>
         </form>
       </view>

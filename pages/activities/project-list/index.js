@@ -24,7 +24,7 @@ Page({
   onLoad: function (options) {
     let self = this;
     wx.setNavigationBarTitle({ 
-      title: options.sceneType == 'SPLICED'? '拼团列表': '砍价列表'
+      title: options.sceneType == 'SPLICED'? '特价拼团': '超值砍价'
     });
     this.setData({
       sceneType: options.sceneType,

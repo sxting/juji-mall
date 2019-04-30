@@ -1,5 +1,3 @@
-// shared/component/item-kanjia/index.js
-import { componentService } from '../shared/service';
 import { errDialog, loading } from '../../utils/util';
 import { constant } from '../../utils/constant';
 import { service } from '../../service';

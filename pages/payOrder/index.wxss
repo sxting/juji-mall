@@ -6,6 +6,7 @@ page{box-sizing:border-box;height:100%;background-color:#f5f5f5}
 .goodTit{font-size:28rpx;}
 .storeName{font-size:22rpx;margin-top:10rpx;color:#999;}
 .goodAmount{font-size:30rpx;color:#E83221;}
+.goodAmount text{font-weight: bold;}
 .item{height:100rpx;background-color:#fff;}
 .line{height:2rpx;background:#EEEEEE;margin-top:10rpx;}
 .itemTit{font-size:28rpx;color:#333333;font-weight:bold;}
@@ -21,7 +22,7 @@ page{box-sizing:border-box;height:100%;background-color:#f5f5f5}
 .kjp-item{border-bottom:1rpx solid #EEEEEE;font-size:28rpx;color:#333333;height:120rpx;line-height:120rpx;}
 .kjp-item text:last-child{float:right;}
 .btnTxt{font-size:30rpx;font-weight:bold;}
-.btnNum{font-size:30rpx;color:#E83121;}
+.btnNum{font-size:30rpx;color:#E83121;font-weight: bold}
 .remarkw{padding: 0 30rpx;background-color: #fff;}
 .remarks{background:#fff;padding:24rpx 0;border-top: 1rpx #eee solid;}
 .remark{font-size: 24rpx;color: #999999;line-height: 40rpx;}

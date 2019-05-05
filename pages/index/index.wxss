@@ -22,7 +22,7 @@
 swiper{display:block;width:100%;height:340rpx;box-sizing:border-box;overflow:hidden;box-shadow:0 5px 5px 0 rgba(229,229,229,0.50);}
 .slide-image{width:100%;height:340rpx;display:block;box-sizing:border-box;border-radius:10rpx;}
 
-.menulist{width:100%;padding: 5rpx 20rpx 15rpx;height: 140rpx;width: 100%;box-sizing:border-box;background-color: #fff;}
+.menulist{width:100%;padding: 5rpx 20rpx 35rpx;height: 140rpx;width: 100%;box-sizing:border-box;background-color: #fff;}
 .menulist .menuitem{width:170rpx; height: 140rpx;}
 .icon_home{display: block;width: 96rpx;height: 96rpx;}
 .menulist .tx-c{font-size: 28rpx;color: #666;margin-top: 10rpx;}

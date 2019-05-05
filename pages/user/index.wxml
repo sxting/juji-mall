@@ -80,7 +80,7 @@
         <view class="userGridText">我的拼团</view>
       </view>
       <view class="userGrid ub ub-ver ub-ac" bindtap="toPage" data-page="/pages/myComment/index">
-        <image class="userGridIcon" mode="aspectFit" src="../../images/icon_my5.png"></image>
+        <image class="userGridIcon" mode="aspectFit" src="../../images/icon_my3.png"></image>
         <view class="userGridText">我的评价</view>
       </view>
     </view>
@@ -90,7 +90,7 @@
         <view class="userGridText">我的卡包</view>
       </view>
       <button class="userGrid ub ub-ver ub-ac" open-type='contact' session-from='weapp'>
-        <image class="userGridIcon" mode="aspectFit" src="../../images/icon_my6.png"></image>
+        <image class="userGridIcon" mode="aspectFit" src="../../images/icon_my5.png"></image>
         <view class="userGridText">在线客服</view>
       </button>
       <button class="userGrid ub ub-ver ub-ac">

@@ -34,6 +34,7 @@ Page({
         });
     },
     onShow: function() {
+        this.setData({curIndex: 1});
         if (this.data.isBack) {
             this.getActivityList('STARTED'); //获取活动列表
             this.getActivityList('READY'); //获取活动列表

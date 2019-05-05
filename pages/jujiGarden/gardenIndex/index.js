@@ -25,6 +25,7 @@ Page({
         switchFun: false,
         minInvitedMemberCount: 0, //邀请几个人就可以成为桔长
         bindPhoneNumber: false, //是否绑定手机号码 是true 不是false
+        isDisabled:false,//按钮是否禁用
     },
     onLoad: function(options) {
         wx.setNavigationBarTitle({ title: '桔 园' });
@@ -102,30 +103,37 @@ Page({
         }
         let self = this;
         if (this.data.wechatId == '') {
-            showAlert('请填写您的微信账号');
-        } else if (this.data.name == '') {
-            showAlert('请填写您的实名认证姓名');
-        } else {
-            jugardenService.bindWechatInfor(data).subscribe({
-                next: res => {
-                    if (res) {
-                        this.setData({
-                            role: res.role,
-                            switchFun: false,
-                            todaySaleRebate: res.todaySaleRebate ? res.todaySaleRebate : 0,
-                            todaySettlementAmount: res.todaySettlementAmount ? res.todaySettlementAmount : 0,
-                            totalSettlementAmount: res.totalSettlementAmount ? res.totalSettlementAmount : 0,
-                            invitedLeaderCount: res.invitedLeaderCount ? res.invitedLeaderCount : 0,
-                            invitedMemberCount: res.invitedMemberCount ? res.invitedMemberCount : 0,
-                            isAuthed: res.hasReceiver == true ? true : false,
-                            applyLeader: res.applyLeader,
-                        })
-                    }
-                },
-                error: err => console.log(err),
-                complete: () => wx.hideToast()
-            })
+            showAlert('请填写您的微信账号');return;
         }
+        if (this.data.name == '') {
+            showAlert('请填写您的实名认证姓名');return;
+        }
+        if(this.data.isDisabled){
+            return;
+        }else{
+            this.setData({isDisabled:true})
+        }
+        jugardenService.bindWechatInfor(data).subscribe({
+            next: res => {
+                if (res) {
+                    this.setData({
+                        role: res.role,
+                        switchFun: false,
+                        todaySaleRebate: res.todaySaleRebate ? res.todaySaleRebate : 0,
+                        todaySettlementAmount: res.todaySettlementAmount ? res.todaySettlementAmount : 0,
+                        totalSettlementAmount: res.totalSettlementAmount ? res.totalSettlementAmount : 0,
+                        invitedLeaderCount: res.invitedLeaderCount ? res.invitedLeaderCount : 0,
+                        invitedMemberCount: res.invitedMemberCount ? res.invitedMemberCount : 0,
+                        isAuthed: res.hasReceiver == true ? true : false,
+                        applyLeader: res.applyLeader,
+                    })
+                }
+            },
+            error: err => console.log(err),
+            complete: () => {
+                this.setData({isDisabled:false})
+            }
+        });
     },
 
     // 获取用户信息 

@@ -17,6 +17,6 @@
 .phoneInner view { font-size: 24rpx; color: #333; }
 .bindBtn { background: transparent; padding: 0; }
 
-.userGrid { padding: 50rpx 40rpx 0 40rpx; margin: 0; background: transparent; }
-.userGridIcon { width: 45rpx; height: 40rpx; }
-.userGridText { font-size: 24rpx; color: #333333; margin-top: 20rpx; line-height: 30rpx; }
+.userGrid { padding: 40rpx 40rpx 0 30rpx; margin: 0; background: transparent; }
+.userGridIcon { width: 50rpx; height: 50rpx; }
+.userGridText { font-size: 24rpx; color: #333333; margin-top: 10rpx; line-height: 30rpx; }

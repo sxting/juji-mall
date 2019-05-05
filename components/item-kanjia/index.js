@@ -1,5 +1,6 @@
 import { errDialog, loading } from '../../utils/util';
 import { constant } from '../../utils/constant';
+import { componentService } from '../shared/service';
 import { service } from '../../service';
 var NP = require('../../utils/number-precision.js');
 

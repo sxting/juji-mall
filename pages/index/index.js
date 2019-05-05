@@ -174,7 +174,7 @@ Page({
                                                     that.getIndexData();
                                                     var obj = {
                                                         providerId: res.id,
-                                                        type: 'PRODUCT',
+                                                        type: '',
                                                         sortField: 'IDX',
                                                         sortOrder: 'ASC',
                                                         pageNo: that.data.pageNo,
@@ -268,7 +268,7 @@ Page({
                                 //根据位置查询附近精选
                                 var obj1 = {
                                     providerId: res.id,
-                                    type: 'PRODUCT',
+                                    type: '',
                                     sortField: 'IDX',
                                     sortOrder: 'ASC',
                                     pageNo: that.data.pageNo,
@@ -313,7 +313,7 @@ Page({
                                 that.getIndexData();
                                 var obj = {
                                     providerId: res.id,
-                                    type: 'PRODUCT',
+                                    type: '',
                                     sortField: 'IDX',
                                     sortOrder: 'ASC',
                                     pageNo: that.data.pageNo,
@@ -357,7 +357,7 @@ Page({
             this.setData({ pageNo: 1 });
             var obj = {
                 providerId: wx.getStorageSync('providerId'),
-                type: 'PRODUCT',
+                type: '',
                 sortField: 'IDX',
                 sortOrder: 'ASC',
                 pageNo: this.data.pageNo,
@@ -466,7 +466,7 @@ Page({
                                             //根据位置查询附近精选
                                             var obj = {
                                                 providerId: this.data.providerId,
-                                                type: 'PRODUCT',
+                                                type: '',
                                                 sortField: 'IDX',
                                                 sortOrder: 'ASC',
                                                 pageNo: this.data.pageNo,
@@ -518,7 +518,7 @@ Page({
                     //根据位置查询附近精选
                     var obj = {
                         providerId: this.data.providerId,
-                        type: 'PRODUCT',
+                        type: '',
                         sortField: 'IDX',
                         sortOrder: 'ASC',
                         pageNo: this.data.pageNo,
@@ -707,7 +707,7 @@ Page({
                 });
                 obj = {
                     providerId: this.data.providerId,
-                    type: 'PRODUCT',
+                    type: '',
                     sortField: 'SOLDNUM',
                     sortOrder: 'DESC',
                     pageNo: this.data.pageNo,
@@ -747,7 +747,7 @@ Page({
             console.log('page:' + p);
             let obj = {
                 providerId: that.data.providerId,
-                type: 'PRODUCT',
+                type: '',
                 sortField: that.data.sortField,
                 sortOrder: that.data.sortArray[Number(that.data.sortIndex) - 1],
                 pageNo: p,
@@ -794,7 +794,7 @@ Page({
             //根据位置查询附近精选
             var obj = {
                 providerId: that.data.providerId,
-                type: 'PRODUCT',
+                type: '',
                 sortField: 'IDX',
                 sortOrder: 'ASC',
                 pageNo: that.data.pageNo,
@@ -922,7 +922,7 @@ Page({
                 that.getIndexData();
                 var obj = {
                     providerId: res.id,
-                    type: 'PRODUCT',
+                    type: '',
                     sortField: 'IDX',
                     sortOrder: 'ASC',
                     pageNo: that.data.pageNo,

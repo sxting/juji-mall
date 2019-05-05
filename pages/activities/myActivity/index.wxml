@@ -45,7 +45,7 @@
                 <view class="ctrl plr15 ub ub-ac ub-pj" wx:if="{{item.activityOrderStatus == 'FAIL'}}">
                     <view class="left ub ub-ac">
                       <image wx:for="{{item.progresses}}" wx:for-item="it" class="headImg" src="{{it.avatar}}" wx:key="un"></image>
-                      <image wx:for="{{item.participateCount-item.progresses.length}}" class="headImg" src="../../../images/unkonw-icon.png" wx:key="un"></image>
+                      <image wx:for="{{item.participateCount-item.progresses.length}}" class="headImg" src="/images/unkonw-icon.png" wx:key="un"></image>
                     </view>
                     <view class="refund ub ub-ac ub-pc" bindtap="toOrderDetail" data-orderid="{{item.orderId}}">查看退款</view>
                 </view>
@@ -60,7 +60,7 @@
             </block>
         </view>
         <view class="nodataDiv ub ub-ac ub-ver" hidden="{{!isShowNodata}}">
-            <image class="nodataImg" src="../../../images/null6.png"></image>
+            <image class="nodataImg" src="/images/null6.png" mode="aspectFill"></image>
             <view class="nodataTxt">
               <view>您还未进行过{{activityTxt}}活动</view>
             </view>

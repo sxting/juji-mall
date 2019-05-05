@@ -14,7 +14,7 @@
                 <!-- <view class="restTime" wx:if="{{item.status=='PAID'}}">有效期至{{item.vouchers}}</view> -->
             </view> 
             <view class="ub ub-ac info" bindtap="toDetail" data-id="{{item.orderId}}" data-status="{{item.status}}" wx:for="{{item.orderItemList}}" wx:for-item='it' wx:key="unique">
-                <image class="goodImg udb" src="{{constant.basePicUrl}}{{it.picId}}/resize_180_180/mode_filt/format_jpg/quality_70"></image>
+                <image class="goodImg udb" src="{{constant.basePicUrl}}{{it.picId}}/resize_750_420/mode_filt/format_jpg/quality_70" mode="aspectFill"></image>
                 <view class="ub-f1 goodMsg">
                     <view class="goodTit">{{format.toEllipsis(it.productName)}}</view>
                     <view class="storeName">{{it.merchantName}}</view>

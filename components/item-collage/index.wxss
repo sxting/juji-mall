@@ -32,6 +32,6 @@
 .group-buying { background-color: #E83221;}
 .low-stocks { background-color: #DEDEDE;}
 .btns-pro { height: 88rpx;font-weight: bold;color: #fff; }
-.proBtns .kaituan { width: 240rpx; background: #E83221; border-radius: 44rpx 0 0 44rpx; font-size: 28rpx; color: #fff; }
+.proBtns .kaituan { width: 240rpx; background: #333333; border-radius: 44rpx 0 0 44rpx; font-size: 28rpx; color: #fff; }
 .proBtns .kaituan-ing { background: #E83221; border-radius: 0 44rpx 44rpx 0; font-size: 24rpx; color: #fff; }
 .topay{font-size: 32rpx;}

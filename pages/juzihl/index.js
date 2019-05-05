@@ -40,6 +40,8 @@ Page({
     var that = this;
 
     if (wx.getStorageSync('selectCode')) { //存在 说明用户选过异地城市
+      console.log('locationCode: ' + wx.getStorageSync('locationCode'));
+      console.log('selectCode: ' + wx.getStorageSync('selectCode'));
       if (wx.getStorageSync('locationCode') != wx.getStorageSync('selectCode')) {
         //如果城市更换了 需要通过用户选择的城市编号code重新加载页面
         console.log('用户更换城市为：' + wx.getStorageSync('selectCityName'));

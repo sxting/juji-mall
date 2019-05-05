@@ -1,4 +1,3 @@
-<!--pages/activities/project-list/index.wxml-->
 <wxs src="../../../utils/numFr.wxs" module="format" />
  <view class="main">
   <view class="toper">

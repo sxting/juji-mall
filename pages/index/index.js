@@ -174,7 +174,6 @@ Page({
                                                     that.getIndexData();
                                                     var obj = {
                                                         providerId: res.id,
-                                                        type: '',
                                                         sortField: 'IDX',
                                                         sortOrder: 'ASC',
                                                         pageNo: that.data.pageNo,
@@ -268,7 +267,6 @@ Page({
                                 //根据位置查询附近精选
                                 var obj1 = {
                                     providerId: res.id,
-                                    type: '',
                                     sortField: 'IDX',
                                     sortOrder: 'ASC',
                                     pageNo: that.data.pageNo,
@@ -313,7 +311,6 @@ Page({
                                 that.getIndexData();
                                 var obj = {
                                     providerId: res.id,
-                                    type: '',
                                     sortField: 'IDX',
                                     sortOrder: 'ASC',
                                     pageNo: that.data.pageNo,
@@ -357,7 +354,6 @@ Page({
             this.setData({ pageNo: 1 });
             var obj = {
                 providerId: wx.getStorageSync('providerId'),
-                type: '',
                 sortField: 'IDX',
                 sortOrder: 'ASC',
                 pageNo: this.data.pageNo,
@@ -518,7 +514,6 @@ Page({
                     //根据位置查询附近精选
                     var obj = {
                         providerId: this.data.providerId,
-                        type: '',
                         sortField: 'IDX',
                         sortOrder: 'ASC',
                         pageNo: this.data.pageNo,
@@ -658,8 +653,6 @@ Page({
                 });
                 obj = {
                     providerId: this.data.providerId,
-                    // providerId: '1215422531428605',
-                    type: 'PRODUCT',
                     sortField: 'IDX',
                     sortOrder: 'ASC',
                     pageNo: this.data.pageNo,
@@ -675,7 +668,6 @@ Page({
                 });
                 obj = {
                     providerId: this.data.providerId,
-                    type: 'PRODUCT',
                     sortField: 'PRICE',
                     sortOrder: this.data.sortArray[Number(sortIndex) - 1],
                     pageNo: this.data.pageNo,
@@ -691,7 +683,6 @@ Page({
                 });
                 obj = {
                     providerId: this.data.providerId,
-                    type: 'PRODUCT',
                     sortField: 'DISTANCE',
                     sortOrder: this.data.sortArray[Number(sortIndex) - 1],
                     pageNo: this.data.pageNo,
@@ -707,7 +698,6 @@ Page({
                 });
                 obj = {
                     providerId: this.data.providerId,
-                    type: '',
                     sortField: 'SOLDNUM',
                     sortOrder: 'DESC',
                     pageNo: this.data.pageNo,
@@ -747,7 +737,6 @@ Page({
             console.log('page:' + p);
             let obj = {
                 providerId: that.data.providerId,
-                type: '',
                 sortField: that.data.sortField,
                 sortOrder: that.data.sortArray[Number(that.data.sortIndex) - 1],
                 pageNo: p,
@@ -794,7 +783,6 @@ Page({
             //根据位置查询附近精选
             var obj = {
                 providerId: that.data.providerId,
-                type: '',
                 sortField: 'IDX',
                 sortOrder: 'ASC',
                 pageNo: that.data.pageNo,
@@ -823,7 +811,6 @@ Page({
     //根据服务商id（providerId）获取首页轮播图地址和桔子换礼的推荐
     getIndexData: function() {
         service.getIndexData({
-            // providerId: this.data.providerId
             providerId: this.data.providerId,
             longitude: wx.getStorageSync('curLongitude'),
             latitude: wx.getStorageSync('curLatitude')
@@ -922,7 +909,6 @@ Page({
                 that.getIndexData();
                 var obj = {
                     providerId: res.id,
-                    type: '',
                     sortField: 'IDX',
                     sortOrder: 'ASC',
                     pageNo: that.data.pageNo,
@@ -938,7 +924,7 @@ Page({
     },
     callPhone: function() {
         wx.makePhoneCall({
-            phoneNumber: '4000011139',
+            phoneNumber: '4000011139'
         });
     },
     toNextDetail: function(e) {

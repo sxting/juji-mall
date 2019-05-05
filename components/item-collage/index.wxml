@@ -8,7 +8,7 @@
     <view class='price-infor clearfix'>
       <text class='fl'>{{format.toFix(resData.activityPrice)}}<text style="font-size:24rpx">元</text></text>
       <text class='fl original-price'>{{format.toFix(collageInforData.originalPrice)}}元</text>
-      <text>已拼{{collageInforData.soldNum}}件</text>
+      <text>已拼{{resData.participantQuantity}}件</text>
     </view>
     <!-- 各种情况判断  -->
     <view class='situation-box' wx:if="{{(orderStatus == 'IN_PROGRESS') || (orderStatus == 'FAIL') || (orderStatus == 'SUCCESS')}}">

@@ -5,9 +5,6 @@ import {ToastPannel} from 'components/toast/toast.js';
 App({
     ToastPannel,
     onLaunch: function(options) {
-        // var logs = wx.getStorageSync('logs') || []
-        // logs.unshift(Date.now())
-        // wx.setStorageSync('logs', logs)
         wx.showShareMenu({
             withShareTicket: true
         });
@@ -22,7 +19,6 @@ App({
                 }
             });
         }
-
     },
     onHide: function() {
         console.log('App Hide')
@@ -30,14 +26,11 @@ App({
     onShow: function(options) {
         console.log(options);
         wx.setStorageSync('scene', options.scene);
-
         const updateManager = wx.getUpdateManager()
-
         updateManager.onCheckForUpdate(function(res) {
             // 请求完新版本信息的回调
             console.log(res.hasUpdate)
         })
-
         updateManager.onUpdateReady(function() {
             wx.showModal({
                 title: '更新提示',
@@ -50,20 +43,8 @@ App({
                 }
             })
         })
-
         updateManager.onUpdateFailed(function() {
             // 新版本下载失败
-        })
-    },
-    getMyInfo: function() {
-        service.getMyInfo().subscribe({
-            next: res => {
-                if (res.name) {
-                    this.globalData.userInfo = res;
-                }
-            },
-            // error: err => errDialog(err),
-            complete: () => wx.hideToast()
         })
     },
     globalData: {

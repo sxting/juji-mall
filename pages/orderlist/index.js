@@ -4,6 +4,10 @@ import { errDialog, loading } from '../../utils/util';
 var app = getApp();
 Page({
     data: {
+        nvabarData: {
+            showCapsule: 1, //是否显示左上角图标   1表示显示    0表示不显示
+            title: '我的订单', //导航栏 中间的标题
+        },
         tablist: [{ name: '全部', status: 'ALL' }, { name: '待付款', status: 'CREATED' }, { name: '待使用', status: 'PAID' }, { name: '待评价', status: 'CONSUME' }],
         curTabIndex: 0,
         constant: constant,

@@ -3,5 +3,8 @@
     "enablePullDownRefresh": true,
     "backgroundColor": "#FFDC00",
     "backgroundColorTop": "#FFDC00",
-    "backgroundColorBottom" : "#F6F6F6"
+    "backgroundColorBottom" : "#F6F6F6",
+    "usingComponents": {
+    "nav-bar": "/components/navbar/index"
+  }
 }

@@ -5,6 +5,10 @@ var app = getApp();
 var timer = null;
 Page({
   data: {
+    nvabarData: {
+        showCapsule: 1, //是否显示左上角图标   1表示显示    0表示不显示
+        title: '订单详情', //导航栏 中间的标题
+    },
     orderId:'',
     orderInfo: {},
     amount: 0,
@@ -23,12 +27,6 @@ Page({
     wx.hideShareMenu();
     this.getData(options.id);
     this.setData({orderId: options.id});
-  },
-  toComDetail:function(e){
-    // var id = e.currentTarget.dataset['id'];
-    // if(this.data.orderInfo.orderBizType=='SPLICED'){
-    //   wx.navigateTo({url: "/pages/comDetail/index?id=" + id});
-    // }
   },
   toComment: function(e) {
     var id = e.currentTarget.dataset['id'];

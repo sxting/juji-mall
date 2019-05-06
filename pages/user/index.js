@@ -4,6 +4,10 @@ import { constant } from '../../utils/constant';
 var app = getApp();
 Page({
     data: {
+        nvabarData: {
+            showCapsule: 0, //是否显示左上角图标   1表示显示    0表示不显示
+            title: '我 的', //导航栏 中间的标题
+        },
         nickName: '***',
         avatar: '',
         phoneNum: '',
@@ -18,7 +22,6 @@ Page({
         wx.navigateTo({ url: page });
     },
     onLoad: function() {
-        wx.setNavigationBarTitle({ title: '我 的' });
         this.getInfo();
     },
     getInfo: function() {

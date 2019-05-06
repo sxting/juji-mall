@@ -1,4 +1,5 @@
 <wxs module="filter" src="../../utils/numFr.wxs"></wxs>
+<nav-bar navbar-data='{{nvabarData}}'></nav-bar>
 <view wx:if="{{showPageLoading}}" class="pageLoading">
   <image src="../../images/pageLoading.gif" class="pageLoadingImg"></image>
   <view class="pageLoadingTip" style="color:#666666;font-size: 30rpx;">桔美好生活，集好店优惠</view>

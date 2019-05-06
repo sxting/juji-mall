@@ -4,6 +4,10 @@ import { service } from '../../service';
 var app = getApp();
 Page({
     data: {
+        nvabarData: {
+            showCapsule: 0, //是否显示左上角图标   1表示显示    0表示不显示
+            title: '桔 集', //导航栏 中间的标题
+        },
         locationPcode: '',
         locationCode: '',
         locationName: '',
@@ -373,30 +377,30 @@ Page({
                 console.log('selectCityName: ' + wx.getStorageSync('selectCityName'));
                 //此处应该判断用户有没有再次更换城市 如果没有更换城市不再次查询
                 // wx.setStorageSync('locationCode', wx.getStorageSync('selectCode'));
-              if (this.data.locationCode == wx.getStorageSync('selectCode')) {
-                console.log('没有查询且返回了');
-                return;
-              } else {
-                this.setData({
-                    showPageLoading: true,
-                    sortIndex: 1,
-                    pageNo: 1,
-                    pullUpFlag: true,
-                    sortArray: ['ASC', 'ASC', 'ASC', 'DESC'],
-                    locationCode: wx.getStorageSync('selectCode'),
-                    locationPcode: wx.getStorageSync('selectPcode'),
-                    locationName: wx.getStorageSync('selectCityName')
-                });
-                console.log('------------pullUpFlag-------------');
-                console.log(this.data.pullUpFlag);
-                if (this.data.isFirstShow) {
-                    this.setData({
-                        isFirstShow: false
-                    })
+                if (this.data.locationCode == wx.getStorageSync('selectCode')) {
+                    console.log('没有查询且返回了');
                     return;
+                } else {
+                    this.setData({
+                        showPageLoading: true,
+                        sortIndex: 1,
+                        pageNo: 1,
+                        pullUpFlag: true,
+                        sortArray: ['ASC', 'ASC', 'ASC', 'DESC'],
+                        locationCode: wx.getStorageSync('selectCode'),
+                        locationPcode: wx.getStorageSync('selectPcode'),
+                        locationName: wx.getStorageSync('selectCityName')
+                    });
+                    console.log('------------pullUpFlag-------------');
+                    console.log(this.data.pullUpFlag);
+                    if (this.data.isFirstShow) {
+                        this.setData({
+                            isFirstShow: false
+                        })
+                        return;
+                    }
+                    this.getDataByCity(); //获取所选城市的服务商Id
                 }
-                this.getDataByCity(); //获取所选城市的服务商Id
-              }
             } else {
                 console.log('用户使用定位城市：' + this.data.locationName);
                 if (this.data.isFirstShow) {

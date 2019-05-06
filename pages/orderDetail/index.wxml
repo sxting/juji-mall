@@ -1,4 +1,5 @@
 <wxs src="../../utils/numFr.wxs" module="format" />
+<nav-bar navbar-data='{{nvabarData}}'></nav-bar>
 <view class="main">
     <view class="orderInfo1 p10">
         <view class="ub ub-ac info" wx:for="{{orderInfo.orderItemList}}" wx:key="{{index}}" data-id="{{item.productId}}" bindtap="toComDetail">

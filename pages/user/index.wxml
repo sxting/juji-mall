@@ -1,3 +1,4 @@
+<nav-bar navbar-data='{{nvabarData}}'></nav-bar>
 <view class="wrap">
   <view class="toper">
     <view class="bgg">

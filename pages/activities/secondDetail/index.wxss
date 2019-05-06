@@ -25,7 +25,7 @@ page { height: 100%; }
 .secondInfo .progress .t{font-size: 26rpx;color: #FFFFFF;}
 .clock{width: 28rpx;height: 27rpx;display:block;vertical-align:middle;margin-right: 14rpx;}
 .secondInfo .progress .b{background: #CE1301;width: 400rpx;height: 26rpx;border-radius: 20rpx;margin-top: 20rpx;}
-.secondInfo .progress .b .left{color: #E83221;background-color: #FDF2E3;min-width: 180rpx;border-radius: 20rpx;font-size: 20rpx;height: 26rpx;font-weight: bold;padding-left: 20rpx;line-height: 26rpx;}
+.secondInfo .progress .b .left{color: #E83221;background-color: #FDF2E3;min-width: 120rpx;border-radius: 20rpx;font-size: 20rpx;height: 26rpx;font-weight: bold;padding-left: 20rpx;line-height: 26rpx;}
 .secondInfo .progress .b .number{width: 80rpx;color: #fff;font-size: 20rpx;line-height: 26rpx;text-align: center;font-weight: bold;}
 
 .statusBg{width: 250rpx;height: 115rpx;position: absolute;top: 0;right: 0;display: block;z-index: 0}

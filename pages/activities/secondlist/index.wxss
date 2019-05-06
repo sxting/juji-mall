@@ -44,7 +44,7 @@ page{height:100%;background-color:#fff;}
 
 .time{margin-top: 10rpx;}
 .time .b{background: #FDF2E3;width: 400rpx;height: 24rpx;border-radius: 20rpx;}
-.time .b .left{color: #ffffff;background: #E83221;min-width: 180rpx;border-radius: 20rpx;font-size: 20rpx;height: 26rpx;font-weight: bold;padding-left: 20rpx;line-height: 26rpx;}
+.time .b .left{color: #ffffff;background: #E83221;min-width: 120rpx;border-radius: 20rpx;font-size: 20rpx;height: 26rpx;font-weight: bold;padding-left: 20rpx;line-height: 26rpx;}
 .time .b .number{width: 80rpx;color: #333;font-size: 20rpx;line-height: 26rpx;text-align: center;font-weight: bold;}
 .time .right{color: #999;font-size: 24rpx;height: 26rpx;line-height: 26rpx;}
 .restTime{margin-left: 30rpx;}

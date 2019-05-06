@@ -15,7 +15,8 @@ Page({
     isShowNodata: false,
     pageNo: 1,
     providerId: '',
-    ifBottom: false
+    ifBottom: false,
+    isLeft:false
   },
 
   /**
@@ -54,7 +55,10 @@ Page({
   /**
    * 跳转我的砍价或者我的拼团页面
    */
-  switchToOrderListPage: function(e){
+  toMyActivity: function(e){
+    if(!this.data.isLeft){
+      this.setData({isLeft:true});return;
+    }
     wx.navigateTo({
       url: '/pages/activities/myActivity/index?type=' + e.currentTarget.dataset.type
     });

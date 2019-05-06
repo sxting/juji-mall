@@ -79,7 +79,7 @@
                 <view class="goText" style="top:60rpx;left:248rpx;" wx:else>桔美好生活</view>
                 <view class="goText" style="top:120rpx;left:318rpx;" wx:if="{{point>0}}">吃喝玩乐随你~</view>
                 <view class="goText" style="top:120rpx;left:318rpx;" wx:else>集好店优惠</view>
-              <image src="../../images/toExchange.jpg" style="width:690rpx;height: 160rpx;border-radius:10rpx;" bindtap="goIndex">
+              <image src="../../images/toExchange.jpg" class="toExchange" style="width:690rpx;height: 160rpx;border-radius:10rpx;" bindtap="goIndex">
               </image>
             </view>
 
@@ -92,7 +92,7 @@
         <view class="pubu" wx:if="{{recommendList.length>0}}">
           <view class="pubuItem">
             <view class="cardWrap padr10">
-              <view class="card" wx:for="{{recommendList}}" wx:key="{{index}}" bindtap="toComDetail" data-id="{{item.productId}}" data-storeid="{{item.nearStore.id}}" wx:if="{{index%2 == 0}}">
+              <view class="card toExchange" wx:for="{{recommendList}}" wx:key="{{index}}" bindtap="toComDetail" data-id="{{item.productId}}" data-storeid="{{item.nearStore.id}}" wx:if="{{index%2 == 0}}">
                 <image src="https://upic.juniuo.com/file/picture/{{item.picId}}/resize_330_185/mode_filt/format_jpg/quality_70" lazy-load="true" mode="aspectFit" class="plimg"></image>
                 <view class="pubuname">{{item.productName}}</view>
                 <view class="pububox" style="margin-top:10rpx;">
@@ -115,7 +115,7 @@
 
           <view class="pubuItem">
             <view class="cardWrap padl10">
-              <view class="card" wx:for="{{recommendList}}" wx:key="{{index}}" bindtap="toComDetail" data-id="{{item.productId}}" data-storeid="{{item.nearStore.id}}" wx:if="{{index%2!=0}}">
+              <view class="card toExchange" wx:for="{{recommendList}}" wx:key="{{index}}" bindtap="toComDetail" data-id="{{item.productId}}" data-storeid="{{item.nearStore.id}}" wx:if="{{index%2!=0}}">
                 <image src="https://upic.juniuo.com/file/picture/{{item.picId}}/resize_330_185/mode_filt/format_jpg/quality_70" lazy-load="true" mode="aspectFit" class="plimg"></image>
                 <view class="pubuname">{{item.productName}}</view>
                 <view class="pububox" style="margin-top:10rpx;">

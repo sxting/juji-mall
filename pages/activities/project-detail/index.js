@@ -43,7 +43,6 @@ Page({
     showCom: false,
   },
   onLoad: function (options) {
-    wx.hideShareMenu();
     if (options.shared) {
       this.setData({ shared: options.shared });
     }

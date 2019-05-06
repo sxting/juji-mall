@@ -22,7 +22,8 @@ Page({
     balance: 0,
     givingMoney: 0,
     aMoney:0, //储值金额 不算赠送
-    zhuheAmount: 0
+    zhuheAmount: 0,
+    providerId: ''
   },
 
   /**
@@ -80,6 +81,7 @@ Page({
                 latitude: res.data.data.store.lat,
                longitude: res.data.data.store.lng
               }
+             this.setData({ providerId: res.data.data.agentId });
             //  /recommend/hot.json
             wx.request({
               url: constant.apiUrl+'/recommend/hot.json',

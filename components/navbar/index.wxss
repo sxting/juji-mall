@@ -2,7 +2,7 @@
 .nav-wrap { position: fixed; width: 100%; top: 0; background: #ffffff; color: #000; z-index: 999; }
 /* 标题要居中 */
 .nav-bar{display: flex; justify-content: space-around;flex-direction: column}
-.nav-title { position: absolute; text-align: center; max-width: 400rpx; top: 0; left: 0; right: 0; bottom: 0; margin: auto; font-size: 32rpx; color: #2b2b2b;font-weight: 600;}
+.nav-title { position: absolute; text-align: center; max-width: 400rpx; top: 0; left: 0; right: 0; bottom: 0; margin: auto; font-size: 32rpx; color: #2b2b2b;font-weight: 400;}
 .nav-capsule { display: flex; align-items: center; margin-left: 30rpx; width: 140rpx; justify-content: space-between; height: 100%; }
 .navbar-v-line { width: 1px; height: 32rpx; background-color: #e5e5e5; }
 .back-pre, .back-home { width: 32rpx; height: 36rpx; margin-top: 4rpx; padding: 10rpx; }

@@ -1,22 +1,18 @@
 <wxs module="filter" src="../../utils/numFr.wxs"></wxs>
-<nav-bar navbar-data='{{nvabarData}}'></nav-bar>
 <view wx:if="{{showPageLoading}}" class="pageLoading">
   <image src="/images/pageLoading.gif" class="pageLoadingImg"></image>
   <view class="pageLoadingTip" style="color:#666666;font-size: 30rpx;">桔美好生活，集好店优惠</view>
 </view>
 <view class="{{(slideShowList.length>0||recommendPage.length>0)?'':'homeTabPage'}} {{isShowNewerGet?'noscroll':''}}" wx:else>
 
-  <view wx:if="{{slideShowList.length>0||pointProductList.length>0||recommendPage.length>0}}">
-    <view class="toperWrap {{pointProductList.length>0?'pb30':''}}">
-      <view class="bgBar"></view>
-      <image src="/images/bgy.png" class="bgy"></image>
+  <view wx:if="content {{slideShowList.length>0||pointProductList.length>0||recommendPage.length>0}}">
+    <view class="toperWrap">
       <view class="toper">
-        <swiper autoplay="{{autoplay}}" indicator-dots="true" indicator-color="{{dotsColor}}" indicator-active-color="{{dotsActiveColor}}" circular>
+        <swiper autoplay="{{autoplay}}" circular>
           <swiper-item wx:for="{{slideShowList}}" wx:key="unique">
-            <image src="{{item.imgId?'https://upic.juniuo.com/file/picture/'+item.imgId+'/resize_690_340/mode_filt/format_jpg/quality_0':''}}" data-link="{{item.link}}" bindtap="onTapBanner" class="slide-image" mode="scaleToFill"></image>
+            <image src="{{item.imgId?'https://upic.juniuo.com/file/picture/'+item.imgId+'/resize_690_340/mode_filt/format_jpg/quality_0':''}}" data-link="{{item.link}}" bindtap="onTapBanner" class="slide-image" mode="scaleToFill" lazy-load="true"></image>
           </swiper-item>
         </swiper>
-
         <view class="locationWrap" bindtap="toCityList">
           <text class="locationText">{{locationName}}</text>
           <image style="width:20rpx;height:14rpx;margin-left:12rpx;margin-top:8rpx;" lazy-load="true" src="/images/sort-down.png" wx:if="{{locationName}}"></image>
@@ -24,24 +20,24 @@
       </view>
     </view>
 
-    <view class="menulist ub ub-ac ub-pj">
-      <view class="menuitem ub ub-ver ub-ac ub-pc" bindtap="toPath" data-page="/pages/juzihl/index">
-        <image class="icon_home" src="/images/icon_home1.png" mode="aspectFit"></image>
-        <view class="tx-c">桔子换礼</view>
-      </view>
-      <view class="menuitem ub ub-ver ub-ac ub-pc" bindtap="toPath" data-page="/pages/activities/project-list/index?sceneType=SPLICED">
-        <image class="icon_home" src="/images/icon_home2.png" mode="aspectFit"></image>
-        <view class="tx-c">特价拼团</view>
-      </view>
-      <view class="menuitem ub ub-ver ub-ac ub-pc" bindtap="toPath" data-page="/pages/activities/project-list/index?sceneType=BARGAIN">
-        <image class="icon_home" src="/images/icon_home3.png" mode="aspectFit"></image>
-        <view class="tx-c">超值砍价</view>
-      </view>
-      <view class="menuitem ub ub-ver ub-ac ub-pc" bindtap="toPath" data-page="/pages/activities/secondlist/index">
-        <image class="icon_home" src="/images/icon_home4.png" mode="aspectFit"></image>
-        <view class="tx-c">限时秒杀</view>
-      </view>
-    </view>
+    <cover-view class="menulist ub ub-ac ub-pj">
+      <cover-view class="menuitem ub ub-ver ub-ac ub-pc" bindtap="toPath" data-page="/pages/juzihl/index">
+        <cover-image class="icon_home" src="/images/icon_home1.png" mode="aspectFit"></cover-image>
+        <cover-view class="tx-c">桔子换礼</cover-view>
+      </cover-view>
+      <cover-view class="menuitem ub ub-ver ub-ac ub-pc" bindtap="toPath" data-page="/pages/activities/project-list/index?sceneType=SPLICED">
+        <cover-image class="icon_home" src="/images/icon_home2.png" mode="aspectFit"></cover-image>
+        <cover-view class="tx-c">特价拼团</cover-view>
+      </cover-view>
+      <cover-view class="menuitem ub ub-ver ub-ac ub-pc" bindtap="toPath" data-page="/pages/activities/project-list/index?sceneType=BARGAIN">
+        <cover-image class="icon_home" src="/images/icon_home3.png" mode="aspectFit"></cover-image>
+        <cover-view class="tx-c">超值砍价</cover-view>
+      </cover-view>
+      <cover-view class="menuitem ub ub-ver ub-ac ub-pc" bindtap="toPath" data-page="/pages/activities/secondlist/index">
+        <cover-image class="icon_home" src="/images/icon_home4.png" mode="aspectFit"></cover-image>
+        <cover-view class="tx-c">好店礼券</cover-view>
+      </cover-view>
+    </cover-view>
 
     <!-- 桔子球 -->
     <view class="juziqiu" bindtap="onTapJuziqiu">
@@ -53,11 +49,35 @@
       </view>
     </view>
 
-    <view class="juzihl-wrap" wx:if="{{recommendPage.length>0}}" style="{{pointProductList.length>0?'padding-top:20rpx;':''}}padding-bottom:30rpx">
-      <view class="ub ub-fe">
-        <view class="mtitle">精选推荐</view>
-        <view class="subtitle" style="margin-top:10rpx;">精选好物，先到先得</view>
+    <view style="background-image: linear-gradient(-180deg, #FFFFFF 0%, #FFF4EE 62%);padding:188rpx 30rpx 40rpx 30rpx;" wx:if="{{pointProductList.length>0}}">
+      <view class="mtitle">限时秒杀</view>
+      <view class="productBox">
+        <view class="productDiv" wx:for="{{pointProductList}}" wx:key="unique" bindtap="toComDetail" data-id="{{item.productId}}" data-storeid="{{item.nearStore.id}}" wx:if="{{index%2==0}}">
+          <image src="https://upic.juniuo.com/file/picture/{{item.picId}}/resize_0_0/mode_fill" lazy-load="true" mode="aspectFill" class="plimg"></image>
+          <view class="pubuname">{{item.productName}}</view>
+          <view class="pubuprice">{{filter.toFix(item.price)}}<text style="font-size:24rpx">元</text></view>
+        </view>
       </view>
+    </view>
+
+    <view style="background:#fff;padding:30rpx 30rpx 40rpx 30rpx;" wx:if="{{pointProductList.length>0}}">
+      <view class="mtitle">新品尝鲜</view>
+      <view class="pubu">
+        <view class="pubuItem" wx:for="{{pointProductList}}" wx:key="unique" bindtap="toComDetail" data-id="{{item.productId}}" data-storeid="{{item.nearStore.id}}" wx:if="{{index%2==0}}">
+          <image src="https://upic.juniuo.com/file/picture/{{item.picId}}/resize_0_0/mode_fill" lazy-load="true" mode="aspectFill" class="plimg"></image>
+          <view class="pubuname">{{item.productName}}</view>
+          <view class="pubuprice">{{filter.toFix(item.price)}}<text style="font-size:24rpx">元</text></view>
+        </view>
+        <view class="pubuItem" wx:for="{{pointProductList}}" wx:key="unique" bindtap="toComDetail" data-id="{{item.productId}}" data-storeid="{{item.nearStore.id}}" wx:if="{{index%2!=0}}">
+          <image src="https://upic.juniuo.com/file/picture/{{item.picId}}/resize_0_0/mode_fill" lazy-load="true" mode="aspectFill" class="plimg"></image>
+          <view class="pubuname">{{item.productName}}</view>
+          <view class="pubuprice">{{filter.toFix(item.price)}}<text style="font-size:24rpx">元</text></view>
+        </view>
+      </view>
+    </view>
+
+    <view class="juzihl-wrap" wx:if="{{recommendPage.length>0}}" style="{{pointProductList.length>0?'padding-top:20rpx;':''}}padding-bottom:30rpx">
+      <view class="mtitle">精选推荐</view>
       <view class="labels-wrap">
         <view class="label {{sortIndex==1?'label-active':''}}" data-label="1" bindtap="toggleLabel">
           综合</view>

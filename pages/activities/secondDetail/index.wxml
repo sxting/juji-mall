@@ -1,4 +1,5 @@
 <wxs module="filter" src="../../../utils/numFr.wxs"></wxs>
+<nav-bar navbar-data='{{nvabarData}}'></nav-bar>
 <view class="container" wx:if="{{isShowData}}">
     <view class="swiper-wrap">
         <swiper class="img-wrap" autoplay="true" interval="3000">

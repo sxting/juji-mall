@@ -4,6 +4,7 @@ import { errDialog, loading } from '../../../utils/util';
 var app = getApp();
 Page({
     data: {
+      nvabarData: {showCapsule: 1,title: '我的收入'},
       tablist: [{ name: '本日', type: '1' }, { name: '本周', type: '2' }, { name: '本月', type: '3' }, { name: '累计', type: '4' }],
       statuslist: [{ name: '全部', status: '' }, { name: '管理佣金', status: 'DISTRIBUTOR_MANAGER_REBATE' }, { name: '购物返利', status: 'DISTRIBUTOR_SALES_REBATE' }],
       curTabIndex: 0,

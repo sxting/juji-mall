@@ -1,6 +1,7 @@
 {
   "usingComponents": {
-    "register": "../../components/register/index"
+    "register": "/components/register/index",
+    "nav-bar": "/components/navbar/index"
   },
   "enablePullDownRefresh": true
 }

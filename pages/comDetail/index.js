@@ -5,6 +5,7 @@ import { errDialog, loading } from '../../utils/util';
 var app = getApp();
 Page({
   data: {
+    nvabarData: {showCapsule: 1,title: '商品详情'},
     productId: '',
     storeId: '',
     showPics: [],

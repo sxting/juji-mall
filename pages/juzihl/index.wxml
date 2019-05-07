@@ -1,4 +1,5 @@
 <wxs module="filter" src="../../utils/numFr.wxs"></wxs>
+<nav-bar navbar-data='{{nvabarData}}'></nav-bar>
 <view>
   <view class="juzihl-wrap">
     <view style="display:flex;justify-content: space-between;align-item:center;">

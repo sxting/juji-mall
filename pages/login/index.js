@@ -3,6 +3,7 @@ import { service } from '../../service';
 var app = getApp();
 Page({
     data: {
+        nvabarData: {showCapsule: 0,title: '桔 集',isIndex:1},
         inviteCode: '',
         openId: '',
         showPageLoading: true,

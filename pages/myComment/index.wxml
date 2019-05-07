@@ -1,4 +1,5 @@
 <wxs src="../../utils/numFr.wxs" module="format" />
+<nav-bar navbar-data='{{nvabarData}}'></nav-bar>
 <view class="main">
     <view class="item" wx:for="{{commentlist}}" wx:key="{{index}}" data-comid="{{item.id}}" hidden="{{isShowNodata}}">
         <view class="nickMsg ub ub-ac">

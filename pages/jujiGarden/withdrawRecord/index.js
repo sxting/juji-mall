@@ -6,6 +6,7 @@ var app = getApp();
 
 Page({
   data: {
+    nvabarData: {showCapsule: 1,title: '提现明细'},
     recordlist: [],
     totalSettlementAmount: 0,
     pageNo: 1,
@@ -19,7 +20,6 @@ Page({
 
   onLoad: function() {
     let self = this;
-    wx.setNavigationBarTitle({ title: '提现明细' });
     getSettlementList.call(self);//get提现摘要列表
     getCardData.call(self);
   },

@@ -1,4 +1,5 @@
 <wxs src="../../../utils/numFr.wxs" module="format" />
+<nav-bar navbar-data='{{nvabarData}}'></nav-bar>
 <view class="main {{isShowModal?'':'ovh'}}">
   <view class="item" wx:for="{{recommendlist}}" wx:key="{{index}}" hidden="{{isShowNodata}}">
     <view class="info ub ub-ac plr15">

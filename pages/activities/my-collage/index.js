@@ -5,6 +5,7 @@ import { errDialog, loading } from '../../../utils/util';
 
 Page({
     data: {
+        nvabarData: {showCapsule: 1,title: '项目详情'},
         portraitUrl: '/images/unkonw-icon.png',
         headPortraitList: ['', ''], //拼团中 参团的头像
         restHour: '00',

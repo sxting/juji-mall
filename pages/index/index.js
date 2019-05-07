@@ -4,10 +4,7 @@ import { service } from '../../service';
 var app = getApp();
 Page({
     data: {
-        nvabarData: {
-            showCapsule: 0, //是否显示左上角图标   1表示显示    0表示不显示
-            title: '桔 集', //导航栏 中间的标题
-        },
+        nvabarData: {isIndex:1,showCapsule: 0,title: '桔 集'},
         locationPcode: '',
         locationCode: '',
         locationName: '',

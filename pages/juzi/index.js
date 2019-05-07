@@ -1,13 +1,8 @@
-import {
-  service
-} from '../../service';
+import {service} from '../../service';
 import { errDialog, loading } from '../../utils/util'
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
+    nvabarData: {showCapsule: 0,title: '',isIndex:1},
     showjuzigz: false,
     currentPointObj: {},
     canSignIn: true,

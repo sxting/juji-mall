@@ -1,4 +1,5 @@
 <wxs src="../../../utils/numFr.wxs" module="format" />
+<nav-bar navbar-data='{{nvabarData}}'></nav-bar>
 <view class="main">
     <view class="toper">
         <view class='toper-box'>

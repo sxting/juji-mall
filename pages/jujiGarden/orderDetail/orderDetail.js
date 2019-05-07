@@ -3,12 +3,12 @@ import { constant } from '../../../utils/constant';
 import { errDialog, loading } from '../../../utils/util';
 Page({
   data: {
+    nvabarData: {showCapsule: 1,title: '订单详情'},
     productUrl: '/images/newerGetBg.png',
     phone: '15210921650',
     orderInfo:{}
   },
   onLoad: function (options) {
-    wx.setNavigationBarTitle({title: '订单详情'});
     this.getData(options.id);
   },
   onTelClick:function() {

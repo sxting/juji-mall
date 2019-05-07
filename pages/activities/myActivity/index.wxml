@@ -1,4 +1,5 @@
 <wxs src="../../../utils/numFr.wxs" module="format" />
+<nav-bar navbar-data='{{nvabarData}}'></nav-bar>
 <view class="fullScreen">
     <view class="main p10">
         <view class="orderItem" wx:for="{{orderlist}}" wx:for-item="item" wx:key="unique">

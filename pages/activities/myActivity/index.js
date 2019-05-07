@@ -5,6 +5,7 @@ import { activitiesService } from '../shared/service.js';
 var app = getApp();
 Page({
     data: {
+        nvabarData: {showCapsule: 1,title: ''},
         constant: constant,
         isShowNodata: false,
         orderlist: [],
@@ -19,7 +20,8 @@ Page({
     },
     onLoad: function(options) {
         wx.hideShareMenu();
-        wx.setNavigationBarTitle({ title: options.type == 'SPLICED' ? '我的拼团' : '我的砍价' });
+        var title = options.type == 'SPLICED' ? '我的拼团' : '我的砍价';
+        this.setData({nvabarData:{showCapsule: 1,title: title}})
         this.setData({ activityTxt: options.type == 'SPLICED' ? '拼团' : '砍价' });
         this.setData({ type: options.type });
         this.getData(options.type, 1)

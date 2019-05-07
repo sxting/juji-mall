@@ -1,4 +1,5 @@
 <wxs src="../../../utils/numFr.wxs" module="format" />
+<nav-bar navbar-data='{{nvabarData}}'></nav-bar>
 <view class="fullScreen ub ub-ver w_100">
     <view class="tablist w_100">
         <view class="tablist ub ub-ac ub-pj1">

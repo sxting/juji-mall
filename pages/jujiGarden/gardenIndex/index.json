@@ -3,5 +3,7 @@
 	"backgroundColor": "#FFDC00",
 	"backgroundColorTop": "#FFDC00",
 	"backgroundColorBottom" : "#FFFFFF",
-	"usingComponents": {}
+    "usingComponents": {
+    "nav-bar": "/components/navbar/index"
+  }
 }

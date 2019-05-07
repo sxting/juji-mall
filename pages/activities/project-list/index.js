@@ -10,6 +10,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    nvabarData: {showCapsule: 1,title: ''},
     sceneType: 'SPLICED',//查看进入的是什么场景类型  BARGAIN  SPLICED
     productList: [],
     isShowNodata: false,
@@ -24,16 +25,14 @@ Page({
    */
   onLoad: function (options) {
     let self = this;
-    wx.setNavigationBarTitle({ 
-      title: options.sceneType == 'SPLICED'? '特价拼团': '超值砍价'
-    });
+    var title = options.sceneType == 'SPLICED' ? '特价拼团' : '超值砍价';
+    this.setData({nvabarData:{showCapsule: 1,title: title}})
     this.setData({
       sceneType: options.sceneType,
       providerId: wx.getStorageSync('providerId'),
     })
     console.log(this.data.providerId);
     console.log(wx.getStorageSync('providerId'));
-
     getActivityList.call(self);//获取活动列表
   },
 

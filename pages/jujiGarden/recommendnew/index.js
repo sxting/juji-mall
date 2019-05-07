@@ -5,6 +5,7 @@ import { errDialog, loading } from '../../../utils/util';
 var app = getApp();
 Page({
     data: {
+        nvabarData: {showCapsule: 1,title: '邀新素材'},
         constant: constant,
         isShowModal: true,
         isTransparnet:false,
@@ -24,7 +25,6 @@ Page({
     onLoad: function() {
         new app.ToastPannel();
         wx.hideShareMenu();
-        wx.setNavigationBarTitle({ title: '邀新素材' });
     },
     previewImage: function(event) {
         var src = event.currentTarget.dataset.src;

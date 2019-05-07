@@ -7,6 +7,7 @@ var timeVal;
 
 Page({
     data: {
+        nvabarData: {showCapsule: 0,title: '桔 园',isIndex:1},
         juminNumList: [], //队员人数
         hadNumber: 0,
         storeId: '',
@@ -28,7 +29,6 @@ Page({
         isDisabled:false,//按钮是否禁用
     },
     onLoad: function(options) {
-        wx.setNavigationBarTitle({ title: '桔 园' });
         if (options.openid) {
             console.log('分享点进来');
             this.setData({

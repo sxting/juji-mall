@@ -5,6 +5,7 @@ import { errDialog, loading } from '../../../utils/util';
 var app = getApp();
 Page({
     data: {
+        nvabarData: {showCapsule: 1,title: '商品推荐'},
         recommendlist: [],
         constant: constant,
         isShowNodata: false,
@@ -24,7 +25,6 @@ Page({
     onLoad: function(options) {
         new app.ToastPannel();
         wx.hideShareMenu();
-        wx.setNavigationBarTitle({ title: '商品推荐' });
         if (options.productid) {
             this.setData({ productId: options.productid });
         }

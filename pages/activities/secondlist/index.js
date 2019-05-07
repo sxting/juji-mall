@@ -5,6 +5,7 @@ import { activitiesService } from '../shared/service.js'
 
 Page({
     data: {
+        nvabarData: {showCapsule: 1,title: '限时秒杀'},
         providerId: '',
         productList1: [],
         productList2: [],

@@ -5,6 +5,7 @@ import { jugardenService } from '../shared/service.js'
 
 Page({
   data: {
+    nvabarData: {showCapsule: 1,title: '提现详情'},
     settlementDetailData: {},//提现详情信息
     transferId: '',
     status: '',
@@ -16,8 +17,6 @@ Page({
     this.setData({
       transferId: options.transferId ? options.transferId : ''
     })
-    console.log(this.data.transferId);
-    wx.setNavigationBarTitle({ title: '提现详情' });
     getSettlementDetail.call(self);//get提现详情信息
   },
 

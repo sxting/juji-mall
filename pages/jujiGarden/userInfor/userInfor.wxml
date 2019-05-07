@@ -1,4 +1,4 @@
-<!--pages/jujiGarden/userInfor/userInfor.wxml-->
+<nav-bar navbar-data='{{nvabarData}}'></nav-bar>
 <view class='page'>
   <view class='list-box'>
     <view class='list' wx:for='{{userListInfor}}' wx:key="item">
@@ -12,7 +12,4 @@
         </view>
     </view>
   </view>
-</view>
-
-
- 
+</view> 

@@ -1,6 +1,7 @@
 {
   "usingComponents": {
-    "kanjia": "../../../components/item-kanjia/index",
-    "item-collage": "../../../components/item-collage/index"
+    "kanjia": "/components/item-kanjia/index",
+    "item-collage": "/components/item-collage/index",
+    "nav-bar": "/components/navbar/index"
   }
 }

@@ -7,6 +7,7 @@ import {
 var app = getApp();
 Page({
   data: {
+    nvabarData: {showCapsule: 1,title: '用户评价'},
     commentlist: [],
     pageNo: 1,
     pageSize: 10,
@@ -95,9 +96,6 @@ Page({
   },
 
   onLoad: function(options) {
-    wx.setNavigationBarTitle({
-      title: '用户评价',
-    });
     wx.hideShareMenu();
     console.log(options);
     if (options.id) {

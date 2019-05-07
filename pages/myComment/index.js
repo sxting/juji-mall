@@ -4,6 +4,7 @@ import {errDialog,loading} from '../../utils/util';
 var app = getApp();
 Page({
     data: {
+        nvabarData: {showCapsule: 1,title: '我的评价'},
         commentlist: [],
         constant: constant,
         isShowNodata: false,

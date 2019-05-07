@@ -94,8 +94,14 @@ Page({
                     });
                     wx.setStorageSync('curLatitude', res.latitude);
                     wx.setStorageSync('curLongitude', res.longitude);
+                  // wx.setStorageSync('curLatitude', '39.085964');
+                  // wx.setStorageSync('curLongitude', '117.18913');
                     console.log('--------位置调用成功--------');
                     resolve3(res);
+                    // resolve3({
+                    //   latitude: '39.085964',
+                    //   longitude: '117.18913'
+                    // });
                 },
                 fail: function(err) {
                     console.log('---------位置调用失败或是被拒绝--------');

@@ -1,7 +1,7 @@
 <wxs module="filter" src="../../utils/numFr.wxs"></wxs>
 <nav-bar navbar-data='{{nvabarData}}'></nav-bar>
 <view wx:if="{{showPageLoading}}" class="pageLoading">
-  <image src="../../images/pageLoading.gif" class="pageLoadingImg"></image>
+  <image src="/images/pageLoading.gif" class="pageLoadingImg"></image>
   <view class="pageLoadingTip" style="color:#666666;font-size: 30rpx;">桔美好生活，集好店优惠</view>
 </view>
 <view class="{{(slideShowList.length>0||recommendPage.length>0)?'':'homeTabPage'}} {{isShowNewerGet?'noscroll':''}}" wx:else>
@@ -9,7 +9,7 @@
   <view wx:if="{{slideShowList.length>0||pointProductList.length>0||recommendPage.length>0}}">
     <view class="toperWrap {{pointProductList.length>0?'pb30':''}}">
       <view class="bgBar"></view>
-      <image src="../../images/bgy.png" class="bgy"></image>
+      <image src="/images/bgy.png" class="bgy"></image>
       <view class="toper">
         <swiper autoplay="{{autoplay}}" indicator-dots="true" indicator-color="{{dotsColor}}" indicator-active-color="{{dotsActiveColor}}" circular>
           <swiper-item wx:for="{{slideShowList}}" wx:key="unique">
@@ -19,26 +19,26 @@
 
         <view class="locationWrap" bindtap="toCityList">
           <text class="locationText">{{locationName}}</text>
-          <image style="width:20rpx;height:14rpx;margin-left:12rpx;margin-top:8rpx;" lazy-load="true" src="../../images/sort-down.png" wx:if="{{locationName}}"></image>
+          <image style="width:20rpx;height:14rpx;margin-left:12rpx;margin-top:8rpx;" lazy-load="true" src="/images/sort-down.png" wx:if="{{locationName}}"></image>
         </view>
       </view>
     </view>
 
     <view class="menulist ub ub-ac ub-pj">
       <view class="menuitem ub ub-ver ub-ac ub-pc" bindtap="toPath" data-page="/pages/juzihl/index">
-        <image class="icon_home" src="../../images/icon_home1.png" mode="aspectFit"></image>
+        <image class="icon_home" src="/images/icon_home1.png" mode="aspectFit"></image>
         <view class="tx-c">桔子换礼</view>
       </view>
       <view class="menuitem ub ub-ver ub-ac ub-pc" bindtap="toPath" data-page="/pages/activities/project-list/index?sceneType=SPLICED">
-        <image class="icon_home" src="../../images/icon_home2.png" mode="aspectFit"></image>
+        <image class="icon_home" src="/images/icon_home2.png" mode="aspectFit"></image>
         <view class="tx-c">特价拼团</view>
       </view>
       <view class="menuitem ub ub-ver ub-ac ub-pc" bindtap="toPath" data-page="/pages/activities/project-list/index?sceneType=BARGAIN">
-        <image class="icon_home" src="../../images/icon_home3.png" mode="aspectFit"></image>
+        <image class="icon_home" src="/images/icon_home3.png" mode="aspectFit"></image>
         <view class="tx-c">超值砍价</view>
       </view>
       <view class="menuitem ub ub-ver ub-ac ub-pc" bindtap="toPath" data-page="/pages/activities/secondlist/index">
-        <image class="icon_home" src="../../images/icon_home4.png" mode="aspectFit"></image>
+        <image class="icon_home" src="/images/icon_home4.png" mode="aspectFit"></image>
         <view class="tx-c">限时秒杀</view>
       </view>
     </view>
@@ -49,7 +49,7 @@
         <text style="font-size: 30rpx;color: #151515;">{{filter.toFloor(pointBalance)}}</text>桔子</view>
       <view class="ub ub-ac ub-pc">
         <text style="font-size: 20rpx;color: #333333;">去赚取</text>
-        <image src="../../images/toPointList.png" style="width:12rpx;height:17rpx;margin-left:10rpx;"></image>
+        <image src="/images/toPointList.png" style="width:12rpx;height:17rpx;margin-left:10rpx;"></image>
       </view>
     </view>
 
@@ -63,15 +63,15 @@
           综合</view>
         <view class="label {{sortIndex==2?'label-active':''}}" data-label="2" bindtap="toggleLabel">
           价格
-          <image src="{{sortIndex==2?'../../images/sort_top_active.png':'../../images/sort_top.png'}}" class="xIcon {{sortIndex==2&&sortArray[sortIndex - 1]=='DESC'?'rotate':''}}" style="width:13rpx;height:18rpx;margin-left:10rpx;"></image>
+          <image src="{{sortIndex==2?'/images/sort_top_active.png':'/images/sort_top.png'}}" class="xIcon {{sortIndex==2&&sortArray[sortIndex - 1]=='DESC'?'rotate':''}}" style="width:13rpx;height:18rpx;margin-left:10rpx;"></image>
         </view>
         <view class="label {{sortIndex==3?'label-active':''}}" data-label="3" bindtap="toggleLabel">
           距离
-          <image src="{{sortIndex==3?'../../images/sort_top_active.png':'../../images/sort_top.png'}}" class="xIcon {{sortIndex==3&&sortArray[sortIndex - 1]=='DESC'?'rotate':''}}" style="width:13rpx;height:18rpx;margin-left:10rpx;"></image>
+          <image src="{{sortIndex==3?'/images/sort_top_active.png':'/images/sort_top.png'}}" class="xIcon {{sortIndex==3&&sortArray[sortIndex - 1]=='DESC'?'rotate':''}}" style="width:13rpx;height:18rpx;margin-left:10rpx;"></image>
         </view>
         <view class="label {{sortIndex==4?'label-active':''}}" data-label="4" bindtap="toggleLabel">
           销量
-          <image src="{{sortIndex==4?'../../images/label_xl_active.png':'../../images/label_xl.png'}}" style="width:15rpx;height:16rpx;margin-left:10rpx;"></image>
+          <image src="{{sortIndex==4?'/images/label_xl_active.png':'/images/label_xl.png'}}" style="width:15rpx;height:16rpx;margin-left:10rpx;"></image>
         </view>
       </view>
       <view class="jingxuanlist" wx:for="{{recommendPage}}" wx:for-index='index' wx:key="unique">
@@ -119,11 +119,11 @@
 
     <view class="phoneWrap" wx:if="{{!pullUpFlag}}">
       <view class="phoneView ub ub-ac" bindtap="callPhone">
-        <image src="../../images/logo_main.png" style="width:80rpx;height:80rpx;"></image>
+        <image src="/images/logo_main.png" style="width:80rpx;height:80rpx;"></image>
         <view class="phoneInner">
           <view>桔集-桔美好生活，集好店优惠</view>
           <view class="ub ub-ac" style="margin-top: 10rpx;">
-            <image src="../../images/dianhua.png" style="width:30rpx;height:26rpx;margin-right:10rpx;"></image>合作电话：400-001-1139</view>
+            <image src="/images/dianhua.png" style="width:30rpx;height:26rpx;margin-right:10rpx;"></image>合作电话：400-001-1139</view>
         </view>
       </view>
     </view>
@@ -132,7 +132,7 @@
 
   <view style="width:100%;height:100%;background:#ffffff;overflow:hidden;" wx:else>
 
-    <image src="../../images/city.png" style="width:240rpx;height:180rpx;margin:180rpx auto 60rpx;display:block;"></image>
+    <image src="/images/city.png" style="width:240rpx;height:180rpx;margin:180rpx auto 60rpx;display:block;"></image>
     <block wx:if="{{locationStatus}}">
       <view style="font-size: 30rpx;color: #333333;text-align:center;">您的所在的位置暂未开通桔集服务</view>
       <view style="margin-top:160rpx;font-size: 28rpx;color: #666666;text-align:center;">逛一下其他热门城市吧</view>
@@ -153,9 +153,9 @@
 
     <view class="newerGetModalWrap" wx:if="{{isShowNewerGet}}">
       <view class="newerGetModal">
-        <image src="../../images/newerGetBg.png" style="width:680rpx;height:735rpx;"></image>
-        <image src="../../images/newerGetBtn.png" class="newerGetBtn" bindtap="closeGetNewer"></image>
-        <image src="../../images/newerGetClose.png" class="newerGetClose" bindtap="closeGetNewer"></image>
+        <image src="/images/newerGetBg.png" style="width:680rpx;height:735rpx;"></image>
+        <image src="/images/newerGetBtn.png" class="newerGetBtn" bindtap="closeGetNewer"></image>
+        <image src="/images/newerGetClose.png" class="newerGetClose" bindtap="closeGetNewer"></image>
       </view>
     </view>
     

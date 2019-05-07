@@ -14,11 +14,13 @@ Page({
         erwmImg: '',
         headImg: '',
         isShowModal: true,
-        isTransparnet:false,
+        isTransparnet: false,
         sceneId: '',
         scenepicid: '',
         userImg: '',
         userImgUrl: '',
+        ifBottom: false,
+        pageNo: 1,
         productId: '' //当前商品的id
     },
     onLoad: function(options) {
@@ -35,16 +37,27 @@ Page({
         jugardenService.shareList({
             providerId: wx.getStorageSync('providerId'),
             productId: productId, //如果从首页进入productId不为空
-            pageNo: 1,
-            pageSize: 20
+            pageNo: this.data.pageNo,
+            pageSize: 10
         }).subscribe({
             next: res => {
-                this.setData({ recommendlist: res });
-                this.setData({ isShowNodata: this.data.recommendlist.length == 0 });
+                this.setData({ recommendlist: this.data.recommendlist.concat(res) });
+                this.setData({
+                    ifBottom: res.length < 10 ? true : false,
+                    isShowNodata: this.data.recommendlist.length == 0
+                })
             },
             error: err => errDialog(err),
             complete: () => wx.hideToast()
         })
+    },
+    onReachBottom: function() {
+        if (this.data.ifBottom) { //已经到底部了
+            return;
+        } else {
+            this.setData({ pageNo: this.data.pageNo + 1 });
+            this.getData(this.data.productId);
+        }
     },
     getUserImg: function() {
         service.userInfo({ openId: wx.getStorageSync('openid') }).subscribe({
@@ -70,20 +83,20 @@ Page({
             return {
                 title: JSON.parse(wx.getStorageSync('userinfo')).nickName + '分享给您一个心动商品，快来一起体验吧！',
                 path: '/pages/login/index?pagetype=4&pid=' + this.data.productId + '&storeid=&sceneid=' + this.data.sceneId + '&invitecode=' + wx.getStorageSync('inviteCode'),
-              imageUrl: constant.basePicUrl + this.data.productInfo.picId + '/resize_360_360/mode_filt/format_jpg/quality_0'
+                imageUrl: constant.basePicUrl + this.data.productInfo.picId + '/resize_360_360/mode_filt/format_jpg/quality_0'
             }
         }
     },
     //保存素材
-    saveMaterial:function(e){
-        this.produceImg(e,1)
+    saveMaterial: function(e) {
+        this.produceImg(e, 1)
     },
     //生成图文
-    produceImg: function(e,type) {
-        if(type==1){
-            wx.showToast({title: '正在保存图片',icon: 'loading',duration: 30000});
-        }else{
-            wx.showToast({title: '生成分享图片',icon: 'loading',duration: 30000});
+    produceImg: function(e, type) {
+        if (type == 1) {
+            wx.showToast({ title: '正在保存图片', icon: 'loading', duration: 30000 });
+        } else {
+            wx.showToast({ title: '生成分享图片', icon: 'loading', duration: 30000 });
         }
         var productId = e.currentTarget.dataset.productid;
         this.setData({ productId: productId });
@@ -103,12 +116,12 @@ Page({
 
                 //下载商品图片
                 wx.downloadFile({
-                  url: constant.basePicUrl + imageId + '/resize_750_420/mode_filt/format_jpg/quality_0',
+                    url: constant.basePicUrl + imageId + '/resize_750_420/mode_filt/format_jpg/quality_0',
                     success: (res) => {
                         if (res.statusCode === 200) {
                             ready++;
                             this.setData({ headImg: res.tempFilePath });
-                            this.startDrawImg(ready,e,type);
+                            this.startDrawImg(ready, e, type);
                         } else {
                             wx.hideToast();
                         }
@@ -126,7 +139,7 @@ Page({
                         if (obj.statusCode === 200) {
                             ready++;
                             this.setData({ userImg: obj.tempFilePath });
-                            this.startDrawImg(ready,e,type);
+                            this.startDrawImg(ready, e, type);
                         } else {
                             wx.hideToast();
                         }
@@ -142,12 +155,12 @@ Page({
                     this.setData({ sceneId: sceneId });
 
                     wx.downloadFile({
-                      url: constant.basePicUrl + scenepicid + '/resize_200_200/mode_filt/format_jpg/quality_0',
+                        url: constant.basePicUrl + scenepicid + '/resize_200_200/mode_filt/format_jpg/quality_0',
                         success: (obj) => {
                             if (obj.statusCode === 200) {
                                 ready++;
                                 this.setData({ erwmImg: obj.tempFilePath });
-                                this.startDrawImg(ready,e,type);
+                                this.startDrawImg(ready, e, type);
                             } else {
                                 wx.hideToast();
                             }
@@ -162,15 +175,15 @@ Page({
                             this.setData({ sceneId: sceneId });
                             console.log('scene222=' + this.data.sceneId);
                             console.log('scenePicId=' + scenePicId);
-                          console.log(constant.basePicUrl + scenePicId + '/resize_200_200/mode_filt/format_jpg/quality_0');
+                            console.log(constant.basePicUrl + scenePicId + '/resize_200_200/mode_filt/format_jpg/quality_0');
 
                             wx.downloadFile({
-                              url: constant.basePicUrl + scenePicId + '/resize_200_200/mode_filt/format_jpg/quality_0',
+                                url: constant.basePicUrl + scenePicId + '/resize_200_200/mode_filt/format_jpg/quality_0',
                                 success: (obj) => {
                                     if (obj.statusCode === 200) {
                                         ready++;
                                         this.setData({ erwmImg: obj.tempFilePath });
-                                        this.startDrawImg(ready,e,type);
+                                        this.startDrawImg(ready, e, type);
                                     } else {
                                         wx.hideToast();
                                     }
@@ -193,10 +206,10 @@ Page({
         })
     },
     closeModal: function() {
-        this.setData({ isShowModal: true,isTransparnet:false });
+        this.setData({ isShowModal: true, isTransparnet: false });
     },
-    startDrawImg: function(ready,e,type) {
-        console.log('ready===='+ready);
+    startDrawImg: function(ready, e, type) {
+        console.log('ready====' + ready);
         if (ready == 3) {
             var info = this.data.productInfo;
             var point = info.point == null || info.point == 0 ? '' : info.point + '桔子';
@@ -206,7 +219,7 @@ Page({
             var name = info.productName;
             var price2 = Number(info.originalPrice / 100).toFixed(2) + '元';
             var storeLen = info.productStores.length;
-            this.drawImage(info.merchantName, name, '', price1, price2, storeLen,e,type);
+            this.drawImage(info.merchantName, name, '', price1, price2, storeLen, e, type);
         }
     },
     //参数依次是storeName,desc,现价,原价,门店数
@@ -248,23 +261,23 @@ Page({
         setText(context, nickName, 70, 360, "#333", 12, 'left');
         setText(context, nickName, 70, 360, "#333", 12, 'left');
         setText(context, "私藏好物，分享给你", 70, 379, '#666', 11, 'left');
-        if(type==1){
+        if (type == 1) {
             this.setData({ isTransparnet: true });
-        }else{
+        } else {
             this.setData({ isShowModal: false });
         }
         context.draw(false, () => {
             console.log("绘图结束");
-            if(type==1){
-                setTimeout(()=>{
-                    this.savePic(e,type);
-                },100)
-            }else{
+            if (type == 1) {
+                setTimeout(() => {
+                    this.savePic(e, type);
+                }, 100)
+            } else {
                 wx.hideToast();
             }
         });
     },
-    savePic: function(e,type) {
+    savePic: function(e, type) {
         var that = this;
         wx.canvasToTempFilePath({
             canvasId: 'myCanvas',
@@ -276,12 +289,12 @@ Page({
                                 scope: 'scope.writePhotosAlbum',
                                 success() {
                                     console.log(res.tempFilePath);
-                                    that.saveAsPhoto(res.tempFilePath,e,type);
+                                    that.saveAsPhoto(res.tempFilePath, e, type);
                                 }
                             })
                         } else {
                             console.log(res.tempFilePath);
-                            that.saveAsPhoto(res.tempFilePath,e,type);
+                            that.saveAsPhoto(res.tempFilePath, e, type);
                         }
                     },
                     fail() {
@@ -293,7 +306,7 @@ Page({
                 console.log(res);
             }
         });
-        if(type==1){
+        if (type == 1) {
             var desc = e.currentTarget.dataset.desc;
             wx.setClipboardData({
                 data: desc,
@@ -303,20 +316,20 @@ Page({
             });
         }
     },
-    saveAsPhoto: function(imgUrl,e,type) {
+    saveAsPhoto: function(imgUrl, e, type) {
         wx.saveImageToPhotosAlbum({
             filePath: imgUrl,
             success: (res) => {
                 this.closeModal();
-                if(type!=1){
-                    wx.showToast({title: "已保存至相册",icon: "success"});
+                if (type != 1) {
+                    wx.showToast({ title: "已保存至相册", icon: "success" });
                 }
             },
             fail: function(res) {
                 console.log(res);
             }
         });
-        if(type==1){
+        if (type == 1) {
             this.saveImages(e);
         }
     },
@@ -324,14 +337,14 @@ Page({
     saveImages: function(e) {
         var imageIds = e.currentTarget.dataset.imgs;
         var desc = e.currentTarget.dataset.desc;
-        this.saveFile(imageIds,desc);
+        this.saveFile(imageIds, desc);
     },
-    saveFile: function(imageIds,desc) {
+    saveFile: function(imageIds, desc) {
         var imgIndex = 0;
         for (var i = 0; i < imageIds.length; i++) {
             var imgId = imageIds[i];
             wx.downloadFile({
-              url: constant.basePicUrl + imageIds[i] + '/resize_0_0/mode_filt/format_jpg/quality_0',
+                url: constant.basePicUrl + imageIds[i] + '/resize_0_0/mode_filt/format_jpg/quality_0',
                 success: (res) => {
                     wx.saveImageToPhotosAlbum({
                         filePath: res.tempFilePath,

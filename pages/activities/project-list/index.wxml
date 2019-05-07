@@ -35,7 +35,8 @@
             <button class="ctrlbtn buyBtn2" bindtap="toComDetail">{{sceneType == 'SPLICED'? '一键开团': '发起砍价'}}</button>
         </view>
     </view>
-    <view class="nodataDiv ub ub-ac ub-ver" hidden="{{!isShowNodata}}" style="position:fixed;top:300rpx;bottom:100rpx;left:0;width:100%;padding-top:130rpx;">
+    
+    <view class="nodataDiv ub ub-ac ub-ver" hidden="{{!isShowNodata}}">
         <image class="nodataImg" src="/images/null6.png" mode="aspectFit"></image>
         <view class="nodataTxt">
             <view>暂无{{sceneType == 'BARGAIN'?'砍价':'拼团'}}活动</view>

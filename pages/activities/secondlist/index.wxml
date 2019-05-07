@@ -58,7 +58,7 @@
       <button wx:if="{{item.activityStatus=='READY'&&item.remind}}" class="ctrlbtn ctrlbtn3">已设置提醒</button>
     </view>
   </view>
-  <view class="nodataDiv ub ub-ac ub-ver" hidden="{{!isShowNodata}}" style="position:fixed;top:300rpx;bottom:100rpx;left:0;width:100%;padding-top:130rpx;">
+  <view class="nodataDiv ub ub-ac ub-ver" hidden="{{!isShowNodata}}">
       <image class="nodataImg" src="/images/null6.png" mode="aspectFit"></image>
       <view class="nodataTxt">
         <view>暂无相关的秒杀商品</view>

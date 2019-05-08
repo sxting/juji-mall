@@ -8,7 +8,8 @@ Page({
         nickName: '***',
         avatar: '',
         phoneNum: '',
-        bindPhone: ""
+        bindPhone: "",
+        topValue:0
     },
     toJuzi: function() {
         wx.switchTab({ url: '../juzi/index' });
@@ -20,6 +21,9 @@ Page({
     },
     onLoad: function() {
         this.getInfo();
+        if(app.globalData.barHeight!=20){
+            // this.setData({topValue:2*(app.globalData.barHeight-20)})
+        }
     },
     getInfo: function() {
         service.userInfo({ openId: wx.getStorageSync('openid') }).subscribe({

@@ -4,7 +4,7 @@
 page{padding-top: 0;}
 .iconfont{display:flex;align-items:center;justify-content:center;}
 .content{position: relative;}
-.locationWrap{position:absolute;top:40rpx;left:30rpx;padding:0 20rpx;height:60rpx;background:rgba(255,255,255,0.7);border-radius:30rpx;display:flex;align-items:center;justify-content:center;z-index:999;}
+.locationWrap{position:absolute;left:30rpx;padding:0 20rpx;height:60rpx;background:rgba(255,255,255,0.7);border-radius:30rpx;display:flex;align-items:center;justify-content:center;z-index:999;}
 .locationText{font-size:30rpx;color:#333333;font-weight:bold;}
 .location{display:flex;justify-content:space-between;align-items:center;font-size:28rpx;}
 .title{font-size:40rpx;color:#333;font-weight:bold;}
@@ -12,11 +12,11 @@ page{padding-top: 0;}
 .pb30{padding-bottom:30rpx;}
 .bgBar{width:100%;height:20rpx;position:absolute;top:0;left:0;right:0;background:#ffdc00;}
 .bgy{width:100%;height:102rpx;position:absolute;top:20rpx;left:0;right:0;}
-.toper{width:100%;position:absolute;top:0;left:0;right:0;z-index:99;padding:0;box-sizing:border-box;}
+.toper{width:100%;position:absolute;top:0;left:0;right:0;z-index:99;padding:0;box-sizing:border-box;background-color: #eeeeee}
 swiper{display:block;width:100%;height:400rpx;box-sizing:border-box;overflow:hidden;box-shadow:0 5px 5px 0 rgba(229,229,229,0.50);}
 .slide-image{width:100%;height:400rpx;display:block;box-sizing:border-box;}
 
-.menulist{width:94%;padding: 25rpx 10rpx 30rpx;box-sizing:border-box;background-color: #fff;border-radius: 20rpx;z-index: 999; box-shadow: 0 4rpx 10rpx 0 rgba(228, 228, 228, 0.50);position: absolute;top:360rpx;left:3%;}
+.menulist{width:94%;padding: 25rpx 10rpx 30rpx;box-sizing:border-box;background-color: #fff;border-radius: 20rpx;z-index: 999; box-shadow: 0 6rpx 14rpx 0 rgba(228,228,228,0.50);position: absolute;top:360rpx;left:3%;}
 .menulist .menuitem{width:170rpx; height: 140rpx;}
 .icon_home{display: block;width: 88rpx;height: 88rpx;}
 .menulist .tx-c{font-size: 26rpx;color: #666;margin-top: 12rpx;}
@@ -130,3 +130,5 @@ swiper{display:block;width:100%;height:400rpx;box-sizing:border-box;overflow:hid
 
 .buyBtn3{width:140rpx;height:56rpx;font-size:26rpx;display:flex;align-items:center;justify-content:center;padding:0;box-sizing:border-box;background: #E83221;border-radius:6rpx;color:#ffffff;}
 .buyBtn4{width:120rpx;height:54rpx;font-size:26rpx;display:flex;align-items:center;justify-content:center;padding:0;box-sizing:border-box;background: #E83221;border-radius:6rpx;color:#ffffff;}
+
+.contentWarp{background-image: linear-gradient(-180deg, #FFFFFF 20%, #F5F5F5 23%);}

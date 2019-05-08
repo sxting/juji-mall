@@ -9,6 +9,7 @@ Page({
         locationCode: '',
         locationName: '',
         businessList: [],
+        topValue:20,
         leavePage: false,
         autoplay: true,
         dotsColor: 'rgba(51,51,51,0.3)',
@@ -61,6 +62,10 @@ Page({
         console.log(options);
         wx.setNavigationBarTitle({ title: '桔 集' });
         wx.showShareMenu({ withShareTicket: true });
+
+        if(app.globalData.barHeight!=20){
+            this.setData({topValue:app.globalData.barHeight+8})
+        }
         console.log('--------------index-onLoad-------------');
 
         //成功登陆之后 查询新用户见面礼

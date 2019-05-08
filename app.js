@@ -30,6 +30,7 @@ App({
         wx.getSystemInfo({
           success: (res) => {
             this.globalData.barHeight = res.statusBarHeight
+            console.log("导航栏高="+res.statusBarHeight);
           }
         })        
     },

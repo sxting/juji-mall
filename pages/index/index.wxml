@@ -13,7 +13,7 @@
             <image src="{{item.imgId?'https://upic.juniuo.com/file/picture/'+item.imgId+'/resize_690_340/mode_filt/format_jpg/quality_0':''}}" data-link="{{item.link}}" bindtap="onTapBanner" class="slide-image" mode="scaleToFill" lazy-load="true"></image>
           </swiper-item>
         </swiper>
-        <view class="locationWrap" bindtap="toCityList">
+        <view class="locationWrap" bindtap="toCityList" style="top:{{topValue}}px">
           <text class="locationText">{{locationName}}</text>
           <image style="width:20rpx;height:14rpx;margin-left:12rpx;margin-top:8rpx;" lazy-load="true" src="/images/sort-down.png" wx:if="{{locationName}}"></image>
         </view>
@@ -60,90 +60,79 @@
       </view>
     </view>
 
-    <view style="background:#fff;padding:30rpx 30rpx 40rpx 30rpx;" wx:if="{{pointProductList.length>0}}">
-      <view class="mtitle">新品尝鲜</view>
-      <view class="pubu">
-        <view class="pubuItem" wx:for="{{pointProductList}}" wx:key="unique" bindtap="toComDetail" data-id="{{item.productId}}" data-storeid="{{item.nearStore.id}}" wx:if="{{index%2==0}}">
-          <image src="https://upic.juniuo.com/file/picture/{{item.picId}}/resize_0_0/mode_fill" lazy-load="true" mode="aspectFill" class="plimg"></image>
-          <view class="pubuname">{{item.productName}}</view>
-          <view class="pubuprice">{{filter.toFix(item.price)}}<text style="font-size:24rpx">元</text></view>
-        </view>
-        <view class="pubuItem" wx:for="{{pointProductList}}" wx:key="unique" bindtap="toComDetail" data-id="{{item.productId}}" data-storeid="{{item.nearStore.id}}" wx:if="{{index%2!=0}}">
-          <image src="https://upic.juniuo.com/file/picture/{{item.picId}}/resize_0_0/mode_fill" lazy-load="true" mode="aspectFill" class="plimg"></image>
-          <view class="pubuname">{{item.productName}}</view>
-          <view class="pubuprice">{{filter.toFix(item.price)}}<text style="font-size:24rpx">元</text></view>
-        </view>
-      </view>
-    </view>
-
-    <view class="juzihl-wrap" wx:if="{{recommendPage.length>0}}" style="{{pointProductList.length>0?'padding-top:20rpx;':''}}padding-bottom:30rpx">
-      <view class="mtitle">精选推荐</view>
-      <view class="labels-wrap">
-        <view class="label {{sortIndex==1?'label-active':''}}" data-label="1" bindtap="toggleLabel">
-          综合</view>
-        <view class="label {{sortIndex==2?'label-active':''}}" data-label="2" bindtap="toggleLabel">
-          价格
-          <image src="{{sortIndex==2?'/images/sort_top_active.png':'/images/sort_top.png'}}" class="xIcon {{sortIndex==2&&sortArray[sortIndex - 1]=='DESC'?'rotate':''}}" style="width:13rpx;height:18rpx;margin-left:10rpx;"></image>
-        </view>
-        <view class="label {{sortIndex==3?'label-active':''}}" data-label="3" bindtap="toggleLabel">
-          距离
-          <image src="{{sortIndex==3?'/images/sort_top_active.png':'/images/sort_top.png'}}" class="xIcon {{sortIndex==3&&sortArray[sortIndex - 1]=='DESC'?'rotate':''}}" style="width:13rpx;height:18rpx;margin-left:10rpx;"></image>
-        </view>
-        <view class="label {{sortIndex==4?'label-active':''}}" data-label="4" bindtap="toggleLabel">
-          销量
-          <image src="{{sortIndex==4?'/images/label_xl_active.png':'/images/label_xl.png'}}" style="width:15rpx;height:16rpx;margin-left:10rpx;"></image>
-        </view>
-      </view>
-      <view class="jingxuanlist" wx:for="{{recommendPage}}" wx:for-index='index' wx:key="unique">
-        <image class="productImg" bindtap="toNextDetail" data-type="{{item.currentActivityType}}" data-actid="{{item.currentActivityId}}" data-id="{{item.productId}}" data-storeid="{{item.nearStore.id}}" lazy-load="true" src="https://upic.juniuo.com/file/picture/{{item.picId}}/resize_690_387/mode_filt/format_jpg/quality_70" mode="widthFix"></image>
-        <view class="dis-wrap jc-sb">
-          <view class="from">{{item.merchantName}}</view>
-          <view class="dis">距你{{filter.toDis(item.nearDist)}}km</view>
-        </view>
-        <view class="pro-name" bindtap="toNextDetail" data-type="{{item.currentActivityType}}" data-actid="{{item.currentActivityId}}" data-id="{{item.productId}}" data-storeid="{{item.nearStore.id}}" style="margin-top:8rpx">{{item.productName}}</view>
-        <view class="price-wrap jc-sb">
-          <view class="p-wrap">
-            <view class="now-price" wx:if="{{item.point>0}}">{{item.point}}</view>
-            <view class="now-text" wx:if="{{item.point>0}}">桔子</view>
-            <view class="now-text" style="font-size: 28rpx;" wx:if="{{item.point>0&&item.price>0}}">+</view>
-            <view class="now-price" wx:if="{{item.price>0}}">{{filter.toFix(item.price)}}</view>
-            <view class="now-text" wx:if="{{item.price>0}}">元</view>
-            <!-- <view class="old-price">{{filter.toFix(item.originalPrice)}}元</view> -->
-            <view class="proDiv ub ub-ac" wx:if="{{item.distributor}}">
-              <view class="l">赚</view>
-              <view class="r">￥{{filter.toFix(item.distributorSalesRebate)}}</view>
-            </view>
-            <view class="mark1" wx:if="{{item.currentActivityType=='SPLICED'}}">特价拼团</view>
-            <view class="mark2" wx:if="{{item.currentActivityType=='BARGAIN'}}">超值砍价</view>
-            <view class="mark3" wx:if="{{item.currentActivityType=='SEC_KILL'}}">限时秒杀</view>
+    <view class="contentWarp">
+      <view style="background:#fff;padding:30rpx 30rpx 40rpx 30rpx;" wx:if="{{pointProductList.length>0}}">
+        <view class="mtitle">新品尝鲜</view>
+        <view class="pubu">
+          <view class="pubuItem" wx:for="{{pointProductList}}" wx:key="unique" bindtap="toComDetail" data-id="{{item.productId}}" data-storeid="{{item.nearStore.id}}" wx:if="{{index%2==0}}">
+            <image src="https://upic.juniuo.com/file/picture/{{item.picId}}/resize_0_0/mode_fill" lazy-load="true" mode="aspectFill" class="plimg"></image>
+            <view class="pubuname">{{item.productName}}</view>
+            <view class="pubuprice">{{filter.toFix(item.price)}}<text style="font-size:24rpx">元</text></view>
+          </view>
+          <view class="pubuItem" wx:for="{{pointProductList}}" wx:key="unique" bindtap="toComDetail" data-id="{{item.productId}}" data-storeid="{{item.nearStore.id}}" wx:if="{{index%2!=0}}">
+            <image src="https://upic.juniuo.com/file/picture/{{item.picId}}/resize_0_0/mode_fill" lazy-load="true" mode="aspectFill" class="plimg"></image>
+            <view class="pubuname">{{item.productName}}</view>
+            <view class="pubuprice">{{filter.toFix(item.price)}}<text style="font-size:24rpx">元</text></view>
           </view>
         </view>
-        <form bindsubmit="collectFormIds" report-submit="true">
-          <view class="ub ub-ac jc-sb" style="padding: 0 30rpx 30rpx 30rpx;">
-              <view class="ub ub-ac ub-f1" style="margin-top:20rpx">
-                <image wx:if="{{item.currentActivityType!='SPLICED'&&item.currentActivityType!='BARGAIN'&&item.currentActivityType!='SEC_KILL'}}" src="/images/soldCount.png" style="width:24rpx;height: 22rpx;"></image>
-                <text wx:if="{{item.currentActivityType!='SPLICED'&&item.currentActivityType!='BARGAIN'&&item.currentActivityType!='SEC_KILL'}}" class="count">已售{{item.soldNum}}件</text>
+      </view>
+      <view class="juzihl-wrap" wx:if="{{recommendPage.length>0}}" style="{{pointProductList.length>0?'padding-top:20rpx;':''}}padding-bottom:30rpx">
+        <view class="mtitle">精选推荐</view>
+        <view class="labels-wrap">
+          <view class="label {{sortIndex==1?'label-active':''}}" data-label="1" bindtap="toggleLabel">
+            综合</view>
+          <view class="label {{sortIndex==2?'label-active':''}}" data-label="2" bindtap="toggleLabel">
+            价格
+            <image src="{{sortIndex==2?'/images/sort_top_active.png':'/images/sort_top.png'}}" class="xIcon {{sortIndex==2&&sortArray[sortIndex - 1]=='DESC'?'rotate':''}}" style="width:13rpx;height:18rpx;margin-left:10rpx;"></image>
+          </view>
+          <view class="label {{sortIndex==3?'label-active':''}}" data-label="3" bindtap="toggleLabel">
+            距离
+            <image src="{{sortIndex==3?'/images/sort_top_active.png':'/images/sort_top.png'}}" class="xIcon {{sortIndex==3&&sortArray[sortIndex - 1]=='DESC'?'rotate':''}}" style="width:13rpx;height:18rpx;margin-left:10rpx;"></image>
+          </view>
+          <view class="label {{sortIndex==4?'label-active':''}}" data-label="4" bindtap="toggleLabel">
+            销量
+            <image src="{{sortIndex==4?'/images/label_xl_active.png':'/images/label_xl.png'}}" style="width:15rpx;height:16rpx;margin-left:10rpx;"></image>
+          </view>
+        </view>
+        <view class="jingxuanlist" wx:for="{{recommendPage}}" wx:for-index='index' wx:key="unique">
+          <image class="productImg" bindtap="toNextDetail" data-type="{{item.currentActivityType}}" data-actid="{{item.currentActivityId}}" data-id="{{item.productId}}" data-storeid="{{item.nearStore.id}}" lazy-load="true" src="https://upic.juniuo.com/file/picture/{{item.picId}}/resize_690_387/mode_filt/format_jpg/quality_70" mode="widthFix"></image>
+          <view class="dis-wrap jc-sb">
+            <view class="from">{{item.merchantName}}</view>
+            <view class="dis">距你{{filter.toDis(item.nearDist)}}km</view>
+          </view>
+          <view class="pro-name" bindtap="toNextDetail" data-type="{{item.currentActivityType}}" data-actid="{{item.currentActivityId}}" data-id="{{item.productId}}" data-storeid="{{item.nearStore.id}}" style="margin-top:8rpx">{{item.productName}}</view>
+          <view class="price-wrap jc-sb">
+            <view class="p-wrap">
+              <view class="now-price" wx:if="{{item.point>0}}">{{item.point}}</view>
+              <view class="now-text" wx:if="{{item.point>0}}">桔子</view>
+              <view class="now-text" style="font-size: 28rpx;" wx:if="{{item.point>0&&item.price>0}}">+</view>
+              <view class="now-price" wx:if="{{item.price>0}}">{{filter.toFix(item.price)}}</view>
+              <view class="now-text" wx:if="{{item.price>0}}">元</view>
+              <view class="proDiv ub ub-ac" wx:if="{{item.distributor}}">
+                <view class="l">赚</view>
+                <view class="r">￥{{filter.toFix(item.distributorSalesRebate)}}</view>
               </view>
-              <button form-type="submit" class="ctrlbtn sharBtn" wx:if="{{!item.distributor&&!item.currentActivityType}}" bindtap="toComDetailAndShare" data-id="{{item.productId}}" data-storeid="{{item.nearStore.id}}">分享</button>
-              <button form-type="submit" class="ctrlbtn buyBtn1" wx:if="{{!item.distributor&&!item.currentActivityType}}" bindtap="toComDetail" data-id="{{item.productId}}" data-storeid="{{item.nearStore.id}}">购买</button>
-              <button form-type="submit" class="ctrlbtn buyBtn2" wx:if="{{item.distributor&&!item.currentActivityType}}" bindtap="toComDetail" data-id="{{item.productId}}" data-storeid="{{item.nearStore.id}}">购买</button>
-              <button form-type="submit" class="ctrlbtn proBtn1" wx:if="{{item.distributor&&!item.currentActivityType}}" bindtap="toPro" data-id="{{item.productId}}">推广</button>
-
-              <button form-type="submit" class="buyBtn3" wx:if="{{item.currentActivityType=='SPLICED'}}" bindtap="toNextDetail" data-type="{{item.currentActivityType}}" data-actid="{{item.currentActivityId}}" data-id="{{item.productId}}">一键开团</button>
-              <button form-type="submit" class="buyBtn3" wx:if="{{item.currentActivityType=='BARGAIN'}}" bindtap="toNextDetail" data-type="{{item.currentActivityType}}" data-actid="{{item.currentActivityId}}" data-id="{{item.productId}}">发起砍价</button>
-              <button form-type="submit" class="buyBtn4" wx:if="{{item.currentActivityType=='SEC_KILL'}}" bindtap="toNextDetail" data-type="{{item.currentActivityType}}" data-actid="{{item.currentActivityId}}" data-id="{{item.productId}}">抢 购</button>
+              <view class="mark1" wx:if="{{item.currentActivityType=='SPLICED'}}">特价拼团</view>
+              <view class="mark2" wx:if="{{item.currentActivityType=='BARGAIN'}}">超值砍价</view>
+              <view class="mark3" wx:if="{{item.currentActivityType=='SEC_KILL'}}">限时秒杀</view>
+            </view>
           </view>
-        </form>
-      </view>
-    </view>
+          <form bindsubmit="collectFormIds" report-submit="true">
+            <view class="ub ub-ac jc-sb" style="padding: 0 30rpx 30rpx 30rpx;">
+                <view class="ub ub-ac ub-f1" style="margin-top:20rpx">
+                  <image wx:if="{{item.currentActivityType!='SPLICED'&&item.currentActivityType!='BARGAIN'&&item.currentActivityType!='SEC_KILL'}}" src="/images/soldCount.png" style="width:24rpx;height: 22rpx;"></image>
+                  <text wx:if="{{item.currentActivityType!='SPLICED'&&item.currentActivityType!='BARGAIN'&&item.currentActivityType!='SEC_KILL'}}" class="count">已售{{item.soldNum}}件</text>
+                </view>
+                <button form-type="submit" class="ctrlbtn sharBtn" wx:if="{{!item.distributor&&!item.currentActivityType}}" bindtap="toComDetailAndShare" data-id="{{item.productId}}" data-storeid="{{item.nearStore.id}}">分享</button>
+                <button form-type="submit" class="ctrlbtn buyBtn1" wx:if="{{!item.distributor&&!item.currentActivityType}}" bindtap="toComDetail" data-id="{{item.productId}}" data-storeid="{{item.nearStore.id}}">购买</button>
+                <button form-type="submit" class="ctrlbtn buyBtn2" wx:if="{{item.distributor&&!item.currentActivityType}}" bindtap="toComDetail" data-id="{{item.productId}}" data-storeid="{{item.nearStore.id}}">购买</button>
+                <button form-type="submit" class="ctrlbtn proBtn1" wx:if="{{item.distributor&&!item.currentActivityType}}" bindtap="toPro" data-id="{{item.productId}}">推广</button>
 
-    <view class="phoneWrap" wx:if="{{!pullUpFlag}}">
-      <view class="phoneView ub ub-ac" bindtap="callPhone">
-        <image src="/images/logo_main.png" style="width:80rpx;height:80rpx;"></image>
-        <view class="phoneInner">
-          <view>桔集-桔美好生活，集好店优惠</view>
-          <view class="ub ub-ac" style="margin-top: 10rpx;">
-            <image src="/images/dianhua.png" style="width:30rpx;height:26rpx;margin-right:10rpx;"></image>合作电话：400-001-1139</view>
+                <button form-type="submit" class="buyBtn3" wx:if="{{item.currentActivityType=='SPLICED'}}" bindtap="toNextDetail" data-type="{{item.currentActivityType}}" data-actid="{{item.currentActivityId}}" data-id="{{item.productId}}">一键开团</button>
+                <button form-type="submit" class="buyBtn3" wx:if="{{item.currentActivityType=='BARGAIN'}}" bindtap="toNextDetail" data-type="{{item.currentActivityType}}" data-actid="{{item.currentActivityId}}" data-id="{{item.productId}}">发起砍价</button>
+                <button form-type="submit" class="buyBtn4" wx:if="{{item.currentActivityType=='SEC_KILL'}}" bindtap="toNextDetail" data-type="{{item.currentActivityType}}" data-actid="{{item.currentActivityId}}" data-id="{{item.productId}}">抢 购</button>
+            </view>
+          </form>
         </view>
       </view>
     </view>

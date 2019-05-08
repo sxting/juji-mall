@@ -8,6 +8,7 @@ var timeVal;
 Page({
     data: {
         nvabarData: {showCapsule: 0,title: '桔 园',isIndex:1},
+        topValue:0,
         juminNumList: [], //队员人数
         hadNumber: 0,
         storeId: '',
@@ -38,6 +39,9 @@ Page({
             this.getUserInfor();
         } else {
             this.getUserInfor(); //用户信息，是否绑定手机号码
+        }
+        if(app.globalData.barHeight!=20){
+            // this.setData({topValue:2*(app.globalData.barHeight-20)})
         }
     },
     onShow: function() {

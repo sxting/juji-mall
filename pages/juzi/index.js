@@ -1,37 +1,32 @@
 import {service} from '../../service';
 import { errDialog, loading } from '../../utils/util'
+var app = getApp();
 Page({
   data: {
     nvabarData: {showCapsule: 0,title: '',isIndex:1},
     showjuzigz: false,
     currentPointObj: {},
     canSignIn: true,
-    avatar: ''
+    avatar: '',
+    topValue:0
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    wx.setNavigationBarTitle({
-      title: ''
-    });
     wx.hideShareMenu();
     this.getInfo();
-    
+    if(app.globalData.barHeight!=20){
+        // this.setData({topValue:2*(app.globalData.barHeight-20)})
+    }
   },
   showDesModal:function(e){
     console.log(e);
     let des = '';
     switch (e.currentTarget.dataset.mt){
-      case '1':
-        des = '今日赚取的桔子数量';
-      break;
-      case '2':
-        des = '今日小程序内分享的次数';
-        break;
-      case '3':
-        des = '今日完成的赚桔子任务';
-        break;
+      case '1':des = '今日赚取的桔子数量';break;
+      case '2':des = '今日小程序内分享的次数';break;
+      case '3':des = '今日完成的赚桔子任务';break;
     }
     wx.showModal({
       title: '',

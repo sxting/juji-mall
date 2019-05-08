@@ -2,6 +2,17 @@ var QQMapWX = require('../../lib/qqmap-wx-jssdk.min.js');
 import { constant } from '../../utils/constant';
 import { service } from '../../service';
 var app = getApp();
+
+// {
+//     productName:'这是一个无效的秒杀商品',
+//     expectGmtEnd:'2019-05-10 00:00:00',
+//     activityPoint:10,
+//     activityPrice:9.99,
+//     activityId:"1111",
+//     id:"11111",
+//     cover:'26zGLpV3LbMI'
+// }
+
 Page({
     data: {
         nvabarData: {isIndex:1,showCapsule: 0,title: '桔 集'},
@@ -18,6 +29,9 @@ Page({
         nowIdx: 0, //当前swiper索引
         slideShowList: [],
         pointProductList: [],
+        newProductList:[],
+        secondList:[],
+        curSecondEndTime:'2019-05-10 00:00:00',
         recommendPage: [],
         sortIndex: 1,
         pageNo: 1,
@@ -216,15 +230,6 @@ Page({
                                                         });
                                                         resolve4(1);
                                                     }
-                                                    // else if (res2.cancel) {
-                                                    //   //如果否 不切换定位名称 继续使用用户选择的外地城市
-                                                    //   that.setData({
-                                                    //     locationName: wx.getStorageSync('selectCityName'),
-                                                    //     locationPcode: wx.getStorageSync('selectPcode'),
-                                                    //     locationCode: wx.getStorageSync('selectCode')
-                                                    //   });
-                                                    //   resolve4(2);
-                                                    // }
                                                 }
                                             });
 
@@ -466,6 +471,16 @@ Page({
                                                 }
                                             });
                                             this.getIndexData();
+                                            //根据位置查询附近精选
+                                            var obj = {
+                                                providerId: this.data.providerId,
+                                                sortField: 'IDX',
+                                                sortOrder: 'ASC',
+                                                pageNo: this.data.pageNo,
+                                                pageSize: this.data.pageSize,
+                                                longitude: wx.getStorageSync('curLongitude'),
+                                                latitude: wx.getStorageSync('curLatitude')
+                                            };
                                             this.getRecommendPage(obj);
                                         }
                                     });
@@ -621,19 +636,46 @@ Page({
         wx.switchTab({url: '../juzi/index'})
     },
     //上拉加载
-    onReachBottom() {
+    onReachBottom:function() {
         //判断是否还可以上拉
         if (this.data.pullUpFlag && this.data.providerId) {
-            var pageNo = this.data.pageNo+1;
-            this.setData({pageNo:pageNo});
-            this.getRecommendPage();
+            let that = this;
+            let p = ++this.data.pageNo;
+            console.log('page:' + p);
+            let obj = {
+                providerId: that.data.providerId,
+                sortField: that.data.sortField,
+                sortOrder: that.data.sortArray[Number(that.data.sortIndex) - 1],
+                pageNo: p,
+                pageSize: that.data.pageSize,
+                longitude: wx.getStorageSync('curLongitude'),
+                latitude: wx.getStorageSync('curLatitude')
+            };
+
+            service.getRecommendPage(obj).subscribe({
+                next: res => {
+                    console.log(res);
+                    this.setData({
+                        recommendPage: this.data.recommendPage.concat(res.list)
+                    });
+                    console.log(res.countPage);
+                    console.log(this.data.pageNo);
+                    if (res.countPage <= this.data.pageNo) {
+                        this.setData({
+                            pullUpFlag: false
+                        });
+                    }
+                },
+                error: err => console.log(err),
+                complete: () => wx.hideToast()
+            });
         } else {
             return;
         }
 
     },
     //下拉刷新
-    onPullDownRefresh() {
+    onPullDownRefresh:function() {
         let that = this;
         this.setData({
             pullUpFlag: true,
@@ -646,8 +688,29 @@ Page({
         if (this.data.providerId) {
             this.getIndexData();
             //根据位置查询附近精选
-            this.setData({pageNo:1});
-            this.getRecommendPage();
+            var obj = {
+                providerId: that.data.providerId,
+                sortField: 'IDX',
+                sortOrder: 'ASC',
+                pageNo: that.data.pageNo,
+                pageSize: that.data.pageSize,
+                longitude: wx.getStorageSync('curLongitude'),
+                latitude: wx.getStorageSync('curLatitude')
+            };
+            service.getRecommendPage(obj).subscribe({
+                next: res => {
+                    console.log(res);
+                    this.setData({
+                        recommendPage: res.list
+                    });
+                },
+                error: err => console.log(err),
+                complete: () => {
+                    setTimeout(() => {
+                        wx.stopPullDownRefresh()
+                    }, 1000);
+                }
+            });
         } else {
             wx.stopPullDownRefresh();
         }
@@ -669,20 +732,12 @@ Page({
             error: err => console.log(err),
             complete: () => wx.hideToast()
         });
+        this.getNewProductList();
+        this.getSecondKillList(); //获取秒杀活动列表
     },
     //获取所有商品，以分页列表形式展示
     getRecommendPage: function(obj) {
         console.log(obj);
-        //根据位置查询附近精选
-        var obj = {
-            providerId: this.data.providerId,
-            sortField: 'IDX',
-            sortOrder: 'ASC',
-            pageNo: this.data.pageNo,
-            pageSize: this.data.pageSize,
-            longitude: wx.getStorageSync('curLongitude'),
-            latitude: wx.getStorageSync('curLatitude')
-        };
         service.getRecommendPage(obj).subscribe({
             next: res => {
                 console.log(res);
@@ -802,5 +857,49 @@ Page({
                 url: '/pages/comDetail/index?share=0&id=' + id + '&storeid=' + storeid
             });
         }
-    }
+    },
+    getNewProductList: function() {
+        var obj = {
+            providerId: this.data.providerId,
+            // subject:"新品尝鲜",
+            sortField: 'IDX',
+            sortOrder: 'ASC',
+            pageNo: 1,
+            pageSize: 4,
+            longitude: wx.getStorageSync('curLongitude'),
+            latitude: wx.getStorageSync('curLatitude')
+        };
+
+        service.getRecommendPage(obj).subscribe({
+            next: res => {
+                console.log(res);
+                this.setData({
+                    newProductList: res.list
+                });
+            },
+            error: err => {},
+            complete: () => wx.hideToast()
+        });
+    },
+    getSecondKillList: function() {
+        let data = {
+            providerId: this.data.providerId,
+            activityType: 'SEC_KILL',
+            activityStatus: "STARTED",
+            pageNo: 1,
+            pageSize: 10
+        }
+        service.activityList(data).subscribe({
+            next: res => {
+                if (res) {
+                    this.setData({
+                        secondList: res
+                    });
+                }
+            },
+            error: err => errDialog(err),
+            complete: () => wx.hideToast()
+        })
+    },
+
 })

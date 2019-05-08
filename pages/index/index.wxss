@@ -43,16 +43,18 @@ swiper{display:block;width:100%;height:400rpx;box-sizing:border-box;overflow:hid
 .mBtnText{font-size:30rpx;color:#333;}
 .mLine{width:1px;height:74rpx;background:#dedede;}
 
-.pubu{width:100%;box-sizing:border-box;display:flex;flex-direction:row;}
-.pubuItem{width:48.5%;display:flex;flex-direction:column; box-shadow: 0 4rpx 10rpx 0 rgba(228, 228, 228, 0.50); border-radius: 6rpx;padding-bottom: 20rpx;position: relative;overflow: hidden;}
-.pubuItem:nth-child(2){margin-left: 3%}
+.newproductDiv{width:100%;box-sizing:border-box;}
+.clearfix:after{display: table;content: "";clear: both}
+.pubuItem{width:48.5%;display:flex;flex-direction:column; box-shadow: 0 4rpx 10rpx 0 rgba(228, 228, 228, 0.50); border-radius: 8rpx;padding-bottom: 20rpx;position: relative;overflow: hidden;float: left;margin-bottom: 20rpx;}
+.newproductDiv .pubuItem:nth-child(even){margin-left: 3%}
 .pubuItem .plimg{width:100%;height:220rpx;position: relative;}
 .pubuname{font-size:26rpx;color:#333;display:-webkit-box;overflow:hidden;text-overflow:ellipsis;-webkit-line-clamp:2;-webkit-box-orient:vertical;margin-top:10rpx;padding-left: 20rpx;padding-right: 20rpx;}
-.pubuprice{font-size: 38rpx;color: #e83221;font-weight: bold;padding-left: 20rpx;margin-top: 16rpx;}
+.priceDiv{padding-left: 20rpx;margin-top: 16rpx;}
+.pubuprice{font-size: 38rpx;color: #e83221;font-weight: bold;}
 
-.productBox{width:100%;display:flex;flex-direction:column; box-shadow: 0 4rpx 10rpx 0 rgba(228, 228, 228, 0.50); border-radius: 6rpx;padding-bottom: 30rpx;background-color: #fff;overflow: hidden;}
+.productBox{width:100%;display:flex;flex-direction:column; box-shadow: 0 4rpx 10rpx 0 rgba(228, 228, 228, 0.50); border-radius: 8rpx;padding-bottom: 30rpx;background-color: #fff;position: relative;}
 .productDiv{width: 100%;}
-.productDiv .plimg{width:100%;height:350rpx;position: relative;}
+.productDiv .plimg{width:100%;height:350rpx;position: relative;border-radius: 8rpx 8rpx 0 0}
 
 /*************juzi****************/
 .juzihl-wrap{background:#fff;padding:30rpx 30rpx 0 30rpx;}
@@ -126,5 +128,7 @@ swiper{display:block;width:100%;height:400rpx;box-sizing:border-box;overflow:hid
 .markBtn{position: absolute;bottom: 20rpx;right: 20rpx;}
 
 .secondKillDiv{background-image: linear-gradient(-180deg, #FFFFFF 0%, #FFF4EE 62%);padding:188rpx 30rpx 40rpx 30rpx;position: relative;}
-.clockDiv{width: 400rpx;height: 42rpx;position: absolute;top: 200rpx;right: 30rpx;}
+.clockDiv{width: 400rpx;height: 42rpx;position: absolute;top: -60rpx;right: 0;}
 .clockDiv .txt{font-size: 28rpx;margin-right: 10rpx;}
+
+.newProductDiv{background:#fff;padding:30rpx 30rpx 40rpx 30rpx;}

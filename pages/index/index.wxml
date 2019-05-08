@@ -49,36 +49,38 @@
       </view>
     </view>
 
-    <view class="secondKillDiv" wx:if="{{pointProductList.length>0}}">
-      <view class="mtitle">限时秒杀</view>
-      <view class="clockDiv ub ub-ac ub-pe">
-        <view class="txt">秒杀中</view>
-        <child dataFromParent='{{item.expectGmtStart}}'></child>
-      </view>
-      <view class="productBox">
-        <view class="productDiv" wx:for="{{pointProductList}}" wx:key="unique" bindtap="toComDetail" data-id="{{item.productId}}" data-storeid="{{item.nearStore.id}}" wx:if="{{index%2==0}}">
-          <image src="https://upic.juniuo.com/file/picture/{{item.picId}}/resize_0_0/mode_fill" lazy-load="true" mode="aspectFill" class="plimg"></image>
+    <view class="secondKillDiv" style="padding-bottom:{{secondList.length==0?0:'30rpx'}}">
+      <view class="mtitle" wx:if="{{secondList.length>0}}">限时秒杀</view>
+      <view class="productBox" wx:if="{{secondList.length>0}}">
+        <view class="clockDiv ub ub-ac ub-pe">
+          <view class="txt">秒杀中</view>
+          <child dataFromParent='{{curSecondEndTime}}'></child>
+        </view>
+        <view class="productDiv" wx:for="{{secondList}}" wx:key="unique" bindtap="toNextDetail" data-type="SEC_KILL" data-actid="{{item.activityId}}" data-id="{{item.productId}}" data-storeid="">
+          <image src="https://upic.juniuo.com/file/picture/{{item.cover}}/resize_0_0/mode_fill" lazy-load="true" mode="aspectFill" class="plimg"></image>
           <view class="pubuname">{{item.productName}}</view>
-          <view class="pubuprice">{{filter.toFix(item.price)}}<text style="font-size:24rpx">元</text></view>
+          <view class="ub ub-ac priceDiv">
+            <view class="pubuprice" wx:if="{{item.activityPoint>0}}">{{item.activityPoint}}<text style="font-size:24rpx">桔子</text></view>
+            <view class="pubuprice" style="margin-bottom:5rpx;" wx:if="{{item.activityPoint>0&&item.activityPrice>0}}">+</view>
+            <view class="pubuprice" wx:if="{{item.activityPrice>0}}">{{filter.toFix(item.activityPrice)}}<text style="font-size:24rpx">元</text></view>
+          </view>
         </view>
       </view>
     </view>
 
     <view class="contentWarp">
-      <view style="background:#fff;padding:30rpx 30rpx 40rpx 30rpx;" wx:if="{{pointProductList.length>0}}">
+      <view class="newProductDiv" wx:if="{{pointProductList.length>0}}">
         <view class="mtitle">新品尝鲜</view>
-        <view class="pubu">
-          <view class="pubuItem" wx:for="{{pointProductList}}" wx:key="unique" bindtap="toComDetail" data-id="{{item.productId}}" data-storeid="{{item.nearStore.id}}" wx:if="{{index%2==0}}">
+        <view class="newproductDiv clearfix">
+          <view class="pubuItem" wx:for="{{newProductList}}" wx:key="unique" bindtap="toComDetail" data-id="{{item.productId}}" data-storeid="{{item.nearStore.id}}">
             <image src="https://upic.juniuo.com/file/picture/{{item.picId}}/resize_0_0/mode_fill" lazy-load="true" mode="aspectFill" class="plimg"></image>
             <view class="pubuname">{{item.productName}}</view>
-            <view class="pubuprice">{{filter.toFix(item.price)}}<text style="font-size:24rpx">元</text></view>
-            <view class="mark3 markBtn">限时秒杀</view>
-          </view>
-          <view class="pubuItem" wx:for="{{pointProductList}}" wx:key="unique" bindtap="toComDetail" data-id="{{item.productId}}" data-storeid="{{item.nearStore.id}}" wx:if="{{index%2!=0}}">
-            <image src="https://upic.juniuo.com/file/picture/{{item.picId}}/resize_0_0/mode_fill" lazy-load="true" mode="aspectFill" class="plimg"></image>
-            <view class="pubuname">{{item.productName}}</view>
-            <view class="pubuprice">{{filter.toFix(item.price)}}<text style="font-size:24rpx">元</text></view>
-            <view class="mark3 markBtn">限时秒杀</view>
+            <view class="ub ub-ac priceDiv">
+              <view class="pubuprice" wx:if="{{item.point>0}}">{{item.point}}<text style="font-size:24rpx">桔子</text></view>
+              <view class="pubuprice" style="margin-bottom:5rpx;" wx:if="{{item.point>0&&item.price>0}}">+</view>
+              <view class="pubuprice" wx:if="{{item.price>0}}">{{filter.toFix(item.price)}}<text style="font-size:24rpx">元</text></view>
+            </view>
+            <!-- <view class="mark3 markBtn">限时秒杀</view> -->
           </view>
         </view>
       </view>

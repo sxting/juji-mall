@@ -205,6 +205,13 @@ service.secKillPay = (data) => {
   return http.get(url, data);
 }
 
+// 活动列表
+service.activityList = (data) => {
+  let url = api + '/activity/consumer/activities.json';
+  return http.get(url, data);
+}
+
+
 module.exports = {
   service: service
 }

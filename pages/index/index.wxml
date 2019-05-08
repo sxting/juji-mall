@@ -56,7 +56,7 @@
           <view class="txt">秒杀中</view>
           <child dataFromParent='{{curSecondEndTime}}'></child>
         </view>
-        <view class="productDiv" wx:for="{{secondList}}" wx:key="unique" bindtap="toNextDetail" data-type="SEC_KILL" data-actid="{{item.activityId}}" data-id="{{item.productId}}" data-storeid="">
+        <view class="productDiv" wx:for="{{secondList}}" wx:key="unique" bindtap="toNextDetail" data-type="SEC_KILL" data-actid="{{item.activityId}}" data-id="{{item.productId}}" data-storeid="" wx:if="{{index<1}}">
           <image src="https://upic.juniuo.com/file/picture/{{item.cover}}/resize_0_0/mode_fill" lazy-load="true" mode="aspectFill" class="plimg"></image>
           <view class="pubuname">{{item.productName}}</view>
           <view class="ub ub-ac priceDiv">

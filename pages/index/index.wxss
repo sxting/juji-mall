@@ -1,7 +1,7 @@
 @import '../../style/iconfont.wxss';
 @import '../../app.wxss';
 .homeTabPage{height:100%;}
-page{padding-top: 0;}
+page{padding-top: 0!important;}
 .iconfont{display:flex;align-items:center;justify-content:center;}
 .content{position: relative;}
 .locationWrap{position:absolute;left:30rpx;padding:0 20rpx;height:60rpx;background:rgba(255,255,255,0.7);border-radius:30rpx;display:flex;align-items:center;justify-content:center;z-index:999;}
@@ -16,7 +16,7 @@ page{padding-top: 0;}
 swiper{display:block;width:100%;height:400rpx;box-sizing:border-box;overflow:hidden;box-shadow:0 5px 5px 0 rgba(229,229,229,0.50);}
 .slide-image{width:100%;height:400rpx;display:block;box-sizing:border-box;}
 
-.menulist{width:94%;padding: 25rpx 10rpx 30rpx;box-sizing:border-box;background-color: #fff;border-radius: 20rpx;z-index: 999; box-shadow: 0 6rpx 14rpx 0 rgba(228,228,228,0.50);position: absolute;top:360rpx;left:3%;}
+.menulist{width:94%;padding: 25rpx 10rpx 30rpx;box-sizing:border-box;background-color: #fff;border-radius: 20rpx;z-index: 999; box-shadow: 0 6rpx 14rpx 0 rgba(228,228,228,0.50);position: absolute;top:360rpx;left:3%;border: 1px #eee solid;}
 .menulist .menuitem{width:170rpx; height: 140rpx;}
 .icon_home{display: block;width: 88rpx;height: 88rpx;}
 .menulist .tx-c{font-size: 26rpx;color: #666;margin-top: 12rpx;}
@@ -44,15 +44,15 @@ swiper{display:block;width:100%;height:400rpx;box-sizing:border-box;overflow:hid
 .mLine{width:1px;height:74rpx;background:#dedede;}
 
 .pubu{width:100%;box-sizing:border-box;display:flex;flex-direction:row;}
-.pubuItem{width:48.5%;display:flex;flex-direction:column; box-shadow: 0 4rpx 10rpx 0 rgba(228, 228, 228, 0.50); border-radius: 6rpx;padding-bottom: 20rpx;}
+.pubuItem{width:48.5%;display:flex;flex-direction:column; box-shadow: 0 4rpx 10rpx 0 rgba(228, 228, 228, 0.50); border-radius: 6rpx;padding-bottom: 20rpx;position: relative;overflow: hidden;}
 .pubuItem:nth-child(2){margin-left: 3%}
-.pubuItem .plimg{width:100%;height:220rpx;border-radius:10rpx;position: relative;}
+.pubuItem .plimg{width:100%;height:220rpx;position: relative;}
 .pubuname{font-size:26rpx;color:#333;display:-webkit-box;overflow:hidden;text-overflow:ellipsis;-webkit-line-clamp:2;-webkit-box-orient:vertical;margin-top:10rpx;padding-left: 20rpx;padding-right: 20rpx;}
-.pubuprice{font-size: 26rpx;color: #e83221;font-weight: bold;padding-left: 20rpx;margin-top: 20rpx;}
+.pubuprice{font-size: 38rpx;color: #e83221;font-weight: bold;padding-left: 20rpx;margin-top: 16rpx;}
 
-.productBox{width:100%;display:flex;flex-direction:column; box-shadow: 0 4rpx 10rpx 0 rgba(228, 228, 228, 0.50); border-radius: 6rpx;padding-bottom: 20rpx;background-color: #fff}
+.productBox{width:100%;display:flex;flex-direction:column; box-shadow: 0 4rpx 10rpx 0 rgba(228, 228, 228, 0.50); border-radius: 6rpx;padding-bottom: 30rpx;background-color: #fff;overflow: hidden;}
 .productDiv{width: 100%;}
-.productDiv .plimg{width:100%;height:350rpx;border-radius:10rpx;position: relative;}
+.productDiv .plimg{width:100%;height:350rpx;position: relative;}
 
 /*************juzi****************/
 .juzihl-wrap{background:#fff;padding:30rpx 30rpx 0 30rpx;}
@@ -82,7 +82,9 @@ swiper{display:block;width:100%;height:400rpx;box-sizing:border-box;overflow:hid
 .proDiv .l{padding: 3rpx 10rpx;background: #444444;font-size: 20rpx;color: #FED901;}
 .proDiv .r{padding: 3rpx 10rpx;font-size: 20rpx;color: #000000;background-image: linear-gradient(-269deg, #FCBF0A 0%, #FFDC00 100%);font-weight: bold;}
 .ctrlbtn{width:106rpx;height:50rpx;font-size:26rpx;display:flex;align-items:center;justify-content:center;padding:0;box-sizing:border-box;}
-.sharBtn,.buyBtn2{border:2rpx solid #E83221;border-radius:6rpx;color:#E83221;background:#fff;}
+.buyBtn2{border:2rpx solid #E83221;border-radius:6rpx;color:#E83221;background:#fff;}
+.sharBtn{width: 80rpx;height: 60rpx;}
+.sharePng{width: 37rpx;height: 40rpx;display: block;}
 .buyBtn1,.proBtn1{background: #E83221;border-radius:6rpx;color:#ffffff;margin-left: 20rpx;}
 .xIcon{transition:all 0.3 ease;}
 .rotate{transform:rotate(180deg);}
@@ -112,17 +114,6 @@ swiper{display:block;width:100%;height:400rpx;box-sizing:border-box;overflow:hid
 .ysqMark image{width:140rpx;height:62rpx;position:absolute;top:50%;left:50%;margin-left:-70rpx;margin-top:-31rpx;}
 .ovh{overflow:hidden;height:100%;}
 
-.modal1{width:100%;height:100%;position:fixed;left:0;top:0;z-index:2;box-sizing:border-box;}
-.modal1 .div{width:100%;position:relative;z-index:9;box-sizing:border-box;}
-.modal1 .div .canvas{width:260px;height:420px;position:relative;z-index:6;}
-.modal1 canvas{width:260px;height:420px;}
-.modal1 .bott{position:relative;height:160rpx;width:100%;z-index:999;}
-.modal1 .bott button{font-size:28rpx;height:160rpx;background-color:#fff;}
-.modal1 .bott button .share{display:block;}
-.modal1 .bott button .icon{display:block;width:60rpx;height:60rpx;}
-.modal1 .bott button .txt1{display:block;height:32rpx;line-height:32rpx;font-size:24rpx;margin-top:16rpx;color:#666;}
-.modal1 .bott button .txt2{display:block;height:32rpx;line-height:32rpx;font-size:24rpx;margin-top:13rpx;color:#666;}
-
 .mark1,.mark2,.mark3{width: 96rpx;height: 34rpx;text-align: center;line-height: 34rpx;border-radius: 17rpx;display: inline-block;font-size: 20rpx;margin-left: 12rpx}
 .mark1{background-color:rgba(37,184,188,0.2);color: #25B8BC;}
 .mark2{background-color:rgba(247,95,96,0.2);color: #F75E60;}
@@ -132,3 +123,8 @@ swiper{display:block;width:100%;height:400rpx;box-sizing:border-box;overflow:hid
 .buyBtn4{width:120rpx;height:54rpx;font-size:26rpx;display:flex;align-items:center;justify-content:center;padding:0;box-sizing:border-box;background: #E83221;border-radius:6rpx;color:#ffffff;}
 
 .contentWarp{background-image: linear-gradient(-180deg, #FFFFFF 20%, #F5F5F5 23%);}
+.markBtn{position: absolute;bottom: 20rpx;right: 20rpx;}
+
+.secondKillDiv{background-image: linear-gradient(-180deg, #FFFFFF 0%, #FFF4EE 62%);padding:188rpx 30rpx 40rpx 30rpx;position: relative;}
+.clockDiv{width: 400rpx;height: 42rpx;position: absolute;top: 200rpx;right: 30rpx;}
+.clockDiv .txt{font-size: 28rpx;margin-right: 10rpx;}

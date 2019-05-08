@@ -5,6 +5,7 @@
     "backgroundColorTop": "#FFDC00",
     "backgroundColorBottom" : "#F6F6F6",
     "usingComponents": {
+    "child": "/components/timechange/timechange",
     "nav-bar": "/components/navbar/index"
   }
 }

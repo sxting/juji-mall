@@ -16,9 +16,6 @@ Page({
   onLoad: function(options) {
     wx.hideShareMenu();
     this.getInfo();
-    if(app.globalData.barHeight!=20){
-        // this.setData({topValue:2*(app.globalData.barHeight-20)})
-    }
   },
   showDesModal:function(e){
     console.log(e);

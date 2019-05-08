@@ -60,6 +60,7 @@ Page({
     if(options.sceneid){
       this.setData({sceneId: options.sceneid});
     }
+    wx.hideShareMenu();
     // 查询商品详情
     this.getItemInfo();
     //查询用户橘子

@@ -1,14 +1,7 @@
-<view class="nav-wrap" style="height: {{height*2 + 25}}px;background:{{navbarData.isIndex==1?'#ffdc00':''}}">
-  <view class="nav-title" style="line-height: {{height*2 + 44}}px;">{{navbarData.title}}</view>
-  <view class="nav-bar">
-    <view class="nav-capsule" style="height: {{height*2 + 44}}px;" wx:if="{{navbarData.showCapsule}}">
-      <view bindtap="_navback" class="backBtn">
-        <image src="/images/back-pre.png" mode="aspectFill" class="back-pre"></image>
-      </view>
-      <!-- <view class="navbar-v-line" wx:if="{{!share}}"></view>
-      <view bindtap="_backhome">
-        <image src="/images/back-home.png" mode="aspectFill" class="back-home"></image>
-      </view> -->
-    </view>
+<view class="navWrap ub ub-ac" style="height:45px;background:{{navbarData.isIndex==1?'#ffdc00':''}}">
+  <view bindtap="goback" class="backBtn ub ub-ac" wx:if="{{navbarData.showCapsule}}">
+    <image src="/images/back-pre.png" mode="aspectFill" class="icon_back"></image>
   </view>
+  <view class="navTitle ub-f1" style="line-height: 45px;">{{navbarData.title}}</view>
+  <view class="backBtn" wx:if="{{navbarData.showCapsule}}"></view>
 </view>

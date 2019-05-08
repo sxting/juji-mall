@@ -21,9 +21,6 @@ Page({
     },
     onLoad: function() {
         this.getInfo();
-        if(app.globalData.barHeight!=20){
-            // this.setData({topValue:2*(app.globalData.barHeight-20)})
-        }
     },
     getInfo: function() {
         service.userInfo({ openId: wx.getStorageSync('openid') }).subscribe({

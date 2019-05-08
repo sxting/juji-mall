@@ -26,15 +26,8 @@ Component({
     })
   },
   methods: {
-    _navback() {
+    goback() {
       wx.navigateBack()
-    },
-  //返回到首页
-    _backhome() {
-      wx.switchTab({
-        url: '/pages/index/index',
-      })
     }
   }
-
 }) 

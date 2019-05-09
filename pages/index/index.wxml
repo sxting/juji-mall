@@ -73,7 +73,7 @@
           <image src="{{sortIndex==4?'../../images/label_xl_active.png':'../../images/label_xl.png'}}" style="width:15rpx;height:16rpx;margin-left:10rpx;"></image>
         </view>
       </view>
-      <view class="jingxuanlist" wx:for="{{recommendPage}}" wx:for-index='index' wx:key="unique">
+      <view class="jingxuanlist" wx:for="{{recommendPage}}" wx:for-index='index' wx:key="unique" style="padding-bottom:30rpx">
         <image class="productImg" bindtap="toNextDetail" data-type="{{item.currentActivityType}}" data-actid="{{item.currentActivityId}}" data-id="{{item.productId}}" data-storeid="{{item.nearStore.id}}" lazy-load="true" src="https://upic.juniuo.com/file/picture/{{item.picId}}/resize_690_387/mode_filt/format_jpg/quality_70" mode="widthFix"></image>
         <view class="dis-wrap jc-sb">
           <view class="from">{{item.merchantName}}</view>
@@ -95,9 +95,12 @@
             <view class="mark1" wx:if="{{item.currentActivityType=='SPLICED'}}">特价拼团</view>
             <view class="mark2" wx:if="{{item.currentActivityType=='BARGAIN'}}">超值砍价</view>
             <view class="mark3" wx:if="{{item.currentActivityType=='SEC_KILL'}}">限时秒杀</view>
+            <button class="ctrlbtn sharBtn shareB" wx:if="{{!item.currentActivityType}}" bindtap="toComDetailAndShare" data-id="{{item.productId}}" data-storeid="{{item.nearStore.id}}">
+              <image class="shareImg" mode="widthFix" src="/images/fx.png"></image>
+            </button>
           </view>
         </view>
-        <form bindsubmit="collectFormIds" report-submit="true">
+        <!-- <form bindsubmit="collectFormIds" report-submit="true">
           <view class="ub ub-ac jc-sb" style="padding: 0 30rpx 30rpx 30rpx;">
               <view class="ub ub-ac ub-f1" style="margin-top:20rpx">
                 <image wx:if="{{item.currentActivityType!='SPLICED'&&item.currentActivityType!='BARGAIN'&&item.currentActivityType!='SEC_KILL'}}" src="/images/soldCount.png" style="width:24rpx;height: 22rpx;"></image>
@@ -112,7 +115,7 @@
               <button form-type="submit" class="buyBtn3" wx:if="{{item.currentActivityType=='BARGAIN'}}" bindtap="toNextDetail" data-type="{{item.currentActivityType}}" data-actid="{{item.currentActivityId}}" data-id="{{item.productId}}">发起砍价</button>
               <button form-type="submit" class="buyBtn4" wx:if="{{item.currentActivityType=='SEC_KILL'}}" bindtap="toNextDetail" data-type="{{item.currentActivityType}}" data-actid="{{item.currentActivityId}}" data-id="{{item.productId}}">抢 购</button>
           </view>
-        </form>
+        </form> -->
       </view>
     </view>
 

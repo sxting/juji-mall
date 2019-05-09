@@ -4,23 +4,23 @@
     <!-- 普通用户进入 1、普通用户 从没申请  2、桔民 从没申请过  -->
     <view class="main" wx:if="{{(role == 'UNDEFINED' && !applyLeader) || (role == 'MEMBER' && !applyLeader)}}">
         <view class="toper1">
-          <image class="udb topBg1" src="../../../images/ytop1.png" mode="scaleToFill"></image>
+          <image class="udb topBg1" src="/images/ytop1.png" mode="scaleToFill"></image>
           <view class="topCon1">
-              <image class="juzhang1" src="../../../images/juzhang1.png"></image>
+              <image class="juzhang1" src="/images/juzhang1.png"></image>
               <view class="tx-c">成功邀请{{minInvitedMemberCount}}名新人，即可获得桔长资格</view>
           </view>
           <view class="menuDiv" style="background-color: #fff;">
               <view class="menulist ub ub-ac ub-pj">
                 <view class="item ub ub-ver ub-ac ub-pc">
-                  <image class="icon_menu" src="../../../images/icon_menu2.png"></image>
+                  <image class="icon_menu" src="/images/icon_menu2.png"></image>
                   <view class="tx-c">零囤货</view>
                 </view>
                 <view class="item ub ub-ver ub-ac ub-pc">
-                  <image class="icon_menu" src="../../../images/icon_menu1.png"></image>
+                  <image class="icon_menu" src="/images/icon_menu1.png"></image>
                   <view class="tx-c">零风险</view>
                 </view>
                 <view class="item ub ub-ver ub-ac ub-pc">
-                  <image class="icon_menu" src="../../../images/icon_menu3.png"></image>
+                  <image class="icon_menu" src="/images/icon_menu3.png"></image>
                   <view class="tx-c">零压力</view>
                 </view>
               </view>
@@ -30,7 +30,7 @@
         </view>
         <view class="txtCon">
           <view class="txtTit">
-            <image class="titbg" src="../../../images/titbg.png"></image>
+            <image class="titbg" src="/images/titbg.png"></image>
             <view class="tittext">桔长专属权益</view>
           </view>
           <view class="titTxt">专享低价</view>
@@ -49,7 +49,7 @@
     <!-- 桔员进入 桔民 申请过-->
     <view class="main" wx:if="{{role == 'MEMBER' && applyLeader}}">
         <view class="toper1">
-          <image class="udb topBg1" src="../../../images/ytop1.png" mode="scaleToFill"></image>
+          <image class="udb topBg1" src="/images/ytop1.png" mode="scaleToFill"></image>
           <view style="height:20rpx"></view>
           <view class='progressDiv' style="background:#fff">
               <view class='clearfix my-team'>
@@ -73,7 +73,7 @@
 
         <view class="txtCon">
           <view class="txtTit">
-            <image class="titbg" src="../../../images/titbg.png"></image>
+            <image class="titbg" src="/images/titbg.png"></image>
             <view class="tittext">桔长专属权益</view>
           </view>
           <view class="titTxt">专享低价</view>
@@ -92,15 +92,15 @@
     <!-- 桔长进入实名认证 -->
     <view class="main" wx:if="{{role == 'LEADER' && !isAuthed}}">
         <view class="toper2">
-            <image class="udb topBg2" src="../../../images/ytop2.png" mode="scaleToFill"></image>
+            <image class="udb topBg2" src="/images/ytop2.png" mode="scaleToFill"></image>
             <view class="topCon2">
-                <image class="juzhang2" src="../../../images/juzhang2.png"></image>
+                <image class="juzhang2" src="/images/juzhang2.png"></image>
                 <view class="tx-c">接下来开启您的推广赚钱之旅！</view>
             </view>
         </view>
         <view class="form">
             <view class="item">
-                <input type="text" placeholder="请填写您的微信账号" value='{{ wechatId }}' data-type='wechatid' maxlength='20' bindinput="dataChange" focus="true" class="bindInput" />
+                <input type="text" placeholder="请填写您的微信账号" value='{{ wechatId }}' data-type='wechatid' maxlength='20' bindinput="dataChange" class="bindInput" />
             </view>
             <view class="item" style="margin-top:50rpx;">
                 <input type="text" placeholder="请填写您的微信实名认证姓名" value='{{ name }}' data-type='name' maxlength='8' bindinput="dataChange" class="bindInput" />
@@ -113,7 +113,7 @@
     <!-- 桔长进入 -->
     <view class="main1" wx:if="{{role == 'LEADER' && isAuthed}}">
         <view class="toper">
-            <image class="udb topBg" src="../../../images/topBg.png" mode="scaleToFill"></image>
+            <image class="udb topBg" src="/images/topBg.png" mode="scaleToFill"></image>
             <view class="topCon" style="padding:30rpx;">
                 <view class="balance tx-c">{{ format.toFix(totalSettlementAmount) }}</view>
                 <view class="remark tx-c">累计提现金额(元)</view>
@@ -134,7 +134,7 @@
         <view class="userBox">
             <view class="ub ub-ac ub-pj" style="padding:30rpx;" bindtap="toPage" data-page="/pages/jujiGarden/myUser/index?role=LEADER">
                 <view class="ub-f1" style="font-size: 30rpx;color: #333333;font-weight:bold">我的用户</view>
-                <image src="../../../images/arrow-right.png" class="udb" style="width:12rpx;height:22rpx;margin-left:10rpx;"></image>
+                <image src="/images/arrow-right.png" class="udb" style="width:12rpx;height:22rpx;margin-left:10rpx;"></image>
             </view>
             <view style="padding:0 30rpx;">
                 <view style="height:1rpx;border-top:#eee 2rpx solid;"></view>
@@ -158,11 +158,11 @@
         </view>
         <view style="margin-top:20rpx;" class="menu ub">
             <view class="ub-f1 ub ub-ver ub-ac ub-pc" bindtap="toPage" data-page="/pages/jujiGarden/recommend/index">
-                <image src="../../../images/icon_tj.png" class='product-icon'></image>
+                <image src="/images/icon_tj.png" class='product-icon'></image>
                 <text class="itemTxt">商品推荐</text>
             </view>
             <view class="ub-f1 ub ub-ver ub-ac ub-pc r" bindtap="toPage" data-page="/pages/jujiGarden/recommendnew/index">
-                <image src="../../../images/icon_sc.png"></image>
+                <image src="/images/icon_sc.png"></image>
                 <text class="itemTxt">邀新素材</text>
             </view>
         </view>

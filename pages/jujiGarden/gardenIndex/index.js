@@ -101,6 +101,7 @@ Page({
 
     // 绑定微信号及姓名
     submitUserInfor() {
+        console.log('按钮是否禁用='+this.data.isDisabled);
         let data = {
             wechatId: this.data.wechatId,
             name: this.data.name
@@ -133,9 +134,12 @@ Page({
                     })
                 }
             },
-            error: err => console.log(err),
+            error: err => {
+                this.setData({isDisabled:false});
+                errDialog(err);
+            },
             complete: () => {
-                this.setData({isDisabled:false})
+                this.setData({isDisabled:false});
             }
         });
     },

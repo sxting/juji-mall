@@ -20,7 +20,7 @@
       </view>
     </view>
 
-    <cover-view class="menulist ub ub-ac ub-pj">
+    <cover-view class="menulist ub ub-ac ub-pj1">
       <cover-view class="menuitem ub ub-ver ub-ac ub-pc" bindtap="toPath" data-page="/pages/juzihl/index">
         <cover-image class="icon_home" src="/images/icon_home1.png" mode="aspectFit"></cover-image>
         <cover-view class="tx-c">桔子换礼</cover-view>
@@ -37,6 +37,10 @@
         <cover-image class="icon_home" src="/images/icon_home4.png" mode="aspectFit"></cover-image>
         <cover-view class="tx-c">好店礼券</cover-view>
       </cover-view>
+      <cover-view class="menuitem ub ub-ver ub-ac ub-pc" bindtap="toPath" data-page="/pages/activities/secondlist/index">
+        <cover-image class="icon_home" src="/images/icon_home5.png" mode="aspectFit"></cover-image>
+        <cover-view class="tx-c">商家入驻</cover-view>
+      </cover-view>
     </cover-view>
 
     <!-- 桔子球 -->
@@ -48,21 +52,22 @@
         <image src="/images/toPointList.png" style="width:12rpx;height:17rpx;margin-left:10rpx;"></image>
       </view>
     </view>
-
-    <view class="secondKillDiv" style="padding-bottom:{{secondList.length==0?0:'30rpx'}}">
-      <view class="mtitle" wx:if="{{secondList.length>0}}">限时秒杀</view>
+    <!--  style="padding-bottom:{{secondList.length==0?0:'30rpx'}}" -->
+    <view class="secondKillDiv">
+      <view class="mtitle" wx:if="{{secondList.length>0}}">限时秒杀
+        <view class="arrowDiv ub ub-ac ub-pe" bindtap="toPath" data-page="/pages/activities/secondlist/index">更多秒杀<image class="arrow-r" src="/images/arrow-r.png"></image></view>
+      </view>
       <view class="productBox" wx:if="{{secondList.length>0}}">
-        <view class="clockDiv ub ub-ac ub-pe">
-          <view class="txt">秒杀中</view>
-          <child dataFromParent='{{curSecondEndTime}}'></child>
-        </view>
-        <view class="productDiv" wx:for="{{secondList}}" wx:key="unique" bindtap="toNextDetail" data-type="SEC_KILL" data-actid="{{item.activityId}}" data-id="{{item.productId}}" data-storeid="" wx:if="{{index<1}}">
+        <view class="productDiv ub ub-ac" wx:for="{{secondList}}" wx:key="unique" bindtap="toNextDetail" data-type="SEC_KILL" data-actid="{{item.activityId}}" data-id="{{item.productId}}" data-storeid="" wx:if="{{index<2}}">
           <image src="https://upic.juniuo.com/file/picture/{{item.cover}}/resize_0_0/mode_fill" lazy-load="true" mode="aspectFill" class="plimg"></image>
-          <view class="pubuname">{{item.productName}}</view>
-          <view class="ub ub-ac priceDiv">
-            <view class="pubuprice" wx:if="{{item.activityPoint>0}}">{{item.activityPoint}}<text style="font-size:24rpx">桔子</text></view>
-            <view class="pubuprice" style="margin-bottom:5rpx;" wx:if="{{item.activityPoint>0&&item.activityPrice>0}}">+</view>
-            <view class="pubuprice" wx:if="{{item.activityPrice>0}}">{{filter.toFix(item.activityPrice)}}<text style="font-size:24rpx">元</text></view>
+          <view class="ub-f1">
+            <view class="pubuname" style="padding-right:0">{{item.productName}}</view>
+            <view class="clockDiv ub ub-ac mt05"><child dataFromParent='{{item.expectGmtEnd}}' customeClass="red" radius="0"></child><view class="txt">秒杀中</view></view>
+            <view class="ub ub-ac priceDiv" style="margin-top:10rpx">
+              <view class="pubuprice" wx:if="{{item.activityPoint>0}}">{{item.activityPoint}}<text style="font-size:20rpx">桔子</text></view>
+              <view class="pubuprice" style="margin-bottom:5rpx;" wx:if="{{item.activityPoint>0&&item.activityPrice>0}}">+</view>
+              <view class="pubuprice" wx:if="{{item.activityPrice>0}}">{{filter.toFix(item.activityPrice)}}<text style="font-size:20rpx">元</text></view>
+            </view>
           </view>
         </view>
       </view>
@@ -70,22 +75,22 @@
 
     <view class="contentWarp">
       <view class="newProductDiv" wx:if="{{pointProductList.length>0}}">
-        <view class="mtitle">新品尝鲜</view>
+        <view class="mtitle ub ub-ac">新品尝鲜<image class="icon_mark" src="/images/icon_h2.png" mode="aspectFit"></image></view>
         <view class="newproductDiv clearfix">
           <view class="pubuItem" wx:for="{{newProductList}}" wx:key="unique" bindtap="toComDetail" data-id="{{item.productId}}" data-storeid="{{item.nearStore.id}}">
             <image src="https://upic.juniuo.com/file/picture/{{item.picId}}/resize_0_0/mode_fill" lazy-load="true" mode="aspectFill" class="plimg"></image>
-            <view class="pubuname">{{item.productName}}</view>
+            <view class="pubuname mt05">{{item.productName}}</view>
             <view class="ub ub-ac priceDiv">
-              <view class="pubuprice" wx:if="{{item.point>0}}">{{item.point}}<text style="font-size:24rpx">桔子</text></view>
+              <view class="pubuprice" wx:if="{{item.point>0}}">{{item.point}}<text style="font-size:20rpx">桔子</text></view>
               <view class="pubuprice" style="margin-bottom:5rpx;" wx:if="{{item.point>0&&item.price>0}}">+</view>
-              <view class="pubuprice" wx:if="{{item.price>0}}">{{filter.toFix(item.price)}}<text style="font-size:24rpx">元</text></view>
+              <view class="pubuprice" wx:if="{{item.price>0}}">{{filter.toFix(item.price)}}<text style="font-size:20rpx">元</text></view>
             </view>
             <!-- <view class="mark3 markBtn">限时秒杀</view> -->
           </view>
         </view>
       </view>
       <view class="juzihl-wrap" wx:if="{{recommendPage.length>0}}" style="{{pointProductList.length>0?'padding-top:20rpx;':''}}padding-bottom:30rpx">
-        <view class="mtitle">精选推荐</view>
+        <view class="mtitle ub ub-ac">精选推荐<image class="icon_mark" src="/images/icon_h3.png" mode="aspectFit"></image></view>
         <view class="jingxuanlist" wx:for="{{recommendPage}}" wx:for-index='index' wx:key="unique">
           <image class="productImg" bindtap="toNextDetail" data-type="{{item.currentActivityType}}" data-actid="{{item.currentActivityId}}" data-id="{{item.productId}}" data-storeid="{{item.nearStore.id}}" lazy-load="true" src="https://upic.juniuo.com/file/picture/{{item.picId}}/resize_690_387/mode_filt/format_jpg/quality_70" mode="widthFix"></image>
           <view class="dis-wrap jc-sb">

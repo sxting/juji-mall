@@ -14,6 +14,13 @@ Component({
       observer: function (newVal, oldVal, changedPath) {
 
       }
+    },
+    radius:{
+      type: String,
+      value: "",
+      observer: function (newVal, oldVal, changedPath) {
+
+      }
     }
   },
   data: { 

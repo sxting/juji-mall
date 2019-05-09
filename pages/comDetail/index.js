@@ -3,6 +3,7 @@ import { service } from '../../service';
 import { constant } from '../../utils/constant';
 import { errDialog, loading } from '../../utils/util';
 var app = getApp();
+
 Page({
   data: {
     productId: '',
@@ -32,8 +33,6 @@ Page({
     isShowProfit:true,
     userImgUrl:'../../images/shareBg.png',
     nickName:'',
-    lat:'',
-    lng:'',
     share:0,//首页分享按钮进入值为1
     promo:0,//首页推广按钮进入值为1
     showMoreXuZhi: false,//购买须知折叠显示
@@ -52,7 +51,6 @@ Page({
     }
     wx.setNavigationBarTitle({title: '商品详情'});
     console.log(JSON.stringify(options));
-    this.setData({productId: options.id});
     if(options.storeid){
       this.setData({storeId: options.storeid});
     }
@@ -60,8 +58,14 @@ Page({
       this.setData({sceneId: options.sceneid});
     }
     wx.hideShareMenu();
-    // 查询商品详情
-    this.getItemInfo();
+
+    if(options.id){
+      this.setData({productId: options.id});
+      // 查询商品详情
+      this.getItemInfo();
+    }else{
+      errDialog('获取商品内容失败，请重试');
+    }
     //查询用户橘子
     this.getPointBalance();
     //查询新用户见面礼
@@ -136,12 +140,9 @@ Page({
       isShowNewerGet: false
     });
   },
-  toMap: function(e){
-    console.log(e);
-    if (e.currentTarget.dataset.lat && e.currentTarget.dataset.lng){
-      wx.navigateTo({
-        url: '/pages/map/index?lat=' + e.currentTarget.dataset.lat + '&lng=' + e.currentTarget.dataset.lng,
-      });
+  toMap: function(){
+    if (this.data.store && this.data.store.lat && this.data.store.lng){
+      wx.navigateTo({url: '/pages/map/index?lat=' + this.data.store.lat + '&lng=' + this.data.store.lng});
     }
   },
   toBuy:function(){
@@ -238,7 +239,6 @@ Page({
     });
   },
   getPointBalance: function() {
-
     service.getPointBalance().subscribe({
       next: res => {
         console.log('--------查询桔子余额-------');
@@ -293,9 +293,7 @@ Page({
             distributorRole: res.distributorRole,
             welfareGroup: res.welfareGroup,
             showPics: picsStrArr,
-            isShowData: true,
-            lat: res.store.lat,
-            lng: res.store.lng
+            isShowData: true
           });
           if(that.data.share==1){
             that.showShare();
@@ -316,9 +314,7 @@ Page({
             distributorRole: res.distributorRole,
             welfareGroup: res.welfareGroup,
             showPics: picsStrArr,
-            isShowData: true,
-            lat: res.store.lat,
-            lng: res.store.lng
+            isShowData: true
           });
           if(that.data.share==1){
             that.showShare();

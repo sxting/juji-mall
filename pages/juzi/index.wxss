@@ -25,7 +25,7 @@
 .normalBtn { width: 560rpx; height: 88rpx; border-radius: 44rpx; background: #FFDC00; line-height: 88rpx; text-align: center; margin-top: 20rpx;}
 .signedBtn { width: 560rpx; height: 88rpx; border-radius: 44rpx; background: #f5f5f5; color: #999999; line-height: 88rpx; text-align: center; margin-top: 20rpx;}
 
-.taskDiv{margin:20rpx 30rpx 0;padding:30rpx 30rpx;box-sizing:border-box;background: #FFFFFF;box-shadow: 0 0 5rpx 0 rgba(228,228,228,0.50);border-radius: 10rpx;}
+.taskDiv{margin:20rpx 30rpx 0;padding:30rpx 30rpx 6rpx;box-sizing:border-box;background: #FFFFFF;box-shadow: 0 0 5rpx 0 rgba(228,228,228,0.50);border-radius: 10rpx;}
 .subImg{width:80rpx;height:80rpx;margin-right:20rpx;}
 .subCon{margin-right: 20rpx;}
 .subTit{font-size:28rpx;color: #333333;}

@@ -118,9 +118,11 @@ Page({
         }else{
             this.setData({isDisabled:true})
         }
+        wx.showToast({ title: '申请中', icon: 'loading', duration: 30000 });
         jugardenService.bindWechatInfor(data).subscribe({
             next: res => {
                 if (res) {
+                    wx.hideToast();
                     this.setData({
                         role: res.role,
                         switchFun: false,
@@ -136,9 +138,11 @@ Page({
             },
             error: err => {
                 this.setData({isDisabled:false});
+                wx.hideToast();
                 errDialog(err);
             },
             complete: () => {
+                wx.hideToast();
                 this.setData({isDisabled:false});
             }
         });

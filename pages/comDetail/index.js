@@ -148,7 +148,7 @@ Page({
   },
   toBuy:function(){
     console.log('下单前sceneId='+this.data.sceneId);
-    service.getProQrCode({ productId:this.data.productId,path: 'pages/comDetail/index'}).subscribe({
+    service.getProQrCode({ productId:this.data.productId,path: 'pages/login/index'}).subscribe({
         next: res => { 
             var sceneId = res.senceId;
             this.setData({sceneId:sceneId});

@@ -95,22 +95,6 @@
           </view>
           <button class="taskBtn" bindtap="toMyOrder">评价</button>
       </view>
-      <view class="taskItem ub ub-ac">
-          <image src="/images/task2.png" class="subImg"></image>
-          <view class="subCon ub-f1">
-              <view class="subTit">发送好物给朋友可得{{currentPointObj.shareProductTask.onceNum}}个桔子</view>
-              <view class="subTxt">每天最多赚{{currentPointObj.shareProductTask.dayNum}}个桔子</view>
-          </view>
-          <button class="taskBtn" bindtap="toIndex">挑选</button>
-      </view>
-      <view class="taskItem ub ub-ac">
-          <image src="/images/task5.png" class="subImg"></image>
-          <view class="subCon ub-f1">
-              <view class="subTit">推荐桔集给朋友可得{{currentPointObj.shareProgramTask.onceNum}}个桔子</view>
-              <view class="subTxt">每天最多可得{{currentPointObj.shareProgramTask.dayNum}}个桔子</view>
-          </view>
-          <button class="taskBtn" open-type="share">邀请</button>
-      </view>
   </view>
 
   <view class="juzigzWrap" hidden="{{!showjuzigz}}" bindtap="closejuzigzModal">

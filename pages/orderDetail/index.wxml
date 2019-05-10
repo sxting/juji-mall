@@ -66,7 +66,7 @@
 
     <view class="ub ub-ac tkDiv plr15 mt10" wx:if="{{orderInfo.status=='PAID'}}">
         <image class="udb" src="/images/tuikuan.png"></image>
-        <view class="txt ub-f1">{{orderInfo.orderBizType=='SEC_KILL'?'秒杀活动商品不支持退款':'有限期内未使用将自动退款'}}</view>
+        <view class="txt ub-f1">{{orderInfo.orderBizType=='SEC_KILL'?'秒杀活动商品不支持退款':'有效期内未使用可以退款，逾期不可退款'}}</view>
         <view wx:if="{{orderInfo.orderBizType!='SEC_KILL'}}" class="btn ub ub-ac ub-pc" bindtap="reFund">退款</view>
     </view>
 

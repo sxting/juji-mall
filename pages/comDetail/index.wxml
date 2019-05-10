@@ -215,11 +215,9 @@
     <view class="footer">
         <view class="homeWrap" bindtap="gohomepage">
             <image src="../../images/shouye.png" style="width:40rpx;height:40rpx;"></image>
-            <view class="home">首页</view>
         </view>
         <button class="homeWrap toBg" bindtap="showShare">
             <image src="../../images/fenxiang.png" style="width:40rpx;height:40rpx;" open-type="share"></image>
-            <view class="home">分享</view>
         </button>
         <form bindsubmit="collectFormIds" report-submit="true" wx:if="{{productInfo.distributor}}">
           <view class="proBtns ub ub-ac">

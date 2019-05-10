@@ -8,11 +8,19 @@ Component({
     }
   },
   data: {
-    height: '',
+    height: 20,
     //默认值  默认显示左上角
     navbarData: {
       showCapsule: 1,
       isIndex:0
+    }
+  },
+  ready:function(){
+    let pages = getCurrentPages(); //当前页面栈
+    if (pages.length == 1) {
+      var title = this.data.navbarData.title;
+      var isIndex = this.data.navbarData.isIndex;
+      this.setData({navbarData:{showCapsule:0,isIndex:isIndex,title:title}});
     }
   },
   attached: function () {

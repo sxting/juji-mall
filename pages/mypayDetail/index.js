@@ -8,7 +8,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    nvabarData: {showCapsule: 1,title: '桔 集'},
+    nvabarData: {showCapsule: 1,title: '消费详情'},
     orderId: '',
     dataInfo: {}
   },

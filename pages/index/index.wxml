@@ -14,9 +14,12 @@
                 </swiper>
                 <view class="locationWrap" bindtap="toPath" data-page="/pages/citylist/index" style="top:{{topValue}}px">
                     <text class="locationText">{{locationName}}</text>
-                    <image style="width:20rpx;height:14rpx;margin-left:12rpx;margin-top:8rpx;" lazy-load="true" src="/images/sort-down.png" wx:if="{{locationName}}"></image>
+                    <image style="width:20rpx;height:14rpx;margin-left:12rpx;margin-top:8rpx;" lazy-load="true" src="/images/sort-down1.png" wx:if="{{locationName}}"></image>
                 </view>
             </view>
+            <cover-view class="homeB">
+                <cover-image class="homeBImg" src="/images/bbbb.png" mode="aspectFit"></cover-image>
+            </cover-view>
         </view>
         <cover-view class="menulist ub ub-ac ub-pj1">
             <cover-view class="menuitem ub ub-ver ub-ac ub-pc" bindtap="toPath" data-page="/pages/juzihl/index">
@@ -31,17 +34,17 @@
                 <cover-image class="icon_home" src="/images/icon_home3.png" mode="aspectFit"></cover-image>
                 <cover-view class="tx-c">超值砍价</cover-view>
             </cover-view>
-            <cover-view class="menuitem ub ub-ver ub-ac ub-pc" bindtap="toPath" data-page="/pages/activities/secondlist/index">
+            <cover-view class="menuitem ub ub-ver ub-ac ub-pc" bindtap="toPath" data-page="/pages/niceShop/index">
                 <cover-image class="icon_home" src="/images/icon_home4.png" mode="aspectFit"></cover-image>
                 <cover-view class="tx-c">好店礼券</cover-view>
             </cover-view>
-            <cover-view class="menuitem ub ub-ver ub-ac ub-pc" bindtap="toPath" data-page="/pages/activities/secondlist/index">
+            <cover-view class="menuitem ub ub-ver ub-ac ub-pc" bindtap="showJoinModal">
                 <cover-image class="icon_home" src="/images/icon_home5.png" mode="aspectFit"></cover-image>
                 <cover-view class="tx-c">商家入驻</cover-view>
             </cover-view>
         </cover-view>
         <!-- 桔子球 -->
-        <view class="juziqiu" bindtap="onTapJuziqiu">
+        <!-- <view class="juziqiu" bindtap="onTapJuziqiu">
             <view style="font-size: 24rpx;color: #333333;font-weight:bold;text-align:center;margin-top:24rpx">
                 <text style="font-size: 30rpx;color: #151515;">{{filter.toFloor(pointBalance)}}</text>桔子
             </view>
@@ -49,28 +52,28 @@
                 <text style="font-size: 20rpx;color: #333333;">去赚取</text>
                 <image src="/images/toPointList.png" style="width:12rpx;height:17rpx;margin-left:10rpx;"></image>
             </view>
-        </view>
-        <!--  style="padding-bottom:{{secondList.length==0?0:'30rpx'}}" -->
-        <view class="secondKillDiv">
-            <view class="mtitle ub ub-ac" wx:if="{{secondList.length>0}}" style="margin-bottom:20rpx">
+        </view> -->
+        <view class="secondKillDiv" wx:if="{{secondList.length>0}}">
+            <view class="mtitle ub ub-ac" style="margin-bottom:12rpx">
                 <image class="icon_h1" src="/images/icon_h1.png" mode="aspectFit"></image>
                 <view class="ub-f1"></view>
                 <view class="arrowDiv ub ub-ac ub-pe" bindtap="toPath" data-page="/pages/activities/secondlist/index">更多秒杀<image class="arrow-r" src="/images/arrow-r.png"></image>
                 </view>
             </view>
-            <view class="productBox" wx:if="{{secondList.length>0}}">
+            <view class="productBox">
                 <view class="productDiv ub ub-ac" wx:for="{{secondList}}" wx:key="unique" bindtap="toNextDetail" data-type="SEC_KILL" data-actid="{{item.activityId}}" data-id="{{item.productId}}" data-storeid="" wx:if="{{index<2}}">
                     <image src="https://upic.juniuo.com/file/picture/{{item.cover}}/resize_0_0/mode_fill" lazy-load="true" mode="aspectFill" class="plimg"></image>
-                    <view class="ub-f1">
+                    <view class="ub-f1 ub ub-ver" style="height:180rpx">
                         <view class="pubuname" style="padding-right:0">{{item.productName}}</view>
-                        <view class="clockDiv ub ub-ac mt05">
+                        <view class="clockDiv ub ub-ac mt05 ub-f1">
                             <child dataFromParent='{{item.expectGmtEnd}}' customeClass="red" radius="0"></child>
                             <view class="txt">秒杀中</view>
                         </view>
-                        <view class="ub ub-ac priceDiv" style="margin-top:10rpx">
+                        <view class="ub ub-ac priceDiv" style="margin-top:20rpx">
                             <view class="pubuprice" wx:if="{{item.activityPoint>0}}">{{item.activityPoint}}<text style="font-size:20rpx">桔子</text></view>
-                            <view class="pubuprice" style="margin-bottom:5rpx;" wx:if="{{item.activityPoint>0&&item.activityPrice>0}}">+</view>
+                            <view class="pubuprice" wx:if="{{item.activityPoint>0&&item.activityPrice>0}}">+</view>
                             <view class="pubuprice" wx:if="{{item.activityPrice>0}}">{{filter.toFix(item.activityPrice)}}<text style="font-size:20rpx">元</text></view>
+                            <view class="old-price" style="margin-left:20rpx;margin-top:8rpx">{{filter.toFix(item.originalPrice)}}元</view>
                         </view>
                     </view>
                 </view>
@@ -81,15 +84,18 @@
                 <view class="mtitle ub ub-ac">新品尝鲜<image class="icon_mark" src="/images/icon_h2.png" mode="aspectFit"></image>
                 </view>
                 <view class="newproductDiv clearfix">
-                    <view class="pubuItem" wx:for="{{newProductList}}" wx:key="unique" bindtap="toComDetail" data-id="{{item.productId}}" data-storeid="{{item.nearStore.id}}">
+                    <view class="pubuItem" wx:for="{{newProductList}}" wx:if="{{!(index==2&&newProductList.length==3)&&index<4}}" wx:key="unique" bindtap="toComDetail" data-id="{{item.productId}}" data-storeid="{{item.nearStore.id}}">
                         <image src="https://upic.juniuo.com/file/picture/{{item.picId}}/resize_0_0/mode_fill" lazy-load="true" mode="aspectFill" class="plimg"></image>
                         <view class="pubuname mt05">{{item.productName}}</view>
-                        <view class="ub ub-ac priceDiv">
+                        <view class="ub ub-ac priceDiv" style="margin-top:6rpx;padding-right:20rpx;">
                             <view class="pubuprice" wx:if="{{item.point>0}}">{{item.point}}<text style="font-size:20rpx">桔子</text></view>
-                            <view class="pubuprice" style="margin-bottom:5rpx;" wx:if="{{item.point>0&&item.price>0}}">+</view>
+                            <view class="pubuprice" wx:if="{{item.point>0&&item.price>0}}">+</view>
                             <view class="pubuprice" wx:if="{{item.price>0}}">{{filter.toFix(item.price)}}<text style="font-size:20rpx">元</text></view>
+                            <view class="ub-f1"></view>
+                            <view class="mark4" wx:if="{{item.currentActivityType=='SPLICED'}}">特价拼团</view>
+                            <view class="mark4" wx:if="{{item.currentActivityType=='BARGAIN'}}">超值砍价</view>
+                            <view class="mark4" wx:if="{{item.currentActivityType=='SEC_KILL'}}">限时秒杀</view>
                         </view>
-                        <!-- <view class="mark3 markBtn">限时秒杀</view> -->
                     </view>
                 </view>
             </view>
@@ -144,11 +150,34 @@
           <view class="clear"></view>
       </view>
   </view>
-  <view class="newerGetModalWrap" wx:if="{{isShowNewerGet}}">
-      <view class="newerGetModal">
-          <image src="/images/newerGetBg.png" style="width:680rpx;height:735rpx;"></image>
-          <image src="/images/newerGetBtn.png" class="newerGetBtn" bindtap="closeGetNewer"></image>
-          <image src="/images/newerGetClose.png" class="newerGetClose" bindtap="closeGetNewer"></image>
-      </view>
-  </view>
+
+    <cover-view class="newerGetModalWrap" wx:if="{{isShowNewerGet}}">
+      <cover-view class="newerGetModal">
+          <cover-image src="/images/newerGetBg.png" style="width:680rpx;height:735rpx;"></cover-image>
+          <cover-image src="/images/newerGetBtn.png" class="newerGetBtn" bindtap="closeGetNewer"></cover-image>
+      </cover-view>
+      <cover-image src="/images/newerGetClose.png" class="newerGetClose" bindtap="closeGetNewer"></cover-image>
+    </cover-view>
+
+    <cover-view class="jcModalWrap" hidden="{{!showJcModal}}">
+        <cover-view class="jcModal">
+            <cover-image src="/images/shoper1.png" style="width:100%;height: 236rpx;border-top-left-radius: 20rpx;border-top-right-radius: 20rpx;"></cover-image>
+            <cover-view class="jcModalTit" style="margin-top:30rpx;margin-bottom: 20rpx;">商家申请入驻桔集</cover-view>
+            <cover-view class="jcModalText plr20">如果您是本地吃喝玩乐优质商家，</cover-view>
+            <cover-view class="jcModalText plr20">想入驻“桔集”平台，可拨打电话或</cover-view>
+            <cover-view class="jcModalText plr20">微信咨询</cover-view>
+            <cover-view class="jcCtrl ub ub-ac plr20" style="margin-top: 20rpx;">
+                <cover-image class="shoperIcon" style="width:32rpx;height:27rpx;" src="/images/shoper3.png"></cover-image>
+                <cover-view class="ub-f1 shopTxt">18813035671</cover-view>
+                <cover-view class="jcModalBtn" style="background:#ffdc00" bindtap="dialtelUs">拨打</cover-view>
+            </cover-view>
+            <cover-view class="jcCtrl ub ub-ac plr20 mt05">
+                <cover-image class="shoperIcon" style="width:36rpx;height:29rpx" src="/images/shoper2.png"></cover-image>
+                <cover-view class="ub-f1 shopTxt">juji1031</cover-view>
+                <cover-view class="jcModalBtn" style="background:#FCBF0A" bindtap="copyUs">复制</cover-view>
+            </cover-view>
+        </cover-view>
+        <cover-image src="/images/newerGetClose.png" class="jcModalClose" bindtap="showJoinModal"></cover-image>
+    </cover-view>
+
 </view>

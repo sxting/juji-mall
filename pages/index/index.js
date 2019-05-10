@@ -2,17 +2,6 @@ var QQMapWX = require('../../lib/qqmap-wx-jssdk.min.js');
 import { constant } from '../../utils/constant';
 import { service } from '../../service';
 var app = getApp();
-
-// {
-//     productName:'这是一个无效的秒杀商品',
-//     expectGmtEnd:'2019-05-10 00:00:00',
-//     activityPoint:10,
-//     activityPrice:9.99,
-//     activityId:"1111",
-//     id:"11111",
-//     cover:'26zGLpV3LbMI'
-// }
-
 Page({
     data: {
         nvabarData: {isIndex:1,showCapsule: 0,title: '桔 集'},
@@ -47,7 +36,24 @@ Page({
         citylist: [],
         isFirstShow: true,
         isLoadedBalance: true,
-        locationStatus: true //定位状态
+        locationStatus: true, //定位状态
+        showJcModal:false
+    },
+    showJoinModal:function(){
+        this.setData({showJcModal:!this.data.showJcModal});
+    },
+    dialtelUs:function(){
+        wx.makePhoneCall({
+          phoneNumber: '18813035671'
+        });
+    },
+    copyUs:function(){
+        wx.setClipboardData({
+          data: 'juji1031',
+          success: (res) => {
+            wx.showToast({title: '复制成功'});
+          }
+        });
     },
     toPath: function(e) {
         var targetUrl = e.currentTarget.dataset['page'];
@@ -861,11 +867,11 @@ Page({
     getNewProductList: function() {
         var obj = {
             providerId: this.data.providerId,
-            // subject:"新品尝鲜",
+            subject:"新品抢鲜",
             sortField: 'IDX',
             sortOrder: 'ASC',
             pageNo: 1,
-            pageSize: 4,
+            pageSize: 5,
             longitude: wx.getStorageSync('curLongitude'),
             latitude: wx.getStorageSync('curLatitude')
         };

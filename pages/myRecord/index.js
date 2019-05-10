@@ -7,7 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    nvabarData: {showCapsule: 1,title: '支付记录'},
+    nvabarData: {showCapsule: 1,title: '消费记录'},
     recordList: []
   },
 

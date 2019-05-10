@@ -159,7 +159,7 @@ Page({
   },
 
   toCardList:function(){
-    wx.redirectTo({
+    wx.navigateTo({
       url: '/pages/cardlist/index',
     });
   },

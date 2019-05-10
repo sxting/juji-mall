@@ -1,3 +1,4 @@
+<nav-bar navbar-data='{{nvabarData}}'></nav-bar>
 <view class="main_cardlist">
   <view class="cardsWrap" wx:if="{{!noCards}}">
     <view class="cardItem {{current==index?'':'h148'}}" wx:for="{{cardList}}" wx:key="{{index}}" wx:for-item="item">

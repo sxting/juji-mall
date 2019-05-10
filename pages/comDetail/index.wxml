@@ -89,7 +89,7 @@
             </view>
         </view>
     </view>
-    <view class="yongkaxuzhi-wrap" style="margin-top:20rpx;">
+    <view class="yongkaxuzhi-wrap" style="margin-top:20rpx;" wx:if="{{store&&store.name}}">
         <view class="yongkaxuzhi">
             <view style="font-size: 30rpx;color: #333333;font-weight: bolder;">门店信息</view>
             <view class="row jc-sb" style="margin-top:30rpx;">
@@ -101,7 +101,7 @@
             </view>
             <view class="line" style="margin-top:30rpx;"></view>
             <view class="row jc-sb" style="margin-top:26rpx;">
-                <view class="row" data-lat="{{lat}}" data-lng="{{lng}}" bindtap="toMap">
+                <view class="row" bindtap="toMap">
                     <image style="width:20rpx;height:23rpx;margin-right:10rpx;" src="../../images/position.png"></image>
                     <view style="font-size: 24rpx;color: #666666;">{{store.address}}</view>
                 </view>

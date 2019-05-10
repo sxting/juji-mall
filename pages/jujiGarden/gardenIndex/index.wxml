@@ -100,7 +100,7 @@
         </view>
         <view class="form">
             <view class="item">
-                <input type="text" placeholder="请填写您的微信账号" value='{{ wechatId }}' data-type='wechatid' maxlength='20' bindinput="dataChange" class="bindInput" />
+                <input type="text" placeholder="请打开微信“我的”页面，复制微信号" value='{{ wechatId }}' data-type='wechatid' maxlength='20' bindinput="dataChange" class="bindInput" />
             </view>
             <view class="item" style="margin-top:50rpx;">
                 <input type="text" placeholder="请填写您的微信实名认证姓名" value='{{ name }}' data-type='name' maxlength='8' bindinput="dataChange" class="bindInput" />

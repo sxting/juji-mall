@@ -5,6 +5,7 @@ var app = getApp();
 
 Page({
   data: {
+    nvabarData: {showCapsule: 1,title: '订单确认'},
     productId: '',
     storeId: '',
     store: {},

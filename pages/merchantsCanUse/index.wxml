@@ -1,3 +1,4 @@
+<nav-bar navbar-data='{{nvabarData}}'></nav-bar>
 <view class="main ub-f1">
   <view class="conDiv">
     <view class="udb" wx:if="{{true}}">

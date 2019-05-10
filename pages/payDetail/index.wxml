@@ -1,4 +1,5 @@
 <wxs module="filter" src="../../utils/numFr.wxs"></wxs>
+<nav-bar navbar-data='{{nvabarData}}'></nav-bar>
 <view class="toper">
   <view class="t3">实付金额(元)</view>
   <view class="ttWrap">

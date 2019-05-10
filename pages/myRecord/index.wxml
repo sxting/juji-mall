@@ -1,4 +1,5 @@
 <wxs module="filter" src="../../utils/numFr.wxs"></wxs>
+<nav-bar navbar-data='{{nvabarData}}'></nav-bar>
 <view class="main_record">
   <view class="recordlist">
     <view class="item" wx:for="{{recordList}}" wx:key="{{index}}" bindtap="toPayDetail" data-id="{{item.id}}">
@@ -28,6 +29,5 @@
   <view class="shuiyin {{recordList.length>0?'':'ab'}}">
     <image src="../../images/juji.png" alt=""></image>
   </view>
-
 
 </view>

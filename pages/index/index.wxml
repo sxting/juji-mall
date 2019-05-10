@@ -1,163 +1,154 @@
 <wxs module="filter" src="../../utils/numFr.wxs"></wxs>
 <view wx:if="{{showPageLoading}}" class="pageLoading">
-  <image src="/images/pageLoading.gif" class="pageLoadingImg"></image>
-  <view class="pageLoadingTip" style="color:#666666;font-size: 30rpx;">桔美好生活，集好店优惠</view>
+    <image src="/images/pageLoading.gif" class="pageLoadingImg"></image>
+    <view class="pageLoadingTip" style="color:#666666;font-size: 30rpx;">桔美好生活，集好店优惠</view>
 </view>
 <view class="{{(providerId&&(slideShowList.length>0||recommendPage.length>0))?'':'homeTabPage'}} {{isShowNewerGet?'noscroll':''}}" wx:else>
-
-  <view wx:if="content {{slideShowList.length>0||pointProductList.length>0||recommendPage.length>0}}">
-    <view class="toperWrap">
-      <view class="toper">
-        <swiper autoplay="{{autoplay}}" circular>
-          <swiper-item wx:for="{{slideShowList}}" wx:key="unique">
-            <image src="{{item.imgId?'https://upic.juniuo.com/file/picture/'+item.imgId+'/resize_690_340/mode_filt/format_jpg/quality_0':''}}" data-link="{{item.link}}" bindtap="onTapBanner" class="slide-image" mode="scaleToFill" lazy-load="true"></image>
-          </swiper-item>
-        </swiper>
-        <view class="locationWrap" bindtap="toPath" data-page="/pages/citylist/index" style="top:{{topValue}}px">
-          <text class="locationText">{{locationName}}</text>
-          <image style="width:20rpx;height:14rpx;margin-left:12rpx;margin-top:8rpx;" lazy-load="true" src="/images/sort-down.png" wx:if="{{locationName}}"></image>
-        </view>
-      </view>
-    </view>
-
-    <cover-view class="menulist ub ub-ac ub-pj1">
-      <cover-view class="menuitem ub ub-ver ub-ac ub-pc" bindtap="toPath" data-page="/pages/juzihl/index">
-        <cover-image class="icon_home" src="/images/icon_home1.png" mode="aspectFit"></cover-image>
-        <cover-view class="tx-c">桔子换礼</cover-view>
-      </cover-view>
-      <cover-view class="menuitem ub ub-ver ub-ac ub-pc" bindtap="toPath" data-page="/pages/activities/project-list/index?sceneType=SPLICED">
-        <cover-image class="icon_home" src="/images/icon_home2.png" mode="aspectFit"></cover-image>
-        <cover-view class="tx-c">特价拼团</cover-view>
-      </cover-view>
-      <cover-view class="menuitem ub ub-ver ub-ac ub-pc" bindtap="toPath" data-page="/pages/activities/project-list/index?sceneType=BARGAIN">
-        <cover-image class="icon_home" src="/images/icon_home3.png" mode="aspectFit"></cover-image>
-        <cover-view class="tx-c">超值砍价</cover-view>
-      </cover-view>
-      <cover-view class="menuitem ub ub-ver ub-ac ub-pc" bindtap="toPath" data-page="/pages/activities/secondlist/index">
-        <cover-image class="icon_home" src="/images/icon_home4.png" mode="aspectFit"></cover-image>
-        <cover-view class="tx-c">好店礼券</cover-view>
-      </cover-view>
-      <cover-view class="menuitem ub ub-ver ub-ac ub-pc" bindtap="toPath" data-page="/pages/activities/secondlist/index">
-        <cover-image class="icon_home" src="/images/icon_home5.png" mode="aspectFit"></cover-image>
-        <cover-view class="tx-c">商家入驻</cover-view>
-      </cover-view>
-    </cover-view>
-
-    <!-- 桔子球 -->
-    <view class="juziqiu" bindtap="onTapJuziqiu">
-      <view style="font-size: 24rpx;color: #333333;font-weight:bold;text-align:center;margin-top:24rpx">
-        <text style="font-size: 30rpx;color: #151515;">{{filter.toFloor(pointBalance)}}</text>桔子</view>
-      <view class="ub ub-ac ub-pc">
-        <text style="font-size: 20rpx;color: #333333;">去赚取</text>
-        <image src="/images/toPointList.png" style="width:12rpx;height:17rpx;margin-left:10rpx;"></image>
-      </view>
-    </view>
-    <!--  style="padding-bottom:{{secondList.length==0?0:'30rpx'}}" -->
-    <view class="secondKillDiv">
-      <view class="mtitle" wx:if="{{secondList.length>0}}">限时秒杀
-        <view class="arrowDiv ub ub-ac ub-pe" bindtap="toPath" data-page="/pages/activities/secondlist/index">更多秒杀<image class="arrow-r" src="/images/arrow-r.png"></image></view>
-      </view>
-      <view class="productBox" wx:if="{{secondList.length>0}}">
-        <view class="productDiv ub ub-ac" wx:for="{{secondList}}" wx:key="unique" bindtap="toNextDetail" data-type="SEC_KILL" data-actid="{{item.activityId}}" data-id="{{item.productId}}" data-storeid="" wx:if="{{index<2}}">
-          <image src="https://upic.juniuo.com/file/picture/{{item.cover}}/resize_0_0/mode_fill" lazy-load="true" mode="aspectFill" class="plimg"></image>
-          <view class="ub-f1">
-            <view class="pubuname" style="padding-right:0">{{item.productName}}</view>
-            <view class="clockDiv ub ub-ac mt05"><child dataFromParent='{{item.expectGmtEnd}}' customeClass="red" radius="0"></child><view class="txt">秒杀中</view></view>
-            <view class="ub ub-ac priceDiv" style="margin-top:10rpx">
-              <view class="pubuprice" wx:if="{{item.activityPoint>0}}">{{item.activityPoint}}<text style="font-size:20rpx">桔子</text></view>
-              <view class="pubuprice" style="margin-bottom:5rpx;" wx:if="{{item.activityPoint>0&&item.activityPrice>0}}">+</view>
-              <view class="pubuprice" wx:if="{{item.activityPrice>0}}">{{filter.toFix(item.activityPrice)}}<text style="font-size:20rpx">元</text></view>
-            </view>
-          </view>
-        </view>
-      </view>
-    </view>
-
-    <view class="contentWarp">
-      <view class="newProductDiv" wx:if="{{pointProductList.length>0}}">
-        <view class="mtitle ub ub-ac">新品尝鲜<image class="icon_mark" src="/images/icon_h2.png" mode="aspectFit"></image></view>
-        <view class="newproductDiv clearfix">
-          <view class="pubuItem" wx:for="{{newProductList}}" wx:key="unique" bindtap="toComDetail" data-id="{{item.productId}}" data-storeid="{{item.nearStore.id}}">
-            <image src="https://upic.juniuo.com/file/picture/{{item.picId}}/resize_0_0/mode_fill" lazy-load="true" mode="aspectFill" class="plimg"></image>
-            <view class="pubuname mt05">{{item.productName}}</view>
-            <view class="ub ub-ac priceDiv">
-              <view class="pubuprice" wx:if="{{item.point>0}}">{{item.point}}<text style="font-size:20rpx">桔子</text></view>
-              <view class="pubuprice" style="margin-bottom:5rpx;" wx:if="{{item.point>0&&item.price>0}}">+</view>
-              <view class="pubuprice" wx:if="{{item.price>0}}">{{filter.toFix(item.price)}}<text style="font-size:20rpx">元</text></view>
-            </view>
-            <!-- <view class="mark3 markBtn">限时秒杀</view> -->
-          </view>
-        </view>
-      </view>
-      <view class="juzihl-wrap" wx:if="{{recommendPage.length>0}}" style="{{pointProductList.length>0?'padding-top:20rpx;':''}}padding-bottom:30rpx">
-        <view class="mtitle ub ub-ac">精选推荐<image class="icon_mark" src="/images/icon_h3.png" mode="aspectFit"></image></view>
-        <view class="jingxuanlist" wx:for="{{recommendPage}}" wx:for-index='index' wx:key="unique">
-          <image class="productImg" bindtap="toNextDetail" data-type="{{item.currentActivityType}}" data-actid="{{item.currentActivityId}}" data-id="{{item.productId}}" data-storeid="{{item.nearStore.id}}" lazy-load="true" src="https://upic.juniuo.com/file/picture/{{item.picId}}/resize_690_387/mode_filt/format_jpg/quality_70" mode="widthFix"></image>
-          <view class="dis-wrap jc-sb">
-            <view class="from">{{item.merchantName}}</view>
-            <view class="dis">距你{{filter.toDis(item.nearDist)}}km</view>
-          </view>
-          <view class="pro-name" bindtap="toNextDetail" data-type="{{item.currentActivityType}}" data-actid="{{item.currentActivityId}}" data-id="{{item.productId}}" data-storeid="{{item.nearStore.id}}" style="margin-top:8rpx">{{item.productName}}</view>
-          <view class="price-wrap jc-sb">
-            <view class="p-wrap">
-              <view class="now-price" wx:if="{{item.point>0}}">{{item.point}}</view>
-              <view class="now-text" wx:if="{{item.point>0}}">桔子</view>
-              <view class="now-text" style="font-size: 28rpx;" wx:if="{{item.point>0&&item.price>0}}">+</view>
-              <view class="now-price" wx:if="{{item.price>0}}">{{filter.toFix(item.price)}}</view>
-              <view class="now-text" wx:if="{{item.price>0}}">元</view>
-              <view class="proDiv ub ub-ac" wx:if="{{item.distributor}}">
-                <view class="l">赚</view>
-                <view class="r">￥{{filter.toFix(item.distributorSalesRebate)}}</view>
-              </view>
-              <view class="mark1" wx:if="{{item.currentActivityType=='SPLICED'}}">特价拼团</view>
-              <view class="mark2" wx:if="{{item.currentActivityType=='BARGAIN'}}">超值砍价</view>
-              <view class="mark3" wx:if="{{item.currentActivityType=='SEC_KILL'}}">限时秒杀</view>
-            </view>
-          </view>
-          <form bindsubmit="collectFormIds" report-submit="true">
-            <view class="ub ub-ac jc-sb" style="padding: 0 30rpx 30rpx 30rpx;">
-                <view class="ub ub-ac ub-f1" style="margin-top:20rpx">
-                  <image wx:if="{{item.currentActivityType!='SPLICED'&&item.currentActivityType!='BARGAIN'&&item.currentActivityType!='SEC_KILL'}}" src="/images/soldCount.png" style="width:24rpx;height: 22rpx;"></image>
-                  <text wx:if="{{item.currentActivityType!='SPLICED'&&item.currentActivityType!='BARGAIN'&&item.currentActivityType!='SEC_KILL'}}" class="count">已售{{item.soldNum}}件</text>
-                </view>
-                <view class="sharBtn ub ub-ac ub-pe" wx:if="{{!item.distributor&&!item.currentActivityType}}" bindtap="toComDetailAndShare" data-id="{{item.productId}}" data-storeid="{{item.nearStore.id}}">
-                  <image class="sharePng" src="/images/shareBtn.png"></image>
+    <view wx:if="content {{slideShowList.length>0||pointProductList.length>0||recommendPage.length>0}}">
+        <view class="toperWrap">
+            <view class="toper">
+                <swiper autoplay="{{autoplay}}" circular>
+                    <swiper-item wx:for="{{slideShowList}}" wx:key="unique">
+                        <image src="{{item.imgId?'https://upic.juniuo.com/file/picture/'+item.imgId+'/resize_690_340/mode_filt/format_jpg/quality_0':''}}" data-link="{{item.link}}" bindtap="onTapBanner" class="slide-image" mode="scaleToFill" lazy-load="true"></image>
+                    </swiper-item>
+                </swiper>
+                <view class="locationWrap" bindtap="toPath" data-page="/pages/citylist/index" style="top:{{topValue}}px">
+                    <text class="locationText">{{locationName}}</text>
+                    <image style="width:20rpx;height:14rpx;margin-left:12rpx;margin-top:8rpx;" lazy-load="true" src="/images/sort-down.png" wx:if="{{locationName}}"></image>
                 </view>
             </view>
-          </form>
         </view>
-      </view>
+        <cover-view class="menulist ub ub-ac ub-pj1">
+            <cover-view class="menuitem ub ub-ver ub-ac ub-pc" bindtap="toPath" data-page="/pages/juzihl/index">
+                <cover-image class="icon_home" src="/images/icon_home1.png" mode="aspectFit"></cover-image>
+                <cover-view class="tx-c">桔子换礼</cover-view>
+            </cover-view>
+            <cover-view class="menuitem ub ub-ver ub-ac ub-pc" bindtap="toPath" data-page="/pages/activities/project-list/index?sceneType=SPLICED">
+                <cover-image class="icon_home" src="/images/icon_home2.png" mode="aspectFit"></cover-image>
+                <cover-view class="tx-c">特价拼团</cover-view>
+            </cover-view>
+            <cover-view class="menuitem ub ub-ver ub-ac ub-pc" bindtap="toPath" data-page="/pages/activities/project-list/index?sceneType=BARGAIN">
+                <cover-image class="icon_home" src="/images/icon_home3.png" mode="aspectFit"></cover-image>
+                <cover-view class="tx-c">超值砍价</cover-view>
+            </cover-view>
+            <cover-view class="menuitem ub ub-ver ub-ac ub-pc" bindtap="toPath" data-page="/pages/activities/secondlist/index">
+                <cover-image class="icon_home" src="/images/icon_home4.png" mode="aspectFit"></cover-image>
+                <cover-view class="tx-c">好店礼券</cover-view>
+            </cover-view>
+            <cover-view class="menuitem ub ub-ver ub-ac ub-pc" bindtap="toPath" data-page="/pages/activities/secondlist/index">
+                <cover-image class="icon_home" src="/images/icon_home5.png" mode="aspectFit"></cover-image>
+                <cover-view class="tx-c">商家入驻</cover-view>
+            </cover-view>
+        </cover-view>
+        <!-- 桔子球 -->
+        <view class="juziqiu" bindtap="onTapJuziqiu">
+            <view style="font-size: 24rpx;color: #333333;font-weight:bold;text-align:center;margin-top:24rpx">
+                <text style="font-size: 30rpx;color: #151515;">{{filter.toFloor(pointBalance)}}</text>桔子
+            </view>
+            <view class="ub ub-ac ub-pc">
+                <text style="font-size: 20rpx;color: #333333;">去赚取</text>
+                <image src="/images/toPointList.png" style="width:12rpx;height:17rpx;margin-left:10rpx;"></image>
+            </view>
+        </view>
+        <!--  style="padding-bottom:{{secondList.length==0?0:'30rpx'}}" -->
+        <view class="secondKillDiv">
+            <view class="mtitle ub ub-ac" wx:if="{{secondList.length>0}}" style="margin-bottom:20rpx">
+                <image class="icon_h1" src="/images/icon_h1.png" mode="aspectFit"></image>
+                <view class="ub-f1"></view>
+                <view class="arrowDiv ub ub-ac ub-pe" bindtap="toPath" data-page="/pages/activities/secondlist/index">更多秒杀<image class="arrow-r" src="/images/arrow-r.png"></image>
+                </view>
+            </view>
+            <view class="productBox" wx:if="{{secondList.length>0}}">
+                <view class="productDiv ub ub-ac" wx:for="{{secondList}}" wx:key="unique" bindtap="toNextDetail" data-type="SEC_KILL" data-actid="{{item.activityId}}" data-id="{{item.productId}}" data-storeid="" wx:if="{{index<2}}">
+                    <image src="https://upic.juniuo.com/file/picture/{{item.cover}}/resize_0_0/mode_fill" lazy-load="true" mode="aspectFill" class="plimg"></image>
+                    <view class="ub-f1">
+                        <view class="pubuname" style="padding-right:0">{{item.productName}}</view>
+                        <view class="clockDiv ub ub-ac mt05">
+                            <child dataFromParent='{{item.expectGmtEnd}}' customeClass="red" radius="0"></child>
+                            <view class="txt">秒杀中</view>
+                        </view>
+                        <view class="ub ub-ac priceDiv" style="margin-top:10rpx">
+                            <view class="pubuprice" wx:if="{{item.activityPoint>0}}">{{item.activityPoint}}<text style="font-size:20rpx">桔子</text></view>
+                            <view class="pubuprice" style="margin-bottom:5rpx;" wx:if="{{item.activityPoint>0&&item.activityPrice>0}}">+</view>
+                            <view class="pubuprice" wx:if="{{item.activityPrice>0}}">{{filter.toFix(item.activityPrice)}}<text style="font-size:20rpx">元</text></view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="contentWarp">
+            <view class="newProductDiv" wx:if="{{newProductList.length>0}}">
+                <view class="mtitle ub ub-ac">新品尝鲜<image class="icon_mark" src="/images/icon_h2.png" mode="aspectFit"></image>
+                </view>
+                <view class="newproductDiv clearfix">
+                    <view class="pubuItem" wx:for="{{newProductList}}" wx:key="unique" bindtap="toComDetail" data-id="{{item.productId}}" data-storeid="{{item.nearStore.id}}">
+                        <image src="https://upic.juniuo.com/file/picture/{{item.picId}}/resize_0_0/mode_fill" lazy-load="true" mode="aspectFill" class="plimg"></image>
+                        <view class="pubuname mt05">{{item.productName}}</view>
+                        <view class="ub ub-ac priceDiv">
+                            <view class="pubuprice" wx:if="{{item.point>0}}">{{item.point}}<text style="font-size:20rpx">桔子</text></view>
+                            <view class="pubuprice" style="margin-bottom:5rpx;" wx:if="{{item.point>0&&item.price>0}}">+</view>
+                            <view class="pubuprice" wx:if="{{item.price>0}}">{{filter.toFix(item.price)}}<text style="font-size:20rpx">元</text></view>
+                        </view>
+                        <!-- <view class="mark3 markBtn">限时秒杀</view> -->
+                    </view>
+                </view>
+            </view>
+            <view class="juzihl-wrap" wx:if="{{recommendPage.length>0}}" style="{{pointProductList.length>0?'padding-top:20rpx;':''}}padding-bottom:30rpx">
+                <view class="mtitle ub ub-ac">精选推荐<image class="icon_mark" src="/images/icon_h3.png" mode="aspectFit"></image>
+                </view>
+                <view class="jingxuanlist" wx:for="{{recommendPage}}" wx:for-index='index' wx:key="unique">
+                    <image class="productImg" bindtap="toNextDetail" data-type="{{item.currentActivityType}}" data-actid="{{item.currentActivityId}}" data-id="{{item.productId}}" data-storeid="{{item.nearStore.id}}" lazy-load="true" src="https://upic.juniuo.com/file/picture/{{item.picId}}/resize_690_387/mode_filt/format_jpg/quality_70" mode="aspectFill"></image>
+                    <view class="dis-wrap jc-sb">
+                        <view class="from">{{item.merchantName}}</view>
+                        <view class="dis">距你{{filter.toDis(item.nearDist)}}km</view>
+                    </view>
+                    <view class="pro-name" bindtap="toNextDetail" data-type="{{item.currentActivityType}}" data-actid="{{item.currentActivityId}}" data-id="{{item.productId}}" data-storeid="{{item.nearStore.id}}" style="margin-top:8rpx">{{item.productName}}</view>
+                    <view class="price-wrap jc-sb">
+                        <view class="p-wrap">
+                            <view class="now-price" wx:if="{{item.point>0}}">{{item.point}}</view>
+                            <view class="now-text" wx:if="{{item.point>0}}">桔子</view>
+                            <view class="now-text" style="font-size: 28rpx;" wx:if="{{item.point>0&&item.price>0}}">+</view>
+                            <view class="now-price" wx:if="{{item.price>0}}">{{filter.toFix(item.price)}}</view>
+                            <view class="now-text" wx:if="{{item.price>0}}">元</view>
+                            <view class="proDiv ub ub-ac" wx:if="{{item.distributor}}">
+                                <view class="l">赚</view>
+                                <view class="r">￥{{filter.toFix(item.distributorSalesRebate)}}</view>
+                            </view>
+                            <view class="mark1" wx:if="{{item.currentActivityType=='SPLICED'}}">特价拼团</view>
+                            <view class="mark2" wx:if="{{item.currentActivityType=='BARGAIN'}}">超值砍价</view>
+                            <view class="mark3" wx:if="{{item.currentActivityType=='SEC_KILL'}}">限时秒杀</view>
+                            <button class="ctrlbtn sharBtn shareB" wx:if="{{!item.currentActivityType}}" bindtap="toComDetailAndShare" data-id="{{item.productId}}" data-storeid="{{item.nearStore.id}}">
+                                <image class="shareImg" mode="widthFix" src="/images/fx.png"></image>
+                            </button>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
     </view>
-
-  </view>
-
-  <view style="width:100%;height:100%;background:#ffffff;overflow:hidden;" wx:else>
-
-    <image src="/images/city.png" style="width:240rpx;height:180rpx;margin:180rpx auto 60rpx;display:block;"></image>
-    <block wx:if="{{locationStatus}}">
-      <view style="font-size: 30rpx;color: #333333;text-align:center;">您的所在的位置暂未开通桔集服务</view>
-      <view style="margin-top:160rpx;font-size: 28rpx;color: #666666;text-align:center;">逛一下其他热门城市吧</view>
-    </block>
-    <block wx:else>
-      <view style="font-size: 30rpx;color: #333333;text-align:center;">微信获取位置信息失败，无法自动为您定位城市</view>
-      <view style="margin-top:160rpx;font-size: 28rpx;color: #666666;text-align:center;">您可以手动选择已开通城市</view>
-    </block>
-
-    <view class="main">
-      <view class="citem ub ub-ac ub-pc" wx:for="{{citylist}}" wx:key="unique" bindtap="selectCity" data-name="{{item.locationType=='CITY'?item.locationName:item.subList[0].locationName}}" data-pcode="{{item.locationType=='PROVINCE'?item.locationCode:''}}" data-code="{{item.locationType=='CITY'?item.locationCode:item.subList[0].locationCode}}" style="width:{{imageWidth}}">
-        <view wx:if="{{item.locationType=='CITY'}}">{{item.locationName}}</view>
-        <view wx:else>{{item.subList[0].locationName}}</view>
+    <view style="width:100%;height:100%;background:#ffffff;overflow:hidden;" wx:else>
+      <image src="/images/city.png" style="width:240rpx;height:180rpx;margin:180rpx auto 60rpx;display:block;"></image>
+      <block wx:if="{{locationStatus}}">
+          <view style="font-size: 30rpx;color: #333333;text-align:center;">您的所在的位置暂未开通桔集服务</view>
+          <view style="margin-top:160rpx;font-size: 28rpx;color: #666666;text-align:center;">逛一下其他热门城市吧</view>
+      </block>
+      <block wx:else>
+          <view style="font-size: 30rpx;color: #333333;text-align:center;">微信获取位置信息失败，无法自动为您定位城市</view>
+          <view style="margin-top:160rpx;font-size: 28rpx;color: #666666;text-align:center;">您可以手动选择已开通城市</view>
+      </block>
+      <view class="main">
+          <view class="citem ub ub-ac ub-pc" wx:for="{{citylist}}" wx:key="unique" bindtap="selectCity" data-name="{{item.locationType=='CITY'?item.locationName:item.subList[0].locationName}}" data-pcode="{{item.locationType=='PROVINCE'?item.locationCode:''}}" data-code="{{item.locationType=='CITY'?item.locationCode:item.subList[0].locationCode}}" style="width:{{imageWidth}}">
+              <view wx:if="{{item.locationType=='CITY'}}">{{item.locationName}}</view>
+              <view wx:else>{{item.subList[0].locationName}}</view>
+          </view>
+          <view class="clear"></view>
       </view>
-      <view class="clear"></view>
-    </view>
   </view>
-
-    <view class="newerGetModalWrap" wx:if="{{isShowNewerGet}}">
+  <view class="newerGetModalWrap" wx:if="{{isShowNewerGet}}">
       <view class="newerGetModal">
-        <image src="/images/newerGetBg.png" style="width:680rpx;height:735rpx;"></image>
-        <image src="/images/newerGetBtn.png" class="newerGetBtn" bindtap="closeGetNewer"></image>
-        <image src="/images/newerGetClose.png" class="newerGetClose" bindtap="closeGetNewer"></image>
+          <image src="/images/newerGetBg.png" style="width:680rpx;height:735rpx;"></image>
+          <image src="/images/newerGetBtn.png" class="newerGetBtn" bindtap="closeGetNewer"></image>
+          <image src="/images/newerGetClose.png" class="newerGetClose" bindtap="closeGetNewer"></image>
       </view>
-    </view>
-    
+  </view>
 </view>

@@ -10,6 +10,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    nvabarData: {showCapsule: 0,title: '桔 集'},
     logo: '',//门店logo
     storeName: '',//门店名称
     showFocus: true,//显示光标

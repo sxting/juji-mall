@@ -7,6 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    nvabarData: {showCapsule: 1,title: '我的卡包'},
     cardList: [],
     current: 0,
     noCards: false

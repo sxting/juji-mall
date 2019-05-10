@@ -10,6 +10,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    nvabarData: {showCapsule: 1,title: '支付结果'},
     addMoney:0,
     prepayMoney:0,
     wxPayMoney:0,

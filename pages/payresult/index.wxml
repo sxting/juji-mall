@@ -1,4 +1,5 @@
 <wxs module="filter" src="../../utils/numFr.wxs"></wxs>
+<nav-bar navbar-data='{{nvabarData}}'></nav-bar>
         <view class="topBox">
             <view class="chengongimgwrap">
                 <image src="../../images/chenggong.png" class="chengongimg" style="width:108rpx;height:108rpx;" ></image>
@@ -93,7 +94,7 @@
           <view class="pubuItem">
             <view class="cardWrap padr10">
               <view class="card todetail" wx:for="{{recommendList}}" wx:key="{{index}}" bindtap="toComDetail" data-id="{{item.productId}}" data-storeid="{{item.nearStore.id}}" wx:if="{{index%2 == 0}}">
-                <image src="https://upic.juniuo.com/file/picture/{{item.picId}}/resize_330_185/mode_filt/format_jpg/quality_70" lazy-load="true" mode="aspectFit" class="plimg"></image>
+                <image src="https://upic.juniuo.com/file/picture/{{item.picId}}/resize_330_185/mode_filt/format_jpg/quality_70" lazy-load="true" mode="aspectFill" class="plimg"></image>
                 <view class="pubuname">{{item.productName}}</view>
                 <view class="pububox" style="margin-top:10rpx;">
                   <view class="ex-juzi">

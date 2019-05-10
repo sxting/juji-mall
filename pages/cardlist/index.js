@@ -7,6 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    nvabarData: {showCapsule: 1,title: '卡 包'},
     cardList: [],
     current: 0,
     payUrl: 'https://juji.juniuo.com',

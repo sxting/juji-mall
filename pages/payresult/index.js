@@ -88,7 +88,9 @@ Page({
               url: constant.apiUrl+'/recommend/hot.json',
               method: 'GET',
               data: {
-                providerId: res.data.data.agentId
+                providerId: res.data.data.agentId,
+                merchantId: res.data.data.accountDto.merchantId,
+                storeId: res.data.data.accountDto.storeId
               },
               success: (res2) => {
                 console.log(res2);

@@ -1,5 +1,5 @@
 <nav-bar navbar-data='{{nvabarData}}'></nav-bar>
-<view id="app" class="app">
+<view id="app" class="app" style="height:{{conHeight}}px">
   <view class="main">
     <view class="bg">
       <view class="contentWrap">

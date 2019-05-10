@@ -4,6 +4,7 @@ import {
 import {
   constant
 } from '../../utils/constant';
+var app = getApp();
 Page({
 
   /**
@@ -38,13 +39,17 @@ Page({
     balance: 0,
     givingMoney: 0,
     accountpaystatus: false,//余额支付等待中效果标记
-    payUrl: 'https://juji.juniuo.com'
+    payUrl: 'https://juji.juniuo.com',
+    conHeight:400,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    var conHeight = app.globalData.screenHeight-app.globalData.barHeight-45;
+    console.log("内容区高"+conHeight);
+    this.setData({conHeight:conHeight})
     console.log(options);
     let that = this;
     new Promise(function (resolve, reject) {

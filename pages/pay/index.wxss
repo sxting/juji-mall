@@ -113,7 +113,6 @@
 
 .app {
   -webkit-overflow-scrolling: touch;
-  height: 100%;
 }
 
 img, input {

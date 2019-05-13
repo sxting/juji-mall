@@ -30,7 +30,7 @@
   </view>
   <view class="nodataDiv ub ub-ac ub-pc ub-ver" hidden="{{!isShowNodata}}">
     <image class="nodataImg" src="../../../images/null5.png" style="width:200rpx;height:137rpx"></image>
-    <view class="nodataTxt" style="margin-bottom:200rpx;">素材为空~</view>
+    <view class="nodataTxt" style="margin-bottom:200rpx;">暂无相关素材~</view>
   </view>
   <view class="modal1 ub ub-ver {{isShowModal?'uhide':''}} {{isTransparnet?'transparent':''}}">
     <view class="div ub-f1 ub ub-ac ub-pc">

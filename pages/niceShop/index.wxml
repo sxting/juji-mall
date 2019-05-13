@@ -34,8 +34,6 @@
   </view>
   <view class="nodataDiv ub ub-ac ub-ver" hidden="{{!isShowNodata}}">
       <image class="nodataImg" src="/images/null6.png" mode="aspectFit"></image>
-      <view class="nodataTxt">
-        <view>暂无商品</view>
-      </view>
+      <view class="nodataTxt">暂无相关商品</view>
   </view>
 </view>

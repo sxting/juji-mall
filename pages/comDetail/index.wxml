@@ -19,7 +19,7 @@
                 </view>
                 <view class="moreJuzi" bindtap="toGetPoint" wx:if="{{false}}">
                     做任务赚桔子
-                    <image src="../../images/arrow-right.png" style="width:14rpx;height:26rpx;margin-left:20rpx;"></image>
+                    <image src="/images/arrow-right.png" style="width:14rpx;height:26rpx;margin-left:20rpx;"></image>
                 </view>
             </view>
             <view class="ub ub-fe jc-sb" style="margin-top:10rpx;">
@@ -42,7 +42,7 @@
                     </view>
                 </view>
                 <view class="ub ub-ac" style="font-size: 24rpx;color: #999999;">
-                    <image src="../../images/soldCount.png" style="width:24rpx;height: 22rpx;margin-right:10rpx;"></image>已售{{productInfo.soldNum}}件
+                    <image src="/images/soldCount.png" style="width:24rpx;height: 22rpx;margin-right:10rpx;"></image>已售{{productInfo.soldNum}}件
                 </view>
             </view>
 
@@ -51,11 +51,11 @@
             <view class="joinClubWrap" wx:if="{{showJoinClub}}" bindtap="showJcModal">
               <view class="jcTitle">戳一下进入福利群</view>
               <view class="jcInner ub ub-ac">
-                <image src="../../images/group.png" class="jcImg"></image>
+                <image src="/images/group.png" class="jcImg"></image>
                 <view class="jcRight">
                     <view class="jcName">{{welfareGroup.title}}</view>
                     <view class="jcHongBaoWrap ub ub-ac">
-                      <image src="../../images/hongbao.png" class="jcHongBao"></image>
+                      <image src="/images/hongbao.png" class="jcHongBao"></image>
                       <view class="jcHongBaoText">{{welfareGroup.info}}</view>
                     </view>
                 </view>
@@ -71,7 +71,7 @@
             <view style="font-size: 30rpx;color: #333333;font-weight: bolder;">购买须知</view>
             <view class="xuzhiBorder">
               <!-- <view class="arrowBtnWrap">
-                <image src="../../images/icon_drop.png" class="arrowBtn {{showMoreXuZhi?'arrowTop':''}}"></image>
+                <image src="/images/icon_drop.png" class="arrowBtn {{showMoreXuZhi?'arrowTop':''}}"></image>
               </view> -->
               <view class="xuzhiInner">
                 
@@ -96,16 +96,16 @@
                 <view style="font-size: 28rpx;color:#333333;">{{store.name}}</view>
                 <view class="row" bindtap="toMerchantsList">
                     <view style="font-size: 24rpx;color: #999999;">适用{{productInfo.nearStoreCount?productInfo.nearStoreCount:0}}家门店</view>
-                    <image style="width:14rpx;height:26rpx;margin-left:20rpx;" src="../../images/arrow-right.png"></image>
+                    <image style="width:14rpx;height:26rpx;margin-left:20rpx;" src="/images/arrow-right.png"></image>
                 </view>
             </view>
             <view class="line" style="margin-top:30rpx;"></view>
             <view class="row jc-sb" style="margin-top:26rpx;">
                 <view class="row" bindtap="toMap">
-                    <image style="width:20rpx;height:23rpx;margin-right:10rpx;" src="../../images/position.png"></image>
+                    <image style="width:20rpx;height:23rpx;margin-right:10rpx;" src="/images/position.png"></image>
                     <view style="font-size: 24rpx;color: #666666;">{{store.address}}</view>
                 </view>
-                <image bindtap="call" style="width:30rpx;height:30rpx;" src="../../images/call.png"></image>
+                <image bindtap="call" style="width:30rpx;height:30rpx;" src="/images/call.png"></image>
             </view>
         </view>
     </view>
@@ -114,7 +114,7 @@
             <view style="font-size: 30rpx;color: #333333;font-weight: bolder;">走心评价({{commentCount}})</view>
             <view class="row" bindtap="toCommentList" wx:if="{{commentCount>2}}">
                 <view style="font-size:24rpx;color:#999999;">查看全部</view>
-                <image style="margin-left:20rpx;width:14rpx;height:26rpx;" src="../../images/arrow-right.png"></image>
+                <image style="margin-left:20rpx;width:14rpx;height:26rpx;" src="/images/arrow-right.png"></image>
             </view>
         </view>
         <view class="item" wx:for="{{commentList}}" wx:key="{{index}}" data-comid="{{item.id}}" bindtap="toCommentDetail">
@@ -122,8 +122,8 @@
                 <image class="userImg" src="{{item.avatar?item.avatar:''}}"></image>
                 <view class="nickname">{{item.nickName}}</view>
                 <view class="ub ub-f1 ub-ac ml10">
-                    <image class="icon_ping" src="../../images/icon_ped.png" wx:for="{{item.score}}" wx:key="un"></image>
-                    <image class="icon_ping" src="../../images/icon_ping.png" wx:for="{{5-item.score}}" wx:key="un"></image>
+                    <image class="icon_ping" src="/images/icon_ped.png" wx:for="{{item.score}}" wx:key="un"></image>
+                    <image class="icon_ping" src="/images/icon_ping.png" wx:for="{{5-item.score}}" wx:key="un"></image>
                 </view>
                 <view class="times" hidden="{{true}}">{{item.dateCreated}}</view>
             </view>
@@ -159,7 +159,7 @@
                                 <view style="font-size: 28rpx;color: #E83221;font-weight:bold;display:flex;align-items:center;" wx:if="{{item.price>0}}">{{filter.toFix(item.price)}}<text style="font-size: 22rpx;color: #E83221;font-weight:bold;">元</text></view>
                             </view>
                             <!-- <view class="ub ub-ac" style="font-size: 22rpx;color: #999999;">
-                                <image src="../../images/soldCount.png" style="width:24rpx;height: 22rpx;margin-right:10rpx;"></image>
+                                <image src="/images/soldCount.png" style="width:24rpx;height: 22rpx;margin-right:10rpx;"></image>
                                 已售{{item.soldNum}}件
                             </view> -->
                         </view>
@@ -182,7 +182,7 @@
                                 <view style="font-size: 28rpx;color: #E83221;font-weight:bold;display:flex;align-items:center;" wx:if="{{item.price>0}}">{{filter.toFix(item.price)}}<text style="font-size: 22rpx;color: #E83221;font-weight:bold;">元</text></view>
                             </view>
                             <!-- <view class="ub ub-ac" style="font-size: 22rpx;color: #999999;">
-                                <image src="../../images/soldCount.png" style="width:24rpx;height: 22rpx;margin-right:10rpx;"></image>
+                                <image src="/images/soldCount.png" style="width:24rpx;height: 22rpx;margin-right:10rpx;"></image>
                                 已售{{item.soldNum}}件
                             </view> -->
                         </view>
@@ -198,26 +198,26 @@
 
     <!-- 成为桔长推广商品获得返利 -->
     <view class="ub ub-ac ub-pc" style="width: 100%;padding-top: 10rpx;padding-bottom: 30rpx;background:#fff;margin-top:20rpx;">
-      <image src="../../images/mjuzhang.png" style="width:693rpx;height:175rpx;" bindtap="openJztgModal"></image>
+      <image src="/images/mjuzhang.png" style="width:693rpx;height:175rpx;" bindtap="openJztgModal"></image>
     </view>
 
     <!-- <view class="phoneWrap">
         <view class="phoneView ub ub-ac" bindtap="callPhone">
-            <image src="../../images/logo_main.png" style="width:80rpx;height:80rpx;"></image>
+            <image src="/images/logo_main.png" style="width:80rpx;height:80rpx;"></image>
             <view class="phoneInner">
                 <view>桔集-桔美好生活，集好店优惠</view>
                 <view class="ub ub-ac" style="margin-top: 10rpx;">
-                    <image src="../../images/dianhua.png" style="width:30rpx;height:26rpx;margin-right:10rpx;"></image>合作电话：400-001-1139
+                    <image src="/images/dianhua.png" style="width:30rpx;height:26rpx;margin-right:10rpx;"></image>合作电话：400-001-1139
                 </view>
             </view>
         </view>
     </view> -->
     <view class="footer">
         <view class="homeWrap" bindtap="gohomepage">
-            <image src="../../images/shouye.png" style="width:40rpx;height:40rpx;"></image>
+            <image src="/images/shouye.png" style="width:48rpx;height:48rpx;"></image>
         </view>
         <button class="homeWrap toBg" bindtap="showShare">
-            <image src="../../images/fenxiang.png" style="width:40rpx;height:40rpx;" open-type="share"></image>
+            <image src="/images/fenxiang.png" style="width:48rpx;height:48rpx;" open-type="share"></image>
         </button>
         <form bindsubmit="collectFormIds" report-submit="true" wx:if="{{productInfo.distributor}}">
           <view class="proBtns ub ub-ac">
@@ -304,37 +304,37 @@
         </view>
         <view class="bott ub ub-ac">
             <button class="ub-f1 ub ub-ac ub-pc left ub-ver" open-type="share">
-                <image class="share" src="../../images/share_friend.png" style="width:117rpx;height:118rpx"></image>
+                <image class="share" src="/images/share_friend.png" style="width:117rpx;height:118rpx"></image>
             </button>
             <button class="ub-f1 ub ub-ac ub-pc right ub-ver" bindtap="savePic" data-type="1">
-                <image class="share" src="../../images/share_save.png" style="width:94rpx;height:118rpx"></image>
+                <image class="share" src="/images/share_save.png" style="width:94rpx;height:118rpx"></image>
             </button>
         </view>
     </view>
     <view class="newerGetModalWrap" wx:if="{{isShowNewerGet}}">
         <view class="newerGetModal">
-            <image src="../../images/newerGetBg.png" style="width:680rpx;height:735rpx;"></image>
-            <image src="../../images/newerGetBtn.png" class="newerGetBtn" bindtap="closeGetNewer"></image>
-            <image src="../../images/newerGetClose.png" class="newerGetClose" bindtap="closeGetNewer"></image>
+            <image src="/images/newerGetBg.png" style="width:680rpx;height:735rpx;"></image>
+            <image src="/images/newerGetBtn.png" class="newerGetBtn" bindtap="closeGetNewer"></image>
+            <image src="/images/newerGetClose.png" class="newerGetClose" bindtap="closeGetNewer"></image>
         </view>
     </view>
 
 
     <view class="jcModalWrap" hidden="{{!showJcModal}}">
       <view class="jcModal">
-      <image src="../../images/quliao.png" style="width:100%;height: 236rpx;border-top-left-radius: 20rpx;border-top-right-radius: 20rpx;"></image>
+      <image src="/images/quliao.png" style="width:100%;height: 236rpx;border-top-left-radius: 20rpx;border-top-right-radius: 20rpx;"></image>
       <view class="jcModalText" style="margin-top:57rpx;">点击下方“去回复”按钮，并发送</view>
       <view class="jcModalText" style="margin-top:6rpx;">数字“{{welfareGroup.code}}”邀请你进群</view>
       <view class="jcModalBtnWrap"><button class="jcModalBtn" open-type='contact' session-from='weapp'>去回复</button></view>
       
-      <image src="../../images/newerGetClose.png" class="jcModalClose" bindtap="closeJcModal"></image>
+      <image src="/images/newerGetClose.png" class="jcModalClose" bindtap="closeJcModal"></image>
       </view>
       
     </view>
 
     <view class="jztgModalWrap" wx:if="{{showJztgModal}}">
       <view class="jztgModal">
-      <image src="../../images/mjuzhangtop.png" style="width:100%;height: 200rpx;border-top-left-radius: 20rpx;border-top-right-radius: 20rpx;"></image>
+      <image src="/images/mjuzhangtop.png" style="width:100%;height: 200rpx;border-top-left-radius: 20rpx;border-top-right-radius: 20rpx;"></image>
       <view class="jztgModalContent">
         <view class="ub ub-ac">
           <view class="point1"></view>
@@ -384,7 +384,7 @@
       
       <view class="jztgModalBtnWrap"><button class="jztgModalBtn" bindtap="openJztgShare">立即邀请好友</button></view>
       
-      <image src="../../images/newerGetClose.png" class="jztgModalClose" bindtap="closeJztgModal"></image>
+      <image src="/images/newerGetClose.png" class="jztgModalClose" bindtap="closeJztgModal"></image>
       </view>
       
     </view>

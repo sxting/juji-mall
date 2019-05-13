@@ -39,9 +39,7 @@
     
     <view class="nodataDiv ub ub-ac ub-ver" hidden="{{!isShowNodata}}">
         <image class="nodataImg" src="/images/null6.png" mode="aspectFit"></image>
-        <view class="nodataTxt">
-            <view>暂无{{sceneType == 'BARGAIN'?'砍价':'拼团'}}活动</view>
-        </view>
+        <view class="nodataTxt">暂无{{sceneType == 'BARGAIN'?'砍价':'拼团'}}活动</view>
     </view>
 </view>
 <!-- <text class='had-bottom' wx:if="{{ ifBottom }}">我也是有底线哒~</text> -->

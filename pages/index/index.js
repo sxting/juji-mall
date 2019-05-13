@@ -37,19 +37,22 @@ Page({
         isFirstShow: true,
         isLoadedBalance: true,
         locationStatus: true, //定位状态
-        showJcModal:false
+        showJcModal:false,
+        joinInfo:{
+            phone:'17316191089',wechat:'juji1031'
+        }
     },
     showJoinModal:function(){
         this.setData({showJcModal:!this.data.showJcModal});
     },
     dialtelUs:function(){
         wx.makePhoneCall({
-          phoneNumber: '18813035671'
+          phoneNumber: this.data.joinInfo.phone
         });
     },
     copyUs:function(){
         wx.setClipboardData({
-          data: 'juji1031',
+          data: this.data.joinInfo.wechat,
           success: (res) => {
             wx.showToast({title: '复制成功'});
           }
@@ -90,7 +93,7 @@ Page({
 
         //成功登陆之后 查询新用户见面礼
         this.isNewer();
-
+        this.getJoinInfo();
         //获取热门城市
         var imageWidth = (wx.getSystemInfoSync().windowWidth - 66) / 3;
         this.setData({
@@ -907,5 +910,19 @@ Page({
             complete: () => wx.hideToast()
         })
     },
-
+    getJoinInfo: function(scene,type) {
+        wx.request({
+            url: 'https://juji.juniuo.com/data/wxappData.php',
+            method: 'GET',
+            header: { 'content-type': 'application/json' },
+            success: (res) => {
+                this.setData({
+                    joinInfo: res.data.data.contact,
+                });
+                if (type == 1) {
+                    this.nextPage();
+                }
+            }
+        });
+    },
 })

@@ -9,12 +9,12 @@
             <view class="toper">
                 <swiper autoplay="{{autoplay}}" circular>
                     <swiper-item wx:for="{{slideShowList}}" wx:key="unique">
-                        <image src="{{item.imgId?'https://upic.juniuo.com/file/picture/'+item.imgId+'/resize_690_340/mode_filt/format_jpg/quality_0':''}}" data-link="{{item.link}}" bindtap="onTapBanner" class="slide-image" mode="scaleToFill" lazy-load="true"></image>
+                        <image src="{{item.imgId?'https://upic.juniuo.com/file/picture/'+item.imgId+'/resize_750_488/mode_filt/format_jpg/quality_0':''}}" data-link="{{item.link}}" bindtap="onTapBanner" class="slide-image" mode="widthFix" lazy-load="true"></image>
                     </swiper-item>
                 </swiper>
                 <view class="locationWrap" bindtap="toPath" data-page="/pages/citylist/index" style="top:{{topValue}}px">
                     <text class="locationText">{{locationName}}</text>
-                    <image style="width:20rpx;height:14rpx;margin-left:12rpx;margin-top:8rpx;" lazy-load="true" src="/images/sort-down1.png" wx:if="{{locationName}}"></image>
+                    <image style="width:20rpx;height:14rpx;margin-left:12rpx;margin-top:4rpx;" lazy-load="true" src="/images/sort-down1.png" wx:if="{{locationName}}"></image>
                 </view>
             </view>
             <cover-view class="homeB">
@@ -168,12 +168,12 @@
             <cover-view class="jcModalText plr20">微信咨询</cover-view>
             <cover-view class="jcCtrl ub ub-ac plr20" style="margin-top: 20rpx;">
                 <cover-image class="shoperIcon" style="width:32rpx;height:27rpx;" src="/images/shoper3.png"></cover-image>
-                <cover-view class="ub-f1 shopTxt">18813035671</cover-view>
+                <cover-view class="ub-f1 shopTxt">{{joinInfo.phone}}</cover-view>
                 <cover-view class="jcModalBtn" style="background:#ffdc00" bindtap="dialtelUs">拨打</cover-view>
             </cover-view>
             <cover-view class="jcCtrl ub ub-ac plr20 mt05">
                 <cover-image class="shoperIcon" style="width:36rpx;height:29rpx" src="/images/shoper2.png"></cover-image>
-                <cover-view class="ub-f1 shopTxt">juji1031</cover-view>
+                <cover-view class="ub-f1 shopTxt">{{joinInfo.wechat}}</cover-view>
                 <cover-view class="jcModalBtn" style="background:#FCBF0A" bindtap="copyUs">复制</cover-view>
             </cover-view>
         </cover-view>

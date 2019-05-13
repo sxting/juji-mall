@@ -1,6 +1,6 @@
 @import 'style/iconfont.wxss';
 view,text{font-family:PingFangSC-Regular,"Noto Sans CJK SC", "Source Han Sans CN","Microsoft YaHei", sans-serif;}
-page { background-color: #f6f6f6; height: 100%;box-sizing: border-box;}
+page { background-color: #f6f6f6; height: 100%;box-sizing: border-box;padding-top: 65px;}
 
 .container { height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: space-between; padding: 200rpx 0; box-sizing: border-box; }
 .main{position: relative;box-sizing:border-box;}

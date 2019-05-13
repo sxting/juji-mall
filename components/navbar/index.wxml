@@ -5,4 +5,4 @@
   <view class="navTitle ub-f1" style="line-height: 45px;">{{navbarData.title}}</view>
   <view class="backBtn" wx:if="{{navbarData.showCapsule}}"></view>
 </view>
-<view class="navHeight" style="height:{{height+45}}px"></view>
+<view class="navHeight" style="height:{{height-20}}px"></view>

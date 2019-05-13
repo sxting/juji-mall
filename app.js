@@ -29,9 +29,10 @@ App({
         //获取设备顶部导航栏的高度（不同设备窗口高度不一样）
         wx.getSystemInfo({
           success: (res) => {
-            this.globalData.barHeight = res.statusBarHeight
-            this.globalData.screenHeight = res.screenHeight
+            this.globalData.barHeight = res.statusBarHeight;
+            this.globalData.screenHeight = res.screenHeight;
             console.log("导航栏高="+res.statusBarHeight);
+            console.log("屏幕高="+res.screenHeight);
           }
         })        
     },

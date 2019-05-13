@@ -1,5 +1,5 @@
 <nav-bar navbar-data='{{nvabarData}}'></nav-bar>
-<view class="wrap" style="margin-top:{{topValue}}px">
+<view class="wrap" style="height:{{conHeight}}px">
   <view class="toper">
     <view class="userInfo ub ub-ac ub-pj">
       <view class="ub ub-ac">

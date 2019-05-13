@@ -81,7 +81,15 @@ Page({
         this.setData({ pageNo: 1 });
         this.getData(this.data.type, 1);
     },
-
+    joinCollage:function(e) {
+        var pid = e.currentTarget.dataset.pid;
+        var activityid = e.currentTarget.dataset.id;
+        var activityorderid = e.currentTarget.dataset.aoid;
+        var spid = e.currentTarget.dataset.spid;
+        wx.navigateTo({
+            url: '/pages/payOrder/index?paytype=5&orderType=SPLICED&id=' + pid + '&activityId=' + activityid + '&activityOrderId=' + activityorderid + '&splicedRuleId=' + spid  
+        });
+    },
     //上拉加载
     onReachBottom:function() {
         if (this.data.isFinall) {

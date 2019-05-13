@@ -1,6 +1,6 @@
 <wxs src="../../../utils/numFr.wxs" module="format" />
 <nav-bar navbar-data='{{nvabarData}}'></nav-bar>
-<view class="wrap" style="margin-top:{{topValue}}px">
+<view class="wrap" style="height:{{conHeight}}px">
     <!-- 普通用户进入 1、普通用户 从没申请  2、桔民 从没申请过  -->
     <view class="main" wx:if="{{(role == 'UNDEFINED' && !applyLeader) || (role == 'MEMBER' && !applyLeader)}}">
         <view class="toper1">

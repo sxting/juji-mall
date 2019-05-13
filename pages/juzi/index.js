@@ -8,12 +8,18 @@ Page({
     currentPointObj: {},
     canSignIn: true,
     avatar: '',
-    topValue:0
+    conHeight:400
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    wx.getSystemInfo({
+      success: (res) => {
+        var conHeight = res.windowHeight-app.globalData.barHeight-45;
+        this.setData({conHeight:conHeight})
+      }
+    });      
     wx.hideShareMenu();
     this.getInfo();
   },

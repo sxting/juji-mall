@@ -9,6 +9,7 @@ Page({
         avatar: '',
         phoneNum: '',
         bindPhone: "",
+        conHeight:400,
         topValue:0
     },
     toJuzi: function() {
@@ -20,6 +21,12 @@ Page({
         wx.navigateTo({ url: page });
     },
     onLoad: function() {
+        wx.getSystemInfo({
+          success: (res) => {
+            var conHeight = res.windowHeight-app.globalData.barHeight-45;
+            this.setData({conHeight:conHeight})
+          }
+        });      
         this.getInfo();
     },
     getInfo: function() {

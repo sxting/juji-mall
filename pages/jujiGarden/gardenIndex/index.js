@@ -28,8 +28,15 @@ Page({
         minInvitedMemberCount: 0, //邀请几个人就可以成为桔长
         bindPhoneNumber: false, //是否绑定手机号码 是true 不是false
         isDisabled:false,//按钮是否禁用
+        conHeight:400
     },
     onLoad: function(options) {
+        wx.getSystemInfo({
+          success: (res) => {
+            var conHeight = res.windowHeight-app.globalData.barHeight-45;
+            this.setData({conHeight:conHeight})
+          }
+        });      
         if (options.openid) {
             console.log('分享点进来');
             this.setData({

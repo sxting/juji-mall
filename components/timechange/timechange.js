@@ -17,7 +17,7 @@ Component({
     },
     radius:{
       type: String,
-      value: "",
+      value: "1",
       observer: function (newVal, oldVal, changedPath) {
 
       }
@@ -47,23 +47,25 @@ Component({
       }
     },
     formatTime:function(expireTime){
-        let countDownTime = '';
         let time = new Date(expireTime).getTime() - new Date().getTime();
         if (time <= 0) {
-          countDownTime = '00:00:00'
+          var hours = '00';
+          var minutes = '00';
+          var seconds = '00';
         } else {
-          let hours = parseInt(time / 1000 / 60 / 60 + '');
-          let minutes = parseInt(time / 1000 / 60 - hours * 60 + '');
-          let seconds = parseInt(time / 1000 - minutes * 60 - hours * 3600 + '');
-          countDownTime = (hours.toString().length < 2 ? '0' + hours : hours) + ':' +
-            (minutes.toString().length < 2 ? '0' + minutes : minutes) + ':' +
-            (seconds.toString().length < 2 ? '0' + seconds : seconds);
+          var hours = formatNum(parseInt(time / 1000 / 60 / 60));
+          var minutes = formatNum(parseInt(time / 1000 / 60 - hours * 60));
+          var seconds = formatNum(parseInt(time / 1000 - minutes * 60 - hours * 3600));
         }
         this.setData({
-          restHour: countDownTime.substring(0, 2),
-          restMinute: countDownTime.substring(3, 5),
-          restSecond: countDownTime.substring(6)
+          restHour: hours,
+          restMinute: minutes,
+          restSecond: seconds
         })
     }
   }
 })
+
+function formatNum(number){
+  return number<10?'0'+number:number;
+}

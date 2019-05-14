@@ -80,7 +80,7 @@
                 </view>
             </view>
         </view>
-        <view class="contentWarp" style="padding-top:{{secondList.length==0&&newProductList.length==0?'30rpx':'20rpx'}}">
+        <view class="contentWarp" style="padding-top:{{secondList.length==0&&newProductList.length==0?'30rpx':(secondList.length==0?'20rpx':'0')}}">
             <view class="newProductDiv" wx:if="{{newProductList.length>0}}">
                 <view class="mtitle ub ub-ac">新品尝鲜<image class="icon_mark" src="/images/icon_h2.png" mode="aspectFit"></image>
                 </view>

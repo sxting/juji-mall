@@ -263,27 +263,30 @@ Page({
                     }
                   });
                 } else {
+                  var number = that.data.productInfo.limitPerOrderNum;
                   wx.showModal({
                     title: '提示',
-                    content: '该商品每单最多可以购买' + that.data.productInfo.limitPerOrderNum + '件'
+                    content: '该商品每单最多可以购买' + number + '件'
                   });
                   that.setData({
                     alreadyPay: false
                   });
                 }
               } else {
+                var number = that.data.productInfo.limitPerDayNum - res.totalToday;
                 wx.showModal({
                   title: '提示',
-                  content: '该商品今日还可以购买' + (that.data.productInfo.limitPerDayNum - res.totalToday) + '件'
+                  content: number==0?'超出购买限制':'该商品今日还可以购买' + number + '件'
                 });
                 that.setData({
                   alreadyPay: false
                 });
               }
             } else {
+              var number = that.data.productInfo.limitMaxNum - res.totalAll;
               wx.showModal({
                 title: '提示',
-                content: '该商品您最多还可以购买' + (that.data.productInfo.limitMaxNum - res.totalAll) + '件'
+                content: number==0?'超出购买限制':'该商品您最多还可以购买' + number + '件'
               });
               that.setData({
                 alreadyPay: false
@@ -373,27 +376,30 @@ Page({
                     }
                   });
                 } else {
+                  var number = that.data.productInfo.limitPerOrderNum;
                   wx.showModal({
                     title: '提示',
-                    content: '该商品每单最多可以购买' + that.data.productInfo.limitPerOrderNum + '件'
+                    content: '该商品每单最多可以购买' + number + '件'
                   });
                   that.setData({
                     alreadyPay: false
                   });
                 }
               } else {
+                var number = that.data.productInfo.limitPerDayNum - res.totalToday;
                 wx.showModal({
                   title: '提示',
-                  content: '该商品今日还可以购买' + (that.data.productInfo.limitPerDayNum - res.totalToday) + '件'
+                  content: number==0?'超出购买限制':'该商品今日还可以购买' + number + '件'
                 });
                 that.setData({
                   alreadyPay: false
                 });
               }
             } else {
+              var number = that.data.productInfo.limitMaxNum - res.totalAll;
               wx.showModal({
                 title: '提示',
-                content: '该商品您最多还可以购买' + (that.data.productInfo.limitMaxNum - res.totalAll) + '件'
+                content: number==0?'超出购买限制':'该商品您最多还可以购买' + number + '件'
               });
               that.setData({
                 alreadyPay: false
@@ -507,27 +513,30 @@ Page({
                   }
                 });
               } else {
+                var number = that.data.productInfo.limitPerOrderNum;
                 wx.showModal({
                   title: '提示',
-                  content: '该商品每单最多可以购买' + that.data.productInfo.limitPerOrderNum + '件'
+                  content: '该商品每单最多可以购买' + number + '件'
                 });
                 that.setData({
                   alreadyPay: false
                 });
               }
             } else {
+              var number = that.data.productInfo.limitPerDayNum - res.totalToday;
               wx.showModal({
                 title: '提示',
-                content: '该商品今日还可以购买' + (that.data.productInfo.limitPerDayNum - res.totalToday) + '件'
+                content: number==0?'超出购买限制':'该商品今日还可以购买' + number + '件'
               });
               that.setData({
                 alreadyPay: false
               });
             }
           } else {
+            var number = that.data.productInfo.limitMaxNum - res.totalAll;
             wx.showModal({
               title: '提示',
-              content: '该商品您最多还可以购买' + (that.data.productInfo.limitMaxNum - res.totalAll) + '件'
+              content: number==0?'超出购买限制':'该商品您最多还可以购买' + number + '件'
             });
             that.setData({
               alreadyPay: false
@@ -632,27 +641,30 @@ Page({
                   }
                 });
               } else {
+                var number = that.data.productInfo.limitPerOrderNum;
                 wx.showModal({
                   title: '提示',
-                  content: '该商品每单最多可以购买' + that.data.productInfo.limitPerOrderNum + '件'
+                  content: '该商品每单最多可以购买' + number + '件'
                 });
                 that.setData({
                   alreadyPay: false
                 });
               }
             } else {
+              var number = that.data.productInfo.limitPerDayNum - res.totalToday;
               wx.showModal({
                 title: '提示',
-                content: '该商品今日还可以购买' + (that.data.productInfo.limitPerDayNum - res.totalToday) + '件'
+                content: number==0?'超出购买限制':'该商品今日还可以购买' + number + '件'
               });
               that.setData({
                 alreadyPay: false
               });
             }
           } else {
+            var number = that.data.productInfo.limitMaxNum - res.totalAll;
             wx.showModal({
               title: '提示',
-              content: '该商品您最多还可以购买' + (that.data.productInfo.limitMaxNum - res.totalAll) + '件'
+              content: number==0?'超出购买限制':'该商品您最多还可以购买' + number + '件'
             });
             that.setData({
               alreadyPay: false

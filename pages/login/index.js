@@ -8,7 +8,7 @@ Page({
         openId: '',
         showPageLoading: true,
         noPath: false,
-        pageType: 0, //0为首页，1为商品详情页分享，2为桔园邀新分享，3为扫码分享，4为素材分享，5为拼团砍价分享
+        pageType: 0, //0为首页，1为商品详情页分享，2为桔园邀新分享，3为扫码分享，4为素材分享，5为拼团砍价分享, 6为秒杀分享
         pageData: {},
         pageFromCode: 1,//1为商品详情，2为邀新，默认1
         sharePersonOpenId:'',
@@ -103,7 +103,7 @@ Page({
         wx.switchTab({url: '/pages/index/index'});
       }
       if(this.data.pageType==1){
-        wx.reLaunch({url: '/pages/comDetail/index?id=' + this.data.pageData.pid + '&storeid=' + this.data.pageData.storeid});
+        wx.reLaunch({url: '/pages/comDetail/index?id='+this.data.pageData.pid+'&storeid='+this.data.pageData.storeid+'&invitecode='+this.data.pageData.invitecode});
       }
       if(this.data.pageType==2){
         wx.reLaunch({url: '/pages/jujiGarden/gardenIndex/index?openid=' + this.data.pageData.openid});
@@ -111,7 +111,7 @@ Page({
       if(this.data.pageType==3){
        if(this.data.pageFromCode==1){
           //商品扫码 
-          wx.reLaunch({url: '/pages/comDetail/index?id=' + this.data.shareProductId + '&storeid='});
+          wx.reLaunch({url: '/pages/comDetail/index?id=' + this.data.shareProductId + '&invitecode='+this.data.pageData.invitecode});
        }else{
           //邀新扫码
           wx.reLaunch({url: '/pages/jujiGarden/gardenIndex/index?openid=' + this.data.sharePersonOpenId});

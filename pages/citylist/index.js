@@ -142,6 +142,10 @@ Page({
       latitude: wx.getStorageSync('curLatitude'),
       longitude: wx.getStorageSync('curLongitude')
     }
+    // var obj = {
+    //   latitude: 35.986896,
+    //   longitude: 103.864746
+    // }
     service.getCurrentLoc(obj).subscribe({
       next: res => {
         console.log(res);

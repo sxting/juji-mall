@@ -15,6 +15,7 @@ Page({
     price: 0,
     paytype: 1,
     sceneId:"",
+    inviteCode:'',
     pointBalance: 0,
     alreadyPay: false,
     showProduct:false,
@@ -44,7 +45,8 @@ Page({
         productId: options.id ? options.id : '',
         storeId: options.storeid ? options.storeid: '',
         paytype: options.paytype,
-        sceneId: options.sceneid?options.sceneid:''
+        sceneId: options.sceneid?options.sceneid:'',
+        inviteCode: options.invitecode?options.invitecode:''
       });
     }
     if(options.type){
@@ -191,6 +193,7 @@ Page({
                   var orderObj = {
                     itemRequests: [{
                       sceneId:that.data.sceneId,
+                      inviteCode:that.data.inviteCode,
                       merchantId: that.data.productInfo.merchantId,
                       merchantName: that.data.productInfo.merchantName,
                       num: that.data.count,
@@ -258,8 +261,6 @@ Page({
                         alreadyPay: false
                       });
                     }
-                      
-
                   });
                 } else {
                   wx.showModal({
@@ -326,6 +327,7 @@ Page({
                   var orderObj = {
                     itemRequests: [{
                       sceneId:that.data.sceneId,
+                      inviteCode:that.data.inviteCode,
                       merchantId: that.data.productInfo.merchantId,
                       merchantName: that.data.productInfo.merchantName,
                       num: that.data.count,
@@ -434,6 +436,7 @@ Page({
                 var orderObj = {
                   itemRequests: [{
                     sceneId:that.data.sceneId,
+                    inviteCode:that.data.inviteCode,
                     merchantId: that.data.productInfo.merchantId,
                     merchantName: that.data.productInfo.merchantName,
                     num: that.data.count,
@@ -558,6 +561,7 @@ Page({
                 var orderObj = {
                   itemRequests: [{
                     sceneId:that.data.sceneId,
+                    inviteCode:that.data.inviteCode,
                     merchantId: that.data.productInfo.merchantId,
                     merchantName: that.data.productInfo.merchantName,
                     num: that.data.count,

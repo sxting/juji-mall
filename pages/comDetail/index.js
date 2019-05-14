@@ -30,6 +30,7 @@ Page({
     erwmImg: '',
     userImg:'',
     sceneId:'',
+    invitecode:'',
     isShowNewerGet: false,
     isShowProfit:true,
     userImgUrl:'../../images/shareBg.png',
@@ -57,6 +58,9 @@ Page({
     }
     if(options.sceneid){
       this.setData({sceneId: options.sceneid});
+    }
+    if(options.invitecode){
+      this.setData({invitecode: options.invitecode});
     }
     wx.hideShareMenu();
 
@@ -213,25 +217,25 @@ Page({
   toCreateOrder: function() { //跳转订单确认 桔子和人民币组合订单
     console.log("跳转前sceneId="+this.data.sceneId);
     wx.navigateTo({
-      url: '/pages/payOrder/index?paytype=1&id=' + this.data.productId + '&storeid=' + this.data.storeId + '&sceneid='+this.data.sceneId
+      url: '/pages/payOrder/index?paytype=1&id=' + this.data.productId + '&storeid=' + this.data.storeId + '&sceneid='+this.data.sceneId + '&invitecode='+this.data.invitecode
     });
   },
   toCreateOrderByPoint: function() { //只用桔子下单
     console.log("跳转前sceneId="+this.data.sceneId);
     wx.navigateTo({
-      url: '/pages/payOrder/index?paytype=2&id=' + this.data.productId + '&storeid=' + this.data.storeId + '&sceneid='+this.data.sceneId
+      url: '/pages/payOrder/index?paytype=2&id=' + this.data.productId + '&storeid=' + this.data.storeId + '&sceneid='+this.data.sceneId + '&invitecode='+this.data.invitecode
     });
   },
   toCreateOrderByRmb: function () { //人民币优惠购买
     console.log("跳转前sceneId="+this.data.sceneId);
     wx.navigateTo({
-      url: '/pages/payOrder/index?paytype=3&id=' + this.data.productId + '&storeid=' + this.data.storeId + '&sceneid='+this.data.sceneId
+      url: '/pages/payOrder/index?paytype=3&id=' + this.data.productId + '&storeid=' + this.data.storeId + '&sceneid='+this.data.sceneId + '&invitecode='+this.data.invitecode
     });
   },
   toCreateOrderByOriPrice: function () { //原价购买
     console.log("跳转前sceneId="+this.data.sceneId);
     wx.navigateTo({
-      url: '/pages/payOrder/index?paytype=4&id=' + this.data.productId + '&storeid=' + this.data.storeId + '&sceneid='+this.data.sceneId
+      url: '/pages/payOrder/index?paytype=4&id=' + this.data.productId + '&storeid=' + this.data.storeId + '&sceneid='+this.data.sceneId + '&invitecode='+this.data.invitecode
     });
   },
   toGetPoint: function() { //跳转到任务页面赚桔子

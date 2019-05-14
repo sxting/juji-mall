@@ -4,7 +4,7 @@
     <view class="pageLoadingTip" style="color:#666666;font-size: 30rpx;">桔美好生活，集好店优惠</view>
 </view>
 <view class="{{(providerId&&(slideShowList.length>0||recommendPage.length>0))?'':'homeTabPage'}} {{isShowNewerGet?'noscroll':''}}" wx:else>
-    <view wx:if="content {{slideShowList.length>0||pointProductList.length>0||recommendPage.length>0}}">
+    <view wx:if="{{slideShowList.length>0||pointProductList.length>0||recommendPage.length>0}}">
         <view class="toperWrap">
             <view class="toper">
                 <swiper autoplay="{{autoplay}}" circular>

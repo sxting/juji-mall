@@ -575,17 +575,18 @@ page {
 
 .pubuItem .plimg {
   width: 100%;
-  height: 185rpx;
+  height: 188rpx;
 }
 
 .pubuname {
-  font-size: 28rpx;
+  font-size: 24rpx;
   color: #333;
   display: -webkit-box;
   overflow: hidden;
   text-overflow: ellipsis;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
+  height: 64rpx;line-height: 32rpx;
 }
 
 .pububox {

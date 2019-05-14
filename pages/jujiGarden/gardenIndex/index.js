@@ -122,9 +122,8 @@ Page({
         }
         if(this.data.isDisabled){
             return;
-        }else{
-            this.setData({isDisabled:true})
         }
+        this.setData({isDisabled:true})
         wx.showToast({ title: '申请中', icon: 'loading', duration: 30000 });
         jugardenService.bindWechatInfor(data).subscribe({
             next: res => {

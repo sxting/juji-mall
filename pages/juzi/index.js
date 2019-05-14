@@ -8,6 +8,7 @@ Page({
     currentPointObj: {},
     canSignIn: true,
     avatar: '',
+    isDisabled:false,
     conHeight:400
   },
   /**
@@ -65,6 +66,7 @@ Page({
     });
   },
   signIn:function(e){
+    if(this.data.isDisabled){return}
     console.log(e.detail.formId)
     service.collectFormIds({
       formId:e.detail.formId
@@ -73,6 +75,7 @@ Page({
         console.log(res)
       }
     });
+    this.setData({isDisabled:true});
     service.signIn().subscribe({
       next: res => {
         console.log(res);
@@ -86,6 +89,13 @@ Page({
           });
           this.currentPoint();
         }
+      },
+      error: err => {
+        this.setData({isDisabled:false});
+        errDialog(err);
+      },
+      complete:()=>{
+        this.setData({isDisabled:false});
       }
     });
   },

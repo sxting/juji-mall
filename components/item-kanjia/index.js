@@ -43,7 +43,11 @@ Component({
   },
 
   methods: {
-
+    gohomepage: function () {
+      wx.switchTab({
+        url: '/pages/index/index'
+      });
+    },
     //收集formid做推送
     collectFormIds: function (e) {
       console.log(e.detail);
@@ -57,7 +61,7 @@ Component({
     },
     
     onlyBuy(e) {
-      let resData = JSON.stringify(this.data.resData); 
+      let resData = JSON.stringify(this.data.resData);
       if (e.currentTarget.dataset.type == '1') {
         wx.navigateTo({
           url: `/pages/payOrder/index?id=${this.data.resData.productId}&paytype=3&storeid=`,
@@ -119,7 +123,7 @@ Component({
       this.setData({
         showAlert2: false
       })
-      getData.call(this);
+      this.triggerEvent('action') //myevent自定义名称事件，父组件中使用
     },
 
     lookOthers() {

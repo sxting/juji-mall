@@ -1,7 +1,7 @@
 import {service} from '../../service';
 Page({
   data: {
-    nvabarData: {showCapsule: 1,title: '订单确认'},
+    nvabarData: {showCapsule: 1,title: '适用门店'},
     merchantsList: []
   },
   onLoad: function(options) {

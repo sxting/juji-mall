@@ -58,6 +58,7 @@ Page({
         return {
             title: price + '元秒杀'+productName+'，手慢无！',
             path: '/pages/login/index?pagetype=6&pid='+this.data.productId+'&activityId=' + this.data.activityId + '&invitecode=' + wx.getStorageSync('inviteCode'),
+            imageUrl:constant.basePicUrl + this.data.resData.cover + '/resize_560_420/mode_fill'
         }
     },
     previewImage: function(e) {

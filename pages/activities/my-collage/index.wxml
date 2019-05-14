@@ -5,7 +5,7 @@
       <view class="ub ub-ac info">
           <image class="goodImg udb" src="{{productOrderInfo.cover?'https://upic.juniuo.com/file/picture/'+productOrderInfo.cover+'/resize_0_0/mode_fill':''}}"></image>
           <view class="ub-f1 goodMsg">
-              <view class="goodTit">{{format.toEllipsis1(productOrderInfo.productName)}}</view>
+              <view class="goodTit">{{productOrderInfo.productName}}</view>
               <view class="collage-num">2人团</view>
               <view class="goodAmount">
                  <text>{{format.toFix(productOrderInfo.activityPrice)}}元</text>
@@ -30,7 +30,7 @@
                 </view>
 
                 <view wx:if="{{productOrderInfo}}"><child dataFromParent='{{productOrderInfo.expirationTime}}'></child></view>
-                <view class='text-describe'>还差<text>1</text>人，赶快邀请好友来拼团吧</view>
+                <view class='text-describe'>还差<text>{{2-productOrderInfo.participateCount}}</text>人，赶快邀请好友来拼团吧</view>
               </view>
               <view class='head-portrait-box'>
                   <view class='head-portrait' wx:for="{{ headPortraitList }}" wx:for-index="index" wx:key="unique">
@@ -42,7 +42,9 @@
           </view>
           <view class='btns'>
             <text class='success-btn' wx:if="{{activityStatus == 'SUCCESS'}}" bindtap='switchToOrderDetailPage'>去使用</text>
-            <button class="ing-btn" open-type="share"  data-type="pintuan" wx:if="{{activityStatus == 'IN_PROGRESS'}}">邀请好友拼团</button>
+            <button class="ing-btn" open-type="share" data-type="pintuan" wx:if="{{activityStatus == 'IN_PROGRESS'&&productOrderInfo.participateCount==1}}">邀请好友拼团</button>
+            <button class="ing-btn1" wx:if="{{activityStatus == 'IN_PROGRESS'&&productOrderInfo.participateCount==2&&productOrderInfo.isInitiator==1}}">等待好友付款中</button>
+            <button class="ing-btn" wx:if="{{activityStatus == 'IN_PROGRESS'&&productOrderInfo.participateCount==2&&productOrderInfo.isInitiator==0}}" bindtap="toPayorder" data-productid="{{productOrderInfo.productId}}" data-activityid="{{productOrderInfo.activityId}}" data-activityorderid="{{productOrderInfo.activityOrderId}}">立即付款</button>
             <text class='fail-btn' wx:if="{{activityStatus == 'FAIL'}}"  bindtap='switchToOrderDetailPage'>查看退款</text>
           </view>
         </view>

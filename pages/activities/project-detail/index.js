@@ -108,8 +108,7 @@ Page({
       })
     }
   },
-
-
+  
   previewImage: function (e) {
     var arr = [];
     var url = constant.basePicUrl + e.currentTarget.dataset.url + '/resize_0_0/mode_fill';

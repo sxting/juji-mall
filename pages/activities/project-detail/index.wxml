@@ -5,7 +5,7 @@
     <swiper class="img-wrap" autoplay="true" interval="3000">
       <block wx:for="{{showPics}}" wx:key="{{index}}">
         <swiper-item>
-          <image mode="aspectFit" src="{{item}}" class="slide-image" lazy-load="true" />
+          <image mode="aspectFill" src="{{item}}" class="slide-image" lazy-load="true" />
         </swiper-item>
       </block>
     </swiper>
@@ -15,7 +15,7 @@
   <!-- 活动状态 -->
   <view class='w-100'>
     <item-collage wx:if="{{type === 'SPLICED'}}" fleg='content' collageInforData="{{productInfo}}" resData="{{resData}}" activityOrderId="{{activityOrderId}}" activityId="{{activityId}}"></item-collage>
-    <kanjia wx:if="{{type === 'BARGAIN' && showCom}}" product-info="{{productInfo}}" activity-order-id="{{activityOrderId}}" activity-id="{{activityId}}" res-data="{{resData}}" bind:myevent="onStartKanjia"></kanjia>
+    <kanjia wx:if="{{type === 'BARGAIN' && showCom}}" product-info="{{productInfo}}" activity-order-id="{{activityOrderId}}" activity-id="{{activityId}}" res-data="{{resData}}" bind:myevent="onStartKanjia" bind:action="onShow"></kanjia>
   </view>
 
   <view class="yongkaxuzhi-wrap" style="{{resData.activityStatus=='STARTED'&&resData.activityType=='BARGAIN'?'margin-top:16rpx':''}}">
@@ -70,8 +70,8 @@
           <image class="userImg" src="{{item.avatar?item.avatar:''}}"></image>
           <view class="nickname">{{item.nickName}}</view>
           <view class="ub ub-f1 ub-ac ml10">
-              <image class="icon_ping" src="../../images/icon_ped.png" wx:for="{{item.score}}" wx:key="un"></image>
-              <image class="icon_ping" src="../../images/icon_ping.png" wx:for="{{5-item.score}}" wx:key="un"></image>
+              <image class="icon_ping" src="/images/icon_ped.png" wx:for="{{item.score}}" wx:key="un"></image>
+              <image class="icon_ping" src="/images/icon_ping.png" wx:for="{{5-item.score}}" wx:key="un"></image>
           </view>
           <view class="times" hidden="{{true}}">{{item.dateCreated}}</view>
       </view>
@@ -148,7 +148,7 @@
     </view>
   </view>
 
-  <view class="footer" wx:if="{{!(type === 'BARGAIN' && !self)}}">
+  <view class="footer" wx:if="{{!(type === 'BARGAIN' && !self)||type === 'BARGAIN'}}">
     <view class="homeWrap" bindtap="gohomepage">
         <image src="/images/shouye.png" style="width:40rpx;height:40rpx;"></image>
     </view>

@@ -57,7 +57,8 @@
             <view class="mtitle ub ub-ac" style="margin-bottom:12rpx">
                 <image class="icon_h1" src="/images/icon_h1.png" mode="aspectFit"></image>
                 <view class="ub-f1"></view>
-                <view class="arrowDiv ub ub-ac ub-pe" bindtap="toPath" data-page="/pages/activities/secondlist/index">更多秒杀<image class="arrow-r" src="/images/arrow-r.png"></image>
+                <view class="arrowDiv ub ub-ac ub-pe" bindtap="toPath" data-page="/pages/activities/secondlist/index">
+                    更多秒杀<image class="arrow-r" src="/images/arrow-r.png"></image>
                 </view>
             </view>
             <view class="productBox">
@@ -79,15 +80,15 @@
                 </view>
             </view>
         </view>
-        <view class="contentWarp" style="padding-top:{{secondList.length==0&&newProductList.length==0?'30rpx':0}}">
+        <view class="contentWarp" style="padding-top:{{secondList.length==0&&newProductList.length==0?'30rpx':'20rpx'}}">
             <view class="newProductDiv" wx:if="{{newProductList.length>0}}">
                 <view class="mtitle ub ub-ac">新品尝鲜<image class="icon_mark" src="/images/icon_h2.png" mode="aspectFit"></image>
                 </view>
                 <view class="newproductDiv clearfix">
                     <view class="pubuItem" wx:for="{{newProductList}}" wx:if="{{!(index==2&&newProductList.length==3)&&index<4}}" wx:key="unique" bindtap="toComDetail" data-id="{{item.productId}}" data-storeid="{{item.nearStore.id}}">
-                        <image src="https://upic.juniuo.com/file/picture/{{item.picId}}/resize_0_0/mode_fill" lazy-load="true" mode="aspectFill" class="plimg"></image>
+                        <image src="https://upic.juniuo.com/file/picture/{{item.picId}}/resize_750_420/mode_fill" lazy-load="true" mode="aspectFill" class="plimg"></image>
                         <view class="pubuname mt05">{{item.productName}}</view>
-                        <view class="ub ub-ac priceDiv" style="margin-top:6rpx;padding-right:20rpx;">
+                        <view class="ub ub-ac priceDiv" style="margin-top:2rpx;padding-right:20rpx;">
                             <view class="pubuprice" wx:if="{{item.point>0}}">{{item.point}}<text style="font-size:20rpx">桔子</text></view>
                             <view class="pubuprice" wx:if="{{item.point>0&&item.price>0}}">+</view>
                             <view class="pubuprice" wx:if="{{item.price>0}}">{{filter.toFix(item.price)}}<text style="font-size:20rpx">元</text></view>

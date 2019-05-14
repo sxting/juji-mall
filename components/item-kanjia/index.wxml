@@ -27,11 +27,8 @@
         <text class='r'><text style='color: #999'>当前价格: </text> <text style='font-size: 28rpx;font-weight:bold'>{{resData.orderDigest.currentSalesPrice/100}}</text>元</text>
       </view>
     </view>
-    <view class='others-btn' wx:if="{{!self}}">
-      <form bindsubmit="collectFormIds" report-submit="true">
-        <button form-type="submit" class='btn-active' wx:if="{{status === 'ing' && !help}}" bindtap='helpKJ'>帮好友砍一刀</button>
-        <button form-type="submit" wx:elif="{{ help || status === 'fail' || status === 'success' }}" class='btn-active' bindtap='startKanjia'>我也要发起砍价</button>
-      </form>
+    <view class='others-btn'>
+      
       <view class='kanjia-status'>
         <text wx:if="{{status === 'success'}}">本次砍价已成功</text>
         <text wx:elif="{{status === 'fail'}}">本次砍价已结束</text>
@@ -49,12 +46,13 @@
           <view class='friend-time'>{{item.participationTime}}</view>
         </view>
         <view class='fr friend-price'>
-          帮砍: {{item.bargainAmount/100}}元
+          帮砍: {{filter.toFix(item.bargainAmount)}}元
         </view>
       </view>
     </view>
   </view>
 </view>
+
 <view class="btn-box">
   <form bindsubmit="collectFormIds" report-submit="true">
     <view class='bt-btn' wx:if="{{status === 'init'}}">
@@ -71,6 +69,12 @@
     <view class='bt-btn' wx:elif="{{ self && status === 'fail'}}">
       <view class='btn-l btn-fail'>砍价失败</view>
       <button form-type="submit" class='btn-r' bindtap='startKanjia'>重新发起砍价</button>
+    </view>
+    <view class='bt-btn' wx:if="{{!self&&status === 'ing' && !help}}">
+      <view class='btn' bindtap='helpKJ'>帮好友砍一刀</view>
+    </view>
+    <view class='bt-btn' wx:if="{{(help || status === 'fail' || status === 'success')&&!self }}">
+      <view class='btn' bindtap='startKanjia'>我也要发起砍价</view>
     </view>
   </form>
 </view>
@@ -90,11 +94,11 @@
     <view class='alert2-box'>
       <view class='alert2-title'>已成功帮砍{{price1/100}}元</view>
       <view class='alert2-tip'>参加该砍价活动可享{{filter.toFix(resData.originalPrice - resData.activityPrice)}}元优惠，快去邀请好友砍价吧！</view>
-      <view class='alert2-product'>
+      <view class='alert2-product ub ub-ac'>
         <image src='{{"https://upic.juniuo.com/file/picture/"+resData.cover+"/resize_220_140/mode_fill"}}'></image>
-        <view class='alert2-product-r fl'>
+        <view class='alert2-product-r ub-f1 ub ub-ver ub-pj'>
           <view class='alert2-product-name'>{{productInfo.productName}}</view>
-          <view class='alert2-product-rb'>
+          <view class='alert2-product-price'>
             <text class='alert2-price'><text>{{resData.activityPrice/100}}</text>元</text>
             <text class='alert2-origin-price'>{{resData.originalPrice/100}}元</text>
           </view>

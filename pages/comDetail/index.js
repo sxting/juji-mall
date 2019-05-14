@@ -376,9 +376,15 @@ Page({
     setTimeout(()=>{
       that.setData({isShowProfit:true});
     },200);
+    var info = this.data.productInfo;
+    var point = info.point==null||info.point==0?'':info.point+'桔子';
+    var price = info.price==null||info.price==0?'':Number(info.price/100).toFixed(2)+'元';
+    var link = (info.price!=null&&info.price!=0)&&(info.point!=null&&info.point!=0)?'+':'';
+    var price1 = point + link + price;
     return {
-      title: JSON.parse(wx.getStorageSync('userinfo')).nickName+'分享给您一个心动商品，快来一起体验吧！',
-      path: '/pages/login/index?pagetype=1&pid=' + that.data.productId+'&storeid='+that.data.storeId+'&invitecode='+wx.getStorageSync('inviteCode')
+      title: price1+','+this.data.productInfo.productName,
+      path: '/pages/login/index?pagetype=1&pid=' + that.data.productId+'&storeid='+that.data.storeId+'&invitecode='+wx.getStorageSync('inviteCode'),
+      imageUrl: constant.basePicUrl + this.data.productInfo.picId + '/resize_560_420/mode_fill'
     }
   },
   toCommentDetail: function(event) {

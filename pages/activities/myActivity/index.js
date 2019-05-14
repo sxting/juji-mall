@@ -47,6 +47,15 @@ Page({
         var activityId = e.currentTarget.dataset.activityid;
         wx.navigateTo({ url: "/pages/payOrder/index?paytype=6&orderType=BARGAIN&id=" + productId +'&activityOrderId='+aorderid + '&activityId=' + activityId });
     },
+    toPayorder1:function(e){
+        var productid = e.currentTarget.dataset.pid;
+        var activityid = e.currentTarget.dataset.id;
+        var activityorderid = e.currentTarget.dataset.aoid;
+        var spid = e.currentTarget.dataset.spid;
+        wx.navigateTo({
+            url: '/pages/payOrder/index?paytype=5&orderType=SPLICED&id=' + productid + '&activityId=' + activityid + '&activityOrderId=' + activityorderid + '&splicedRuleId=' + spid
+        });
+    },
     getData: function(type, pageNo) {
         var obj = {
             providerId: wx.getStorageSync('providerId'),

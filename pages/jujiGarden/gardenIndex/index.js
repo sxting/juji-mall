@@ -36,7 +36,7 @@ Page({
             var conHeight = res.windowHeight-app.globalData.barHeight-45;
             this.setData({conHeight:conHeight})
           }
-        });      
+        });
         if (options.openid) {
             console.log('分享点进来');
             this.setData({

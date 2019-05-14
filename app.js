@@ -31,7 +31,7 @@ App({
           success: (res) => {
             this.globalData.barHeight = res.statusBarHeight;
             this.globalData.screenHeight = res.screenHeight;
-            console.log("导航栏高="+res.statusBarHeight);
+            console.log("状态栏高="+res.statusBarHeight);
             console.log("屏幕高="+res.screenHeight);
           }
         })        

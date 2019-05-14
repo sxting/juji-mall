@@ -2,12 +2,14 @@ import { service } from '../../../service';
 import { activitiesService } from '../shared/service';
 import { constant } from '../../../utils/constant';
 import { errDialog, loading } from '../../../utils/util';
+var timer = null;
 
 Page({
     data: {
         nvabarData: {showCapsule: 1,title: '项目详情'},
         portraitUrl: '/images/unkonw-icon.png',
         headPortraitList: ['', ''], //拼团中 参团的头像
+        productOrderInfo:{},
         restHour: '00',
         restMinute: '00',
         restSecond: '00',
@@ -20,6 +22,7 @@ Page({
         activityStatus: '',
         progressId: '',
         storeId: '',
+        isTimeOpen:false,
         productId: ''
     },
     onLoad: function(options) {
@@ -37,6 +40,18 @@ Page({
             url: '/pages/orderDetail/index?id=' + this.data.productOrderInfo.orderId + '&storeid=' + this.data.storeId
         });
     },
+    toPayorder:function(e){
+        var productid = e.currentTarget.dataset.productid;
+        var activityid = e.currentTarget.dataset.activityid;
+        var activityorderid = e.currentTarget.dataset.activityorderid;
+        console.log("去参团");
+        console.log(productid);
+        console.log(activityid);
+        console.log("activityorderid="+activityorderid);
+        wx.navigateTo({
+            url: '/pages/payOrder/index?paytype=5&orderType=SPLICED&id=' + productid + '&activityId=' + activityid + '&activityOrderId=' + activityorderid + '&splicedRuleId=' + this.data.productOrderInfo.rules[0].splicedRuleId
+        });
+    },
     onShareAppMessage: function() {
         var price = Number(this.data.productInfo.activityPrice/100).toFixed(2);
         return {
@@ -51,12 +66,23 @@ Page({
             phoneNumber: phone,
         });
     },
+    onUnload:function(){
+        clearTimeout(timer);
+        this.setData({isTimeOpen:false});
+    },
+    onHide:function(){
+        clearTimeout(timer);
+        this.setData({isTimeOpen:false});
+    },
     toMerchantsList: function() {
         wx.navigateTo({
             url: '/pages/merchantsCanUse/index?id=' + this.data.productId
         });
     },
     getItemInfo: function() {
+        if(this.data.isTimeOpen&&this.data.productOrderInfo.participateCount==1&&this.data.activityStatus=="IN_PROGRESS"){
+            clearTimeout(timer);
+        }
         let data = {
             progressId: this.data.progressId,
             activityId: this.data.activityId,
@@ -82,7 +108,13 @@ Page({
                         headPortraitList: res.orderDigest.progresses,
                         productId: res.orderDigest ? res.orderDigest.productId : '',
                         activityStatus: res.orderDigest ? res.orderDigest.activityOrderStatus : '',
-                    })
+                    });
+                    if(this.data.productOrderInfo.participateCount==2&&this.data.activityStatus=="IN_PROGRESS"){
+                        timer = setTimeout(()=>{
+                            this.getItemInfo();
+                            this.setData({isTimeOpen:true});
+                        },3000);
+                    }
                 }
             },
             error: err => console.log(err),

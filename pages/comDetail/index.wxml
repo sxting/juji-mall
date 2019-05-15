@@ -46,7 +46,6 @@
                 </view>
             </view>
 
-
             <!-- 加入群聊 -->
             <view class="joinClubWrap" wx:if="{{showJoinClub}}" bindtap="showJcModal">
               <view class="jcTitle">戳一下进入福利群</view>

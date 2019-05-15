@@ -42,13 +42,10 @@ Page({
             this.setData({
                 openId: options.openid,
                 switchFun: true
-            })
+            });
             this.getUserInfor();
         } else {
             this.getUserInfor(); //用户信息，是否绑定手机号码
-        }
-        if(app.globalData.barHeight!=20){
-            // this.setData({topValue:2*(app.globalData.barHeight-20)})
         }
     },
     onShow: function() {
@@ -124,7 +121,7 @@ Page({
             return;
         }
         this.setData({isDisabled:true})
-        wx.showToast({ title: '申请中', icon: 'loading', duration: 30000 });
+        wx.showToast({ title: '提交中', icon: 'loading', duration: 30000 });
         jugardenService.bindWechatInfor(data).subscribe({
             next: res => {
                 if (res) {

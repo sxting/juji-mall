@@ -62,8 +62,6 @@ Page({
     if(options.invitecode){
       this.setData({invitecode: options.invitecode});
     }
-    wx.hideShareMenu();
-
     if(options.id){
       this.setData({productId: options.id});
       // 查询商品详情

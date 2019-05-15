@@ -83,20 +83,20 @@ Page({
     if (res.from === 'button' && res.target.dataset.type === 'pintuan') {
         return {
             title: '嗨！便宜一起拼￥' + price + '【' + productName + '】',
-            path: '/pages/login/index?pagetype=5&type=SPLICED&activityId=' + activityId + '&activityOrderId=' + activityOrderId + '&invitecode=' + wx.getStorageSync('inviteCode'),
+            path: '/pages/login/index?pagetype=5&type=SPLICED&pid='+this.data.productId+'&activityId=' + activityId + '&activityOrderId=' + activityOrderId + '&invitecode=' + wx.getStorageSync('inviteCode'),
             imageUrl: constant.basePicUrl + picId + '/resize_560_420/mode_fill'
         }
     }
     if (res.from === 'button' && res.target.dataset.type === 'share2') {
         return {
             title: nickName+'邀请你帮'+gender+'砍价，'+price+'元得原价'+oprice+'元的'+productName,
-            path: '/pages/login/index?pagetype=5&type=BARGAIN&activityId=' + activityId + '&activityOrderId=' + activityOrderId + '&invitecode=' + wx.getStorageSync('inviteCode'),
+            path: '/pages/login/index?pagetype=5&type=BARGAIN&pid='+this.data.productId+'&activityId=' + activityId + '&activityOrderId=' + activityOrderId + '&invitecode=' + wx.getStorageSync('inviteCode'),
             imageUrl: constant.basePicUrl + picId + '/resize_560_420/mode_fill'
         }
     }
     return {
       title: nickName + '分享给您一个心动商品，快来一起体验吧！',
-      path: '/pages/login/index?pagetype=5&type=' + this.data.type + '&activityId=' + this.data.activityId + '&invitecode=' + wx.getStorageSync('inviteCode'),
+      path: '/pages/login/index?pagetype=5&type=' + this.data.type + '&pid='+this.data.productId+'&activityId=' + this.data.activityId + '&invitecode=' + wx.getStorageSync('inviteCode'),
       imageUrl: constant.basePicUrl + picId + '/resize_560_420/mode_fill'
     }
   },

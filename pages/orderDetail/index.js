@@ -55,7 +55,7 @@ Page({
       next: res => {
         this.setData({orderInfo: res});
         this.setData({preOrderStr:res.preOrderStr});
-        this.setData({storeInfo:res.orderItemList[0]});
+        this.setData({storeInfo:res.orderItemList.length>0?res.orderItemList[0]:{}});
         if(res.status=='PAID'){
           if(!this.data.isTimeOpen&&res.vouchers.length>0){
             console.log("获取核销码信息")

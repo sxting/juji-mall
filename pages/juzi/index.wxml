@@ -8,17 +8,15 @@
         <view>
           <view style="font-size:28rpx;color:#333333;">当前桔子</view>
           <view class="ub ub-ac" bindtap="toMyTrade">
-            <view style="font-family: PingFangSC-Semibold;font-size:54rpx;color:#333333;line-heght:54rpx;">{{currentPointObj.pointBalance}}</view>
+            <view style="font-size:54rpx;color:#333333;line-heght:54rpx;">{{currentPointObj.pointBalance}}</view>
             <image src="/images/toPointList.png" style="width:12rpx;height:17rpx;margin-left:20rpx;"></image>
           </view>
 
         </view>
       </view>
-      <view style="width:160rpx;height:60rpx;text-align:center;line-height:60rpx;font-size:28rpx;color:#ffffff;background-image: linear-gradient(-90deg, #494849 0%, #2D2D2D 100%);border-radius: 31rpx;" bindtap="juzigzModal">桔子规则</view>
+      <view class="juziRule" bindtap="juzigzModal">桔子规则</view>
     </view>
-
     <image src="/images/bgy.png" class="bgy"></image>
-
     <view class="ub ub-ac ub-pj1 taskCounts">
       <view class="ub ub-ver ub-ac ub-pc" bindtap="showDesModal" data-mt="3">
         <view class="qd-title">{{currentPointObj.todayTask}}</view>
@@ -90,7 +88,7 @@
       <view class="taskItem ub ub-ac">
           <image src="/images/task4.png" class="subImg"></image>
           <view class="subCon ub-f1">
-              <view class="subTit">发表10字以上评级得桔子</view>
+              <view class="subTit">发表10字以上评价得桔子</view>
               <view class="subTxt">附上美图可多得10个桔子</view>
           </view>
           <button class="taskBtn" bindtap="toMyOrder">评价</button>

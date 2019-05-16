@@ -20,7 +20,7 @@ Page({
         var conHeight = res.windowHeight-app.globalData.barHeight-45;
         this.setData({conHeight:conHeight})
       }
-    });      
+    });
     wx.hideShareMenu();
     this.getInfo();
   },

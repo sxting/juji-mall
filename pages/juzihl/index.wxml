@@ -27,7 +27,7 @@
       </view>
     </view>
     <view class="jingxuanlist" wx:for="{{recommendPage}}" wx:key="{{index}}" bindtap="toComDetail" data-id="{{item.productId}}" data-storeid="{{item.nearStore.id}}">
-      <image class="productImg" src="https://upic.juniuo.com/file/picture/{{item.picId}}/resize_690_387/mode_filt/format_jpg/quality_70" mode="widthFix">
+      <image class="productImg" src="https://upic.juniuo.com/file/picture/{{item.picId}}/resize_750_420/mode_filt/format_jpg/quality_70" mode="widthFix">
               <!-- 已售罄标识 -->
               <view class="ysqMark" wx:if="{{!item.stock}}">
                 <image src="../../images/ysq.png"></image>

@@ -198,7 +198,7 @@
             <image src="/images/shouye.png" style="width:48rpx;height:48rpx;"></image>
         </view>
         <button class="homeWrap toBg" bindtap="showShare">
-            <image src="/images/fenxiang.png" style="width:48rpx;height:48rpx;" open-type="share"></image>
+            <image src="/images/fenxiang.png" style="width:48rpx;height:48rpx;"></image>
         </button>
         <form bindsubmit="collectFormIds" report-submit="true" wx:if="{{productInfo.distributor}}">
           <view class="proBtns ub ub-ac">
@@ -279,7 +279,7 @@
     <view class="modal1 ub ub-ver" hidden="{{isShowModal}}">
         <view class="div ub-f1 ub ub-ac ub-pc">
             <view style="width:100%;height:100%;background-color:rgba(0,0,0,0.3);position:absolute;z-index:1;top: 0;left: 0" bindtap="closeModal"></view>
-            <view class="canvas">
+            <view class="canvas" hidden="{{isShowCanvas}}">
                 <canvas canvas-id="myCanvas"></canvas>
             </view>
         </view>
@@ -287,7 +287,7 @@
             <button class="ub-f1 ub ub-ac ub-pc left ub-ver" open-type="share">
                 <image class="share" src="/images/share_friend.png" style="width:117rpx;height:118rpx"></image>
             </button>
-            <button class="ub-f1 ub ub-ac ub-pc right ub-ver" bindtap="savePic" data-type="1">
+            <button class="ub-f1 ub ub-ac ub-pc right ub-ver" bindtap="showShareModal" data-type="1">
                 <image class="share" src="/images/share_save.png" style="width:94rpx;height:118rpx"></image>
             </button>
         </view>

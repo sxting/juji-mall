@@ -21,6 +21,7 @@ Page({
     note:[],
     despImgHeightValues:[],
     isShowData:false,
+    isShowCanvas:false,
     isHiddenClose:false,
     isShowModal:true,
     windowWidth: 345,
@@ -365,7 +366,7 @@ Page({
         console.log(res);
       },
       error: err => console.log(err),
-      complete: () => wx.hideToast()
+      complete: () =>{}
     })
   },
   /**
@@ -394,8 +395,8 @@ Page({
       url: '/pages/commentDetail/index?id=' + event.currentTarget.dataset.comid
     });
   },
-  // 点击分享
-  showShare:function(){
+
+  showShareModal:function(){
     console.log('生成分享图片');
     console.log(constant.basePicUrl + this.data.productInfo.picId +'/resize_750_420/mode_filt/format_jpg/quality_70');
     service.userInfo({ openId: wx.getStorageSync('openid') }).subscribe({
@@ -435,6 +436,15 @@ Page({
         complete: () => {}
     })
   },
+  saveShareImage:function(){
+    this.showShareModal();
+  },
+
+  // 点击分享
+  showShare:function(){
+    this.setData({isShowModal:false});
+    this.setData({isShowCanvas:true});
+  },
   closeModal:function(){
       this.setData({isShowModal:true});
   },
@@ -455,6 +465,7 @@ Page({
                     var name = info.productName;
                     var price2 = Number(info.originalPrice / 100).toFixed(2) + '元';
                     var storeLen = info.productStores.length;
+                    this.setData({isShowCanvas:false});
                     this.drawImage(info.merchantName,name,'',price1,price2,storeLen);//参数依次是storeName,desc,现价,原价,门店数
                     this.setData({isShowModal:false});
                 }else{
@@ -507,12 +518,12 @@ Page({
       var nickName = name.length>8?name.substring(0,8)+'...':name;
       setText(context,nickName, 70, 360,"#333",12,'left');
       setText(context,"私藏好物，分享给你", 70, 379,'#666',11,'left');
-      context.draw(true,function(){
+      context.draw(true,()=>{
         wx.hideLoading();
+        this.savePic();
       });
   },
   savePic: function(e) {
-      var type = e.currentTarget.dataset.type;
       var that = this;
       wx.canvasToTempFilePath({
           canvasId: 'myCanvas',
@@ -523,7 +534,7 @@ Page({
                           wx.authorize({
                               scope: 'scope.writePhotosAlbum',
                               success() {
-                                  that.saveAsPhoto(res.tempFilePath,type);
+                                  that.saveAsPhoto(res.tempFilePath);
                               },
                               fail() {
                                   wx.openSetting({
@@ -537,7 +548,7 @@ Page({
                               }
                           })
                       } else {
-                          that.saveAsPhoto(res.tempFilePath,type);
+                          that.saveAsPhoto(res.tempFilePath);
                       }
                   },
                   fail() {
@@ -550,20 +561,15 @@ Page({
           }
       });
   },
-  saveAsPhoto: function(imgUrl,type) {
+  saveAsPhoto: function(imgUrl) {
       wx.saveImageToPhotosAlbum({
           filePath: imgUrl,
           success: (res) => {
             this.share();//分享获得桔子
-            this.closeModal();
-            if(type==1){
-              wx.showToast({
-                  title: "已保存至相册",
-                  icon: "success"
-              });
-            }else{
-              errDialog('图文海报已保存到微信本地相册，打开微信发送给朋友吧!');
-            }
+            wx.showToast({
+                title: "已保存至相册",
+                icon: "success"
+            });
           },
           fail: function(res) {
               console.log(res);

@@ -9,7 +9,7 @@
             <view class="toper">
                 <swiper autoplay="{{autoplay}}" circular>
                     <swiper-item wx:for="{{slideShowList}}" wx:key="unique">
-                        <image src="{{item.imgId?'https://upic.juniuo.com/file/picture/'+item.imgId+'/resize_750_488/mode_filt/format_jpg/quality_0':''}}" data-link="{{item.link}}" bindtap="onTapBanner" class="slide-image" mode="widthFix" lazy-load="true"></image>
+                        <image src="{{item.imgId?'https://upic.juniuo.com/file/picture/'+item.imgId+'/resize_750_488/mode_filt/format_jpg/quality_0':''}}" data-link="{{item.link}}" bindtap="onTapBanner" class="slide-image" mode="widthFix" lazy-load="true" data-tit="商品详情"></image>
                     </swiper-item>
                 </swiper>
                 <view class="locationWrap" bindtap="toPath" data-page="/pages/citylist/index" style="top:{{topValue}}px">
@@ -21,23 +21,23 @@
                 <cover-image class="homeBImg" src="/images/bbbb.png" mode="aspectFit"></cover-image>
             </cover-view>
             <cover-view class="menulist ub ub-ac ub-pj1">
-                <cover-view class="menuitem ub ub-ver ub-ac ub-pc" bindtap="toPath" data-page="/pages/juzihl/index">
+                <cover-view class="menuitem ub ub-ver ub-ac ub-pc" bindtap="toPath" data-tit="桔子换礼" data-page="/pages/juzihl/index">
                     <cover-image class="icon_home" src="/images/icon_home1.png" mode="aspectFit"></cover-image>
                     <cover-view class="tx-c">桔子换礼</cover-view>
                 </cover-view>
-                <cover-view class="menuitem ub ub-ver ub-ac ub-pc" bindtap="toPath" data-page="/pages/activities/project-list/index?sceneType=SPLICED">
+                <cover-view class="menuitem ub ub-ver ub-ac ub-pc" bindtap="toPath" data-tit="特价拼团" data-page="/pages/activities/project-list/index?sceneType=SPLICED">
                     <cover-image class="icon_home" src="/images/icon_home2.png" mode="aspectFit"></cover-image>
                     <cover-view class="tx-c">特价拼团</cover-view>
                 </cover-view>
-                <cover-view class="menuitem ub ub-ver ub-ac ub-pc" bindtap="toPath" data-page="/pages/activities/project-list/index?sceneType=BARGAIN">
+                <cover-view class="menuitem ub ub-ver ub-ac ub-pc" bindtap="toPath" data-tit="超值砍价" data-page="/pages/activities/project-list/index?sceneType=BARGAIN">
                     <cover-image class="icon_home" src="/images/icon_home3.png" mode="aspectFit"></cover-image>
                     <cover-view class="tx-c">超值砍价</cover-view>
                 </cover-view>
-                <cover-view class="menuitem ub ub-ver ub-ac ub-pc" bindtap="toPath" data-page="/pages/niceShop/index">
+                <cover-view class="menuitem ub ub-ver ub-ac ub-pc" bindtap="toPath" data-tit="好店礼券" data-page="/pages/niceShop/index">
                     <cover-image class="icon_home" src="/images/icon_home4.png" mode="aspectFit"></cover-image>
                     <cover-view class="tx-c">好店礼券</cover-view>
                 </cover-view>
-                <cover-view class="menuitem ub ub-ver ub-ac ub-pc" bindtap="showJoinModal">
+                <cover-view class="menuitem ub ub-ver ub-ac ub-pc" bindtap="showJoinModal" data-tit="商家入驻">
                     <cover-image class="icon_home" src="/images/icon_home5.png" mode="aspectFit"></cover-image>
                     <cover-view class="tx-c">商家入驻</cover-view>
                 </cover-view>
@@ -57,18 +57,24 @@
             <view class="mtitle ub ub-ac" style="margin-bottom:12rpx">
                 <image class="icon_h1" src="/images/icon_h1.png" mode="aspectFit"></image>
                 <view class="ub-f1"></view>
-                <view class="arrowDiv ub ub-ac ub-pe" bindtap="toPath" data-page="/pages/activities/secondlist/index">
+                <view class="arrowDiv ub ub-ac ub-pe" bindtap="toPath" data-page="/pages/activities/secondlist/index" data-tit="限时秒杀">
                     更多秒杀<image class="arrow-r" src="/images/arrow-r.png"></image>
                 </view>
             </view>
             <view class="productBox">
-                <view class="productDiv ub ub-ac" wx:for="{{secondList}}" wx:key="unique" bindtap="toNextDetail" data-type="SEC_KILL" data-actid="{{item.activityId}}" data-id="{{item.productId}}" data-storeid="" wx:if="{{index<2}}">
+                <view class="productDiv ub ub-ac" wx:for="{{secondList}}" wx:if="{{index<2}}" wx:key="unique" bindtap="toNextDetail" data-type="SEC_KILL" data-actid="{{item.activityId}}" data-id="{{item.productId}}" data-storeid="" wx:if="{{index<2}}">
                     <image src="https://upic.juniuo.com/file/picture/{{item.cover}}/resize_0_0/mode_fill" lazy-load="true" mode="aspectFill" class="plimg"></image>
+                    <view class="yqgMark" wx:if="{{item.balanceStock==0}}"><image src="/images/yqg.png"></image></view>
                     <view class="ub-f1 ub ub-ver" style="height:180rpx">
                         <view class="pubuname" style="padding-right:0">{{item.productName}}</view>
-                        <view class="clockDiv ub ub-ac mt05 ub-f1">
-                            <child dataFromParent='{{item.expectGmtEnd}}' customeClass="red" radius="0"></child>
-                            <view class="txt">秒杀中</view>
+                        <view class="clockDiv ub ub-ac mt05 ub-f1" wx:if="{{item.activityStatus=='STARTED'&&item.balanceStock>0}}">
+                            <child dataFromParent='{{item.expectGmtEnd}}' customeClass="red" radius="0"></child><view class="txt">秒杀中</view>
+                        </view>
+                        <view class="clockDiv ub ub-ac mt05 ub-f1" wx:if="{{item.activityStatus=='READY'}}">
+                            <child dataFromParent='{{item.expectGmtEnd}}' customeClass="block" radius="0"></child><view class="txt">即将开始</view>
+                        </view>
+                        <view class="clockDiv ub ub-ac mt05 ub-f1" wx:if="{{item.balanceStock==0}}">
+                            <view class="txt">已抢光</view>
                         </view>
                         <view class="ub ub-ac priceDiv" style="margin-top:20rpx">
                             <view class="pubuprice" wx:if="{{item.activityPoint>0}}">{{item.activityPoint}}<text style="font-size:20rpx">桔子</text></view>
@@ -85,7 +91,7 @@
                 <view class="mtitle ub ub-ac">新品尝鲜<image class="icon_mark" src="/images/icon_h2.png" mode="aspectFit"></image>
                 </view>
                 <view class="newproductDiv clearfix">
-                    <view class="pubuItem" wx:for="{{newProductList}}" wx:if="{{!(index==2&&newProductList.length==3)&&index<4}}" wx:key="unique" bindtap="toComDetail" data-id="{{item.productId}}" data-storeid="{{item.nearStore.id}}">
+                    <view class="pubuItem" wx:for="{{newProductList}}" wx:if="{{!(index==2&&newProductList.length==3)&&index<4}}" wx:key="unique" bindtap="toNextDetail" data-type="{{item.currentActivityType}}" data-actid="{{item.currentActivityId}}" data-id="{{item.productId}}" data-storeid="{{item.nearStore.id}}" data-tit="新品尝鲜">
                         <image src="https://upic.juniuo.com/file/picture/{{item.picId}}/resize_750_420/mode_fill" lazy-load="true" mode="aspectFill" class="plimg"></image>
                         <view class="pubuname mt05">{{item.productName}}</view>
                         <view class="ub ub-ac priceDiv" style="margin-top:2rpx;padding-right:20rpx;">
@@ -104,12 +110,12 @@
                 <view class="mtitle ub ub-ac">精选推荐<image class="icon_mark" src="/images/icon_h3.png" mode="aspectFit"></image>
                 </view>
                 <view class="jingxuanlist" wx:for="{{recommendPage}}" wx:for-index='index' wx:key="unique">
-                    <image class="productImg" bindtap="toNextDetail" data-type="{{item.currentActivityType}}" data-actid="{{item.currentActivityId}}" data-id="{{item.productId}}" data-storeid="{{item.nearStore.id}}" lazy-load="true" src="https://upic.juniuo.com/file/picture/{{item.picId}}/resize_750_420/mode_filt/format_jpg/quality_70" mode="aspectFill"></image>
+                    <image class="productImg" bindtap="toNextDetail" data-type="{{item.currentActivityType}}" data-actid="{{item.currentActivityId}}" data-id="{{item.productId}}" data-storeid="{{item.nearStore.id}}" data-tit="精品推荐" lazy-load="true" src="https://upic.juniuo.com/file/picture/{{item.picId}}/resize_750_420/mode_filt/format_jpg/quality_70" mode="aspectFill"></image>
                     <view class="dis-wrap jc-sb">
                         <view class="from">{{item.merchantName}}</view>
                         <view class="dis">距你{{filter.toDis(item.nearDist)}}km</view>
                     </view>
-                    <view class="pro-name" bindtap="toNextDetail" data-type="{{item.currentActivityType}}" data-actid="{{item.currentActivityId}}" data-id="{{item.productId}}" data-storeid="{{item.nearStore.id}}" style="margin-top:8rpx">{{item.productName}}</view>
+                    <view class="pro-name" bindtap="toNextDetail" data-type="{{item.currentActivityType}}" data-actid="{{item.currentActivityId}}" data-id="{{item.productId}}" data-storeid="{{item.nearStore.id}}" data-tit="精品推荐" style="margin-top:8rpx">{{item.productName}}</view>
                     <view class="price-wrap jc-sb">
                         <view class="p-wrap">
                             <view class="now-price" wx:if="{{item.point>0}}">{{item.point}}</view>
@@ -168,7 +174,7 @@
             <cover-view class="jcCtrl ub ub-ac plr20" style="margin-top: 20rpx;">
                 <cover-image class="shoperIcon" style="width:32rpx;height:27rpx;" src="/images/shoper3.png"></cover-image>
                 <cover-view class="ub-f1 shopTxt">{{joinInfo.phone}}</cover-view>
-                <cover-view class="jcModalBtn" style="background:#ffdc00" bindtap="dialtelUs">拨打</cover-view>
+                <cover-view class="jcModalBtn" style="background:#ffdc00" bindtap="dialtoUs">拨打</cover-view>
             </cover-view>
             <cover-view class="jcCtrl ub ub-ac plr20 mt05">
                 <cover-image class="shoperIcon" style="width:36rpx;height:29rpx" src="/images/shoper2.png"></cover-image>

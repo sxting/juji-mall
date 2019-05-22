@@ -82,7 +82,7 @@ Page({
             this.closeModal();
             return {
                 title: JSON.parse(wx.getStorageSync('userinfo')).nickName + '分享给您一个心动商品，快来一起体验吧！',
-                path: '/pages/login/index?pagetype=4&pid=' + this.data.productId + '&storeid=&sceneid=' + this.data.sceneId + '&invitecode=' + wx.getStorageSync('inviteCode'),
+                path: '/pages/login/index?pagetype=4&inner=1&pid=' + this.data.productId + '&storeid=&sceneid=' + this.data.sceneId + '&invitecode=' + wx.getStorageSync('inviteCode'),
                 imageUrl: constant.basePicUrl + this.data.productInfo.picId + '/resize_360_360/mode_filt/format_jpg/quality_0'
             }
         }

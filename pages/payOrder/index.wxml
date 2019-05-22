@@ -66,6 +66,14 @@
     </view>
   </view>
 
+  <view class="plr15" style="background:#fff;">
+    <view class="ub ub-ac ub-pj item">
+      <view class="itemTit ub ub-ac">商品规格</view>
+      <view class="skuName ub-f1 tx-r">{{skuId}}</view>
+    </view>
+    <view class="line"></view>
+  </view>
+  
   <view class="plr15" style="background:#fff;" wx:if="{{paytype!=5 && paytype!=6 && paytype!=7}}">
     <view class="ub ub-ac ub-pj item">
       <view class="itemTit ub ub-ac">购买数量</view>

@@ -312,7 +312,7 @@ Page({
     var storeid = e.currentTarget.dataset.storeid;
     console.log(id);
     wx.navigateTo({
-      url: '/pages/comDetail/index?id=' + id + '&storeid=' + storeid
+      url: '/pages/comDetail/index?referer=0&id=' + id + '&storeid=' + storeid
     });
   },
   toggleLabel: function(event) {

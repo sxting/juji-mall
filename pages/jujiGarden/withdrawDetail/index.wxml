@@ -39,6 +39,10 @@
                 <view class="txt">{{settlementDetailData.goodsName}}</view>
             </view>
             <view class="item ub ub-ac">
+                <view class="ub-f1">商品规格</view>
+                <view class="txt">{{settlementDetailData.goodsName}}</view>
+            </view>
+            <view class="item ub ub-ac">
                 <view class="ub-f1">买家用户</view>
                 <view class="txt">{{settlementDetailData.buyerName? settlementDetailData.buyerName : '-'}}</view>
             </view>

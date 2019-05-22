@@ -16,6 +16,8 @@ Page({
     paytype: 1,
     sceneId:"",
     inviteCode:'',
+    skuId:'',
+    skuMajorId:'',
     pointBalance: 0,
     alreadyPay: false,
     showProduct:false,
@@ -50,9 +52,10 @@ Page({
       });
     }
     if(options.type){
-        this.setData({
-          type: options.type
-        })
+        this.setData({type: options.type});
+    }
+    if(options.skuId){
+        this.setData({skuId: options.skuId,skuMajorId:options.smId});
     }
     this.setData({
       activityOrderId: options.activityOrderId ? options.activityOrderId : ''
@@ -205,6 +208,8 @@ Page({
                       price: that.data.productInfo.price,
                       productId: that.data.productInfo.productId,
                       productName: that.data.productInfo.productName,
+                      skuId:that.data.skuId,
+                      skuMajorId:that.data.skuMajorId,
                       type: that.data.productInfo.type
                     }],
                     openId: wx.getStorageSync('openid'),
@@ -342,6 +347,8 @@ Page({
                       price: that.data.productInfo.price,
                       productId: that.data.productInfo.productId,
                       productName: that.data.productInfo.productName,
+                      skuId:that.data.skuId,
+                      skuMajorId:that.data.skuMajorId,
                       type: that.data.productInfo.type
                     }],
                     openId: wx.getStorageSync('openid'),
@@ -454,6 +461,8 @@ Page({
                     price: that.data.productInfo.price,
                     productId: that.data.productInfo.productId,
                     productName: that.data.productInfo.productName,
+                    skuId:that.data.skuId,
+                    skuMajorId:that.data.skuMajorId,
                     type: that.data.productInfo.type
                   }],
                   openId: wx.getStorageSync('openid'),
@@ -582,6 +591,8 @@ Page({
                     price: that.data.productInfo.originalPrice,
                     productId: that.data.productInfo.productId,
                     productName: that.data.productInfo.productName,
+                    skuId:that.data.skuId,
+                    skuMajorId:that.data.skuMajorId,
                     type: that.data.productInfo.type
                   }],
                   openId: wx.getStorageSync('openid'),

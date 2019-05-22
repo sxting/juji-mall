@@ -100,10 +100,12 @@ Page({
       console.log("走下一页");
       console.log('pageType===='+this.data.pageType);
       if(this.data.pageType==0){
-        wx.switchTab({url: '/pages/index/index'});
+        var referer = this.data.pageData.inner?1:4;
+        wx.reLaunch({url: '/pages/index/index?referer='+referer});
       }
       if(this.data.pageType==1){
-        wx.reLaunch({url: '/pages/comDetail/index?id='+this.data.pageData.pid+'&storeid='+this.data.pageData.storeid+'&invitecode='+this.data.pageData.invitecode});
+        var referer = this.data.pageData.inner?1:5;
+        wx.reLaunch({url: '/pages/comDetail/index?referer='+referer+'&id='+this.data.pageData.pid+'&storeid='+this.data.pageData.storeid+'&invitecode='+this.data.pageData.invitecode});
       }
       if(this.data.pageType==2){
         wx.reLaunch({url: '/pages/jujiGarden/gardenIndex/index?openid=' + this.data.pageData.openid});
@@ -111,14 +113,15 @@ Page({
       if(this.data.pageType==3){
        if(this.data.pageFromCode==1){
           //商品扫码 
-          wx.reLaunch({url: '/pages/comDetail/index?id=' + this.data.shareProductId + '&invitecode='+this.data.pageData.invitecode});
+          wx.reLaunch({url: '/pages/comDetail/index?referer=2&id=' + this.data.shareProductId + '&invitecode='+this.data.pageData.invitecode});
        }else{
           //邀新扫码
           wx.reLaunch({url: '/pages/jujiGarden/gardenIndex/index?openid=' + this.data.sharePersonOpenId});
        }
       }
       if(this.data.pageType==4){
-        wx.reLaunch({url: '/pages/comDetail/index?id=' + this.data.pageData.pid + '&storeid=' + this.data.pageData.storeid + '&sceneid=' + this.data.pageData.sceneid});
+        var referer = this.data.pageData.inner?1:5;
+        wx.reLaunch({url: '/pages/comDetail/index?referer='+referer+'&id=' + this.data.pageData.pid + '&storeid=' + this.data.pageData.storeid + '&sceneid=' + this.data.pageData.sceneid});
       }
       if(this.data.pageType==5) {
         if (this.data.pageData.type == 'BARGAIN' && this.data.pageData.activityOrderId) {

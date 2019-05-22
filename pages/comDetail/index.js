@@ -12,6 +12,10 @@ Page({
     showPics: [],
     commentList: [],
     productInfo: {},
+    productSkus:[],
+    defaultSku:'',
+    curSkuId:'',
+    curSkuMajorId:'',
     description:[],
     recommendList: [],
     store: {},
@@ -26,7 +30,7 @@ Page({
     isShowModal:true,
     windowWidth: 345,
     windowHeight: 430,
-    shareBg: '../../images/shareBg.png',
+    shareBg: '/images/shareBg.png',
     headImg: '',
     erwmImg: '',
     userImg:'',
@@ -34,7 +38,7 @@ Page({
     invitecode:'',
     isShowNewerGet: false,
     isShowProfit:true,
-    userImgUrl:'../../images/shareBg.png',
+    userImgUrl:'/images/shareBg.png',
     nickName:'',
     share:0,//首页分享按钮进入值为1
     promo:0,//首页推广按钮进入值为1
@@ -43,7 +47,8 @@ Page({
     showJcModal: false,//显示“去回复”模态窗口
     showJztgModal: false,//显示“桔长推广”模态窗口
     distributorRole:'',//桔长还是桔园身份
-    welfareGroup: {}//“戳一下加入福利群”数据对象
+    welfareGroup: {},//“戳一下加入福利群”数据对象
+    isShowSelect:false
   },
   onLoad: function(options) {
     if (options.share) {
@@ -74,6 +79,18 @@ Page({
     this.getPointBalance();
     //查询新用户见面礼
     this.getNewGift();
+    if(options.referer){
+        var referer = options.referer;
+        var source = '';
+        if(referer==0){source='商品列表'}
+        if(referer==1){source='分享链接'}
+        if(referer==2){source='小程序码'}
+        if(referer==3){source='支付结果'}
+        if(referer==4){source='同店推荐'}
+        if(referer==5){source='外链'}
+        console.log('sourceName='+source);
+        wx.reportAnalytics('detail_referer', {ue: source});
+    }
   },
   openJztgShare: function(){
     this.setData({
@@ -82,6 +99,7 @@ Page({
     this.showShare();
   },
   openJztgModal: function(){
+    wx.reportAnalytics('detail_ue', {ue: '成为桔长'});
     if(this.data.distributorRole=='MEMBER'){
       this.setData({
         showJztgModal: true
@@ -96,6 +114,7 @@ Page({
     })
   },
   showJcModal: function(){
+    wx.reportAnalytics('detail_ue', {ue: '加群'});
     console.log("showJcModal");
     this.setData({
       showJcModal: true
@@ -145,6 +164,7 @@ Page({
     });
   },
   toMap: function(){
+    wx.reportAnalytics('detail_ue', {ue: '门店地址'});
     if (this.data.store && this.data.store.lat && this.data.store.lng){
       wx.navigateTo({url: '/pages/map/index?lat=' + this.data.store.lat + '&lng=' + this.data.store.lng});
     }
@@ -171,6 +191,28 @@ Page({
       var type = this.data.productInfo.type;
       if(type=='PRODUCT'&&point>0&&price>0){
         if(price>0&&this.data.pointBalance>=point){
+          this.toggleSelect();
+        }else{
+          this.toGetPoint();
+        }
+      }
+      if(type=='PRODUCT'&&point==0&&price>0){
+        this.toggleSelect();
+      }
+      if(type=='POINT'){
+        this.toggleSelect();
+      }
+      if(this.data.pointBalance<point||!this.data.pointBalance){
+        this.toGetPoint();
+      }
+  },
+
+  okSelect:function(){
+      var point = this.data.productInfo.point==null?0:this.data.productInfo.point;
+      var price = this.data.productInfo.price==null?0:this.data.productInfo.price;
+      var type = this.data.productInfo.type;
+      if(type=='PRODUCT'&&point>0&&price>0){
+        if(price>0&&this.data.pointBalance>=point){
           this.toCreateOrder();
         }else{
           this.toGetPoint();
@@ -186,11 +228,9 @@ Page({
         this.toGetPoint();
       }
   },
+
   toPro:function(e){
     this.showShare();
-    // wx.navigateTo({
-    //   url: '/pages/jujiGarden/recommend/index?productid='+e.currentTarget.dataset.id
-    // });
   },
   callPhone: function () {
     wx.makePhoneCall({
@@ -209,32 +249,37 @@ Page({
     });
   },
   toMerchantsList:function(){
+    wx.reportAnalytics('detail_ue', {ue: '适用门店'});
     wx.navigateTo({
       url: '/pages/merchantsCanUse/index?id=' + this.data.productId
     });
   },
   toCreateOrder: function() { //跳转订单确认 桔子和人民币组合订单
     console.log("跳转前sceneId="+this.data.sceneId);
+    wx.reportAnalytics('detail_ue', {ue: '下单'});
     wx.navigateTo({
-      url: '/pages/payOrder/index?paytype=1&id=' + this.data.productId + '&storeid=' + this.data.storeId + '&sceneid='+this.data.sceneId + '&invitecode='+this.data.invitecode
+      url: '/pages/payOrder/index?paytype=1&id='+this.data.productId+'&storeid='+this.data.storeId+'&sceneid='+this.data.sceneId+'&invitecode='+this.data.invitecode+'&skuId='+this.data.curSkuId+'&smId='+this.data.curSkuMajorId
     });
   },
   toCreateOrderByPoint: function() { //只用桔子下单
     console.log("跳转前sceneId="+this.data.sceneId);
+    wx.reportAnalytics('detail_ue', {ue: '下单'});
     wx.navigateTo({
-      url: '/pages/payOrder/index?paytype=2&id=' + this.data.productId + '&storeid=' + this.data.storeId + '&sceneid='+this.data.sceneId + '&invitecode='+this.data.invitecode
+      url: '/pages/payOrder/index?paytype=2&id='+this.data.productId+'&storeid='+this.data.storeId+'&sceneid='+this.data.sceneId+'&invitecode='+this.data.invitecode+'&skuId='+this.data.curSkuId+'&smId='+this.data.curSkuMajorId
     });
   },
   toCreateOrderByRmb: function () { //人民币优惠购买
     console.log("跳转前sceneId="+this.data.sceneId);
+    wx.reportAnalytics('detail_ue', {ue: '下单'});
     wx.navigateTo({
-      url: '/pages/payOrder/index?paytype=3&id=' + this.data.productId + '&storeid=' + this.data.storeId + '&sceneid='+this.data.sceneId + '&invitecode='+this.data.invitecode
+      url: '/pages/payOrder/index?paytype=3&id='+this.data.productId+'&storeid='+this.data.storeId+'&sceneid='+this.data.sceneId+'&invitecode='+this.data.invitecode+'&skuId='+this.data.curSkuId+'&smId='+this.data.curSkuMajorId
     });
   },
   toCreateOrderByOriPrice: function () { //原价购买
     console.log("跳转前sceneId="+this.data.sceneId);
+    wx.reportAnalytics('detail_ue', {ue: '下单'});
     wx.navigateTo({
-      url: '/pages/payOrder/index?paytype=4&id=' + this.data.productId + '&storeid=' + this.data.storeId + '&sceneid='+this.data.sceneId + '&invitecode='+this.data.invitecode
+      url: '/pages/payOrder/index?paytype=4&id='+this.data.productId+'&storeid='+this.data.storeId+'&sceneid='+this.data.sceneId+'&invitecode='+this.data.invitecode+'&skuId='+this.data.curSkuId+'&smId='+this.data.curSkuMajorId
     });
   },
   toGetPoint: function() { //跳转到任务页面赚桔子
@@ -260,13 +305,14 @@ Page({
     var storeid = e.currentTarget.dataset.storeid;
     console.log(id);
     wx.navigateTo({
-      url: '/pages/comDetail/index?id=' + id + '&storeid=' + storeid
+      url: '/pages/comDetail/index?referer=4&id=' + id + '&storeid=' + storeid
     });
   },
   onShow: function() {
-    //评论列表
+    this.setData({isShowSelect:false});
   },
   call: function() {
+    wx.reportAnalytics('detail_ue', {ue: '拨打电话'});
     wx.makePhoneCall({
       phoneNumber: this.data.store.phone // 仅为示例，并非真实的电话号码
     })
@@ -297,7 +343,11 @@ Page({
             distributorRole: res.distributorRole,
             welfareGroup: res.welfareGroup,
             showPics: picsStrArr,
-            isShowData: true
+            isShowData: true,
+            productSkus:res.product.productSkus,
+            defaultSku:res.product.defaultSku,
+            curSkuId:res.product.defaultSku.skuId,
+            curSkuMajorId:res.product.defaultSku.id
           });
           if(that.data.share==1){
             that.showShare();
@@ -318,7 +368,11 @@ Page({
             distributorRole: res.distributorRole,
             welfareGroup: res.welfareGroup,
             showPics: picsStrArr,
-            isShowData: true
+            isShowData: true,
+            productSkus:res.product.productSkus,
+            defaultSku:res.product.defaultSku,
+            curSkuId:res.product.defaultSku.skuId,
+            curSkuMajorId:res.product.defaultSku.id
           });
           if(that.data.share==1){
             that.showShare();
@@ -341,9 +395,13 @@ Page({
     });
   },
   gohomepage: function() {
-    wx.switchTab({
-      url: '/pages/index/index'
+    wx.reportAnalytics('detail_ue', {ue: '回首页'});
+    wx.reLaunch({
+      url: '/pages/index/index?referer=2'
     });
+  },
+  selectType:function(e){
+    this.setData({curSkuId:e.currentTarget.dataset.skuId,curSkuMajorId:e.currentTarget.dataset.id});
   },
   toCommentList: function() {
     wx.navigateTo({
@@ -373,6 +431,7 @@ Page({
    * 用户点击右上角分享或页面中的分享
    */
   onShareAppMessage: function(res) {
+    wx.reportAnalytics('detail_ue', {ue: '发送好友'});
     this.share();
     this.setData({ isShowModal: true,isShowProfit:false });
     var that = this;
@@ -386,7 +445,7 @@ Page({
     var price1 = point + link + price;
     return {
       title: price1+','+this.data.productInfo.productName,
-      path: '/pages/login/index?pagetype=1&pid=' + that.data.productId+'&storeid='+that.data.storeId+'&invitecode='+wx.getStorageSync('inviteCode'),
+      path: '/pages/login/index?pagetype=1&inner=1&pid=' + that.data.productId+'&storeid='+that.data.storeId+'&invitecode='+wx.getStorageSync('inviteCode'),
       imageUrl: constant.basePicUrl + this.data.productInfo.picId + '/resize_560_420/mode_fill'
     }
   },
@@ -395,8 +454,8 @@ Page({
       url: '/pages/commentDetail/index?id=' + event.currentTarget.dataset.comid
     });
   },
-
   showShareModal:function(){
+    wx.reportAnalytics('detail_ue', {ue: '保存推广图片'});
     console.log('生成分享图片');
     console.log(constant.basePicUrl + this.data.productInfo.picId +'/resize_750_420/mode_filt/format_jpg/quality_70');
     service.userInfo({ openId: wx.getStorageSync('openid') }).subscribe({
@@ -439,7 +498,11 @@ Page({
   saveShareImage:function(){
     this.showShareModal();
   },
-
+  toggleSelect:function(){
+    // if(this.data.productSkus.length>1){
+      this.setData({isShowSelect:!this.data.isShowSelect});
+    // }
+  },
   // 点击分享
   showShare:function(){
     this.setData({isShowModal:false});

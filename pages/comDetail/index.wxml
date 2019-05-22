@@ -218,13 +218,13 @@
             <!-- 4月02日修改的逻辑 -->
             <view class="footerBtnWrap" wx:if="{{productInfo.point>0&&productInfo.price>0}}">
                 <button wx:if="{{!productInfo.stock}}" class="noStock">已售罄</button>
-                <button form-type="submit" class="yuanjia-xiadan" bindtap="toCreateOrder" wx:if="{{productInfo.stock&&productInfo.price>0&&pointBalance>=productInfo.point}}">
+                <button form-type="submit" class="yuanjia-xiadan" bindtap="buyProduct" wx:if="{{productInfo.stock&&productInfo.price>0&&pointBalance>=productInfo.point}}">
                     <view>
                         <view style="font-size: 24rpx;font-weight:bold;line-height:34rpx;font-weight:bolder;">{{productInfo.point}}桔子+{{filter.toFix(productInfo.price)}}元</view>
                         <view style="font-size: 18rpx;line-height:22rpx;text-align:center;">立即兑换</view>
                     </view>
                 </button>
-                <button form-type="submit" class="yuanjia-xiadan" bindtap="toGetPoint" wx:if="{{pointBalance<productInfo.point||!pointBalance}}">
+                <button form-type="submit" class="yuanjia-xiadan" bindtap="buyProduct" wx:if="{{pointBalance<productInfo.point||!pointBalance}}">
                     <view>
                         <view style="font-size: 24rpx;font-weight:bold;line-height:34rpx;font-weight:bolder;">桔子不足</view>
                         <view style="font-size: 18rpx;line-height:22rpx;">赚桔子</view>
@@ -234,7 +234,7 @@
             <!-- 如果是只能人民币购买的商品 -->
             <view class="footerBtnWrap" wx:if="{{productInfo.type=='PRODUCT'&&!productInfo.point&&productInfo.price>0}}">
                 <button wx:if="{{!productInfo.stock}}" class="noStock">已售罄</button>
-                <button wx:else form-type="submit" class="yuanjia-xiadan" bindtap="toCreateOrderByRmb">
+                <button wx:else form-type="submit" class="yuanjia-xiadan" bindtap="buyProduct">
                     <view>
                         <view style="font-size: 24rpx;font-weight:bold;line-height:34rpx;font-weight:bolder;">{{filter.toFix(productInfo.price)}}元</view>
                         <view style="font-size: 18rpx;line-height:22rpx;text-align:center;">立即购买</view>
@@ -245,14 +245,14 @@
             <view class="footerBtnWrap" wx:if="{{productInfo.type=='POINT'&&!productInfo.price}}">
                 <button wx:if="{{!productInfo.stock}}" class="noStock">已售罄</button>
                 <!-- 如果桔子充足 -->
-                <button form-type="submit" class="yuanjia-xiadan" bindtap="toCreateOrderByPoint" wx:if="{{productInfo.stock&&pointBalance>=productInfo.point}}">
+                <button form-type="submit" class="yuanjia-xiadan" bindtap="buyProduct" wx:if="{{productInfo.stock&&pointBalance>=productInfo.point}}">
                     <view>
                         <view style="font-size: 24rpx;font-weight:bold;line-height:34rpx;font-weight:bolder;">{{productInfo.point}} 桔子</view>
                         <view style="font-size: 18rpx;line-height:22rpx;text-align:center;">立即兑换</view>
                     </view>
                 </button>
                 <!-- 如果桔子不足 跳转到任务 -->
-                <button form-type="submit" class="yuanjia-xiadan" bindtap="toGetPoint" wx:if="{{productInfo.stock&&pointBalance<productInfo.point||!pointBalance}}">
+                <button form-type="submit" class="yuanjia-xiadan" bindtap="buyProduct" wx:if="{{productInfo.stock&&pointBalance<productInfo.point||!pointBalance}}">
                     <view>
                         <view style="font-size: 24rpx;font-weight:bold;line-height:34rpx;font-weight:bolder;">桔子不足</view>
                         <view style="font-size: 18rpx;line-height:22rpx;">赚桔子</view>
@@ -300,17 +300,14 @@
         </view>
     </view>
 
-
     <view class="jcModalWrap" hidden="{{!showJcModal}}">
       <view class="jcModal">
-      <image src="/images/quliao.png" style="width:100%;height: 236rpx;border-top-left-radius: 20rpx;border-top-right-radius: 20rpx;"></image>
-      <view class="jcModalText" style="margin-top:57rpx;">点击下方“去回复”按钮，并发送</view>
-      <view class="jcModalText" style="margin-top:6rpx;">数字“{{welfareGroup.code}}”邀请你进群</view>
-      <view class="jcModalBtnWrap"><button class="jcModalBtn" open-type='contact' session-from='weapp'>去回复</button></view>
-      
-      <image src="/images/newerGetClose.png" class="jcModalClose" bindtap="closeJcModal"></image>
+          <image src="/images/quliao.png" style="width:100%;height: 236rpx;border-top-left-radius: 20rpx;border-top-right-radius: 20rpx;"></image>
+          <view class="jcModalText" style="margin-top:57rpx;">点击下方“去回复”按钮，并发送</view>
+          <view class="jcModalText" style="margin-top:6rpx;">数字“{{welfareGroup.code}}”邀请你进群</view>
+          <view class="jcModalBtnWrap"><button class="jcModalBtn" open-type='contact' session-from='weapp'>去回复</button></view>
+          <image src="/images/newerGetClose.png" class="jcModalClose" bindtap="closeJcModal"></image>
       </view>
-      
     </view>
 
     <view class="jztgModalWrap" wx:if="{{showJztgModal}}">
@@ -362,12 +359,19 @@
           <view class="jztgModalText">推广素材可由平台小编编写，一键保存转发即可</view>
         </view>
       </view>
-      
       <view class="jztgModalBtnWrap"><button class="jztgModalBtn" bindtap="openJztgShare">立即邀请好友</button></view>
-      
-      <image src="/images/newerGetClose.png" class="jztgModalClose" bindtap="closeJztgModal"></image>
+          <image src="/images/newerGetClose.png" class="jztgModalClose" bindtap="closeJztgModal"></image>
       </view>
-      
+    </view>
+    <view class="selectWrap" hidden="{{!isShowSelect}}" bindtap="toggleSelect"></view>
+    <view class="ub ub-ver selectModal" hidden="{{!isShowSelect}}">
+        <view class="closeSelect ub ub-ac ub-pc" bindtap="toggleSelect"><image src="/images/icon_close.png"></image></view>
+        <view class="ub ub-ac selectTit">选择规格</view>
+        <view class="ub ub-ac selectType">
+            <view wx:for="{{productSkus}}" wx:key="unique" class="ub-f1 ub ub-ac ub-pc {{item.skuId==defaultSku.skuId?'on':''}}" data-price="{{item.price}}" data-point="{{item.point}}" data-skuId="{{item.skuId}}" data-id="{{item.id}}" bindtap="selectType">{{filter.toEllipsised(item.skuName)}}</view>
+        </view>
+        <view class="selectDiv ub ub-ac">已选：“{{filter.toEllipsised(defaultSku.skuName)}}”，售价：{{filter.toFix(defaultSku.price)}}元</view>
+        <button class="selectBtn" bindtap="okSelect">选好了</button>
     </view>
 </view>
 <import src="../../components/toast/toast.wxml" />

@@ -10,12 +10,7 @@ Page({
         locationName: '',
         businessList: [],
         topValue:28,
-        leavePage: false,
         autoplay: true,
-        dotsColor: 'rgba(51,51,51,0.3)',
-        dotsActiveColor: '#FFDC00',
-        swiperH: '', //swiper高度
-        nowIdx: 0, //当前swiper索引
         slideShowList: [],
         pointProductList: [],
         newProductList:[],
@@ -45,7 +40,7 @@ Page({
     showJoinModal:function(){
         this.setData({showJcModal:!this.data.showJcModal});
     },
-    dialtelUs:function(){
+    dialtoUs:function(){
         wx.makePhoneCall({
           phoneNumber: this.data.joinInfo.phone
         });
@@ -60,6 +55,11 @@ Page({
     },
     toPath: function(e) {
         var targetUrl = e.currentTarget.dataset['page'];
+        if(e.currentTarget.dataset.tit){
+            var tit = e.currentTarget.dataset.tit;
+            console.log('elementName='+tit);
+            wx.reportAnalytics('home_ue', {ue: tit});
+        }
         wx.navigateTo({ url: targetUrl })
     },
     isNewer: function() {
@@ -90,7 +90,16 @@ Page({
             this.setData({topValue:app.globalData.barHeight+8})
         }
         console.log('--------------index-onLoad-------------');
-
+        if(options.referer){
+            var referer = options.referer;
+            var source = '';
+            if(referer==0){source='正常进入'}
+            if(referer==1){source='分享链接'}
+            if(referer==2){source='回到首页按钮'}
+            if(referer==3){source='支付结果'}
+            if(referer==4){source='外链'}
+            wx.reportAnalytics('home_referer', {ue: source});
+        }
         //成功登陆之后 查询新用户见面礼
         this.isNewer();
         this.getJoinInfo();
@@ -600,44 +609,41 @@ Page({
             })
         });
     },
-    //swiper滑动事件
-    swiperChange: function(e) {
-        this.setData({
-            nowIdx: e.detail.current
-        })
-    },
     //点击banner
     onTapBanner: function(e) {
         var link = e.currentTarget.dataset.link;
         if (link == '/juzihl/index' && this.data.pointProductList.length == 0) {
             return;
         }
+        wx.reportAnalytics('home_ue', {ue: e.currentTarget.dataset.tit});
         wx.navigateTo({
             url: '/pages' + link
         });
     },
     //跳转到商品详情
     toComDetail: function(e) {
+        wx.reportAnalytics('home_ue', {ue: '商品详情'});
         var id = e.currentTarget.dataset.id;
         var storeid = e.currentTarget.dataset.storeid;
         console.log(id);
         wx.navigateTo({
-            url: '/pages/comDetail/index?share=0&id=' + id + '&storeid=' + storeid
+            url: '/pages/comDetail/index?share=0&referer=0&id=' + id + '&storeid=' + storeid
         });
     },
     // 分享
     toComDetailAndShare: function(e) {
+        wx.reportAnalytics('home_ue', {ue: '首页推广'});
         var id = e.currentTarget.dataset.id;
         var storeid = e.currentTarget.dataset.storeid;
         wx.navigateTo({
-            url: '/pages/comDetail/index?share=1&id=' + id + '&storeid=' + storeid
+            url: '/pages/comDetail/index?share=1&referer=0&id=' + id + '&storeid=' + storeid
         });
     },
     //推广
     toPro: function(e) {
         var id = e.currentTarget.dataset.id;
         wx.navigateTo({
-            url: '/pages/comDetail/index?promo=1&id=' + id
+            url: '/pages/comDetail/index?promo=1&referer=0&id=' + id
         });
     },
     //点击桔子球
@@ -742,7 +748,7 @@ Page({
             complete: () => wx.hideToast()
         });
         this.getNewProductList();
-        this.getSecondKillList(); //获取秒杀活动列表
+        this.getSecondList(); //获取秒杀活动列表
     },
     //获取所有商品，以分页列表形式展示
     getRecommendPage: function(obj) {
@@ -800,7 +806,7 @@ Page({
         return {
             title: '桔集：聚集优质好店，体验美好生活！',
             imageUrl: '/images/shareImg.png',
-            path: '/pages/login/index?invitecode=' + wx.getStorageSync('inviteCode')
+            path: '/pages/login/index?inner=1&invitecode=' + wx.getStorageSync('inviteCode')
         }
     },
     //已知省市代码，获取该地点的服务商信息，然后更新首页数据
@@ -849,6 +855,7 @@ Page({
         var id = e.currentTarget.dataset.id;
         var storeid = e.currentTarget.dataset.storeid;
         var actId = e.currentTarget.dataset.actid;
+        wx.reportAnalytics('home_ue', {ue: e.currentTarget.dataset.tit});
         if (type == 'SPLICED') {
             wx.navigateTo({
                 url: '/pages/activities/project-detail/index?type=SPLICED&id=' + id + '&activityId=' + actId
@@ -863,7 +870,7 @@ Page({
             });
         } else {
             wx.navigateTo({
-                url: '/pages/comDetail/index?share=0&id=' + id + '&storeid=' + storeid
+                url: '/pages/comDetail/index?share=0&referer=0&id=' + id + '&storeid=' + storeid
             });
         }
     },
@@ -890,11 +897,16 @@ Page({
             complete: () => wx.hideToast()
         });
     },
-    getSecondKillList: function() {
+    getSecondList:function(){
+        this.setData({secondList:[]});
+        this.getSecondListByStatus('STARTED');
+        this.getSecondListByStatus('READY');
+    },
+    getSecondListByStatus: function(status) {
         let data = {
             providerId: this.data.providerId,
             activityType: 'SEC_KILL',
-            activityStatus: "STARTED",
+            activityStatus: status,
             pageNo: 1,
             pageSize: 10
         }
@@ -902,7 +914,7 @@ Page({
             next: res => {
                 if (res) {
                     this.setData({
-                        secondList: res
+                        secondList: res.concat(this.data.secondList)
                     });
                 }
             },

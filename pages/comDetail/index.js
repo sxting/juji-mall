@@ -254,22 +254,22 @@ Page({
       url: '/pages/merchantsCanUse/index?id=' + this.data.productId
     });
   },
-  toCreateOrder: function() { //跳转订单确认 桔子和人民币组合订单
-    console.log("跳转前sceneId="+this.data.sceneId);
+  toCreateOrder: function() { //桔子和人民币组合订单
+    console.log("组合订单跳转前sceneId="+this.data.sceneId);
     wx.reportAnalytics('detail_ue', {ue: '下单'});
     wx.navigateTo({
       url: '/pages/payOrder/index?paytype=1&id='+this.data.productId+'&storeid='+this.data.storeId+'&sceneid='+this.data.sceneId+'&invitecode='+this.data.invitecode+'&skuId='+this.data.curSkuId+'&smId='+this.data.curSkuMajorId
     });
   },
   toCreateOrderByPoint: function() { //只用桔子下单
-    console.log("跳转前sceneId="+this.data.sceneId);
+    console.log("桔子单跳转前sceneId="+this.data.sceneId);
     wx.reportAnalytics('detail_ue', {ue: '下单'});
     wx.navigateTo({
       url: '/pages/payOrder/index?paytype=2&id='+this.data.productId+'&storeid='+this.data.storeId+'&sceneid='+this.data.sceneId+'&invitecode='+this.data.invitecode+'&skuId='+this.data.curSkuId+'&smId='+this.data.curSkuMajorId
     });
   },
   toCreateOrderByRmb: function () { //人民币优惠购买
-    console.log("跳转前sceneId="+this.data.sceneId);
+    console.log("人民币单跳转前sceneId="+this.data.sceneId);
     wx.reportAnalytics('detail_ue', {ue: '下单'});
     wx.navigateTo({
       url: '/pages/payOrder/index?paytype=3&id='+this.data.productId+'&storeid='+this.data.storeId+'&sceneid='+this.data.sceneId+'&invitecode='+this.data.invitecode+'&skuId='+this.data.curSkuId+'&smId='+this.data.curSkuMajorId
@@ -403,7 +403,6 @@ Page({
   selectType:function(e){
     this.setData({curSkuId:e.currentTarget.dataset.skuid,curSkuMajorId:e.currentTarget.dataset.id});
     this.setData({defaultSku:getObjById(this.data.productSkus,this.data.curSkuId)});
-    console.log(JSON.stringify(this.data.defaultSku));
   },
   toCommentList: function() {
     wx.navigateTo({

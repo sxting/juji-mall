@@ -199,7 +199,8 @@ Page({
       this.setData({isShowSelect:!this.data.isShowSelect});
     },
     selectType:function(e){
-        this.setData({curSkuId:e.currentTarget.dataset.skuId,curSkuMajorId:e.currentTarget.dataset.id});
+        this.setData({curSkuId:e.currentTarget.dataset.skuid,curSkuMajorId:e.currentTarget.dataset.id});
+        this.setData({defaultSku:getObjById(this.data.productSkus,this.data.curSkuId)});
     },
     okSelect:function(){
         wx.navigateTo({
@@ -224,3 +225,11 @@ Page({
         })
     }
 });
+
+function getObjById(arr,id){
+  for(var i=0;i<arr.length;i++){
+    if(arr[i].skuId == id){
+      return arr[i];
+    }
+  }
+}

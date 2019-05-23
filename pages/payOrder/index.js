@@ -26,7 +26,8 @@ Page({
     type: '',//场景类型
     kanjiaData: '',
     splicedRuleId: '',
-    orderBizType:'NORMAL'
+    orderBizType:'NORMAL',
+    defaultSku:{}
   },
   onLoad: function(options) {
     console.log("确认订单页面");
@@ -138,6 +139,7 @@ Page({
           point: res.product.point,
           showProduct: true
         });
+        this.setData({defaultSku:getObjById(res.product.productSkus,this.data.skuId)})
       },
       error: err => console.log(err),
       complete: () => wx.hideToast()
@@ -178,7 +180,7 @@ Page({
         alreadyPay : true
       });
     }
-    if (that.data.paytype == 1) { //混合支付
+    if (that.data.paytype==1||that.data.paytype==2||that.data.paytype==3) { //普通商品非原价支付
       service.getPre({
         productId: that.data.productId
       }).subscribe({
@@ -193,6 +195,16 @@ Page({
                 //判断条件 如果：要买的数量 > 每个订单限制购买的最大数量 处理：禁止下单
                 if (that.data.count <= that.data.productInfo.limitPerOrderNum) {
                   //创建订单
+                  var info = that.data.defaultSku;
+                  var point = info.point==null||info.point==0?'0':info.point;
+                  var price = info.price==null||info.price==0?'0':info.price;
+                  if(point==0&&price>0){
+                    var payTypeValue = 'WECHAT';
+                  }else if(point>0&&price==0){
+                    var payTypeValue = 'POINT';
+                  }else{
+                    var payTypeValue = 'MIX';
+                  }
                   var orderObj = {
                     itemRequests: [{
                       sceneId:that.data.sceneId,
@@ -201,11 +213,11 @@ Page({
                       merchantName: that.data.productInfo.merchantName,
                       num: that.data.count,
                       originalPrice: that.data.productInfo.originalPrice,
-                      payAmount: that.data.productInfo.price * that.data.count,
-                      payPoint: that.data.productInfo.point * that.data.count,
+                      payAmount: price * that.data.count,
+                      payPoint: point * that.data.count,
                       picId: that.data.productInfo.picId,
-                      point: that.data.productInfo.point,
-                      price: that.data.productInfo.price,
+                      point: point,
+                      price: price,
                       productId: that.data.productInfo.productId,
                       productName: that.data.productInfo.productName,
                       skuId:that.data.skuId,
@@ -214,9 +226,9 @@ Page({
                     }],
                     openId: wx.getStorageSync('openid'),
                     originAmount: that.data.productInfo.originalPrice * that.data.count,
-                    payAmount: that.data.productInfo.price * that.data.count,
-                    payPoint: that.data.productInfo.point * that.data.count,
-                    payType: 'MIX',
+                    payAmount: price * that.data.count,
+                    payPoint: point * that.data.count,
+                    payType: payTypeValue,
                     providerId: that.data.productInfo.providerId,
                     providerName: that.data.productInfo.providerName,
                     orderBizType:that.data.orderBizType
@@ -317,251 +329,6 @@ Page({
           });
         }
       })
-    } else if (that.data.paytype == 2) { //桔子支付
-      service.getPre({
-        productId: that.data.productId
-      }).subscribe({
-        next: res => {
-          console.log('--------下单前数据校验2桔子支付-------');
-          console.log(res);
-          if (res.pointBalance >= that.data.productInfo.point * that.data.count) {
-            //判断条件 如果：过往已经购买的数量 + 要买的数量 > 限制购买的最大数量 处理：禁止下单
-            if (res.totalAll + that.data.count <= that.data.productInfo.limitMaxNum) {
-              //判断条件 如果：今日已经购买的数量 + 要买的数量 > 今日限制购买的最大数量 处理：禁止下单
-              if (res.totalToday + that.data.count <= that.data.productInfo.limitPerDayNum) {
-                //判断条件 如果：要买的数量 > 每个订单限制购买的最大数量 处理：禁止下单
-                if (that.data.count <= that.data.productInfo.limitPerOrderNum) {
-                  //创建订单
-                  var orderObj = {
-                    itemRequests: [{
-                      sceneId:that.data.sceneId,
-                      inviteCode:that.data.inviteCode,
-                      merchantId: that.data.productInfo.merchantId,
-                      merchantName: that.data.productInfo.merchantName,
-                      num: that.data.count,
-                      originalPrice: that.data.productInfo.originalPrice,
-                      payAmount: 0,
-                      payPoint: that.data.productInfo.point * that.data.count,
-                      picId: that.data.productInfo.picId,
-                      point: that.data.productInfo.point,
-                      price: that.data.productInfo.price,
-                      productId: that.data.productInfo.productId,
-                      productName: that.data.productInfo.productName,
-                      skuId:that.data.skuId,
-                      skuMajorId:that.data.skuMajorId,
-                      type: that.data.productInfo.type
-                    }],
-                    openId: wx.getStorageSync('openid'),
-                    originAmount: that.data.productInfo.originalPrice * that.data.count,
-                    payAmount: 0,
-                    payPoint: that.data.productInfo.point * that.data.count,
-                    payType: 'POINT',
-                    providerId: that.data.productInfo.providerId,
-                    providerName: that.data.productInfo.providerName,
-                    orderBizType:that.data.orderBizType
-                  };
-                  service.saveOrder(orderObj).subscribe({
-                    next: res1 => {
-                      console.log('--------创建订单返回2桔子支付-------');
-                      console.log(res1);
-                      //兑换成功什么都不返回
-                      wx.redirectTo({
-                        url: '/pages/orderDetail/index?id=' + res1.orderId,
-                      });
-                      that.setData({
-                        alreadyPay: false
-                      });
-                    },
-                    error: err => {
-                      wx.showModal({
-                        title: '错误',
-                        content: err,
-                      });
-                      that.setData({
-                        alreadyPay: false
-                      });
-                    }
-                  });
-                } else {
-                  var number = that.data.productInfo.limitPerOrderNum;
-                  wx.showModal({
-                    title: '提示',
-                    content: '该商品每单最多可以购买' + number + '件'
-                  });
-                  that.setData({
-                    alreadyPay: false
-                  });
-                }
-              } else {
-                var number = that.data.productInfo.limitPerDayNum - res.totalToday;
-                wx.showModal({
-                  title: '提示',
-                  content: number==0?'超出购买限制':'该商品今日还可以购买' + number + '件'
-                });
-                that.setData({
-                  alreadyPay: false
-                });
-              }
-            } else {
-              var number = that.data.productInfo.limitMaxNum - res.totalAll;
-              wx.showModal({
-                title: '提示',
-                content: number==0?'超出购买限制':'该商品您最多还可以购买' + number + '件'
-              });
-              that.setData({
-                alreadyPay: false
-              });
-            }
-          } else {
-            wx.showModal({
-              title: '提示',
-              content: '当前桔子余额不足，请多赚些桔子吧'
-            });
-            that.setData({
-              alreadyPay: false
-            });
-          }
-        },
-        error: err => {
-          wx.showModal({
-            title: '错误',
-            content: err,
-          });
-          that.setData({
-            alreadyPay: false
-          });
-        }
-      })
-    } else if (that.data.paytype == 3) { //人民币优惠支付
-      service.getPre({
-        productId: that.data.productId
-      }).subscribe({
-        next: res => {
-          console.log('--------下单前数据校验3微信支付-------');
-          console.log(res);
-          //判断条件 如果：过往已经购买的数量 + 要买的数量 > 限制购买的最大数量 处理：禁止下单
-          if (res.totalAll + that.data.count <= that.data.productInfo.limitMaxNum) {
-            //判断条件 如果：今日已经购买的数量 + 要买的数量 > 今日限制购买的最大数量 处理：禁止下单
-            if (res.totalToday + that.data.count <= that.data.productInfo.limitPerDayNum) {
-              //判断条件 如果：要买的数量 > 每个订单限制购买的最大数量 处理：禁止下单
-              if (that.data.count <= that.data.productInfo.limitPerOrderNum) {
-                //创建订单
-                var orderObj = {
-                  itemRequests: [{
-                    sceneId:that.data.sceneId,
-                    inviteCode:that.data.inviteCode,
-                    merchantId: that.data.productInfo.merchantId,
-                    merchantName: that.data.productInfo.merchantName,
-                    num: that.data.count,
-                    originalPrice: that.data.productInfo.originalPrice,
-                    payAmount: that.data.productInfo.price * that.data.count,
-                    payPoint: 0,
-                    picId: that.data.productInfo.picId,
-                    point: that.data.productInfo.point,
-                    price: that.data.productInfo.price,
-                    productId: that.data.productInfo.productId,
-                    productName: that.data.productInfo.productName,
-                    skuId:that.data.skuId,
-                    skuMajorId:that.data.skuMajorId,
-                    type: that.data.productInfo.type
-                  }],
-                  openId: wx.getStorageSync('openid'),
-                  originAmount: that.data.productInfo.originalPrice * that.data.count,
-                  payAmount: that.data.productInfo.price * that.data.count,
-                  payPoint: 0,
-                  payType: 'WECHAT',
-                  providerId: that.data.productInfo.providerId,
-                  providerName: that.data.productInfo.providerName,
-                  orderBizType:that.data.orderBizType
-                };
-                service.saveOrder(orderObj).subscribe({
-                  next: res1 => {
-                    console.log('--------创建订单返回3微信支付--------');
-                    console.log(res1);
-                    var payInfo = JSON.parse(res1.payInfo);
-                    wx.requestPayment({
-                      timeStamp: payInfo.timeStamp,
-                      nonceStr: payInfo.nonceStr,
-                      package: payInfo.package,
-                      signType: payInfo.signType,
-                      paySign: payInfo.paySign,
-                      success(res2) {
-                        console.log(res2);
-                        wx.redirectTo({
-                          url: '/pages/orderDetail/index?id=' + res1.orderId,
-                        });
-                        that.setData({
-                          alreadyPay: false
-                        });
-                      },
-                      fail(res2) {
-                        console.log(res2);
-                        if (res2.errMsg == 'requestPayment:fail cancel') {
-                          wx.showToast({
-                            title: '用户取消支付',
-                            icon: 'none'
-                          });
-                          //跳转到待支付列表
-                          that.toMyOrder();
-                          that.setData({
-                            alreadyPay: false
-                          });
-                        }
-
-                      }
-                    });
-                  },
-                  error: err => {
-                    wx.showModal({
-                      title: '错误',
-                      content: err,
-                    });
-                    that.setData({
-                      alreadyPay: false
-                    });
-                  }
-                });
-              } else {
-                var number = that.data.productInfo.limitPerOrderNum;
-                wx.showModal({
-                  title: '提示',
-                  content: '该商品每单最多可以购买' + number + '件'
-                });
-                that.setData({
-                  alreadyPay: false
-                });
-              }
-            } else {
-              var number = that.data.productInfo.limitPerDayNum - res.totalToday;
-              wx.showModal({
-                title: '提示',
-                content: number==0?'超出购买限制':'该商品今日还可以购买' + number + '件'
-              });
-              that.setData({
-                alreadyPay: false
-              });
-            }
-          } else {
-            var number = that.data.productInfo.limitMaxNum - res.totalAll;
-            wx.showModal({
-              title: '提示',
-              content: number==0?'超出购买限制':'该商品您最多还可以购买' + number + '件'
-            });
-            that.setData({
-              alreadyPay: false
-            });
-          }
-        },
-        error: err => {
-          wx.showModal({
-            title: '错误',
-            content: err,
-          })
-          that.setData({
-            alreadyPay: false
-          });
-        }
-      })
     } else if (that.data.paytype == 4){//原价支付
       service.getPre({
         productId: that.data.productId
@@ -587,8 +354,8 @@ Page({
                     payAmount: that.data.productInfo.price * that.data.count,
                     payPoint: 0,
                     picId: that.data.productInfo.picId,
-                    point: that.data.productInfo.point,
-                    price: that.data.productInfo.originalPrice,
+                    point: that.data.defaultSku.point,
+                    price: that.data.defaultSku.originalPrice,
                     productId: that.data.productInfo.productId,
                     productName: that.data.productInfo.productName,
                     skuId:that.data.skuId,
@@ -830,3 +597,11 @@ Page({
 
   }
 });
+
+function getObjById(arr,id){
+  for(var i=0;i<arr.length;i++){
+    if(arr[i].skuId == id){
+      return arr[i];
+    }
+  }
+}

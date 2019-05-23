@@ -182,7 +182,7 @@ Page({
     if (scene == '1011' || scene == '1012' || scene == '1013') {//扫描二维码场景值
       return;
     } else {
-      wx.switchTab({
+      wx.reLaunch({
         url: '/pages/index/index?referer=3',
       })
     }
@@ -194,8 +194,8 @@ Page({
     });
   },
   goIndex: function(){
-    wx.switchTab({
-      url: '/pages/index/index',
+    wx.reLaunch({
+      url: '/pages/index/index?referer=3',
     });
   },
   toComDetail: function (e) {

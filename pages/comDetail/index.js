@@ -402,6 +402,7 @@ Page({
   },
   selectType:function(e){
     this.setData({curSkuId:e.currentTarget.dataset.skuId,curSkuMajorId:e.currentTarget.dataset.id});
+    this.setData({defaultSku:getObjById(this.data.productSkus,this.data.curSkuId)});
   },
   toCommentList: function() {
     wx.navigateTo({
@@ -499,9 +500,12 @@ Page({
     this.showShareModal();
   },
   toggleSelect:function(){
-    // if(this.data.productSkus.length>1){
+    if(this.data.productSkus.length>1){
       this.setData({isShowSelect:!this.data.isShowSelect});
-    // }
+    }else{
+      console.log("下单页面");
+      this.okSelect();
+    }
   },
   // 点击分享
   showShare:function(){
@@ -698,4 +702,12 @@ function drawText(ctx, str, left, top, titleHeight, canvasWidth) {
     ctx.stroke();
     titleHeight = titleHeight + 10;
     return titleHeight
+}
+
+function getObjById(arr,id){
+  for(var i=0;i<arr.length;i++){
+    if(arr[i].skuId == id){
+      return arr[i];
+    }
+  }
 }

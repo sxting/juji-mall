@@ -70,10 +70,10 @@
 
   <!-- 拼团中 他人进入 -->
   <view class="proBtns ub ub-ac" wx:if="{{ orderStatus == 'IN_PROGRESS' && isInitiator == 0 }}">
-    <view class="kaituan btns-pro ub-f1 ub ub-ver ub-ac ub-pc l" data-productid="{{collageInforData.productId}}" catchtap='createCollage'>
+    <view class="kaituan btns-pro ub-f1 ub ub-ver ub-ac ub-pc l" catchtap='createCollage'>
       <text class="txt1">我要开团</text>
     </view>
-    <view wx:if="{{resData.orderDigest.orderId==''}}" class="kaituan-ing btns-pro ub-f1 ub ub-ver ub-ac ub-pc r" data-activityorderid='{{resData.orderDigest.activityOrderId}}' data-activityid='{{resData.activityId}}' data-productid="{{collageInforData.productId}}" catchtap='joinCollage'>
+    <view wx:if="{{resData.orderDigest.orderId==''}}" class="kaituan-ing btns-pro ub-f1 ub ub-ver ub-ac ub-pc r" catchtap='joinCollage'>
       <text class="txt1">{{format.toFix(resData.activityPrice)}}元</text>
       <text class="txt2">一键参团{{resData.activityOrderId}}</text>
     </view>
@@ -81,4 +81,16 @@
       <text class="topay">去支付</text>
     </view>
   </view>
+
+  <view class="selectWrap" hidden="{{!isShowSelect}}" bindtap="toggleSelect"></view>
+  <view class="ub ub-ver selectModal" hidden="{{!isShowSelect}}">
+      <view class="closeSelect ub ub-ac ub-pc" bindtap="toggleSelect"><image src="/images/icon_close.png"></image></view>
+      <view class="ub ub-ac selectTit">选择规格</view>
+      <view class="ub ub-ac selectType">
+          <view wx:for="{{productSkus}}" wx:key="unique" class="ub-f1 ub ub-ac ub-pc {{item.skuId==defaultSku.skuId?'on':''}}" data-price="{{item.price}}" data-point="{{item.point}}" data-skuId="{{item.skuId}}" data-id="{{item.id}}" bindtap="selectType">{{format.toEllipsised(item.skuName)}}</view>
+      </view>
+      <view class="selectDiv ub ub-ac">已选：“{{format.toEllipsised(defaultSku.skuName)}}”，售价：{{format.toFix(defaultSku.price)}}元</view>
+      <button class="selectBtn" bindtap="okSelect">选好了</button>
+  </view>
+
 </view>

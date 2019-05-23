@@ -29,6 +29,11 @@ Page({
         ruleInfo: {},
         productProgress: 0,
         remind: false,
+        productSkus:[],
+        defaultSku:'',
+        curSkuId:'',
+        curSkuMajorId:'',
+        isShowSelect:false,
         isBack: false
     },
     onLoad: function(options) {
@@ -47,6 +52,7 @@ Page({
         this.setData({ isBack: true });
     },
     onShow: function() {
+        this.setData({isShowSelect:false});
         if (this.data.isBack) {
             this.getData(); // 返回刷新
         }
@@ -147,7 +153,11 @@ Page({
                         lng: res.product.store ? res.product.store.lng : '',
                         resData: res,
                         ruleInfo: res.rules[0],
-                        activityStatus:res.activityStatus
+                        activityStatus:res.activityStatus,
+                        productSkus:res.product.productSkus,
+                        defaultSku:res.product.defaultSku,
+                        curSkuId:res.product.defaultSku.skuId,
+                        curSkuMajorId:res.product.defaultSku.id
                     });
                 }).catch(function(err) {
                     that.setData({
@@ -165,7 +175,11 @@ Page({
                         lng: res.product.store.lng,
                         resData: res,
                         ruleInfo: res.rules[0],
-                        activityStatus:res.activityStatus
+                        activityStatus:res.activityStatus,
+                        productSkus:res.product.productSkus,
+                        defaultSku:res.product.defaultSku,
+                        curSkuId:res.product.defaultSku.skuId,
+                        curSkuMajorId:res.product.defaultSku.id
                     });
                 })
             },
@@ -179,8 +193,17 @@ Page({
         });
     },
     toSecondKill: function() {
+        this.toggleSelect();
+    },
+    toggleSelect:function(){
+      this.setData({isShowSelect:!this.data.isShowSelect});
+    },
+    selectType:function(e){
+        this.setData({curSkuId:e.currentTarget.dataset.skuId,curSkuMajorId:e.currentTarget.dataset.id});
+    },
+    okSelect:function(){
         wx.navigateTo({
-            url: '/pages/payOrder/index?paytype=7&orderType=SEC_KILL&id=' + this.data.productId + '&activityId=' + this.data.activityId + '&splicedRuleId=' + this.data.resData.rules[0].secKillRuleId
+            url: '/pages/payOrder/index?paytype=7&orderType=SEC_KILL&id=' + this.data.productId + '&activityId=' + this.data.activityId + '&splicedRuleId=' + this.data.resData.rules[0].secKillRuleId+'&skuId='+this.data.curSkuId+'&smId='+this.data.curSkuMajorId
         });
     },
     toRemainMe: function() {

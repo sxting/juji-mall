@@ -43,7 +43,13 @@ Component({
         restHour: '00',
         restMinute: '00',
         restSecond: '00',
-        resNum: 0
+        resNum: 0,
+        isShowSelect:false,
+        productSkus:[],
+        defaultSku:'',
+        curSkuId:'',
+        curSkuMajorId:'',
+        btnType:''
     },
     ready: function() {
         console.log('活动信息');
@@ -76,7 +82,7 @@ Component({
                 resNum: resNum
             })
         }
-
+        console.log(JSON.stringify(this.data.resData.product));
         this.setData({
             headPortraitList: this.data.resData.orderDigest && this.data.resData.orderDigest.progresses ? this.data.resData.orderDigest.progresses : [],
             pintuanListInfor: this.data.resData.otherDigests, //其他正在参团的小伙伴
@@ -84,7 +90,12 @@ Component({
             isInitiator: this.data.resData.orderDigest ? this.data.resData.orderDigest.isInitiator : 1, //是否为发起者 (判断进入是自己还是他人)
             orderStock: this.data.resData.stock, //查看此活动的库存
             orderInfor: this.data.resData.orderDigest, //订单信息
+            productSkus:this.data.resData.product.product.productSkus,
+            defaultSku:this.data.resData.product.product.defaultSku,
+            curSkuId:this.data.resData.product.product.defaultSku.skuId,
+            curSkuMajorId:this.data.resData.product.product.defaultSku.id
         })
+        console.log(this.data.productSkus);
         console.log(this.data.resData.otherDigests.length);
 
         /** 拼团数据 **/
@@ -135,33 +146,49 @@ Component({
                 url: '/pages/orderlist/index?index=2&status=PAID'
             })
         },
-        onlyJoinCollage(){
-            wx.navigateTo({
-                url: '/pages/payOrder/index?paytype=5&orderType=SPLICED&id=' + e.currentTarget.dataset.productid + '&activityId=' + this.data.activityId + '&splicedRuleId=' + this.data.resData.rules[0].splicedRuleId
-            })
+        toggleSelect:function(){
+            this.setData({isShowSelect:!this.data.isShowSelect});
+        },
+        selectType:function(e){
+            this.setData({curSkuId:e.currentTarget.dataset.skuId,curSkuMajorId:e.currentTarget.dataset.id});
+        },
+
+        okSelect:function(){
+            if(this.data.btnType == 'join'){
+                var productid = this.data.collageInforData.productId;
+                var activityid = this.data.activityId;
+                var activityorderid = this.data.resData.orderDigest.activityOrderId;
+                console.log("去参团");
+                wx.navigateTo({
+                    url: '/pages/payOrder/index?paytype=5&orderType=SPLICED&id=' + productid + '&activityId=' + activityid + '&activityOrderId=' + activityorderid + '&splicedRuleId=' + this.data.resData.rules[0].splicedRuleId+'&skuId='+this.data.curSkuId+'&smId='+this.data.curSkuMajorId
+                });
+            }else{
+                console.log("去开团");
+                var productid = this.data.collageInforData.productId;
+                wx.navigateTo({
+                    url: '/pages/payOrder/index?paytype=5&orderType=SPLICED&id=' + productid + '&activityId=' + this.data.activityId + '&splicedRuleId=' + this.data.resData.rules[0].splicedRuleId+'&skuId='+this.data.curSkuId+'&smId='+this.data.curSkuMajorId
+                })
+            }
         },
 
         /****  参团 ****/
         joinCollage(e) {
-            console.log(this.data.resData.activityOrderId);
-            var productid = e.currentTarget.dataset.productid;
-            var activityid = e.currentTarget.dataset.activityid;
-            var activityorderid = e.currentTarget.dataset.activityorderid;
-            console.log("去参团");
-            console.log(productid);
-            console.log(activityid);
-            console.log("activityorderid="+activityorderid);
-            wx.navigateTo({
-                url: '/pages/payOrder/index?paytype=5&orderType=SPLICED&id=' + productid + '&activityId=' + activityid + '&activityOrderId=' + activityorderid + '&splicedRuleId=' + this.data.resData.rules[0].splicedRuleId
-            });
+            this.setData({btnType:'join'});
+            if(this.data.productSkus.length>0){
+                this.toggleSelect();
+            }else{
+                this.okSelect();
+            }
         },
 
         /****  开团 ****/
         createCollage(e) {
-            console.log(e.currentTarget.dataset.productid);
-            wx.navigateTo({
-                url: '/pages/payOrder/index?paytype=5&orderType=SPLICED&id=' + e.currentTarget.dataset.productid + '&activityId=' + this.data.activityId + '&splicedRuleId=' + this.data.resData.rules[0].splicedRuleId
-            })
+            this.setData({btnType:'create'});
+            if(this.data.productSkus.length>0){
+                this.toggleSelect();
+            }else{
+                this.okSelect();
+            }
         }
     }
 })

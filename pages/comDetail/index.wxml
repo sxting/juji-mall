@@ -368,9 +368,13 @@
         <view class="closeSelect ub ub-ac ub-pc" bindtap="toggleSelect"><image src="/images/icon_close.png"></image></view>
         <view class="ub ub-ac selectTit">选择规格</view>
         <view class="ub ub-ac selectType">
-            <view wx:for="{{productSkus}}" wx:key="unique" class="ub-f1 ub ub-ac ub-pc {{item.skuId==defaultSku.skuId?'on':''}}" data-skuId="{{item.skuId}}" data-id="{{item.id}}" bindtap="selectType">{{filter.toEllipsised(item.skuName)}}</view>
+            <view wx:for="{{productSkus}}" wx:key="unique" class="ub-f1 ub ub-ac ub-pc {{item.skuId==defaultSku.skuId?'on':''}}" data-skuid="{{item.skuId}}" data-id="{{item.id}}" bindtap="selectType">{{filter.toEllipsised(item.skuName)}}</view>
         </view>
-        <view class="selectDiv ub ub-ac">已选：“{{filter.toEllipsised(defaultSku.skuName)}}”，售价：{{defaultSku.point>0?defaultSku.point+'桔子':''}}{{defaultSku.point>0&&defaultSku.price>0?'+':''}}{{filter.toFix(defaultSku.price+'元')}}</view>
+        <view class="selectDiv ub ub-ac">已选：“{{filter.toEllipsised(defaultSku.skuName)}}”，售价：
+            <text class="uu" wx:if="{{defaultSku.point>0}}">{{defaultSku.point}}桔子</text>
+            <text class="uu" wx:if="{{defaultSku.point>0&&defaultSku.price>0}}">+</text>
+            <text class="uu" wx:if="{{defaultSku.price>0}}">{{filter.toFix(defaultSku.price)}}元</text>
+        </view>
         <button class="selectBtn" bindtap="okSelect">选好了</button>
     </view>
 </view>

@@ -401,8 +401,9 @@ Page({
     });
   },
   selectType:function(e){
-    this.setData({curSkuId:e.currentTarget.dataset.skuId,curSkuMajorId:e.currentTarget.dataset.id});
+    this.setData({curSkuId:e.currentTarget.dataset.skuid,curSkuMajorId:e.currentTarget.dataset.id});
     this.setData({defaultSku:getObjById(this.data.productSkus,this.data.curSkuId)});
+    console.log(JSON.stringify(this.data.defaultSku));
   },
   toCommentList: function() {
     wx.navigateTo({

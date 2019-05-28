@@ -12,36 +12,32 @@
         
         <!-- 普通商品购买 -->
         <view class="goodAmount" wx:if="{{paytype==1||paytype==2||paytype==3}}">
-          <text class="uu" wx:if="{{defaultSku.point>0}}">{{defaultSku.point}}<text style="font-size:28rpx;">桔子</text></text>
-          <text class="uu" wx:if="{{defaultSku.point>0&&defaultSku.price>0}}">+</text>
-          <text class="uu" wx:if="{{defaultSku.price>0}}">{{filter.toFix(defaultSku.price)}}<text style="font-size:28rpx;">元</text></text>
-          <text style="margin-left: 10rpx;font-size: 24rpx;color: #999999;text-decoration:line-through">{{filter.toFix(productInfo.originalPrice)}}元</text>
-        </view>
-        <!-- 原价购买 -->
-        <view class="goodAmount" wx:if="{{paytype==4}}">{{filter.toFix(productInfo.originalPrice)}}<text style="font-size:28rpx;">元</text>
+          <text style="font-size:30rpx;" wx:if="{{defaultSku.point>0}}">{{defaultSku.point}}<text style="font-size:28rpx;">桔子</text></text>
+          <text style="font-size:30rpx;" wx:if="{{defaultSku.point>0&&defaultSku.price>0}}">+</text>
+          <text style="font-size:30rpx;" wx:if="{{defaultSku.price>0}}">{{filter.toFix(defaultSku.price)}}<text style="font-size:28rpx;">元</text></text>
+          <text class="original-price">{{filter.toFix(productInfo.originalPrice)}}元</text>
         </view>
 
-        <!-- 拼团进来 -->
+        <!-- 拼团 -->
         <view class="goodAmount" wx:if="{{paytype==5}}">
-          {{filter.toFix(price)}}
+          {{filter.toFix(activityData.splicedPrice)}}
           <text style="font-size:28rpx;">元</text>
           <text class='original-price'>{{filter.toFix(productInfo.originalPrice)}}元</text>
         </view>
 
-        <!-- 砍价进来 -->
+        <!-- 砍价 -->
         <view class="goodAmount" wx:if="{{paytype==6}}">
           {{filter.toFix(kanjiaData.activityPrice)}}
           <text style="font-size:28rpx;">元</text>
           <text class='original-price'>{{filter.toFix(kanjiaData.originalPrice)}}元</text>
         </view>
 
+        <!-- 秒杀 -->
         <view class="goodAmount" wx:if="{{paytype==7}}">
-          <text style="font-size:30rpx;" wx:if="{{kanjiaData.activityPoint>0}}">{{kanjiaData.activityPoint}}</text>
-          <text style="font-size:28rpx;" wx:if="{{kanjiaData.activityPoint>0}}">桔子</text>
-          <text style="font-size:28rpx;" wx:if="{{kanjiaData.activityPoint>0&&kanjiaData.activityPrice>0}}">+</text>
-          <text style="font-size:30rpx;" wx:if="{{kanjiaData.activityPrice>0}}">{{filter.toFix(kanjiaData.activityPrice)}}</text>
-          <text style="font-size:28rpx;" wx:if="{{kanjiaData.activityPrice>0}}">元</text>
-          <text style="margin-left: 10rpx;font-size: 24rpx;color: #999999;text-decoration:line-through">{{filter.toFix(kanjiaData.originalPrice)}}元</text>
+          <text style="font-size:30rpx;" wx:if="{{activityData.activityPoint>0}}">{{activityData.activityPoint}}<text style="font-size:28rpx;">桔子</text></text>
+          <text style="font-size:30rpx;" wx:if="{{activityData.activityPoint>0&&activityData.activityPrice>0}}">+</text>
+          <text style="font-size:30rpx;" wx:if="{{activityData.activityPrice>0}}">{{filter.toFix(activityData.activityPrice)}}<text style="font-size:28rpx;">元</text></text>
+          <text class="original-price">{{filter.toFix(activityData.originalPrice)}}元</text>
         </view>
 
       </view>
@@ -63,15 +59,16 @@
     </view>
   </view>
 
-  <view class="plr15" style="background:#fff;">
+  <view class="plr15 bgb">
     <view class="ub ub-ac ub-pj item">
       <view class="itemTit ub ub-ac">商品规格</view>
-      <view class="skuName ub-f1 tx-r">{{defaultSku.skuName}}</view>
+      <view class="itemTit ub-f1 tx-r" wx:if="{{paytype==1||paytype==2||paytype==3}}">{{filter.toEllipsised(defaultSku.skuName)}}</view>
+      <view class="itemTit ub-f1 tx-r" wx:if="{{paytype==5||paytype==6||paytype==7}}">{{filter.toEllipsised(activityData.skuName)}}</view>
     </view>
     <view class="line"></view>
   </view>
   
-  <view class="plr15" style="background:#fff;" wx:if="{{paytype!=5 && paytype!=6 && paytype!=7}}">
+  <view class="plr15 bgb" wx:if="{{paytype!=5 && paytype!=6 && paytype!=7}}">
     <view class="ub ub-ac ub-pj item">
       <view class="itemTit ub ub-ac">购买数量</view>
       <view class="numberCtrl ub ub-ac">
@@ -83,20 +80,20 @@
     <view class="line" wx:if="{{paytype==1||paytype==2}}"></view>
   </view>
 
-  <view class="plr15" style="background:#fff;padding-top:30rpx;" wx:if="{{paytype==1||paytype==2}}">
+  <view class="plr15 bgb" style="padding-top:30rpx;" wx:if="{{defaultSku&&defaultSku.point&&defaultSku.point>0}}">
     <view class="ub ub-ac ub-pj">
       <view class="itemTit ub ub-ac">使用桔子</view>
-      <view class="discountAmount">-{{point*count}}
+      <view class="discountAmount">-{{defaultSku.point*count}}
         <text style="font-size: 24rpx;color: #151515;">桔子</text>
       </view>
     </view>
     <view style="padding:20rpx 0 30rpx 0;font-size: 24rpx;color: #999999;">你有{{pointBalance}}个桔子</view>
   </view>
 
-  <view class="plr15" style="background:#fff;padding-top:30rpx;" wx:if="{{paytype==7&&kanjiaData.activityPoint>0}}">
+  <view class="plr15 bgb" style="padding-top:30rpx;" wx:if="{{activityData&&activityData.point&&activityData.point>0}}">
     <view class="ub ub-ac ub-pj">
       <view class="itemTit ub ub-ac">使用桔子</view>
-      <view class="discountAmount">-{{kanjiaData.activityPoint}}
+      <view class="discountAmount">-{{activityData.activityPoint}}
         <text style="font-size: 24rpx;color: #151515;">桔子</text>
       </view>
     </view>
@@ -112,28 +109,22 @@
 
 </view>
 <view class="btn_bottom ub ub-ac plr15" wx:if="{{showProduct}}">
-  <view class="ub-f1" wx:if="{{paytype==3}}">金额：
-    <text class="btnNum">{{filter.toFix(productInfo.price*count)}}元</text>
+  <view class="ub-f1" wx:if="{{paytype==1||paytype==2||paytype==3}}">金额：
+    <text class="btnNum">{{filter.toFix(defaultSku.price*count)}}元</text>
   </view>
-
-  <view class="ub-f1" wx:if="{{paytype==5||paytype==7}}">金额：
-      <text class="btnNum">{{filter.toFix(price)}}元</text>
+  <view class="ub-f1" wx:if="{{paytype==5}}">金额：
+    <text class="btnNum">{{filter.toFix(activityData.splicedPrice)}}元</text>
   </view>
-
-  <view class="ub-f1" wx:if="{{paytype==4}}">金额：
-    <text class="btnNum">{{filter.toFix(productInfo.originalPrice*count)}}元</text>
-  </view>
-  <view class="ub-f1" wx:if="{{paytype==1||paytype==2}}">金额：
-    <text class="btnNum">{{filter.toFix(price*count)}}元</text>
+  <view class="ub-f1" wx:if="{{paytype==7}}">金额：
+    <text class="btnNum">{{filter.toFix(activityData.activityPrice)}}元</text>
   </view>
   <view class="ub-f1" wx:if="{{paytype==6}}">金额：
     <text class="btnNum">{{kanjiaData.orderDigest.currentSalesPrice ? filter.toFix(kanjiaData.orderDigest.currentSalesPrice) : filter.toFix(kanjiaData.originalPrice)}}元</text>
   </view>
   <form bindsubmit="collectFormIds" report-submit="true" >
-    <button form-type="submit" class="btn_common ub-f1 ub ub-ac ub-pc" wx:if="{{paytype==1||paytype==3||paytype==4}}" bindtap="toPay" style="background:#ffdc00;color:#333">确认支付</button>
-    <button form-type="submit" class="btn_common ub-f1 ub ub-ac ub-pc {{paytype==6?'ty6':''}}" data-type="{{type}}" wx:if="{{paytype==5||paytype==6}}" bindtap="toPay" style="background:#ffdc00;color:#333">确认支付</button>
-
-    <button form-type="submit" class="btn_common ub-f1 ub ub-ac ub-pc" data-type="{{type}}" wx:if="{{paytype==7}}" bindtap="toPay" style="background:#ffdc00;color:#333">确认支付</button>
+    <button form-type="submit" class="btn_common1 ub-f1 ub ub-ac ub-pc" wx:if="{{paytype==1||paytype==3}}" bindtap="toPay">确认支付</button>
+    <button form-type="submit" class="btn_common1 ub-f1 ub ub-ac ub-pc {{paytype==6?'ty6':''}}" data-type="{{type}}" wx:if="{{paytype==5||paytype==6}}" bindtap="toPay">确认支付</button>
+    <button form-type="submit" class="btn_common1 ub-f1 ub ub-ac ub-pc" data-type="{{type}}" wx:if="{{paytype==7}}" bindtap="toPay">确认支付</button>
     <!-- 如果是桔子换礼类型显示兑换 -->
     <button form-type="submit" class="btn_common ub-f1 ub ub-ac ub-pc" wx:if="{{paytype==2}}" bindtap="toPay">确认兑换</button>
   </form>

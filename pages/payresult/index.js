@@ -24,17 +24,14 @@ Page({
     givingMoney: 0,
     aMoney:0, //储值金额 不算赠送
     zhuheAmount: 0,
-    providerId: ''
+    providerId: '',
+    merchantId:''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // options.orderId = '1552963656620554665079';//余额支付
-    // options.orderId = '1552989230513662818301';//微信支付
-    // options.orderId = '1552990946988705024048';//储值支付
-    // options.orderId = '1552990220020184525455';//组合支付
     if (!options.orderId) {
       wx.showModal({
         title: '系统错误',
@@ -47,7 +44,6 @@ Page({
         this.setData({
           payUrl: payUrl
         });
-        
       } else {
         this.setData({
           payUrl: constant.jujipayUrl
@@ -78,18 +74,18 @@ Page({
                prepayMoney: res.data.data.prepayMoney?Number(res.data.data.prepayMoney):0,
                wxPayMoney: res.data.data.wxPayMoney?Number(res.data.data.wxPayMoney):0
              });
+             this.setData({merchantId:res.data.data.accountDto.merchantId})
              var obj = {
                 latitude: res.data.data.store.lat,
                longitude: res.data.data.store.lng
               }
              this.setData({ providerId: res.data.data.agentId });
-            //  /recommend/hot.json
             wx.request({
               url: constant.apiUrl+'/recommend/hot.json',
               method: 'GET',
               data: {
                 providerId: res.data.data.agentId,
-                merchantId: res.data.data.accountDto.merchantId,
+                merchantId: this.data.merchantId,
                 storeId: res.data.data.accountDto.storeId
               },
               success: (res2) => {
@@ -98,12 +94,6 @@ Page({
                     this.setData({
                       recommendList: res2.data.data
                     })
-                  // console.log(this.data.recommendList);
-                }else{
-                    // wx.showModal({
-                    //   title: '错误: ' + res2.data.errorCode,
-                    //   content: res2.data.errorInfo,
-                    // })
                 }
               }
             })
@@ -115,48 +105,6 @@ Page({
            }
         }
       });
-
-      // service.getSelectProviderByLoc(obj).subscribe({
-      //   next: res => {
-      //     console.log('----------服务商信息---------');
-      //     console.log(res);
-      //     if (res.id) { //如果存在服务商
-      //       //根据位置查询附近精选
-      //       var obj = {
-      //         providerId: res.id,
-      //         type: 'PRODUCT',
-      //         sortField: 'IDX',
-      //         sortOrder: 'ASC',
-      //         pageNo: 1,
-      //         pageSize: 4,
-      //         longitude: wx.getStorageSync('curLongitude'),
-      //         latitude: wx.getStorageSync('curLatitude')
-      //       };
-
-      //       service.getRecommendPage(obj).subscribe({
-      //         next: res => {
-      //           console.log(res);
-      //           this.setData({
-      //             recommendList: res.list
-      //           });
-      //         },
-      //         error: err => {
-      //           console.log(err);
-      //         },
-      //         complete: () => wx.hideToast()
-      //       });
-
-      //     } else { //如果不存在服务商
-      //       wx.showModal({
-      //         title: '错误',
-      //         content: '当前位置不存在服务商'
-      //       });
-      //     }
-      //   }
-      // });
-
-      
-
     }
   },
 

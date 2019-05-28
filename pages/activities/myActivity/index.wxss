@@ -13,7 +13,7 @@ page{box-sizing:border-box;height: 100%;background-color: #fbfbfb}
 .orderItem .top .doing{font-size: 30rpx;color: #E83221;}
 .orderItem .top .dofail{font-size: 30rpx;color: #999;}
 .orderItem .info{padding: 30rpx;padding-bottom: 20rpx;}
-.goodImg{width: 180rpx;height: 180rpx;border-radius: 8rpx;border:1rpx #eee solid;}
+.goodImg{width: 180rpx;height: 180rpx;border-radius: 8rpx;border:1rpx #eee solid;background-color: #eee}
 .goodMsg{margin-left: 20rpx;}
 .goodTit{font-size: 28rpx;}
 .storeName{font-size: 24rpx;margin-top: 10rpx;color: #999;}

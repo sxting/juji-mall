@@ -33,9 +33,9 @@ Page({
         var id = e.currentTarget.dataset.id;
         var activityType = e.currentTarget.dataset.activitytype;
         if(activityType=="SPLICED")
-            wx.navigateTo({ url: "../my-collage/index?id=" + productId + '&activityId=' + activityId + '&activityOrderId=' + activityOrderId + '&activityType=' + activityType });
+            wx.navigateTo({ url: "../my-collage/index?id=" + productId + '&activityId=' + activityId + '&activityOrderId=' + activityOrderId });
         else
-            wx.navigateTo({ url: "../project-detail/index?id=" + productId + '&activityId=' + activityId + '&activityOrderId=' + activityOrderId + '&type=' + activityType });
+            wx.navigateTo({ url: "../bargainDetail/index?id=" + productId + '&activityId=' + activityId + '&activityOrderId=' + activityOrderId });
     },
     toOrderDetail: function(e) {
         var orderid = e.currentTarget.dataset.orderid;

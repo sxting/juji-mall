@@ -25,6 +25,19 @@ activitiesService.remind = (data) =>{
 	return http.get(url, data);
 }
 
+// 砍价 /activity/consumer/bargain/doBargain.json
+activitiesService.doBargain = (data) => {
+  let url = api + '/activity/consumer/bargain/doBargain.json';
+  return http.get(url, data);
+}
+
+// 发起砍价 /activity/consumer/bargain/initiate.json
+activitiesService.initiateBargain = (data) => {
+  let url = api + '/activity/consumer/bargain/initiate.json';
+  return http.get(url, data);
+}
+
+
 module.exports = {
   activitiesService: activitiesService
 }

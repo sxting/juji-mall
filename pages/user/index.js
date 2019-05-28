@@ -64,7 +64,6 @@ Page({
                     this.setData({ bindPhone: res.phoneNumber });
                     this.bindPhone();
                 },
-                // error: err => errDialog(err),
                 error: err => { console.log(err) },
                 complete: () => wx.hideToast()
             })

@@ -124,13 +124,23 @@ Page({
         wx.reLaunch({url: '/pages/comDetail/index?referer='+referer+'&id=' + this.data.pageData.pid + '&storeid=' + this.data.pageData.storeid + '&sceneid=' + this.data.pageData.sceneid});
       }
       if(this.data.pageType==5) {
-        if (this.data.pageData.type == 'BARGAIN' && this.data.pageData.activityOrderId) {
-          wx.reLaunch({ url: '/pages/activities/project-detail/index?type=' + this.data.pageData.type + '&id='+this.data.pageData.pid+'&activityId=' + this.data.pageData.activityId + '&activityOrderId=' + this.data.pageData.activityOrderId });
-        } else if (this.data.pageData.type == 'SPLICED' ){//拼团
-          console.log('拼团分享进入');
-          wx.reLaunch({ url: '/pages/activities/project-detail/index?type=' + this.data.pageData.type + '&id='+this.data.pageData.pid+'&activityId=' + this.data.pageData.activityId + '&activityOrderId=' + this.data.pageData.activityOrderId + '&progressId=' + this.data.pageData.progressId});
-        }else {
-          wx.reLaunch({ url: '/pages/activities/project-detail/index?type=' + this.data.pageData.type + '&id='+this.data.pageData.pid+'&activityId=' + this.data.pageData.activityId });
+        if(this.data.pageData.activityOrderId){
+            if (this.data.pageData.type == 'BARGAIN') {
+              wx.reLaunch({ url: '/pages/activities/bargainDetail/index?id='+this.data.pageData.pid+'&activityId=' + this.data.pageData.activityId + '&activityOrderId=' + this.data.pageData.activityOrderId+'&invitecode='+this.data.pageData.invitecode });
+            } else {
+              console.log('拼团分享进入');
+              wx.reLaunch({ url: '/pages/activities/splicedDetail/index?id='+this.data.pageData.pid+'&activityId=' + this.data.pageData.activityId + '&activityOrderId=' + this.data.pageData.activityOrderId + '&progressId=' + this.data.pageData.progressId+'&invitecode='+this.data.pageData.invitecode});
+            }
+        }else{
+            if (this.data.pageData.type == 'BARGAIN') {
+                wx.reLaunch({
+                    url: '/pages/activities/bargainDetail/index?id=' + this.data.pageData.pid + '&activityId=' + this.data.pageData.activityId+'&invitecode='+this.data.pageData.invitecode
+                });
+            } else { //拼团
+                wx.reLaunch({
+                    url: '/pages/activities/splicedDetail/index?id=' + this.data.pageData.pid + '&activityId=' + this.data.pageData.activityId+'&invitecode='+this.data.pageData.invitecode
+                });
+            }
         }
       }
       if(this.data.pageType==6){

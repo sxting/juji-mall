@@ -68,9 +68,20 @@ Page({
    */
   checkProductDetail: function(e){
     console.log(e.currentTarget.dataset.productid);
-    wx.navigateTo({
-      url: '/pages/activities/project-detail/index?type=' + this.data.sceneType + '&id=' + e.currentTarget.dataset.productid + '&activityId=' + e.currentTarget.dataset.activityid
-    });
+    // wx.navigateTo({
+    //   url: '/pages/activities/project-detail/index?type=' + this.data.sceneType + '&id=' + e.currentTarget.dataset.productid + '&activityId=' + e.currentTarget.dataset.activityid
+    // });
+
+    if(this.data.sceneType=="SPLICED"){
+      wx.navigateTo({
+        url: '/pages/activities/splicedDetail/index?id=' + e.currentTarget.dataset.productid + '&activityId=' + e.currentTarget.dataset.activityid
+      });
+    }else{
+      wx.navigateTo({
+        url: '/pages/activities/bargainDetail/index?id=' + e.currentTarget.dataset.productid + '&activityId=' + e.currentTarget.dataset.activityid
+      });
+    }
+
   },
 })
 

@@ -156,31 +156,19 @@ Page({
       despImgHeightValues: arr
     });
   },
-  gohomepage: function () {
-    wx.switchTab({
-      url: '/pages/index/index'
-    });
-  },
   toCommentList: function () {
     wx.navigateTo({
       url: '/pages/commentList/index?id=' + this.data.productId
     });
   },
-  share: function () {
-    var obj = {
-      type: 'SHARE_PRODUCT',
-      sharePath: '/pages/index/index'
-    };
-    service.share(obj).subscribe({
-      next: res => {},
-      error: err => console.log(err),
-      complete: () => wx.hideToast()
-    })
-  },
-
   toCommentDetail: function (event) {
     wx.navigateTo({
       url: '/pages/commentDetail/index?id=' + event.currentTarget.dataset.comid
+    });
+  },
+  gohomepage: function () {
+    wx.switchTab({
+      url: '/pages/index/index'
     });
   },
 });

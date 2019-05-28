@@ -10,12 +10,8 @@ Page({
         portraitUrl: '/images/unkonw-icon.png',
         headPortraitList: ['', ''], //拼团中 参团的头像
         productOrderInfo:{},
-        restHour: '00',
-        restMinute: '00',
-        restSecond: '00',
         activityId: '',
         activityOrderId: '',
-        activityType: '',
         productInfo: {}, //商品详情
         orderId: '',
         store: {}, //
@@ -30,8 +26,7 @@ Page({
         this.setData({
             progressId: options.progressId ? options.progressId : '',
             activityId: options.activityId ? options.activityId : '',
-            activityOrderId: options.activityOrderId ? options.activityOrderId : '',
-            activityType: options.activityType ? options.activityType : 'SPLICED'
+            activityOrderId: options.activityOrderId ? options.activityOrderId : ''
         })
         this.getItemInfo(); //调取详情页接口
     },
@@ -56,14 +51,14 @@ Page({
         var price = Number(this.data.productInfo.activityPrice/100).toFixed(2);
         return {
             title: '嗨！便宜一起拼￥' + price + '【' + this.data.productInfo.productName + '】',
-            path: '/pages/login/index?pagetype=5&type=' + this.data.activityType + '&activityId=' + this.data.activityId + '&activityOrderId=' + this.data.activityOrderId + '&progressId=' + this.data.progressId,
+            path: '/pages/login/index?pagetype=5&type=SPLICED&activityId=' + this.data.activityId + '&activityOrderId=' + this.data.activityOrderId + '&progressId=' + this.data.progressId,
             imageUrl: constant.basePicUrl + this.data.productInfo.cover + '/resize_560_420/mode_fill',
         }
     },
-    callPhone(e) {
+    callPhone:function(e) {
         let phone = e.currentTarget.dataset.phone;
         wx.makePhoneCall({
-            phoneNumber: phone,
+            phoneNumber: phone
         });
     },
     onUnload:function(){
@@ -94,7 +89,7 @@ Page({
                 if (res) {
                     console.log(res);
                     /** 参团的人 **/
-                    if (res.orderDigest && res.orderDigest.progresses.length != 0) {
+                    if (res.orderDigest && res.orderDigest.progresses&&res.orderDigest.progresses.length != 0) {
                         let resNum = 2 - res.orderDigest.progresses.length;
                         for (let i = 0; i < resNum; i++) {
                             res.orderDigest.progresses.push({});
@@ -105,7 +100,7 @@ Page({
                         productOrderInfo: res.orderDigest,
                         store: res.product.store,
                         storeId: res.product.store.id,
-                        headPortraitList: res.orderDigest.progresses,
+                        headPortraitList: res.orderDigest&&res.orderDigest.progresses?res.orderDigest.progresses:[],
                         productId: res.orderDigest ? res.orderDigest.productId : '',
                         activityStatus: res.orderDigest ? res.orderDigest.activityOrderStatus : '',
                     });

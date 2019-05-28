@@ -82,7 +82,6 @@ Component({
                 resNum: resNum
             })
         }
-        console.log(JSON.stringify(this.data.resData.product));
         this.setData({
             headPortraitList: this.data.resData.orderDigest && this.data.resData.orderDigest.progresses ? this.data.resData.orderDigest.progresses : [],
             pintuanListInfor: this.data.resData.otherDigests, //其他正在参团的小伙伴
@@ -90,14 +89,12 @@ Component({
             isInitiator: this.data.resData.orderDigest ? this.data.resData.orderDigest.isInitiator : 1, //是否为发起者 (判断进入是自己还是他人)
             orderStock: this.data.resData.stock, //查看此活动的库存
             orderInfor: this.data.resData.orderDigest, //订单信息
-            productSkus:this.data.resData.product.product.productSkus,
-            defaultSku:this.data.resData.product.product.defaultSku,
+            productSkus:this.data.resData.rules,
             curSkuId:this.data.resData.product.product.defaultSku.skuId,
             curSkuMajorId:this.data.resData.product.product.defaultSku.id
         })
-        console.log(this.data.productSkus);
         console.log(this.data.resData.otherDigests.length);
-
+        this.setData({defaultSku:getObjById(this.data.productSkus,this.data.curSkuId)});
         /** 拼团数据 **/
         let countDownTime = '';
         let expireTime = this.data.resData.orderDigest && this.data.resData.orderDigest != null ? this.data.resData.orderDigest.expirationTime.replace(/-/g, '/') : '';
@@ -146,27 +143,29 @@ Component({
                 url: '/pages/orderlist/index?index=2&status=PAID'
             })
         },
+
         toggleSelect:function(){
             this.setData({isShowSelect:!this.data.isShowSelect});
         },
+
         selectType:function(e){
             this.setData({curSkuId:e.currentTarget.dataset.skuId,curSkuMajorId:e.currentTarget.dataset.id});
+            this.setData({defaultSku:getObjById(this.data.productSkus,this.data.curSkuId)});
         },
 
         okSelect:function(){
+            var productid = this.data.collageInforData.productId;
+            var activityid = this.data.activityId;
             if(this.data.btnType == 'join'){
-                var productid = this.data.collageInforData.productId;
-                var activityid = this.data.activityId;
                 var activityorderid = this.data.resData.orderDigest.activityOrderId;
                 console.log("去参团");
                 wx.navigateTo({
-                    url: '/pages/payOrder/index?paytype=5&orderType=SPLICED&id=' + productid + '&activityId=' + activityid + '&activityOrderId=' + activityorderid + '&splicedRuleId=' + this.data.resData.rules[0].splicedRuleId+'&skuId='+this.data.curSkuId+'&smId='+this.data.curSkuMajorId
+                    url: '/pages/payOrder/index?paytype=5&orderType=SPLICED&id=' + productid + '&activityId=' + activityid + '&activityOrderId=' + activityorderid + '&splicedRuleId=' + this.data.defaultSku.splicedRuleId+'&skuId='+this.data.curSkuId+'&smId='+this.data.curSkuMajorId
                 });
             }else{
                 console.log("去开团");
-                var productid = this.data.collageInforData.productId;
                 wx.navigateTo({
-                    url: '/pages/payOrder/index?paytype=5&orderType=SPLICED&id=' + productid + '&activityId=' + this.data.activityId + '&splicedRuleId=' + this.data.resData.rules[0].splicedRuleId+'&skuId='+this.data.curSkuId+'&smId='+this.data.curSkuMajorId
+                    url: '/pages/payOrder/index?paytype=5&orderType=SPLICED&id=' + productid + '&activityId=' + activityid + '&splicedRuleId=' + this.data.defaultSku.splicedRuleId+'&skuId='+this.data.curSkuId+'&smId='+this.data.curSkuMajorId
                 })
             }
         },
@@ -174,7 +173,7 @@ Component({
         /****  参团 ****/
         joinCollage(e) {
             this.setData({btnType:'join'});
-            if(this.data.productSkus.length>0){
+            if(this.data.productSkus.length>1){
                 this.toggleSelect();
             }else{
                 this.okSelect();
@@ -184,7 +183,7 @@ Component({
         /****  开团 ****/
         createCollage(e) {
             this.setData({btnType:'create'});
-            if(this.data.productSkus.length>0){
+            if(this.data.productSkus.length>1){
                 this.toggleSelect();
             }else{
                 this.okSelect();
@@ -192,3 +191,11 @@ Component({
         }
     }
 })
+
+function getObjById(arr,id){
+  for(var i=0;i<arr.length;i++){
+    if(arr[i].skuId == id){
+      return arr[i];
+    }
+  }
+}

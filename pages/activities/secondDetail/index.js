@@ -23,17 +23,18 @@ Page({
         activityStatus: '',
         despImgHeightValues: [],
         isShowData: false,
-        lat: '',
-        lng: '',
+        storeInfo: {},
         resData: '',
         ruleInfo: {},
         productProgress: 0,
         remind: false,
         productSkus:[],
-        defaultSku:'',
+        defaultSku:{},
+        ruleMaps:{},
         curSkuId:'',
         curSkuMajorId:'',
         isShowSelect:false,
+        inviteCode:'',
         isBack: false
     },
     onLoad: function(options) {
@@ -45,6 +46,9 @@ Page({
             productId: options.id,
             activityId: options.activityId
         });
+        if(options.invitecode){
+            this.setData({inviteCode:options.invitecode});
+        }
         // 查询商品详情
         this.getData();
     },
@@ -77,8 +81,8 @@ Page({
     },
     toMap: function(e) {
         wx.openLocation({
-            latitude: e.currentTarget.dataset.lat,
-            longitude: e.currentTarget.dataset.lng,
+            latitude: this.data.store.lat,
+            longitude: this.data.store.lng,
             name: this.data.store.name,
             address: this.data.store.address,
             scale: 15
@@ -121,67 +125,41 @@ Page({
     getData: function() {
         let that = this;
         activitiesService.activity({
-            activityId: this.data.activityId,
+            activityId: that.data.activityId,
             activityType: 'SEC_KILL'
         }).subscribe({
             next: res => {
-                that.setData({
-                    showCom: true
-                });
-                that.setData({ productProgress: Math.round((res.rules[0].soldStock * 100) / res.rules[0].activityStock) });
+                that.setData({showCom: true});
                 var picsStrArr = res.cover.split(',');
                 picsStrArr.forEach(function(item, index) {
-                    picsStrArr[index] = constant.basePicUrl + item + '/resize_751_420/mode_fill'
+                    picsStrArr[index] = constant.basePicUrl + item + '/resize_751_420/mode_fill';
                 });
-                new Promise(function(resolve, reject) {
-                    let str = JSON.parse(res.product.product.note);
-                    resolve(str);
-                }).then(function(result) {
-                    that.setData({
-                        commentList: res.product.commentList,
-                        productInfo: res.product.product,
-                        description: JSON.parse(res.product.product.description),
-                        recommendList: res.product.recommendList,
-                        store: res.product.store,
-                        commentCount: res.product.commentCount,
-                        recommendCount: res.product.recommendList.length,
-                        note: result,
-                        showPics: picsStrArr,
-                        isShowData: true,
-                        remind: res.isRemind,
-                        lat: res.product.store ? res.product.store.lat : '',
-                        lng: res.product.store ? res.product.store.lng : '',
-                        resData: res,
-                        ruleInfo: res.rules[0],
-                        activityStatus:res.activityStatus,
-                        productSkus:res.product.productSkus,
-                        defaultSku:res.product.defaultSku,
-                        curSkuId:res.product.defaultSku.skuId,
-                        curSkuMajorId:res.product.defaultSku.id
-                    });
-                }).catch(function(err) {
-                    that.setData({
-                        commentList: res.product.commentList,
-                        productInfo: res.product.product,
-                        description: JSON.parse(res.product.product.description),
-                        recommendList: res.product.recommendList,
-                        store: res.product.store,
-                        commentCount: res.product.commentCount,
-                        recommendCount: res.product.recommendList.length,
-                        showPics: picsStrArr,
-                        isShowData: true,
-                        remind: res.isRemind,
-                        lat: res.product.store.lat,
-                        lng: res.product.store.lng,
-                        resData: res,
-                        ruleInfo: res.rules[0],
-                        activityStatus:res.activityStatus,
-                        productSkus:res.product.productSkus,
-                        defaultSku:res.product.defaultSku,
-                        curSkuId:res.product.defaultSku.skuId,
-                        curSkuMajorId:res.product.defaultSku.id
-                    });
-                })
+                that.setData({
+                    commentList: res.product.commentList,
+                    productInfo: res.product.product,
+                    description: JSON.parse(res.product.product.description),
+                    recommendList: res.product.recommendList,
+                    store: res.product.store,
+                    commentCount: res.product.commentCount,
+                    recommendCount: res.product.recommendList.length,
+                    note: JSON.parse(res.product.product.note),
+                    showPics: picsStrArr,
+                    isShowData: true,
+                    remind: res.isRemind,
+                    resData: res,
+                    activityStatus:res.activityStatus,
+                    ruleMaps:res.ruleMaps,
+                    productSkus:res.product.product.productSkus,
+                    curSkuId:res.product.product.defaultSku.skuId,
+                    curSkuMajorId:res.product.product.defaultSku.id
+                });
+                that.setData({ 
+                    productProgress: Math.round((res.ruleMaps[that.data.curSkuId][0].soldStock * 100) / res.ruleMaps[that.data.curSkuId][0].activityStock)
+                });
+                var skuObj = this.data.ruleMaps[this.data.curSkuId];
+                this.setData({ defaultSku:skuObj[0]});
+                console.log("获取默认规格");
+                console.log(this.data.defaultSku);
             },
             error: err => console.log(err),
             complete: () => wx.hideToast()
@@ -193,18 +171,24 @@ Page({
         });
     },
     toSecondKill: function() {
-        this.toggleSelect();
+        if(Object.keys(this.data.productSkus).length>1){
+            this.toggleSelect();
+        }else{
+            this.okSelect();
+        }
     },
     toggleSelect:function(){
       this.setData({isShowSelect:!this.data.isShowSelect});
     },
     selectType:function(e){
+        if(e.currentTarget.dataset.stock==0){return;}
         this.setData({curSkuId:e.currentTarget.dataset.skuid,curSkuMajorId:e.currentTarget.dataset.id});
-        this.setData({defaultSku:getObjById(this.data.productSkus,this.data.curSkuId)});
+        var skuObj = this.data.ruleMaps[this.data.curSkuId];
+        this.setData({ defaultSku:skuObj[0]});
     },
     okSelect:function(){
         wx.navigateTo({
-            url: '/pages/payOrder/index?paytype=7&orderType=SEC_KILL&id=' + this.data.productId + '&activityId=' + this.data.activityId + '&splicedRuleId=' + this.data.resData.rules[0].secKillRuleId+'&skuId='+this.data.curSkuId+'&smId='+this.data.curSkuMajorId
+            url: '/pages/payOrder/index?paytype=7&orderType=SEC_KILL&id=' + this.data.productId + '&activityId=' + this.data.activityId + '&splicedRuleId=' + this.data.defaultSku.secKillRuleId+'&skuId='+this.data.curSkuId+'&smId='+this.data.curSkuMajorId+'&inviteCode='+this.data.inviteCode
         });
     },
     toRemainMe: function() {

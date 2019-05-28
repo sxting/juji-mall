@@ -378,7 +378,7 @@ Page({
                 showPageLoading: false
             });
         }, 5000);
-        this.currentPoint();
+        // this.currentPoint();
         if (wx.getStorageSync('isLeaderAlert') == 1) {
             console.log("成为了桔长");
             this.setData({ pageNo: 1 });
@@ -858,11 +858,11 @@ Page({
         wx.reportAnalytics('home_ue', {ue: e.currentTarget.dataset.tit});
         if (type == 'SPLICED') {
             wx.navigateTo({
-                url: '/pages/activities/project-detail/index?type=SPLICED&id=' + id + '&activityId=' + actId
+                url: '/pages/activities/splicedDetail/index?id=' + id + '&activityId=' + actId
             });
         } else if (type == "BARGAIN") {
             wx.navigateTo({
-                url: '/pages/activities/project-detail/index?type=BARGAIN&id=' + id + '&activityId=' + actId
+                url: '/pages/activities/bargainDetail/index?id=' + id + '&activityId=' + actId
             });
         } else if (type == "SEC_KILL") {
             wx.navigateTo({

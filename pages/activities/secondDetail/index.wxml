@@ -34,7 +34,7 @@
     </view>
     <view class="businessInfo-wrap">
         <view class="businessInfo" style="padding-bottom:{{showJoinClub?'10rpx':'30rpx'}};">
-            <view style="display:flex;justify-content: space-between;align-items: flex-start;">
+            <view class="ub ub-ac">
                 <view class="title">{{productInfo.productName}}</view>
             </view>
             <view class="ub ub-fe jc-sb" style="margin-top:16rpx;">

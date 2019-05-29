@@ -75,9 +75,7 @@ Page({
         var arr = [];
         var url = constant.basePicUrl + e.currentTarget.dataset.url + '/resize_0_0/mode_fill';
         arr.push(url);
-        wx.previewImage({
-            urls: arr // 需要预览的图片http链接列表
-        })
+        wx.previewImage({urls: arr});
     },
     toMap: function(e) {
         wx.openLocation({
@@ -105,9 +103,9 @@ Page({
             phoneNumber: this.data.store.phone
         })
     },
-    desImgLoad: function(event) {
+    desImgLoad: function(e) {
         var arr = this.data.despImgHeightValues;
-        arr.push(event.detail.height * 690 / event.detail.width);
+        arr.push(e.detail.height * 690 / e.detail.width);
         this.setData({
             despImgHeightValues: arr
         });
@@ -154,7 +152,7 @@ Page({
                     curSkuMajorId:res.product.product.defaultSku.id
                 });
                 that.setData({ 
-                    productProgress: Math.round((res.ruleMaps[that.data.curSkuId][0].soldStock * 100) / res.ruleMaps[that.data.curSkuId][0].activityStock)
+                    productProgress: Math.round(100 - (res.balanceStock * 100) / res.activityStock)
                 });
                 var skuObj = this.data.ruleMaps[this.data.curSkuId];
                 this.setData({ defaultSku:skuObj[0]});
@@ -164,11 +162,6 @@ Page({
             error: err => console.log(err),
             complete: () => wx.hideToast()
         })
-    },
-    toCommentDetail: function(event) {
-        wx.navigateTo({
-            url: '/pages/commentDetail/index?id=' + event.currentTarget.dataset.comid
-        });
     },
     toSecondKill: function() {
         if(Object.keys(this.data.productSkus).length>1){

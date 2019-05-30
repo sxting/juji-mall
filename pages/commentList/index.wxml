@@ -4,7 +4,7 @@
   <view class="item" wx:for="{{commentlist}}" wx:key="{{index}}" data-comid="{{item.id}}" bindtap="toCommentDetail">
     <view class="nickMsg ub ub-ac">
       <image class="userImg" src="{{item.avatar?item.avatar:''}}"></image>
-      <view class="nickname">{{item.nickName}}</view>
+      <view class="nickname textnowarp">{{item.nickName}}</view>
       <view class="ub ub-f1 ub-ac ml10">
           <image class="icon_ping" src="/images/icon_ped.png" wx:for="{{item.score}}" wx:key="un"></image>
           <image class="icon_ping" src="/images/icon_ping.png" wx:for="{{5-item.score}}" wx:key="un"></image>

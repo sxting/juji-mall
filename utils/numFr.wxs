@@ -25,7 +25,7 @@ var filters = {
   },
   toEllipsised:function(value){
     if(value){
-      return value.length>5?value.substring(0,5):value;
+      return value.length>10?value.substring(0,10)+'...':value;
     }
   },
   toEllipsis1:function(value){

@@ -28,7 +28,7 @@
             <view class="name">{{item.nickName}}</view>
             <view class="remark">拥有桔民：{{item.invitedMemberCount}}人</view>
             <view class="income"><text>购物返利：{{item.saleRebate/100}}元</text><text class="r">管理佣金：{{item.manageRebate/100}}元</text></view>
-            <view class="time">接受邀请时间：{{item.joinedDate}}</view>
+            <view class="time">受邀时间：{{item.joinedDate}}</view>
           </view>
         </view>
       </view>

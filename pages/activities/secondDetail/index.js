@@ -61,6 +61,13 @@ Page({
             this.getData(); // 返回刷新
         }
     },
+    collectFormIds: function(e) {
+        service.collectFormIds({
+            formId: e.detail.formId
+        }).subscribe({
+            next: res => {console.log(res)}
+        });
+    },
     onShareAppMessage: function(res) {
         var picId = this.data.resData.cover;
         var productName = this.data.resData.productName;
@@ -121,18 +128,17 @@ Page({
         });
     },
     getData: function() {
-        let that = this;
         activitiesService.activity({
-            activityId: that.data.activityId,
+            activityId: this.data.activityId,
             activityType: 'SEC_KILL'
         }).subscribe({
             next: res => {
-                that.setData({showCom: true});
+                this.setData({showCom: true});
                 var picsStrArr = res.cover.split(',');
                 picsStrArr.forEach(function(item, index) {
                     picsStrArr[index] = constant.basePicUrl + item + '/resize_751_420/mode_fill';
                 });
-                that.setData({
+                this.setData({
                     commentList: res.product.commentList,
                     productInfo: res.product.product,
                     description: JSON.parse(res.product.product.description),
@@ -151,7 +157,7 @@ Page({
                     curSkuId:res.product.product.defaultSku.skuId,
                     curSkuMajorId:res.product.product.defaultSku.id
                 });
-                that.setData({ 
+                this.setData({ 
                     productProgress: Math.round(100 - (res.balanceStock * 100) / res.activityStock)
                 });
                 var skuObj = this.data.ruleMaps[this.data.curSkuId];
@@ -190,10 +196,7 @@ Page({
         }).subscribe({
             next: res => {
                 this.setData({ remind: true })
-                wx.showToast({
-                    title: "提醒成功",
-                    icon: "success"
-                });
+                wx.showToast({title: "提醒成功",icon: "success"});
             },
             error: err => {
                 wx.showToast({ title: '系统错误' });

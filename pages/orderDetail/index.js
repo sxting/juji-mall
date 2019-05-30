@@ -127,7 +127,7 @@ Page({
           timer = setInterval(()=>{
             this.setData({isTimeOpen:true});
             this.getData(this.data.orderId);
-          },1200);
+          },2000);
         }
       },
       error: err => console.log(err),

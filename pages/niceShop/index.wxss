@@ -1,5 +1,5 @@
 page{height:100%;background-color:#fff;}
-.main{background:#fff;padding:40rpx 30rpx 30rpx;height: 100%;box-sizing:border-box;overflow: auto;}
+.main{background:#fff;padding:40rpx 30rpx 30rpx;}
 .nodataDiv{padding-top: 260rpx;height: 900rpx;}
 
 .jingxuanlist{box-shadow:0 5px 5px 3px rgba(229,229,229,0.50);border-radius:10rpx;margin-top:30rpx;position: relative;padding-bottom: 30rpx;}

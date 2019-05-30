@@ -321,7 +321,8 @@ Page({
     let that = this;
     service.getItemInfo({
       productId: this.data.productId,
-      storeId: this.data.storeId
+      storeId: this.data.storeId,
+      sceneId:this.data.sceneId
     }).subscribe({
       next: res => {
         console.log(res);
@@ -352,9 +353,6 @@ Page({
           if(that.data.share==1){
             that.showShare();
           }
-          if(that.data.promo==1){
-            that.showShare();
-          }
         }).catch(function(err){
           that.setData({
             commentList: res.commentList,
@@ -375,9 +373,6 @@ Page({
             curSkuMajorId:res.product.defaultSku.id
           });
           if(that.data.share==1){
-            that.showShare();
-          }
-          if(that.data.promo==1){
             that.showShare();
           }
         })
@@ -401,8 +396,10 @@ Page({
     });
   },
   selectType:function(e){
-    this.setData({curSkuId:e.currentTarget.dataset.skuid,curSkuMajorId:e.currentTarget.dataset.id});
-    this.setData({defaultSku:getObjById(this.data.productSkus,this.data.curSkuId)});
+    if(e.currentTarget.dataset.stock>0){
+      this.setData({curSkuId:e.currentTarget.dataset.skuid,curSkuMajorId:e.currentTarget.dataset.id});
+      this.setData({defaultSku:getObjById(this.data.productSkus,this.data.curSkuId)});
+    }
   },
   toCommentList: function() {
     wx.navigateTo({
@@ -449,11 +446,6 @@ Page({
       path: '/pages/login/index?pagetype=1&inner=1&pid=' + that.data.productId+'&storeid='+that.data.storeId+'&invitecode='+wx.getStorageSync('inviteCode'),
       imageUrl: constant.basePicUrl + this.data.productInfo.picId + '/resize_560_420/mode_fill'
     }
-  },
-  toCommentDetail: function(event) {
-    wx.navigateTo({
-      url: '/pages/commentDetail/index?id=' + event.currentTarget.dataset.comid
-    });
   },
   showShareModal:function(){
     wx.reportAnalytics('detail_ue', {ue: '保存推广图片'});

@@ -73,7 +73,6 @@
                 <image src="/images/icon_drop.png" class="arrowBtn {{showMoreXuZhi?'arrowTop':''}}"></image>
               </view> -->
               <view class="xuzhiInner">
-                
                 <view class="{{index+1 == note.length?'':'mb20'}}" wx:for="{{note}}" wx:key="{{index}}">
                     <view style="display:flex;align-items:center;" wx:if="{{item.title}}">
                         <view class="y-point"></view>
@@ -116,7 +115,7 @@
                 <image style="margin-left:20rpx;width:14rpx;height:26rpx;" src="/images/arrow-right.png"></image>
             </view>
         </view>
-        <view class="item" wx:for="{{commentList}}" wx:key="{{index}}" data-comid="{{item.id}}" bindtap="toCommentDetail">
+        <view class="item" wx:for="{{commentList}}" wx:key="{{index}}" data-comid="{{item.id}}">
             <view class="nickMsg ub ub-ac">
                 <image class="userImg" src="{{item.avatar?item.avatar:''}}"></image>
                 <view class="nickname">{{item.nickName}}</view>
@@ -367,8 +366,8 @@
     <view class="ub ub-ver selectModal" hidden="{{!isShowSelect}}">
         <view class="closeSelect ub ub-ac ub-pc" bindtap="toggleSelect"><image src="/images/icon_close.png"></image></view>
         <view class="ub ub-ac selectTit">选择规格</view>
-        <view class="ub ub-ac selectType">
-            <view wx:for="{{productSkus}}" wx:key="unique" class="ub-f1 ub ub-ac ub-pc {{item.skuId==defaultSku.skuId?'on':''}}" data-skuid="{{item.skuId}}" data-id="{{item.id}}" bindtap="selectType">{{filter.toEllipsised(item.skuName)}}</view>
+        <view class="selectType">
+            <view wx:for="{{productSkus}}" wx:key="unique" class="{{item.skuId==defaultSku.skuId?'on':''}} {{item.stock==0?'null':''}}" data-skuid="{{item.skuId}}" data-id="{{item.id}}" bindtap="selectType" data-stock="{{item.stock}}">{{filter.toEllipsised(item.skuName)}}</view>
         </view>
         <view class="selectDiv ub ub-ac">已选：“{{filter.toEllipsised(defaultSku.skuName)}}”，售价：
             <text class="uu" wx:if="{{defaultSku.point>0}}">{{defaultSku.point}}桔子</text>

@@ -639,17 +639,6 @@ Page({
             url: '/pages/comDetail/index?share=1&referer=0&id=' + id + '&storeid=' + storeid
         });
     },
-    //推广
-    toPro: function(e) {
-        var id = e.currentTarget.dataset.id;
-        wx.navigateTo({
-            url: '/pages/comDetail/index?promo=1&referer=0&id=' + id
-        });
-    },
-    //点击桔子球
-    onTapJuziqiu: function() {
-        wx.switchTab({url: '../juzi/index'})
-    },
     //上拉加载
     onReachBottom:function() {
         //判断是否还可以上拉

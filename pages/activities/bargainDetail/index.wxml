@@ -108,8 +108,8 @@
     <view class="ub ub-ver selectModal" hidden="{{!isShowSelect}}">
         <view class="closeSelect ub ub-ac ub-pc" bindtap="toggleSelect"><image src="/images/icon_close.png"></image></view>
         <view class="ub ub-ac selectTit">选择规格</view>
-        <view class="ub ub-ac selectType">
-            <view wx:for="{{productSkus}}" wx:key="unique" class="ub-f1 ub ub-ac ub-pc {{item.skuId==defaultSku.skuId?'on':''}}" data-skuid="{{item.skuId}}" data-id="{{item.id}}" bindtap="selectType">{{filter.toEllipsised(item.skuName)}}</view>
+        <view class="selectType">
+            <view wx:for="{{productSkus}}" wx:key="unique" class="{{item.skuId==defaultSku.skuId?'on':''}}" data-skuid="{{item.skuId}}" data-id="{{item.id}}" bindtap="selectType" data-stock="{{item.stock}}">{{filter.toEllipsised(item.skuName)}}</view>
         </view>
         <!-- <view class="selectDiv ub ub-ac" wx:if="{{buyType=='kan'}}">已选：“{{filter.toEllipsised(defaultSku.skuName)}}”，售价：
             <text class="uu" wx:if="{{defaultSku.bargainPoint>0}}">{{defaultSku.bargainPoint}}桔子</text>
@@ -135,9 +135,9 @@
       <image src='/images/jinbi.png'></image>
       <view>已成功为您砍掉<text class='alert1-price'>{{price1/100}}</text>元</view>
       <view>分享给好友多砍几刀吧</view>
-      <button class='alert1-share' open-type="share" data-type='1' bindtap='closeAlert1'>分享加速砍价吧</button>
+      <button class='alert1-share' open-type="share" data-type='1'>分享加速砍价吧</button>
     </view>
-    <image class='icon-close1' src='/images/newerGetClose.png' bindtap='closeAlert1'></image>
+    <image class='icon-close1' src='/images/newerGetClose.png' bindtap='closeAlert'></image>
   </view>
 
   <view class='alert2' wx:if="{{showAlert2}}">
@@ -159,6 +159,6 @@
       </form>
       <view bindtap='lookOthers'>浏览其他项目</view>
     </view>
-    <image class='icon-close1' src='/images/newerGetClose.png' bindtap='closeAlert2'></image>
+    <image class='icon-close1' src='/images/newerGetClose.png' bindtap='closeAlert'></image>
   </view>
 </view>

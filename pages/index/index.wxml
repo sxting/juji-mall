@@ -4,7 +4,7 @@
     <view class="pageLoadingTip" style="color:#666666;font-size: 30rpx;">桔美好生活，集好店优惠</view>
 </view>
 <view class="{{(providerId&&(slideShowList.length>0||recommendPage.length>0))?'':'homeTabPage'}} {{isShowNewerGet?'noscroll':''}}" wx:else>
-    <view wx:if="{{slideShowList.length>0||pointProductList.length>0||recommendPage.length>0}}">
+    <view wx:if="{{slideShowList.length>0||recommendPage.length>0}}">
         <view class="toperWrap">
             <view class="toper">
                 <swiper autoplay="{{autoplay}}" circular>
@@ -71,7 +71,7 @@
                             <child dataFromParent='{{item.expectGmtEnd}}' customeClass="red" radius="0"></child><view class="txt">秒杀中</view>
                         </view>
                         <view class="clockDiv ub ub-ac mt05 ub-f1" wx:if="{{item.activityStatus=='READY'}}">
-                            <child dataFromParent='{{item.expectGmtEnd}}' customeClass="block" radius="0"></child><view class="txt">即将开始</view>
+                            <child dataFromParent='{{item.expectGmtStart}}' customeClass="block" radius="0"></child><view class="txt">即将开始</view>
                         </view>
                         <view class="clockDiv ub ub-ac mt05 ub-f1" wx:if="{{item.balanceStock==0}}">
                             <view class="txt">已抢光</view>
@@ -106,7 +106,7 @@
                     </view>
                 </view>
             </view>
-            <view class="juzihl-wrap" wx:if="{{recommendPage.length>0}}" style="{{pointProductList.length>0?'padding-top:20rpx;':''}}padding-bottom:30rpx">
+            <view class="juzihl-wrap" wx:if="{{recommendPage.length>0}}" style="padding-bottom:30rpx">
                 <view class="mtitle ub ub-ac">精选推荐<image class="icon_mark" src="/images/icon_h3.png" mode="aspectFit"></image>
                 </view>
                 <view class="jingxuanlist" wx:for="{{recommendPage}}" wx:for-index='index' wx:key="unique">

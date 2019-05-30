@@ -16,7 +16,7 @@
                 <image class="clock" mode="aspectFit" src="/images/clock.png"></image>限时秒杀{{activityStatus=='STARTED'?'抢购中':'即将开始'}}
             </view>
             <view class="b ub ub-pj">
-                <view class="left" style="width:{{productProgress}}%" wx:if="{{activityStatus!='READY'}}">已抢{{defaultSku.soldStock}}件</view>
+                <view class="left" style="width:{{productProgress}}%" wx:if="{{activityStatus!='READY'}}">已抢{{resData.activityStock-resData.balanceStock}}件</view>
                 <view class="number" wx:if="{{productProgress<=80}}">{{productProgress}}%</view>
             </view>
         </view>
@@ -58,7 +58,7 @@
             </view>
         </view>
     </view>
-    <view class="conDiv1" style="{{resData.participateUserList.length==0?'margin-top:20rpx':'margin-top:0'}}">
+    <view class="conDiv1" style="{{resData.participateUserList==null||resData.participateUserList.length==0?'margin-top:20rpx':'margin-top:0'}}">
         <view class="yongkaxuzhi">
             <view style="font-size: 30rpx;color: #333333;font-weight: bolder;">购买须知</view>
             <view class="xuzhiBorder">
@@ -117,7 +117,7 @@
             </view>
             <view class="content">{{item.content}}</view>
             <view class="imglist" wx:if="{{item.imgIds.length > 0}}">
-                <image wx:for="{{filter.toSplitImgs(item.imgIds)}}" wx:for-item='it' wx:key="unique" data-url="{{it}}" bindtap="previewImage" src="{{it?'https://upic.juniuo.com/file/picture/' + it + '/resize_320_0/mode_lfit/format_webp/quality_60':''}}"></image>
+                <image wx:for="{{filter.toSplitImgs(item.imgIds)}}" wx:for-item='it' wx:key="unique" data-url="{{it}}" bindtap="previewImage" src="{{it?'https://upic.juniuo.com/file/picture/' + it + '/resize_320_0/mode_fill':''}}"></image>
             </view>
         </view>
     </view>
@@ -150,8 +150,8 @@
     <view class="ub ub-ver selectModal" hidden="{{!isShowSelect}}">
         <view class="closeSelect ub ub-ac ub-pc" bindtap="toggleSelect"><image src="/images/icon_close.png"></image></view>
         <view class="ub ub-ac selectTit">选择规格</view>
-        <view class="ub ub-ac selectType">
-            <view wx:for="{{productSkus}}" wx:key="unique" class="ub-f1 ub ub-ac ub-pc {{item.skuId==defaultSku.skuId?'on':''}} {{item.balanceStock==0?'null':''}}" data-skuid="{{item.skuId}}" data-id="{{item.id}}" bindtap="selectType" data-stock="{{item.balanceStock}}">{{filter.toEllipsised(item.skuName)}}</view>
+        <view class="selectType">
+            <view wx:for="{{productSkus}}" wx:key="unique" class="{{item.skuId==defaultSku.skuId?'on':''}} {{item.balanceStock==0?'null':''}}" data-skuid="{{item.skuId}}" data-id="{{item.id}}" bindtap="selectType" data-stock="{{item.balanceStock}}">{{filter.toEllipsised(item.skuName)}}</view>
         </view>
         <view class="selectDiv ub ub-ac">已选：“{{filter.toEllipsised(defaultSku.skuName)}}”，售价：
             <text class="uu" wx:if="{{defaultSku.activityPoint>0}}">{{defaultSku.activityPoint}}桔子</text>

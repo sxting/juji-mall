@@ -24,8 +24,8 @@
       <view class='situation-box' wx:if="{{(orderStatus == 'IN_PROGRESS') || (orderStatus == 'FAIL') || (orderStatus == 'SUCCESS')}}">
         <!--拼团中 自己进入 或者 他人进入 -->
         <view wx:if="{{orderStatus == 'IN_PROGRESS'}}">
-          <view class='last-time'>
-            剩余时间<child dataFromParent='{{resData.orderDigest.expirationTime}}'></child>
+          <view class='last-time ub ub-ac ub-pc'>
+            剩余时间<child dataFromParent='{{resData.orderDigest.expirationTime}}' style="margin-left:30rpx;"></child>
           </view>
           <view class='head-portrait-box'>
               <view class='head-portrait' wx:key="unique" wx:for="{{ headPortraitList }}" wx:for-index="index">
@@ -102,13 +102,13 @@
   <view class="ub ub-ver selectModal" hidden="{{!isShowSelect}}">
       <view class="closeSelect ub ub-ac ub-pc" bindtap="toggleSelect"><image src="/images/icon_close.png"></image></view>
       <view class="ub ub-ac selectTit">选择规格</view>
-      <view class="ub ub-ac selectType">
-          <view wx:for="{{productSkus}}" wx:key="unique" class="ub-f1 ub ub-ac ub-pc {{item.skuId==defaultSku.skuId?'on':''}}" data-skuid="{{item.skuId}}" data-id="{{item.id}}" bindtap="selectType">{{filter.toEllipsised(item.skuName)}}</view>
+      <view class="selectType">
+          <view wx:for="{{productSkus}}" wx:key="unique" class="{{item.skuId==defaultSku.skuId?'on':''}}" data-skuid="{{item.skuId}}" data-id="{{item.id}}" bindtap="selectType" data-stock="{{item.stock}}">{{filter.toEllipsised(item.skuName)}}</view>
       </view>
       <view class="selectDiv ub ub-ac">已选：“{{filter.toEllipsised(defaultSku.skuName)}}”，售价：
-          <text class="uu" wx:if="{{defaultSku.splicedPoint>0}}">{{defaultSku.splicedPoint}}桔子</text>
-          <text class="uu" wx:if="{{defaultSku.splicedPoint>0&&defaultSku.splicedPrice>0}}">+</text>
-          <text class="uu" wx:if="{{defaultSku.splicedPrice>0}}">{{filter.toFix(defaultSku.splicedPrice)}}元</text>
+          <text class="uu" wx:if="{{defaultSku.point>0}}">{{defaultSku.point}}桔子</text>
+          <text class="uu" wx:if="{{defaultSku.point>0&&defaultSku.price>0}}">+</text>
+          <text class="uu" wx:if="{{defaultSku.price>0}}">{{filter.toFix(defaultSku.price)}}元</text>
       </view>
       <form bindsubmit="collectFormIds" report-submit="true">
         <button class="selectBtn" bindtap="okSelect">选好了</button>

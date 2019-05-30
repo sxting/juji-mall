@@ -300,7 +300,7 @@ Page({
                         paySign: payInfo.paySign,
                         success:(res1)=>{
                             wx.redirectTo({
-                                url: '/pages/orderDetail/index?id=' + res.orderId,
+                                url: '/pages/activities/my-collage/index?id=' + this.data.productId + '&activityId=' + this.data.activityId + '&progressId=' + res.progressId,
                             });
                         },
                         fail:(res)=> {

@@ -20,11 +20,12 @@ Page({
         isShowData: false,
         isHiddenClose: false,
         activityOrderId: '',
+        activityElseOrderid:'',
         resData: '',
-        activityOrderId: '',
         progressId: '',
         self: '',
         showCom: false,
+        portraitUrl: '/images/unkonw-icon.png',
         orderStatus: '',
         isInitiator: 1,
         isShowSelect:false,
@@ -93,13 +94,10 @@ Page({
         }
     },
     collectFormIds: function(e) {
-        console.log(e.detail);
         service.collectFormIds({
             formId: e.detail.formId
         }).subscribe({
-            next: res => {
-                console.log(res)
-            }
+            next: res => {console.log(res)}
         });
     },
     gohomepage: function() {
@@ -137,11 +135,8 @@ Page({
                 if (res.product.product.note) {
                     this.setData({ note: JSON.parse(res.product.product.note) })
                 }
-                var skuObj = this.data.ruleMaps[this.data.curSkuId];
-                this.setData({ defaultSku:skuObj[0]});
-                console.log("获取默认规格");
-                console.log(this.data.defaultSku);
-
+                var skuObj = getObjById(this.data.productSkus,this.data.curSkuId)
+                this.setData({ defaultSku:skuObj});
                 // 是否有其他参团者的活动
                 if (res.otherDigests) {
                     res.otherDigests.forEach(function(item) {
@@ -156,7 +151,6 @@ Page({
                         item.picArr = picArr;
                     })
                 }
-
                 // 正在参团的人
                 if (res.orderDigest && res.orderDigest.progresses) {
                     let resNum = 2 - res.orderDigest.progresses.length;
@@ -167,54 +161,61 @@ Page({
                         resNum: resNum
                     })
                 }
-
                 this.setData({
-                    headPortraitList:res.orderDigest &&res.orderDigest.progresses ?res.orderDigest.progresses : [],
-                    pintuanListInfor:res.otherDigests, //其他正在参团的小伙伴
+                    headPortraitList:res.orderDigest&&res.orderDigest.progresses ? res.orderDigest.progresses : [],
+                    pintuanListInfor:res.otherDigests //其他正在参团的小伙伴
                 })
-
             },
             error: err => console.log(err),
             complete: () => wx.hideToast()
         })
     },
-    toMyOrderList() {
-        wx.navigateTo({
-            url: '/pages/orderlist/index?index=2&status=PAID'
-        })
+    toMyOrderList:function() {
+        wx.navigateTo({url: '/pages/orderlist/index?index=2&status=PAID'});
     },
     toggleSelect: function() {
         this.setData({ isShowSelect: !this.data.isShowSelect });
     },
     selectType: function(e) {
-        this.setData({ curSkuId: e.currentTarget.dataset.skuid, curSkuMajorId: e.currentTarget.dataset.id });
-        var skuObj = this.data.ruleMaps[this.data.curSkuId];
-        this.setData({ defaultSku:skuObj[0]});
+        if(e.currentTarget.dataset.stock>0){
+            this.setData({ curSkuId: e.currentTarget.dataset.skuid, curSkuMajorId: e.currentTarget.dataset.id });
+            var skuObj = getObjById(this.data.productSkus,this.data.curSkuId);
+            this.setData({defaultSku:skuObj});
+        }
     },
     okSelect: function() {
         var productid = this.data.productId;
         var activityid = this.data.activityId;
         this.setData({ isShowSelect: false });
+        var splicedRuleId = this.data.ruleMaps[this.data.curSkuId][0].splicedRuleId;
+        console.log(splicedRuleId);
         if (this.data.btnType == 'join') {
             var activityorderid = this.data.resData.orderDigest.activityOrderId;
             console.log("去参团");
             wx.navigateTo({
-                url: '/pages/payOrder/index?paytype=5&orderType=SPLICED&id=' + productid + '&activityId=' + activityid + '&activityOrderId=' + activityorderid + '&splicedRuleId=' + this.data.defaultSku.splicedRuleId + '&skuId=' + this.data.curSkuId + '&smId=' + this.data.curSkuMajorId+'&inviteCode='+this.data.inviteCode
+                url: '/pages/payOrder/index?paytype=5&orderType=SPLICED&id=' + productid + '&activityId=' + activityid + '&activityOrderId=' + activityorderid + '&splicedRuleId=' + splicedRuleId + '&skuId=' + this.data.curSkuId + '&smId=' + this.data.curSkuMajorId+'&inviteCode='+this.data.inviteCode
+            });
+        } else if(this.data.btnType=='joinElse'){
+            var activityorderid = this.data.activityElseOrderid;
+            wx.navigateTo({
+                url: '/pages/payOrder/index?paytype=5&orderType=SPLICED&id=' + productid + '&activityId=' + activityid + '&activityOrderId=' + activityorderid + '&splicedRuleId=' + splicedRuleId + '&skuId=' + this.data.curSkuId + '&smId=' + this.data.curSkuMajorId
             });
         } else {
             console.log("去开团");
             wx.navigateTo({
-                url: '/pages/payOrder/index?paytype=5&orderType=SPLICED&id=' + productid + '&activityId=' + activityid + '&splicedRuleId=' + this.data.defaultSku.splicedRuleId + '&skuId=' + this.data.curSkuId + '&smId=' + this.data.curSkuMajorId+'&inviteCode='+this.data.inviteCode
-            })
+                url: '/pages/payOrder/index?paytype=5&orderType=SPLICED&id=' + productid + '&activityId=' + activityid + '&splicedRuleId=' + splicedRuleId + '&skuId=' + this.data.curSkuId + '&smId=' + this.data.curSkuMajorId+'&inviteCode='+this.data.inviteCode
+            });
         }
     },
     joinElseCollage:function(e){
-        var productid = e.currentTarget.dataset.productid;
-        var activityid = e.currentTarget.dataset.activityid;
+        this.setData({ btnType: 'joinElse' });
         var activityorderid = e.currentTarget.dataset.activityorderid;
-        wx.navigateTo({
-            url: '/pages/payOrder/index?paytype=5&orderType=SPLICED&id=' + productid + '&activityId=' + activityid + '&activityOrderId=' + activityorderid + '&splicedRuleId=' + this.data.defaultSku.splicedRuleId + '&skuId=' + this.data.curSkuId + '&smId=' + this.data.curSkuMajorId
-        });
+        this.setData({activityElseOrderid:activityorderid});
+        if (Object.keys(this.data.productSkus).length > 1) {
+            this.toggleSelect();
+        } else {
+            this.okSelect();
+        }
     },
     /****  参团 ****/
     joinCollage:function() {

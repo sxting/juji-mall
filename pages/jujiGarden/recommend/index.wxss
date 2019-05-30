@@ -27,7 +27,7 @@
 
 .modal1{width:100%;height:100%;position:fixed;left:0;top:0;z-index:2;box-sizing:border-box;}
 .modal1 .div{width:100%;position:relative;z-index:9;box-sizing:border-box;}
-.modal1 .div .canvas{width:260px;height:420px;position:relative;z-index:6;}
+.modal1 .div .canvas{width:260px;height:420px;position:relative;z-index:6;margin-top: 30px;}
 .modal1 canvas{width:260px;height:420px;}
 .modal1 .bott{position:relative;height:160rpx;width:100%;z-index:999}
 .modal1 .bott button{font-size:28rpx;height:160rpx;background-color: #ffffff}

@@ -77,11 +77,8 @@ Page({
         this.setData({ isShowSelect: !this.data.isShowSelect });
     },
     selectType: function(e) {
-        this.setData({ curSkuId: e.currentTarget.dataset.skuid, curSkuMajorId: e.currentTarget.dataset.id });
-        if(this.data.buyType=='dir'){
-            var skuObj = getObjById(this.data.productSkus,this.data.curSkuId);
-            this.setData({ defaultSku:skuObj});
-        }else{
+        if(e.currentTarget.dataset.stock>0){
+            this.setData({ curSkuId: e.currentTarget.dataset.skuid, curSkuMajorId: e.currentTarget.dataset.id });
             var skuObj = getObjById(this.data.productSkus,this.data.curSkuId);
             this.setData({ defaultSku:skuObj});
         }
@@ -156,27 +153,15 @@ Page({
             complete: () => wx.hideToast()
         })
     },
-    helpKJ() {
-        this.setData({
-            showAlert2: true
-        })
+    helpKJ:function() {
+        this.setData({showAlert2: true})
         this.doBargain();
     },
-    closeAlert1() {
-        this.setData({
-            showAlert1: false
-        })
+    closeAlert:function() {
+        this.setData({showAlert1: false,showAlert2: false})
         this.getData();
     },
-
-    closeAlert2() {
-        this.setData({
-            showAlert2: false
-        })
-        this.getData()
-    },
-
-    doBargain() {
+    doBargain:function() {
         activitiesService.doBargain({activityOrderId: this.data.activityOrderId}).subscribe({
             next: res => {
                 this.setData({price1: res});
@@ -185,8 +170,7 @@ Page({
             complete: () => wx.hideToast()
         })
     },
-
-    lookOthers() {
+    lookOthers:function() {
         wx.navigateTo({
             url: '/pages/activities/project-list/index?sceneType=BARGAIN',
         });
@@ -207,8 +191,6 @@ Page({
                 if (res.orderDigest) {
                     res.yikan = NP.minus(res.originalPrice, res.orderDigest.currentSalesPrice);
                 }
-                console.log("获取数据");
-                console.log(JSON.stringify(res.orderDigest));
                 this.setData({
                     productInfo: res.product.product,
                     store: res.product.store,
@@ -262,6 +244,7 @@ Page({
         var price = Number(this.data.resData.activityPrice / 100).toFixed(2);
         var oprice = Number(this.data.resData.originalPrice / 100).toFixed(2);
         if (res.target.dataset.type=='1') {
+            this.closeAlert();
             return {
                 title: nickName + '邀请你帮' + gender + '砍价，' + price + '元得原价' + oprice + '元的' + productName,
                 path: '/pages/login/index?pagetype=5&type=BARGAIN&pid=' + this.data.productId + '&activityId=' + activityId + '&activityOrderId=' + activityOrderId + '&invitecode=' + wx.getStorageSync('inviteCode'),

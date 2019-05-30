@@ -65,3 +65,4 @@ button:after{border:0;}
 .fr{float:right;}
 .clearfix:after{content:'';display:block;clear:both;}
 .clearfix{zoom:1;}
+.textnowarp { white-space: nowrap; overflow: hidden; text-overflow: ellipsis }

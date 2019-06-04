@@ -22,6 +22,8 @@ Page({
         productId: ''
     },
     onLoad: function(options) {
+        console.log('进入项目详情')
+        console.log(options)
         wx.setNavigationBarTitle({ title: '项目详情' });
         this.setData({
             progressId: options.progressId ? options.progressId : '',
@@ -30,7 +32,7 @@ Page({
         })
         this.getItemInfo(); //调取详情页接口
     },
-    switchToOrderDetailPage: function() {
+    toOrderDetail: function() {
         wx.navigateTo({
             url: '/pages/orderDetail/index?id=' + this.data.productOrderInfo.orderId + '&storeid=' + this.data.storeId
         });
@@ -103,6 +105,7 @@ Page({
                         headPortraitList: res.orderDigest&&res.orderDigest.progresses?res.orderDigest.progresses:[],
                         productId: res.orderDigest ? res.orderDigest.productId : '',
                         activityStatus: res.orderDigest ? res.orderDigest.activityOrderStatus : '',
+                        activityOrderId:res.orderDigest ? res.orderDigest.activityOrderId : ''
                     });
                     if(this.data.productOrderInfo.participateCount==2&&this.data.activityStatus=="IN_PROGRESS"){
                         timer = setTimeout(()=>{

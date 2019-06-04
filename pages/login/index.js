@@ -144,8 +144,10 @@ Page({
         }
       }
       if(this.data.pageType==6){
-        wx.reLaunch({url: '/pages/activities/secondDetail/index?id=' + this.data.pageData.pid + '&activityId=' + this.data.pageData.activityId});
-      }
+            wx.reLaunch({
+                url: '/pages/activities/secondDetail/index?id=' + this.data.pageData.pid + '&activityId=' + this.data.pageData.activityId + '&invitecode=' + this.data.pageData.invitecode
+            });
+        }
     },
     getUserInfo: function(e) {
         if (e.detail.userInfo) {

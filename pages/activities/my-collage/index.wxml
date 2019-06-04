@@ -25,11 +25,11 @@
               <view wx:if="{{activityStatus == 'IN_PROGRESS'}}">
 
                 <view class="txtTit">
-                  <image class="titbg" src="../../../images/pint.png"></image>
+                  <image class="titbg" src="/images/pint.png"></image>
                   <view class="tittext">距结束时间仅剩</view>
                 </view>
 
-                <view wx:if="{{productOrderInfo}}"><child dataFromParent='{{productOrderInfo.expirationTime}}'></child></view>
+                <view wx:if="{{productOrderInfo}}"><child dataFromParent='{{productOrderInfo.expirationTime}}' curTime="{{productInfo.timestamp}}"></child></view>
                 <view class='text-describe'>还差<text>{{2-productOrderInfo.participateCount}}</text>人，赶快邀请好友来拼团吧</view>
               </view>
               <view class='head-portrait-box'>
@@ -41,11 +41,11 @@
               </view>
           </view>
           <view class='btns'>
-            <text class='success-btn' wx:if="{{activityStatus == 'SUCCESS'}}" bindtap='switchToOrderDetailPage'>去使用</text>
+            <text class='success-btn' wx:if="{{activityStatus == 'SUCCESS'}}" bindtap='toOrderDetail'>去使用</text>
             <button class="ing-btn" open-type="share" data-type="pintuan" wx:if="{{activityStatus == 'IN_PROGRESS'&&productOrderInfo.participateCount==1}}">邀请好友拼团</button>
             <button class="ing-btn1" wx:if="{{activityStatus == 'IN_PROGRESS'&&productOrderInfo.participateCount==2&&productOrderInfo.isInitiator==1}}">等待好友付款中</button>
             <button class="ing-btn" wx:if="{{activityStatus == 'IN_PROGRESS'&&productOrderInfo.participateCount==2&&productOrderInfo.isInitiator==0}}" bindtap="toPayorder" data-productid="{{productOrderInfo.productId}}" data-activityid="{{productOrderInfo.activityId}}" data-activityorderid="{{productOrderInfo.activityOrderId}}">立即付款</button>
-            <text class='fail-btn' wx:if="{{activityStatus == 'FAIL'}}"  bindtap='switchToOrderDetailPage'>查看退款</text>
+            <text class='fail-btn' wx:if="{{activityStatus == 'FAIL'}}"  bindtap='toOrderDetail'>查看退款</text>
           </view>
         </view>
       </view>

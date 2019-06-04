@@ -38,14 +38,13 @@ Page({
             this.setData({ orderBizType: options.orderType });
         }
         wx.hideShareMenu();
-        console.log(options);
         if (options.id && options.paytype) {
             this.setData({
                 productId: options.id ? options.id : '',
                 storeId: options.storeid ? options.storeid : '',
                 paytype: options.paytype,
                 sceneId: options.sceneid ? options.sceneid : '',
-                inviteCode: options.invitecode ? options.invitecode : ''
+                inviteCode: options.inviteCode ? options.inviteCode : ''
             });
         }
         if (options.type) {
@@ -90,6 +89,7 @@ Page({
         })
     },
     getActivityInfo: function() {
+        console.log("活动详情");
         service.activity({
             activityId: this.data.activityId,
             activityOrderId: this.data.activityOrderId,
@@ -102,7 +102,6 @@ Page({
                     productInfo: res.product.product,
                     store: res.product.store,
                     price: res.activityPrice,
-                    point: '',
                     showProduct: true,
                     kanjiaData: res,
                     ruleMaps: res.ruleMaps
@@ -118,6 +117,7 @@ Page({
         })
     },
     getItemInfo: function() {
+        console.log("普通商品详情");
         service.getItemInfo({
             productId: this.data.productId,
             storeId: this.data.storeId
@@ -300,7 +300,7 @@ Page({
                         paySign: payInfo.paySign,
                         success:(res1)=>{
                             wx.redirectTo({
-                                url: '/pages/activities/my-collage/index?id=' + this.data.productId + '&activityId=' + this.data.activityId + '&progressId=' + res.progressId,
+                                url: '/pages/activities/my-collage/index?id=' + this.data.productId + '&activityId=' + this.data.activityId + '&progressId=' + res.progressId + '&activityOrderId=' + this.data.activityOrderId,
                             });
                         },
                         fail:(res)=> {
@@ -319,11 +319,9 @@ Page({
     },
     // 砍价支付
     toActivityPay2: function() {
-        let data = {};
-        if (this.data.activityOrderId) {
-            data = {
-                activityOrderId: this.data.activityOrderId
-            }
+        let data = {
+            inviteCode: this.data.inviteCode,
+            activityOrderId: this.data.activityOrderId
         }
         service.bargainPayment(data).subscribe({
             next: res => {

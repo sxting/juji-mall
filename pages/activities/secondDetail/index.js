@@ -38,17 +38,13 @@ Page({
         isBack: false
     },
     onLoad: function(options) {
-        if (options.shared) {
-            this.setData({ shared: options.shared });
-        }
         wx.setNavigationBarTitle({ title: '商品详情' });
+        var inviteCode = wx.getStorageSync('inviteCode');
         this.setData({
             productId: options.id,
-            activityId: options.activityId
+            activityId: options.activityId,
+            inviteCode: options.invitecode?options.invitecode:inviteCode
         });
-        if(options.invitecode){
-            this.setData({inviteCode:options.invitecode});
-        }
         // 查询商品详情
         this.getData();
     },
@@ -72,10 +68,12 @@ Page({
         var picId = this.data.resData.cover;
         var productName = this.data.resData.productName;
         var price = Number(this.data.resData.activityPrice / 100).toFixed(2);
+        var shareTxt = this.data.productInfo.shareText;
+        var shareImg = this.data.productInfo.shareImg;
         return {
-            title: price + '元秒杀'+productName+'，手慢无！',
+            title: shareTxt?shareTxt:price + '元秒杀'+productName+'，手慢无！',
             path: '/pages/login/index?pagetype=6&pid='+this.data.productId+'&activityId=' + this.data.activityId + '&invitecode=' + wx.getStorageSync('inviteCode'),
-            imageUrl:constant.basePicUrl + this.data.resData.cover + '/resize_560_420/mode_fill'
+            imageUrl:constant.basePicUrl + (shareImg?shareImg:this.data.resData.cover) + '/resize_560_420/mode_fill'
         }
     },
     previewImage: function(e) {
@@ -186,6 +184,7 @@ Page({
         this.setData({ defaultSku:skuObj[0]});
     },
     okSelect:function(){
+        if(this.data.defaultSku.balanceStock==0){errDialog("此规格库存不足");return}
         wx.navigateTo({
             url: '/pages/payOrder/index?paytype=7&orderType=SEC_KILL&id=' + this.data.productId + '&activityId=' + this.data.activityId + '&splicedRuleId=' + this.data.defaultSku.secKillRuleId+'&skuId='+this.data.curSkuId+'&smId='+this.data.curSkuMajorId+'&inviteCode='+this.data.inviteCode
         });

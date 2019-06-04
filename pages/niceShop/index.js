@@ -39,9 +39,10 @@ Page({
         };
         service.getRecommendPage(obj).subscribe({
             next: res => {
-                console.log(res);
-                this.setData({productList: this.data.productList.concat(res.list)});
-                this.setData({ isShowNodata: this.data.productList.length == 0 });
+                this.setData({
+                    productList: this.data.productList.concat(res.list),
+                    isShowNodata: this.data.pageNo==1 && res.list.length==0
+                });
             },
             error: err => {},
             complete: () => wx.hideToast()
@@ -74,7 +75,6 @@ Page({
     toComDetail: function(e) {
         var id = e.currentTarget.dataset.id;
         var storeid = e.currentTarget.dataset.storeid;
-        console.log(id);
         wx.navigateTo({
             url: '/pages/comDetail/index?share=0&id=' + id + '&storeid=' + storeid
         });

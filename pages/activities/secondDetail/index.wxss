@@ -133,4 +133,4 @@ page { height: 100%; }
 .selectType view.on{background-color: #ffdb00;}
 .selectType view.null{border: 1rpx dashed #CFCFCF;color: #CFCFCF;background-color: #fff;}
 .selectDiv{background: #FFFCEF;border: 1rpx solid #FFDB00;border-radius: 4rpx;height: 60rpx;width: 100%;padding-left: 20rpx;box-sizing:border-box;margin-top: 20rpx;font-size: 24rpx;color: #999999;}
-.selectBtn{width: 100%;height: 90rpx;line-height: 90rpx;text-align: center;background-color: #ffdb00;border-radius: 100rpx;font-size: 28rpx;color: #333;margin-top: 44rpx;font-weight: bold;}
+.selectBtn{width: 100%;height: 90rpx;line-height: 90rpx;text-align: center;background-color: #ffdb00;border-radius: 100rpx;font-size: 34rpx;color: #333;margin-top: 44rpx;font-weight: bold;}

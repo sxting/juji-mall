@@ -81,7 +81,7 @@ page { height: 100%; }
 .title-infor .collage-infor .collage-numbers { width: 76rpx; height: 36rpx; font-size: 22rpx; color: #333333; text-align: center; line-height: 36rpx; background-color: #FFDB00; margin-right: 20rpx; }
 .name-collage { font-size: 30rpx; color: #333333; margin-top: 27rpx }
 .price-infor { line-height: 50rpx; margin-top: 15rpx; font-weight:bold;}
-.price-infor .original-price { font-size: 28rpx; color: #999999; text-decoration: line-through; margin-left: 20rpx; }
+.price-infor .original-price { font-size: 28rpx; color: #999999; text-decoration: line-through; margin-left: 20rpx;margin-top: 2rpx; }
 .price-infor text:last-of-type { font-size: 24rpx; color: #999999; letter-spacing: 0; float: right }
 .price-infor text:first-of-type { font-size: 38rpx; color: #E83221; }
 .pintuan-person { padding: 0 30rpx 20rpx; background-color: #fff;}
@@ -122,4 +122,7 @@ page { height: 100%; }
 .selectType view.on{background-color: #ffdb00;}
 .selectType view.null{border: 1rpx dashed #CFCFCF;color: #CFCFCF;background-color: #fff;}
 .selectDiv{background: #FFFCEF;border: 1rpx solid #FFDB00;border-radius: 4rpx;height: 60rpx;width: 100%;padding-left: 20rpx;box-sizing:border-box;margin-top: 20rpx;font-size: 24rpx;color: #999999;}
-.selectBtn{width: 100%;height: 90rpx;line-height: 90rpx;text-align: center;background-color: #ffdb00;border-radius: 100rpx;font-size: 28rpx;color: #333;margin-top: 44rpx;font-weight: bold;}
+.selectBtn{width: 100%;height: 90rpx;line-height: 90rpx;text-align: center;background-color: #ffdb00;border-radius: 100rpx;font-size: 34rpx;color: #333;margin-top: 44rpx;font-weight: bold;}
+
+.price1{font-size:38rpx;color: #E83221;font-weight:bold;line-height:38rpx;}
+.price2{font-size:24rpx;color: #E83221;font-weight:bold;line-height:24rpx;margin-bottom:4rpx;}

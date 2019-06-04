@@ -17,7 +17,7 @@
       <view class='name-collage'>{{productInfo.productName}}</view>
       <view class='price-infor clearfix'>
         <text class='fl'>{{filter.toFix(resData.activityPrice)}}<text style="font-size:24rpx">元</text></text>
-        <text class='fl original-price'>{{filter.toFix(resData.product.product.originalPrice)}}元</text>
+        <text class='fl original-price'>{{filter.toFix(resData.originalPrice)}}元</text>
         <text>已拼{{resData.participantQuantity}}件</text>
       </view>
       <!-- 各种情况判断  -->
@@ -25,7 +25,7 @@
         <!--拼团中 自己进入 或者 他人进入 -->
         <view wx:if="{{orderStatus == 'IN_PROGRESS'}}">
           <view class='last-time ub ub-ac ub-pc'>
-            剩余时间<child dataFromParent='{{resData.orderDigest.expirationTime}}' style="margin-left:30rpx;"></child>
+            剩余时间<child dataFromParent='{{resData.orderDigest.expirationTime}}' curTime="{{resData.timestamp}}" style="margin-left:30rpx;"></child>
           </view>
           <view class='head-portrait-box'>
               <view class='head-portrait' wx:key="unique" wx:for="{{ headPortraitList }}" wx:for-index="index">
@@ -68,11 +68,12 @@
           <image src="/images/shouye.png" style="width:40rpx;height:40rpx;"></image>
       </view>
       <button class="homeWrap toBg" open-type='share'>
-          <image src="/images/fenxiang.png" style="width:40rpx;height:40rpx;" open-type="share"></image>
+          <image src="/images/fenxiang.png" style="width:40rpx;height:40rpx;"></image>
       </button>
       <view style='width: 470rpx; height: 90rpx;'>
         <form bindsubmit="collectFormIds" report-submit="true">
-        <view class='group-buying btns' wx:if="{{orderStatus == '' && orderStock > 0}}" catchtap='createCollage'>一键开团<!--  {{filter.toFix(resData.activityPrice)}}元 --></view>
+        <view class='group-buying btns' wx:if="{{orderStatus == ''&& orderStock > 0}}" catchtap='createCollage'>一键开团</view>
+        <view class='group-buying btns' wx:if="{{orderStatus == 'SUCCESS' && isInitiator == 1}}" catchtap='toOrderDetail'>去使用</view>
         <!-- 1、进入 库存不足 拼团失败 2、拼团成功，进入库存不足  无论自己或者他人-->
         <view class='low-stocks btns' wx:if="{{(orderStatus == ''||orderStatus == 'FAIL'||orderStatus == 'SUCCESS') && orderStock == 0}}">库存不足，可选择参团</view>
         <!-- 他人进入 已经拼团成功  -->
@@ -82,13 +83,14 @@
         <!-- 拼团中  自己进入 -->
         <button class="btns group-buying" open-type="share" data-type="1" wx:if="{{ orderStatus == 'IN_PROGRESS' && isInitiator == 1 }}">邀请好友拼团</button>
         <!-- 拼团中 他人进入 -->
-        <view class="proBtns ub ub-ac" wx:if="{{ orderStatus == 'IN_PROGRESS' && isInitiator == 0 }}">
+        <view class='group-buying btns' wx:if="{{resData.activityStatus == 'ENDED' && orderStock > 0 && isInitiator == 0}}" catchtap='joinCollage'>一键参团</view>
+        <view class="proBtns ub ub-ac" wx:if="{{resData.activityStatus != 'ENDED'&& orderStatus == 'IN_PROGRESS' && isInitiator == 0 }}"> 
           <view class="kaituan btns-pro ub-f1 ub ub-ver ub-ac ub-pc l" catchtap='createCollage'>
             <text class="txt1">我要开团</text>
           </view>
           <view wx:if="{{resData.orderDigest.orderId==''}}" class="kaituan-ing btns-pro ub-f1 ub ub-ver ub-ac ub-pc r" catchtap='joinCollage'>
             <text class="txt1">{{filter.toFix(resData.activityPrice)}}元</text>
-            <text class="txt2">一键参团{{resData.activityOrderId}}</text>
+            <text class="txt2">一键参团</text>
           </view>
           <view wx:if="{{resData.orderDigest.orderId!=''}}" class="kaituan-ing btns-pro ub-f1 ub ub-ver ub-ac ub-pc r" data-activityorderid='{{resData.orderDigest.activityOrderId}}' data-activityid='{{resData.activityId}}' data-productid="{{productInfo.productId}}" catchtap='joinCollage'>
             <text class="topay">去支付</text>
@@ -103,7 +105,7 @@
       <view class="closeSelect ub ub-ac ub-pc" bindtap="toggleSelect"><image src="/images/icon_close.png"></image></view>
       <view class="ub ub-ac selectTit">选择规格</view>
       <view class="selectType">
-          <view wx:for="{{productSkus}}" wx:key="unique" class="{{item.skuId==defaultSku.skuId?'on':''}}" data-skuid="{{item.skuId}}" data-id="{{item.id}}" bindtap="selectType" data-stock="{{item.stock}}">{{filter.toEllipsised(item.skuName)}}</view>
+          <view wx:for="{{productSkus}}" wx:key="unique" class="{{item.skuId==defaultSku.skuId?'on':''}} {{item.stock==0?'null':''}}" data-skuid="{{item.skuId}}" data-id="{{item.id}}" bindtap="selectType" data-stock="{{item.stock}}">{{filter.toEllipsised(item.skuName)}}</view>
       </view>
       <view class="selectDiv ub ub-ac">已选：“{{filter.toEllipsised(defaultSku.skuName)}}”，售价：
           <text class="uu" wx:if="{{defaultSku.point>0}}">{{defaultSku.point}}桔子</text>

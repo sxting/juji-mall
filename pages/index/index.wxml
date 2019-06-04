@@ -7,11 +7,12 @@
     <view wx:if="{{slideShowList.length>0||recommendPage.length>0}}">
         <view class="toperWrap">
             <view class="toper">
-                <swiper autoplay="{{autoplay}}" circular>
+                <swiper autoplay="{{autoplay}}" circular wx:if="{{slideShowList.length>0}}">
                     <swiper-item wx:for="{{slideShowList}}" wx:key="unique">
-                        <image src="{{item.imgId?'https://upic.juniuo.com/file/picture/'+item.imgId+'/resize_750_488/mode_filt/format_jpg/quality_0':''}}" data-link="{{item.link}}" bindtap="onTapBanner" class="slide-image" mode="widthFix" lazy-load="true" data-tit="商品详情"></image>
+                        <image src="https://upic.juniuo.com/file/picture/{{item.imgId}}/resize_750_488/mode_filt/format_jpg/quality_0" data-link="{{item.link}}" bindtap="onTapBanner" class="slide-image" mode="widthFix" lazy-load="true" data-tit="商品详情"></image>
                     </swiper-item>
                 </swiper>
+                <swiper wx:else><swiper-item><image src="https://upic.juniuo.com/file/picture/2773KOjQnLf0/resize_750_488/mode_filt/format_jpg/quality_0" class="slide-image"></image></swiper-item></swiper>
                 <view class="locationWrap" bindtap="toPath" data-page="/pages/citylist/index" style="top:{{topValue}}px">
                     <text class="locationText">{{locationName}}</text>
                     <image style="width:20rpx;height:14rpx;margin-left:12rpx;margin-top:4rpx;" lazy-load="true" src="/images/sort-down1.png" wx:if="{{locationName}}"></image>
@@ -68,10 +69,10 @@
                     <view class="ub-f1 ub ub-ver" style="height:180rpx">
                         <view class="pubuname" style="padding-right:0">{{item.productName}}</view>
                         <view class="clockDiv ub ub-ac mt05 ub-f1" wx:if="{{item.activityStatus=='STARTED'&&item.balanceStock>0}}">
-                            <child dataFromParent='{{item.expectGmtEnd}}' customeClass="red" radius="0"></child><view class="txt">秒杀中</view>
+                            <child curTime="{{item.timestamp}}" dataFromParent='{{item.expectGmtEnd}}' customeClass="red" radius="0" bind:action="getSecondList"></child><view class="txt plr05">秒杀中</view>
                         </view>
                         <view class="clockDiv ub ub-ac mt05 ub-f1" wx:if="{{item.activityStatus=='READY'}}">
-                            <child dataFromParent='{{item.expectGmtStart}}' customeClass="block" radius="0"></child><view class="txt">即将开始</view>
+                            <child curTime="{{item.timestamp}}" dataFromParent='{{item.expectGmtStart}}' customeClass="block" radius="0" bind:action="getSecondList"></child><view class="txt plr05">即将开始</view>
                         </view>
                         <view class="clockDiv ub ub-ac mt05 ub-f1" wx:if="{{item.balanceStock==0}}">
                             <view class="txt">已抢光</view>
@@ -88,8 +89,7 @@
         </view>
         <view class="contentWarp" style="padding-top:{{secondList.length==0&&newProductList.length<=1?'30rpx':(secondList.length==0?'20rpx':'0')}}">
             <view class="newProductDiv" wx:if="{{newProductList.length>1}}">
-                <view class="mtitle ub ub-ac">新品尝鲜<image class="icon_mark" src="/images/icon_h2.png" mode="aspectFit"></image>
-                </view>
+                <view class="mtitle ub ub-ac">新品尝鲜<image class="icon_mark" src="/images/icon_h2.png" mode="aspectFit"></image></view>
                 <view class="newproductDiv clearfix">
                     <view class="pubuItem" wx:for="{{newProductList}}" wx:if="{{!(index==2&&newProductList.length==3)&&index<4}}" wx:key="unique" bindtap="toNextDetail" data-type="{{item.currentActivityType}}" data-actid="{{item.currentActivityId}}" data-id="{{item.productId}}" data-storeid="{{item.nearStore.id}}" data-tit="新品尝鲜">
                         <image src="https://upic.juniuo.com/file/picture/{{item.picId}}/resize_750_420/mode_fill" lazy-load="true" mode="aspectFill" class="plimg"></image>

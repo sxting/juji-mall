@@ -20,8 +20,8 @@ Page({
     onLoad: function(options) {
         wx.setNavigationBarTitle({ title: '限时秒杀' });
         this.setData({providerId: wx.getStorageSync('providerId')});
-        this.getActivityList('STARTED'); //获取活动列表
-        this.getActivityList('READY'); //获取活动列表
+        this.getActivityList('STARTED');
+        this.getActivityList('READY');
     },
     onHide: function() {
         this.setData({
@@ -34,11 +34,15 @@ Page({
             isBack: true
         });
     },
+    getData:function(){
+        this.getActivityList('STARTED');
+        this.getActivityList('READY');
+    },
     onShow: function() {
         this.setData({curIndex: 1});
         if (this.data.isBack) {
-            this.getActivityList('STARTED'); //获取活动列表
-            this.getActivityList('READY'); //获取活动列表
+            this.getActivityList('STARTED');
+            this.getActivityList('READY');
         }
     },
     onReachBottom: function() {

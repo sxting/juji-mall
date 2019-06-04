@@ -92,7 +92,7 @@ swiper{display:block;width:100%;height:488rpx;box-sizing:border-box;overflow:hid
 .buyBtn2{border:2rpx solid #E83221;border-radius:6rpx;color:#E83221;background:#fff;}
 .sharBtn{width: 80rpx;height: 60rpx;}
 .sharePng{width: 37rpx;height: 40rpx;display: block;}
-.buyBtn1,.proBtn1{background: #E83221;border-radius:6rpx;color:#ffffff;margin-left: 20rpx;}
+.buyBtn1,.proBtn1{background: #E83221;border-radius:6rpx;color:#fff;margin-left: 20rpx;}
 .xIcon{transition:all 0.3 ease;}
 .rotate{transform:rotate(180deg);}
 .newerGetModalWrap{position:fixed;top:0;left:0;right:0;bottom:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index: 999999999;}
@@ -127,14 +127,14 @@ swiper{display:block;width:100%;height:488rpx;box-sizing:border-box;overflow:hid
 .mark3{background-color:rgba(254,119,66,0.2);color: #FE7742;}
 .mark4{width: 84rpx;height: 26rpx;text-align: center;line-height: 26rpx;border-radius: 17rpx;display: inline-block;font-size: 18rpx;margin-left: 12rpx;color: #e83221;border:1rpx #e83221 solid;}
 
-.buyBtn3{width:140rpx;height:56rpx;font-size:26rpx;display:flex;align-items:center;justify-content:center;padding:0;box-sizing:border-box;background: #E83221;border-radius:6rpx;color:#ffffff;}
-.buyBtn4{width:120rpx;height:54rpx;font-size:26rpx;display:flex;align-items:center;justify-content:center;padding:0;box-sizing:border-box;background: #E83221;border-radius:6rpx;color:#ffffff;}
+.buyBtn3{width:140rpx;height:56rpx;font-size:26rpx;display:flex;align-items:center;justify-content:center;padding:0;box-sizing:border-box;background: #E83221;border-radius:6rpx;color:#fff;}
+.buyBtn4{width:120rpx;height:54rpx;font-size:26rpx;display:flex;align-items:center;justify-content:center;padding:0;box-sizing:border-box;background: #E83221;border-radius:6rpx;color:#fff;}
 
 .contentWarp{background-image: linear-gradient(-180deg, #FFFFFF 2%, #F5F5F5 9%);}
 
 .secondKillDiv{background-image: linear-gradient(-180deg, #FFFFFF 0%, rgba(255,244,238,0.5) 30%);padding:42rpx 30rpx 10rpx;position: relative;}
 .clockDiv{height: 42rpx;padding-left: 20rpx;}
-.clockDiv .txt{font-size: 22rpx;margin-left: 10rpx;color: #666;}
+.clockDiv .txt{font-size: 22rpx;color: #666;}
 
 .newProductDiv{padding:30rpx 30rpx 20rpx;}
 

@@ -1,4 +1,3 @@
-var util = require('../../../utils/util.js');
 import { service } from '../../../service';
 import { activitiesService } from '../shared/service';
 import { constant } from '../../../utils/constant';
@@ -26,12 +25,14 @@ Page({
         self: '',
         showCom: false,
         portraitUrl: '/images/unkonw-icon.png',
+        productOrderInfo: {},
         orderStatus: '',
         isInitiator: 1,
         isShowSelect:false,
         productSkus:[],
         ruleMaps:{},
         defaultSku:{},
+        inviteCode:'',
         curSkuId:'',
         curSkuMajorId:'',
         btnType:'',
@@ -41,15 +42,14 @@ Page({
         if (options.shared) {
             this.setData({ shared: options.shared });
         }
+        var inviteCode = wx.getStorageSync('inviteCode');
         this.setData({
             productId: options.id,
             activityId: options.activityId,
             activityOrderId: options.activityOrderId ? options.activityOrderId : '',
-            progressId: options.progressId ? options.progressId : ''
+            progressId: options.progressId ? options.progressId : '',
+            inviteCode: options.invitecode?options.invitecode:inviteCode
         });
-        if(options.invitecode){
-            this.setData({inviteCode:options.invitecode});
-        }
         // 查询商品详情
         this.getData();
     },
@@ -78,14 +78,16 @@ Page({
                 imageUrl: constant.basePicUrl + picId + '/resize_560_420/mode_fill'
             }
         }else{
+            var shareTxt = this.data.productInfo.shareText;
+            var shareImg = this.data.productInfo.shareImg;
             return {
-                title: nickName + '分享给您一个心动商品，快来一起体验吧！',
+                title: shareTxt?shareTxt:nickName + '分享给您一个心动商品，快来一起体验吧！',
                 path: '/pages/login/index?pagetype=5&type=SPLICED&pid=' + this.data.productId + '&activityId=' + this.data.activityId + '&invitecode=' + wx.getStorageSync('inviteCode'),
-                imageUrl: constant.basePicUrl + picId + '/resize_560_420/mode_fill'
+                imageUrl: constant.basePicUrl + (shareImg?shareImg:picId) + '/resize_560_420/mode_fill'
             }
         }
     },
-    onStartKanjia(e) {
+    onStartKanjia:function(e) {
         console.log(e.detail);
         if (e.detail) {
             this.setData({
@@ -111,6 +113,7 @@ Page({
             progressId: this.data.progressId
         }).subscribe({
             next: res => {
+                // console.log(JSON.stringify(res));
                 this.setData({ showCom: true });
                 var picsStrArr = res.cover.split(',');
                 picsStrArr.forEach(function(item, index) {
@@ -121,6 +124,7 @@ Page({
                     store: res.product.store,
                     showPics: picsStrArr,
                     isShowData: true,
+                    productOrderInfo: res.orderDigest,
                     resData: res,
                     isInitiator: res.orderDigest ? res.orderDigest.isInitiator : 1, //是否为发起者 (判断进入是自己还是他人)
                     orderStatus: res.orderDigest ? res.orderDigest.activityOrderStatus : '', //订单状态
@@ -128,6 +132,7 @@ Page({
                     activityOrderId: res.orderDigest ? res.orderDigest.activityOrderId : '',
                     self: (!res.orderDigest) || (res.orderDigest && res.orderDigest.isInitiator),
                     productSkus: res.product.product.productSkus,
+                    defaultSku: res.product.product.defaultSku,
                     ruleMaps:res.ruleMaps,
                     curSkuId:res.product.product.defaultSku.skuId,
                     curSkuMajorId:res.product.product.defaultSku.id
@@ -135,8 +140,6 @@ Page({
                 if (res.product.product.note) {
                     this.setData({ note: JSON.parse(res.product.product.note) })
                 }
-                var skuObj = getObjById(this.data.productSkus,this.data.curSkuId)
-                this.setData({ defaultSku:skuObj});
                 // 是否有其他参团者的活动
                 if (res.otherDigests) {
                     res.otherDigests.forEach(function(item) {
@@ -173,6 +176,11 @@ Page({
     toMyOrderList:function() {
         wx.navigateTo({url: '/pages/orderlist/index?index=2&status=PAID'});
     },
+    toOrderDetail: function() {
+        wx.navigateTo({
+            url: '/pages/orderDetail/index?id=' + this.data.productOrderInfo.orderId + '&storeid=' + this.data.store.id
+        });
+    },
     toggleSelect: function() {
         this.setData({ isShowSelect: !this.data.isShowSelect });
     },
@@ -184,6 +192,7 @@ Page({
         }
     },
     okSelect: function() {
+        if(this.data.defaultSku.stock==0){errDialog("此规格库存不足");return}
         var productid = this.data.productId;
         var activityid = this.data.activityId;
         this.setData({ isShowSelect: false });
@@ -198,7 +207,7 @@ Page({
         } else if(this.data.btnType=='joinElse'){
             var activityorderid = this.data.activityElseOrderid;
             wx.navigateTo({
-                url: '/pages/payOrder/index?paytype=5&orderType=SPLICED&id=' + productid + '&activityId=' + activityid + '&activityOrderId=' + activityorderid + '&splicedRuleId=' + splicedRuleId + '&skuId=' + this.data.curSkuId + '&smId=' + this.data.curSkuMajorId
+                url: '/pages/payOrder/index?paytype=5&orderType=SPLICED&id=' + productid + '&activityId=' + activityid + '&activityOrderId=' + activityorderid + '&splicedRuleId=' + splicedRuleId + '&skuId=' + this.data.curSkuId + '&smId=' + this.data.curSkuMajorId + '&inviteCode=' + this.data.inviteCode
             });
         } else {
             console.log("去开团");

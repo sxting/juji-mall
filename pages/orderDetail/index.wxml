@@ -6,7 +6,7 @@
             <image class="goodImg udb" src="{{constant.basePicUrl}}{{item.picId}}/resize_750_420/mode_filt/format_jpg/quality_70" mode="aspectFill"></image>
             <view class="ub-f1 ub ub-ver ub-pj goodMsg">
                 <view class="goodTit">{{format.toEllipsis(item.productName)}}</view>
-                <view class="storeName">{{item.skuName}}</view>
+                <view class="storeName">{{format.toEllipsised(item.skuName)}}</view>
                 <!-- 混合支付 -->
                 <view class="goodAmount" wx:if="{{orderInfo.payType=='MIX'&&(orderInfo.status=='CREATED'||orderInfo.status=='CLOSE')}}">
                     <text>{{item.point}}桔子</text><text>+</text><text>{{format.toFix(item.price)}}元</text>

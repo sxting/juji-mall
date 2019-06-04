@@ -1,4 +1,3 @@
-var util = require('../../../utils/util.js');
 import { service } from '../../../service';
 import { activitiesService } from '../shared/service';
 import { constant } from '../../../utils/constant';
@@ -26,7 +25,6 @@ Page({
         showAlert1: false,
         showAlert2: false,
         status: 'init', //未开始 init，砍价中 ing，砍价失败 fail，砍价成功 success
-        shared: true,
         self: true, //是否活动发起者
         help: true, //是否已帮砍
         price1: 0,
@@ -38,23 +36,22 @@ Page({
         curSkuId:'',
         curSkuMajorId:'',
         inviteCode:'',
-        isBack: false
+        isBack: false,
+        buyType:'kan'
     },
     onLoad: function(options) {
-        if (options.shared) {
-            this.setData({ shared: options.shared });
-        }
+        console.log('砍价活动详情');
+        console.log(options);
+        var inviteCode = wx.getStorageSync('inviteCode');
         this.setData({
             productId: options.id,
             activityId: options.activityId,
             activityOrderId: options.activityOrderId ? options.activityOrderId : '',
-            progressId: options.progressId ? options.progressId : ''
+            progressId: options.progressId ? options.progressId : '',
+            inviteCode: options.invitecode?options.invitecode:inviteCode
         });
         if (options.storeid) {
             this.setData({ storeId: options.storeid });
-        }
-        if (options.invitecode) {
-            this.setData({ inviteCode: options.invitecode });
         }
         // 查询商品详情
         this.getData();
@@ -94,6 +91,7 @@ Page({
         });
     },
     okSelect:function(e){
+        if(this.data.defaultSku.stock==0){errDialog("此规格库存不足");return}
         this.setData({isShowSelect:false});
         if(this.data.buyType=='dir'){
            this.toPayOrder();
@@ -105,13 +103,13 @@ Page({
         var productId = this.data.productId;
         var activityId = this.data.activityId;
         wx.navigateTo({
-            url: '/pages/payOrder/index?paytype=3&id='+productId+'&activityId='+activityId+'&skuId='+this.data.curSkuId+'&smId='+this.data.curSkuMajorId,
+            url: '/pages/payOrder/index?paytype=3&id='+productId+'&skuId='+this.data.curSkuId+'&smId='+this.data.curSkuMajorId + '&inviteCode=' + this.data.inviteCode,
         });
     },
     dirBuy:function(e){
         if(Object.keys(this.data.defaultSku).length>1){
-            this.toggleSelect();
             this.setData({buyType:'dir'});
+            this.toggleSelect();
         }else{
             this.toPayOrder();
         }
@@ -121,11 +119,12 @@ Page({
         var activityOrderId = this.data.activityOrderId;
         var activityId = this.data.activityId;
         wx.navigateTo({
-            url: '/pages/payOrder/index?paytype=6&orderType=BARGAIN&id='+productId+'&activityOrderId='+activityOrderId+'&activityId='+activityId+'&skuId='+this.data.curSkuId+'&smId='+this.data.curSkuMajorId,
-        })
+            url: '/pages/payOrder/index?paytype=6&orderType=BARGAIN&id='+productId+'&activityOrderId='+activityOrderId+'&activityId='+activityId+'&skuId='+this.data.curSkuId+'&smId='+this.data.curSkuMajorId + '&inviteCode=' + this.data.inviteCode,
+        });
     },
     // 发起砍价 
     startKanjia:function() {
+        this.setData({showAlert2:false});
         if(Object.keys(this.data.defaultSku).length>1){
             this.toggleSelect();
             this.setData({buyType:'kan'});
@@ -147,7 +146,6 @@ Page({
                 }
             },
             error: err => {
-                this.getData();
                 errDialog(err);
             },
             complete: () => wx.hideToast()
@@ -159,16 +157,19 @@ Page({
     },
     closeAlert:function() {
         this.setData({showAlert1: false,showAlert2: false})
-        this.getData();
     },
     doBargain:function() {
-        activitiesService.doBargain({activityOrderId: this.data.activityOrderId}).subscribe({
-            next: res => {
-                this.setData({price1: res});
-            },
-            error: err => errDialog(err),
-            complete: () => wx.hideToast()
-        })
+        activitiesService.doBargain({ 
+                inviteCode:this.data.inviteCode,
+                activityOrderId: this.data.activityOrderId
+            }).subscribe({
+                next: res => {
+                    this.setData({ price1: res });
+                    this.getData();
+                },
+                error: err => errDialog(err),
+                complete: () => wx.hideToast()
+            });
     },
     lookOthers:function() {
         wx.navigateTo({
@@ -203,6 +204,7 @@ Page({
                     activityOrderId: res.orderDigest ? res.orderDigest.activityOrderId : '',
                     self: (!res.orderDigest) || (res.orderDigest && res.orderDigest.isInitiator==1),
                     productSkus: res.product.product.productSkus,
+                    defaultSku: res.product.product.defaultSku,
                     ruleMaps:res.ruleMaps,
                     curSkuId: res.product.product.defaultSku.skuId,
                     curSkuMajorId: res.product.product.defaultSku.id
@@ -210,8 +212,6 @@ Page({
                 if (res.product.product.note) {
                     this.setData({ note: JSON.parse(res.product.product.note) })
                 }
-                var skuObj = getObjById(this.data.productSkus,this.data.curSkuId);
-                this.setData({ defaultSku:skuObj});
                 let status = 'init'
                 if (res.orderDigest) {
                   switch (res.orderDigest.activityOrderStatus) {
@@ -251,10 +251,12 @@ Page({
                 imageUrl: constant.basePicUrl + picId + '/resize_560_420/mode_fill'
             }
         }else{
+            var shareTxt = this.data.productInfo.shareText;
+            var shareImg = this.data.productInfo.shareImg;
             return {
-                title: nickName + '分享给您一个心动商品，快来一起体验吧！',
+                title: shareTxt?shareTxt:nickName + '分享给您一个心动商品，快来一起体验吧！',
                 path: '/pages/login/index?pagetype=5&type=BARGAIN&pid=' + this.data.productId + '&activityId=' + activityId + '&invitecode=' + wx.getStorageSync('inviteCode'),
-                imageUrl: constant.basePicUrl + picId + '/resize_560_420/mode_fill'
+                imageUrl: constant.basePicUrl + (shareImg?shareImg:picId) + '/resize_560_420/mode_fill'
             }
         }
     }

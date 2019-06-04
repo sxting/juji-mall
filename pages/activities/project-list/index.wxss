@@ -1,6 +1,6 @@
 /* pages/activities/project-list/index.wxss */
 page{height:100%;background-color:#fff;}
-.juzihl-wrap{background:#fff;padding:40rpx 30rpx 30rpx 30rpx;height: 100%;box-sizing:border-box;}
+.juzihl-wrap{background:#fff;padding:30rpx;box-sizing:border-box;}
 .fixed-button{position:fixed;right:-125rpx;top:70%;width:210rpx;height:84rpx;background:#E83221;box-shadow:0 0 5rpx 1rpx #E83221;border-radius:45rpx 0 0 45rpx;line-height:84rpx;z-index:1000;transition: all .3s ease;}
 .fixed-button .type-icon{width:66rpx;height:66rpx;border-radius:50%;background-color:#FFFFFF;margin:0 10rpx;line-height:66rpx;text-align:center}
 .fixed-button .type-icon image{width:50rpx;height:35rpx;border-radius:50%;padding-top:14rpx;}

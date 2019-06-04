@@ -21,15 +21,15 @@
             </view>
         </view>
         <image class="statusBg" src="/images/statusBg.png"></image>
-        <view wx:if="{{activityStatus=='STARTED'&&defaultSku.balanceStock==0}}" class="status1 ub ub-ac ub-pc">已抢光</view>
+        <view wx:if="{{activityStatus=='STARTED'&&resData.balanceStock==0}}" class="status1 ub ub-ac ub-pc">已抢光</view>
         <view wx:if="{{activityStatus=='ENDED'}}" class="status1 ub ub-ac ub-pc">已结束</view>
-        <view wx:if="{{activityStatus=='STARTED'&&defaultSku.balanceStock>0}}" class="status2 ub ub-ver ub-ac ub-pc">
+        <view wx:if="{{activityStatus=='STARTED'&&resData.balanceStock>0}}" class="status2 ub ub-ver ub-ac ub-pc">
             <view class="txt">距活动结束还有</view>
-            <child dataFromParent='{{resData.expectGmtEnd}}' customeClass="red"></child>
+            <child dataFromParent='{{resData.expectGmtEnd}}' curTime="{{resData.timestamp}}" customeClass="red" bind:action='getData'></child>
         </view>
-        <view wx:if="{{activityStatus=='READY'&&defaultSku.balanceStock>0}}" class="status2 ub ub-ver ub-ac ub-pc">
+        <view wx:if="{{activityStatus=='READY'&&resData.balanceStock>0}}" class="status2 ub ub-ver ub-ac ub-pc">
             <view class="txt">距活动开始还有</view>
-            <child dataFromParent='{{resData.expectGmtStart}}' customeClass="block"></child>
+            <child dataFromParent='{{resData.expectGmtStart}}' curTime="{{resData.timestamp}}" customeClass="block" bind:action='getData'></child>
         </view>
     </view>
     <view class="businessInfo-wrap">
@@ -138,11 +138,11 @@
             <image src="/images/fenxiang.png" style="width:40rpx;height:40rpx;"></image>
         </button>
         <form bindsubmit="collectFormIds" report-submit="true">
-            <button wx:if="{{activityStatus=='STARTED'&&defaultSku.balanceStock>0}}" form-type="submit" class="btn btn1" bindtap="toSecondKill">一键秒杀</button>
+            <button wx:if="{{activityStatus=='STARTED'&&resData.balanceStock>0}}" form-type="submit" class="btn btn1" bindtap="toSecondKill">一键秒杀</button>
             <button wx:if="{{activityStatus=='READY'&&!remind}}" class="btn btn1" bindtap="toRemainMe">开始时提醒我</button>
             <button wx:if="{{activityStatus=='READY'&&remind}}" class="btn btn2">已设置提醒</button>
             <button wx:if="{{activityStatus=='ENDED'}}" class="btn btn2">活动已结束</button>
-            <button wx:if="{{activityStatus=='STARTED'&&defaultSku.balanceStock==0}}" class="btn btn2">抢光啦</button>
+            <button wx:if="{{activityStatus=='STARTED'&&resData.balanceStock==0}}" class="btn btn2">抢光啦</button>
         </form>
     </view>
 
@@ -151,7 +151,7 @@
         <view class="closeSelect ub ub-ac ub-pc" bindtap="toggleSelect"><image src="/images/icon_close.png"></image></view>
         <view class="ub ub-ac selectTit">选择规格</view>
         <view class="selectType">
-            <view wx:for="{{productSkus}}" wx:key="unique" class="{{item.skuId==defaultSku.skuId?'on':''}} {{item.balanceStock==0?'null':''}}" data-skuid="{{item.skuId}}" data-id="{{item.id}}" bindtap="selectType" data-stock="{{item.balanceStock}}">{{filter.toEllipsised(item.skuName)}}</view>
+            <view wx:for="{{productSkus}}" wx:key="unique" class="{{item.skuId==defaultSku.skuId?'on':''}} {{ruleMaps[item.skuId][0].balanceStock==0?'null':''}}" data-skuid="{{item.skuId}}" data-id="{{item.id}}" bindtap="selectType" data-stock="{{ruleMaps[item.skuId][0].balanceStock}}">{{filter.toEllipsised(item.skuName)}}</view>
         </view>
         <view class="selectDiv ub ub-ac">已选：“{{filter.toEllipsised(defaultSku.skuName)}}”，售价：
             <text class="uu" wx:if="{{defaultSku.activityPoint>0}}">{{defaultSku.activityPoint}}桔子</text>

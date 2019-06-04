@@ -35,7 +35,7 @@
                     <view class="goodAmount" wx:elif="{{item.payType=='WECHAT'&&(item.status=='CREATED'||item.status=='CLOSE')}}"><text>{{format.toFix(it.price)}}元</text></view>
                     <view class="goodAmount" wx:elif="{{item.payType=='WECHAT'}}"><text>{{format.toFix(it.paidAmount)}}元</text>
                     </view>
-                    <view class="num">{{it.skuName}}×{{it.num}}</view>
+                    <view class="num">{{format.toEllipsised(it.skuName)}}×{{it.num}}</view>
                 </view>
             </view>
             <view class="tx-r total" wx:if="{{item.status=='CREATED'||item.status=='CLOSE'}}">

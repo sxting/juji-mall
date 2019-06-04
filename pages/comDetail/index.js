@@ -171,6 +171,7 @@ Page({
   },
   toBuy:function(){
     console.log('下单前sceneId='+this.data.sceneId);
+    wx.showLoading({title: '提交中...'})
     service.getProQrCode({ productId:this.data.productId,path: 'pages/login/index'}).subscribe({
         next: res => { 
             var sceneId = res.senceId;
@@ -180,9 +181,8 @@ Page({
         },
         error: err => {
             errDialog(err);
-            wx.hideLoading();
         },
-        complete: () => wx.hideToast()
+        complete: () => wx.hideLoading()
     });
   },
   buyProduct:function(){
@@ -208,6 +208,7 @@ Page({
   },
 
   okSelect:function(){
+      if(this.data.defaultSku.stock==0){errDialog("此规格库存不足");return}
       var point = this.data.productInfo.point==null?0:this.data.productInfo.point;
       var price = this.data.productInfo.price==null?0:this.data.productInfo.price;
       var type = this.data.productInfo.type;
@@ -258,28 +259,28 @@ Page({
     console.log("组合订单跳转前sceneId="+this.data.sceneId);
     wx.reportAnalytics('detail_ue', {ue: '下单'});
     wx.navigateTo({
-      url: '/pages/payOrder/index?paytype=1&id='+this.data.productId+'&storeid='+this.data.storeId+'&sceneid='+this.data.sceneId+'&invitecode='+this.data.invitecode+'&skuId='+this.data.curSkuId+'&smId='+this.data.curSkuMajorId
+      url: '/pages/payOrder/index?paytype=1&id='+this.data.productId+'&storeid='+this.data.storeId+'&sceneid='+this.data.sceneId+'&inviteCode='+this.data.invitecode+'&skuId='+this.data.curSkuId+'&smId='+this.data.curSkuMajorId
     });
   },
   toCreateOrderByPoint: function() { //只用桔子下单
     console.log("桔子单跳转前sceneId="+this.data.sceneId);
     wx.reportAnalytics('detail_ue', {ue: '下单'});
     wx.navigateTo({
-      url: '/pages/payOrder/index?paytype=2&id='+this.data.productId+'&storeid='+this.data.storeId+'&sceneid='+this.data.sceneId+'&invitecode='+this.data.invitecode+'&skuId='+this.data.curSkuId+'&smId='+this.data.curSkuMajorId
+      url: '/pages/payOrder/index?paytype=2&id='+this.data.productId+'&storeid='+this.data.storeId+'&sceneid='+this.data.sceneId+'&inviteCode='+this.data.invitecode+'&skuId='+this.data.curSkuId+'&smId='+this.data.curSkuMajorId
     });
   },
   toCreateOrderByRmb: function () { //人民币优惠购买
     console.log("人民币单跳转前sceneId="+this.data.sceneId);
     wx.reportAnalytics('detail_ue', {ue: '下单'});
     wx.navigateTo({
-      url: '/pages/payOrder/index?paytype=3&id='+this.data.productId+'&storeid='+this.data.storeId+'&sceneid='+this.data.sceneId+'&invitecode='+this.data.invitecode+'&skuId='+this.data.curSkuId+'&smId='+this.data.curSkuMajorId
+      url: '/pages/payOrder/index?paytype=3&id='+this.data.productId+'&storeid='+this.data.storeId+'&sceneid='+this.data.sceneId+'&inviteCode='+this.data.invitecode+'&skuId='+this.data.curSkuId+'&smId='+this.data.curSkuMajorId
     });
   },
   toCreateOrderByOriPrice: function () { //原价购买
     console.log("跳转前sceneId="+this.data.sceneId);
     wx.reportAnalytics('detail_ue', {ue: '下单'});
     wx.navigateTo({
-      url: '/pages/payOrder/index?paytype=4&id='+this.data.productId+'&storeid='+this.data.storeId+'&sceneid='+this.data.sceneId+'&invitecode='+this.data.invitecode+'&skuId='+this.data.curSkuId+'&smId='+this.data.curSkuMajorId
+      url: '/pages/payOrder/index?paytype=4&id='+this.data.productId+'&storeid='+this.data.storeId+'&sceneid='+this.data.sceneId+'&inviteCode='+this.data.invitecode+'&skuId='+this.data.curSkuId+'&smId='+this.data.curSkuMajorId
     });
   },
   toGetPoint: function() { //跳转到任务页面赚桔子
@@ -441,10 +442,12 @@ Page({
     var price = info.price==null||info.price==0?'':Number(info.price/100).toFixed(2)+'元';
     var link = (info.price!=null&&info.price!=0)&&(info.point!=null&&info.point!=0)?'+':'';
     var price1 = point + link + price;
+    var shareTxt = info.shareText;
+    var shareImg = info.shareImg;
     return {
-      title: price1+','+this.data.productInfo.productName,
+      title: shareTxt?shareTxt:price1+','+this.data.productInfo.productName,
       path: '/pages/login/index?pagetype=1&inner=1&pid=' + that.data.productId+'&storeid='+that.data.storeId+'&invitecode='+wx.getStorageSync('inviteCode'),
-      imageUrl: constant.basePicUrl + this.data.productInfo.picId + '/resize_560_420/mode_fill'
+      imageUrl: constant.basePicUrl + (shareImg?shareImg:this.data.productInfo.picId) + '/resize_560_420/mode_fill'
     }
   },
   showShareModal:function(){

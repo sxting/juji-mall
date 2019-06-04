@@ -17,7 +17,7 @@
                     <view class="storeName" wx:if="{{type == 'SPLICED'}}">2人团</view>
                     <view class="storeName" wx:if="{{type == 'BARGAIN'}}">已砍{{item.participateCount}}刀</view>
                     <view class="goodAmount">
-                        <text>{{format.toFix(item.currentSalesPrice)}}元</text><text class="origin">{{format.toFix(item.originalPrice)}}元</text>
+                        <text>{{format.toFix(item.activityPrice)}}元</text><text class="origin">{{format.toFix(item.originalPrice)}}元</text>
                     </view>
                 </view>
             </view>

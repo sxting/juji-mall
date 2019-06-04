@@ -11,7 +11,7 @@
   </view>
   <!-- 正在秒杀 -->
   <view wx:if="{{curIndex==1}}" class="productItem" wx:for='{{productList1}}' wx:key='item' data-productid='{{item.productId}}' data-activityid="{{item.activityId}}" data-status="{{item.activityStatus}}" catchtap='toDetail'>
-    <image class="productImg" bindtap="toComDetail" src="{{item.cover?'https://upic.juniuo.com/file/picture/'+item.cover+'/resize_0_0/mode_fill':''}}"></image>
+    <image class="productImg" src="{{item.cover?'https://upic.juniuo.com/file/picture/'+item.cover+'/resize_0_0/mode_fill':''}}"></image>
     <view class="yqgMark" wx:if="{{item.balanceStock==0}}"><image src="/images/yqg.png"></image></view>
     <view class="time ub ub-ac plr15">
       <view class="b ub ub-pj ub-f1">
@@ -20,7 +20,7 @@
       </view>
       <view class="restTime ub ub-ac ub-pc">
           <view class="txt">剩余</view>
-          <child dataFromParent='{{item.expectGmtEnd}}' customeClass="block"></child>
+          <child curTime="{{item.timestamp}}" dataFromParent='{{item.expectGmtEnd}}' customeClass="block" bind:action="getData"></child>
       </view>
     </view>  
 
@@ -32,17 +32,17 @@
         <view class="now-price" wx:if="{{item.activityPrice>0}}">{{format.toFix(item.activityPrice)}}元</view>
         <view class="old-price">{{format.toFix(item.originalPrice)}}元</view>
       </view>
-      <button wx:if="{{item.activityStatus=='STARTED'&&item.balanceStock>0}}" class="ctrlbtn ctrlbtn0" bindtap="toComDetail">抢购</button>
-      <button wx:if="{{item.activityStatus=='STARTED'&&item.balanceStock==0}}" class="ctrlbtn ctrlbtn2" bindtap="toComDetail">已抢光</button>
+      <button wx:if="{{item.activityStatus=='STARTED'&&item.balanceStock>0}}" class="ctrlbtn ctrlbtn0">抢购</button>
+      <button wx:if="{{item.activityStatus=='STARTED'&&item.balanceStock==0}}" class="ctrlbtn ctrlbtn2">已抢光</button>
     </view>
   </view>
   <!-- 即将开始 -->
   <view wx:if="{{curIndex==2}}" class="productItem" wx:for='{{productList2}}' wx:key='item' data-productid='{{item.productId}}' data-activityid="{{item.activityId}}" data-status="{{item.activityStatus}}" catchtap='toDetail'>
-    <image class="productImg" bindtap="toComDetail" src="{{item.cover?'https://upic.juniuo.com/file/picture/'+item.cover+'/resize_0_0/mode_fill':''}}"></image>
+    <image class="productImg" src="{{item.cover?'https://upic.juniuo.com/file/picture/'+item.cover+'/resize_0_0/mode_fill':''}}"></image>
     <view class="time ub ub-ac plr15">
       <view class="restTime1 ub ub-ac ub-f1">
           <view class="txt">距开始还有</view>
-          <child dataFromParent='{{item.expectGmtStart}}' customeClass="red"></child>
+          <child curTime="{{item.timestamp}}" dataFromParent='{{item.expectGmtStart}}' customeClass="red" bind:action="getData"></child>
       </view>
       <view class="right ub ub-ac ub-pc">{{item.totalRemindNum}}人已设置提醒</view>
     </view>  
@@ -55,7 +55,7 @@
         <view class="now-price" wx:if="{{item.activityPrice>0}}">{{format.toFix(item.activityPrice)}}元</view>
         <view class="old-price">{{format.toFix(item.originalPrice)}}元</view>
       </view>
-      <button wx:if="{{item.activityStatus=='READY'&&!item.remind}}" class="ctrlbtn ctrlbtn1 ub ub-ac ub-pc" bindtap="toComDetail" style="font-size:26rpx;width:150rpx;"><image class="clock1" src="/images/clock1.png"></image>提醒我</button>
+      <button wx:if="{{item.activityStatus=='READY'&&!item.remind}}" class="ctrlbtn ctrlbtn1 ub ub-ac ub-pc" style="font-size:26rpx;width:150rpx;"><image class="clock1" src="/images/clock1.png"></image>提醒我</button>
       <button wx:if="{{item.activityStatus=='ENDED'}}" class="ctrlbtn ctrlbtn2">已结束</button>
       <button wx:if="{{item.activityStatus=='READY'&&item.remind}}" class="ctrlbtn ctrlbtn3">已设置提醒</button>
     </view>

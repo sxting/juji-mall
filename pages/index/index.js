@@ -1,6 +1,7 @@
 var QQMapWX = require('../../lib/qqmap-wx-jssdk.min.js');
 import { constant } from '../../utils/constant';
 import { service } from '../../service';
+import { errDialog, loading } from '../../utils/util';
 var app = getApp();
 Page({
     data: {
@@ -33,9 +34,7 @@ Page({
         isLoadedBalance: true,
         locationStatus: true, //定位状态
         showJcModal:false,
-        joinInfo:{
-            phone:'17316191089',wechat:'juji1031'
-        }
+        joinInfo:{phone:'17316191089',wechat:'juji1031'}
     },
     showJoinModal:function(){
         this.setData({showJcModal:!this.data.showJcModal});

@@ -10,8 +10,9 @@ page{height: 100%}
 .tit{line-height: 64rpx;font-size: 28rpx;color: #333;}
 .item{ padding: 30rpx 30rpx;background-color: #fff;border-radius: 10rpx;margin-bottom: 30rpx;}
 .name {font-size: 28rpx;color: #333 }
-.time{color: #999;font-size:22rpx;margin-top: 16rpx;}
-.amount{font-size: 28rpx;color: #333}
+.address{margin-top: 30rpx;}
+.phone{margin-top: 16rpx;}
+.icon1{width:24rpx;height:29rpx;margin-right: 15rpx;display: block;margin-top: 10rpx;}
+.icon2{width:26rpx;height:22rpx;margin-right: 15rpx;display: block;margin-top: 12rpx;}
+.txt{color: #333;font-size:28rpx;line-height: 47rpx;}
 .conDiv{height: 100%;box-sizing:border-box;}
-.phone{font-size: 28rpx;color: #FCBF0A;margin-top: 16rpx;display: flex;align-items: center;}
-.call{width:28rpx;height:28rpx;margin-right: 10rpx;}

@@ -5,6 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    nvabarData: {showCapsule: 1,title: '门店位置'},
     lat: '39.959372',
     lng: '116.323634',
     markers: [{

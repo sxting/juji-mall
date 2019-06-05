@@ -1,7 +1,11 @@
 {
-    "navigationBarBackgroundColor": "#FFDC00",
+    "navigationBarTextStyle":"white",
     "enablePullDownRefresh": true,
-    "backgroundColor": "#FFDC00",
-    "backgroundColorTop": "#FFDC00",
-    "backgroundColorBottom" : "#FFFFFF"
+    "backgroundColor": "#999",
+    "backgroundColorTop": "#999",
+    "backgroundColorBottom" : "#F6F6F6",
+    "usingComponents": {
+    "child": "/components/timechange/timechange",
+    "nav-bar": "/components/navbar/index"
+  }
 }

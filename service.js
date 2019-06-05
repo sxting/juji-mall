@@ -1,9 +1,5 @@
-import {
-  constant
-} from 'utils/constant';
-import {
-  http
-} from 'utils/http';
+import {constant} from 'utils/constant';
+import {http} from 'utils/http';
 let service = {};
 let api = constant.apiUrl;
 let jujipay = constant.jujipayUrl;
@@ -30,6 +26,11 @@ service.getRecommendPage = (data) => {
 
 service.getHotData = (data) => {
   let apiUrl = api + '/loc/hot.json';//描述:查询热门开通城市
+  return http.get(apiUrl, data);
+}
+
+service.getOpenedData = (data) => {
+  let apiUrl = api + '/loc/opened.json';//描述:查询(新版)热门开通城市
   return http.get(apiUrl, data);
 }
 
@@ -174,6 +175,42 @@ service.getComIdByscence = (data) => {
   let apiUrl = api +'/qr/getBySceneId.json';
   return http.get(apiUrl,data);
 }
+
+// 获取sceneID
+service.getProQrCode = (data) => {
+  let url = api + '/qr/getDistributorProduct.json';
+  return http.get(url, data);
+}
+
+// 拼团支付
+service.splicedPayment = (data) => {
+  let url = api + '/activity/consumer/spliced/payment.json';
+  return http.get(url, data);
+}
+
+// 砍价支付
+service.bargainPayment = (data) => {
+  let url = api + '/activity/consumer/bargain/payment.json';
+  return http.get(url, data);
+}
+
+service.activity = (data) => {
+  let url = api + '/activity/consumer/activity.json';
+  return http.get(url, data);
+}
+
+// 秒杀支付
+service.secKillPay = (data) => {
+  let url = api + '/secKill/pay.json';
+  return http.get(url, data);
+}
+
+// 活动列表
+service.activityList = (data) => {
+  let url = api + '/activity/consumer/activities.json';
+  return http.get(url, data);
+}
+
 
 module.exports = {
   service: service

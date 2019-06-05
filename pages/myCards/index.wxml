@@ -1,8 +1,9 @@
+<nav-bar navbar-data='{{nvabarData}}'></nav-bar>
 <view class="main_cardlist">
   <view class="cardsWrap" wx:if="{{!noCards}}">
     <view class="cardItem {{current==index?'':'h148'}}" wx:for="{{cardList}}" wx:key="{{index}}" wx:for-item="item">
       <view class="cardInfo ub ub-ac" bindtap="toggleCard" data-index="{{index}}">
-        <image src="{{item.logo?'https://upic.juniuo.com/file/picture/'+item.logo+'/resize_200_200/mode_fill':''}}" class="shopLogo"></image>
+        <image src="{{item.logo?'https://upic.juniuo.com/file/picture/'+item.logo+'/resize_200_200/mode_filt/format_jpg/quality_0':'../../images/logo_main.png'}}" class="shopLogo"></image>
         <view class="ub-f1">
           <view class="cardInfoRow">
             <view class="shopName">{{item.merchantName}}</view>

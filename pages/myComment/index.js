@@ -4,12 +4,26 @@ import {errDialog,loading} from '../../utils/util';
 var app = getApp();
 Page({
     data: {
+        nvabarData: {showCapsule: 1,title: '我的评价'},
         commentlist: [],
         constant: constant,
         isShowNodata: false,
         pageNo: 1,
         isFinall: false,
         scorelist: []
+    },
+    previewImage: function(e){
+      // console.log(e);
+      var arr = [];
+      var url = constant.basePicUrl + e.currentTarget.dataset.url + '/resize_0_0/mode_fill';
+      arr.push(url);
+      // console.log(arr);
+      wx.previewImage({
+        urls: arr // 需要预览的图片http链接列表
+        // success: res => { console.log(res)},
+        // fail: err => { console.log(err)},
+        // complete: res =>{ console.log(res)}
+      })
     },
     getComments: function(pageNo) {
         var obj = {
@@ -52,10 +66,10 @@ Page({
         })
     },
     toComDetail: function(e) {
-        var id = e.currentTarget.dataset['id'];
-        wx.navigateTo({
-            url: "/pages/comDetail/index?id=" + id
-        });
+        // var id = e.currentTarget.dataset['id'];
+        // wx.navigateTo({
+        //     url: "/pages/comDetail/index?id=" + id
+        // });
     },
 
     //下拉刷新

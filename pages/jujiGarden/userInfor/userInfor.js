@@ -10,6 +10,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    nvabarData: {showCapsule: 1,title: '我的桔民'},
     userHeadUrl: '/images/pinglunuser.png',
     userListInfor: ['',''],
     role: '',

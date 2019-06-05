@@ -1,9 +1,10 @@
-<view id="app" class="app">
+<nav-bar navbar-data='{{nvabarData}}'></nav-bar>
+<view id="app" class="app" style="height:{{conHeight}}px">
   <view class="main">
     <view class="bg">
       <view class="contentWrap">
         <view class="content">
-          <image src="{{headImg?'https://upic.juniuo.com/file/picture/'+headImg+'/resize_200_200/mode_fill':''}}" class="shopLogo"></image>
+          <image src="{{headImg?'https://upic.juniuo.com/file/picture/'+headImg+'/resize_200_200/mode_filt/format_jpg/quality_0':''}}" class="shopLogo"></image>
           <view class="tit tx-c">付款给{{storeName}}</view>
           <view class="rechargeDiv ub ub-ac ub-pc">
             <view class="remark {{showSelectCard?'font50':''}}">￥</view>
@@ -63,7 +64,7 @@
         </view>
       </view>
 <!-- current-item-id="{{selectCardId}}" -->
-      <swiper class="swiper-container cardList" indicator-color="#fff" display-multiple-items="{{cardList.length<2?1:2}}" next-margin="100rpx" >
+      <swiper wx:if="{{cardList.length>0}}" class="swiper-container cardList" indicator-color="#fff" display-multiple-items="{{cardList.length<2?1:2}}" next-margin="100rpx" >
         <swiper-item style="box-sizing:border-box;padding-right:20rpx;overflow:hidden;" wx:for="{{cardList}}" wx:key="unique"  data-item="{{item}}" data-index="{{index}}" item-id="{{item.prepayRuleId}}" bindtap="changeSelectCard">
         <view class="card {{selectCardId==item.prepayRuleId&&paytype==='recommend'?'selectCard':''}}">
           <view class="yu-e-Title {{selectCardId==item.prepayRuleId&&paytype==='recommend'?'cardTitle':''}}">储值{{item.pay}}元</view>

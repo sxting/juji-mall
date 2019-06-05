@@ -1,3 +1,4 @@
+<nav-bar navbar-data='{{nvabarData}}'></nav-bar>
 <view class="merchantInfo">
     <view class="merchantDiv ub ub-ac">
         <image src="{{constant.basePicUrl}}{{productInfo.picId}}{{constant.basePicFix1}}" class="merchantImg"></image>

@@ -1,4 +1,5 @@
 <wxs src="../../utils/numFr.wxs" module="format" />
+<nav-bar navbar-data='{{nvabarData}}'></nav-bar>
 <view class="fullScreen ub ub-ver">
     <view class="tablist">
         <view class="tablist ub ub-ac ub-pj1">
@@ -8,14 +9,15 @@
     </view>
     <view class="main ub-f1 p10">
         <view class="orderItem" wx:for="{{orderlist}}" wx:for-item="item" wx:key="unique">
+            <image class="expire" src="../../images/expire.png" wx:if="{{item.voucherValidEndDays&&item.voucherValidEndDays<=0}}"></image>
             <view class="ub ub-ac ub-pj top">
                 <view class="status">{{ format.formatStatus(item.status)}}</view>
                 <!-- <view class="restTime" wx:if="{{item.status=='PAID'}}">有效期至{{item.vouchers}}</view> -->
             </view> 
             <view class="ub ub-ac info" bindtap="toDetail" data-id="{{item.orderId}}" data-status="{{item.status}}" wx:for="{{item.orderItemList}}" wx:for-item='it' wx:key="unique">
-                <image class="goodImg udb" src="{{constant.basePicUrl}}{{it.picId}}/resize_180_180/mode_fill"></image>
+                <image class="goodImg udb" src="{{constant.basePicUrl}}{{it.picId}}/resize_750_420/mode_filt/format_jpg/quality_70" mode="aspectFill"></image>
                 <view class="ub-f1 goodMsg">
-                    <view class="goodTit">{{it.productName}}</view>
+                    <view class="goodTit">{{format.toEllipsis(it.productName)}}</view>
                     <view class="storeName">{{it.merchantName}}</view>
                     <!-- 混合支付 -->
                     <view class="goodAmount" wx:if="{{item.payType=='MIX'&&(item.status=='CREATED'||item.status=='CLOSE')}}">
@@ -33,7 +35,7 @@
                     <view class="goodAmount" wx:elif="{{item.payType=='WECHAT'&&(item.status=='CREATED'||item.status=='CLOSE')}}"><text>{{format.toFix(it.price)}}元</text></view>
                     <view class="goodAmount" wx:elif="{{item.payType=='WECHAT'}}"><text>{{format.toFix(it.paidAmount)}}元</text>
                     </view>
-                    <view class="num">×{{it.num}}</view>
+                    <view class="num">{{format.toEllipsised(it.skuName)}}×{{it.num}}</view>
                 </view>
             </view>
             <view class="tx-r total" wx:if="{{item.status=='CREATED'||item.status=='CLOSE'}}">
@@ -46,7 +48,7 @@
               <text wx:if="{{item.paidPoint>0&&item.paidAmount>0}}">+</text>
               <text wx:if="{{item.paidPoint>0}}">{{item.paidPoint}}桔子</text>
             </view>
-            <view class="ctrl plr15 ub ub-ac ub-pj" hidden="{{item.status=='REFUND'||item.status=='CLOSE'}}">
+            <view class="ctrl plr15 ub ub-ac ub-pj" wx:if="{{item.status=='PAID'||item.status=='CREATED'||item.status=='CONSUME'}}">
                 <view wx:if="{{item.status=='PAID'}}" class="left">您已成功付款，请到店展示消费码消费</view>
                 <view wx:if="{{item.status=='CREATED'}}" class="left">请在下单后5分钟内付款，超时将自动关闭</view>
                 <view wx:if="{{item.status=='CONSUME'}}" class="left">您已成功消费，老铁给个评价再走呗～</view>

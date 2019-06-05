@@ -7,9 +7,9 @@ Page({
    * 页面的初始数据
    */
   data: {
+    nvabarData: {showCapsule: 1,title: '我的卡包'},
     cardList: [],
     current: 0,
-    payUrl: 'https://juji.juniuo.com',
     noCards: false
   },
 
@@ -17,20 +17,37 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    if (wx.getStorageSync('accessToken')) {
-      let payUrl = wx.getStorageSync('payUrl');
-      if (payUrl) {
-        this.setData({
-          payUrl: payUrl
-        });
+    
 
-      } else {
-        this.setData({
-          payUrl: constant.jujipayUrl
-        });
-      }
+  },
+  toRecord: function(e) {
+    console.log(e);
+    wx.navigateTo({
+      url: '/pages/myRecord/index?merchantId=' + e.currentTarget.dataset.mid,
+    })
+  },
+  toggleCard: function(e) { //切换卡片高度
+    console.log(this.data.current);
+    console.log(e);
+    this.setData({
+      current: e.currentTarget.dataset.index
+    });
+    console.log(this.data.current);
+  },
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady: function() {
+
+  },
+
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function() {
+    if (wx.getStorageSync('openid')) {
       wx.request({
-        url: this.data.payUrl + '/mini/getCardsByOpenid.json',
+        url: constant.jujipayUrl + '/mini/getCardsByOpenid.json',
         method: 'GET',
         data: {
           openid: wx.getStorageSync('openid')
@@ -55,6 +72,9 @@ Page({
               });
             }
           } else {
+            this.setData({
+              noCards: true
+            });
             wx.showModal({
               title: '错误：' + res.data.errorCode,
               content: res.data.errorInfo,
@@ -66,39 +86,13 @@ Page({
 
     } else {
       wx.showModal({
-        title: '',
-        content: '未获取到accessToken',
+        title: '错误',
+        content: '未获取到openid',
       });
       this.setData({
         noCards: true
       });
     }
-
-  },
-  toRecord: function(e) {
-    console.log(e);
-    wx.navigateTo({
-      url: '/pages/myRecord/index?merchantId=' + e.currentTarget.dataset.mid,
-    })
-  },
-  toggleCard: function(e) { //切换卡片高度
-    console.log(e);
-    this.setData({
-      current: e.currentTarget.dataset.index
-    });
-  },
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function() {
-
   },
 
   /**

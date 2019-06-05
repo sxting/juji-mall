@@ -7,6 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    nvabarData: {showCapsule: 1,title: '卡 包'},
     cardList: [],
     current: 0,
     payUrl: 'https://juji.juniuo.com',
@@ -17,63 +18,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    if (wx.getStorageSync('accessToken')) {
-      let payUrl = wx.getStorageSync('payUrl');
-      if (payUrl) {
-        this.setData({
-          payUrl: payUrl
-        });
-
-      } else {
-        this.setData({
-          payUrl: constant.jujipayUrl
-        });
-      }
-      wx.request({
-        url: this.data.payUrl + '/mini/getCardsByOpenid.json',
-        method: 'GET',
-        data: {
-          openid: wx.getStorageSync('openid')
-        },
-        header: {
-          'content-type': 'application/json'
-        },
-        success: (res) => {
-          console.log(res);
-          if (res.data.errorCode == '0') {
-            console.log(this.data.cardList)
-            this.setData({
-              cardList: res.data.data
-            });
-            if (res.data.data.length > 0) {
-              this.setData({
-                noCards: false
-              });
-            } else {
-              this.setData({
-                noCards: true
-              });
-            }
-          } else {
-            wx.showModal({
-              title: '错误：' + res.data.errorCode,
-              content: res.data.errorInfo,
-            })
-          }
-        }
-      })
-
-
-    } else {
-      wx.showModal({
-        title: '',
-        content: '未获取到accessToken',
-      });
-      this.setData({
-        noCards: true
-      });
-    }
-
+    
   },
   toRecord: function(e) {
     console.log(e);
@@ -101,7 +46,62 @@ Page({
     // wx.setStorageSync('scene', '1011'); //测试用
     let scene = wx.getStorageSync('scene');
     if (scene == '1011' || scene == '1012' || scene == '1013') { //扫描二维码场景值
-      return;
+      if (wx.getStorageSync('accessToken')) {
+        let payUrl = wx.getStorageSync('payUrl');
+        if (payUrl) {
+          this.setData({
+            payUrl: payUrl
+          });
+
+        } else {
+          this.setData({
+            payUrl: constant.jujipayUrl
+          });
+        }
+        wx.request({
+          url: this.data.payUrl + '/mini/mycard.json',
+          method: 'GET',
+          header: {
+            'content-type': 'application/json',
+            'Access-Token': wx.getStorageSync('accessToken')
+          },
+          success: (res) => {
+            console.log(res);
+            if (res.data.errorCode == '0') {
+              console.log(this.data.cardList)
+              this.setData({
+                cardList: res.data.data
+              });
+              if (res.data.data.length > 0) {
+                this.setData({
+                  noCards: false
+                });
+              } else {
+                this.setData({
+                  noCards: true
+                });
+              }
+            } else {
+              wx.showModal({
+                title: '错误：' + res.data.errorCode,
+                content: res.data.errorInfo,
+              })
+            }
+          }
+        })
+
+
+      } else {
+        wx.showModal({
+          title: '',
+          content: '未获取到accessToken',
+        });
+        this.setData({
+          noCards: true
+        });
+      }
+
+      // return;
     } else {
       wx.switchTab({
         url: '/pages/index/index',

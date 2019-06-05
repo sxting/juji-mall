@@ -1,32 +1,34 @@
 .main{height: 100%;background-color: #f5f5f5;}
 
+.uhide{display: none}
+
 .tabs{padding: 20rpx 30rpx 10rpx;background-color: #fff;}
 .tabs view{width: 190rpx;height: 60rpx;line-height: 60rpx;text-align: center;font-size: 30rpx;color: #666666;}
 .tabs view.on{background-image: linear-gradient(-90deg, #FFDC00 0%, #FCBF0A 100%);border-radius: 30rpx;font-size: 30rpx;color: #333333;font-weight:bold;}
 
-.item{margin-bottom: 20rpx;background-color: #fff;padding: 20rpx 0;}
+.item{margin-bottom: 20rpx;background-color: #fff;padding: 10rpx 0 0;}
 .info{height: 80rpx;}
 .info .userImg{width: 60rpx; height: 60rpx;border-radius: 50%;}
-.info .nickname{font-size: 28rpx;color: #333;margin-left: 10rpx;}
+.info .nickname{font-size: 26rpx;color: #333;margin-left: 10rpx;}
 .info .txt{font-size: 24rpx;color: #999;text-align: right;}
 .content{line-height: 40rpx;font-size: 24rpx;text-align: justify;color: #333}
 
-.imglist{margin-top: 20rpx;padding-left: 30rpx;padding-right: 10rpx;}
+.imglist{margin-top: 0rpx;padding-left: 30rpx;padding-right: 10rpx;}
 .imglist:after{clear:both;content:"";display:table;}
-.imgWrap{float:left;margin-bottom:20rpx;padding-right:20rpx;width:33.33%;box-sizing:border-box;}
-.imgWrap image{border-radius:8rpx;width:100%;display:block;}
+.imgWrap{float:left;margin-top:20rpx;padding-right:20rpx;width:33.33%;box-sizing:border-box;min-height: 218rpx;}
+.imgWrap image{border-radius:8rpx;width:100%;display:block;height: 217rpx;}
 .wxIcon{width: 50rpx;height: 32rpx;display: block;}
 
-.ctrl{height: 80rpx;}
-.ctrl view{font-size: 24rpx;color: #333;}
+.ctrl{height: 80rpx;width: 100%;box-sizing:border-box;}
+.ctrl .ctrlbtn{font-size: 24rpx;color: #333;height: 80rpx;width: 168rpx;}
+.ml20{margin-left: 20rpx;}
 
 .btn{display: block;width: 50rpx;height: 32rpx;background-color: #fff;padding: 0}
 
-
 .modal1{width:100%;height:100%;position:fixed;left:0;top:0;z-index:2;box-sizing:border-box;}
 .modal1 .div{width:100%;position:relative;z-index:9;box-sizing:border-box;}
-.modal1 .div .canvas{width:256px;height:420px;position:relative;z-index:6;}
-.modal1 canvas{width:256px;height:420px;}
+.modal1 .div .canvas{width:260px;height:420px;position:relative;z-index:6;margin-top: 30px;}
+.modal1 canvas{width:260px;height:420px;}
 .modal1 .bott{position:relative;height:160rpx;width:100%;z-index:999}
 .modal1 .bott button{font-size:28rpx;height:160rpx;background-color: #ffffff}
 .modal1 .bott button .icon{display:block;width:60rpx;height:60rpx;}
@@ -36,3 +38,5 @@
 .bott .center{border-radius:0;}
 .bott .right{border-radius:0;}
 .ovh{overflow:hidden;height:100%;}
+
+.transparent{left:100%;display: block!important;}

@@ -1,8 +1,10 @@
 {
   "navigationBarBackgroundColor": "#FFDC00",
-  "usingComponents": {},
+  "usingComponents": {
+    "nav-bar": "/components/navbar/index"
+  },
   "enablePullDownRefresh": true,
   "backgroundColor": "#FFDC00",
   "backgroundColorTop": "#FFDC00",
-  "backgroundColorBottom": "#F7F7F7"
+  "backgroundColorBottom": "#F6F6F6"
 }

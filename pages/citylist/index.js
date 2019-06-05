@@ -11,6 +11,7 @@ import {
 var app = getApp();
 Page({
   data: {
+    nvabarData: {showCapsule: 1,title: '选择城市'},
     curCity: "",
     citylist: [],
     imageWidth: '200px',
@@ -59,48 +60,10 @@ Page({
         }
       ]
     }],
-    citylist: [{
-      "version": 0,
-      "dateCreated": "2019-01-23 18:31:25",
-      "lastUpdated": "2019-01-23 18:31:25",
-      "deleted": 0,
-      "locationCode": "410000",
-      "locationName": "河南省",
-      "locationType": "PROVINCE",
-      "parentLocationCode": "0",
-      "parentLocation": null,
-      "subList": [
-        {
-          "version": 0,
-          "dateCreated": "2019-01-23 18:31:25",
-          "lastUpdated": "2019-01-23 18:31:25",
-          "deleted": 0,
-          "locationCode": "410100",
-          "locationName": "郑州市",
-          "locationType": "CITY",
-          "parentLocationCode": "410000",
-          "parentLocation": null,
-          "subList": [
-            {
-              "version": 0,
-              "dateCreated": "2019-01-23 18:31:25",
-              "lastUpdated": "2019-01-23 18:31:25",
-              "deleted": 0,
-              "locationCode": "410105",
-              "locationName": "金水区",
-              "locationType": "DISTRICT",
-              "parentLocationCode": "410100",
-              "parentLocation": null,
-              "subList": null
-            }
-          ]
-        }
-      ]
-    }
-    ]
+    citylist: []
   },
   getCitylist: function() {
-    service.getHotData().subscribe({
+    service.getOpenedData().subscribe({
       next: res => {
         console.log(res);
         this.setData({
@@ -169,19 +132,20 @@ Page({
     });
   },
   onLoad: function(options) {
-    wx.setNavigationBarTitle({
-      title: '选择城市'
-    });
     wx.hideShareMenu();
     var imageWidth = (wx.getSystemInfoSync().windowWidth - 66) / 3;
     this.setData({
       imageWidth: imageWidth + 'px'
     });
-    // this.getCitylist();
+    this.getCitylist();
     var obj = {
       latitude: wx.getStorageSync('curLatitude'),
       longitude: wx.getStorageSync('curLongitude')
     }
+    // var obj = {
+    //   latitude: 35.986896,
+    //   longitude: 103.864746
+    // }
     service.getCurrentLoc(obj).subscribe({
       next: res => {
         console.log(res);

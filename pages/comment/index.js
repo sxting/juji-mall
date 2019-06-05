@@ -4,6 +4,7 @@ import { service } from '../../service';
 var app = getApp();
 Page({
     data: {
+        nvabarData: {showCapsule: 1,title: '发表评价'},
         pinglist1: ['', '', '', '', ''],
         pinglist2:[],
         orderId: '',
@@ -168,7 +169,6 @@ Page({
     },
     onLoad: function(options) {
         new app.ToastPannel();
-        wx.setNavigationBarTitle({ title: '发表评价' });
         wx.hideShareMenu();
         this.setData({productId:options.pid });
         this.setData({ orderId: options.id});

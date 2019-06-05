@@ -1,6 +1,12 @@
 var filters = {
+  toNum: function (value) {
+    return Number(value).toFixed(2);
+  },
   toFix: function(value) {
-    return Number(value / 100).toFixed(2);
+    if(typeof value == 'number')
+      return Number(value / 100).toFixed(2);
+    else
+      return "0.00";
   },
   toInt: function(value){
     return parseInt(value);
@@ -13,6 +19,23 @@ var filters = {
   },
   toFloor:function(value){
     return value > 999 ? Math.floor(value/1000)+'k':value;
+  },
+  toEllipsis:function(value){
+    return value.length>30?value.substring(0,30)+'...':value;
+  },
+  toEllipsised:function(value){
+    if(value){
+      return value.length>10?value.substring(0,10)+'...':value;
+    }
+  },
+  toEllipsis1:function(value){
+    return value.length>24?value.substring(0,24)+'...':value;
+  },
+  toPercentage:function(value){
+    if(typeof value == 'number')
+      return Number((1 - value)*100).toFixed(2);
+    else
+      return "0.00";
   }
 }
 
@@ -46,11 +69,15 @@ var initArr = function(len){
 }
 
 module.exports = {
+  toNum: filters.toNum,
   toFix: filters.toFix,
   formatStatus:formatStatus,
   toInt: filters.toInt,
   toDis: filters.toDis,
   toSplitImgs: filters.toSplitImgs,
   toFloor: filters.toFloor,
+  toEllipsis: filters.toEllipsis,
+  toEllipsis1: filters.toEllipsis1,
+  toEllipsised: filters.toEllipsised,
   initArr: initArr
 }

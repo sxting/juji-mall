@@ -1,6 +1,4 @@
-import {
-  service
-} from '../../service';
+import {service} from '../../service';
 var app = getApp();
 Page({
 
@@ -8,6 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    nvabarData: {showCapsule: 1,title: '桔子换礼'},
     locationPcode: '',
     locationCode: '',
     locationName: '',
@@ -25,9 +24,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    wx.setNavigationBarTitle({
-      title: ''
-    });
     wx.hideShareMenu();
     // this.getCurLocation(); //用户位置+位置名称
   },
@@ -40,6 +36,8 @@ Page({
     var that = this;
 
     if (wx.getStorageSync('selectCode')) { //存在 说明用户选过异地城市
+      console.log('locationCode: ' + wx.getStorageSync('locationCode'));
+      console.log('selectCode: ' + wx.getStorageSync('selectCode'));
       if (wx.getStorageSync('locationCode') != wx.getStorageSync('selectCode')) {
         //如果城市更换了 需要通过用户选择的城市编号code重新加载页面
         console.log('用户更换城市为：' + wx.getStorageSync('selectCityName'));
@@ -314,7 +312,7 @@ Page({
     var storeid = e.currentTarget.dataset.storeid;
     console.log(id);
     wx.navigateTo({
-      url: '/pages/comDetail/index?id=' + id + '&storeid=' + storeid
+      url: '/pages/comDetail/index?referer=0&id=' + id + '&storeid=' + storeid
     });
   },
   toggleLabel: function(event) {

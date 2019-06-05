@@ -1,4 +1,5 @@
-<view class="wrap">
+<nav-bar navbar-data='{{nvabarData}}'></nav-bar>
+<view class="wrap" style="height:{{conHeight}}px">
   <view class="toper">
     <view class="bgg">
       <view style="padding:30rpx;" class="userinfo ub ub-ac">
@@ -9,9 +10,11 @@
           <view class="ub ub-ac" style="margin-top:10rpx;" wx:if="{{phoneNum}}">
             <view class="phoneTxt">{{phoneNum}}</view>
           </view>
-          <view class="ub ub-ac" style="margin-top:10rpx;" wx:else bindtap="toPage" data-page="/pages/bindPhone/index">
-            <view class="phoneTxt">绑定手机号</view>
-            <image style="width:12rpx;height:22rpx;" src="../../images/arrow-r.png"></image>
+          <view style="margin-top:10rpx;" wx:else>
+            <button class="ub ub-ac bindBtn" open-type="getPhoneNumber" bindgetphonenumber="getUserPhoneNumber">
+              <view class="phoneTxt">绑定手机号</view>
+              <image style="width:12rpx;height:22rpx;" src="../../images/arrow-r.png"></image>
+            </button>
           </view>
         </view>
       </view>
@@ -49,7 +52,7 @@
       </view>
     </view>
     <view style="padding:0 30rpx;">
-      <view style="height:2rpx;background:#eeeeee;"></view>
+      <view style="height:2rpx;background:#eeeeee;transform: scaleY(0.5);"></view>
     </view>
     <view class="ub ub-ac ub-pj" style="padding: 30rpx 40rpx;">
       <view class="ub ub-ver ub-ac ub-pc" bindtap="toPage" data-page="/pages/orderlist/index?index=1&status=CREATED">
@@ -67,39 +70,33 @@
     </view>
   </view>
 
-  <view style="margin-top:20rpx;" class="userBox">
-    <view class="ub ub-ac ub-pj" style="padding:30rpx;" bindtap="toPage" data-page="/pages/myCards/index">
-      <view class="itemTxt">我的卡包</view>
-      <image src="../../images/arrow-right.png" style="width:12rpx;height:22rpx;"></image>
-    </view>
-    <view style="padding:0 30rpx;">
-      <view style="height:1rpx;background:#eeeeee;"></view>
-    </view>
-    <view class="ub ub-ac ub-pj" style="padding:30rpx;" bindtap="toPage" data-page="/pages/myComment/index">
-      <view class="itemTxt">我的评价</view>
-      <image src="../../images/arrow-right.png" style="width:12rpx;height:22rpx;"></image>
-    </view>
-    <view style="padding:0 30rpx;">
-      <view style="height:1rpx;background:#eeeeee;"></view>
-    </view>
-    <view class="ub ub-ac ub-pj plr15">
-      <view class="ub-f1">
-        <button class='kefu tx-l udb' open-type='contact' session-from='weapp'>客服</button>
+  <view style="margin-top:20rpx;padding-bottom:50rpx;" class="userBox">
+    <view class="ub ub-ac ub-pj">
+      <view class="userGrid ub ub-ver ub-ac" bindtap="toPage" data-page="/pages/activities/myActivity/index?type=BARGAIN">
+        <image class="userGridIcon" mode="aspectFit" src="../../images/icon_my1.png"></image>
+        <view class="userGridText">我的砍价</view>
       </view>
-      <image src="../../images/arrow-right.png" style="width:12rpx;height:22rpx;"></image>
-    </view>
-  </view>
-
-  <view class="phoneWrap">
-    <view class="phoneView ub ub-ac" bindtap="callPhone">
-      <image src="../../images/logo_main.png" style="width:80rpx;height:80rpx;"></image>
-      <view class="phoneInner">
-        <view>桔集-桔美好生活，集好店优惠</view>
-        <view class="ub ub-ac" style="margin-top: 10rpx;">
-          <image src="../../images/dianhua.png" style="width:30rpx;height:26rpx;margin-right:10rpx;"></image>合作电话：400-001-1139</view>
+      <view class="userGrid ub ub-ver ub-ac" bindtap="toPage" data-page="/pages/activities/myActivity/index?type=SPLICED">
+        <image class="userGridIcon" mode="aspectFit" src="../../images/icon_my2.png"></image>
+        <view class="userGridText">我的拼团</view>
+      </view>
+      <view class="userGrid ub ub-ver ub-ac" bindtap="toPage" data-page="/pages/myComment/index">
+        <image class="userGridIcon" mode="aspectFit" src="../../images/icon_my3.png"></image>
+        <view class="userGridText">我的评价</view>
       </view>
     </view>
+    <view class="ub ub-ac ub-pj">
+      <view class="userGrid ub ub-ver ub-ac" bindtap="toPage" data-page="/pages/myCards/index">
+        <image class="userGridIcon" mode="aspectFit" src="../../images/icon_my4.png"></image>
+        <view class="userGridText">我的卡包</view>
+      </view>
+      <button class="userGrid ub ub-ver ub-ac" open-type='contact' session-from='weapp'>
+        <image class="userGridIcon" mode="aspectFit" src="../../images/icon_my5.png"></image>
+        <view class="userGridText">在线客服</view>
+      </button>
+      <button class="userGrid ub ub-ver ub-ac">
+        <view class="userGridText" style="color:#fff">在线客服</view>
+      </button>
+    </view>
   </view>
-
-
 </view>

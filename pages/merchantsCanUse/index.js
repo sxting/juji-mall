@@ -1,35 +1,13 @@
-import {
-  service
-} from '../../service';
+import {service} from '../../service';
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
+    nvabarData: {showCapsule: 1,title: '适用门店'},
     merchantsList: []
   },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
   onLoad: function(options) {
-    wx.setNavigationBarTitle({
-      title: '适用门店',
-    });
+    wx.setNavigationBarTitle({title: '适用门店'});
     wx.hideShareMenu();
-    if (options.id) {
-      this.applyStoreList(options.id)
-    } else {
-      wx.showToast({
-        title: '发生错误，未找到商品id',
-        icon: 'none'
-      })
-      wx.navigateBack({
-        delta: 1
-      });
-      return;
-    }
+    this.applyStoreList(options.id);
   },
   applyStoreList: function(id) {
     service.applyStoreList({
@@ -46,58 +24,19 @@ Page({
       complete: () => wx.hideToast()
     })
   },
+  toMap: function(e){
+    wx.openLocation({
+        latitude: e.currentTarget.dataset.lat,
+        longitude: e.currentTarget.dataset.lng,
+        name: e.currentTarget.dataset.name,
+        address: e.currentTarget.dataset.address,
+        scale: 15
+    });
+  },
   callPhone:function(e){
     console.log(e.currentTarget.dataset.phone);
     wx.makePhoneCall({
       phoneNumber: e.currentTarget.dataset.phone,
     })
-  },
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function() {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function() {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function() {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function() {
-
   }
 })

@@ -3,13 +3,19 @@ import { service } from '../../service';
 import { constant } from '../../utils/constant';
 import { errDialog, loading } from '../../utils/util';
 var app = getApp();
+
 Page({
   data: {
+    nvabarData: {showCapsule: 1,title: '商品详情'},
     productId: '',
     storeId: '',
     showPics: [],
     commentList: [],
     productInfo: {},
+    productSkus:[],
+    defaultSku:'',
+    curSkuId:'',
+    curSkuMajorId:'',
     description:[],
     recommendList: [],
     store: {},
@@ -19,208 +25,137 @@ Page({
     note:[],
     despImgHeightValues:[],
     isShowData:false,
+    isShowCanvas:false,
     isHiddenClose:false,
     isShowModal:true,
     windowWidth: 345,
     windowHeight: 430,
-    shareBg: '../../images/shareBg.png',
-    headImg: '../../images/shareMinPro.png',
-    erwmImg: '../../images/erwmImg.png',
+    shareBg: '/images/shareBg.png',
+    headImg: '',
+    erwmImg: '',
+    userImg:'',
     sceneId:'',
+    invitecode:'',
     isShowNewerGet: false,
-    lat:'',
-    lng:''
+    isShowProfit:true,
+    userImgUrl:'/images/shareBg.png',
+    nickName:'',
+    share:0,//首页分享按钮进入值为1
+    promo:0,//首页推广按钮进入值为1
+    showMoreXuZhi: false,//购买须知折叠显示
+    showJoinClub: true,//显示“戳一下加入福利群”模态窗口
+    showJcModal: false,//显示“去回复”模态窗口
+    showJztgModal: false,//显示“桔长推广”模态窗口
+    distributorRole:'',//桔长还是桔园身份
+    welfareGroup: {},//“戳一下加入福利群”数据对象
+    isShowSelect:false
   },
-  onLoad: function(option) {
-    new app.ToastPannel();
-    wx.setNavigationBarTitle({title: '商品详情'});
-    console.log(option);
-    if (!option.id) {
-      if (option.scene) {
-        let scene = decodeURIComponent(option.scene);
-        this.setData({sceneId: scene});
-
-        wx.request({
-          url: 'https://c.juniuo.com/shopping/qr/getBySceneId.json?sceneId='+scene,
-          method: 'GET',
-          header: {
-            'content-type': 'application/json',
-          },
-          success: (res) => {
-              this.setData({
-                productId: res.data.data.productId
-              });
-              if (wx.getStorageSync('token')) {
-                console.log('token存在');
-                this.getItemInfo();
-                //查询用户橘子
-                this.getPointBalance();
-                //查询新用户见面礼
-                service.isNewer().subscribe({
-                  next: res2 => {
-                    console.log(res2);
-                    this.setData({
-                      isShowNewerGet: res2
-                    });
-
-                  },
-                  error: err => console.log(err)
-                });
-
-              } else {
-                console.log('token不存在');
-                //新用户 授权 登录 跳转
-                this.mainFnc(option,1);
-              }
-          }
-        });
-
-
-        // service.getComIdByscence({ sceneId: scene }).subscribe({
-        //   next: res => {
-        //     this.setData({
-        //       productId: res.productId
-        //     });
-        //     if (wx.getStorageSync('token')) {
-        //       console.log('token存在');
-        //       this.getItemInfo();
-        //       //查询用户橘子
-        //       this.getPointBalance();
-        //     } else {
-        //       console.log('token不存在');
-        //       //新用户 授权 登录 跳转
-        //       this.mainFnc(option,1);
-        //     }
-        //   },
-        //   error: err => console.log(err),
-        //   complete: () => wx.hideToast()
-        // });
-
-      }else{
-        wx.showToast({
-          title: '发生错误，未找到商品id',
-          icon: 'none'
-        });
-        this.gohomepage();
-        return;
-      }
-
-    }else{
-      this.setData({
-        productId: option.id,
-        storeId: option.storeid
-      });
-
-      if (wx.getStorageSync('token')) {
-        console.log('token存在');
-        this.getItemInfo();
-        //查询用户橘子
-        this.getPointBalance();
-        //查询新用户见面礼
-        service.isNewer().subscribe({
-          next: res2 => {
-            console.log(res2)
-            this.setData({
-              isShowNewerGet: res2
-            });
-
-          },
-          error: err => console.log(err)
-        });
-      } else {
-        console.log('token不存在');
-        //新用户 授权 登录 跳转
-        this.mainFnc(option,2);
-      }
+  onLoad: function(options) {
+    if (options.share) {
+      this.setData({share: options.share});
     }
-
-
+    if (options.promo) {
+      this.setData({promo: options.promo});
+    }
+    wx.setNavigationBarTitle({title: '商品详情'});
+    console.log(JSON.stringify(options));
+    if(options.storeid){
+      this.setData({storeId: options.storeid});
+    }
+    if(options.sceneid){
+      this.setData({sceneId: options.sceneid});
+    }
+    if(options.invitecode){
+      this.setData({invitecode: options.invitecode});
+    }
+    if(options.id){
+      this.setData({productId: options.id});
+      // 查询商品详情
+      this.getItemInfo();
+    }else{
+      errDialog('获取商品内容失败，请重试');
+    }
+    //查询用户橘子
+    this.getPointBalance();
+    //查询新用户见面礼
+    this.getNewGift();
+    if(options.referer){
+        var referer = options.referer;
+        var source = '';
+        if(referer==0){source='商品列表'}
+        if(referer==1){source='分享链接'}
+        if(referer==2){source='小程序码'}
+        if(referer==3){source='支付结果'}
+        if(referer==4){source='同店推荐'}
+        if(referer==5){source='外链'}
+        console.log('sourceName='+source);
+        wx.reportAnalytics('detail_referer', {ue: source});
+    }
   },
-  mainFnc: function (option,type){
-    let that = this;
-    new Promise(function (resolve, reject) {
-      console.log('Promise is ready!');
-      wx.getSetting({
-        success: (res) => {
-          console.log(res.authSetting['scope.userInfo']);
-          if (!res.authSetting['scope.userInfo']) {
-              wx.reLaunch({url: '/pages/login/index?fromPage=comDetail&productId=' + that.data.productId + '&inviteCode=' + option.inviteCode});
-          } else { //如果已经授权
-            //判断rowData是否存在
-            // if (wx.getStorageSync('rawData')) { //如果存在
-              resolve();
-            // } else { //如果不存在rowData
-            //   reject('未获取rawData');
-            // }
-          }
-        }
+  openJztgShare: function(){
+    this.setData({
+      showJztgModal: false
+    })
+    this.showShare();
+  },
+  openJztgModal: function(){
+    wx.reportAnalytics('detail_ue', {ue: '成为桔长'});
+    if(this.data.distributorRole=='MEMBER'){
+      this.setData({
+        showJztgModal: true
       });
-    }).then(function () {
-
-      return new Promise(function (resolve1, reject1) {
-        wx.login({
-          success: res => {
-            console.log('code: ' + res.code);
-            console.log(constant.APPID);
-            resolve1(res.code);
-          }
+    }else{
+      this.showShare();
+    }
+  },
+  closeJztgModal: function(){
+    this.setData({
+      showJztgModal: false
+    })
+  },
+  showJcModal: function(){
+    wx.reportAnalytics('detail_ue', {ue: '加群'});
+    console.log("showJcModal");
+    this.setData({
+      showJcModal: true
+    })
+  },
+  closeJcModal: function(){
+    this.setData({
+      showJcModal: false
+    })
+  },
+  getNewGift:function(){
+    service.isNewer().subscribe({
+      next: res2 => {
+        console.log(res2);
+        this.setData({
+          isShowNewerGet: res2
         });
-
-      })
-    }).then(function (code) {
-      if(type==1){
-        var requestObj = {
-          code: code,
-          appId: constant.APPID,
-          isMock: false, //测试标记
-          sceneId: that.data.sceneId,
-          rawData: wx.getStorageSync('rawData')
+        if (res2) {
+          service.newerGet().subscribe({
+            next: res3 => {
+              console.log(res3);
+              this.getPointBalance();
+            }
+          });
         }
-      }else{
-        var requestObj = {
-          code: code,
-          appId: constant.APPID,
-          isMock: false, //测试标记
-          inviteCode: option.inviteCode,
-          rawData: wx.getStorageSync('rawData')
-        }
-      }
-      wx.request({
-        url: 'https://c.juniuo.com/shopping/user/login.json',
-        method: 'GET',
-        data: requestObj,
-        header: {
-          'content-type': 'application/json',
-        },
-        success: (res1) => {
-          console.log(res1);
-
-          if (res1.data.errorCode == '200') {
-            wx.setStorageSync('token', res1.data.data.token);
-            wx.setStorageSync('openid', res1.data.data.openId);
-            wx.setStorageSync('inviteCode', res1.data.data.inviteCode);
-            wx.setStorageSync('userinfo', JSON.stringify(res1.data.data));
-
-            that.getItemInfo();
-            //查询用户橘子
-            that.getPointBalance();
-
-          } else {
-            wx.showModal({
-              title: '错误',
-              content: '登录失败，错误码:' + res1.data.errorCode + ' 返回错误: ' + res1.data.errorInfo
-            });
-          }
-        }
-      });
-
-    }).catch(function (err) {
-      console.log(err);
-      wx.showModal({
-        title: '错误',
-        content: err
-      });
+      },
+      error: err => console.log(err)
     });
+  },
+  toggoleXuzhi: function(){
+    this.setData({
+      showMoreXuZhi: !this.data.showMoreXuZhi
+    })
+  },
+  previewImage: function (e) {
+    var arr = [];
+    var url = constant.basePicUrl + e.currentTarget.dataset.url + '/resize_0_0/mode_fill';
+    arr.push(url);
+    wx.previewImage({
+      urls: arr // 需要预览的图片http链接列表
+    })
   },
   //关闭新用户见面礼
   closeGetNewer: function () {
@@ -228,22 +163,79 @@ Page({
       isShowNewerGet: false
     });
   },
-  toMap: function(e){
-    console.log(e);
-    if (e.currentTarget.dataset.lat && e.currentTarget.dataset.lng){
-      wx.navigateTo({
-        url: '/pages/map/index?lat=' + e.currentTarget.dataset.lat + '&lng=' + e.currentTarget.dataset.lng,
-      });
+  toMap: function(){
+    wx.reportAnalytics('detail_ue', {ue: '门店地址'});
+    if (this.data.store && this.data.store.lat && this.data.store.lng){
+      wx.navigateTo({url: '/pages/map/index?lat=' + this.data.store.lat + '&lng=' + this.data.store.lng});
     }
   },
-  toPro:function(e){
-    wx.navigateTo({
-      url: 'pages/jujiGarden/recommend/index?productId='+e.currentTarget.dataset.id
+  toBuy:function(){
+    console.log('下单前sceneId='+this.data.sceneId);
+    wx.showLoading({title: '提交中...'})
+    service.getProQrCode({ productId:this.data.productId,path: 'pages/login/index'}).subscribe({
+        next: res => { 
+            var sceneId = res.senceId;
+            this.setData({sceneId:sceneId});
+            console.log('接口生成sceneId='+this.data.sceneId);
+            this.buyProduct();  
+        },
+        error: err => {
+            errDialog(err);
+        },
+        complete: () => wx.hideLoading()
     });
+  },
+  buyProduct:function(){
+      var point = this.data.productInfo.point==null?0:this.data.productInfo.point;
+      var price = this.data.productInfo.price==null?0:this.data.productInfo.price;
+      var type = this.data.productInfo.type;
+      if(type=='PRODUCT'&&point>0&&price>0){
+        if(price>0&&this.data.pointBalance>=point){
+          this.toggleSelect();
+        }else{
+          this.toGetPoint();
+        }
+      }
+      if(type=='PRODUCT'&&point==0&&price>0){
+        this.toggleSelect();
+      }
+      if(type=='POINT'){
+        this.toggleSelect();
+      }
+      if(this.data.pointBalance<point||!this.data.pointBalance){
+        this.toGetPoint();
+      }
+  },
+
+  okSelect:function(){
+      if(this.data.defaultSku.stock==0){errDialog("此规格库存不足");return}
+      var point = this.data.productInfo.point==null?0:this.data.productInfo.point;
+      var price = this.data.productInfo.price==null?0:this.data.productInfo.price;
+      var type = this.data.productInfo.type;
+      if(type=='PRODUCT'&&point>0&&price>0){
+        if(price>0&&this.data.pointBalance>=point){
+          this.toCreateOrder();
+        }else{
+          this.toGetPoint();
+        }
+      }
+      if(type=='PRODUCT'&&point==0&&price>0){
+        this.toCreateOrderByRmb();
+      }
+      if(type=='POINT'){
+        this.toCreateOrderByPoint();
+      }
+      if(this.data.pointBalance<point||!this.data.pointBalance){
+        this.toGetPoint();
+      }
+  },
+
+  toPro:function(e){
+    this.showShare();
   },
   callPhone: function () {
     wx.makePhoneCall({
-      phoneNumber: '4000011139',
+      phoneNumber: '4000011139'
     });
   },
   //收集formid做推送
@@ -258,28 +250,37 @@ Page({
     });
   },
   toMerchantsList:function(){
+    wx.reportAnalytics('detail_ue', {ue: '适用门店'});
     wx.navigateTo({
-      url: '/pages/merchantsCanUse/index?id=' + this.data.productId 
+      url: '/pages/merchantsCanUse/index?id=' + this.data.productId
     });
   },
-  toCreateOrder: function() { //跳转订单确认 桔子和人民币组合订单
+  toCreateOrder: function() { //桔子和人民币组合订单
+    console.log("组合订单跳转前sceneId="+this.data.sceneId);
+    wx.reportAnalytics('detail_ue', {ue: '下单'});
     wx.navigateTo({
-      url: '/pages/payOrder/index?paytype=1&id=' + this.data.productId + '&storeid=' + this.data.storeId
+      url: '/pages/payOrder/index?paytype=1&id='+this.data.productId+'&storeid='+this.data.storeId+'&sceneid='+this.data.sceneId+'&inviteCode='+this.data.invitecode+'&skuId='+this.data.curSkuId+'&smId='+this.data.curSkuMajorId
     });
   },
   toCreateOrderByPoint: function() { //只用桔子下单
+    console.log("桔子单跳转前sceneId="+this.data.sceneId);
+    wx.reportAnalytics('detail_ue', {ue: '下单'});
     wx.navigateTo({
-      url: '/pages/payOrder/index?paytype=2&id=' + this.data.productId + '&storeid=' + this.data.storeId
+      url: '/pages/payOrder/index?paytype=2&id='+this.data.productId+'&storeid='+this.data.storeId+'&sceneid='+this.data.sceneId+'&inviteCode='+this.data.invitecode+'&skuId='+this.data.curSkuId+'&smId='+this.data.curSkuMajorId
     });
   },
   toCreateOrderByRmb: function () { //人民币优惠购买
+    console.log("人民币单跳转前sceneId="+this.data.sceneId);
+    wx.reportAnalytics('detail_ue', {ue: '下单'});
     wx.navigateTo({
-      url: '/pages/payOrder/index?paytype=3&id=' + this.data.productId + '&storeid=' + this.data.storeId
+      url: '/pages/payOrder/index?paytype=3&id='+this.data.productId+'&storeid='+this.data.storeId+'&sceneid='+this.data.sceneId+'&inviteCode='+this.data.invitecode+'&skuId='+this.data.curSkuId+'&smId='+this.data.curSkuMajorId
     });
   },
   toCreateOrderByOriPrice: function () { //原价购买
+    console.log("跳转前sceneId="+this.data.sceneId);
+    wx.reportAnalytics('detail_ue', {ue: '下单'});
     wx.navigateTo({
-      url: '/pages/payOrder/index?paytype=4&id=' + this.data.productId + '&storeid=' + this.data.storeId
+      url: '/pages/payOrder/index?paytype=4&id='+this.data.productId+'&storeid='+this.data.storeId+'&sceneid='+this.data.sceneId+'&inviteCode='+this.data.invitecode+'&skuId='+this.data.curSkuId+'&smId='+this.data.curSkuMajorId
     });
   },
   toGetPoint: function() { //跳转到任务页面赚桔子
@@ -288,7 +289,6 @@ Page({
     });
   },
   getPointBalance: function() {
-
     service.getPointBalance().subscribe({
       next: res => {
         console.log('--------查询桔子余额-------');
@@ -306,13 +306,14 @@ Page({
     var storeid = e.currentTarget.dataset.storeid;
     console.log(id);
     wx.navigateTo({
-      url: '/pages/comDetail/index?id=' + id + '&storeid=' + storeid
+      url: '/pages/comDetail/index?referer=4&id=' + id + '&storeid=' + storeid
     });
   },
   onShow: function() {
-    //评论列表
+    this.setData({isShowSelect:false});
   },
   call: function() {
+    wx.reportAnalytics('detail_ue', {ue: '拨打电话'});
     wx.makePhoneCall({
       phoneNumber: this.data.store.phone // 仅为示例，并非真实的电话号码
     })
@@ -321,14 +322,12 @@ Page({
     let that = this;
     service.getItemInfo({
       productId: this.data.productId,
-      storeId: this.data.storeId
+      storeId: this.data.storeId,
+      sceneId:this.data.sceneId
     }).subscribe({
       next: res => {
         console.log(res);
         var picsStrArr = res.product.picIds.split(',');
-        picsStrArr.forEach(function(item,index){
-          picsStrArr[index] = constant.basePicUrl + item + '/resize_751_420/mode_fill'
-        });
         new Promise(function(resolve,reject){
           let str = JSON.parse(res.product.note);
           resolve(str);
@@ -342,11 +341,19 @@ Page({
             commentCount: res.commentCount,
             recommendCount: res.recommendList.length,
             note: result,
+            showJoinClub: res.welfareGroup?true: false,
+            distributorRole: res.distributorRole,
+            welfareGroup: res.welfareGroup,
             showPics: picsStrArr,
             isShowData: true,
-            lat: res.store.lat,
-            lng: res.store.lng
+            productSkus:res.product.productSkus,
+            defaultSku:res.product.defaultSku,
+            curSkuId:res.product.defaultSku.skuId,
+            curSkuMajorId:res.product.defaultSku.id
           });
+          if(that.data.share==1){
+            that.showShare();
+          }
         }).catch(function(err){
           that.setData({
             commentList: res.commentList,
@@ -356,13 +363,20 @@ Page({
             store: res.store,
             commentCount: res.commentCount,
             recommendCount: res.recommendList.length,
+            showJoinClub: res.welfareGroup ? true : false,
+            distributorRole: res.distributorRole,
+            welfareGroup: res.welfareGroup,
             showPics: picsStrArr,
             isShowData: true,
-            lat: res.store.lat,
-            lng: res.store.lng
+            productSkus:res.product.productSkus,
+            defaultSku:res.product.defaultSku,
+            curSkuId:res.product.defaultSku.skuId,
+            curSkuMajorId:res.product.defaultSku.id
           });
+          if(that.data.share==1){
+            that.showShare();
+          }
         })
-        
       },
       error: err => console.log(err),
       complete: () => wx.hideToast()
@@ -377,14 +391,16 @@ Page({
     });
   },
   gohomepage: function() {
-    wx.switchTab({
-      url: '/pages/index/index'
+    wx.reportAnalytics('detail_ue', {ue: '回首页'});
+    wx.reLaunch({
+      url: '/pages/index/index?referer=2'
     });
-    //getCurrentPages() 函数用于获取当前页面栈的实例，以数组形式按栈的顺序给出，第一个元素为首页，最后一个元素为当前页面
-    // wx.navigateBack({
-    //   delta: getCurrentPages().length,
-    //   url: '/pages/index/index'
-    // });
+  },
+  selectType:function(e){
+    if(e.currentTarget.dataset.stock>0){
+      this.setData({curSkuId:e.currentTarget.dataset.skuid,curSkuMajorId:e.currentTarget.dataset.id});
+      this.setData({defaultSku:getObjById(this.data.productSkus,this.data.curSkuId)});
+    }
   },
   toCommentList: function() {
     wx.navigateTo({
@@ -407,73 +423,113 @@ Page({
         console.log(res);
       },
       error: err => console.log(err),
-      complete: () => wx.hideToast()
+      complete: () =>{}
     })
   },
   /**
    * 用户点击右上角分享或页面中的分享
    */
   onShareAppMessage: function(res) {
+    wx.reportAnalytics('detail_ue', {ue: '发送好友'});
     this.share();
-    this.setData({ isShowModal: true });
+    this.setData({ isShowModal: true,isShowProfit:false });
+    var that = this;
+    setTimeout(()=>{
+      that.setData({isShowProfit:true});
+    },200);
+    var info = this.data.productInfo;
+    var point = info.point==null||info.point==0?'':info.point+'桔子';
+    var price = info.price==null||info.price==0?'':Number(info.price/100).toFixed(2)+'元';
+    var link = (info.price!=null&&info.price!=0)&&(info.point!=null&&info.point!=0)?'+':'';
+    var price1 = point + link + price;
+    var shareTxt = info.shareText;
+    var shareImg = info.shareImg;
     return {
-      title: JSON.parse(wx.getStorageSync('userinfo')).nickName+'分享给您一个心动商品，快来一起体验吧！',
-      path: '/pages/comDetail/index?id=' + this.data.productId + '&storeid=' + this.data.storeId + '&inviteCode=' + wx.getStorageSync('inviteCode'),
-      // imageUrl:constant.basePicUrl+this.data.productInfo.picId+'/resize_360_360/mode_fill'
+      title: shareTxt?shareTxt:price1+','+this.data.productInfo.productName,
+      path: '/pages/login/index?pagetype=1&inner=1&pid=' + that.data.productId+'&storeid='+that.data.storeId+'&invitecode='+wx.getStorageSync('inviteCode'),
+      imageUrl: constant.basePicUrl + (shareImg?shareImg:this.data.productInfo.picId) + '/resize_560_420/mode_fill'
     }
   },
-  toCommentDetail: function(event) {
-    wx.navigateTo({
-      url: '/pages/commentDetail/index?id=' + event.currentTarget.dataset.comid
-    });
+  showShareModal:function(){
+    wx.reportAnalytics('detail_ue', {ue: '保存推广图片'});
+    console.log('生成分享图片');
+    console.log(constant.basePicUrl + this.data.productInfo.picId +'/resize_750_420/mode_filt/format_jpg/quality_70');
+    service.userInfo({ openId: wx.getStorageSync('openid') }).subscribe({
+        next: res => {
+            this.setData({
+                nickName: res.nickName,
+                userImgUrl: res.avatar
+            });
+            wx.showLoading({title: '生成分享图片'});
+            wx.downloadFile({
+              url: constant.basePicUrl + this.data.productInfo.picId +'/resize_750_420/mode_filt/format_jpg/quality_70',
+              success: (res) => {
+                if (res.statusCode === 200) {
+                    this.setData({headImg:res.tempFilePath});
+                    console.log(this.data.userImgUrl);
+                    wx.downloadFile({
+                      url: this.data.userImgUrl,
+                      success: (obj) => {
+                        if (obj.statusCode === 200) {
+                          this.setData({userImg:obj.tempFilePath});
+                          this.getQrCode();
+                        }else{
+                          wx.hideLoading();
+                        }
+                      },
+                      fail:(err)=>{
+                          console.log('头像下载失败');
+                      }
+                    });
+                }else{
+                  wx.hideLoading();
+                }
+              }
+            });
+        },
+        // error: err => errDialog(err),
+        complete: () => {}
+    })
   },
-
+  saveShareImage:function(){
+    this.showShareModal();
+  },
+  toggleSelect:function(){
+    if(this.data.productSkus.length>1){
+      this.setData({isShowSelect:!this.data.isShowSelect});
+    }else{
+      console.log("下单页面");
+      this.okSelect();
+    }
+  },
   // 点击分享
   showShare:function(){
-    wx.showLoading({title: '生成图片...'});
-    wx.downloadFile({
-      url: constant.basePicUrl+this.data.productInfo.picId+'/resize_751_420/mode_fill',
-      success: (res) => {
-        if (res.statusCode === 200) {
-            this.setData({headImg:res.tempFilePath});
-            this.getQrCode();
-        }else{
-          wx.hideLoading();
-        }
-      }
-    });
+    this.setData({isShowModal:false});
+    this.setData({isShowCanvas:true});
   },
   closeModal:function(){
       this.setData({isShowModal:true});
   },
   getQrCode: function() {
-      service.getQrCode({ productId:this.data.productId,path: 'pages/comDetail/index'}).subscribe({
+      service.getQrCode({ productId:this.data.productId,path: 'pages/login/index'}).subscribe({
           next: res => {
             var picId = res;
             wx.downloadFile({
-              url: constant.basePicUrl+picId+'/resize_200_200/mode_fill',
+              url: constant.basePicUrl + picId +'/resize_200_200/mode_filt/format_jpg/quality_0',
               success: (res1) => {
                 if (res1.statusCode === 200) {
                     this.setData({erwmImg:res1.tempFilePath});
                     var info = this.data.productInfo;
-                    wx.hideLoading();
-                    if(info.type=='POINT'){
-                      var price1 = info.point+'桔子';
-                    }else{
-                      if(info.point!=0){
-                        var juzi = info.point+'桔子+';
-                      }else{
-                        var juzi = ''
-                      }
-                      var price1 = juzi + Number(info.price / 100).toFixed(2)+'元';
-                    }
-                    var name = info.productName.substring(0,15);
+                    var point = info.point==null||info.point==0?'':info.point+'桔子';
+                    var price = info.price==null||info.price==0?'':Number(info.price/100).toFixed(2)+'元';
+                    var link = (info.price!=null&&info.price!=0)&&(info.point!=null&&info.point!=0)?'+':'';
+                    var price1 = point + link + price;
+                    var name = info.productName;
                     var price2 = Number(info.originalPrice / 100).toFixed(2) + '元';
-                    this.drawImage(name,'',price1,price2,info.soldNum);//参数依次是storeName,desc,现价,原价,销量
+                    var storeLen = info.productStores.length;
+                    this.setData({isShowCanvas:false});
+                    this.drawImage(info.merchantName,name,'',price1,price2,storeLen);//参数依次是storeName,desc,现价,原价,门店数
                     this.setData({isShowModal:false});
-                    setTimeout(()=>{
-                      this.setData({isHiddenClose:true});
-                    },1500)            
                 }else{
                   wx.hideLoading();
                 }
@@ -487,95 +543,60 @@ Page({
           complete: () => wx.hideToast()
       });
   },
-  setCanvasSize: function() {
-      var size = {};
-      size.w = 256;
-      size.h = 424;
-      return size;
-  },
-  setTitle: function(context,name) {
-      context.setFontSize(12);
-      context.setTextAlign("left");
-      context.setFillStyle("#333");
-      context.fillText(name, 20, 210);
-      context.stroke();
-
-      context.setFontSize(13);
-      context.setTextAlign("center");
-      context.setFillStyle("#000");
-      context.fillText("“桔”美好生活，集好店优惠", 128, 68);
-      context.stroke();
-  },
-  setText2: function(context,price1,price2) {
-      var size = this.setCanvasSize();
-      context.setFontSize(12);
-      context.setTextAlign("left");
-      context.setFillStyle("#E83221");
-      context.fillText(price1, 55, 235);
-      context.stroke();
-      context.setFontSize(10);
-      context.setTextAlign("right");
-      context.setFillStyle("#999999");
-      context.fillText("原价:" + price2, size.w - 20, 234);
-      context.stroke();
-  },
-  setText3: function(context,amount) {
-      var size = this.setCanvasSize();
-      context.setFontSize(10);
-      context.setTextAlign("right");
-      context.setFillStyle("#999999");
-      context.fillText("销量:" + amount, size.w-20, 262);
-      context.stroke();
-  },
-  setText4: function(context) {
-      var size = this.setCanvasSize();
-      context.setFontSize(11);
-      context.setTextAlign("center");
-      context.setFillStyle("#666666");
-      context.fillText("长按识别二维码", 128, 393);
-      context.stroke();
-  },
-  setText5: function(context) {
-      var size = this.setCanvasSize();
-      context.setFontSize(9);
-      context.setTextAlign("left");
-      context.setFillStyle("#999999");
-      context.fillText("过期退", 35, 261);
-      context.fillText("随时退", 95, 261);
-      context.stroke();
-  },
-  drawImage: function(name, desc,price1,price2,amount) {//name,desc,现价,原价,销量
-      var size = this.setCanvasSize();
+  drawImage: function(merchant,name,desc,price1,price2,storeLen) {
+      var size = {w:260,h:424};
       var context = wx.createCanvasContext('myCanvas');
-      context.drawImage(this.data.shareBg, 0, 0, size.w, size.h); //宽度70，居中，距离上15
-      context.drawImage("../../images/logo.png", size.w/2-14, 15, 28,30); //宽度70，居中，距离上15
-      context.drawImage(this.data.headImg, 10, 82, size.w - 20,140); //宽度70，居中，距离上15
-      rectPath(context, 10, 190, size.w-20, 219);
-      context.drawImage(this.data.erwmImg, size.w/2 - 40, 292.5, 80, 80); //二维码，宽度100，居中
-      this.setTitle(context,name);
-      context.drawImage("../../images/price.png", 20, 224, 30,13); //宽度70，居中，距离上15
-      context.drawImage("../../images/gou.png", 20, 252.5, 10,10); //宽度70，居中，距离上15
-      context.drawImage("../../images/gou.png", 80, 252.5, 10,10); //宽度70，居中，距离上15
-      this.setText5(context);
-      drawDashLine(context, 15, 280, size.w-15, 280, 4);//横向虚线
-      this.setText2(context,price1,price2);
-      this.setText3(context,amount);
-      this.setText4(context);
-      context.draw();
+      context.drawImage(this.data.shareBg, 0, 0, size.w, size.h);
+      context.drawImage("../../images/logo.png", 20, 18, 20, 21);
+      setText(context,"“桔”美好生活，集好店优惠", 52, 35,"#000",15,'left');
+      context.drawImage(this.data.headImg, 10, 52, size.w - 20,138);
+      rectPath(context, 10, 190, size.w-20, 134);
+      setText(context,merchant, 20, 210,"#999",10,'left');//商户名
+      drawText(context,name,20,230,50,216);//商品名字
+      setText(context,"适用"+storeLen+"家门店", size.w - 20, 210,"#999",10,'right');//适用门店
+
+      context.drawImage("../../images/price.png", 20, 263, 30,13);
+      setText(context,price1, 55, 275,'#E83221',14,'left');//价格
+      setText(context,"原价:" + price2, size.w - 20, 275,'#999',10,'right');//原价
+
+      context.drawImage("../../images/gou.png", 20, 293, 10,10);
+      setText(context,"可退款", 35, 302,'#999',9,'left');
+      context.drawImage("../../images/gou.png", 80, 293, 10,10);
+      setText(context,"可转赠", 95, 302,'#999',9,'left');
+
+      rectPath(context, 0, 334, size.w, 88);
+      context.drawImage('../../images/erbg.png', 70, 387, 103, 18);
+      setText(context,"长按识别小程序码", 77, 400,'#333',11,'left');
+
+      context.save();
+      context.beginPath();
+      context.arc(35, 375, 25, 0, Math.PI * 2, false);
+      context.clip();
+      context.drawImage(this.data.userImg, 10, 350, 50, 50);
+      context.restore();
+
+      context.drawImage(this.data.erwmImg, size.w - 80, 342.5, 70, 70);
+      var name = this.data.nickName;
+      var nickName = name.length>8?name.substring(0,8)+'...':name;
+      setText(context,nickName, 70, 360,"#333",12,'left');
+      setText(context,"私藏好物，分享给你", 70, 379,'#666',11,'left');
+      context.draw(true,()=>{
+        wx.hideLoading();
+        this.savePic();
+      });
   },
   savePic: function(e) {
-      var type = e.currentTarget.dataset['type'];
       var that = this;
       wx.canvasToTempFilePath({
           canvasId: 'myCanvas',
-          success: function(res1) {
+          success: function(res) {
               wx.getSetting({
-                  success(res2) {
-                      if (!res2.authSetting['scope.writePhotosAlbum']) {
+                  success(rep) {
+                      if (!rep.authSetting['scope.writePhotosAlbum']) {
                           wx.authorize({
                               scope: 'scope.writePhotosAlbum',
                               success() {
-                                  that.saveAsPhoto(res1.tempFilePath);
+                                  that.saveAsPhoto(res.tempFilePath);
                               },
                               fail() {
                                   wx.openSetting({
@@ -589,7 +610,7 @@ Page({
                               }
                           })
                       } else {
-                          that.saveAsPhoto(res1.tempFilePath,type);
+                          that.saveAsPhoto(res.tempFilePath);
                       }
                   },
                   fail() {
@@ -602,20 +623,15 @@ Page({
           }
       });
   },
-  saveAsPhoto: function(imgUrl,type) {
+  saveAsPhoto: function(imgUrl) {
       wx.saveImageToPhotosAlbum({
           filePath: imgUrl,
           success: (res) => {
             this.share();//分享获得桔子
-            this.closeModal();
-            if(type==1){
-              wx.showToast({
-                  title: "已保存至相册",
-                  icon: "success"
-              });
-            }else{
-              errDialog('图文海报已保存到微信本地相册，打开微信朋友圈分享吧!');
-            }
+            wx.showToast({
+                title: "已保存至相册",
+                icon: "success"
+            });
           },
           fail: function(res) {
               console.log(res);
@@ -624,6 +640,13 @@ Page({
   }
 });
 
+function setText(ctx,str,x,y,color,size,align){
+    ctx.setFontSize(size);
+    ctx.setTextAlign(align);
+    ctx.setFillStyle(color);
+    ctx.fillText(str, x, y);
+    ctx.stroke();
+}
 
 function rectPath(ctx, x, y, w, h) {
     ctx.beginPath();
@@ -638,20 +661,48 @@ function rectPath(ctx, x, y, w, h) {
     ctx.closePath();
 }
 
-function drawDashLine(ctx, x1, y1, x2, y2, dashLength){  //传context对象，始点x和y坐标，终点x和y坐标，虚线长度
-  ctx.beginPath();
-  ctx.setStrokeStyle("#eeeeee")//设置线条的颜色
-  ctx.setLineWidth(1)//设置线条宽度
-  var dashLen = dashLength === undefined ? 3 : dashLength,
-  xpos = x2 - x1, //得到横向的宽度;
-  ypos = y2 - y1, //得到纵向的高度;
-  numDashes = Math.floor(Math.sqrt(xpos * xpos + ypos * ypos) / dashLen);
-  for(var i=0; i<numDashes; i++){
-     if(i % 2 === 0){
-         ctx.moveTo(x1 + (xpos/numDashes) * i, y1 + (ypos/numDashes) * i);
-      }else{
-          ctx.lineTo(x1 + (xpos/numDashes) * i, y1 + (ypos/numDashes) * i);
-      }
-   }
-  ctx.stroke();
+function drawBar(ctx,x1,x2,y){
+    ctx.beginPath();
+    ctx.setLineCap('round');
+    ctx.setStrokeStyle('#FFDC00');
+    ctx.setLineWidth(18);
+    ctx.moveTo(x1, y);
+    ctx.lineTo(x2, y);
+    ctx.stroke();
+}
+
+//1、canvas对象，2、文本 3、距离左侧的距离 4、距离顶部的距离 5、6、文本的宽度
+function drawText(ctx, str, left, top, titleHeight, canvasWidth) {
+    var lineWidth = 0;
+    var lastSubStrIndex = 0; //每次开始截取的字符串的索引
+    ctx.setFontSize(12);
+    ctx.setTextAlign('left');
+    ctx.setFillStyle('#333');
+    if(str.length>36){
+      var str = str.substring(0,36)+'...';
+    }
+    for (let i = 0; i < str.length; i++) {
+        lineWidth += ctx.measureText(str[i]).width;
+        if (lineWidth > canvasWidth) {
+            ctx.fillText(str.substring(lastSubStrIndex, i), left, top); //绘制截取部分
+            top += 16; //16为字体的高度
+            lineWidth = 0;
+            lastSubStrIndex = i;
+            titleHeight += 30;
+        }
+        if (i == str.length - 1) { //绘制剩余部分
+            ctx.fillText(str.substring(lastSubStrIndex, i + 1), left, top);
+        }
+    }
+    ctx.stroke();
+    titleHeight = titleHeight + 10;
+    return titleHeight
+}
+
+function getObjById(arr,id){
+  for(var i=0;i<arr.length;i++){
+    if(arr[i].skuId == id){
+      return arr[i];
+    }
+  }
 }

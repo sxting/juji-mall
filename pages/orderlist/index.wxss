@@ -6,7 +6,7 @@ page{box-sizing:border-box;height: 100%;background-color: #fbfbfb}
 .tablist .tabItem.on{color:#333;font-size: 30rpx;font-weight: bold;}
 .tablist .tabItem.on .line{display: block;}
 
-.orderItem{background-color: #fff;position:relative;border-radius: 8rpx;overflow: hidden;margin-bottom: 20rpx;}
+.orderItem{background-color: #fff;position:relative;border-radius: 8rpx;overflow: hidden;margin-bottom: 20rpx;position: relative;}
 .orderItem .top{height: 88rpx;border-bottom: 1rpx #eee solid;padding-left: 30rpx;padding-right: 30rpx;}
 .orderItem .top .status{font-size: 30rpx;color: #333;font-weight: bold}
 .orderItem .top .restTime{font-size: 24rpx;color: #999;}
@@ -30,3 +30,5 @@ page{box-sizing:border-box;height: 100%;background-color: #fbfbfb}
 .numberCtrl .num{width: 60rpx;height:40rpx;text-align: center;font-size: 24rpx;color: #333;background-color: #f5f5f5;line-height: 40rpx;margin: 0 10rpx;}
 
 .nodataDiv{padding-top: 260rpx;}
+
+.expire{position: absolute;width: 93rpx;height: 87rpx;display: block;right: 0;top: 0}

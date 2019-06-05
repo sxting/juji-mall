@@ -41,19 +41,26 @@ jugardenService.joinDistributor = (data) => {
 
 // 提现明细详情
 jugardenService.getSettlementDetail = (data) => {
-  let url = API + '/distributor/settlementDetail.json';
+  let url = API + '/distributor/transferDetail.json';
   return http.get(url, data);
 }
 
 // 提现摘要列表
-jugardenService.getSettlementList = () => {
-  let url = API + '/distributor/settlementDigests.json';
+jugardenService.getSettlementList = (data) => {
+  let url = API + '/distributor/transferDigests.json';
+  return http.get(url, data);
+}
+
+// 提现页面卡片数据
+jugardenService.transferIndex = () => {
+  let url = API + '/distributor/transferIndex.json';
   return http.get(url);
 }
 
 // 登陆
 jugardenService.logIn = (data) => {
   let url = API + '/user/login.json';
+  console.log(url);
   return http.get(url, data);
 }
 
@@ -72,6 +79,12 @@ jugardenService.bindWechatInfor = (data) => {
 // 我的用户
 jugardenService.personListInfor = (data) => {
   let url = API + '/distributor/persons.json';
+  return http.get(url, data);
+}
+
+// 获取小程序码
+jugardenService.getQrCode = (data) => {
+  let url = API + '/qr/getDistributorProduct.json';
   return http.get(url, data);
 }
 

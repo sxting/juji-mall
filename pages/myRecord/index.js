@@ -7,8 +7,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    recordList: [],
-    payUrl: 'https://juji.juniuo.com'
+    nvabarData: {showCapsule: 1,title: '消费记录'},
+    recordList: []
   },
 
   /**
@@ -17,19 +17,8 @@ Page({
   onLoad: function (options) {
     // options.merchantId = '101542271446184185';
     if (options.merchantId) {
-      let payUrl = wx.getStorageSync('payUrl');
-      if (payUrl) {
-        this.setData({
-          payUrl: payUrl
-        });
-
-      } else {
-        this.setData({
-          payUrl: constant.jujipayUrl
-        });
-      }
       wx.request({
-        url: this.data.payUrl + '/mini/getPayRecordsByOpenid.json',
+        url: constant.jujipayUrl + '/mini/orderRecordsByOpenid.json',
         method: 'GET',
         data: {
           merchantId: options.merchantId,
@@ -42,7 +31,7 @@ Page({
           console.log(res);
           if (res.data.errorCode == '0') {
             this.setData({
-              recordList: res.data.data.list
+              recordList: res.data.data
             });
             console.log(this.data.recordList)
           } else {
@@ -55,12 +44,17 @@ Page({
       })
     } else {
       wx.showModal({
-        title: '系统错误',
+        title: '错误',
         content: '未能获取到商户信息',
       });
       return;
     }
 
+  },
+  toPayDetail: function(e){
+    wx.navigateTo({
+      url: '/pages/mypayDetail/index?id='+e.currentTarget.dataset.id,
+    })
   },
 
   /**

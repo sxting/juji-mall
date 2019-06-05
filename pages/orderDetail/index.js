@@ -1,25 +1,32 @@
-import { errDialog, loading,barcode} from '../../utils/util';
+import { errDialog, loading,barcode,formatDate} from '../../utils/util';
 import { service} from '../../service';
 import { constant} from '../../utils/constant';
 var app = getApp();
+var timer = null;
 Page({
   data: {
+    nvabarData: {
+        showCapsule: 1, //是否显示左上角图标   1表示显示    0表示不显示
+        title: '订单详情', //导航栏 中间的标题
+    },
     orderId:'',
     orderInfo: {},
     amount: 0,
     preOrderStr:'',
     constant: constant,
-    voucherInfo:{}
+    voucherInfo:{},
+    vouchers:[],
+    validEndDate:'',
+    isTimeOpen:false,
+    storeInfo:{},
+    productType:''
   },
   onLoad: function(options) {
+    clearInterval(timer);
     wx.setNavigationBarTitle({title: '订单详情'});
     wx.hideShareMenu();
     this.getData(options.id);
     this.setData({orderId: options.id});
-  },
-  toComDetail:function(e){
-    var id = e.currentTarget.dataset['id'];
-    wx.navigateTo({url: "/pages/comDetail/index?id=" + id});
   },
   toComment: function(e) {
     var id = e.currentTarget.dataset['id'];
@@ -35,45 +42,36 @@ Page({
       success:(res) => {
         if (res.confirm) {
           wx.switchTab({
-            url: '../user/index',
+            url: '../user/index'
           })
         } else if (res.cancel) {
           console.log('用户点击取消');
         }
       }
     })
-    // wx.showModal({
-    //   title: '退款后金额将原路返回',
-    //   content: '退款金额为商品实付金额，商品优惠金额不予退款',
-    //   showCancel:true,
-    //   cancelColor:'#999999',
-    //   confirmColor:'#333333',
-    //   success:(res) => {
-    //     if (res.confirm) {
-    //       service.refund({orderId: this.data.orderId}).subscribe({
-    //         next: res => {
-    //             wx.showToast({
-    //                 title:"退款成功",
-    //                 icon:"success"
-    //             });
-    //         },
-    //         error: err => console.log(err),
-    //         complete: () => wx.hideToast()
-    //       })
-    //     } else if (res.cancel) {
-    //       console.log('用户点击取消');
-    //     }
-    //   }
-    // })
   },
   getData: function(orderId) {
-    service.orderInfo({orderId: orderId}).subscribe({
+    service.orderInfo({orderId: orderId,lng:wx.getStorageSync('curLongitude'),lat:wx.getStorageSync('curLatitude')}).subscribe({
       next: res => {
         this.setData({orderInfo: res});
         this.setData({preOrderStr:res.preOrderStr});
+        this.setData({storeInfo:res.orderItemList.length>0?res.orderItemList[0]:{}});
         if(res.status=='PAID'){
-          barcode('barcode', res.vouchers[0].voucherCode, 664, 136);
-          this.getListVoucher(res.vouchers[0].voucherCode);
+          if(!this.data.isTimeOpen&&res.vouchers.length>0){
+            console.log("获取核销码信息")
+            this.getListVoucher(res.vouchers[0].voucherCode);
+          }
+        }
+        this.setData({vouchers:res.vouchers});
+        if(res.status=='CONSUME'||res.status=='FINISH'){
+          console.log('已完成的订单');
+          clearInterval(timer);
+          this.setData({isTimeOpen:false});
+          console.log('关闭定时器');
+          console.log(timer);
+          if(!this.data.isTimeOpen&&res.vouchers.length>0){
+            this.getListVoucher(res.vouchers[0].voucherCode);
+          }
         }
       },
       error: err => console.log(err),
@@ -82,11 +80,37 @@ Page({
   },
   copyBtn: function (e) {
     wx.setClipboardData({
-      data: this.data.orderInfo.orderId,
+      data: e.currentTarget.dataset.str,
       success: (res) => {
         wx.showToast({title: '复制成功'});
       }
     });
+  },
+  toMap: function(e){
+    console.log(e);
+    if (e.currentTarget.dataset.lat && e.currentTarget.dataset.lng){
+      wx.navigateTo({
+        url: '/pages/map/index?lat=' + e.currentTarget.dataset.lat + '&lng=' + e.currentTarget.dataset.lng,
+      });
+    }
+  },
+  toMerchantsList:function(){
+    wx.navigateTo({
+      url: '/pages/merchantsCanUse/index?id=' + this.data.storeInfo.productId
+    });
+  },
+  callPhone: function (e) {
+    wx.makePhoneCall({
+      phoneNumber: e.currentTarget.dataset.tel
+    });
+  },
+  onUnload:function(){
+    clearInterval(timer);
+    this.setData({isTimeOpen:false});
+  },
+  onHide:function(){
+    clearInterval(timer);
+    this.setData({isTimeOpen:false});
   },
   getListVoucher:function(code){
     var obj = {
@@ -96,6 +120,15 @@ Page({
     service.listVouchers(obj).subscribe({
       next: res => {
         this.setData({voucherInfo: res[0]});
+        console.log(res[0].validEndDate);
+        this.setData({validEndDate:res[0].validEndDate.substring(0,10)});
+        if(this.data.orderInfo.status=='PAID'&&this.data.voucherInfo.validDays>=0){
+          barcode('barcode', this.data.orderInfo.vouchers[0].voucherCode, 664, 136);
+          timer = setInterval(()=>{
+            this.setData({isTimeOpen:true});
+            this.getData(this.data.orderId);
+          },2000);
+        }
       },
       error: err => console.log(err),
       complete: () => wx.hideToast()
@@ -103,6 +136,7 @@ Page({
   },
   toPay: function() {
     var payInfo = JSON.parse(this.data.preOrderStr);
+    var that = this;
     wx.requestPayment({
       timeStamp: payInfo.timeStamp,
       nonceStr: payInfo.nonceStr,
@@ -110,7 +144,7 @@ Page({
       signType: payInfo.signType,
       paySign: payInfo.paySign,
       success(res2) {
-        this.getData(this.data.orderId);
+        that.getData(that.data.orderId);
       },
       fail(res2) {
         if (res2.errMsg == 'requestPayment:fail cancel') {

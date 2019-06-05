@@ -72,6 +72,7 @@
   height:387rpx;
   border-top-left-radius: 10rpx;
   border-top-right-radius: 10rpx;
+  position: relative;
 }
 .dis-wrap {
   display: flex;
@@ -168,4 +169,17 @@
 }
 .rotate{
   transform: rotate(180deg);
+}
+
+.ysqMark{
+  width:100%;height:100%;position:absolute;top:0;left:0;background: rgba(0,0,0,.5);
+}
+.ysqMark image{
+  width: 140rpx;
+  height: 62rpx;
+  position:absolute;
+  top:50%;
+  left:50%;
+  margin-left: -70rpx;
+  margin-top: -31rpx;
 }

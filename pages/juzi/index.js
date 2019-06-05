@@ -11,9 +11,6 @@ Page({
     isDisabled:false,
     conHeight:400
   },
-  /**
-   * 生命周期函数--监听页面加载
-   */
   onLoad: function(options) {
     wx.getSystemInfo({
       success: (res) => {
@@ -23,9 +20,9 @@ Page({
     });
     wx.hideShareMenu();
     this.getInfo();
+    this.currentPoint();
   },
   showDesModal:function(e){
-    console.log(e);
     let des = '';
     switch (e.currentTarget.dataset.mt){
       case '1':des = '今日赚取的桔子数量';break;
@@ -37,11 +34,6 @@ Page({
       content: des,
       showCancel:false
     })
-  },
-  toJuzihl: function () {
-    wx.navigateTo({
-      url: '../juzihl/index'
-    });
   },
   toIndex: function () {
     wx.switchTab({ url: '../index/index' });
@@ -67,7 +59,6 @@ Page({
   },
   signIn:function(e){
     if(this.data.isDisabled){return}
-    console.log(e.detail.formId)
     service.collectFormIds({
       formId:e.detail.formId
     }).subscribe({
@@ -108,57 +99,13 @@ Page({
           canSignIn: res.canSignIn
         });
       },
-      // error: err => errDialog(err)
     });
   },
-  closejuzigzModal: function() {
-    this.setData({
-      showjuzigz: false
-    });
-  },
-  juzigzModal: function() {
-    if (this.data.showjuzigz) {
+  toggleModal: function() {
       this.setData({
-        showjuzigz: false
+        showjuzigz: !this.data.showjuzigz
       });
-    } else {
-      this.setData({
-        showjuzigz: true
-      });
-    }
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function() {
-    this.currentPoint();
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function() {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
   onPullDownRefresh: function() {
     this.getInfo();
     service.currentPoint().subscribe({
@@ -177,15 +124,7 @@ Page({
       }
     });
   },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function() {
-
-  },
   share: function (obj) {
-
     service.share(obj).subscribe({
       next: res => {
         console.log('---------分享接口返回--------');
@@ -195,10 +134,6 @@ Page({
       complete: () => wx.hideToast()
     })
   },
-
-  /**
-   * 用户点击右上角分享
-   */
   onShareAppMessage: function () {
     var obj = {
       type:'SHARE_PROGRAM',

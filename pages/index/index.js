@@ -131,14 +131,7 @@ Page({
                     });
                     wx.setStorageSync('curLatitude', res.latitude);
                     wx.setStorageSync('curLongitude', res.longitude);
-                  // wx.setStorageSync('curLatitude', '39.085964');
-                  // wx.setStorageSync('curLongitude', '117.18913');
-                    console.log('--------位置调用成功--------');
                     resolve3(res);
-                    // resolve3({
-                    //   latitude: '39.085964',
-                    //   longitude: '117.18913'
-                    // });
                 },
                 fail: function(err) {
                     console.log('---------位置调用失败或是被拒绝--------');
@@ -536,7 +529,8 @@ Page({
                     wx.setStorageSync('providerId', res1.id ? res1.id : '');
                     this.setData({
                         providerId: res1.id,
-                        pageNo: 1
+                        pageNo: 1,
+                        pullUpFlag: true
                     });
                     this.getIndexData();
                     //根据位置查询附近精选
@@ -547,7 +541,7 @@ Page({
                         pageNo: this.data.pageNo,
                         pageSize: this.data.pageSize,
                         longitude: curLongitude,
-                        latitude: curLatitude
+                        latitude: curLatitude,
                     };
                     this.getRecommendPage(obj);
                 } else { //如果不存在服务商

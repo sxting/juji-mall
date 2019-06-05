@@ -35,7 +35,8 @@ Page({
         curSkuMajorId:'',
         isShowSelect:false,
         inviteCode:'',
-        isBack: false
+        isBack: false,
+        phone:''
     },
     onLoad: function(options) {
         wx.setNavigationBarTitle({ title: '商品详情' });
@@ -45,6 +46,9 @@ Page({
             activityId: options.activityId,
             inviteCode: options.invitecode?options.invitecode:inviteCode
         });
+        var phone = JSON.parse(wx.getStorageSync('userinfo')).phone;
+        console.log(phone);
+        this.setData({phone:phone});
         // 查询商品详情
         this.getData();
     },
@@ -189,7 +193,27 @@ Page({
             url: '/pages/payOrder/index?paytype=7&orderType=SEC_KILL&id=' + this.data.productId + '&activityId=' + this.data.activityId + '&splicedRuleId=' + this.data.defaultSku.secKillRuleId+'&skuId='+this.data.curSkuId+'&smId='+this.data.curSkuMajorId+'&inviteCode='+this.data.inviteCode
         });
     },
-    toRemainMe: function() {
+    toRemainMe: function(e) {
+        let data = { encryptData: e.detail.encryptedData, iv: e.detail.iv }
+        service.decodeUserPhone(data).subscribe({
+            next: res => {
+                this.bindPhone(res.phoneNumber);
+                this.bindPhone(); //授权以后绑定手机号码
+            },
+            error: err => console.log(err),
+            complete: () => wx.hideToast()
+        })
+    },
+    bindPhone:function (phone) {
+        service.bindPhone({ phone: phone }).subscribe({
+            next: res => {
+                this.remainUser()
+            },
+            error: err => console.log(err),
+            complete: () => wx.hideToast()
+        })
+    },
+    remainUser:function(){
         activitiesService.remind({
             activityId: this.data.activityId
         }).subscribe({
@@ -198,10 +222,10 @@ Page({
                 wx.showToast({title: "提醒成功",icon: "success"});
             },
             error: err => {
-                wx.showToast({ title: '系统错误' });
+                wx.showToast({ title: err });
             },
             complete: () => wx.hideToast()
-        })
+        });
     }
 });
 

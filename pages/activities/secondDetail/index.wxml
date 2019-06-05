@@ -139,7 +139,8 @@
         </button>
         <form bindsubmit="collectFormIds" report-submit="true">
             <button wx:if="{{activityStatus=='STARTED'&&resData.balanceStock>0}}" form-type="submit" class="btn btn1" bindtap="toSecondKill">一键秒杀</button>
-            <button wx:if="{{activityStatus=='READY'&&!remind}}" class="btn btn1" bindtap="toRemainMe">开始时提醒我</button>
+            <button wx:if="{{activityStatus=='READY'&&!remind&&!phone}}" class="btn btn1" bindgetphonenumber="toRemainMe" open-type="getPhoneNumber">开始时提醒我</button>
+            <button wx:if="{{activityStatus=='READY'&&!remind&&phone}}" class="btn btn1" bindtap="remainUser">开始时提醒我</button>
             <button wx:if="{{activityStatus=='READY'&&remind}}" class="btn btn2">已设置提醒</button>
             <button wx:if="{{activityStatus=='ENDED'}}" class="btn btn2">活动已结束</button>
             <button wx:if="{{activityStatus=='STARTED'&&resData.balanceStock==0}}" class="btn btn2">抢光啦</button>

@@ -32,7 +32,7 @@ page{background-color: #ffffff;}
 .form{padding: 50rpx;margin-top: 30rpx;}
 .form2{padding:50rpx 30rpx;}
 .form .item{width: 100%;height: 88rpx;}
-.form-row{display: flex;justify-content: space-between;align-items: center;padding: 30rpx;}
+.form-row{display: flex;justify-content: space-between;align-items: center;padding: 30rpx 0;}
 .b-t-1px{border-top: 1px solid #eeeeee;}
 .b-b-1px{border-bottom: 1px solid #eeeeee;}
 .form-label{font-size: 28rpx;color: #333333;}

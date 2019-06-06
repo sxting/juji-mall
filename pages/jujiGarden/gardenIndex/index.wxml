@@ -136,6 +136,13 @@
               <view class="form-inner"><input placeholder='请输入职业'></input></view>
             </view>
             <view class="form-row b-b-1px">
+              <view class="form-label">相关经验</view>
+              <view class="form-inner">
+                请选择
+                <image src="../../../images/formInnerArrowRight.png" class="formInnerArrowRight"></image>
+              </view>
+            </view>
+            <view class="form-row b-b-1px">
               <view class="form-label">邀请码（选填）</view>
               <view class="form-inner"><input placeholder='请输入邀请码'></input></view>
             </view>

@@ -134,7 +134,15 @@
             </view>
             <view class="form-row b-b-1px">
               <view class="form-label">所在城市</view>
-              <view class="form-inner"><input placeholder='请输入城市名称' value="{{city}}" bindinput="bindcityinput"></input></view>
+              <picker bindchange="cityPickerChange" value="{{cityIndex}}" range="{{cityArr}}" range-key="{{'label'}}">
+                <view class="genderInner" wx:if="{{!cityFlag}}">
+                  请选择
+                  <image src="../../../images/formInnerArrowRight.png" class="formInnerArrowRight"></image>
+                </view>
+                <view class="picker" wx:else>
+                  {{cityArr[cityIndex].label}}
+                </view>
+              </picker>
             </view>
             <view class="form-row b-b-1px">
               <view class="form-label">职业</view>

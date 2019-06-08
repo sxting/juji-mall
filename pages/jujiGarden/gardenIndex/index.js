@@ -35,8 +35,11 @@ Page({
         profession: '',//职业
         selfInviteCode: '',//自己的邀请码 
         genderIndex: 0,
+        cityIndex: 0,
         genderFlag: false,
+        cityFlag: false,
         genderArr: [{ value: 1, label: '男' }, { value: 2, label: '女' }],
+        cityArr: [{ label: '郑州' }, { label: '呼和浩特' },{ label: '其他'}],
         applyStatus: -1,//替换allowDistribute的判断条件，申请状态，-1未通过，0审核中，1审核通过 
         conHeight:400
     },
@@ -274,6 +277,14 @@ Page({
       genderFlag: true,
       gender: this.data.genderArr[e.detail.value].value,
       genderIndex: e.detail.value
+    })
+  },
+  cityPickerChange: function (e) {
+    console.log('picker发送选择改变，携带值为', e.detail.value)
+    this.setData({
+      cityFlag: true,
+      city: this.data.cityArr[e.detail.value].label,
+      cityIndex: e.detail.value
     })
   }
 });

@@ -22,7 +22,7 @@ Page({
         invitedMemberCount: 0,
         wechatId: '', //微信号码
         phone: '',
-        applyLeader: false, //是否申请桔长
+        applyLeader: '-1', //是否申请桔长
         switchFun: false,
         minInvitedMemberCount: 0, //邀请几个人就可以成为桔长
         bindPhoneNumber: false, //是否绑定手机号码 是true 不是false
@@ -30,6 +30,7 @@ Page({
         age: '',//年龄s
         city: '',//城市
         experience: '',//相关经验
+        genderArr: [{ value: 1, name: '男'}, { value: 2, name: '女'}],
         gender: '',//性别
         name: '',//姓名
         profession: '',//职业
@@ -38,8 +39,8 @@ Page({
         cityIndex: 0,
         genderFlag: false,
         cityFlag: false,
-        genderArr: [{ value: 1, label: '男' }, { value: 2, label: '女' }],
         cityArr: [{ label: '郑州' }, { label: '呼和浩特' },{ label: '其他'}],
+        experienceArr:[{value: '无相关经验'},{value: '微商'},{value: '社交选项'},{value: '其它'}],
         applyStatus: '-2',//替换allowDistribute的判断条件，申请状态，-1未通过，0审核中，1审核通过
         conHeight:400
     },
@@ -75,7 +76,7 @@ Page({
         let self = this;
         if (this.data.bindPhoneNumber) { //已经绑定手机号码  
             this.setData({
-                applyLeader: true,
+                applyLeader: 1,
                 parentId: this.data.openId
             });
             wx.setStorageSync('isLeaderAlert',1);
@@ -119,10 +120,6 @@ Page({
     // 绑定微信号及姓名
     submitUserInfor() {
         console.log('按钮是否禁用='+this.data.isDisabled);
-        // let data = {
-        //     wechatId: this.data.wechatId,
-        //     name: this.data.name
-        // }
         let self = this;
         let reg = /[\u4e00-\u9fa5]/;
         if (!this.data.name) {
@@ -169,19 +166,9 @@ Page({
                 if (res) {
                     wx.hideToast();
                     this.setData({
-                      applyStatus:0
-                    })
-                    // this.setData({
-                    //     role: res.role,
-                    //     switchFun: false,
-                    //     todaySaleRebate: res.todaySaleRebate ? res.todaySaleRebate : 0,
-                    //     todaySettlementAmount: res.todaySettlementAmount ? res.todaySettlementAmount : 0,
-                    //     totalSettlementAmount: res.totalSettlementAmount ? res.totalSettlementAmount : 0,
-                    //     invitedLeaderCount: res.invitedLeaderCount ? res.invitedLeaderCount : 0,
-                    //     invitedMemberCount: res.invitedMemberCount ? res.invitedMemberCount : 0,
-                    //     isAuthed: res.hasReceiver == true ? true : false,
-                    //     applyLeader: res.applyLeader,
-                    // })
+                      applyStatus:0,
+                      applyLeader:1
+                    });
                 }
             },
             error: err => {
@@ -212,7 +199,9 @@ Page({
             complete: () => wx.hideToast()
         })
     },
-
+    radioChange:function(e){
+        this.setData({gender:e.detail.value});
+    },
     // 授权手机号码
     getUserPhoneNumber: function(e) {
         let self = this;
@@ -259,11 +248,10 @@ Page({
       profession: e.detail.value
     })
   },
-  bindexperienceinput: function (e) {
-    console.log(e.detail.value);
+  experiencePickerChange: function (e) {
     this.setData({
-      experience: e.detail.value
-    })
+      experience: this.data.experienceArr[e.detail.value].value
+    });
   },
   bindselfInviteCodeinput: function (e) {
     console.log(e.detail.value);
@@ -271,16 +259,7 @@ Page({
       selfInviteCode: e.detail.value
     })
   },
-  genderPickerChange: function(e){
-    console.log('picker发送选择改变，携带值为', e.detail.value)
-    this.setData({
-      genderFlag: true,
-      gender: this.data.genderArr[e.detail.value].value,
-      genderIndex: e.detail.value
-    })
-  },
   cityPickerChange: function (e) {
-    console.log('picker发送选择改变，携带值为', e.detail.value)
     this.setData({
       cityFlag: true,
       city: this.data.cityArr[e.detail.value].label,
@@ -301,9 +280,8 @@ function bindPhone() {
             });
             this.setData({
                 bindPhoneNumber: true,
-                applyLeader: true,
-            })
-            console.log('绑定手机号');
+                applyLeader: 1
+            });
             let data = {
                 parentId: this.data.openId,
                 applyLeader: this.data.applyLeader
@@ -365,7 +343,7 @@ function getGardenInfor() {
                     invitedLeaderCount: res.invitedLeaderCount ? res.invitedLeaderCount : 0,
                     invitedMemberCount: res.invitedMemberCount ? res.invitedMemberCount : 0,
                     isAuthed: res.hasReceiver == true ? true : false,
-                    applyLeader: res.applyLeader,
+                    applyLeader: res.applyLeader?1:0,
                     minInvitedMemberCount: res.minInvitedMemberCount
                 })
             }

@@ -27,7 +27,7 @@ Page({
         minInvitedMemberCount: 0, //邀请几个人就可以成为桔长
         bindPhoneNumber: false, //是否绑定手机号码 是true 不是false
         isDisabled:false,//按钮是否禁用
-        age: '',//年龄
+        age: '',//年龄s
         city: '',//城市
         experience: '',//相关经验
         gender: '',//性别
@@ -40,7 +40,7 @@ Page({
         cityFlag: false,
         genderArr: [{ value: 1, label: '男' }, { value: 2, label: '女' }],
         cityArr: [{ label: '郑州' }, { label: '呼和浩特' },{ label: '其他'}],
-        applyStatus: -1,//替换allowDistribute的判断条件，申请状态，-1未通过，0审核中，1审核通过 
+        applyStatus: '-2',//替换allowDistribute的判断条件，申请状态，-1未通过，0审核中，1审核通过
         conHeight:400
     },
     onLoad: function(options) {

@@ -33,8 +33,8 @@ page{background-color: #ffffff;}
 .form2{padding:50rpx 30rpx;}
 .form .item{width: 100%;height: 88rpx;}
 .form-row{display: flex;justify-content: space-between;align-items: center;padding: 30rpx 0;}
-.b-t-1px{border-top: 1px solid #eeeeee;}
-.b-b-1px{border-bottom: 1px solid #eeeeee;}
+.btc{border-top: 1px solid #eeeeee;}
+.bbc{border-bottom: 1px solid #eeeeee;}
 .form-label{font-size: 28rpx;color: #333333;}
 .form-inner{width: 50%;height: 40rpx;display: flex;justify-content: flex-end;align-items: center;font-size: 28rpx;color: #999999;}
 .picker{width: 200rpx;height: 40rpx;display: flex;justify-content: flex-end;align-items: center;font-size: 28rpx;color: #333;}
@@ -44,8 +44,9 @@ page{background-color: #ffffff;}
 .bindInput{width:100%;height:88rpx;line-height:88rpx;padding-left:30rpx;background:#f5f5f5;border-radius:100rpx;box-sizing:border-box;font-size:28rpx;}
 .remark2{margin-top: 30rpx;line-height: 40rpx;font-size: 24rpx;color: #999;text-align: justify;}
 button.btn2{height:88rpx;border-radius:50rpx;font-size:34rpx;display:flex;justify-content:center;align-items:center;margin-top:80rpx;}
-
-.toper1 {padding:0 30rpx 20rpx;position:relative;}
+.submit{color:#333;background-color:#ffdc00;}
+.checking{color:#fff;background-color:#ccc;}
+.toper1 {padding:0 30rp.x 20rpx;position:relative;}
 .topBg1 { position: absolute; width: 100%; height: 303rpx; z-index: 0;top: 0;left: 0 }
 .topCon1 { position: relative; z-index: 1; text-align: center;padding: 40rpx;}
 .topCon1 view{font-size: 30rpx;margin-top: 10rpx;}

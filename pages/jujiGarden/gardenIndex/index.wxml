@@ -3,6 +3,7 @@
 <view class="wrap" style="height:{{conHeight}}px">
     <view class="main" wx:if="{{(applyLeader==0)||(applyLeader==1&&applyStatus==-1)&&!isClickApply}}">
         <view class="toper1">
+          <image class="udb topBg1" src="/images/ytop1.png" mode="scaleToFill"></image>
           <view class="menuDiv" style="background-color: #fff;">
               <view class="menulist ub ub-ac ub-pj">
                 <view class="item ub ub-ver ub-ac ub-pc">
@@ -95,10 +96,10 @@
                 </view>
               </picker>
             </view>
-            <view class="form-row bbc">
+            <!-- <view class="form-row bbc">
               <view class="form-label">邀请码（选填）</view>
               <view class="form-inner"><input placeholder='请输入邀请码' value="{{selfInviteCode}}" bindinput="bindselfInviteCodeinput"></input></view>
-            </view>
+            </view> -->
             <button class="btn2 submit" bindtap='submitUserInfor'>提交</button>
         </view>
     </view>

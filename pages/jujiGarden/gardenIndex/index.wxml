@@ -15,7 +15,7 @@
               <view class="form-inner"><input placeholder='请输入真实姓名' value="{{name}}" bindinput="bindnameinput"></input></view>
             </view>
             <view class="form-row bbc">
-              <view class="form-label">微信账号</view>
+              <view class="form-label">微信号</view>
               <view class="form-inner"><input placeholder='请输入微信账号' value="{{wechatId}}" bindinput="bindwechatIdinput"></input></view>
             </view>
             <view class="form-row bbc">
@@ -79,7 +79,7 @@
               <view class="form-inner">{{name}}</view>
             </view>
             <view class="form-row bbc">
-              <view class="form-label">微信账号</view>
+              <view class="form-label">微信号</view>
               <view class="form-inner">{{wechatId}}</view>
             </view>
             <view class="form-row bbc">

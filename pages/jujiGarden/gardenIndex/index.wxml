@@ -22,8 +22,8 @@
               <view class="form-label">性别</view>
               <view class="form-inner">
                 <radio-group class="radio-group" bindchange="radioChange">
-                  <label class="radio" wx:for="{{genderArr}}" wx:key="un">
-                    <radio value="{{item.value}}" checked="{{item.checked}}" color="#ffdc00"/>{{item.name}}
+                  <label class="radio" wx:for="{{genderArr}}" wx:key="un" style="margin-left:20rpx">
+                    <radio value="{{item.value}}" color="#ffdc00"/>{{item.name}}
                   </label>
                 </radio-group>
               </view>
@@ -51,8 +51,8 @@
             <view class="form-row bbc">
               <view class="form-label">相关经验</view>
               <picker bindchange="experiencePickerChange" range="{{experienceArr}}" range-key="{{'value'}}">
-                <view class="genderInner">
-                  {experience?experience:'请选择'}}
+                <view class="genderInner" style="color:#333333">
+                  {{experience?experience:'请选择'}}
                   <image src="/images/formInnerArrowRight.png" class="formInnerArrowRight" wx:if="{{!experience}}"></image>
                 </view>
               </picker>

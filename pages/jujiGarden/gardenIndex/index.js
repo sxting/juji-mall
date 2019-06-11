@@ -39,8 +39,8 @@ Page({
         cityIndex: 0,
         genderFlag: false,
         cityFlag: false,
-        cityArr: [{ label: '郑州' }, { label: '呼和浩特' },{ label: '其他'}],
-        experienceArr:[{value: '无相关经验'},{value: '微商'},{value: '社交选项'},{value: '其它'}],
+        cityArr: [{ label: '郑州' }, { label: '呼和浩特' },{ label: '其它'}],
+        experienceArr:[{value: '无相关经验'},{value: '微商'},{value: '社交电商'},{value: '其它'}],
         applyStatus: '-2',//替换allowDistribute的判断条件，申请状态，-1未通过，0审核中，1审核通过
         conHeight:400
     },
@@ -63,6 +63,17 @@ Page({
         }
     },
     onShow: function() {
+        this.setData({
+            age: '',//年龄
+            city: '',//城市
+            experience: '',//相关经验
+            genderArr: [{ value: 1, name: '男'}, { value: 2, name: '女'}],
+            gender: '',//性别
+            name: '',//姓名
+            profession: '',//职业
+            selfInviteCode: '',//自己的邀请码 
+            wechatId: ''//微信号
+        })
         let self = this;
         if (wx.getStorageSync('token')) { //token存在
             getGardenInfor.call(self); //get首页信息,获取分销角色
@@ -200,6 +211,7 @@ Page({
         })
     },
     radioChange:function(e){
+        console.log("性别="+e.detail.value);
         this.setData({gender:e.detail.value});
     },
     // 授权手机号码

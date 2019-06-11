@@ -1,7 +1,45 @@
 <wxs src="../../../utils/numFr.wxs" module="format" />
 <nav-bar navbar-data='{{nvabarData}}'></nav-bar>
 <view class="wrap" style="height:{{conHeight}}px">
-    <view class="main" wx:if="{{applyLeader==0}}">
+    <view class="main" wx:if="{{(applyLeader==0)||(applyLeader==1&&applyStatus==-1)&&!isClickApply}}">
+        <view class="toper1">
+          <view class="menuDiv" style="background-color: #fff;">
+              <view class="menulist ub ub-ac ub-pj">
+                <view class="item ub ub-ver ub-ac ub-pc">
+                  <image class="icon_menu" src="/images/icon_menu2.png"></image>
+                  <view class="tx-c">零囤货</view>
+                </view>
+                <view class="item ub ub-ver ub-ac ub-pc">
+                  <image class="icon_menu" src="/images/icon_menu1.png"></image>
+                  <view class="tx-c">零风险</view>
+                </view>
+                <view class="item ub ub-ver ub-ac ub-pc">
+                  <image class="icon_menu" src="/images/icon_menu3.png"></image>
+                  <view class="tx-c">零压力</view>
+                </view>
+              </view>
+              <button class="btn1" style="color:#333;background-color:#ffdc00;" bindtap="clickApply">立即申请</button>
+          </view>
+        </view>
+        <view class="txtCon">
+          <view class="txtTit">
+            <image class="titbg" src="/images/titbg.png"></image>
+            <view class="tittext">桔长专属权益</view>
+          </view>
+          <view class="titTxt">专享低价</view>
+          <view class="conTxt">可享受桔长超低专属折扣，自购超级省钱</view>
+          <view class="titTxt">推广赚钱</view>
+          <view class="conTxt">推广商品，平均可获得15%的商品返利</view>
+          <view class="titTxt">免费体验</view>
+          <view class="conTxt">桔长可享受更多免费体验吃喝玩乐游的机会</view>
+          <view class="titTxt">专属培训</view>
+          <view class="conTxt">可享受专属营销推广培训，平台专业运营人员手把手传授</view>
+          <view class="titTxt">轻松推广</view>
+          <view class="conTxt">推广素材可由平台小编编写，一键保存转发即可</view>
+        </view>
+    </view>
+    
+    <view class="main" wx:if="{{(applyLeader==0)||(applyLeader==1&&applyStatus==-1)&&isClickApply}}">
         <view class="toper2">
             <image class="udb topBg2" src="/images/ytop2.png" mode="scaleToFill"></image>
             <view class="topCon2">

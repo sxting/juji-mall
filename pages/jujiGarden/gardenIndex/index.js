@@ -23,6 +23,7 @@ Page({
         wechatId: '', //微信号码
         phone: '',
         applyLeader: '-1', //是否申请桔长
+        isClickApply:false,
         switchFun: false,
         minInvitedMemberCount: 0, //邀请几个人就可以成为桔长
         bindPhoneNumber: false, //是否绑定手机号码 是true 不是false
@@ -42,7 +43,8 @@ Page({
         cityArr: [{ label: '郑州' }, { label: '呼和浩特' },{ label: '其它'}],
         experienceArr:[{value: '无相关经验'},{value: '微商'},{value: '社交电商'},{value: '其它'}],
         applyStatus: '-2',//替换allowDistribute的判断条件，申请状态，-1未通过，0审核中，1审核通过
-        conHeight:400
+        conHeight:400,
+        isClickApply:false
     },
     onLoad: function(options) {
         wx.getSystemInfo({
@@ -83,20 +85,10 @@ Page({
     },
 
     /**申请成为桔长  **/
-    apply: function(e) {
-        let self = this;
-        if (this.data.bindPhoneNumber) { //已经绑定手机号码  
-            this.setData({
-                applyLeader: 1,
-                parentId: this.data.openId
-            });
-            wx.setStorageSync('isLeaderAlert',1);
-            let data = {
-                parentId: this.data.openId,
-                applyLeader: this.data.applyLeader
-            }
-            joinDistributor.call(self, data); //加入桔园
-        }
+    clickApply: function(e) {
+        this.setData({
+            isClickApply: true
+        });
     },
 
     /**   跳转页面  ***/

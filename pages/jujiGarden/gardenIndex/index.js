@@ -7,8 +7,8 @@ var timeVal;
 
 Page({
     data: {
-        nvabarData: {showCapsule: 0,title: '桔 园',isIndex:1},
-        topValue:0,
+        nvabarData: { showCapsule: 0, title: '桔 园', isIndex: 1 },
+        topValue: 0,
         juminNumList: [], //队员人数
         hadNumber: 0,
         storeId: '',
@@ -23,35 +23,35 @@ Page({
         wechatId: '', //微信号码
         phone: '',
         applyLeader: '-1', //是否申请桔长
-        isClickApply:false,
+        isClickApply: false,
         switchFun: false,
         minInvitedMemberCount: 0, //邀请几个人就可以成为桔长
         bindPhoneNumber: false, //是否绑定手机号码 是true 不是false
-        isDisabled:false,//按钮是否禁用
-        age: '',//年龄s
-        city: '',//城市
-        experience: '',//相关经验
-        genderArr: [{ value: 1, name: '男'}, { value: 2, name: '女'}],
-        gender: '',//性别
-        name: '',//姓名
-        profession: '',//职业
-        selfInviteCode: '',//自己的邀请码 
+        isDisabled: false, //按钮是否禁用
+        age: '', //年龄s
+        city: '', //城市
+        experience: '', //相关经验
+        genderArr: [{ value: 1, name: '男' }, { value: 2, name: '女' }],
+        gender: '', //性别
+        name: '', //姓名
+        profession: '', //职业
+        selfInviteCode: '', //自己的邀请码 
         genderIndex: 0,
         cityIndex: 0,
         genderFlag: false,
         cityFlag: false,
-        cityArr: [{ label: '郑州' }, { label: '呼和浩特' },{ label: '其它'}],
-        experienceArr:[{value: '无相关经验'},{value: '微商'},{value: '社交电商'},{value: '其它'}],
-        applyStatus: '-2',//替换allowDistribute的判断条件，申请状态，-1未通过，0审核中，1审核通过
-        conHeight:400,
-        isClickApply:false
+        cityArr: [{ label: '郑州' }, { label: '呼和浩特' }, { label: '其它' }],
+        experienceArr: [{ value: '无相关经验' }, { value: '微商' }, { value: '社交电商' }, { value: '其它' }],
+        applyStatus: '-2', //替换allowDistribute的判断条件，申请状态，-1未通过，0审核中，1审核通过
+        conHeight: 400,
+        isClickApply: false
     },
     onLoad: function(options) {
         wx.getSystemInfo({
-          success: (res) => {
-            var conHeight = res.windowHeight-app.globalData.barHeight-45;
-            this.setData({conHeight:conHeight})
-          }
+            success: (res) => {
+                var conHeight = res.windowHeight - app.globalData.barHeight - 45;
+                this.setData({ conHeight: conHeight })
+            }
         });
         if (options.openid) {
             console.log('分享点进来');
@@ -66,15 +66,15 @@ Page({
     },
     onShow: function() {
         this.setData({
-            age: '',//年龄
-            city: '',//城市
-            experience: '',//相关经验
-            genderArr: [{ value: 1, name: '男'}, { value: 2, name: '女'}],
-            gender: '',//性别
-            name: '',//姓名
-            profession: '',//职业
-            selfInviteCode: '',//自己的邀请码 
-            wechatId: ''//微信号
+            age: '', //年龄
+            city: '', //城市
+            experience: '', //相关经验
+            genderArr: [{ value: 1, name: '男' }, { value: 2, name: '女' }],
+            gender: '', //性别
+            name: '', //姓名
+            profession: '', //职业
+            selfInviteCode: '', //自己的邀请码 
+            wechatId: '' //微信号
         })
         let self = this;
         if (wx.getStorageSync('token')) { //token存在
@@ -122,66 +122,61 @@ Page({
 
     // 绑定微信号及姓名
     submitUserInfor() {
-        console.log('按钮是否禁用='+this.data.isDisabled);
         let self = this;
         let reg = /[\u4e00-\u9fa5]/;
         if (!this.data.name) {
-          showAlert('请填写您的实名认证姓名');return;
+            showAlert('请填写您的实名认证姓名');return;
         }
-        if (!reg.test(this.data.name)){
-          showAlert('请填写中文姓名');return;
+        if (!reg.test(this.data.name)) {
+            showAlert('请填写中文姓名');return;
         }
         if (!this.data.wechatId) {
-          showAlert('请填写您的微信账号'); return;
+            showAlert('请填写您的微信号');return;
         }
         if (!this.data.gender) {
-          showAlert('请填写您的性别'); return;
+            showAlert('请选择您的性别');return;
         }
         if (!this.data.age) {
-          showAlert('请填写您的年龄'); return;
+            showAlert('请填写您的年龄');return;
         }
         if (!this.data.city) {
-          showAlert('请填写您的城市'); return;
+            showAlert('请选择您的城市');return;
         }
         if (!this.data.profession) {
-          showAlert('请填写您的职业'); return;
+            showAlert('请填写您的职业');return;
         }
         if (!this.data.experience) {
-          showAlert('请填写您的相关经验'); return;
+            showAlert('请选择您的相关经验');return;
         }
-        if(this.data.isDisabled){
-            return;
-        }
-        this.setData({isDisabled:true})
-        wx.showToast({ title: '提交中', icon: 'loading', duration: 30000 });
+        wx.showToast({ title: '提交中', icon: 'loading', duration: 10000,mask: true});
         jugardenService.joinDistributor({
-          name: this.data.name,
-          wechatId: this.data.wechatId,
-          age: this.data.age,
-          city: this.data.city,
-          profession: this.data.profession,
-          experience: this.data.experience,
-          gender: this.data.gender,
-          inviteCode: this.data.selfInviteCode,
-          parentId: '',
+            name: this.data.name,
+            wechatId: this.data.wechatId,
+            age: this.data.age,
+            city: this.data.city,
+            profession: this.data.profession,
+            experience: this.data.experience,
+            gender: this.data.gender,
+            inviteCode: this.data.selfInviteCode,
+            parentId: '',
         }).subscribe({
             next: res => {
                 if (res) {
                     wx.hideToast();
                     this.setData({
-                      applyStatus:0,
-                      applyLeader:1
+                        applyStatus: 0,
+                        applyLeader: 1
                     });
                 }
             },
             error: err => {
-                this.setData({isDisabled:false});
+                this.setData({ isDisabled: false });
                 wx.hideToast();
                 errDialog(err);
             },
             complete: () => {
                 wx.hideToast();
-                this.setData({isDisabled:false});
+                this.setData({ isDisabled: false });
             }
         });
     },
@@ -202,9 +197,9 @@ Page({
             complete: () => wx.hideToast()
         })
     },
-    radioChange:function(e){
-        console.log("性别="+e.detail.value);
-        this.setData({gender:e.detail.value});
+    radioChange: function(e) {
+        console.log("性别=" + e.detail.value);
+        this.setData({ gender: e.detail.value });
     },
     // 授权手机号码
     getUserPhoneNumber: function(e) {
@@ -222,54 +217,54 @@ Page({
             complete: () => wx.hideToast()
         })
     },
-  bindnameinput: function(e){
-    console.log(e.detail.value);
-    this.setData({
-      name: e.detail.value
-    })
-  },
-  bindwechatIdinput: function (e) {
-    console.log(e.detail.value);
-    this.setData({
-      wechatId: e.detail.value
-    })
-  },
-  bindageinput: function (e) {
-    console.log(e.detail.value);
-    this.setData({
-      age: e.detail.value
-    })
-  },
-  bindcityinput: function (e) {
-    console.log(e.detail.value);
-    this.setData({
-      city: e.detail.value
-    })
-  },
-  bindprofessioninput: function (e) {
-    console.log(e.detail.value);
-    this.setData({
-      profession: e.detail.value
-    })
-  },
-  experiencePickerChange: function (e) {
-    this.setData({
-      experience: this.data.experienceArr[e.detail.value].value
-    });
-  },
-  bindselfInviteCodeinput: function (e) {
-    console.log(e.detail.value);
-    this.setData({
-      selfInviteCode: e.detail.value
-    })
-  },
-  cityPickerChange: function (e) {
-    this.setData({
-      cityFlag: true,
-      city: this.data.cityArr[e.detail.value].label,
-      cityIndex: e.detail.value
-    })
-  }
+    bindnameinput: function(e) {
+        console.log(e.detail.value);
+        this.setData({
+            name: e.detail.value
+        })
+    },
+    bindwechatIdinput: function(e) {
+        console.log(e.detail.value);
+        this.setData({
+            wechatId: e.detail.value
+        })
+    },
+    bindageinput: function(e) {
+        console.log(e.detail.value);
+        this.setData({
+            age: e.detail.value
+        })
+    },
+    bindcityinput: function(e) {
+        console.log(e.detail.value);
+        this.setData({
+            city: e.detail.value
+        })
+    },
+    bindprofessioninput: function(e) {
+        console.log(e.detail.value);
+        this.setData({
+            profession: e.detail.value
+        })
+    },
+    experiencePickerChange: function(e) {
+        this.setData({
+            experience: this.data.experienceArr[e.detail.value].value
+        });
+    },
+    bindselfInviteCodeinput: function(e) {
+        console.log(e.detail.value);
+        this.setData({
+            selfInviteCode: e.detail.value
+        })
+    },
+    cityPickerChange: function(e) {
+        this.setData({
+            cityFlag: true,
+            city: this.data.cityArr[e.detail.value].label,
+            cityIndex: e.detail.value
+        })
+    }
 });
 
 // 绑定手机号码
@@ -329,16 +324,16 @@ function getGardenInfor() {
                     })
                 }
                 this.setData({
-                    age: res.age,//年龄
-                    city: res.city,//城市
-                    experience: res.experience,//相关经验
-                    gender: res.gender,//性别
-                    name: res.name,//姓名
-                    profession: res.profession,//职业
-                    selfInviteCode: res.selfInviteCode,//自己的邀请码 
-                    wechatId: res.wechatId,//微信号
+                    age: res.age, //年龄
+                    city: res.city, //城市
+                    experience: res.experience, //相关经验
+                    gender: res.gender, //性别
+                    name: res.name, //姓名
+                    profession: res.profession, //职业
+                    selfInviteCode: res.selfInviteCode, //自己的邀请码 
+                    wechatId: res.wechatId, //微信号
                     role: res.role,
-                    applyStatus: res.applyStatus,// 替换allowDistribute的判断条件，申请状态，-1未通过，0审核中，1审核通过 
+                    applyStatus: res.applyStatus, // 替换allowDistribute的判断条件，申请状态，-1未通过，0审核中，1审核通过 
                     juminNumList: this.data.juminNumList,
                     hadNumber: this.data.hadNumber,
                     todaySaleRebate: res.todaySaleRebate ? res.todaySaleRebate : 0,
@@ -347,7 +342,7 @@ function getGardenInfor() {
                     invitedLeaderCount: res.invitedLeaderCount ? res.invitedLeaderCount : 0,
                     invitedMemberCount: res.invitedMemberCount ? res.invitedMemberCount : 0,
                     isAuthed: res.hasReceiver == true ? true : false,
-                    applyLeader: res.applyLeader?1:0,
+                    applyLeader: res.applyLeader ? 1 : 0,
                     minInvitedMemberCount: res.minInvitedMemberCount
                 })
             }

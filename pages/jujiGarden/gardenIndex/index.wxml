@@ -1,7 +1,7 @@
 <wxs src="../../../utils/numFr.wxs" module="format" />
 <nav-bar navbar-data='{{nvabarData}}'></nav-bar>
 <view class="wrap" style="height:{{conHeight}}px">
-    <view class="main" wx:if="{{(applyLeader==0)||(applyLeader==1&&applyStatus==-1)&&!isClickApply}}">
+    <view class="main" wx:if="{{(applyLeader==0||(applyLeader==1&&applyStatus==-1))&&!isClickApply}}">
         <view class="toper1">
           <image class="udb topBg1" src="/images/ytop1.png" mode="scaleToFill"></image>
           <view class="menuDiv" style="background-color: #fff;">
@@ -40,7 +40,7 @@
         </view>
     </view>
     
-    <view class="main" wx:if="{{(applyLeader==0)||(applyLeader==1&&applyStatus==-1)&&isClickApply}}">
+    <view class="main" wx:if="{{(applyLeader==0||(applyLeader==1&&applyStatus==-1))&&isClickApply}}">
         <view class="toper2">
             <image class="udb topBg2" src="/images/ytop2.png" mode="scaleToFill"></image>
             <view class="topCon2">
@@ -62,7 +62,7 @@
               <view class="form-inner">
                 <radio-group class="radio-group" bindchange="radioChange">
                   <label class="radio" wx:for="{{genderArr}}" wx:key="un" style="margin-left:20rpx">
-                    <radio value="{{item.value}}" color="#ffdc00"/>{{item.name}}
+                    <radio value="{{item.value}}" color="#ffdc00" checked="{{gender==item.value}}" />{{item.name}}
                   </label>
                 </radio-group>
               </view>

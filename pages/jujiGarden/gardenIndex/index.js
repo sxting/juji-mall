@@ -28,7 +28,7 @@ Page({
         minInvitedMemberCount: 0, //邀请几个人就可以成为桔长
         bindPhoneNumber: false, //是否绑定手机号码 是true 不是false
         isDisabled: false, //按钮是否禁用
-        age: '', //年龄s
+        age: '', //年龄
         city: '', //城市
         experience: '', //相关经验
         genderArr: [{ value: 1, name: '男' }, { value: 2, name: '女' }],
@@ -260,10 +260,8 @@ Page({
     },
     cityPickerChange: function(e) {
         this.setData({
-            cityFlag: true,
-            city: this.data.cityArr[e.detail.value].label,
-            cityIndex: e.detail.value
-        })
+            city: this.data.cityArr[e.detail.value].label
+        });
     }
 });
 
@@ -324,7 +322,7 @@ function getGardenInfor() {
                     })
                 }
                 this.setData({
-                    age: res.age, //年龄
+                    age: res.age==0?'':res.age, //年龄
                     city: res.city, //城市
                     experience: res.experience, //相关经验
                     gender: res.gender, //性别

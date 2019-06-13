@@ -51,15 +51,15 @@
         <view class="form2">
             <view class="form-row btc bbc">
               <view class="form-label">姓名</view>
-              <view class="form-inner"><input placeholder='请输入真实姓名' value="{{name}}" bindinput="bindnameinput"></input></view>
+              <view class="form-inner ub-f1"><input placeholder='请输入真实姓名' value="{{name}}" bindinput="bindnameinput"></input></view>
             </view>
             <view class="form-row bbc">
               <view class="form-label">微信号</view>
-              <view class="form-inner"><input placeholder='请输入微信账号' value="{{wechatId}}" bindinput="bindwechatIdinput"></input></view>
+              <view class="form-inner ub-f1"><input placeholder='请输入微信账号' value="{{wechatId}}" bindinput="bindwechatIdinput"></input></view>
             </view>
             <view class="form-row bbc">
               <view class="form-label">性别</view>
-              <view class="form-inner">
+              <view class="form-inner ub-f1">
                 <radio-group class="radio-group" bindchange="radioChange">
                   <label class="radio" wx:for="{{genderArr}}" wx:key="un" style="margin-left:20rpx">
                     <radio value="{{item.value}}" color="#ffdc00" checked="{{gender==item.value}}" />{{item.name}}
@@ -69,36 +69,33 @@
             </view>
             <view class="form-row bbc">
               <view class="form-label">年龄</view>
-              <view class="form-inner"><input placeholder='请输入年龄' type='number' value="{{age}}" bindinput="bindageinput"></input></view>
+              <view class="form-inner ub-f1"><input placeholder='请输入年龄' type='number' value="{{age}}" bindinput="bindageinput"></input></view>
             </view>
             <view class="form-row bbc">
               <view class="form-label">所在城市</view>
-              <picker bindchange="cityPickerChange" value="{{cityIndex}}" range="{{cityArr}}" range-key="{{'label'}}">
-                <view class="genderInner" wx:if="{{!cityFlag}}">
-                  请选择
+              <picker class="ub-f1" bindchange="cityPickerChange" range="{{cityArr}}" range-key="{{'label'}}">
+                <view class="genderInner">
+                  {{city?city:'请选择'}}
                   <image src="/images/formInnerArrowRight.png" class="formInnerArrowRight"></image>
-                </view>
-                <view class="picker" wx:else>
-                  {{cityArr[cityIndex].label}}
                 </view>
               </picker>
             </view>
             <view class="form-row bbc">
               <view class="form-label">职业</view>
-              <view class="form-inner"><input placeholder='请输入职业' value="{{profession}}" bindinput="bindprofessioninput"></input></view>
+              <view class="form-inner ub-f1"><input placeholder='请输入职业' value="{{profession}}" bindinput="bindprofessioninput"></input></view>
             </view>
             <view class="form-row bbc">
               <view class="form-label">相关经验</view>
-              <picker bindchange="experiencePickerChange" range="{{experienceArr}}" range-key="{{'value'}}">
-                <view class="genderInner" style="color:#333333">
+              <picker class="ub-f1" bindchange="experiencePickerChange" range="{{experienceArr}}" range-key="{{'value'}}">
+                <view class="genderInner">
                   {{experience?experience:'请选择'}}
-                  <image src="/images/formInnerArrowRight.png" class="formInnerArrowRight" wx:if="{{!experience}}"></image>
+                  <image src="/images/formInnerArrowRight.png" class="formInnerArrowRight"></image>
                 </view>
               </picker>
             </view>
             <!-- <view class="form-row bbc">
               <view class="form-label">邀请码（选填）</view>
-              <view class="form-inner"><input placeholder='请输入邀请码' value="{{selfInviteCode}}" bindinput="bindselfInviteCodeinput"></input></view>
+              <view class="form-inner ub-f1"><input placeholder='请输入邀请码' value="{{selfInviteCode}}" bindinput="bindselfInviteCodeinput"></input></view>
             </view> -->
             <button class="btn2 submit" bindtap='submitUserInfor'>提交</button>
         </view>
@@ -115,35 +112,35 @@
         <view class="form2">
             <view class="form-row btc bbc">
               <view class="form-label">姓名</view>
-              <view class="form-inner">{{name}}</view>
+              <view class="form-inner ub-f1">{{name}}</view>
             </view>
             <view class="form-row bbc">
               <view class="form-label">微信号</view>
-              <view class="form-inner">{{wechatId}}</view>
+              <view class="form-inner ub-f1">{{wechatId}}</view>
             </view>
             <view class="form-row bbc">
               <view class="form-label">性别</view>
-              <view class="form-inner">{{gender==1?'男':'女'}}</view>
+              <view class="form-inner ub-f1">{{gender==1?'男':'女'}}</view>
             </view>
             <view class="form-row bbc">
               <view class="form-label">年龄</view>
-              <view class="form-inner">{{age}}</view>
+              <view class="form-inner ub-f1">{{age}}</view>
             </view>
             <view class="form-row bbc">
               <view class="form-label">所在城市</view>
-              <view class="form-inner">{{city}}</view>
+              <view class="form-inner ub-f1">{{city}}</view>
             </view>
             <view class="form-row bbc">
               <view class="form-label">职业</view>
-              <view class="form-inner">{{profession}}</view>
+              <view class="form-inner ub-f1">{{profession}}</view>
             </view>
             <view class="form-row bbc">
               <view class="form-label">相关经验</view>
-              <view class="form-inner">{{experience}}</view>
+              <view class="form-inner ub-f1">{{experience}}</view>
             </view>
             <!-- <view class="form-row bbc" wx:if="{{selfInviteCode}}">
               <view class="form-label">邀请码</view>
-              <view class="form-inner">{{selfInviteCode}}</view>
+              <view class="form-inner ub-f1">{{selfInviteCode}}</view>
             </view> -->
             <button class="btn2 checking">审核中</button>
         </view>

@@ -93,6 +93,15 @@
                 </view>
               </picker>
             </view>
+            <view class="form-row bbc">
+              <view class="form-label">粉丝数量</view>
+              <picker class="ub-f1" bindchange="fansCountPickerChange" range="{{fansCountArr}}" range-key="{{'value'}}">
+                <view class="genderInner">
+                  {{fansCount?fansCount:'请选择'}}
+                  <image src="/images/formInnerArrowRight.png" class="formInnerArrowRight"></image>
+                </view>
+              </picker>
+            </view>
             <!-- <view class="form-row bbc">
               <view class="form-label">邀请码（选填）</view>
               <view class="form-inner ub-f1"><input placeholder='请输入邀请码' value="{{selfInviteCode}}" bindinput="bindselfInviteCodeinput"></input></view>

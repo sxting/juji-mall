@@ -36,12 +36,12 @@ Page({
         name: '', //姓名
         profession: '', //职业
         selfInviteCode: '', //自己的邀请码 
-        genderIndex: 0,
-        cityIndex: 0,
         genderFlag: false,
         cityFlag: false,
         cityArr: [{ label: '郑州' }, { label: '呼和浩特' }, { label: '其它' }],
         experienceArr: [{ value: '无相关经验' }, { value: '微商' }, { value: '社交电商' }, { value: '其它' }],
+        fansCountArr:[{value:'0-100'},{value:'100-500'},{value:'500-2000'},{value:'2000以上'}],
+        fansCount:'',
         applyStatus: '-2', //替换allowDistribute的判断条件，申请状态，-1未通过，0审核中，1审核通过
         conHeight: 400,
         isClickApply: false
@@ -83,21 +83,18 @@ Page({
             return;
         }
     },
-
     /**申请成为桔长  **/
     clickApply: function(e) {
         this.setData({
             isClickApply: true
         });
     },
-
     /**   跳转页面  ***/
     toPage: function(e) {
         let role = e.currentTarget.dataset.role ? e.currentTarget.dataset.role : '';
         let page = role ? e.currentTarget.dataset.page + '?role=' + role : e.currentTarget.dataset.page;
         wx.navigateTo({ url: page });
     },
-
     /*** 用户分享  ***/
     onShareAppMessage: function() {
         return {
@@ -106,20 +103,6 @@ Page({
             imageUrl: '/images/banner-invent.png'
         }
     },
-
-    dataChange(e) {
-        console.log(e.currentTarget.dataset.type);
-        if (e.currentTarget.dataset.type == 'wechatid') {
-            this.setData({
-                wechatId: e.detail.value, //微信号码
-            })
-        } else {
-            this.setData({
-                name: e.detail.value, //姓名
-            })
-        }
-    },
-
     // 绑定微信号及姓名
     submitUserInfor() {
         let self = this;
@@ -148,6 +131,9 @@ Page({
         if (!this.data.experience) {
             showAlert('请选择您的相关经验');return;
         }
+        if (!this.data.fansCount){
+            showAlert('请选择粉丝数量');return;
+        }
         wx.showToast({ title: '提交中', icon: 'loading', duration: 10000,mask: true});
         jugardenService.joinDistributor({
             name: this.data.name,
@@ -158,6 +144,7 @@ Page({
             experience: this.data.experience,
             gender: this.data.gender,
             inviteCode: this.data.selfInviteCode,
+            fansCount:this.data.fansCount,
             parentId: '',
         }).subscribe({
             next: res => {
@@ -261,6 +248,11 @@ Page({
     cityPickerChange: function(e) {
         this.setData({
             city: this.data.cityArr[e.detail.value].label
+        });
+    },
+    fansCountPickerChange:function(e){
+        this.setData({
+            fansCount: this.data.fansCountArr[e.detail.value].value
         });
     }
 });

@@ -370,6 +370,7 @@ Page({
                 showPageLoading: false
             });
         }, 5000);
+        console.log("locationCode====="+this.data.locationCode);
         // this.currentPoint();
         if (wx.getStorageSync('isLeaderAlert') == 1) {
             console.log("成为了桔长");
@@ -386,15 +387,11 @@ Page({
             this.getRecommendPage(obj);
             wx.removeStorageSync('isLeaderAlert');
         }
-        if (wx.getStorageSync('selectCode')) { //存在 说明用户选过异地城市
+        //如果用户选过城市
+        if (wx.getStorageSync('selectCode')) {
+            // 如果选择的是异地城市
             if (wx.getStorageSync('locationCode') != wx.getStorageSync('selectCode')) {
-                //如果城市更换了 需要通过用户选择的城市编号code重新加载页面
-                console.log('用户使用自选城市111：' + wx.getStorageSync('selectCityName'));
-                console.log('selectCode: ' + wx.getStorageSync('selectCode'));
-                console.log('selectPcode: ' + wx.getStorageSync('selectPcode'));
-                console.log('selectCityName: ' + wx.getStorageSync('selectCityName'));
-                //此处应该判断用户有没有再次更换城市 如果没有更换城市不再次查询
-                // wx.setStorageSync('locationCode', wx.getStorageSync('selectCode'));
+                // 如果选择的城市不变
                 if (this.data.locationCode == wx.getStorageSync('selectCode')) {
                     console.log('没有查询且返回了');
                     return;
@@ -420,14 +417,13 @@ Page({
                     this.getDataByCity(); //获取所选城市的服务商Id
                 }
             } else {
-                console.log('用户使用定位城市：' + this.data.locationName);
+                console.log('用户使用定位城市：' + wx.getStorageSync('locationName'));
                 if (this.data.isFirstShow) {
                     this.setData({
                         isFirstShow: false
                     })
                     return;
                 }
-                console.log('用户使用定位城市并向下');
                 //如果没有更换城市 有两种情况 一种是由其他城市切回所在城市 一种是由其他页面回退到本页面
                 if (this.data.locationCode == wx.getStorageSync('selectCode')) {
                     console.log('没有查询且返回了');
@@ -547,6 +543,8 @@ Page({
                 } else { //如果不存在服务商
                     this.setData({
                         showPageLoading: false,
+                        slideShowList:[],
+                        recommendPage:[],
                         providerId: '',
                         pageNo: 1
                     });

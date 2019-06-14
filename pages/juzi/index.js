@@ -23,7 +23,6 @@ Page({
     this.currentPoint();
   },
   showDesModal:function(e){
-    console.log(e);
     let des = '';
     switch (e.currentTarget.dataset.mt){
       case '1':des = '今日赚取的桔子数量';break;
@@ -60,7 +59,6 @@ Page({
   },
   signIn:function(e){
     if(this.data.isDisabled){return}
-    console.log(e.detail.formId)
     service.collectFormIds({
       formId:e.detail.formId
     }).subscribe({

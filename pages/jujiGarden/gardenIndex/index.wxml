@@ -1,14 +1,9 @@
 <wxs src="../../../utils/numFr.wxs" module="format" />
 <nav-bar navbar-data='{{nvabarData}}'></nav-bar>
 <view class="wrap" style="height:{{conHeight}}px">
-    <!-- 普通用户进入 1、普通用户 从没申请  2、桔民 从没申请过  -->
-    <view class="main" wx:if="{{(role == 'UNDEFINED' && !applyLeader) || (role == 'MEMBER' && !applyLeader)}}">
+    <view class="main" wx:if="{{(applyLeader==0||(applyLeader==1&&applyStatus==-1))&&!isClickApply}}">
         <view class="toper1">
           <image class="udb topBg1" src="/images/ytop1.png" mode="scaleToFill"></image>
-          <view class="topCon1">
-              <image class="juzhang1" src="/images/juzhang1.png"></image>
-              <view class="tx-c">成功邀请{{minInvitedMemberCount}}名新人，即可获得桔长资格</view>
-          </view>
           <view class="menuDiv" style="background-color: #fff;">
               <view class="menulist ub ub-ac ub-pj">
                 <view class="item ub ub-ver ub-ac ub-pc">
@@ -24,8 +19,7 @@
                   <view class="tx-c">零压力</view>
                 </view>
               </view>
-              <button class="btn1" style="color:#333;background-color:#ffdc00;" bindtap="apply" wx:if='{{bindPhoneNumber}}'>立即邀请新人</button>
-              <button class="btn1" style="color:#333;background-color:#ffdc00;" wx:else='{{!bindPhoneNumber}}' open-type="getPhoneNumber" bindgetphonenumber="getUserPhoneNumber">申请成为桔长</button>
+              <button class="btn1" style="color:#333;background-color:#ffdc00;" bindtap="clickApply">立即申请</button>
           </view>
         </view>
         <view class="txtCon">
@@ -45,73 +39,124 @@
           <view class="conTxt">推广素材可由平台小编编写，一键保存转发即可</view>
         </view>
     </view>
-
-    <!-- 桔员进入 桔民 申请过-->
-    <view class="main" wx:if="{{role == 'MEMBER' && applyLeader}}">
-        <view class="toper1">
-          <image class="udb topBg1" src="/images/ytop1.png" mode="scaleToFill"></image>
-          <view style="height:20rpx"></view>
-          <view class='progressDiv' style="background:#fff">
-              <view class='clearfix my-team'>
-                  <view class='fl'>
-                    <text style='font-weight:bold;font-size:30rpx'>我的队伍 </text>
-                    <text class='num'><text style='color:#ffdc00'>{{ hadNumber }}</text>/{{minInvitedMemberCount}}</text>
-                  </view>
-                  <view class='fr' wx:if='{{hadNumber != 0}}'>
-                      <text catchtap="toPage" data-page="/pages/jujiGarden/userInfor/userInfor" data-role='{{role}}' style="font-size:26rpx">查看桔民</text>
-                      <text class='iconfont icon-right'></text>
-                  </view>
-              </view>
-              <view class='progress-box' style="margin-top:50rpx">
-                  <text wx:for="{{ hadNumber }}" wx:key="unique" class="had-number"></text>
-                  <text wx:for="{{ minInvitedMemberCount - hadNumber }}" wx:key="unique"></text>
-              </view>
-              <view class="remark3" style="margin-top:24rpx">成功邀请{{minInvitedMemberCount}}名新人，即可获得桔长资格</view>
-              <button class="btn1" style="color:#333;background-color:#ffdc00;margin-top:50rpx" open-type="share">邀请新人加入桔园</button>
-          </view>
-        </view>
-
-        <view class="txtCon">
-          <view class="txtTit">
-            <image class="titbg" src="/images/titbg.png"></image>
-            <view class="tittext">桔长专属权益</view>
-          </view>
-          <view class="titTxt">专享低价</view>
-          <view class="conTxt">可享受桔长超低专属折扣，自购超级省钱</view>
-          <view class="titTxt">推广赚钱</view>
-          <view class="conTxt">推广商品，平均可获得15%的商品返利</view>
-          <view class="titTxt">免费体验</view>
-          <view class="conTxt">桔长可享受更多免费体验吃喝玩乐游的机会</view>
-          <view class="titTxt">专属培训</view>
-          <view class="conTxt">可享受专属营销推广培训，平台专业运营人员手把手传授</view>
-          <view class="titTxt">轻松推广</view>
-          <view class="conTxt">推广素材可由平台小编编写，一键保存转发即可</view>
-        </view>
-    </view>
-
-    <!-- 桔长进入实名认证 -->
-    <view class="main" wx:if="{{role == 'LEADER' && !isAuthed}}">
+    
+    <view class="main" wx:if="{{(applyLeader==0||(applyLeader==1&&applyStatus==-1))&&isClickApply}}">
         <view class="toper2">
             <image class="udb topBg2" src="/images/ytop2.png" mode="scaleToFill"></image>
             <view class="topCon2">
-                <image class="juzhang2" src="/images/juzhang2.png"></image>
-                <view class="tx-c">接下来开启您的推广赚钱之旅！</view>
+                <image class="juzhang3" src="/images/juzhang3.png"></image>
+                <view class="tx-c">请填写以下信息，完成后等待平台审核</view>
             </view>
         </view>
-        <view class="form">
-            <view class="item">
-                <input type="text" placeholder="请打开微信“我的”页面，复制微信号" value='{{ wechatId }}' data-type='wechatid' maxlength='20' bindinput="dataChange" class="bindInput" />
+        <view class="form2">
+            <view class="form-row btc bbc">
+              <view class="form-label">姓名</view>
+              <view class="form-inner ub-f1"><input placeholder='请输入真实姓名' value="{{name}}" bindinput="bindnameinput"></input></view>
             </view>
-            <view class="item" style="margin-top:50rpx;">
-                <input type="text" placeholder="请填写您的微信实名认证姓名" value='{{ name }}' data-type='name' maxlength='8' bindinput="dataChange" class="bindInput" />
+            <view class="form-row bbc">
+              <view class="form-label">微信号</view>
+              <view class="form-inner ub-f1"><input placeholder='请输入微信账号' value="{{wechatId}}" bindinput="bindwechatIdinput"></input></view>
             </view>
-            <view class="remark2">请如实填写以上信息，推广获得的收入将自动提现到微信零钱</view>
-            <button class="btn2" style="color:#333;background-color:#ffdc00;" bindtap='submitUserInfor'>确定</button>
+            <view class="form-row bbc">
+              <view class="form-label">性别</view>
+              <view class="form-inner ub-f1">
+                <radio-group class="radio-group" bindchange="radioChange">
+                  <label class="radio" wx:for="{{genderArr}}" wx:key="un" style="margin-left:20rpx">
+                    <radio value="{{item.value}}" color="#ffdc00" checked="{{gender==item.value}}" />{{item.name}}
+                  </label>
+                </radio-group>
+              </view>
+            </view>
+            <view class="form-row bbc">
+              <view class="form-label">年龄</view>
+              <view class="form-inner ub-f1"><input placeholder='请输入年龄' type='number' value="{{age}}" bindinput="bindageinput"></input></view>
+            </view>
+            <view class="form-row bbc">
+              <view class="form-label">所在城市</view>
+              <picker class="ub-f1" bindchange="cityPickerChange" range="{{cityArr}}" range-key="{{'label'}}">
+                <view class="genderInner">
+                  {{city?city:'请选择'}}
+                  <image src="/images/formInnerArrowRight.png" class="formInnerArrowRight"></image>
+                </view>
+              </picker>
+            </view>
+            <view class="form-row bbc">
+              <view class="form-label">职业</view>
+              <view class="form-inner ub-f1"><input placeholder='请输入职业' value="{{profession}}" bindinput="bindprofessioninput"></input></view>
+            </view>
+            <view class="form-row bbc">
+              <view class="form-label">相关经验</view>
+              <picker class="ub-f1" bindchange="experiencePickerChange" range="{{experienceArr}}" range-key="{{'value'}}">
+                <view class="genderInner">
+                  {{experience?experience:'请选择'}}
+                  <image src="/images/formInnerArrowRight.png" class="formInnerArrowRight"></image>
+                </view>
+              </picker>
+            </view>
+            <view class="form-row bbc">
+              <view class="form-label">粉丝数量</view>
+              <picker class="ub-f1" bindchange="fansCountPickerChange" range="{{fansCountArr}}" range-key="{{'value'}}">
+                <view class="genderInner">
+                  {{fansCount?fansCount:'请选择'}}
+                  <image src="/images/formInnerArrowRight.png" class="formInnerArrowRight"></image>
+                </view>
+              </picker>
+            </view>
+            <!-- <view class="form-row bbc">
+              <view class="form-label">邀请码（选填）</view>
+              <view class="form-inner ub-f1"><input placeholder='请输入邀请码' value="{{selfInviteCode}}" bindinput="bindselfInviteCodeinput"></input></view>
+            </view> -->
+            <button class="btn2 submit" bindtap='submitUserInfor'>提交</button>
+        </view>
+    </view>
+
+    <view class="main" wx:if="{{applyLeader==1&&applyStatus==0}}">
+        <view class="toper2">
+            <image class="udb topBg2" src="/images/ytop2.png" mode="scaleToFill"></image>
+            <view class="topCon2">
+                <image class="juzhang3" src="/images/juzhang3.png"></image>
+                <view class="tx-c">等待平台审核中...</view>
+            </view>
+        </view>
+        <view class="form2">
+            <view class="form-row btc bbc">
+              <view class="form-label">姓名</view>
+              <view class="form-inner ub-f1">{{name}}</view>
+            </view>
+            <view class="form-row bbc">
+              <view class="form-label">微信号</view>
+              <view class="form-inner ub-f1">{{wechatId}}</view>
+            </view>
+            <view class="form-row bbc">
+              <view class="form-label">性别</view>
+              <view class="form-inner ub-f1">{{gender==1?'男':'女'}}</view>
+            </view>
+            <view class="form-row bbc">
+              <view class="form-label">年龄</view>
+              <view class="form-inner ub-f1">{{age}}</view>
+            </view>
+            <view class="form-row bbc">
+              <view class="form-label">所在城市</view>
+              <view class="form-inner ub-f1">{{city}}</view>
+            </view>
+            <view class="form-row bbc">
+              <view class="form-label">职业</view>
+              <view class="form-inner ub-f1">{{profession}}</view>
+            </view>
+            <view class="form-row bbc">
+              <view class="form-label">相关经验</view>
+              <view class="form-inner ub-f1">{{experience}}</view>
+            </view>
+            <!-- <view class="form-row bbc" wx:if="{{selfInviteCode}}">
+              <view class="form-label">邀请码</view>
+              <view class="form-inner ub-f1">{{selfInviteCode}}</view>
+            </view> -->
+            <button class="btn2 checking">审核中</button>
         </view>
     </view>
 
     <!-- 桔长进入 -->
-    <view class="main1" wx:if="{{role == 'LEADER' && isAuthed}}">
+    <view class="main1" wx:if="{{applyLeader==1&&applyStatus==1}}">
         <view class="toper">
             <image class="udb topBg" src="/images/topBg.png" mode="scaleToFill"></image>
             <view class="topCon" style="padding:30rpx;">

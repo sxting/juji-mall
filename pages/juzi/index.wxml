@@ -68,7 +68,7 @@
       </view>
       <view class="pointStatus">连续签到<text style="color: #CE463F;">{{currentPointObj.signInDays}}</text>天</view>
       <view style="font-size: 24rpx;color: #666666;text-align:center;margin-top:20rpx;">连续签到一周可得{{currentPointObj.signInMax}}个桔子</view>
-      <form bindsubmit="signIn" report-submit="true">
+      <form bindsubmit="signIn" report-submit="true" >
           <button form-type="submit" class="normalBtn" hidden="{{!canSignIn}}" style="margin:30rpx auto 0;">签到</button>
           <button class="signedBtn" hidden="{{canSignIn}}" style="margin:30rpx auto 0;">已签到</button>
       </form>

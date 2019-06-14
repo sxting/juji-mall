@@ -127,9 +127,7 @@ Page({
     wx.setStorageSync('selectCityName', selectCityName);
     wx.setStorageSync('selectPcode', selectPcode);
     wx.setStorageSync('selectCode', selectCode);
-    wx.navigateBack({
-      delta: 1
-    });
+    wx.navigateBack({delta: 1});
   },
   onLoad: function(options) {
     wx.hideShareMenu();

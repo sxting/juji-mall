@@ -227,7 +227,7 @@ Page({
                   })
                 }
             },
-            error: err => console.log(err),
+            error: err => errDialog(err),
             complete: () => wx.hideToast()
         })
     },

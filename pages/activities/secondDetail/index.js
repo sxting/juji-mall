@@ -167,7 +167,7 @@ Page({
                 console.log("获取默认规格");
                 console.log(this.data.defaultSku);
             },
-            error: err => console.log(err),
+            error: err => errDialog(err),
             complete: () => wx.hideToast()
         })
     },

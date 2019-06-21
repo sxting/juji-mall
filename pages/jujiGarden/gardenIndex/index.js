@@ -66,22 +66,23 @@ Page({
     },
     onShow: function() {
         this.setData({
-            age: '', //年龄
-            city: '', //城市
-            experience: '', //相关经验
-            genderArr: [{ value: 1, name: '男' }, { value: 2, name: '女' }],
-            gender: '', //性别
-            name: '', //姓名
-            profession: '', //职业
-            selfInviteCode: '', //自己的邀请码 
-            wechatId: '' //微信号
-        })
+            genderArr: [{ value: 1, name: '男' }, { value: 2, name: '女' }]
+        });
+        if(wx.getStorageSync('inputData')){
+            console.log("录入后保存的数据重新展现");
+            var obj = JSON.parse(wx.getStorageSync('inputData'));
+            this.setData(obj);
+        }
         let self = this;
         if (wx.getStorageSync('token')) { //token存在
             getGardenInfor.call(self); //get首页信息,获取分销角色
         } else { //token不存在 登陆
             return;
         }
+    },
+    onHide:function(){
+        console.log("保存录入的数据");
+        this.saveInputData();
     },
     /**申请成为桔长  **/
     clickApply: function(e) {
@@ -103,9 +104,23 @@ Page({
             imageUrl: '/images/banner-invent.png'
         }
     },
+    // ----保存用户输入的数据----
+    saveInputData:function(){
+        var dataInfo = {
+            name: this.data.name,
+            wechatId: this.data.wechatId,
+            age: this.data.age,
+            city: this.data.city,
+            profession: this.data.profession,
+            experience: this.data.experience,
+            gender: this.data.gender,
+            fansCount:this.data.fansCount
+        };
+        wx.setStorageSync('inputData',JSON.stringify(dataInfo));
+    },
+
     // 绑定微信号及姓名
-    submitUserInfor() {
-        let self = this;
+    submitUserInfor:function() {
         let reg = /[\u4e00-\u9fa5]/;
         if (!this.data.name) {
             showAlert('请填写您的实名认证姓名');return;
@@ -157,13 +172,11 @@ Page({
                 }
             },
             error: err => {
-                this.setData({ isDisabled: false });
                 wx.hideToast();
                 errDialog(err);
             },
             complete: () => {
                 wx.hideToast();
-                this.setData({ isDisabled: false });
             }
         });
     },

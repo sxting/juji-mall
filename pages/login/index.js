@@ -69,7 +69,8 @@ Page({
                     shareProductId:res.data.data.productId
                 });
                 if (type == 1) {
-                    this.nextPage();
+                    // this.nextPage();
+                    this.preLogin1("",scene);
                 }
             }
         });

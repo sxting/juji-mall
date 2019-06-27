@@ -30,13 +30,15 @@
           <view class="titTxt">专享低价</view>
           <view class="conTxt">可享受桔长超低专属折扣，自购超级省钱</view>
           <view class="titTxt">推广赚钱</view>
-          <view class="conTxt">推广商品，平均可获得15%的商品返利</view>
+          <view class="conTxt">推广商品，最高可获得50%的商品返佣</view>
           <view class="titTxt">免费体验</view>
-          <view class="conTxt">桔长可享受更多免费体验吃喝玩乐游的机会</view>
-          <view class="titTxt">专属培训</view>
-          <view class="conTxt">可享受专属营销推广培训，平台专业运营人员手把手传授</view>
-          <view class="titTxt">轻松推广</view>
-          <view class="conTxt">推广素材可由平台小编编写，一键保存转发即可</view>
+          <view class="conTxt">新品新店上线，试吃、尝鲜等优先免费霸王餐体验</view>
+          <view class="titTxt">轻松分享</view>
+          <view class="conTxt">宣传素材无需费脑，由专业团队免费提供，转发分享即可</view>
+          <view class="titTxt">精英社交</view>
+          <view class="conTxt">行业聚会，特色沙龙，主题讲座等线下活动可优先免费参加</view>
+          <view class="titTxt">专业培训</view>
+          <view class="conTxt">可免费接受专业营销推广培训，营销大师就是你</view>
         </view>
     </view>
     

@@ -38,8 +38,15 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 34,
-			"list": []
+			"current": 0,
+			"list": [
+				{
+					"id": -1,
+					"name": "桔园",
+					"pathName": "pages/jujiGarden/gardenIndex/index",
+					"scene": null
+				}
+			]
 		}
 	}
 }

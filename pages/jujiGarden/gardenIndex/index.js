@@ -132,11 +132,14 @@ Page({
         wx.setStorageSync('inputData',JSON.stringify(dataInfo));
     },
 
-    // 绑定微信号及姓名
+    // 提交信息，申请加入桔园
     submitUserInfor:function() {
         let reg = /[\u4e00-\u9fa5]/;
         if (!this.data.name) {
             showAlert('请填写您的实名认证姓名');return;
+        }
+        if (!this.data.bindPhoneNumber) {
+          showAlert('请绑定手机号'); return;
         }
         if (!reg.test(this.data.name)) {
             showAlert('请填写中文姓名');return;
@@ -194,7 +197,7 @@ Page({
         });
     },
 
-    // 获取用户信息 
+    // 获取用户信息 是否绑定手机号
     getUserInfor: function() {
         let self = this;
         service.userInfo({ openId: wx.getStorageSync('openid') }).subscribe({
@@ -216,19 +219,21 @@ Page({
     },
     // 授权手机号码
     getUserPhoneNumber: function(e) {
-        let self = this;
+      let self = this;var errMsg = e.detail.errMsg;
+      if (errMsg = 'getPhoneNumber:ok') {
         let data = { encryptData: e.detail.encryptedData, iv: e.detail.iv }
         service.decodeUserPhone(data).subscribe({
-            next: res => {
-                this.setData({
-                    phone: res.phoneNumber,
-                });
-                console.log(this.data.phone);
-                bindPhone.call(self); //授权以后绑定手机号码
-            },
-            error: err => console.log(err),
-            complete: () => wx.hideToast()
+          next: res => {
+            this.setData({
+              phone: res ? res.phoneNumber : '',
+            });
+            console.log(this.data.phone);
+            bindPhone.call(self); //授权以后绑定手机号码
+          },
+          error: err => { console.log(err) },
+          complete: () => wx.hideToast()
         })
+      }
     },
     bindnameinput: function(e) {
         console.log(e.detail.value);
@@ -301,7 +306,7 @@ function bindPhone() {
                 parentId: this.data.openId,
                 applyLeader: this.data.applyLeader
             }
-            joinDistributor.call(self, data); //加入桔园
+            // joinDistributor.call(self, data); //加入桔园
         },
         error: err => console.log(err),
         complete: () => wx.hideToast()

@@ -75,7 +75,7 @@
     </view>
   </view>
 
-  <view class="taskDiv">
+  <!-- <view class="taskDiv">
       <view class="qtitle ub ub-ac" style="padding-left:20rpx">做任务赚桔子</view>
       <view class="ub ub-ac mt15">
         <button class="taskItem ub-f1 ub ub-ver ub-ac ub-pc" open-type="share">
@@ -95,7 +95,7 @@
             <view class="subTxt">推荐桔集</view>
         </button>
       </view>
-  </view>
+  </view> -->
 
   <view class="juzigzWrap" hidden="{{!showjuzigz}}" bindtap="toggleModal">
     <view class="juzigz">

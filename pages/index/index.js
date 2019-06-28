@@ -925,6 +925,7 @@ Page({
                 this.setData({
                     joinInfo: res.data.data.contact,
                 });
+                wx.setStorageSync('shareType',res.data.data.shareType);
                 if (type == 1) {
                     this.nextPage();
                 }

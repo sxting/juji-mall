@@ -8,6 +8,7 @@
   background: #2F2D2E;
   min-height: 100vh;
   color: #EDD9B6;
+  padding-bottom: 60rpx;
 }
 .bg-top {
   text-align: center;
@@ -70,6 +71,7 @@
 .font1 {
   font-size: 28rpx;
 }
+
 .cards-list {
   background-color: #fff;
   padding: 30rpx 20rpx;
@@ -81,8 +83,73 @@
   color: #333333;
 }
 .card-item {
-  background-image: linear-gradient(45deg, #9FA2AB 0%, #BBBDC9 48%, #D9DCE1 100%);
+  text-align: center;
+  width: 210rpx;
+  padding-top: 20rpx;
+  display: inline-block;
+  margin-right: 10rpx;
+}
+.card-item:nth-child(3n) {
+  margin-right: 0;
+}
+.card {
   border-radius: 10rpx;
   width: 210rpx;
   height: 150rpx;
+  font-size: 26rpx;
+  line-height:46rpx;
+  box-sizing:border-box;
+  padding-top:30rpx;
+  position: relative;
+}
+.card1 {
+  background-image: linear-gradient(45deg, #9FA2AB 0%, #BBBDC9 48%, #D9DCE1 100%);
+  color:#2E3547;
+}
+.card2 {
+  background-image: linear-gradient(43deg, #3A3A3B 0%, rgba(82,83,84,0.90) 59%, #575859 100%);
+  color:#fff;
+}
+.card3 {
+  background-image: linear-gradient(-136deg, #E9D2B0 0%, #DBBE91 53%, #CCAA71 100%);
+  color:#A07446;
+}
+.card-price {
+  font-family: PingFangSC-Regular;
+  font-size: 34rpx;
+}
+.selected {
+  position: absolute;
+}
+.origin-price {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 96rpx;
+  height: 30rpx;
+  line-height: 30rpx;
+  background: #BB4D3C;
+  font-family: PingFangSC-Regular;
+  font-size: 18rpx;
+  color: #FFFFFF;
+  border-radius: 10rpx 10rpx 10rpx 0;
+}
+.card-bottom {
+  font-family: PingFangSC-Medium;
+  font-size: 24rpx;
+  color: #333333;
+  padding-top: 10rpx;
+}
+
+.buy {
+  background-image: linear-gradient(0deg, #D0B079 0%, #E1C8A0 34%, #E3CAA3 50%, #F1E1C2 100%);
+  width: 100vw;
+  height: 100rpx;
+  line-height: 100rpx;
+  position: fixed;
+  bottom: 0;
+  text-align: center;
+  font-family: PingFangSC-Semibold;
+  font-size: 36rpx;
+  color: #A07446;
 }

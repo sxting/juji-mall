@@ -42,8 +42,32 @@
 
   <view class='cards-list winner'>
     <view class='cards-title'>选择会员版本</view>
-    <view class='card-item'>
-
+    <view>
+      <view class='card-item'>
+        <view class='card card1'>
+          <view class='card-name'>季卡</view>
+          <view class='card-price'>¥ 30.00</view>
+          <view class='selected'></view>
+        </view>
+        <view class='card-bottom'>赠送50桔子</view>
+      </view>
+      <view class='card-item'>
+        <view class='card card2'>
+          <view class='card-name'>半年卡</view>
+          <view class='card-price'>¥ 58.00</view>
+        </view>
+        <view class='card-bottom'>赠送50桔子</view>
+      </view>
+      <view class='card-item'>
+        <view class='card card3'>
+          <view class='origin-price'>原价¥120</view>
+          <view class='card-name'>年卡</view>
+          <view class='card-price'>¥ 100.00</view>
+        </view>
+        <view class='card-bottom'>赠送50桔子</view>
+      </view>
     </view>
   </view>
+
+  <view class='buy'>立即购买</view>
 </view>

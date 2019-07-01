@@ -38,12 +38,20 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 0,
+			"current": 1,
 			"list": [
 				{
 					"id": -1,
 					"name": "桔园",
 					"pathName": "pages/jujiGarden/gardenIndex/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "商品详情",
+					"pathName": "pages/comDetail/index",
+					"query": "share=0&referer=0&id=2019041916464291620578838&storeid=111543908079199612",
 					"scene": null
 				}
 			]

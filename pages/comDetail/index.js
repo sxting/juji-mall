@@ -48,7 +48,8 @@ Page({
     showJztgModal: false,//显示“桔长推广”模态窗口
     distributorRole:'',//桔长还是桔园身份
     welfareGroup: {},//“戳一下加入福利群”数据对象
-    isShowSelect:false
+    isShowSelect:false,
+    shareType:1
   },
   onLoad: function(options) {
     const updateManager = wx.getUpdateManager();
@@ -63,6 +64,8 @@ Page({
             }
         })
     })
+    var shareType = wx.getStorageSync('shareType');
+    this.setData({shareType:shareType==1})
     
     if (options.share) {
       this.setData({share: options.share});
@@ -104,6 +107,9 @@ Page({
         console.log('sourceName='+source);
         wx.reportAnalytics('detail_referer', {ue: source});
     }
+  },
+  showTips1:function(){
+    errDialog("请先保存图片后将图片发给要分享的好友");
   },
   openJztgShare: function(){
     this.setData({

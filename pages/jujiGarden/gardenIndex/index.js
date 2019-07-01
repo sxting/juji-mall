@@ -220,7 +220,7 @@ Page({
     // 授权手机号码
     getUserPhoneNumber: function(e) {
       let self = this;var errMsg = e.detail.errMsg;
-      if (errMsg = 'getPhoneNumber:ok') {
+      if (errMsg == 'getPhoneNumber:ok') {
         let data = { encryptData: e.detail.encryptedData, iv: e.detail.iv }
         service.decodeUserPhone(data).subscribe({
           next: res => {

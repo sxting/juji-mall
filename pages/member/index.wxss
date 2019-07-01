@@ -1,0 +1,88 @@
+/* pages/member/index.wxss */
+.winner {
+  width: 690rpx;
+  margin: 0 auto;
+  border-radius: 10rpx;
+}
+.member-bg {
+  background: #2F2D2E;
+  min-height: 100vh;
+  color: #EDD9B6;
+}
+.bg-top {
+  text-align: center;
+}
+.bg-top .top1 {
+  margin-bottom: 30rpx;
+  height:30rpx;
+}
+.bg-top .top2 {
+  margin-bottom: 10rpx;
+  font-family: PingFangSC-Medium;
+  font-size: 50rpx;
+  color: #EDD9B6;
+  text-shadow: 1px 1px 7px #281C0E;
+}
+.bg-top .top3 {
+  margin-bottom: 70rpx;
+  font-family: PingFangSC-Light;
+  font-size: 30rpx;
+  color: #E7D6B2;
+}
+.member-rights {
+  background-color: #fff;
+  border-radius: 10rpx;
+  width: 690rpx;
+  height: 640rpx;
+  margin: 0 auto 30rpx;
+}
+.right-title {
+  background-image: linear-gradient(-180deg, #E9D2B0 0%, #DBBE91 53%, #CCAA71 100%);
+  border-radius: 46.5rpx;
+  width: 500rpx;
+  height: 80rpx;
+  margin: 0 auto;
+  position: relative;
+  top: -40rpx;
+  line-height: 80rpx;
+  text-align: center;
+  font-family: PingFangSC-Medium;
+  font-size: 32rpx;
+  color: #A07446;
+}
+.rights-item {
+  display: flex;
+  padding: 0 40rpx 40rpx;
+}
+.rights-item image {
+  width: 78rpx;
+  height: 78rpx;
+  min-width: 78rpx;
+}
+.rights-item .right {
+  font-family: PingFangSC-Regular;
+  font-size: 24rpx;
+  color: #999999;
+}
+.color1 {
+  color: #464646;
+}
+.font1 {
+  font-size: 28rpx;
+}
+.cards-list {
+  background-color: #fff;
+  padding: 30rpx 20rpx;
+  box-sizing: border-box;
+}
+.cards-title {
+  font-family: PingFangSC-Medium;
+  font-size: 30rpx;
+  color: #333333;
+}
+.card-item {
+  background-image: linear-gradient(45deg, #9FA2AB 0%, #BBBDC9 48%, #D9DCE1 100%);
+  border-radius: 10rpx;
+  width: 210rpx;
+  height: 150rpx;
+}

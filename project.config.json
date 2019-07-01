@@ -38,7 +38,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 1,
+			"current": 2,
 			"list": [
 				{
 					"id": -1,
@@ -52,6 +52,12 @@
 					"name": "商品详情",
 					"pathName": "pages/comDetail/index",
 					"query": "share=0&referer=0&id=2019041916464291620578838&storeid=111543908079199612",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "开通会员",
+					"pathName": "pages/member/index",
 					"scene": null
 				}
 			]

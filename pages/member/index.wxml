@@ -1,0 +1,49 @@
+<nav-bar navbar-data='{{nvabarData}}'></nav-bar>
+<view class="member-bg">
+  <view class='bg-top'>
+    <view class='top1'></view>
+    <view class='top2'>超级会员开通</view>
+    <view class='top3'>开通会员 特权体验 精彩无限</view>
+  </view>
+
+  <view class='member-rights'>
+    <view class='right-title'>会员专属权益</view>
+    <view>
+      <view class='rights-item'>
+        <image></image>
+        <view class='right'>
+          <view class='color1 font1'>会员专享价</view>
+          <view>会员可享有所有商品会员折扣价购买</view>
+        </view>
+      </view>
+      <view class='rights-item'>
+        <image></image>
+        <view class='right'>
+          <view class='color1 font1'>周周送福利</view>
+          <view>会员每周会收到专属会员桔子礼包（15个）</view>
+        </view>
+      </view>
+      <view class='rights-item'>
+        <image></image>
+        <view class='right'>
+          <view class='color1 font1'>会员专属区</view>
+          <view>带有会员专属标签的商品仅限会员购买</view>
+        </view>
+      </view>
+      <view class='rights-item'>
+        <image></image>
+        <view class='right'>
+          <view class='color1 font1'>专属客服</view>
+          <view>专属客服权益仅限会员专享，会员享有优先客服通道，无需排队会员配备专属微信客服顾问，提供更专业、优质的服务与咨询（1对1客服）</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class='cards-list winner'>
+    <view class='cards-title'>选择会员版本</view>
+    <view class='card-item'>
+
+    </view>
+  </view>
+</view>

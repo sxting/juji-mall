@@ -13,7 +13,8 @@ Component({
     navbarData: {
       showCapsule: 1,
       isIndex:0
-    }
+    },
+    bgc: ''
   },
   ready:function(){
     let pages = getCurrentPages(); //当前页面栈
@@ -21,6 +22,20 @@ Component({
       var title = this.data.navbarData.title;
       var isIndex = this.data.navbarData.isIndex;
       this.setData({navbarData:{showCapsule:0,isIndex:isIndex,title:title}});
+    }
+    
+    if (this.data.navbarData.isIndex == 1) {
+      this.setData({
+        bgc: '#ffdc00'
+      })
+    } else if (this.data.navbarData.isIndex == 2) {
+      this.setData({
+        bgc: '#2F2D2E'
+      })
+      wx.setNavigationBarColor({
+        frontColor: '#ffffff',
+        backgroundColor: '#2F2D2E',
+      })
     }
   },
   attached: function () {

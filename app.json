@@ -41,7 +41,8 @@
     "pages/activities/myActivity/index",
     "pages/activities/my-collage/index",
     "pages/payDetail/index",
-    "pages/mypayDetail/index"
+    "pages/mypayDetail/index",
+    "pages/member/index"
   ],
   "permission": {
     "scope.userLocation": {

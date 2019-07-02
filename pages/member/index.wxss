@@ -8,14 +8,17 @@
   background: #2F2D2E;
   min-height: 100vh;
   color: #EDD9B6;
-  padding-bottom: 60rpx;
+  padding-bottom: 140rpx;
 }
 .bg-top {
   text-align: center;
 }
 .bg-top .top1 {
-  margin-bottom: 30rpx;
-  height:30rpx;
+  height: 147rpx;
+}
+.bg-top .top1 image {
+  width: 226rpx;
+  height: 147rpx;
 }
 .bg-top .top2 {
   margin-bottom: 10rpx;
@@ -53,12 +56,13 @@
 }
 .rights-item {
   display: flex;
-  padding: 0 40rpx 40rpx;
+  padding:0 30rpx 40rpx 40rpx;
 }
 .rights-item image {
   width: 78rpx;
   height: 78rpx;
   min-width: 78rpx;
+  margin-right:30rpx;
 }
 .rights-item .right {
   font-family: PingFangSC-Regular;
@@ -120,6 +124,10 @@
 }
 .selected {
   position: absolute;
+  right: 10rpx;
+  top: 8rpx;
+  width: 22rpx;
+  height: 22rpx;
 }
 .origin-price {
   position: absolute;

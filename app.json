@@ -42,7 +42,9 @@
     "pages/activities/my-collage/index",
     "pages/payDetail/index",
     "pages/mypayDetail/index",
-    "pages/member/index"
+    "pages/member/index",
+    "pages/memberzq/index",
+    "pages/juzhangGZ/index"
   ],
   "permission": {
     "scope.userLocation": {

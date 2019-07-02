@@ -38,10 +38,14 @@
                     <cover-image class="icon_home" src="/images/icon_home4.png" mode="aspectFit"></cover-image>
                     <cover-view class="tx-c">好店礼券</cover-view>
                 </cover-view>
-                <cover-view class="menuitem ub ub-ver ub-ac ub-pc" bindtap="showJoinModal" data-tit="商家入驻">
+                <cover-view class="menuitem ub ub-ver ub-ac ub-pc" bindtap="toPath" data-tit="会员专区" data-page="/pages/memberzq/index">
+                    <cover-image class="icon_home" src="/images/icon_home5.png" mode="aspectFit"></cover-image>
+                    <cover-view class="tx-c">会员专区</cover-view>
+                </cover-view>
+                <!-- <cover-view class="menuitem ub ub-ver ub-ac ub-pc" bindtap="showJoinModal" data-tit="商家入驻">
                     <cover-image class="icon_home" src="/images/icon_home5.png" mode="aspectFit"></cover-image>
                     <cover-view class="tx-c">商家入驻</cover-view>
-                </cover-view>
+                </cover-view> -->
             </cover-view>
         </view>
         <!-- 桔子球 -->

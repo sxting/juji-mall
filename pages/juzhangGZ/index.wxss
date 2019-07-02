@@ -1,0 +1,43 @@
+/* pages/juzhangGZ/index.wxss */
+.inner {
+  min-height: 100%;
+  background-color: #fff;
+  font-family: PingFangSC-Regular;
+  font-size: 24rpx;
+  color: #999999;
+  padding: 30rpx;
+}
+.sub-title {
+  height: 30rpx;
+  line-height: 30rpx;
+  border-left: 5rpx solid #FFDC00;
+  font-family: PingFangSC-Medium;
+  font-size: 28rpx;
+  color: #666666;
+  padding-left: 20rpx;
+  margin-bottom: 20rpx;
+}
+.text {
+  line-height: 36rpx;
+  margin-bottom: 30rpx;
+}
+.note-item {
+  margin-bottom: 30rpx;
+  display: list-item;
+  list-style-type: disc;
+  list-style-position: inside;
+  list-style-image: radial-gradient(#FFDC00 40%,#fff 50%);
+}
+
+.btn {
+  background: #FFDC00;
+  border-radius: 44rpx;
+  width: 690rpx;
+  height: 88rpx;
+  line-height: 88rpx;
+  text-align: center;
+  margin-top: 50rpx;
+  font-family: PingFangSC-Regular;
+  font-size: 34rpx;
+  color: #333333;
+}

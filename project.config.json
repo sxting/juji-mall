@@ -38,7 +38,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 2,
+			"current": 5,
 			"list": [
 				{
 					"id": -1,
@@ -58,6 +58,28 @@
 					"id": -1,
 					"name": "开通会员",
 					"pathName": "pages/member/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "会员专区",
+					"pathName": "pages/memberzq/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "个人中心",
+					"pathName": "pages/user/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "桔长升降级规则",
+					"pathName": "pages/juzhangGZ/index",
+					"query": "",
 					"scene": null
 				}
 			]

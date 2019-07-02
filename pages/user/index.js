@@ -10,7 +10,9 @@ Page({
         phoneNum: '',
         bindPhone: "",
         conHeight:400,
-        topValue:0
+        topValue:0,
+      showJcModal: false,
+      joinInfo: { phone: '17316191089', wechat: 'juji1031' }
     },
     toJuzi: function() {
         wx.switchTab({ url: '../juzi/index' });
@@ -28,7 +30,24 @@ Page({
           }
         });      
         this.getInfo();
+      this.getJoinInfo();
     },
+    showJoinModal: function () {
+      this.setData({ showJcModal: !this.data.showJcModal });
+    },
+  dialtoUs: function () {
+    wx.makePhoneCall({
+      phoneNumber: this.data.joinInfo.phone
+    });
+  },
+  copyUs: function () {
+    wx.setClipboardData({
+      data: this.data.joinInfo.wechat,
+      success: (res) => {
+        wx.showToast({ title: '复制成功' });
+      }
+    });
+  },
     getInfo: function() {
         service.userInfo({ openId: wx.getStorageSync('openid') }).subscribe({
             next: res => {
@@ -79,5 +98,21 @@ Page({
      */
     onPullDownRefresh: function() {
         this.getInfo();
-    }
+    },
+  getJoinInfo: function (scene, type) {
+    wx.request({
+      url: 'https://juji.juniuo.com/data/wxappData.php',
+      method: 'GET',
+      header: { 'content-type': 'application/json' },
+      success: (res) => {
+        this.setData({
+          joinInfo: res.data.data.contact,
+        });
+        wx.setStorageSync('shareType', res.data.data.shareType);
+        if (type == 1) {
+          this.nextPage();
+        }
+      }
+    });
+  },
 });

@@ -1,0 +1,40 @@
+<wxs module="filter" src="../../utils/numFr.wxs"></wxs>
+<nav-bar navbar-data='{{nvabarData}}'></nav-bar>
+<view>
+  <view class="juzihl-wrap">
+    <view style="display:flex;justify-content: space-between;align-item:center;">
+      <view class="mtitle">会员专区</view>
+    </view>
+    
+    <view class="subtitle" style="margin-top:10rpx;">让低价好物一目了然</view>
+
+    <view class="jingxuanlist" wx:for="{{recommendPage}}" wx:key="{{index}}" bindtap="toComDetail" data-id="{{item.productId}}" data-storeid="{{item.nearStore.id}}">
+      <image class="productImg" src="https://upic.juniuo.com/file/picture/{{item.picId}}/resize_750_420/mode_filt/format_jpg/quality_70" mode="widthFix">
+              <!-- 已售罄标识 -->
+              <view class="ysqMark" wx:if="{{!item.stock}}">
+                <image src="../../images/ysq.png"></image>
+              </view>
+      </image>
+      <view class="dis-wrap jc-sb">
+          <view class="from">{{item.merchantName}}</view>
+          <view class="dis">距你{{filter.toDis(item.nearDist)}}km</view>
+        </view>
+        <view class="pro-name">{{item.productName}}</view>
+        <view class="price-wrap jc-sb">
+          <view class="p-wrap">
+            <view class="now-price" wx:if="{{item.point>0}}">{{item.point}}桔子</view>
+            <view class="now-price" wx:if="{{item.point>0&&item.price>0}}">+</view>
+            <view class="now-price" wx:if="{{item.price>0}}">{{filter.toFix(item.price)}}元</view>
+            <!-- <view class="old-price">{{filter.toFix(item.originalPrice)}}元</view> -->
+          </view>
+        </view>
+    </view> 
+
+  </view>
+</view>
+
+<view class='alert'>
+  <view class='alert-text'>您还不是桔集会员</view>
+  <view class='alert-text'>无法购买会员专区商品</view>
+  <view class='alert-btn' bindtap='toPage'>立即开通</view>
+</view>

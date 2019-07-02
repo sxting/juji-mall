@@ -20,3 +20,34 @@
 .userGrid { padding: 40rpx 40rpx 0 30rpx; margin: 0; background: transparent; }
 .userGridIcon { width: 50rpx; height: 50rpx; }
 .userGridText { font-size: 24rpx; color: #333333; margin-top: 10rpx; line-height: 30rpx; }
+
+.rela-top {
+  position:relative;
+  top:-170rpx;
+}
+.juzhang {
+  background-image: linear-gradient(-90deg, #494849 0%, #2D2D2D 100%);
+  border-radius: 4rpx;
+  font-family: PingFangSC-Semibold;
+  font-size: 22rpx;
+  color: #FFDC00;
+  padding: 0 6rpx;
+  position:relative;
+  top:-4rpx;
+  left:20rpx;
+}
+.hgVIP {
+  width: 90rpx;
+  height: 34rpx;
+  margin-left: 20rpx;
+  transform: translateY(6rpx)
+}
+
+.jcModalWrap{position:fixed;top:0;left:0;right:0;bottom:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:999999999999;}
+.jcModal{width:530rpx;height:620rpx;position:absolute;top:50%;left:50%;margin-top:-310rpx;margin-left:-266rpx;background:#fff;border-radius:20rpx;}
+.jcModalClose{width:50rpx;height:50rpx;position:absolute;top:50%;margin-top:360rpx;left:50%;margin-left:-25rpx;z-index:999999999;}
+.jcModalTit{font-size: 32rpx;color:#333;text-align: center;font-weight: bold;}
+.jcModalText{font-size:28rpx;color:#333;text-align:left;line-height: 48rpx;}
+.jcModalBtn{border-radius:8rpx;width:94rpx;height:42rpx;font-size:24rpx;color:#333;text-align: center;line-height: 42rpx;}
+.shoperIcon{display: block;margin-right: 12rpx;}
+.jcCtrl .shopTxt{font-size: 26rpx;color: #333333;}

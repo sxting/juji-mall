@@ -49,7 +49,8 @@ Page({
     distributorRole:'',//桔长还是桔园身份
     welfareGroup: {},//“戳一下加入福利群”数据对象
     isShowSelect:false,
-    shareType:1
+    shareType:1,
+    member: wx.getStorageSync('distributorRole') == 'LEADER' || wx.getStorageSync('member')
   },
   onLoad: function(options) {
     const updateManager = wx.getUpdateManager();

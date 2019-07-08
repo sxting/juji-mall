@@ -12,7 +12,12 @@ Page({
         conHeight:400,
         topValue:0,
       showJcModal: false,
-      joinInfo: { phone: '17316191089', wechat: 'juji1031' }
+      joinInfo: { phone: '17316191089', wechat: 'juji1031' },
+      distributorRole: wx.getStorageSync('distributorRole'),
+      member: wx.getStorageSync('member'),
+      memberDays: wx.getStorageSync('memberDays'),
+      memberExpireTime: wx.getStorageSync('memberExpireTime'),
+      level: '白银'
     },
     toJuzi: function() {
         wx.switchTab({ url: '../juzi/index' });
@@ -23,6 +28,17 @@ Page({
         wx.navigateTo({ url: page });
     },
     onLoad: function() {
+      let levelStr = wx.getStorageSync('level'), level='白银';
+      if (levelStr === 'LOW') {
+        level = '白银'
+      } else if (levelStr= 'MID') {
+        level = '黄金'
+      } else if (levelStr = 'HIGH') {
+        level = '钻石'
+      }
+      this.setData({
+        level: level
+      })
         wx.getSystemInfo({
           success: (res) => {
             var conHeight = res.windowHeight-app.globalData.barHeight-45;

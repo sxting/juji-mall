@@ -34,7 +34,8 @@ Page({
         isLoadedBalance: true,
         locationStatus: true, //定位状态
         showJcModal:false,
-        joinInfo:{phone:'17316191089',wechat:'juji1031'}
+        joinInfo:{phone:'17316191089',wechat:'juji1031'},
+        member: wx.getStorageSync('distributorRole') == 'LEADER' || wx.getStorageSync('member')
     },
     showJoinModal:function(){
         this.setData({showJcModal:!this.data.showJcModal});

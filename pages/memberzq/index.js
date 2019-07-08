@@ -4,25 +4,23 @@ var app = getApp();
 
 Page({
   data: {
-    nvabarData: { showCapsule: 0, title: '' },
+    nvabarData: { showCapsule: 1, title: '' },
     locationPcode: '',
     locationCode: '',
     locationName: '',
-    recommendPage: [
-      {},
-      {},
-    ],
+    recommendPage: [],
     sortIndex: 1,
     pageNo: 1,
     pageSize: 5,
-    providerId: '',
+    providerId: wx.getStorageSync('providerId'),
     pullUpFlag: true,
-    sortField: 'IDX'
+    sortField: 'IDX',
+    member: wx.getStorageSync('distributorRole') == 'LEADER' || wx.getStorageSync('member')
   },
 
   onLoad: function (options) {
     this.getCurLocation();
-    // this.getRecommendPage();
+    this.getRecommendPage();
   },
 
   onShow: function () {
@@ -72,11 +70,14 @@ Page({
   getRecommendPage: function () {
     var obj = {
       providerId: this.data.providerId,
-      type: 'POINT',
-      sortField: 'IDX',
-      sortOrder: 'ASC',
+      type: '',
+      sortField: '',
+      sortOrder: '',
       pageNo: this.data.pageNo,
-      pageSize: this.data.pageSize
+      pageSize: this.data.pageSize,
+      isMember: 1,
+      longitude: wx.getStorageSync('curLongitude'),
+      latitude: wx.getStorageSync('curLatitude')
     };
     service.getRecommendPage(obj).subscribe({
       next: res => {
@@ -101,13 +102,12 @@ Page({
 
       let obj = {
         providerId: this.data.providerId,
-        type: 'POINT',
-        sortField: this.data.sortField,
-        sortOrder: this.data.sortArray[Number(this.data.sortIndex) - 1],
+        type: '',
+        sortField: '',
+        sortOrder: '',
         pageNo: p,
         pageSize: this.data.pageSize,
-        longitude: wx.getStorageSync('curLongitude'),
-        latitude: wx.getStorageSync('curLatitude')
+        isMember: 1
       };
 
       service.getRecommendPage(obj).subscribe({

@@ -71,5 +71,7 @@
     </view>
   </view>
 
-  <view class='buy'>立即购买</view>
+  <view class='buy' bindtap='buy'>立即购买</view>
+  <button class='buy share' open-type="share">分享</button>
+
 </view>

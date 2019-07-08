@@ -26,5 +26,31 @@ Page({
 
   },
 
+  share: function (obj) {
+    service.share(obj).subscribe({
+      next: res => {
+        console.log('---------分享接口返回--------');
+        console.log(res);
+      },
+      error: err => console.log(err),
+      complete: () => wx.hideToast()
+    })
+  },
 
+  onShareAppMessage: function (res) {
+    var obj = {
+      type: 'SHARE_PROGRAM',
+      sharePath: '/pages/member/index'
+    };
+    this.share(obj);
+    return {
+      title: '桔集：聚集优质好店，体验美好生活，加入成为会员吧！',
+      imageUrl: '/images/shareImg.png',
+      path: '/pages/login/index?pagetype=7&invitecode=' + wx.getStorageSync('inviteCode')
+    }
+  },
+
+  buy() {
+
+  },
 })

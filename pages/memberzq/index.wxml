@@ -6,7 +6,7 @@
       <view class="mtitle">会员专区</view>
     </view>
     
-    <view class="subtitle" style="margin-top:10rpx;">让低价好物一目了然</view>
+    <view class="subtitle" style="margin-top:10rpx;">会员专享精彩无限</view>
 
     <view class="jingxuanlist" wx:for="{{recommendPage}}" wx:key="{{index}}" bindtap="toComDetail" data-id="{{item.productId}}" data-storeid="{{item.nearStore.id}}">
       <image class="productImg" src="https://upic.juniuo.com/file/picture/{{item.picId}}/resize_750_420/mode_filt/format_jpg/quality_70" mode="widthFix">
@@ -33,7 +33,7 @@
   </view>
 </view>
 
-<view class='alert'>
+<view class='alert' wx:if="{{!member}}">
   <view class='alert-text'>您还不是桔集会员</view>
   <view class='alert-text'>无法购买会员专区商品</view>
   <view class='alert-btn' bindtap='toPage'>立即开通</view>

@@ -99,9 +99,11 @@
                         <image src="https://upic.juniuo.com/file/picture/{{item.picId}}/resize_750_420/mode_fill" lazy-load="true" mode="aspectFill" class="plimg"></image>
                         <view class="pubuname mt05">{{item.productName}}</view>
                         <view class="ub ub-ac priceDiv" style="margin-top:2rpx;padding-right:20rpx;">
+                            <text wx:if="{{member && item.distributor}}" class='f20'>会员价</text>
                             <view class="pubuprice" wx:if="{{item.point>0}}">{{item.point}}<text style="font-size:20rpx">桔子</text></view>
                             <view class="pubuprice" wx:if="{{item.point>0&&item.price>0}}">+</view>
-                            <view class="pubuprice" wx:if="{{item.price>0}}">{{filter.toFix(item.price)}}<text style="font-size:20rpx">元</text></view>
+                            <view class="pubuprice" wx:if="{{member&&item.distributor}}">{{item.memberPrice?filter.toFix(item.memberPrice):0}}<text style="font-size:20rpx">元</text></view>
+                            <view class="pubuprice" wx:else>{{filter.toFix(item.price)}}<text style="font-size:20rpx">元</text></view>
                             <view class="ub-f1"></view>
                             <view class="mark4" wx:if="{{item.currentActivityType=='SPLICED'}}">特价拼团</view>
                             <view class="mark4" wx:if="{{item.currentActivityType=='BARGAIN'}}">超值砍价</view>
@@ -122,15 +124,20 @@
                     <view class="pro-name" bindtap="toNextDetail" data-type="{{item.currentActivityType}}" data-actid="{{item.currentActivityId}}" data-id="{{item.productId}}" data-storeid="{{item.nearStore.id}}" data-tit="精品推荐" style="margin-top:8rpx">{{item.productName}}</view>
                     <view class="price-wrap jc-sb">
                         <view class="p-wrap">
+                          <text wx:if="{{member && item.distributor}}" class='f20'>会员价</text>
                             <view class="now-price" wx:if="{{item.point>0}}">{{item.point}}</view>
                             <view class="now-text" wx:if="{{item.point>0}}">桔子</view>
                             <view class="now-text" style="font-size: 28rpx;" wx:if="{{item.point>0&&item.price>0}}">+</view>
-                            <view class="now-price" wx:if="{{item.price>0}}">{{filter.toFix(item.price)}}</view>
-                            <view class="now-text" wx:if="{{item.price>0}}">元</view>
-                            <view class="proDiv ub ub-ac" wx:if="{{item.distributor}}">
-                                <view class="l">赚</view>
-                                <view class="r">￥{{filter.toFix(item.distributorSalesRebate)}}</view>
+                            <view class="now-price">
+                              <text wx:if="{{member&&item.distributor}}">{{item.memberPrice?filter.toFix(item.memberPrice):0}}</text>
+                              <text wx:else>{{filter.toFix(item.price)}}</text>
                             </view>
+                            <view class="now-text">元</view>
+                            <view class="proDiv ub ub-ac" wx:if="{{item.distributor && member}}">
+                                <view class="l">赚</view>
+                                <view class="r">￥{{filter.toFix(item.distributorSalesPrice)}}</view>
+                            </view>
+                            <view class='hyj-bg' wx:if="{{!member&&item.distributor}}">会员价:¥{{item.memberPrice?filter.toFix(item.memberPrice):0}}</view>
                             <view class="mark1" wx:if="{{item.currentActivityType=='SPLICED'}}">特价拼团</view>
                             <view class="mark2" wx:if="{{item.currentActivityType=='BARGAIN'}}">超值砍价</view>
                             <view class="mark3" wx:if="{{item.currentActivityType=='SEC_KILL'}}">限时秒杀</view>

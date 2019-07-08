@@ -148,7 +148,13 @@ Page({
             wx.reLaunch({
                 url: '/pages/activities/secondDetail/index?id=' + this.data.pageData.pid + '&activityId=' + this.data.pageData.activityId + '&invitecode=' + this.data.pageData.invitecode
             });
-        }
+      }
+      if (this.data.pageType == 7) {
+        wx.reLaunch({
+          url: '/pages/member/index?invitecode=' + this.data.pageData.invitecode
+        });
+      }
+
     },
     getUserInfo: function(e) {
         if (e.detail.userInfo) {
@@ -196,6 +202,11 @@ Page({
                             wx.setStorageSync('openid', res1.data.data.openId);
                             wx.setStorageSync('inviteCode', res1.data.data.inviteCode);
                             wx.setStorageSync('userinfo', JSON.stringify(res1.data.data));
+                            wx.setStorageSync('distributorRole', res1.data.data.distributorRole);
+                            wx.setStorageSync('member', res1.data.data.member);
+                            wx.setStorageSync('level', res1.data.data.level);
+                            wx.setStorageSync('memberDays', res1.data.data.memberDays);
+                            wx.setStorageSync('memberExpireTime', res1.data.data.memberExpireTime);
                             resolve2();
                         } else {
                             reject2('登录失败，错误码:' + res1.data.errorCode + ' 返回错误: ' + res1.data.errorInfo);

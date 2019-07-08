@@ -8,8 +8,8 @@
         <view class="">
           <view style="font-size: 34rpx;color: #000000;">
             <text>{{nickName}}</text>
-            <text wx:if="22" class='juzhang' bindtap="toPage" data-page='/pages/juzhangGZ/index'>白银桔长</text>
-            <image wx:elif="" class='hgVIP' src='../../images/hgVIP.png'></image>
+            <text wx:if="{{distributorRole == 'LEADER'}}" class='juzhang' bindtap="toPage" data-page='/pages/juzhangGZ/index'>{{level}}桔长</text>
+            <image wx:elif="{{member}}" class='hgVIP' src='../../images/hgVIP.png'></image>
             <image wx:else class='hgVIP' src='../../images/hgVIP2.png'></image>
           </view>
           <view class="ub ub-ac" style="margin-top:10rpx;" wx:if="{{phoneNum}}">
@@ -30,22 +30,22 @@
 
     <image src="../../images/bgy.png" class="bgy"></image>
 
-    <view style="height:140rpx;" class="taskCenter">
+    <view style="height:140rpx;" class="taskCenter" wx:if="{{!(distributorRole == 'LEADER' && !member)}}">
       <view class="ub ub-ac ub-pj" style="padding:30rpx;" bindtap="toPage" data-page='/pages/member/index'>
         <view class="ub ub-ac">
           <image style="width:135rpx;height:90rpx;margin-right:40rpx;" src="../../images/huangguan1.png"></image>
-          <view wx:if="">
+          <view wx:if="{{!member}}">
             <view style="font-family: PingFangSC-Regular;font-size: 22rpx;color: #666;">开通会员，享受会员专享价</view>
             <view style="font-family: PingFangSC-Regular;font-size: 22rpx;color: #666;margin-top:12rpx;">更有每周福利和会员专属客服</view>
           </view>
           <view wx:else>
-            <view style="font-family: PingFangSC-Regular;font-size: 22rpx;color: #666;">您已加入桔集会员230天</view>
-            <view style="font-family: PingFangSC-Regular;font-size: 22rpx;color: #666;margin-top:12rpx;">会员有效期至2019-08-29</view>
+            <view style="font-family: PingFangSC-Regular;font-size: 22rpx;color: #666;">您已加入桔集会员{{memberDays}}天</view>
+            <view style="font-family: PingFangSC-Regular;font-size: 22rpx;color: #666;margin-top:12rpx;">会员有效期至{{memberExpireTime}}</view>
           </view>
         </view>
         <view class="ub ub-ac">
           <view style="font-size: 24rpx;color: #333333;font-weight:bold">
-            <text wx:if="">立即开通</text>
+            <text wx:if="{{!member}}">立即开通</text>
             <text wx:else>立即续费</text>
           </view>
           <image src="../../images/arrow-r.png" style="width:12rpx;height:22rpx;margin-left:10rpx;"></image>
@@ -53,7 +53,7 @@
       </view>
     </view>
 
-    <view style="margin-top:60rpx;" class="userBox">
+    <view style="margin-top:60rpx;" class="userBox {{(distributorRole == 'LEADER' && !member) ? 'rela-top' : ''}}">
       <view class="ub ub-ac ub-pj" style="padding:30rpx;">
         <view style="font-size: 30rpx;color: #333333;">我的订单</view>
         <view class="ub ub-ac" bindtap="toPage" data-page="/pages/orderlist/index?index=0&status=ALL">
@@ -80,7 +80,7 @@
       </view>
     </view>
 
-    <view style="margin-top:20rpx;padding-bottom:50rpx;" class="userBox">
+    <view style="margin-top:20rpx;padding-bottom:50rpx;" class="userBox {{(distributorRole == 'LEADER' && !member) ? 'rela-top' : ''}}">
       <view class="ub ub-ac ub-pj">
         <view class="userGrid ub ub-ver ub-ac" bindtap="toPage" data-page="/pages/activities/myActivity/index?type=BARGAIN">
           <image class="userGridIcon" mode="aspectFit" src="../../images/icon_my1.png"></image>

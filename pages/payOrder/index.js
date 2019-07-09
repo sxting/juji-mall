@@ -29,7 +29,8 @@ Page({
         orderBizType: 'NORMAL',
         defaultSku: {},
         activityData: {},
-        ruleMaps: {}
+        ruleMaps: {},
+      member: wx.getStorageSync('distributorRole') == 'LEADER' || wx.getStorageSync('member')
     },
     onLoad: function(options) {
         console.log("确认订单页面");
@@ -195,6 +196,13 @@ Page({
                             var info = this.data.defaultSku;
                             var point = info.point == null || info.point == 0 ? '0' : info.point;
                             var price = info.price == null || info.price == 0 ? '0' : info.price;
+
+                            if (!this.data.productInfo.isMember && this.data.member && this.data.productInfo.distributor) {
+                              price = info.memberPrice
+                            } else {
+                              price = info.price;
+                            }
+
                             if (point == 0 && price > 0) {
                                 var payTypeValue = 'WECHAT';
                             } else if (point > 0 && price == 0) {

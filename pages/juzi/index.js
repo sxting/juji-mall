@@ -20,6 +20,8 @@ Page({
     });
     wx.hideShareMenu();
     this.getInfo();
+  },
+  onShow: function() {
     this.currentPoint();
   },
   showDesModal:function(e){

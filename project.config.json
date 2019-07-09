@@ -38,7 +38,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 1,
+			"current": 6,
 			"list": [
 				{
 					"id": -1,
@@ -79,6 +79,13 @@
 					"id": -1,
 					"name": "桔长升降级规则",
 					"pathName": "pages/juzhangGZ/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 6,
+					"name": "pages/jujiGarden/myUser/index",
+					"pathName": "pages/jujiGarden/myUser/index",
 					"query": "",
 					"scene": null
 				}

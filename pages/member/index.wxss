@@ -105,15 +105,15 @@
   padding-top:30rpx;
   position: relative;
 }
-.card1 {
+.card-item:nth-child(1) .card {
   background-image: linear-gradient(45deg, #9FA2AB 0%, #BBBDC9 48%, #D9DCE1 100%);
   color:#2E3547;
 }
-.card2 {
+.card-item:nth-child(2) .card {
   background-image: linear-gradient(43deg, #3A3A3B 0%, rgba(82,83,84,0.90) 59%, #575859 100%);
   color:#fff;
 }
-.card3 {
+.card-item:nth-child(3) .card {
   background-image: linear-gradient(-136deg, #E9D2B0 0%, #DBBE91 53%, #CCAA71 100%);
   color:#A07446;
 }

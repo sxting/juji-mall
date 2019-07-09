@@ -211,6 +211,13 @@ service.activityList = (data) => {
   return http.get(url, data);
 }
 
+// 会员卡列表 
+// 
+service.memberDefines = (data) => {
+  let url = api + '/distributor/memberDefines.json';
+  return http.get(url, data);
+}
+
 
 module.exports = {
   service: service

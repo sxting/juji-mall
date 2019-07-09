@@ -39,14 +39,22 @@ Page({
       this.setData({
         level: level
       })
-        wx.getSystemInfo({
-          success: (res) => {
-            var conHeight = res.windowHeight-app.globalData.barHeight-45;
-            this.setData({conHeight:conHeight})
-          }
-        });      
-        this.getInfo();
+      wx.getSystemInfo({
+        success: (res) => {
+          var conHeight = res.windowHeight-app.globalData.barHeight-45;
+          this.setData({conHeight:conHeight})
+        }
+      });      
+      this.getInfo();
       this.getJoinInfo();
+    },
+    onShow: function() {
+      this.setData({
+        distributorRole: wx.getStorageSync('distributorRole'),
+        member: wx.getStorageSync('member'),
+        memberDays: wx.getStorageSync('memberDays'),
+        memberExpireTime: wx.getStorageSync('memberExpireTime'),
+      })
     },
     showJoinModal: function () {
       this.setData({ showJcModal: !this.data.showJcModal });

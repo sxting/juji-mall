@@ -1,3 +1,4 @@
+<wxs module="filter" src="../../utils/numFr.wxs"></wxs>
 <nav-bar navbar-data='{{nvabarData}}'></nav-bar>
 <view class="member-bg">
   <view class='bg-top'>
@@ -45,33 +46,22 @@
   <view class='cards-list winner'>
     <view class='cards-title'>选择会员版本</view>
     <view>
-      <view class='card-item'>
+      <view class='card-item' wx:for="{{dataList}}" wx:key="{{index}}" wx:for-item="item" bindtap='cardClick' data-card='{{item}}'>
         <view class='card card1'>
-          <view class='card-name'>季卡</view>
-          <view class='card-price'>¥ 30.00</view>
-          <image class='selected' src='../../images/xuanzhong.png'></image>
+          <view class='origin-price' wx:if="{{item.skuId == 'YEAR_CARD'}}">原价¥{{item.originalPrice/100}}</view>
+          <view class='card-name'>{{item.skuName}}</view>
+          <view class='card-price'>¥ {{filter.toFix(item.price)}}</view>
+          <image class='selected' wx:if="{{selectedCard.id == item.id}}" src='../../images/xuanzhong.png'></image>
         </view>
-        <view class='card-bottom'>赠送50桔子</view>
-      </view>
-      <view class='card-item'>
-        <view class='card card2'>
-          <view class='card-name'>半年卡</view>
-          <view class='card-price'>¥ 58.00</view>
-        </view>
-        <view class='card-bottom'>赠送50桔子</view>
-      </view>
-      <view class='card-item'>
-        <view class='card card3'>
-          <view class='origin-price'>原价¥120</view>
-          <view class='card-name'>年卡</view>
-          <view class='card-price'>¥ 100.00</view>
-        </view>
-        <view class='card-bottom'>赠送50桔子</view>
+        <view class='card-bottom'>赠送{{item.point}}桔子</view>
       </view>
     </view>
   </view>
 
-  <view class='buy' bindtap='buy'>立即购买</view>
+  <form bindsubmit="collectFormIds" report-submit="true">
+    <button form-type="submit" class='buy' bindtap='buy'>立即购买</button>
+  </form>
+
   <button class='buy share' open-type="share">分享</button>
 
 </view>

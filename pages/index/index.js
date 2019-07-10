@@ -385,6 +385,9 @@ Page({
                 showPageLoading: false
             });
         }, 5000);
+        this.setData({
+          member: wx.getStorageSync('distributorRole') == 'LEADER' || wx.getStorageSync('member')
+        })
         console.log("locationCode====="+this.data.locationCode);
         // this.currentPoint();
         if (wx.getStorageSync('isLeaderAlert') == 1) {

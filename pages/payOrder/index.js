@@ -35,6 +35,9 @@ Page({
     onLoad: function(options) {
         console.log("确认订单页面");
         console.log(options);
+        this.setData({
+          member: wx.getStorageSync('distributorRole') == 'LEADER' || wx.getStorageSync('member')
+        })
         if (options.orderType) {
             this.setData({ orderBizType: options.orderType });
         }

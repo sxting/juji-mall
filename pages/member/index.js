@@ -179,16 +179,17 @@ Page({
                     signType: payInfo.signType,
                     paySign: payInfo.paySign,
                     success: (res2) => {
-                      wx.reLaunch({
-                        url: '/pages/jujiGarden/gardenIndex/index',
-                      })
                       this.setData({ paying: false });
                       var obj = {
                         rawData: '',
                         inviteCode: '',
                         scene: ''
                       };
-                      this.login(obj).then(() => {});
+                      this.login(obj).then(() => {
+                        wx.reLaunch({
+                          url: '/pages/jujiGarden/gardenIndex/index',
+                        })
+                      });
                     },
                     fail: (res2) => {
                       if (res2.errMsg == 'requestPayment:fail cancel') {

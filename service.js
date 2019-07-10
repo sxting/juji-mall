@@ -218,6 +218,12 @@ service.memberDefines = (data) => {
   return http.get(url, data);
 }
 
+// 绑定微信号及姓名
+service.bindWechatId = (data) => {
+  let url = api + '/distributor/bindWechatId.json';
+  return http.get(url, data);
+}
+
 
 module.exports = {
   service: service

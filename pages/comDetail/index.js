@@ -66,7 +66,10 @@ Page({
         })
     })
     var shareType = wx.getStorageSync('shareType');
-    this.setData({shareType:shareType==1})
+    this.setData({
+      shareType:shareType==1,
+      member: wx.getStorageSync('distributorRole') == 'LEADER' || wx.getStorageSync('member')
+    })
     
     if (options.share) {
       this.setData({share: options.share});

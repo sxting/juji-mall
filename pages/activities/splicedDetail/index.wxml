@@ -108,9 +108,9 @@
           <view wx:for="{{productSkus}}" wx:key="unique" class="{{item.skuId==defaultSku.skuId?'on':''}} {{item.stock==0?'null':''}}" data-skuid="{{item.skuId}}" data-id="{{item.id}}" bindtap="selectType" data-stock="{{item.stock}}">{{filter.toEllipsised(item.skuName)}}</view>
       </view>
       <view class="selectDiv ub ub-ac">已选：“{{filter.toEllipsised(defaultSku.skuName)}}”，售价：
-          <text class="uu" wx:if="{{defaultSku.point>0}}">{{defaultSku.point}}桔子</text>
-          <text class="uu" wx:if="{{defaultSku.point>0&&defaultSku.price>0}}">+</text>
-          <text class="uu" wx:if="{{defaultSku.price>0}}">{{filter.toFix(defaultSku.price)}}元</text>
+          <text class="uu" wx:if="{{defaultSku.splicedPoint>0}}">{{defaultSku.splicedPoint}}桔子</text>
+          <text class="uu" wx:if="{{defaultSku.splicedPoint>0&&defaultSku.splicedPoint>0}}">+</text>
+          <text class="uu" wx:if="{{defaultSku.splicedPrice>0}}">{{filter.toFix(defaultSku.splicedPrice)}}元</text>
       </view>
       <form bindsubmit="collectFormIds" report-submit="true">
         <button class="selectBtn" bindtap="okSelect">选好了</button>

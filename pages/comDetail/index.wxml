@@ -37,7 +37,7 @@
                     </view>
                     <view class='memberp' wx:if="{{!member&&productInfo.distributor}}">会员价:￥{{filter.toFix(productInfo.memberPrice)}}</view>
                     <view style="font-size: 24rpx;color: #999999;text-decoration:line-through;margin-left:25rpx;line-height:24rpx;">{{filter.toFix(productInfo.originalPrice)}} 元</view>
-                    <view class="proDiv ub ub-ac" wx:if="{{isShowProfit&&productInfo.distributor}}">
+                    <view class="proDiv ub ub-ac" wx:if="{{productInfo.distributor&&member}}">
                         <view class="l">赚</view>
                         <view class="r">￥{{filter.toFix(productInfo.distributorSalesPrice)}}</view>
                     </view>

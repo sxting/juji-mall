@@ -79,7 +79,8 @@ Page({
     },
     onShow: function() {
         this.setData({
-            genderArr: [{ value: 1, name: '男' }, { value: 2, name: '女' }]
+          genderArr: [{ value: 1, name: '男' }, { value: 2, name: '女' }],
+          member: wx.getStorageSync('distributorRole') == 'LEADER' || wx.getStorageSync('member')
         });
         if(wx.getStorageSync('inputData')){
             console.log("录入后保存的数据重新展现");
@@ -285,7 +286,26 @@ Page({
         this.setData({
             fansCount: this.data.fansCountArr[e.detail.value].value
         });
+    },
+  bandAuth() {
+    let data = {
+      wechatId: this.data.wechatId,
+      name: this.data.name
     }
+    service.bindWechatId(data).subscribe({
+      next: res => {
+        wx.showToast({
+          title: "绑定成功",
+          icon: "success",
+        });
+        this.setData({
+          isAuthed: true,
+        });
+      },
+      error: err => console.log(err),
+      complete: () => wx.hideToast()
+    })
+  }
 });
 
 // 绑定手机号码

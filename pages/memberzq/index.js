@@ -20,6 +20,9 @@ Page({
 
   onLoad: function (options) {
     this.getCurLocation();
+    this.setData({
+      member: wx.getStorageSync('distributorRole') == 'LEADER' || wx.getStorageSync('member')
+    })
     this.getRecommendPage();
   },
 

@@ -145,7 +145,7 @@ Page({
                     activityOrderId: res.orderDigest ? res.orderDigest.activityOrderId : '',
                     self: (!res.orderDigest) || (res.orderDigest && res.orderDigest.isInitiator),
                     productSkus: res.product.product.productSkus,
-                    defaultSku: res.product.product.defaultSku,
+                  defaultSku: res.ruleMaps[res.product.product.defaultSku.skuId][0],
                     ruleMaps:res.ruleMaps,
                     curSkuId:res.product.product.defaultSku.skuId,
                     curSkuMajorId:res.product.product.defaultSku.id
@@ -200,8 +200,9 @@ Page({
     selectType: function(e) {
         if(e.currentTarget.dataset.stock>0){
             this.setData({ curSkuId: e.currentTarget.dataset.skuid, curSkuMajorId: e.currentTarget.dataset.id });
-            var skuObj = getObjById(this.data.productSkus,this.data.curSkuId);
-            this.setData({defaultSku:skuObj});
+            // var skuObj = getObjById(this.data.productSkus,this.data.curSkuId);
+          var skuObj = this.data.ruleMaps[this.data.curSkuId];
+            this.setData({defaultSku:skuObj[0]});
         }
     },
     okSelect: function() {

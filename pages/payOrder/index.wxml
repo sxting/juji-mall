@@ -14,9 +14,6 @@
         <view class="goodAmount" wx:if="{{paytype==1||paytype==2||paytype==3}}">
           <text style="font-size:30rpx;" wx:if="{{defaultSku.point>0}}">{{defaultSku.point}}<text style="font-size:28rpx;">桔子</text></text>
           <text style="font-size:30rpx;" wx:if="{{defaultSku.point>0&&defaultSku.price>0}}">+</text>
-
-          
-
           <text style="font-size:30rpx;">
             <text wx:if="{{!productInfo.isMember&&member&&productInfo.distributor}}">{{filter.toFix(defaultSku.memberPrice)}}</text>
             <text wx:else>{{filter.toFix(defaultSku.price)}}</text>

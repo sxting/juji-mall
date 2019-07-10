@@ -38,7 +38,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 6,
+			"current": 8,
 			"list": [
 				{
 					"id": -1,
@@ -87,6 +87,20 @@
 					"name": "pages/jujiGarden/myUser/index",
 					"pathName": "pages/jujiGarden/myUser/index",
 					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "拼团",
+					"pathName": "pages/activities/splicedDetail/index",
+					"query": "id=2019071010001650311625319&activityId=2019071014364790073995277",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "砍价",
+					"pathName": "pages/activities/bargainDetail/index",
+					"query": "id=2019071010102515223363240&activityId=2019071012040472180950246",
 					"scene": null
 				}
 			]

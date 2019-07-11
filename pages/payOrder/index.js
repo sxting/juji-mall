@@ -245,25 +245,32 @@ Page({
                                 next: res1 => {
                                     console.log('--------创建订单返回1混合支付-------');
                                     console.log(res1);
+                                  if (payTypeValue == 'POINT') {
+                                    wx.redirectTo({
+                                      url: '/pages/orderDetail/index?id=' + res1.orderId,
+                                    });
+                                    this.setData({ alreadyPay: false });
+                                  } else {
                                     var payInfo = JSON.parse(res1.payInfo);
                                     wx.requestPayment({
-                                        timeStamp: payInfo.timeStamp,
-                                        nonceStr: payInfo.nonceStr,
-                                        package: payInfo.package,
-                                        signType: payInfo.signType,
-                                        paySign: payInfo.paySign,
-                                        success:(res2) => {
-                                            wx.redirectTo({
-                                                url: '/pages/orderDetail/index?id=' + res1.orderId,
-                                            });
-                                            this.setData({alreadyPay: false});
-                                        },
-                                        fail:(res2) => {
-                                            if (res2.errMsg == 'requestPayment:fail cancel') {
-                                                this.cancelPay();
-                                            }
+                                      timeStamp: payInfo.timeStamp,
+                                      nonceStr: payInfo.nonceStr,
+                                      package: payInfo.package,
+                                      signType: payInfo.signType,
+                                      paySign: payInfo.paySign,
+                                      success: (res2) => {
+                                        wx.redirectTo({
+                                          url: '/pages/orderDetail/index?id=' + res1.orderId,
+                                        });
+                                        this.setData({ alreadyPay: false });
+                                      },
+                                      fail: (res2) => {
+                                        if (res2.errMsg == 'requestPayment:fail cancel') {
+                                          this.cancelPay();
                                         }
+                                      }
                                     });
+                                  }
                                 },
                                 error: err => {
                                     this.errorAlert(err);

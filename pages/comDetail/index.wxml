@@ -31,9 +31,9 @@
                         <view class="price2" wx:if="{{productInfo.point>0&&productInfo.price>0}}">+</view>
                         <view class="price1">
                           <text wx:if="{{!productInfo.isMember&&member&&productInfo.distributor}}">{{filter.toFix(productInfo.memberPrice)}}</text>
-                          <text wx:else>{{filter.toFix(productInfo.price)}}</text>
+                          <text wx:elif="{{productInfo.price>0}}">{{filter.toFix(productInfo.price)}}</text>
                         </view>
-                        <view class="price2">元</view>
+                        <view class="price2" wx:if="{{productInfo.price>0}}">元</view>
                     </view>
                     <view class='memberp' wx:if="{{!member&&productInfo.distributor}}">会员价:￥{{filter.toFix(productInfo.memberPrice)}}</view>
                     <view style="font-size: 24rpx;color: #999999;text-decoration:line-through;margin-left:25rpx;line-height:24rpx;">{{filter.toFix(productInfo.originalPrice)}} 元</view>

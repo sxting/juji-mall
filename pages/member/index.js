@@ -130,7 +130,8 @@ Page({
             if (this.data.count <= this.data.productInfo.limitPerOrderNum) {
               //创建订单
               var info = this.data.selectedCard;
-              var point = info.point == null || info.point == 0 ? '0' : info.point;
+              // var point = info.point == null || info.point == 0 ? '0' : info.point;
+              var point = 0;
               var price = info.price == null || info.price == 0 ? '0' : info.price;
               if (point == 0 && price > 0) {
                 var payTypeValue = 'WECHAT';

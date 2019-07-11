@@ -58,7 +58,7 @@
             <image class='selected' wx:if="{{selectedCard.id == item.id}}" src='../../images/xuanzhong.png'></image>
           </view>
         </view>
-        <view class='card-bottom'>赠送{{item.point}}桔子</view>
+        <view class='card-bottom'>赠送200桔子</view>
       </view>
     </view>
   </view>

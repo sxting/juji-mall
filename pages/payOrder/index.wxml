@@ -1,6 +1,6 @@
 <wxs module="filter" src="../../utils/numFr.wxs"></wxs>
 <nav-bar navbar-data='{{nvabarData}}'></nav-bar>
-<view wx:if="{{showProduct}}">
+<view wx:if="{{showProduct}}" class='content'>
   <view class="tradeInfo" style="padding:20rpx 30rpx;">
     <view class="p15 ub info" style="align-items:flex-start;">
       <image class="goodImg udb" src="{{productInfo.picId?'https://upic.juniuo.com/file/picture/'+productInfo.picId+'/resize_220_200/mode_filt/format_jpg/quality_70':''}}" lazy-load="true" mode="aspectFill"></image>
@@ -103,6 +103,32 @@
       </view>
     </view>
     <view style="padding:20rpx 0 30rpx 0;font-size: 24rpx;color: #999999;">你有{{pointBalance}}个桔子</view>
+  </view>
+
+  <view class='usermsg plr15 bgb' wx:if="">
+    <view class="ub ub-ac ub-pj item">
+      <view class="itemTit ub ub-ac">顾客信息</view>
+    </view>
+    <view class="ub ub-ac ub-pj item">
+      <view class="itemTit2 ub ub-ac">姓名</view>
+      <view class="ub-f1 tx-r"> 
+        <input placeholder='必填，输入证件上的姓名' placeholder-class='placeholder'></input>
+      </view>
+    </view>
+    <view class="line"></view>
+    <view class="ub ub-ac ub-pj item">
+      <view class="itemTit2 ub ub-ac">身份证</view>
+      <view class="ub-f1 tx-r"> 
+        <input placeholder='必填，输入证件号' placeholder-class='placeholder'></input>
+      </view>
+    </view>
+    <view class="line"></view>
+    <view class="ub ub-ac ub-pj item">
+      <view class="itemTit2 ub ub-ac">手机号</view>
+      <view class="ub-f1 tx-r"> 
+        <input placeholder='必填，输入联系人手机号' placeholder-class='placeholder'></input>
+      </view>
+    </view>
   </view>
   
   <view class="remarkw">

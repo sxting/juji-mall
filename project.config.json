@@ -38,7 +38,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 1,
+			"current": 9,
 			"list": [
 				{
 					"id": -1,
@@ -101,6 +101,13 @@
 					"name": "砍价",
 					"pathName": "pages/activities/bargainDetail/index",
 					"query": "id=2019071010102515223363240&activityId=2019071012040472180950246",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "订单确认",
+					"pathName": "pages/payOrder/index",
+					"query": "paytype=2&id=2019031515591744503355633&storeid=111552548179297607&sceneid=&inviteCode=&skuId=2019031515591744503355633&smId=30",
 					"scene": null
 				}
 			]

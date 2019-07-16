@@ -24,8 +24,11 @@
             </view>
             <view class="ub ub-fe jc-sb" style="margin-top:10rpx;">
                 <view class="ub ub-fe">
-                    <view style="display:flex;align-items: flex-end;">
-                        <text wx:if="{{member && productInfo.distributor}}" class='f20'>会员价</text>
+                    <view wx:if="{{!productInfo.isMember&&member&&productInfo.distributor}}" class='jujia'>
+                      桔价:{{filter.toFix(productInfo.price)}}
+                    </view>
+                    <view style="display:flex;align-items: flex-end;" class='{{!productInfo.isMember&&member&&productInfo.distributor ? "memberp2": ""}}'>
+                        <text wx:if="{{member && productInfo.distributor}}" class='f20'>会员价 </text>
                         <view class="price1" wx:if="{{productInfo.point>0}}">{{productInfo.point}}</view>
                         <view class="price2" wx:if="{{productInfo.point>0}}">桔子</view>
                         <view class="price2" wx:if="{{productInfo.point>0&&productInfo.price>0}}">+</view>

@@ -282,13 +282,26 @@ Page({
 function getData() {
   service.memberDefines({}).subscribe({
     next: res => {
-      this.setData({
-        dataList: res.productSkus,
-        selectedCard: res.productSkus[0],
-        productId: res.productId,
-        skuMajorId: res.productSkus[0].id,
-        skuId: res.productSkus[0].skuId
-      });
+        
+        // 19.07.17兼容后台送桔子新版本
+        if (res.product) {
+            var pointMap = res.pointMap
+            res = res.product
+            var productSkus = res.productSkus
+            productSkus.forEach(p => {
+                // 自定义添加一个送桔子属性
+                p['sendPoint'] = pointMap[p.skuId]
+            })
+        }
+
+        this.setData({
+            dataList: res.productSkus,
+            selectedCard: res.productSkus[0],
+            productId: res.productId,
+            skuMajorId: res.productSkus[0].id,
+            skuId: res.productSkus[0].skuId
+        });
+      
       this.getItemInfo();
     },
     error: err => console.log(err),

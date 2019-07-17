@@ -212,6 +212,25 @@ Page({
       var point = this.data.productInfo.point==null?0:this.data.productInfo.point;
       var price = this.data.productInfo.price==null?0:this.data.productInfo.price;
       var type = this.data.productInfo.type;
+      if (this.data.productInfo.isMember && !this.data.member) {
+        wx.showModal({
+          title: '提示',
+          content: '您还不是桔集会员，无法购买会员专区商品',
+          cancelText: '取消',
+          confirmText: '开通会员',
+          success(res) {
+            if (res.confirm) {
+              console.log('用户点击确定');
+              wx.navigateTo({
+                url: '/pages/member/index',
+              })
+            } else if (res.cancel) {
+              console.log('用户点击取消')
+            }
+          }
+        })
+        return;
+      }
       if(type=='PRODUCT'&&point>0&&price>0){
         if(price>0&&this.data.pointBalance>=point){
           this.toggleSelect();

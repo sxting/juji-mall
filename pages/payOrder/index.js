@@ -30,7 +30,10 @@ Page({
         defaultSku: {},
         activityData: {},
         ruleMaps: {},
-      member: wx.getStorageSync('distributorRole') == 'LEADER' || wx.getStorageSync('member')
+      member: wx.getStorageSync('distributorRole') == 'LEADER' || wx.getStorageSync('member'),
+      realName: '',
+      idNo: '',
+      mobile: ''
     },
     onLoad: function(options) {
         console.log("确认订单页面");
@@ -180,6 +183,21 @@ Page({
         });
         this.setData({ alreadyPay: false });
     },
+  bindrealNameinput(e) {
+    this.setData({
+      realName: e.detail.value
+    })
+  },
+  bindidNoinput(e) {
+    this.setData({
+      idNo: e.detail.value
+    })
+  },
+  bindmobileinput(e) {
+    this.setData({
+      mobile: e.detail.value
+    })
+  },
     // 普通商品支付
     toProductPay: function() {
         service.getPre({productId: this.data.productId}).subscribe({
@@ -239,7 +257,10 @@ Page({
                                 payType: payTypeValue,
                                 providerId: this.data.productInfo.providerId,
                                 providerName: this.data.productInfo.providerName,
-                                orderBizType: this.data.orderBizType
+                                orderBizType: this.data.orderBizType,
+                                realName: this.data.realName,
+                                idNo: this.data.idNo,
+                                mobile: this.data.mobile,
                             };
                             service.saveOrder(orderObj).subscribe({
                                 next: res1 => {

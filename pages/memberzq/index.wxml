@@ -25,7 +25,7 @@
             <view class="now-price" wx:if="{{item.point>0}}">{{item.point}}桔子</view>
             <view class="now-price" wx:if="{{item.point>0&&item.price>0}}">+</view>
             <view class="now-price" wx:if="{{item.price>0}}">{{filter.toFix(item.price)}}元</view>
-            <!-- <view class="old-price">{{filter.toFix(item.originalPrice)}}元</view> -->
+            <view class="old-price">{{filter.toFix(item.originalPrice)}}元</view>
           </view>
         </view>
     </view> 
@@ -33,8 +33,8 @@
   </view>
 </view>
 
-<view class='alert' wx:if="{{!member}}">
+<!-- <view class='alert' wx:if="{{!member}}">
   <view class='alert-text'>您还不是桔集会员</view>
   <view class='alert-text'>无法购买会员专区商品</view>
   <view class='alert-btn' bindtap='toPage'>立即开通</view>
-</view>
+</view> -->

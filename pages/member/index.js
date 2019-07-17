@@ -299,7 +299,8 @@ function getData() {
             selectedCard: res.productSkus[0],
             productId: res.productId,
             skuMajorId: res.productSkus[0].id,
-            skuId: res.productSkus[0].skuId
+            skuId: res.productSkus[0].skuId,
+          sceneId: res.sceneId
         });
       
       this.getItemInfo();

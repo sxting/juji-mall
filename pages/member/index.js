@@ -16,6 +16,7 @@ Page({
     inviteCode: '',
     orderBizType: 'NORMAL',
     paying: false,
+    resData: {}
   },
 
   onLoad: function (options) {
@@ -29,6 +30,9 @@ Page({
         this.setData({ conHeight: conHeight })
       }
     });
+    this.setData({
+      sceneId: options.sceneId ? options.sceneId : ''
+    })
     getData.call(this);
   },
 
@@ -52,7 +56,7 @@ Page({
     return {
       title: '桔集：聚集优质好店，体验美好生活，加入成为会员吧！',
       imageUrl: '/images/shareImg.png',
-      path: '/pages/login/index?pagetype=7&invitecode=' + wx.getStorageSync('inviteCode')
+      path: '/pages/login/index?pagetype=7&sceneId=' + this.data.resData.sceneId
     }
   },
 
@@ -300,7 +304,8 @@ function getData() {
             productId: res.productId,
             skuMajorId: res.productSkus[0].id,
             skuId: res.productSkus[0].skuId,
-          sceneId: res.sceneId
+          sceneId: this.data.sceneId ? this.data.sceneId : res.sceneId,
+          resData: res
         });
       
       this.getItemInfo();

@@ -312,13 +312,12 @@ Page({
                                     latitude: wx.getStorageSync('curLatitude')
                                 };
                                 that.getRecommendPage(obj1);
-                            } else { //如果不存在服务商 显示当前地区暂未开通
-                                // wx.showModal({
-                                //   title: '错误',
-                                //   content: '当前位置不存在服务商'
-                                // });
+                            } else {
+                                //如果不存在服务商 显示当前地区暂未开通
                                 that.setData({
                                     providerId: '',
+                                    slideShowList:[],
+                                    recommendPage:[],
                                     showPageLoading: false
                                 });
                             }
@@ -359,6 +358,8 @@ Page({
                             } else {
                                 that.setData({
                                     providerId: '',
+                                    slideShowList:[],
+                                    recommendPage:[],
                                     showPageLoading: false
                                 });
                             }

@@ -52,6 +52,7 @@ Page({
       });      
       this.getInfo();
       this.getJoinInfo();
+      this.getQrCode();
     },
     onShow: function() {
       this.setData({
@@ -150,6 +151,22 @@ Page({
           this.nextPage();
         }
       }
+    });
+  },
+
+  getQrCode: function () {
+    service.getQrCode({ productId: 'MEMBER_CARD', path: '' }).subscribe({
+      next: res => {
+        console.log(res);
+        this.setData({
+          sceneId: res
+        })
+      },
+      error: err => {
+        errDialog(err);
+        wx.hideLoading();
+      },
+      complete: () => wx.hideToast()
     });
   },
 });

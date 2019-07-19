@@ -17,7 +17,9 @@ Page({
       member: wx.getStorageSync('member'),
       memberDays: wx.getStorageSync('memberDays'),
       memberExpireTime: wx.getStorageSync('memberExpireTime'),
-      level: '白银'
+      level: '白银',
+      sceneId: '',
+      inviteMemberCount: 0,
     },
     toJuzi: function() {
         wx.switchTab({ url: '../juzi/index' });
@@ -25,6 +27,9 @@ Page({
     toPage: function(e) {
         var page = e.currentTarget.dataset.page;
         console.log(page);
+        if(this.data.member) {
+          return;
+        }
         wx.navigateTo({ url: page });
     },
     onLoad: function() {
@@ -54,8 +59,16 @@ Page({
         member: wx.getStorageSync('member'),
         memberDays: wx.getStorageSync('memberDays'),
         memberExpireTime: wx.getStorageSync('memberExpireTime'),
+        inviteMemberCount: wx.getStorageSync('inviteMemberCount'),
       })
     },
+  onShareAppMessage: function (res) {
+    return {
+      title: '桔集：聚集优质好店，体验美好生活，加入成为会员吧！',
+      imageUrl: '/images/shareImg.png',
+      path: '/pages/login/index?pagetype=7&sceneId=' + this.data.sceneId
+    }
+  },
     showJoinModal: function () {
       this.setData({ showJcModal: !this.data.showJcModal });
     },

@@ -38,7 +38,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 10,
+			"current": 11,
 			"list": [
 				{
 					"id": -1,
@@ -115,6 +115,13 @@
 					"name": "订单确认",
 					"pathName": "pages/payOrder/index",
 					"query": "paytype=3&id=2019070521132493519170931&storeid=111561173843226527&sceneid=&inviteCode=&skuId=hozK5Oe0&smId=406",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "桔园",
+					"pathName": "pages/jujiGarden/gardenIndex/index",
+					"query": "",
 					"scene": null
 				}
 			]

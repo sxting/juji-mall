@@ -33,20 +33,23 @@
     <view style="height:140rpx;" class="taskCenter" wx:if="{{!(distributorRole == 'LEADER' && !member)}}">
       <view class="ub ub-ac ub-pj" style="padding:30rpx;" bindtap="toPage" data-page='/pages/member/index'>
         <view class="ub ub-ac">
-          <image style="width:135rpx;height:90rpx;margin-right:40rpx;" src="../../images/huangguan1.png"></image>
+          <image style="width:135rpx;height:90rpx;margin-right:20rpx;" src="../../images/huangguan1.png"></image>
           <view wx:if="{{!member}}">
             <view style="font-family: PingFangSC-Regular;font-size: 22rpx;color: #666;">开通会员，享受会员专享价</view>
             <view style="font-family: PingFangSC-Regular;font-size: 22rpx;color: #666;margin-top:12rpx;">更有每周福利和会员专属客服</view>
           </view>
           <view wx:else>
-            <view style="font-family: PingFangSC-Regular;font-size: 22rpx;color: #666;">您已加入桔集会员{{memberDays}}天</view>
-            <view style="font-family: PingFangSC-Regular;font-size: 22rpx;color: #666;margin-top:12rpx;">会员有效期至{{memberExpireTime}}</view>
+            <view style="font-family: PingFangSC-Regular;font-size: 22rpx;color: #666;">邀请6人成为会员，您可升级为桔长</view>
+            <view style="font-family: PingFangSC-Regular;font-size: 22rpx;color: #666;margin-top:12rpx;">享受更高返利和桔长专属权益({{inviteMemberCount?inviteMemberCount:0}}/6)</view>
+            <!-- <view style="font-family: PingFangSC-Regular;font-size: 22rpx;color: #666;">您已加入桔集会员{{memberDays}}天</view>
+            <view style="font-family: PingFangSC-Regular;font-size: 22rpx;color: #666;margin-top:12rpx;">会员有效期至{{memberExpireTime}}</view> -->
           </view>
         </view>
         <view class="ub ub-ac">
           <view style="font-size: 24rpx;color: #333333;font-weight:bold">
             <text wx:if="{{!member}}">立即开通</text>
-            <text wx:else>立即续费</text>
+            <button open-type='share' wx:else class='yaoqing'>邀请他人</button>
+            <!-- <text wx:else>立即续费</text> -->
           </view>
           <image src="../../images/arrow-r.png" style="width:12rpx;height:22rpx;margin-left:10rpx;"></image>
         </view>

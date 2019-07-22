@@ -1,11 +1,7 @@
 var constant = {
   TPLID: '1.0.07',//应用版本
   APPID: 'wxb03b0ab93bb60ecc',//小程序wxid
-<<<<<<< HEAD
-//   apiUrl: 'https://c.juniuo.com/shopping', //mall
-=======
   // apiUrl: 'https://c.juniuo.com/shopping', //mall
->>>>>>> 1dc8aed9c97d4f18fb340d5c390e8fe38017264f
   apiUrl: 'https://upic-test.juniuo.com',//测试环境
   jujipayUrl: 'https://juji.juniuo.com', //测试 https://juji-dev.juniuo.com
   uploadUrl: 'https://juji.juniuo.com',

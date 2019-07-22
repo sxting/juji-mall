@@ -130,15 +130,13 @@ Page({
         } else {
             this.getUserInfor(); //用户信息，是否绑定手机号码
         }
-<<<<<<< HEAD
-=======
 
-      this.setData({
-        sceneId: options.sceneId ? options.sceneId : ''
-      })
-      console.log(options);
-      getData.call(this);
->>>>>>> 1dc8aed9c97d4f18fb340d5c390e8fe38017264f
+
+        this.setData({
+            sceneId: options.sceneId ? options.sceneId : ''
+        })
+        console.log(options);
+        getData.call(this);
     },
     onShow: function() {
         this.setData({

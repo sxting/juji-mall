@@ -1,9 +1,10 @@
 {
-	"navigationBarBackgroundColor": "#FFDC00",
-	"backgroundColor": "#FFDC00",
-	"backgroundColorTop": "#FFDC00",
-	"backgroundColorBottom" : "#FFFFFF",
+    "navigationBarBackgroundColor": "#FFDC00",
+    "backgroundColor": "#FFDC00",
+    "backgroundColorTop": "#FFDC00",
+    "backgroundColorBottom": "#FFFFFF",
     "usingComponents": {
-    "nav-bar": "/components/navbar/index"
-  }
+        "nav-bar": "/components/navbar/index",
+        "open-member": "/components/openmember/index"
+    }
 }

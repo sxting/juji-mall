@@ -109,6 +109,7 @@ Page({
             // storeId: this.data.storeId
         }).subscribe({
             next: res => {
+                console.log(res)
                 this.setData({
                     productInfo: res.product,
                     store: res.store,

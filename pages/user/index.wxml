@@ -31,7 +31,7 @@
     <image src="../../images/bgy.png" class="bgy"></image>
 
     <view style="height:140rpx;" class="taskCenter" wx:if="{{!(distributorRole == 'LEADER' && !member)}}">
-      <view class="ub ub-ac ub-pj" style="padding:30rpx;" bindtap="toPage" data-page='/pages/member/index'>
+      <view class="ub ub-ac ub-pj" style="padding:30rpx;" bindtap="toMemberTabBar" data-page='/pages/member/index'>
         <view class="ub ub-ac">
           <image style="width:135rpx;height:90rpx;margin-right:20rpx;" src="../../images/huangguan1.png"></image>
           <view wx:if="{{!member}}">

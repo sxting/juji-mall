@@ -64,6 +64,7 @@ Page({
       })
     },
   onShareAppMessage: function (res) {
+    console.log(this.data.sceneId);
     return {
       title: '桔集：聚集优质好店，体验美好生活，加入成为会员吧！',
       imageUrl: '/images/shareImg.png',

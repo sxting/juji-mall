@@ -91,6 +91,7 @@ Page({
       this.setData({
         sceneId: options.sceneId ? options.sceneId : ''
       })
+      console.log(options);
       getData.call(this);
     },
     onShow: function() {

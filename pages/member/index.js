@@ -46,6 +46,7 @@ Page({
         this.setData({
             sceneId: options.sceneId ? options.sceneId : ''
         })
+      console.log(options.sceneId);
         getData.call(this);
     },
 
@@ -206,6 +207,7 @@ Page({
                                 providerName: this.data.productInfo.providerName,
                                 orderBizType: this.data.orderBizType
                             };
+                          console.log(orderObj);
                             service.saveOrder(orderObj).subscribe({
                                 next: res1 => {
                                     console.log('--------创建订单返回1混合支付-------');

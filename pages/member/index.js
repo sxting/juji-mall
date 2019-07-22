@@ -23,11 +23,14 @@ Page({
         storeId: '',
         productInfo: {},
         count: 1,
-        sceneId: "",
         inviteCode: '',
         orderBizType: 'NORMAL',
         paying: false,
-        resData: {}
+        resData: {},
+        // 分享链接里的sceneId
+        shareSceneId: "",
+        // 自己的sceneId
+        selfSceneId: ""
     },
 
     onLoad: function(options) {
@@ -44,7 +47,7 @@ Page({
             }
         });
         this.setData({
-            sceneId: options.sceneId ? options.sceneId : ''
+            shareSceneId: options.sceneId ? options.sceneId : ''
         })
         getData.call(this);
     },
@@ -69,7 +72,7 @@ Page({
         return {
             title: '桔集：聚集优质好店，体验美好生活，加入成为会员吧！',
             imageUrl: '/images/shareImg.png',
-            path: '/pages/login/index?pagetype=7&sceneId=' + this.data.resData.sceneId
+            path: '/pages/login/index?pagetype=7&sceneId=' + this.data.selfSceneId
         }
     },
 
@@ -180,7 +183,7 @@ Page({
                             }
                             var orderObj = {
                                 itemRequests: [{
-                                    sceneId: this.data.sceneId,
+                                    sceneId: this.data.shareSceneId,
                                     inviteCode: this.data.inviteCode,
                                     merchantId: this.data.productInfo.merchantId,
                                     merchantName: this.data.productInfo.merchantName,
@@ -341,9 +344,7 @@ function getData() {
                 productId: res.productId,
                 skuMajorId: res.productSkus[0].id,
                 skuId: res.productSkus[0].skuId,
-                // data里边的sceneId为onLoad函数入参options里边的sceneId，用来确定点击谁的分享链接进入
-                // 请求会员卡数据后不应该替换sceneId
-                // sceneId: this.data.sceneId ? this.data.sceneId : res.sceneId,
+                selfSceneId: res.sceneId,
                 resData: res
             });
 

@@ -38,7 +38,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 11,
+			"current": 2,
 			"list": [
 				{
 					"id": -1,
@@ -55,14 +55,14 @@
 					"scene": null
 				},
 				{
-					"id": -1,
+					"id": 2,
 					"name": "开通会员",
 					"pathName": "pages/member/index",
 					"query": "",
 					"scene": null
 				},
 				{
-					"id": -1,
+					"id": 3,
 					"name": "会员专区",
 					"pathName": "pages/memberzq/index",
 					"query": "",
@@ -115,13 +115,6 @@
 					"name": "订单确认",
 					"pathName": "pages/payOrder/index",
 					"query": "paytype=3&id=2019070521132493519170931&storeid=111561173843226527&sceneid=&inviteCode=&skuId=hozK5Oe0&smId=406",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "桔园",
-					"pathName": "pages/jujiGarden/gardenIndex/index",
-					"query": "",
 					"scene": null
 				}
 			]

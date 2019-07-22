@@ -85,42 +85,39 @@ Page({
         this.getQrCode();
     },
     onShow: function() {
-        this.getInfo();
-        this.setData({
-            distributorRole: wx.getStorageSync('distributorRole'),
-            member: wx.getStorageSync('member'),
-            memberDays: wx.getStorageSync('memberDays'),
-            memberExpireTime: wx.getStorageSync('memberExpireTime'),
-            inviteMemberCount: wx.getStorageSync('inviteMemberCount'),
-        })
+      this.setData({
+        distributorRole: wx.getStorageSync('distributorRole'),
+        member: wx.getStorageSync('member'),
+        memberDays: wx.getStorageSync('memberDays'),
+        memberExpireTime: wx.getStorageSync('memberExpireTime'),
+        inviteMemberCount: wx.getStorageSync('inviteMemberCount'),
+      })
     },
-    onShareAppMessage: function(res) {
-        return {
-            title: '桔集：聚集优质好店，体验美好生活，加入成为会员吧！',
-            imageUrl: '/images/shareImg.png',
-            path: '/pages/login/index?pagetype=7&sceneId=' + this.data.sceneId
-        }
+  onShareAppMessage: function (res) {
+    console.log(this.data.sceneId);
+    return {
+      title: '桔集：聚集优质好店，体验美好生活，加入成为会员吧！',
+      imageUrl: '/images/shareImg.png',
+      path: '/pages/login/index?pagetype=7&sceneId=' + this.data.sceneId
+    }
+  },
+    showJoinModal: function () {
+      this.setData({ showJcModal: !this.data.showJcModal });
     },
-    showJoinModal: function() {
-        this.setData({
-            showJcModal: !this.data.showJcModal
-        });
-    },
-    dialtoUs: function() {
-        wx.makePhoneCall({
-            phoneNumber: this.data.joinInfo.phone
-        });
-    },
-    copyUs: function() {
-        wx.setClipboardData({
-            data: this.data.joinInfo.wechat,
-            success: (res) => {
-                wx.showToast({
-                    title: '复制成功'
-                });
-            }
-        });
-    },
+  dialtoUs: function () {
+    wx.makePhoneCall({
+      phoneNumber: this.data.joinInfo.phone
+    });
+  },
+  copyUs: function () {
+    wx.setClipboardData({
+      data: this.data.joinInfo.wechat,
+      success: (res) => {
+        wx.showToast({ title: '复制成功' });
+      }
+    });
+  },
+>>>>>>> 1dc8aed9c97d4f18fb340d5c390e8fe38017264f
     getInfo: function() {
         service.userInfo({
             openId: wx.getStorageSync('openid')

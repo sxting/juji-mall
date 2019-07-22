@@ -156,11 +156,11 @@ Page({
   },
 
   getQrCode: function () {
-    service.getQrCode({ productId: 'MEMBER_CARD', path: '' }).subscribe({
+      service.getProQrCode({ productId: 'MEMBER_CARD', path: '' }).subscribe({
       next: res => {
         console.log(res);
         this.setData({
-          sceneId: res
+            sceneId: res.senceId
         })
       },
       error: err => {

@@ -99,6 +99,7 @@ Page({
         resData: {}
     },
     onLoad: function(options) {
+        console.log('options: ' + JSON.stringify(options))
         const updateManager = wx.getUpdateManager();
         updateManager.onUpdateReady(function() {
             wx.showModal({
@@ -133,10 +134,8 @@ Page({
 
 
         this.setData({
-            sceneId: options.sceneId ? options.sceneId : ''
+            shareSceneId: options.sceneId ? options.sceneId : ''
         })
-        console.log(options);
-        getData.call(this);
     },
     onShow: function() {
         this.setData({
@@ -149,7 +148,6 @@ Page({
             }]
         });
         if (wx.getStorageSync('inputData')) {
-            console.log("录入后保存的数据重新展现");
             var obj = JSON.parse(wx.getStorageSync('inputData'));
             this.setData(obj);
         }
@@ -190,23 +188,29 @@ Page({
     },
     /*** 用户分享  ***/
     onShareAppMessage: function() {
-        if ((this.data.applyLeader == 0 || (this.data.applyLeader == 1 && this.data.applyStatus == -1)) && !this.data.isClickApply && !this.data.member) {
-            var obj = {
-                type: 'SHARE_PROGRAM',
-                sharePath: '/pages/member/index'
-            };
-            this.share(obj);
-            return {
-                title: '桔集：聚集优质好店，体验美好生活，加入成为会员吧！',
-                imageUrl: '/images/shareImg.png',
-                path: '/pages/login/index?pagetype=7&sceneId=' + this.data.resData.sceneId
-            }
-        } else {
-            return {
-                title: '我在桔集免费吃喝玩乐还能赚钱，邀你组队一起赚钱！',
-                path: 'pages/login/index?pagetype=2&openid=' + wx.getStorageSync('openid') + '&invitecode=' + wx.getStorageSync('inviteCode'),
-                imageUrl: '/images/banner-invent.png'
-            }
+        // if ((this.data.applyLeader == 0 || (this.data.applyLeader == 1 && this.data.applyStatus == -1)) && !this.data.isClickApply && !this.data.member) {
+        //     var obj = {
+        //         type: 'SHARE_PROGRAM',
+        //         sharePath: '/pages/member/index'
+        //     };
+        //     this.share(obj);
+        //     return {
+        //         title: '桔集：聚集优质好店，体验美好生活，加入成为会员吧！',
+        //         imageUrl: '/images/shareImg.png',
+        //         path: '/pages/login/index?pagetype=7&sceneId=' + this.data.resData.sceneId
+        //     }
+        // } else {
+        //     return {
+        //         title: '我在桔集免费吃喝玩乐还能赚钱，邀你组队一起赚钱！',
+        //         path: 'pages/login/index?pagetype=2&openid=' + wx.getStorageSync('openid') + '&invitecode=' + wx.getStorageSync('inviteCode'),
+        //         imageUrl: '/images/banner-invent.png'
+        //     }
+        // }
+        console.log('/pages/login/index?pagetype=7&sceneId=' + this.data.selfSceneId)
+        return {
+            title: '桔集：聚集优质好店，体验美好生活，加入成为会员吧！',
+            imageUrl: '/images/shareImg.png',
+            path: '/pages/login/index?pagetype=7&sceneId=' + this.data.selfSceneId
         }
     },
     // ----保存用户输入的数据----
@@ -316,7 +320,6 @@ Page({
                     bindPhoneNumber: res.phone ? true : false
                 });
                 getGardenInfor.call(self); //get用户信息身份
-                console.log(this.data.bindPhoneNumber);
             },
             error: err => console.log(err),
             complete: () => wx.hideToast()
@@ -424,8 +427,22 @@ Page({
         })
     },
 
+    openMemberInitialize(e) {
+        console.log('selfSceneId: ' + e.detail)
+        this.setData({
+            selfSceneId: e.detail
+        })
+    },
+
     openMemberSuccess() {
-        this.refreshPage()
+        wx.showToast({
+            title: '支付成功',
+            icon: "success",
+        })
+        var _this = this
+        setTimeout(function() {
+            _this.refreshPage()
+        }, 1500)
     },
 
     refreshPage() {
@@ -470,8 +487,6 @@ function getGardenInfor() {
     jugardenService.getGardenHomeInfor().subscribe({
         next: res => {
             if (res) {
-                console.log(res);
-                console.log('进入查询用户信息拉');
                 if (res.role == 'MEMBER') { // 1、邀请进来的是桔民 return 2、邀请进来的是其他的 加入桔园 applyLeader=false;
                     this.data.juminNumList = [];
                     this.data.hadNumber = parseInt(res.invitedLeaderCount) + parseInt(res.invitedMemberCount);
@@ -519,7 +534,11 @@ function getGardenInfor() {
                     applyLeader: res.applyLeader ? 1 : 0,
                     minInvitedMemberCount: res.minInvitedMemberCount,
                     isLoadDataInfo: true,
-                    member: res.user ? res.user.member : false
+                    member: res.user ? res.user.member : false,
+                    allowDistribute: res.allowDistribute,
+                    invitedPaidMemberCount: res.invitedPaidMemberCount,
+                    invitedUnPaidPersonCount: res.invitedUnPaidPersonCount,
+                    selfSceneId: res.selfSceneId
                 });
 
                 if (this.data.member) {

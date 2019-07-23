@@ -151,7 +151,7 @@ Page({
       }
       if (this.data.pageType == 7) {
         wx.reLaunch({
-          url: '/pages/member/index?sceneId=' + this.data.pageData.sceneId
+            url: '/pages/jujiGarden/gardenIndex/index?sceneId=' + this.data.pageData.sceneId
         });
       }
 

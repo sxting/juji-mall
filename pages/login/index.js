@@ -39,7 +39,7 @@ Page({
                         this.getValueByscene(this.data.scene,1);
                     }else{
                         // 正常用户先登录再进行下一步;
-                        this.preLogin1("",this.data.scene);
+                        this.preLogin1(this.data.pageData.invitecode,this.data.scene);
                     }
                 } else {
                   this.setData({showPageLoading: false});
@@ -70,7 +70,7 @@ Page({
                 });
                 if (type == 1) {
                     // this.nextPage();
-                    this.preLogin1("",scene);
+                    this.preLogin1(this.data.pageData.invitecode,scene);
                 }
             }
         });
@@ -151,7 +151,7 @@ Page({
       }
       if (this.data.pageType == 7) {
         wx.reLaunch({
-            url: '/pages/jujiGarden/gardenIndex/index?sceneId=' + this.data.pageData.sceneId
+            url: '/pages/jujiGarden/gardenIndex/index?sceneId=' + this.data.pageData.sceneid
         });
       }
 

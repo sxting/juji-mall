@@ -6,7 +6,7 @@ import { jugardenService } from '../shared/service.js'
 Page({
     data: {
       nvabarData: {showCapsule: 1,title: '我的用户'},
-      tablist: [{ name: '已邀桔长', status: 'LEADER' }, { name: '已邀桔民', status: 'MEMBER' }],
+      tablist: [{ name: '已邀会员', status: 'LEADER' }, { name: '已邀桔民', status: 'MEMBER' }],
       curTabIndex: 0,
       constant: constant,
       isShowTips1: true,//显示最上面的tips

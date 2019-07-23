@@ -207,11 +207,11 @@ Page({
         //         imageUrl: '/images/banner-invent.png'
         //     }
         // }
-        console.log('/pages/login/index?pagetype=7&sceneId=' + this.data.selfSceneId + '&invitecode=' + wx.getStorageSync('inviteCode'))
+        console.log('/pages/login/index?pagetype=7&sceneid=' + this.data.selfSceneId + '&invitecode=' + wx.getStorageSync('inviteCode'))
         return {
             title: '桔集：聚集优质好店，体验美好生活，加入成为会员吧！',
             imageUrl: '/images/shareImg.png',
-            path: '/pages/login/index?pagetype=7&sceneId=' + this.data.selfSceneId + '&invitecode=' + wx.getStorageSync('inviteCode')
+            path: '/pages/login/index?pagetype=7&sceneid=' + this.data.selfSceneId + '&invitecode=' + wx.getStorageSync('inviteCode')
         }
     },
     // ----保存用户输入的数据----

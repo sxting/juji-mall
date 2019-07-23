@@ -1,6 +1,6 @@
 <wxs src="../../../utils/numFr.wxs" module="format" />
 <nav-bar navbar-data='{{nvabarData}}' wx:if="{{isLoadDataInfo}}"></nav-bar>
-<view class="wrap" style="height:{{conHeight}}px">
+<view class="wrap" style="height:{{conHeight}}px" wx:if='{{ isLoadDataInfo }}'>
 
     <!--非会员 未申请 展示桔长介绍 
     {{(applyLeader==0||(applyLeader==1&&applyStatus==-1))&&!isClickApply&&!member}}

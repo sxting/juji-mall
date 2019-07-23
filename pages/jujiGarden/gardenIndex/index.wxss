@@ -306,3 +306,8 @@ radio{display:inline-block;width:40rpx;height:40rpx;margin-right:12rpx;}
     margin: 0;
     background-color: #fff;
 }
+.little-tip {
+  font-size:24rpx;
+  padding-left:20rpx;
+  padding-top:20rpx;
+}

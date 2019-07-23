@@ -267,7 +267,7 @@
     </view>
 
     <!-- 桔长或会员进入 未绑定账号  -->
-    <!-- <view class='band' wx:if="{{(applyLeader==1&&applyStatus==1&&!isAuthed) || (member&&!isAuthed)}}"> -->
+    <!-- <view class='band' wx:if="{{(applyLeader==1&&applyStatus==1&&!isAuthed) || (member&&!isAuthed)}}">  -->
     <view class='band' wx:if="{{(member&&!isAuthed)}}">
         <view class="toperg">
             <image class="udb topBgg" src="/images/ytop1.png" mode="scaleToFill"></image>
@@ -281,6 +281,7 @@
             <view class="band-form-inner">
                 <input placeholder='请打开微信“我”页面，复制微信号' value="{{wechatId}}" bindinput="bindwechatIdinput"></input>
             </view>
+            <view class='little-tip'>注意不是手机号</view>
         </view>
         <view class="band-form">
             <view class="band-form-label">真实姓名</view>

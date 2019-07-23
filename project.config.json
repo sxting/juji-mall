@@ -38,7 +38,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 11,
+			"current": 12,
 			"list": [
 				{
 					"id": -1,
@@ -122,6 +122,13 @@
 					"name": "登录",
 					"pathName": "pages/login/index",
 					"query": "sceneid=68fd29074dbb4f2b8a00f26da1d77a1e&pagetype=7",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "我的用户",
+					"pathName": "pages/jujiGarden/myUser/index",
+					"query": "role=LEADER",
 					"scene": null
 				}
 			]

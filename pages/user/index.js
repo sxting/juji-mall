@@ -83,15 +83,14 @@ Page({
         });
         this.getJoinInfo();
         this.getQrCode();
-        this.getInfo();
     },
     onShow: function() {
+        this.getInfo();
         this.setData({
             distributorRole: wx.getStorageSync('distributorRole'),
             member: wx.getStorageSync('member'),
             memberDays: wx.getStorageSync('memberDays'),
             memberExpireTime: wx.getStorageSync('memberExpireTime'),
-            inviteMemberCount: wx.getStorageSync('inviteMemberCount'),
         })
     },
     onShareAppMessage: function(res) {
@@ -131,7 +130,8 @@ Page({
                 this.setData({
                     nickName: res.nickName,
                     phoneNum: res.phone,
-                    avatar: res.avatar
+                    avatar: res.avatar,
+                    inviteMemberCount: res.inviteMemberCount
                 });
             },
             complete: () => wx.hideToast()

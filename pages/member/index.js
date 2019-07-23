@@ -306,7 +306,6 @@ Page({
                             wx.setStorageSync('level', res1.data.data.level);
                             wx.setStorageSync('memberDays', res1.data.data.memberDays);
                             wx.setStorageSync('memberExpireTime', res1.data.data.memberExpireTime);
-                            wx.setStorageSync('inviteMemberCount', res1.data.data.inviteMemberCount);
                             resolve2();
                         } else {
                             reject2('登录失败，错误码:' + res1.data.errorCode + ' 返回错误: ' + res1.data.errorInfo);

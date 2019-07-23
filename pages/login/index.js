@@ -207,7 +207,6 @@ Page({
                             wx.setStorageSync('level', res1.data.data.level);
                             wx.setStorageSync('memberDays', res1.data.data.memberDays);
                             wx.setStorageSync('memberExpireTime', res1.data.data.memberExpireTime);
-                            wx.setStorageSync('inviteMemberCount', res1.data.data.inviteMemberCount);
                           
                             resolve2();
                         } else {

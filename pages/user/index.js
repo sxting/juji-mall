@@ -83,6 +83,7 @@ Page({
         });
         this.getJoinInfo();
         this.getQrCode();
+        this.getInfo();
     },
     onShow: function() {
         this.setData({

@@ -21,10 +21,11 @@ Component({
         shareSceneId: {
             type: String,
             value: ''
-        },
+        }
     },
 
     ready: function() {
+        var _this = this
         service.memberDefines({}).subscribe({
             next: res => {
 
@@ -39,19 +40,20 @@ Component({
                     })
                 }
 
-                this.setData({
+                _this.setData({
                     dataList: res.productSkus,
                     selectedCard: res.productSkus[0],
                     productId: res.productId,
                     skuMajorId: res.productSkus[0].id,
                     skuId: res.productSkus[0].skuId,
-                    selfSceneId: res.sceneId,
                     resData: res,
                     productInfo: res
                 });
-                console.log(this.data)
+
+                // 回传自身的sceneId
+                _this.triggerEvent('initialize', res.sceneId)
             },
-            error: err => console.log(err),
+            error: err => showAlert(err),
             complete: () => wx.hideToast()
         })
     },
@@ -66,7 +68,6 @@ Component({
             this.setData({
                 selectedCard: e.currentTarget.dataset.card
             });
-            console.log(this.data)
         },
 
         _collectFormIds: function (e) {

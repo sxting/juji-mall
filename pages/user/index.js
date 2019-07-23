@@ -55,7 +55,7 @@ Page({
         if (this.data.member) {
             return;
         }
-        wx.switchTab({
+        wx.reLaunch({
             url: '/pages/jujiGarden/gardenIndex/index',
         })
     },
@@ -86,19 +86,13 @@ Page({
     },
     onShow: function() {
         this.getInfo();
-        this.setData({
-            distributorRole: wx.getStorageSync('distributorRole'),
-            member: wx.getStorageSync('member'),
-            memberDays: wx.getStorageSync('memberDays'),
-            memberExpireTime: wx.getStorageSync('memberExpireTime'),
-        })
     },
     onShareAppMessage: function(res) {
         console.log(this.data.sceneId);
         return {
             title: '桔集：聚集优质好店，体验美好生活，加入成为会员吧！',
             imageUrl: '/images/shareImg.png',
-            path: '/pages/login/index?pagetype=7&sceneId=' + this.data.sceneId
+            path: '/pages/login/index?pagetype=7&sceneId=' + this.data.sceneId + '&invitecode=' + wx.getStorageSync('inviteCode')
         }
     },
     showJoinModal: function() {
@@ -131,7 +125,9 @@ Page({
                     nickName: res.nickName,
                     phoneNum: res.phone,
                     avatar: res.avatar,
-                    inviteMemberCount: res.inviteMemberCount
+                    inviteMemberCount: res.inviteMemberCount,
+                    member: res.member,
+                    allowDistribute: res.allowDistribute == 1
                 });
             },
             complete: () => wx.hideToast()

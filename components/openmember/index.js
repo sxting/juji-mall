@@ -141,7 +141,8 @@ Component({
                                     payType: payTypeValue,
                                     providerId: this.data.productInfo.providerId,
                                     providerName: this.data.productInfo.providerName,
-                                    orderBizType: this.data.orderBizType
+                                    orderBizType: this.data.orderBizType,
+                                    needDeductStock: false
                                 };
                                 service.saveOrder(orderObj).subscribe({
                                     next: res1 => {

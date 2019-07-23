@@ -8,7 +8,7 @@
         <view class="">
           <view style="font-size: 34rpx;color: #000000;">
             <text>{{nickName}}</text>
-            <text wx:if="{{distributorRole == 'LEADER'}}" class='juzhang' bindtap="toPage" data-page='/pages/juzhangGZ/index'>{{level}}桔长</text>
+            <text wx:if="{{allowDistribute}}" class='juzhang' bindtap="toPage" data-page='/pages/juzhangGZ/index'>{{level}}桔长</text>
             <image wx:elif="{{member}}" class='hgVIP' src='../../images/hgVIP.png'></image>
             <image wx:else class='hgVIP' src='../../images/hgVIP2.png'></image>
           </view>
@@ -30,7 +30,7 @@
 
     <image src="../../images/bgy.png" class="bgy"></image>
 
-    <view style="height:140rpx;" class="taskCenter" wx:if="{{!(distributorRole == 'LEADER' && !member)}}">
+    <view style="height:140rpx;" class="taskCenter">
       <view class="ub ub-ac ub-pj" style="padding:30rpx;" bindtap="toMemberTabBar" data-page='/pages/member/index'>
         <view class="ub ub-ac">
           <image style="width:135rpx;height:90rpx;margin-right:20rpx;" src="../../images/huangguan1.png"></image>

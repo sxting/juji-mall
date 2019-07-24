@@ -43,9 +43,6 @@ Page({
     toPage: function(e) {
         var page = e.currentTarget.dataset.page;
         console.log(page);
-        if (this.data.member) {
-            return;
-        }
         wx.navigateTo({
             url: page
         });

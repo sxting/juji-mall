@@ -6,17 +6,19 @@
             <view class='type-icon'>
                 <image src='/images/pintuan-icon-my.png'></image>
             </view>
-            <text>我的拼团</text>
+            <!-- <text>我的拼团</text> -->
+            <text>新品尝鲜</text>
         </block>
         <block wx:else>
             <view class='type-icon kanjia-icon'>
                 <image src='/images/kanjia-icon.png'></image>
             </view>
-            <text>我的砍价</text>
+            <text>必吃红店</text>
         </block>
     </view>
     <view>
-        <view class="mtitle">{{ sceneType == 'SPLICED'? '特价拼团' : '优惠砍价'}}</view>
+        <!-- <view class="mtitle">{{ sceneType == 'SPLICED'? '特价拼团' : '优惠砍价'}}</view> -->
+        <view class="mtitle">{{ sceneType == 'SPLICED'? '新品尝鲜' : '必吃红店'}}</view>
         <view class="subtitle">{{ sceneType == 'SPLICED'? '省着购,不如拼团购!' : '让低价好物一目了然'}}</view>
     </view>
     <view class="jingxuanlist" wx:for='{{ productList }}' wx:key='item' data-productid='{{item.productId}}' data-activityid="{{item.activityId}}" catchtap='checkProductDetail'>
@@ -39,7 +41,8 @@
     
     <view class="nodataDiv ub ub-ac ub-ver" hidden="{{!isShowNodata}}">
         <image class="nodataImg" src="/images/null6.png" mode="aspectFit"></image>
-        <view class="nodataTxt">暂无{{sceneType == 'BARGAIN'?'砍价':'拼团'}}活动</view>
+        <!-- <view class="nodataTxt">暂无{{sceneType == 'BARGAIN'?'砍价':'拼团'}}活动</view> -->
+        <view class="nodataTxt">暂无{{sceneType == 'BARGAIN'?'必吃红店':'新品尝鲜'}}</view>
     </view>
 </view>
 <!-- <text class='had-bottom' wx:if="{{ ifBottom }}">我也是有底线哒~</text> -->

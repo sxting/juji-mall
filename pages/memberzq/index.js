@@ -4,7 +4,7 @@ var app = getApp();
 
 Page({
   data: {
-    nvabarData: { showCapsule: 1, title: '' },
+    nvabarData: { showCapsule: 1, title: '会员专区' },
     locationPcode: '',
     locationCode: '',
     locationName: '',

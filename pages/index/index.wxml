@@ -22,25 +22,25 @@
                 <cover-image class="homeBImg" src="/images/bbbb.png" mode="aspectFit"></cover-image>
             </cover-view>
             <cover-view class="menulist ub ub-ac ub-pj1">
+                <cover-view class="menuitem ub ub-ver ub-ac ub-pc" bindtap="toPath" data-tit="会员专区" data-page="/pages/memberzq/index">
+                    <cover-image class="icon_home" src="/images/icon_home6.png" mode="aspectFit"></cover-image>
+                    <cover-view class="tx-c">会员专区</cover-view>
+                </cover-view>
                 <cover-view class="menuitem ub ub-ver ub-ac ub-pc" bindtap="toPath" data-tit="桔子换礼" data-page="/pages/juzihl/index">
                     <cover-image class="icon_home" src="/images/icon_home1.png" mode="aspectFit"></cover-image>
                     <cover-view class="tx-c">桔子换礼</cover-view>
-                </cover-view>
-                <cover-view class="menuitem ub ub-ver ub-ac ub-pc" bindtap="toPath" data-tit="特价拼团" data-page="/pages/activities/project-list/index?sceneType=SPLICED">
-                    <cover-image class="icon_home" src="/images/icon_home2.png" mode="aspectFit"></cover-image>
-                    <cover-view class="tx-c">特价拼团</cover-view>
-                </cover-view>
-                <cover-view class="menuitem ub ub-ver ub-ac ub-pc" bindtap="toPath" data-tit="超值砍价" data-page="/pages/activities/project-list/index?sceneType=BARGAIN">
-                    <cover-image class="icon_home" src="/images/icon_home3.png" mode="aspectFit"></cover-image>
-                    <cover-view class="tx-c">超值砍价</cover-view>
                 </cover-view>
                 <cover-view class="menuitem ub ub-ver ub-ac ub-pc" bindtap="toPath" data-tit="好店礼券" data-page="/pages/niceShop/index">
                     <cover-image class="icon_home" src="/images/icon_home4.png" mode="aspectFit"></cover-image>
                     <cover-view class="tx-c">好店礼券</cover-view>
                 </cover-view>
-                <cover-view class="menuitem ub ub-ver ub-ac ub-pc" bindtap="toPath" data-tit="会员专区" data-page="/pages/memberzq/index">
-                    <cover-image class="icon_home" src="/images/icon_home6.png" mode="aspectFit"></cover-image>
-                    <cover-view class="tx-c">会员专区</cover-view>
+                <cover-view class="menuitem ub ub-ver ub-ac ub-pc" bindtap="toPath" data-tit="新品尝鲜" data-page="/pages/activities/project-list/index?sceneType=SPLICED">
+                    <cover-image class="icon_home" src="/images/icon_home2.png" mode="aspectFit"></cover-image>
+                    <cover-view class="tx-c">新品尝鲜</cover-view>
+                </cover-view>
+                <cover-view class="menuitem ub ub-ver ub-ac ub-pc" bindtap="toPath" data-tit="必吃红店" data-page="/pages/activities/project-list/index?sceneType=BARGAIN">
+                    <cover-image class="icon_home" src="/images/icon_home3.png" mode="aspectFit"></cover-image>
+                    <cover-view class="tx-c">必吃红店</cover-view>
                 </cover-view>
                 <!-- <cover-view class="menuitem ub ub-ver ub-ac ub-pc" bindtap="showJoinModal" data-tit="商家入驻">
                     <cover-image class="icon_home" src="/images/icon_home5.png" mode="aspectFit"></cover-image>
@@ -58,6 +58,7 @@
                 <image src="/images/toPointList.png" style="width:12rpx;height:17rpx;margin-left:10rpx;"></image>
             </view>
         </view> -->
+        <!-- 秒杀活动 -->
         <view class="secondKillDiv" wx:if="{{secondList.length>0}}">
             <view class="mtitle ub ub-ac" style="margin-bottom:12rpx">
                 <image class="icon_h1" src="/images/icon_h1.png" mode="aspectFit"></image>
@@ -93,7 +94,7 @@
         </view>
         <view class="contentWarp" style="padding-top:{{secondList.length==0&&newProductList.length<=1?'30rpx':(secondList.length==0?'20rpx':'0')}}">
             <view class="newProductDiv" wx:if="{{newProductList.length>1}}">
-                <view class="mtitle ub ub-ac">新品尝鲜<image class="icon_mark" src="/images/icon_h2.png" mode="aspectFit"></image></view>
+                <view class="mtitle ub ub-ac">新店尝鲜<image class="icon_mark" src="/images/icon_h2.png" mode="aspectFit"></image></view>
                 <view class="newproductDiv clearfix">
                     <view class="pubuItem" wx:for="{{newProductList}}" wx:if="{{!(index==2&&newProductList.length==3)&&index<4}}" wx:key="unique" bindtap="toNextDetail" data-type="{{item.currentActivityType}}" data-actid="{{item.currentActivityId}}" data-id="{{item.productId}}" data-storeid="{{item.nearStore.id}}" data-tit="新品尝鲜">
                         <image src="https://upic.juniuo.com/file/picture/{{item.picId}}/resize_750_420/mode_fill" lazy-load="true" mode="aspectFill" class="plimg"></image>

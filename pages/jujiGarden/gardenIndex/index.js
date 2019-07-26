@@ -210,7 +210,7 @@ Page({
         console.log('/pages/login/index?pagetype=7&sceneid=' + this.data.selfSceneId + '&invitecode=' + wx.getStorageSync('inviteCode'))
         return {
             title: '桔集：聚集优质好店，体验美好生活，加入成为会员吧！',
-            imageUrl: '/images/shareImg.png',
+            imageUrl: '/images/member_share.jpeg',
             path: '/pages/login/index?pagetype=7&sceneid=' + this.data.selfSceneId + '&invitecode=' + wx.getStorageSync('inviteCode')
         }
     },

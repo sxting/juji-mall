@@ -25,7 +25,8 @@ Page({
    */
   onLoad: function (options) {
     let self = this;
-    var title = options.sceneType == 'SPLICED' ? '特价拼团' : '超值砍价';
+    // var title = options.sceneType == 'SPLICED' ? '特价拼团' : '超值砍价';
+    var title = options.sceneType == 'SPLICED' ? '新品尝鲜' : '必吃红店';
     this.setData({nvabarData:{showCapsule: 1,title: title}})
     this.setData({
       sceneType: options.sceneType,

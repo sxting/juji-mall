@@ -88,7 +88,7 @@ Page({
         console.log(this.data.sceneId);
         return {
             title: '桔集：聚集优质好店，体验美好生活，加入成为会员吧！',
-            imageUrl: '/images/member_share.jpeg',
+            imageUrl: '/images/member_share.jpg',
             path: '/pages/login/index?pagetype=7&sceneid=' + this.data.sceneId + '&invitecode=' + wx.getStorageSync('inviteCode')
         }
     },

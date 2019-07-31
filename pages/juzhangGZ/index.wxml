@@ -2,9 +2,9 @@
 <view class='inner'>
   <view class='item'>
     <view class='sub-title'>分销等级标准</view>
-    <view class='text'>分销等级分为三级，初级（白银）中级（黄金）高级（钻石）分别拿不同等级的佣金比例</view>
+    <view class='text'>分销等级分为三级，桔长、一级服务商、金牌服务商，分别拿不同等级的佣金比例</view>
   </view>
-  <view class='item'>
+  <!-- <view class='item'>
     <view class='sub-title'>晋升机制</view>
     <view class='text'>初升中需销量300单（已核销为准）中升高需1000单，销量计算有两种方式，第一种为通过A分享的链接产生的销量达到300单即可升级，第二种为A+B1+B2+…的总销量为300单（B为下级桔长）A也可晋升，若此时B1同A一起达到晋升标准，则可以一同晋级，分销上下级为终身绑定，若销量不足最低标准，则对桔长实行降级或淘汰。</view>
   </view>
@@ -19,7 +19,7 @@
       <view class='note-item'>桔长享有会员同等权益，但不显示会员身份，权益有效期即为桔长身份存续期。</view>
       <view class='note-item'>首月不参与考核是指当桔粉成为桔长身份变更那一刻后30天不列入淘汰机制考核，单数同样累计，30天后正常考核，当桔长晋升时，考核从等级变化那一刻开始算起，30天为缓冲期，缓冲期仅存在于桔粉变成桔长这一次身份变更。</view>
     </view>
-  </view>
+  </view> -->
 
   <view class='btn' bindtap='goBack'>我知道了</view>
 </view>

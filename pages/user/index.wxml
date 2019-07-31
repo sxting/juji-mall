@@ -8,7 +8,7 @@
         <view class="">
           <view style="font-size: 34rpx;color: #000000;">
             <text>{{nickName}}</text>
-            <text wx:if="{{allowDistribute}}" class='juzhang' bindtap="toPage" data-page='/pages/juzhangGZ/index'>{{level}}桔长</text>
+            <text wx:if="{{allowDistribute}}" class='juzhang' bindtap="toPage" data-page='/pages/juzhangGZ/index'>{{level}}</text>
             <image wx:elif="{{member}}" class='hgVIP' src='../../images/hgVIP.png'></image>
             <image wx:else class='hgVIP' src='../../images/hgVIP2.png'></image>
           </view>

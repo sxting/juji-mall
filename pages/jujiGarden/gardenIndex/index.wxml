@@ -223,7 +223,7 @@
                 <view class='line'></view>
                 <view class="ub ub-ver ub-ac ub-pc user" bindtap="toPage" data-page="/pages/jujiGarden/myUser/index?role=MEMBER">
                     <text class="orderBtnsNum">{{ invitedUnPaidPersonCount }}</text>
-                    <text class="orderBtnsText">已邀桔民</text>
+                    <text class="orderBtnsText">已邀桔粉</text>
                 </view>
             </view>
         </view>

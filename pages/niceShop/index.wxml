@@ -2,7 +2,7 @@
 <nav-bar navbar-data='{{nvabarData}}'></nav-bar>
  <view class="main">
   <view class="toper">
-    <view class="mtitle">好店礼券</view>
+    <view class="mtitle">优惠好券</view>
     <view class="subtitle">好礼送不停，来体验吧！</view>
   </view>
   <view class='newproductDiv clearfix'>

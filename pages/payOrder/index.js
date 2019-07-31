@@ -154,7 +154,11 @@ Page({
         this.setData({count: thisNum});
     },
     toPay: function(e) {
-        if (this.data.alreadyPay) { return; }
+        if (this.data.alreadyPay) { return; } else {
+          this.setData({
+            alreadyPay: true
+          })
+        }
         if (this.data.paytype == 1 || this.data.paytype == 2 || this.data.paytype == 3) {
             this.toProductPay();
         }

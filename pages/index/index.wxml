@@ -30,9 +30,9 @@
                     <cover-image class="icon_home" src="/images/icon_home1.png" mode="aspectFit"></cover-image>
                     <cover-view class="tx-c">桔子换礼</cover-view>
                 </cover-view>
-                <cover-view class="menuitem ub ub-ver ub-ac ub-pc" bindtap="toPath" data-tit="好店礼券" data-page="/pages/niceShop/index">
+                <cover-view class="menuitem ub ub-ver ub-ac ub-pc" bindtap="toPath" data-tit="优惠好券" data-page="/pages/niceShop/index">
                     <cover-image class="icon_home" src="/images/icon_home4.png" mode="aspectFit"></cover-image>
-                    <cover-view class="tx-c">好店礼券</cover-view>
+                    <cover-view class="tx-c">优惠好券</cover-view>
                 </cover-view>
                 <cover-view class="menuitem ub ub-ver ub-ac ub-pc" bindtap="toPath" data-tit="新品尝鲜" data-page="/pages/activities/project-list/index?sceneType=SPLICED">
                     <cover-image class="icon_home" src="/images/icon_home2.png" mode="aspectFit"></cover-image>

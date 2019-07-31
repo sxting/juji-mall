@@ -31,7 +31,7 @@ Page({
         member: wx.getStorageSync('member'),
         memberDays: wx.getStorageSync('memberDays'),
         memberExpireTime: wx.getStorageSync('memberExpireTime'),
-        level: '白银',
+        level: '',
         sceneId: '',
         inviteMemberCount: 0,
     },
@@ -59,9 +59,9 @@ Page({
 
     onLoad: function() {
         let levelStr = wx.getStorageSync('level'),
-            level = '白银';
+            level = '';
         if (levelStr === 'LOW') {
-            level = '白银'
+            level = ''
         } else if (levelStr = 'MID') {
             level = '黄金'
         } else if (levelStr = 'HIGH') {

@@ -5,7 +5,7 @@ import { service } from '../../service.js';
 
 Page({
     data: {
-        nvabarData: {showCapsule: 1,title: '好店礼券'},
+      nvabarData: { showCapsule: 1, title: '优惠好券'},
         providerId:'',
         productList: [],
         isShowNodata: false,

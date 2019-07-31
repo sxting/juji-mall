@@ -272,8 +272,9 @@
         <view class="toperg">
             <image class="udb topBgg" src="/images/ytop1.png" mode="scaleToFill"></image>
             <view class='topert'>
-                <image class='cwjz' src="/images/cwjz.png"></image>
-                <view class='f30'>需要您提供微信号和真实姓名</view>
+                <!-- <image class='cwjz' src="/images/cwjz.png"></image> -->
+                <!-- <view class='f30'>需要您提供微信号和真实姓名</view> -->
+                <view class='f30'>请务必填写分账信息，邀请会员才能获得返佣</view>
             </view>
         </view>
         <view class="band-form">

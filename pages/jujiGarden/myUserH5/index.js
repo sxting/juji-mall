@@ -13,7 +13,7 @@ Page({
    */
   onLoad: function (options) {
     this.setData({
-      url: decodeURIComponent('https://juji.juniuo.com/wxapp_h5/myteam?token=' + wx.getStorageInfoSync('token'))
+      url: decodeURIComponent('https://jujiwxapp.juniuo.com/myteam?token=' + wx.getStorageInfoSync('token'))
     })
   },
 

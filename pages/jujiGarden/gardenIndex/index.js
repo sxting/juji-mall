@@ -96,7 +96,7 @@ Page({
         inviteCode: '',
         orderBizType: 'NORMAL',
         paying: false,
-        resData: {}
+        resData: {},
     },
     onLoad: function(options) {
         console.log('options: ' + JSON.stringify(options))
@@ -145,7 +145,7 @@ Page({
             }, {
                 value: 2,
                 name: '女'
-            }]
+            }],
         });
         if (wx.getStorageSync('inputData')) {
             var obj = JSON.parse(wx.getStorageSync('inputData'));
@@ -177,6 +177,22 @@ Page({
             url: page
         });
     },
+  /**   跳转到我的用户  ***/
+  toPage2: function (e) {
+    let role = e.currentTarget.dataset.role ? e.currentTarget.dataset.role : '';
+    let page = role ? e.currentTarget.dataset.page + '?role=' + role : e.currentTarget.dataset.page;
+    //    https://juji.juniuo.com/wxapp_h5/
+    // 如果是桔长  跳转到h5页面
+    if (this.data.allowDistribute) {
+      wx.navigateTo({
+        url: '/pages/jujiGarden/myUserH5/index'
+      });
+    } else {
+      wx.navigateTo({
+        url: page
+      });
+    }
+  },
     share: function(obj) {
         service.share(obj).subscribe({
             next: res => {

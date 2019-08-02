@@ -4,7 +4,7 @@
 
     <!--非会员 未申请 展示桔长介绍 
     {{(applyLeader==0||(applyLeader==1&&applyStatus==-1))&&!isClickApply&&!member}}
-     替换成开通会员的页面 -->
+    替换成开通会员的页面 -->
     <view class="main" wx:if="">
         <view class="toper1">
             <image class="udb topBg1" src="/images/ytop1.png" mode="scaleToFill"></image>
@@ -208,7 +208,7 @@
             <view class="qdBtn tx-c" bindtap="toPage" data-page="/pages/jujiGarden/withdrawRecord/index">提现明细</view>
         </view>
         <view class="userBox">
-            <view class="ub ub-ac ub-pj" style="padding:30rpx;" bindtap="toPage" data-page="/pages/jujiGarden/myUser/index?role=LEADER">
+            <view class="ub ub-ac ub-pj" style="padding:30rpx;" bindtap="toPage2" data-page="/pages/jujiGarden/myUser/index?role=LEADER">
                 <view class="ub-f1" style="font-size: 30rpx;color: #333333;font-weight:bold">我的用户</view>
                 <image src="/images/arrow-right.png" class="udb" style="width:12rpx;height:22rpx;margin-left:10rpx;"></image>
             </view>
@@ -216,12 +216,12 @@
                 <view style="height:1rpx;border-top:#eee 2rpx solid;"></view>
             </view>
             <view class="ub ub-ac ub-pj" style="padding: 0 10rpx;border-bottom:2rpx #eee solid">
-                <view class="ub ub-ver ub-ac ub-pc user" bindtap="toPage" data-page="/pages/jujiGarden/myUser/index?role=LEADER">
+                <view class="ub ub-ver ub-ac ub-pc user" bindtap="toPage2" data-page="/pages/jujiGarden/myUser/index?role=LEADER">
                     <text class="orderBtnsNum">{{ invitedPaidMemberCount }}</text>
                     <text class="orderBtnsText">已邀会员</text>
                 </view>
                 <view class='line'></view>
-                <view class="ub ub-ver ub-ac ub-pc user" bindtap="toPage" data-page="/pages/jujiGarden/myUser/index?role=MEMBER">
+                <view class="ub ub-ver ub-ac ub-pc user" bindtap="toPage2" data-page="/pages/jujiGarden/myUser/index?role=MEMBER">
                     <text class="orderBtnsNum">{{ invitedUnPaidPersonCount }}</text>
                     <text class="orderBtnsText">已邀桔粉</text>
                 </view>

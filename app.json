@@ -44,7 +44,8 @@
     "pages/mypayDetail/index",
     "pages/member/index",
     "pages/memberzq/index",
-    "pages/juzhangGZ/index"
+    "pages/juzhangGZ/index",
+    "pages/jujiGarden/myUserH5/index"
   ],
   "permission": {
     "scope.userLocation": {

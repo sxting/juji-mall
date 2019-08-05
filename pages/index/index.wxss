@@ -169,3 +169,41 @@ swiper{display:block;width:100%;height:488rpx;box-sizing:border-box;overflow:hid
   color: #E83221;
   margin-left:16rpx;
 }
+
+.priceDiv2 {
+  padding-left: 10rpx;
+}
+.f18 {
+  font-size: 18rpx;
+}
+.disflex {
+  display: flex;
+}
+.pubuprice2 {
+  color: #fbbe3f;
+  font-size: 26rpx;
+}
+.originalprice {
+  font-size:18rpx;color:#999;text-decoration:line-through;
+  padding-left: 10rpx;padding-top: 6rpx;
+}
+.huiyuanjia {
+  background-color: #fcbf0a;
+  /* border-radius: 10rpx; */
+  color: #000;
+  font-size:16rpx;
+  display: inline-block;
+  padding-right: 6rpx;
+
+}
+.huiyuanjia .l {
+  background-color: #444;
+  line-height: 26rpx;
+  color: #fed901;
+  font-size:16rpx;
+  padding-left: 8rpx;
+  padding-right: 8rpx;
+  display: inline-block;
+  height: 100%;
+  /* border-radius: 10rpx 0 0 10rpx; */
+}

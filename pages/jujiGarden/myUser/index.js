@@ -24,7 +24,11 @@ Page({
         role: options.role,
         curTabIndex: options.role == '' || options.role == 'LEADER'? 0 : 1
       })
-      wx.setNavigationBarTitle({ title: '我的用户' });
+      if (options.role == '' || options.role == 'LEADER') {
+        wx.setNavigationBarTitle({ title: '已邀会员' });
+      } else {
+        wx.setNavigationBarTitle({ title: '已邀桔粉' });
+      }
       getPersonListInfor.call(self);//get我的用户信息
     },
     

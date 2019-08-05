@@ -1,12 +1,12 @@
 <wxs src="../../../utils/numFr.wxs" module="format" />
 <nav-bar navbar-data='{{nvabarData}}'></nav-bar>
 <view class="fullScreen ub ub-ver">
-    <view class="tablist">
+    <!-- <view class="tablist">
         <view class="tablist ub ub-ac ub-pj1">
             <view wx:for="{{tablist}}" wx:key="item" wx:for-index="index" bindtap="switchTab" data-index="{{index}}" data-status="{{item.status}}" class="tabItem {{index == curTabIndex? 'on' : ''}}" >{{item.name}}<view class="line"></view>
             </view>
         </view>
-    </view>
+    </view> -->
     <!-- 解释说明 -->
     <!-- <view class='explain-text-box' wx:if='{{isShowTips1&&curTabIndex==0}}'>
       <view class='explain-text ub ub-ac'>

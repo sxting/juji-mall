@@ -13,8 +13,15 @@ Page({
    */
   onLoad: function (options) {
     this.setData({
-      url: decodeURIComponent('https://jujiwxapp.juniuo.com/myteam?token=' + wx.getStorageInfoSync('token') + '&avatar=' + wx.getStorageInfoSync('avatar') + '&nickName=' + wx.getStorageInfoSync('nickName'))
+      // url: 'http://jujiwxapp.juniuo.com/myteam?' + decodeURIComponent('token=' + wx.getStorageInfoSync('token') + '&avatar=' + wx.getStorageInfoSync('avatar') + '&nickName=' + wx.getStorageInfoSync('nickName'))
+      url: `https://jujiwxapp.juniuo.com/myteam?token=${wx.getStorageSync('token')}&avatar=${encodeURIComponent(wx.getStorageSync('avatar'))}&nickName=${encodeURIComponent(wx.getStorageSync('nickName'))}` 
     })
+  },
+
+  // 接收 h5 页面传递过来的参数
+  handlePostMessage: function (e) {
+    const data = e.detail;
+    console.log(data);
   },
 
   /**

@@ -207,6 +207,8 @@ Page({
                             wx.setStorageSync('level', res1.data.data.level);
                             wx.setStorageSync('memberDays', res1.data.data.memberDays);
                             wx.setStorageSync('memberExpireTime', res1.data.data.memberExpireTime);
+                          wx.setStorageSync('nickName', res1.data.data.nickName);
+                          wx.setStorageSync('avatar', res1.data.data.avatar);
                           
                             resolve2();
                         } else {

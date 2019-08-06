@@ -208,20 +208,21 @@
             <view class="qdBtn tx-c" bindtap="toPage" data-page="/pages/jujiGarden/withdrawRecord/index">提现明细</view>
         </view>
         <view class="userBox">
-            <view class="ub ub-ac ub-pj" style="padding:30rpx;" bindtap="toPage2" data-page="/pages/jujiGarden/myUser/index?role=LEADER">
+            <!-- <view class="ub ub-ac ub-pj" style="padding:30rpx;" bindtap="toPage2" data-page="/pages/jujiGarden/myUser/index?role=LEADER">
                 <view class="ub-f1" style="font-size: 30rpx;color: #333333;font-weight:bold">我的用户</view>
                 <image src="/images/arrow-right.png" class="udb" style="width:12rpx;height:22rpx;margin-left:10rpx;"></image>
             </view>
             <view style="padding:0 30rpx;">
                 <view style="height:1rpx;border-top:#eee 2rpx solid;"></view>
-            </view>
+            </view> -->
             <view class="ub ub-ac ub-pj" style="padding: 0 10rpx;border-bottom:2rpx #eee solid">
                 <view class="ub ub-ver ub-ac ub-pc user" bindtap="toPage2" data-page="/pages/jujiGarden/myUser/index?role=LEADER">
                     <text class="orderBtnsNum">{{ invitedPaidMemberCount }}</text>
-                    <text class="orderBtnsText">已邀会员</text>
+                    <text class="orderBtnsText" wx:if="{{allowDistribute}}">我的团队</text>
+                    <text class="orderBtnsText" wx:else>已邀会员</text>
                 </view>
                 <view class='line'></view>
-                <view class="ub ub-ver ub-ac ub-pc user" bindtap="toPage2" data-page="/pages/jujiGarden/myUser/index?role=MEMBER">
+                <view class="ub ub-ver ub-ac ub-pc user" bindtap="toPage" data-page="/pages/jujiGarden/myUser/index?role=MEMBER">
                     <text class="orderBtnsNum">{{ invitedUnPaidPersonCount }}</text>
                     <text class="orderBtnsText">已邀桔粉</text>
                 </view>

@@ -24,26 +24,50 @@
             </view>
             <view class="ub ub-fe jc-sb" style="margin-top:10rpx;">
                 <view class="ub ub-fe">
+                    <!-- 会员专区进来 -->
+                    <!-- <view class="style1" wx:if="{{productInfo.isMember}}">
+                      <view style="display:flex;align-items: flex-end;" class='{{!productInfo.isMember&&member&&productInfo.distributor ? "memberp2": ""}}'>
+                          <text wx:if="{{member && productInfo.distributor}}" class='f20 bg1'>会员价 </text>
+                          <view class="price1" wx:if="{{productInfo.point>0}}">{{productInfo.point}}</view>
+                          <view class="price2" wx:if="{{productInfo.point>0}}">桔子</view>
+                          <view class="price2" wx:if="{{productInfo.point>0&&productInfo.price>0}}">+</view>
+                          <view class="price1">
+                            <text wx:if="{{!productInfo.isMember&&member&&productInfo.distributor}}">{{filter.toFix(productInfo.memberPrice)}}</text>
+                            <text wx:elif="{{productInfo.price>0}}">{{filter.toFix(productInfo.price)}}</text>
+                          </view>
+                          <view class="price2" wx:if="{{productInfo.price>0}}">元</view>
+                      </view>
+                    </view>                                                                  
+                    <!-- 非会员专区进来，是会员，商品是非会员商品 -->
+                    <!-- <view class="style2" wx:if="{{!productInfo.isMember && member && !productInfo.distributor}}"></view> -->
+                    <!-- 非会员专区进来，是会员，商品是会员商品 -->
+                    <!-- <view class="style3" wx:if="{{!productInfo.isMember && member && productInfo.distributor}}"></view> -->
+                    <!-- 非会员专区进来，不是会员，商品是会员商品 -->
+                    <!-- <view class="style4" wx:if="{{!productInfo.isMember && !member && productInfo.distributor}}"></view> -->
+                    <!-- 非会员专区进来，不是会员，商品不是会员商品 -->
+                    <!-- <view class="style5" wx:if="{{!productInfo.isMember && !member && !productInfo.distributor}}"></view> --> 
+
+
                     <view wx:if="{{!productInfo.isMember&&member&&productInfo.distributor}}" class='jujia'>
-                      桔价:{{filter.toFix(productInfo.price)}}
+                      ￥<text style="font-size: 36rpx">{{filter.toFix(productInfo.price)}}</text>
                     </view>
                     <view style="display:flex;align-items: flex-end;" class='{{!productInfo.isMember&&member&&productInfo.distributor ? "memberp2": ""}}'>
-                        <text wx:if="{{member && productInfo.distributor}}" class='f20'>会员价 </text>
-                        <view class="price1" wx:if="{{productInfo.point>0}}">{{productInfo.point}}</view>
-                        <view class="price2" wx:if="{{productInfo.point>0}}">桔子</view>
-                        <view class="price2" wx:if="{{productInfo.point>0&&productInfo.price>0}}">+</view>
+                        <text wx:if="{{member && productInfo.distributor}}" class='f20 bg1'>会员价 </text>
+                        <view class="price2" wx:if="{{productInfo.price>0}}">￥</view>
                         <view class="price1">
                           <text wx:if="{{!productInfo.isMember&&member&&productInfo.distributor}}">{{filter.toFix(productInfo.memberPrice)}}</text>
                           <text wx:elif="{{productInfo.price>0}}">{{filter.toFix(productInfo.price)}}</text>
                         </view>
-                        <view class="price2" wx:if="{{productInfo.price>0}}">元</view>
+                        <view class="price2" wx:if="{{productInfo.point>0&&productInfo.price>0}}">+</view>
+                        <view class="price1" wx:if="{{productInfo.point>0}}">{{productInfo.point}}</view>
+                        <view class="price2" wx:if="{{productInfo.point>0}}">桔子</view>
                     </view>
                     <view class='memberp' wx:if="{{!member&&productInfo.distributor}}">会员价:￥{{filter.toFix(productInfo.memberPrice)}}</view>
-                    <view style="font-size: 24rpx;color: #999999;text-decoration:line-through;margin-left:25rpx;line-height:24rpx;">{{filter.toFix(productInfo.originalPrice)}} 元</view>
-                    <view class="proDiv ub ub-ac" wx:if="{{productInfo.distributor&&member}}">
+                    <view style="font-size: 24rpx;color: #999999;text-decoration:line-through;margin-left:25rpx;line-height:24rpx;" class="{{!productInfo.isMember&&member&&productInfo.distributor?'ty10':''}}">{{filter.toFix(productInfo.originalPrice)}} 元</view>
+                    <!-- <view class="proDiv ub ub-ac" wx:if="{{productInfo.distributor&&member}}">
                         <view class="l">赚</view>
                         <view class="r">￥{{filter.toFix(productInfo.distributorSalesPrice)}}</view>
-                    </view>
+                    </view> -->
                 </view>
                 <view class="ub ub-ac" style="font-size: 24rpx;color: #999999;">
                     <image src="/images/soldCount.png" style="width:24rpx;height: 22rpx;margin-right:10rpx;"></image>已售{{productInfo.soldNum}}件

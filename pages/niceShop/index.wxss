@@ -54,6 +54,7 @@ page{height:100%;background-color:#fff;}
   margin-bottom:20rpx;
   background-color:#fff;
   max-height:312rpx;
+  height: 312rpx;
 }
 .newproductDiv .pubuItem:nth-child(even) {
   margin-left:3%;
@@ -75,6 +76,47 @@ page{height:100%;background-color:#fff;}
   -webkit-box-orient:vertical;
   padding-left:20rpx;
   padding-right:20rpx;
-  height:64rpx;
+  height:70rpx;
   line-height:32rpx;
+}
+
+/* 按首页会员价样式修改 */
+.priceDiv2 {
+  padding-left: 10rpx;
+}
+.f18 {
+  font-size: 18rpx;
+}
+.disflex {
+  display: flex;
+}
+.pubuprice2 {
+  color: #fbbe3f;
+  font-size: 26rpx;
+}
+.originalprice {
+  font-size:18rpx;color:#999;text-decoration:line-through;
+  /* padding-left: 10rpx; */
+  padding-top: 6rpx;
+}
+.huiyuanjia {
+  background-color: #fcbf0a;
+  /* border-radius: 10rpx; */
+  color: #000;
+  font-size:16rpx;
+  display: inline-block;
+  padding-right: 6rpx;
+  height: 26rpx;
+  margin-top: 8rpx;
+}
+.huiyuanjia .l {
+  background-color: #444;
+  line-height: 26rpx;
+  color: #fed901;
+  font-size:16rpx;
+  padding-left: 8rpx;
+  padding-right: 8rpx;
+  display: inline-block;
+  height: 100%;
+  /* border-radius: 10rpx 0 0 10rpx; */
 }

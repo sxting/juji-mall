@@ -13,7 +13,21 @@
             <view class="dis">距你{{filter.toDis(item.nearDist)}}km</view>
         </view> -->
         <view class="pro-name pubuname mt05" bindtap="toNextDetail" data-type="{{item.currentActivityType}}" data-actid="{{item.currentActivityId}}" data-id="{{item.productId}}" data-storeid="{{item.nearStore.id}}" style="margin-top:8rpx">{{item.productName}}</view>
-        <view class="price-wrap jc-sb mt08">
+        <view class="priceDiv2" style="margin-top:2rpx;padding-right:20rpx;">
+            <view class="disflex">
+              <view class="pubuprice2"><text class="f18">￥</text>{{filter.toFix(item.price)}}</view>
+              <view class="pubuprice2" wx:if="{{item.point>0&&item.price>0}}">+</view>
+              <view class="pubuprice2" wx:if="{{item.point>0}}">{{item.point}}桔子</view>
+              <view class="originalprice">￥{{filter.toFix(item.originalPrice)}}</view>
+            </view>
+            <view class="disflex">
+              <view class="huiyuanjia" wx:if="{{item.distributor}}">
+                <text class="l">会员价</text> 
+                <text class="r">￥{{item.memberPrice?filter.toFix(item.memberPrice):0}}</text>
+              </view>
+            </view>
+        </view>
+        <!-- <view class="price-wrap jc-sb mt08">
             <view class="p-wrap">
                 <view class="now-price" wx:if="{{item.point>0}}">{{item.point}}</view>
                 <view class="now-text" wx:if="{{item.point>0}}">桔子</view>
@@ -30,8 +44,8 @@
                 <!-- <button class="ctrlbtn sharBtn shareB" wx:if="{{!item.currentActivityType}}" bindtap="toComDetailAndShare" data-id="{{item.productId}}" data-storeid="{{item.nearStore.id}}">
                     <image class="shareImg" mode="widthFix" src="/images/fx.png"></image>
                 </button> -->
-            </view>
-        </view>
+            <!-- </view> -->
+        <!-- </view> --> 
     </view>
   </view>
   <view class="nodataDiv ub ub-ac ub-ver" hidden="{{!isShowNodata}}">

@@ -62,9 +62,9 @@ Page({
             level = '';
         if (levelStr === 'LOW') {
             level = '桔长'
-        } else if (levelStr = 'MID') {
+        } else if (levelStr === 'MID') {
             level = '一级服务商'
-        } else if (levelStr = 'HIGH') {
+        } else if (levelStr === 'HIGH') {
             level = '金牌服务商'
         }
         this.setData({

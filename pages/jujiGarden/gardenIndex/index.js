@@ -559,12 +559,25 @@ function getGardenInfor() {
                 });
 
                 if (this.data.member) {
+                    let level = '';
+                    if (this.data.allowDistribute) {
+                      let levelStr = res.user.level;
+                      if (levelStr === 'LOW') {
+                        level = '桔长';
+                      } else if (levelStr === 'MID') {
+                        level = '一级服务商';
+                      } else if (levelStr === 'HIGH') {
+                        level = '金牌服务商';
+                      };
+                    } else {
+                      level = '会员';
+                    }
                     this.setData({
-                        nvabarData: {
-                            showCapsule: 0,
-                            title: '会员',
-                            isIndex: 1
-                        },
+                      nvabarData: {
+                        showCapsule: 0,
+                        title: level,
+                        isIndex: 1
+                      },
                     })
                 } else {
                     this.setData({

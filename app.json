@@ -45,6 +45,7 @@
     "pages/member/index",
     "pages/memberzq/index",
     "pages/seed/index",
+    "pages/seedDetail/index",
     "pages/juzhangGZ/index",
     "pages/jujiGarden/myUserH5/index"
   ],

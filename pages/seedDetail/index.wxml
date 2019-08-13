@@ -1,14 +1,13 @@
-<wxs src="../../utils/numFr.wxs" module="filter" />
+<import src="/wxParse/wxParse.wxml" />
 <nav-bar navbar-data='{{nvabarData}}'></nav-bar>
  <view class="main">
   <view class='newproductDiv clearfix'>
-    <view class="jingxuanlist pubuItem" wx:for="{{productList}}" wx:for-index='index' wx:key="unique" bindtap="toNextDetail" data-type="{{item.currentActivityType}}" data-actid="{{item.currentActivityId}}" data-id="{{item.productId}}" data-storeid="{{item.nearStore.id}}" >
-        <image class="productImg plimg"lazy-load="true" src="https://upic.juniuo.com/file/picture/{{item.cover}}/resize_690_387/mode_filt/format_jpg/quality_70" mode="widthFix"></image>
-        <view class="pubuname">{{item.title}}</view>
+    <view class="pubuItem">
+        <image class="productImg plimg"lazy-load="true" src="https://upic.juniuo.com/file/picture/{{tweetInfo.cover}}/resize_690_387/mode_filt/format_jpg/quality_70" mode="widthFix"></image>
+        <view class="pubuname">{{tweetInfo.title}}</view>
     </view>
-  </view>
-  <view class="nodataDiv ub ub-ac ub-ver" hidden="{{!isShowNodata}}">
-      <image class="nodataImg" src="/images/null6.png" mode="aspectFit"></image>
-      <view class="nodataTxt">暂无相关商品</view>
+    <view class="content">
+      <template is="wxParse" data="{{wxParseData:content.nodes}}" />
+    </view>
   </view>
 </view>

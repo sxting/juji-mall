@@ -223,6 +223,17 @@ service.bindWechatId = (data) => {
   let url = api + '/distributor/bindWechatId.json';
   return http.get(url, data);
 }
+// 种草列表
+service.tweets = (data) => {
+  let url = api + '/tweets/list.json';
+  return http.get(url, data);
+}
+
+service.tweetDetail = (data) =>{
+  let url = api + '/tweets/detail.json';
+  return http.get(url, data);
+}
+
 
 
 module.exports = {

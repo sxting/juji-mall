@@ -9,7 +9,7 @@
             <view class="toper">
                 <swiper autoplay="{{autoplay}}" circular wx:if="{{slideShowList.length>0}}">
                     <swiper-item wx:for="{{slideShowList}}" wx:key="unique">
-                        <image src="https://upic.juniuo.com/file/picture/{{item.imgId}}/resize_750_488/mode_filt/format_jpg/quality_0" data-link="{{item.link}}" bindtap="onTapBanner" class="slide-image" mode="widthFix" lazy-load="true" data-tit="商品详情"></image>
+                        <image src="https://upic.juniuo.com/file/picture/{{item.imgId}}/resize_750_488/mode_filt/format_jpg/quality_0" data-link="{{item.link}}" bindtap="onTapBanner" class="slide-image" mode="aspectFill" lazy-load="true" data-tit="商品详情"></image>
                     </swiper-item>
                 </swiper>
                 <swiper wx:else><swiper-item><image src="https://upic.juniuo.com/file/picture/2773KOjQnLf0/resize_750_488/mode_filt/format_jpg/quality_0" class="slide-image"></image></swiper-item></swiper>
@@ -21,31 +21,51 @@
             <cover-view class="homeB">
                 <cover-image class="homeBImg" src="/images/bbbb.png" mode="aspectFit"></cover-image>
             </cover-view>
-            <cover-view class="menulist ub ub-ac ub-pj1">
-                <cover-view class="menuitem ub ub-ver ub-ac ub-pc" bindtap="toPath" data-tit="会员专区" data-page="/pages/memberzq/index">
-                    <cover-image class="icon_home" src="/images/icon_home6.png" mode="aspectFit"></cover-image>
-                    <cover-view class="tx-c">会员专区</cover-view>
+            <cover-view class="menulist">
+                <cover-view class="ub ub-ac ub-pj1">
+                    <cover-view class="menuitem ub ub-ver ub-ac ub-pc" bindtap="toSeriesPath" data-tit="美食饮品" data-page="/pages/series/index">
+                        <cover-image class="icon_home" src="/images/icon_home7.png" mode="aspectFit"></cover-image>
+                        <cover-view class="tx-c">美食饮品</cover-view>
+                    </cover-view>
+                    <cover-view class="menuitem ub ub-ver ub-ac ub-pc" bindtap="toSeriesPath" data-tit="美容美发" data-page="/pages/series/index">
+                        <cover-image class="icon_home" src="/images/icon_home8.png" mode="aspectFit"></cover-image>
+                        <cover-view class="tx-c">美容美发</cover-view>
+                    </cover-view>
+                    <cover-view class="menuitem ub ub-ver ub-ac ub-pc" bindtap="toSeriesPath" data-tit="休闲娱乐" data-page="/pages/series/index">
+                        <cover-image class="icon_home" src="/images/icon_home9.png" mode="aspectFit"></cover-image>
+                        <cover-view class="tx-c">休闲娱乐</cover-view>
+                    </cover-view>
+                    <cover-view class="menuitem ub ub-ver ub-ac ub-pc" bindtap="toSeriesPath" data-tit="亲子游乐" data-page="/pages/series/index">
+                        <cover-image class="icon_home" src="/images/icon_home10.png" mode="aspectFit"></cover-image>
+                        <cover-view class="tx-c">亲子游乐</cover-view>
+                    </cover-view>
+                    <cover-view class="menuitem ub ub-ver ub-ac ub-pc" bindtap="toSeriesPath" data-tit="周边游" data-page="/pages/series/index">
+                        <cover-image class="icon_home" src="/images/icon_home11.png" mode="aspectFit"></cover-image>
+                        <cover-view class="tx-c">周边游</cover-view>
+                    </cover-view>
                 </cover-view>
-                <cover-view class="menuitem ub ub-ver ub-ac ub-pc" bindtap="toPath" data-tit="桔子换礼" data-page="/pages/juzihl/index">
-                    <cover-image class="icon_home" src="/images/icon_home1.png" mode="aspectFit"></cover-image>
-                    <cover-view class="tx-c">桔子换礼</cover-view>
+                <cover-view class="ub ub-ac ub-pj1">
+                    <cover-view class="menuitem ub ub-ver ub-ac ub-pc" bindtap="toPath" data-tit="会员专区" data-page="/pages/memberzq/index">
+                        <cover-image class="icon_home" src="/images/icon_home6.png" mode="aspectFit"></cover-image>
+                        <cover-view class="tx-c">会员专区</cover-view>
+                    </cover-view>
+                    <cover-view class="menuitem ub ub-ver ub-ac ub-pc" bindtap="toPath" data-tit="桔子换礼" data-page="/pages/juzihl/index">
+                        <cover-image class="icon_home" src="/images/icon_home1.png" mode="aspectFit"></cover-image>
+                        <cover-view class="tx-c">桔子换礼</cover-view>
+                    </cover-view>
+                    <cover-view class="menuitem ub ub-ver ub-ac ub-pc" bindtap="toSeriesPath" data-tit="好店礼券" data-page="/pages/series/index">
+                        <cover-image class="icon_home" src="/images/icon_home4.png" mode="aspectFit"></cover-image>
+                        <cover-view class="tx-c">优惠好券</cover-view>
+                    </cover-view>
+                    <cover-view class="menuitem ub ub-ver ub-ac ub-pc" bindtap="toPath" data-tit="新品尝鲜" data-page="/pages/activities/project-list/index?sceneType=SPLICED">
+                        <cover-image class="icon_home" src="/images/icon_home2.png" mode="aspectFit"></cover-image>
+                        <cover-view class="tx-c">新品尝鲜</cover-view>
+                    </cover-view>
+                    <cover-view class="menuitem ub ub-ver ub-ac ub-pc" bindtap="toPath" data-tit="必吃红店" data-page="/pages/activities/project-list/index?sceneType=BARGAIN">
+                        <cover-image class="icon_home" src="/images/icon_home3.png" mode="aspectFit"></cover-image>
+                        <cover-view class="tx-c">必吃红店</cover-view>
+                    </cover-view>
                 </cover-view>
-                <cover-view class="menuitem ub ub-ver ub-ac ub-pc" bindtap="toPath" data-tit="优惠好券" data-page="/pages/niceShop/index">
-                    <cover-image class="icon_home" src="/images/icon_home4.png" mode="aspectFit"></cover-image>
-                    <cover-view class="tx-c">优惠好券</cover-view>
-                </cover-view>
-                <cover-view class="menuitem ub ub-ver ub-ac ub-pc" bindtap="toPath" data-tit="新品尝鲜" data-page="/pages/activities/project-list/index?sceneType=SPLICED">
-                    <cover-image class="icon_home" src="/images/icon_home2.png" mode="aspectFit"></cover-image>
-                    <cover-view class="tx-c">新品尝鲜</cover-view>
-                </cover-view>
-                <cover-view class="menuitem ub ub-ver ub-ac ub-pc" bindtap="toPath" data-tit="必吃红店" data-page="/pages/activities/project-list/index?sceneType=BARGAIN">
-                    <cover-image class="icon_home" src="/images/icon_home3.png" mode="aspectFit"></cover-image>
-                    <cover-view class="tx-c">必吃红店</cover-view>
-                </cover-view>
-                <!-- <cover-view class="menuitem ub ub-ver ub-ac ub-pc" bindtap="showJoinModal" data-tit="商家入驻">
-                    <cover-image class="icon_home" src="/images/icon_home5.png" mode="aspectFit"></cover-image>
-                    <cover-view class="tx-c">商家入驻</cover-view>
-                </cover-view> -->
             </cover-view>
         </view>
         <!-- 桔子球 -->

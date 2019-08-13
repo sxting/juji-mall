@@ -44,6 +44,7 @@
     "pages/mypayDetail/index",
     "pages/member/index",
     "pages/memberzq/index",
+    "pages/seed/index",
     "pages/juzhangGZ/index",
     "pages/jujiGarden/myUserH5/index"
   ],
@@ -78,10 +79,10 @@
         "selectedIconPath": "images/juyuan-select.png"
       },
       {
-        "text": "桔子",
-        "pagePath": "pages/juzi/index",
-        "iconPath": "images/juzi.png",
-        "selectedIconPath": "images/juzi_selected.png"
+        "text": "种草",
+        "pagePath": "pages/seed/index",
+        "iconPath": "images/seed_un.png",
+        "selectedIconPath": "images/seed_on.png"
       },
       {
         "text": "我的",

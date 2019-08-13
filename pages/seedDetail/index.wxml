@@ -2,7 +2,7 @@
 <nav-bar navbar-data='{{nvabarData}}'></nav-bar>
  <view class="main">
   <view class='newproductDiv clearfix'>
-    <view class="jingxuanlist pubuItem" wx:for="{{productList}}" wx:for-index='index' wx:key="unique" bindtap="toDetail" data-type="{{item.currentActivityType}}" data-id="{{item.tweetsId}}">
+    <view class="jingxuanlist pubuItem" wx:for="{{productList}}" wx:for-index='index' wx:key="unique" bindtap="toNextDetail" data-type="{{item.currentActivityType}}" data-actid="{{item.currentActivityId}}" data-id="{{item.productId}}" data-storeid="{{item.nearStore.id}}" >
         <image class="productImg plimg"lazy-load="true" src="https://upic.juniuo.com/file/picture/{{item.cover}}/resize_690_387/mode_filt/format_jpg/quality_70" mode="widthFix"></image>
         <view class="pubuname">{{item.title}}</view>
     </view>

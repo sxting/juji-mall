@@ -5,7 +5,7 @@ import { service } from '../../service.js';
 
 Page({
     data: {
-      nvabarData: { showCapsule: 1, title: '种草'},
+        nvabarData: { showCapsule: 1, title: '种草'},
         providerId:'',
         productList: [],
         isShowNodata: false,
@@ -14,7 +14,7 @@ Page({
     },
     onLoad: function(options) {
         this.setData({providerId: wx.getStorageSync('providerId')});
-        this.getData(); //获取活动列表
+        this.getData(options.id); //获取活动列表
     },
     onReachBottom: function() {
         if (this.data.ifBottom) { //已经到底部了
@@ -26,17 +26,11 @@ Page({
             this.getData();
         }
     },
-    getData: function(status) {
-        var obj = {
-            providerId: this.data.providerId,
-            pageNo: this.data.pageNo,
-            pageSize: 10
-        };
-        service.tweets(obj).subscribe({
+    getData: function(id) {
+        service.tweetDetail({tweetsId:id}).subscribe({
             next: res => {
                 this.setData({
-                    productList: this.data.productList.concat(res),
-                    isShowNodata: this.data.pageNo==1 && res.length==0
+
                 });
             },
             error: err => {},
@@ -44,10 +38,11 @@ Page({
         });
     },
     //跳转到商品详情
-    toDetail: function(e) {
+    toComDetail: function(e) {
         var id = e.currentTarget.dataset.id;
+        var storeid = e.currentTarget.dataset.storeid;
         wx.navigateTo({
-            url: '/pages/seedDetail/index?share=0&id=' + id
+            url: '/pages/comDetail/index?share=0&id=' + id + '&storeid=' + storeid
         });
     },
     // 分享

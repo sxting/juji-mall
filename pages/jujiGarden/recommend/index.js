@@ -89,7 +89,27 @@ Page({
     },
     //保存素材
     saveMaterial: function(e) {
-        this.produceImg(e, 1)
+        // this.produceImg(e, 1)
+        wx.showToast({ title: '生成分享图片', icon: 'loading', duration: 30000 });
+        var productId = e.currentTarget.dataset.productid;
+        this.setData({ productId: productId });
+        jugardenService.getQrCode({ productId: this.data.productId, path: 'pages/login/index' }).subscribe({
+            next: res => {
+                var sceneId = res.senceId;
+                var scenePicId = res.picId;
+                this.setData({ sceneId: sceneId });
+                var imageIds = e.currentTarget.dataset.imgs;
+                var desc = e.currentTarget.dataset.desc;
+                imageIds.push(scenePicId);
+                console.log(imageIds);
+                this.saveFile(imageIds, desc);
+            },
+            error: err => {
+                errDialog(err);
+                wx.hideToast();
+            },
+            complete: () => wx.hideToast()
+        });
     },
     //生成图文
     produceImg: function(e, type) {
@@ -343,8 +363,10 @@ Page({
         var imgIndex = 0;
         for (var i = 0; i < imageIds.length; i++) {
             var imgId = imageIds[i];
+            var imgUrl = constant.basePicUrl + imageIds[i] + '/resize_0_0/mode_filt/format_jpg/quality_0';
+            console.log(imgUrl)
             wx.downloadFile({
-                url: constant.basePicUrl + imageIds[i] + '/resize_0_0/mode_filt/format_jpg/quality_0',
+                url: imgUrl,
                 success: (res) => {
                     wx.saveImageToPhotosAlbum({
                         filePath: res.tempFilePath,

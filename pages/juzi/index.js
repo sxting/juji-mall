@@ -3,7 +3,7 @@ import { errDialog, loading } from '../../utils/util'
 var app = getApp();
 Page({
   data: {
-    nvabarData: {showCapsule: 0,title: '',isIndex:1},
+    nvabarData: {showCapsule: 1,title: '我的桔子',isIndex:1},
     showjuzigz: false,
     currentPointObj: {},
     canSignIn: true,

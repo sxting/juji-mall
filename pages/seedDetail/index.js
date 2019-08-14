@@ -4,14 +4,10 @@ import { errDialog, loading } from '../../utils/util';
 import { service } from '../../service.js';
 var WxParse = require('../../wxParse/wxParse.js');
 
-
-
-
-
 Page({
     data: {
         nvabarData: { showCapsule: 1, title: '种草'},
-        tweetInfo: {},
+        tweetInfo: null,
         content:{}
     },
     onLoad: function(options) {
@@ -21,7 +17,7 @@ Page({
         service.tweetDetail({tweetsId:id}).subscribe({
             next: res => {
                 this.setData({
-                  tweetInfo:res,w
+                  tweetInfo:res,
                   content:WxParse.wxParse('content', 'html', res.html, this)
                 })
             },

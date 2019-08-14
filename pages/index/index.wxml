@@ -23,28 +23,28 @@
             </cover-view>
             <cover-view class="menulist">
                 <cover-view class="ub ub-ac ub-pj1">
-                    <cover-view class="menuitem ub ub-ver ub-ac ub-pc" bindtap="toSeriesPath" data-tit="美食饮品" data-page="/pages/series/index">
+                    <cover-view class="menuitem ub ub-ver ub-ac ub-pc" bindtap="toSeriesPath" data-tit="要吃" data-page="/pages/series/index">
                         <cover-image class="icon_home" src="/images/icon_home7.png" mode="aspectFit"></cover-image>
-                        <cover-view class="tx-c">美食饮品</cover-view>
+                        <cover-view class="tx-c">要吃</cover-view>
                     </cover-view>
-                    <cover-view class="menuitem ub ub-ver ub-ac ub-pc" bindtap="toSeriesPath" data-tit="美容美发" data-page="/pages/series/index">
-                        <cover-image class="icon_home" src="/images/icon_home8.png" mode="aspectFit"></cover-image>
-                        <cover-view class="tx-c">美容美发</cover-view>
-                    </cover-view>
-                    <cover-view class="menuitem ub ub-ver ub-ac ub-pc" bindtap="toSeriesPath" data-tit="休闲娱乐" data-page="/pages/series/index">
+                    <cover-view class="menuitem ub ub-ver ub-ac ub-pc" bindtap="toSeriesPath" data-tit="要玩" data-page="/pages/series/index">
                         <cover-image class="icon_home" src="/images/icon_home9.png" mode="aspectFit"></cover-image>
-                        <cover-view class="tx-c">休闲娱乐</cover-view>
+                        <cover-view class="tx-c">要玩</cover-view>
                     </cover-view>
-                    <cover-view class="menuitem ub ub-ver ub-ac ub-pc" bindtap="toSeriesPath" data-tit="亲子游乐" data-page="/pages/series/index">
+                    <cover-view class="menuitem ub ub-ver ub-ac ub-pc" bindtap="toSeriesPath" data-tit="要美" data-page="/pages/series/index">
+                        <cover-image class="icon_home" src="/images/icon_home8.png" mode="aspectFit"></cover-image>
+                        <cover-view class="tx-c">要美</cover-view>
+                    </cover-view>
+                    <cover-view class="menuitem ub ub-ver ub-ac ub-pc" bindtap="toSeriesPath" data-tit="亲子" data-page="/pages/series/index">
                         <cover-image class="icon_home" src="/images/icon_home10.png" mode="aspectFit"></cover-image>
-                        <cover-view class="tx-c">亲子游乐</cover-view>
+                        <cover-view class="tx-c">亲子</cover-view>
                     </cover-view>
-                    <cover-view class="menuitem ub ub-ver ub-ac ub-pc" bindtap="toSeriesPath" data-tit="周边游" data-page="/pages/series/index">
+                    <cover-view class="menuitem ub ub-ver ub-ac ub-pc" bindtap="toSeriesPath" data-tit="度假" data-page="/pages/series/index">
                         <cover-image class="icon_home" src="/images/icon_home11.png" mode="aspectFit"></cover-image>
-                        <cover-view class="tx-c">周边游</cover-view>
+                        <cover-view class="tx-c">度假</cover-view>
                     </cover-view>
                 </cover-view>
-                <cover-view class="ub ub-ac ub-pj1">
+                <cover-view class="ub ub-ac ub-pj1" style="margin-top:10rpx">
                     <cover-view class="menuitem ub ub-ver ub-ac ub-pc" bindtap="toPath" data-tit="会员专区" data-page="/pages/memberzq/index">
                         <cover-image class="icon_home" src="/images/icon_home6.png" mode="aspectFit"></cover-image>
                         <cover-view class="tx-c">会员专区</cover-view>

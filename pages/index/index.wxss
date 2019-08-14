@@ -17,8 +17,8 @@ swiper{display:block;width:100%;height:488rpx;box-sizing:border-box;overflow:hid
 .slide-image{width:100%;height:488rpx;display:block;box-sizing:border-box;}
 .homeB{position: absolute;bottom: 100rpx;width: 100%;height: 70rpx;left: 0;z-index: 99;}
 .homeBImg{width: 100%;height: 70rpx;display: block;}
-.menulist{width:94%;padding: 5rpx 10rpx 20rpx;box-sizing:border-box;background-color: #fff;border-radius: 10rpx;z-index: 100; box-shadow: 0 6rpx 14rpx 0 rgba(228,228,228,0.50);position: absolute;top:340rpx;left:3%;border:1rpx #eee solid;}
-.menulist .menuitem{width:170rpx; height: 140rpx;}
+.menulist{width:94%;padding: 15rpx 2rpx 25rpx;box-sizing:border-box;background-color: #fff;border-radius: 10rpx;z-index: 100; box-shadow: 0 6rpx 14rpx 0 rgba(228,228,228,0.50);position: absolute;top:340rpx;left:3%;border:1rpx #eee solid;}
+.menulist .menuitem{width:170rpx; height: 120rpx;}
 .icon_home{display: block;width: 80rpx;height: 80rpx;}
 .menulist .tx-c{font-size: 24rpx;color: #333;margin-top: 4rpx;}
 

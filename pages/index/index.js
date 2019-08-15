@@ -68,6 +68,12 @@ Page({
         wx.reportAnalytics('home_ue', {ue: tit});
         wx.navigateTo({ url: targetUrl+'?subject='+tit})
     },
+    toTypePath:function(e){
+        var targetUrl = e.currentTarget.dataset['page'];
+        var tit = e.currentTarget.dataset.tit;
+        wx.reportAnalytics('home_ue', {ue: tit});
+        wx.navigateTo({ url: targetUrl+'?subject='+tit})
+    },
     isNewer: function() {
         service.isNewer().subscribe({
             next: res2 => {

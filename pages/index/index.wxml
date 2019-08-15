@@ -28,7 +28,7 @@
                         <cover-view class="tx-c">要吃</cover-view>
                     </cover-view>
                     <cover-view class="menuitem ub ub-ver ub-ac ub-pc" bindtap="toSeriesPath" data-tit="要玩" data-page="/pages/series/index">
-                        <cover-image class="icon_home" src="/images/icon_home9.png" mode="aspectFit"></cover-image>
+                        <cover-image class="icon_home" src="/images/icon_home10.png" mode="aspectFit"></cover-image>
                         <cover-view class="tx-c">要玩</cover-view>
                     </cover-view>
                     <cover-view class="menuitem ub ub-ver ub-ac ub-pc" bindtap="toSeriesPath" data-tit="要美" data-page="/pages/series/index">
@@ -36,7 +36,7 @@
                         <cover-view class="tx-c">要美</cover-view>
                     </cover-view>
                     <cover-view class="menuitem ub ub-ver ub-ac ub-pc" bindtap="toSeriesPath" data-tit="亲子" data-page="/pages/series/index">
-                        <cover-image class="icon_home" src="/images/icon_home10.png" mode="aspectFit"></cover-image>
+                        <cover-image class="icon_home" src="/images/icon_home9.png" mode="aspectFit"></cover-image>
                         <cover-view class="tx-c">亲子</cover-view>
                     </cover-view>
                     <cover-view class="menuitem ub ub-ver ub-ac ub-pc" bindtap="toSeriesPath" data-tit="度假" data-page="/pages/series/index">
@@ -53,17 +53,17 @@
                         <cover-image class="icon_home" src="/images/icon_home1.png" mode="aspectFit"></cover-image>
                         <cover-view class="tx-c">桔子换礼</cover-view>
                     </cover-view>
-                    <cover-view class="menuitem ub ub-ver ub-ac ub-pc" bindtap="toSeriesPath" data-tit="好店礼券" data-page="/pages/series/index">
+                    <cover-view class="menuitem ub ub-ver ub-ac ub-pc" bindtap="toTypePath" data-tit="优选好券" data-page="/pages/niceShop/index">
                         <cover-image class="icon_home" src="/images/icon_home4.png" mode="aspectFit"></cover-image>
-                        <cover-view class="tx-c">优惠好券</cover-view>
+                        <cover-view class="tx-c">优选好券</cover-view>
                     </cover-view>
-                    <cover-view class="menuitem ub ub-ver ub-ac ub-pc" bindtap="toPath" data-tit="新品尝鲜" data-page="/pages/activities/project-list/index?sceneType=SPLICED">
+                    <cover-view class="menuitem ub ub-ver ub-ac ub-pc" bindtap="toTypePath" data-tit="特惠品鉴" data-page="/pages/niceShop/index">
                         <cover-image class="icon_home" src="/images/icon_home2.png" mode="aspectFit"></cover-image>
-                        <cover-view class="tx-c">新品尝鲜</cover-view>
+                        <cover-view class="tx-c">特惠品鉴</cover-view>
                     </cover-view>
-                    <cover-view class="menuitem ub ub-ver ub-ac ub-pc" bindtap="toPath" data-tit="必吃红店" data-page="/pages/activities/project-list/index?sceneType=BARGAIN">
+                    <cover-view class="menuitem ub ub-ver ub-ac ub-pc" bindtap="toTypePath" data-tit="打卡潮店" data-page="/pages/niceShop/index">
                         <cover-image class="icon_home" src="/images/icon_home3.png" mode="aspectFit"></cover-image>
-                        <cover-view class="tx-c">必吃红店</cover-view>
+                        <cover-view class="tx-c">打卡潮店</cover-view>
                     </cover-view>
                 </cover-view>
             </cover-view>

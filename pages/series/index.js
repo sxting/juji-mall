@@ -32,7 +32,7 @@ Page({
     getData: function(status) {
         var obj = {
             providerId: this.data.providerId,
-            subject:this.data.subject,
+            tag:this.data.subject,
             sortField: 'IDX',
             sortOrder: 'ASC',
             pageNo: this.data.pageNo,

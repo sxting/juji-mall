@@ -1,11 +1,7 @@
 page{height:100%;background-color:#fff;}
-.main{background:#fff;padding:40rpx 30rpx 30rpx;
-  background-image:linear-gradient(-180deg, #FFFFFF 2%, #F5F5F5 9%);
-}
+.main{padding:30rpx;background-image:linear-gradient(-180deg, #FFFFFF 2%, #F5F5F5 9%);height:100%;}
 .nodataDiv{padding-top: 260rpx;height: 900rpx;}
 
-/* .jingxuanlist{box-shadow:0 5px 5px 3px rgba(229,229,229,0.50);border-radius:10rpx;margin-top:30rpx;position: relative;padding-bottom: 30rpx;} */
-/* .jingxuanlist .productImg{width:100%;height:340rpx;border-top-left-radius:10rpx;border-top-right-radius:10rpx;} */
 .dis-wrap{display:flex;align-items:center;margin-top:10rpx;padding:0 20rpx;}
 .from{font-size:22rpx;color:#999;}
 .dis{font-size:22rpx;color:#999;}

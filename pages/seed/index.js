@@ -12,7 +12,7 @@ Page({
         pageNo: 1,
         ifBottom: false
     },
-    onLoad: function(options) {
+    onShow: function(options) {
         this.setData({providerId: wx.getStorageSync('providerId')});
         this.getData(); //获取活动列表
     },
@@ -28,6 +28,7 @@ Page({
     },
     getData: function(status) {
         var obj = {
+            show:1,
             providerId: this.data.providerId,
             pageNo: this.data.pageNo,
             pageSize: 10
@@ -35,11 +36,13 @@ Page({
         service.tweets(obj).subscribe({
             next: res => {
                 this.setData({
-                    productList: this.data.productList.concat(res),
-                    isShowNodata: this.data.pageNo==1 && res.length==0
+                    productList: this.data.productList.concat(res.list),
+                    isShowNodata: this.data.pageNo==1 && res.list.length==0
                 });
             },
-            error: err => {},
+            error: err => {
+                this.setData({isShowNodata:true})
+            },
             complete: () => wx.hideToast()
         });
     },

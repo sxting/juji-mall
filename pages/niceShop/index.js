@@ -3,10 +3,14 @@ import { constant } from '../../utils/constant';
 import { errDialog, loading } from '../../utils/util';
 import { service } from '../../service.js';
 
+var queryValue = {"特惠品鉴":"新品尝鲜", "优选好券":"好店礼券", "打卡潮店":"打卡潮店"}
+
 Page({
     data: {
       nvabarData: { showCapsule: 1, title: '优惠好券'},
         providerId:'',
+        subject:'',
+        typeName:'',
         productList: [],
         isShowNodata: false,
         pageNo: 1,
@@ -14,6 +18,11 @@ Page({
     },
     onLoad: function(options) {
         this.setData({providerId: wx.getStorageSync('providerId')});
+        this.setData({subject:options.subject});
+
+        this.setData({typeName:queryValue[options.subject]});
+
+        this.setData({nvabarData: { showCapsule: 1, title: options.subject}})
         this.getData(); //获取活动列表
     },
     onReachBottom: function() {
@@ -29,7 +38,7 @@ Page({
     getData: function(status) {
         var obj = {
             providerId: this.data.providerId,
-            subject:"好店礼券",
+            subject:this.data.typeName,
             sortField: 'IDX',
             sortOrder: 'ASC',
             pageNo: this.data.pageNo,

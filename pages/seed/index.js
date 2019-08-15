@@ -31,20 +31,33 @@ Page({
             show:1,
             providerId: this.data.providerId,
             pageNo: this.data.pageNo,
-            pageSize: 10
+            pageSize: 16
         };
         service.tweets(obj).subscribe({
             next: res => {
-                this.setData({
-                    productList: this.data.productList.concat(res.list),
-                    isShowNodata: this.data.pageNo==1 && res.list.length==0
-                });
+                if(res.length==0){
+                    this.setData({
+                        productList: [],
+                        isShowNodata: true,
+                        ifBottom:true
+                    });
+                }else{
+                    this.setData({
+                        productList: this.data.productList.concat(res.list),
+                        isShowNodata: this.data.pageNo==1 && res.list.length==0,
+                        ifBottom:res.list.length==0
+                    });
+                }
             },
             error: err => {
                 this.setData({isShowNodata:true})
             },
             complete: () => wx.hideToast()
         });
+    },
+    fillData: function (isFull,goods){
+        let view = this.selectComponent('#waterFallView');
+        view.fillData(isFull, goods);
     },
     //跳转到商品详情
     toDetail: function(e) {

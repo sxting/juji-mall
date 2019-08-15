@@ -1,13 +1,41 @@
 <wxs src="../../utils/numFr.wxs" module="filter" />
 <nav-bar navbar-data='{{nvabarData}}'></nav-bar>
- <view class="main">
+ <!-- <view class="main">
   <view class='content clearfix'>
     <view class="pubuItem" wx:for="{{productList}}" wx:for-index='index' wx:key="unique" bindtap="toDetail" data-type="{{item.currentActivityType}}" data-id="{{item.tweetsId}}">
-        <image class="productImg plimg"lazy-load="true" src="https://upic.juniuo.com/file/picture/{{item.cover}}/resize_690_387/mode_filt/format_jpg/quality_70" mode="widthFix"></image>
+        <image class="productImg plimg" lazy-load="true" src="https://upic.juniuo.com/file/picture/{{item.cover}}/resize_690_387/mode_filt/format_jpg/quality_70" mode="widthFix"></image>
         <view class="pubuname">{{item.title}}</view>
     </view>
   </view>
   <view class="nodataDiv ub ub-ac ub-ver" hidden="{{!isShowNodata}}">
+      <image class="nodataImg" src="/images/null6.png" mode="aspectFit"></image>
+      <view class="nodataTxt">暂无相关内容~</view>
+  </view>
+</view> -->
+<view class="main">
+<view class="cateCommodity">
+  <view class="leftContainer">
+    <block wx:for="{{productList}}" wx:key="{{item.tweetsId}}">
+      <view class="cateItem" wx:if="{{index%2==0}}">
+        <view class="item">
+          <image src="https://upic.juniuo.com/file/picture/{{item.cover}}/resize_690_387/mode_filt/format_jpg/quality_70" class="itemImg" mode="widthFix"></image>
+          <view class="title">{{item.title}}</view>
+        </view>
+      </view>
+    </block>
+  </view>
+  <view class="rightContainer">
+    <block wx:for="{{productList}}" wx:key="{{item.tweetsId}}">
+      <view class="cateItem" wx:if="{{index%2==1}}">
+        <view class="item">
+          <image src="https://upic.juniuo.com/file/picture/{{item.cover}}/resize_690_387/mode_filt/format_jpg/quality_70" class="itemImg" mode="widthFix"></image>
+          <view class="title">{{item.title}}</view>
+        </view>
+      </view>
+    </block>
+  </view>
+</view>
+<view class="nodataDiv ub ub-ac ub-ver" hidden="{{!isShowNodata}}">
       <image class="nodataImg" src="/images/null6.png" mode="aspectFit"></image>
       <view class="nodataTxt">暂无相关内容~</view>
   </view>

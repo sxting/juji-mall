@@ -13,6 +13,7 @@ Page({
         ifBottom: false
     },
     onShow: function(options) {
+        this.setData({productList:[]});
         this.setData({providerId: wx.getStorageSync('providerId')});
         this.getData(); //获取活动列表
     },
@@ -54,10 +55,6 @@ Page({
             },
             complete: () => wx.hideToast()
         });
-    },
-    fillData: function (isFull,goods){
-        let view = this.selectComponent('#waterFallView');
-        view.fillData(isFull, goods);
     },
     //跳转到商品详情
     toDetail: function(e) {

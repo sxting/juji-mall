@@ -16,7 +16,7 @@
 <view class="cateCommodity">
   <view class="leftContainer">
     <block wx:for="{{productList}}" wx:key="{{item.tweetsId}}">
-      <view class="cateItem" wx:if="{{index%2==0}}">
+      <view class="cateItem" wx:if="{{index%2==0}}" bindtap="toDetail" data-id="{{item.tweetsId}}">
         <view class="item">
           <image src="https://upic.juniuo.com/file/picture/{{item.cover}}/resize_690_387/mode_filt/format_jpg/quality_70" class="itemImg" mode="widthFix"></image>
           <view class="title">{{item.title}}</view>
@@ -26,7 +26,7 @@
   </view>
   <view class="rightContainer">
     <block wx:for="{{productList}}" wx:key="{{item.tweetsId}}">
-      <view class="cateItem" wx:if="{{index%2==1}}">
+      <view class="cateItem" wx:if="{{index%2==1}}" bindtap="toDetail" data-id="{{item.tweetsId}}">
         <view class="item">
           <image src="https://upic.juniuo.com/file/picture/{{item.cover}}/resize_690_387/mode_filt/format_jpg/quality_70" class="itemImg" mode="widthFix"></image>
           <view class="title">{{item.title}}</view>

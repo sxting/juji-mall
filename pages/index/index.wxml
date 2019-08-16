@@ -9,7 +9,7 @@
             <view class="toper">
                 <swiper autoplay="{{autoplay}}" circular wx:if="{{slideShowList.length>0}}">
                     <swiper-item wx:for="{{slideShowList}}" wx:key="unique">
-                        <image src="https://upic.juniuo.com/file/picture/{{item.imgId}}/resize_750_488/mode_filt/format_jpg/quality_0" data-link="{{item.link}}" bindtap="onTapBanner" class="slide-image" mode="aspectFill" lazy-load="true" data-tit="商品详情"></image>
+                        <image src="https://upic.juniuo.com/file/picture/{{item.imgId}}/resize_750_488/mode_filt/format_jpg/quality_0" data-link="{{item.link}}" bindtap="onTapBanner" class="slide-image" mode="widthFix" lazy-load="true" data-tit="商品详情"></image>
                     </swiper-item>
                 </swiper>
                 <swiper wx:else><swiper-item><image src="https://upic.juniuo.com/file/picture/2773KOjQnLf0/resize_750_488/mode_filt/format_jpg/quality_0" class="slide-image"></image></swiper-item></swiper>

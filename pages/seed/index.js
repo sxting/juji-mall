@@ -12,7 +12,7 @@ Page({
         pageNo: 1,
         ifBottom: false
     },
-    onShow: function(options) {
+    onShow: function() {
         this.setData({productList:[]});
         this.setData({providerId: wx.getStorageSync('providerId')});
         this.getData(); //获取活动列表

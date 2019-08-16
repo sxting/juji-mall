@@ -68,4 +68,4 @@ button:after{border:0;}
 .clearfix{zoom:1;}
 .textnowarp { white-space: nowrap; overflow: hidden; text-overflow: ellipsis }
 
-.wxParse-p image{width:100%!important;margin:12rpx 0;}
+/*.wxParse-p image{max-width:100%!important;margin:12rpx 0;}*/

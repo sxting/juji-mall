@@ -4,7 +4,6 @@
     "backgroundColorTop": "#FFDC00",
     "backgroundColorBottom": "#FFFFFF",
     "usingComponents": {
-        "nav-bar": "/components/navbar/index",
-        "open-member": "/components/openmember/index"
+        "nav-bar": "/components/navbar/index"
     }
 }

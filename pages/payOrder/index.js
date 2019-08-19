@@ -1,11 +1,21 @@
-import { service } from '../../service';
-import { constant } from '../../utils/constant';
-import { errDialog, loading } from '../../utils/util'
+import {
+    service
+} from '../../service';
+import {
+    constant
+} from '../../utils/constant';
+import {
+    errDialog,
+    loading
+} from '../../utils/util'
 var app = getApp();
 
 Page({
     data: {
-        nvabarData: { showCapsule: 1, title: '订单确认' },
+        nvabarData: {
+            showCapsule: 1,
+            title: '订单确认'
+        },
         productId: '',
         storeId: '',
         store: {},
@@ -30,19 +40,21 @@ Page({
         defaultSku: {},
         activityData: {},
         ruleMaps: {},
-      member: wx.getStorageSync('distributorRole') == 'LEADER' || wx.getStorageSync('member'),
-      realName: '',
-      idNo: '',
-      mobile: ''
+        member: wx.getStorageSync('distributorRole') == 'LEADER' || wx.getStorageSync('member'),
+        realName: '',
+        idNo: '',
+        mobile: ''
     },
     onLoad: function(options) {
         console.log("确认订单页面");
         console.log(options);
         this.setData({
-          member: wx.getStorageSync('distributorRole') == 'LEADER' || wx.getStorageSync('member')
+            member: wx.getStorageSync('distributorRole') == 'LEADER' || wx.getStorageSync('member')
         })
         if (options.orderType) {
-            this.setData({ orderBizType: options.orderType });
+            this.setData({
+                orderBizType: options.orderType
+            });
         }
         wx.hideShareMenu();
         if (options.id && options.paytype) {
@@ -55,10 +67,20 @@ Page({
             });
         }
         if (options.type) {
-            this.setData({ type: options.type });
+            this.setData({
+                type: options.type
+            });
         }
         if (options.skuId) {
-            this.setData({ skuId: options.skuId, skuMajorId: options.smId });
+            this.setData({
+                skuId: options.skuId,
+                skuMajorId: options.smId
+            });
+        }
+        if (options.buyMember) {
+            this.setData({
+                buyMember: options.buyMember
+            })
         }
         this.setData({
             activityOrderId: options.activityOrderId ? options.activityOrderId : ''
@@ -89,7 +111,9 @@ Page({
     getPointBalance: function() {
         service.getPointBalance().subscribe({
             next: res => {
-                this.setData({pointBalance: res});
+                this.setData({
+                    pointBalance: res
+                });
             },
             error: err => console.log(err),
             complete: () => wx.hideToast()
@@ -116,7 +140,9 @@ Page({
                 console.log(this.data.ruleMaps);
                 console.log(this.data.skuId);
                 console.log(this.data.ruleMaps[this.data.skuId]);
-                this.setData({ activityData: this.data.ruleMaps[this.data.skuId][0]});
+                this.setData({
+                    activityData: this.data.ruleMaps[this.data.skuId][0]
+                });
                 console.log(this.data.activityData);
             },
             error: err => console.log(err),
@@ -138,7 +164,9 @@ Page({
                     point: res.product.point,
                     showProduct: true
                 });
-                this.setData({ defaultSku: getObjById(res.product.productSkus, this.data.skuId) })
+                this.setData({
+                    defaultSku: getObjById(res.product.productSkus, this.data.skuId)
+                })
             },
             error: err => console.log(err),
             complete: () => wx.hideToast()
@@ -146,18 +174,26 @@ Page({
     },
     delNumber: function() {
         var thisNum = this.data.count - 1;
-        if (thisNum <= 0) {return;}
-        this.setData({count: thisNum});
+        if (thisNum <= 0) {
+            return;
+        }
+        this.setData({
+            count: thisNum
+        });
     },
     addNumber: function() {
         var thisNum = this.data.count + 1;
-        this.setData({count: thisNum});
+        this.setData({
+            count: thisNum
+        });
     },
     toPay: function(e) {
-        if (this.data.alreadyPay) { return; } else {
-          this.setData({
-            alreadyPay: true
-          })
+        if (this.data.alreadyPay) {
+            return;
+        } else {
+            this.setData({
+                alreadyPay: true
+            })
         }
         if (this.data.paytype == 1 || this.data.paytype == 2 || this.data.paytype == 3) {
             this.toProductPay();
@@ -172,39 +208,56 @@ Page({
             this.toActivityPay3();
         }
     },
-    showAlert:function(msg){
-        wx.showModal({title: '提示',content: msg});
-        this.setData({alreadyPay: false});
+    showAlert: function(msg) {
+        wx.showModal({
+            title: '提示',
+            content: msg
+        });
+        this.setData({
+            alreadyPay: false
+        });
     },
-    errorAlert:function(msg){
-        wx.showModal({title: '支付失败',content: msg});
-        this.setData({alreadyPay: false});
+    errorAlert: function(msg) {
+        wx.showModal({
+            title: '支付失败',
+            content: msg
+        });
+        this.setData({
+            alreadyPay: false
+        });
     },
-    cancelPay:function(){
-        wx.showToast({title: '用户取消支付',icon: 'none'});
+    cancelPay: function() {
+        wx.showToast({
+            title: '用户取消支付',
+            icon: 'none'
+        });
         wx.redirectTo({
             url: '/pages/orderlist/index?index=1&status=CREATED'
         });
-        this.setData({ alreadyPay: false });
+        this.setData({
+            alreadyPay: false
+        });
     },
-  bindrealNameinput(e) {
-    this.setData({
-      realName: e.detail.value
-    })
-  },
-  bindidNoinput(e) {
-    this.setData({
-      idNo: e.detail.value
-    })
-  },
-  bindmobileinput(e) {
-    this.setData({
-      mobile: e.detail.value
-    })
-  },
+    bindrealNameinput(e) {
+        this.setData({
+            realName: e.detail.value
+        })
+    },
+    bindidNoinput(e) {
+        this.setData({
+            idNo: e.detail.value
+        })
+    },
+    bindmobileinput(e) {
+        this.setData({
+            mobile: e.detail.value
+        })
+    },
     // 普通商品支付
     toProductPay: function() {
-        service.getPre({productId: this.data.productId}).subscribe({
+        service.getPre({
+            productId: this.data.productId
+        }).subscribe({
             next: res => {
                 console.log('--------下单前数据校验-------');
                 console.log(res);
@@ -223,9 +276,9 @@ Page({
                             var price = info.price == null || info.price == 0 ? '0' : info.price;
 
                             if (!this.data.productInfo.isMember && this.data.member && this.data.productInfo.distributor) {
-                              price = info.memberPrice
+                                price = info.memberPrice
                             } else {
-                              price = info.price;
+                                price = info.price;
                             }
 
                             if (point == 0 && price > 0) {
@@ -238,7 +291,7 @@ Page({
                             var orderObj = {
                                 itemRequests: [{
                                     sceneId: this.data.sceneId,
-                                    inviteCode: this.data.inviteCode,
+                                    inviteCode: this.data.inputShareInviteCode ? this.data.inputShareInviteCode : this.data.inviteCode,
                                     merchantId: this.data.productInfo.merchantId,
                                     merchantName: this.data.productInfo.merchantName,
                                     num: this.data.count,
@@ -270,32 +323,36 @@ Page({
                                 next: res1 => {
                                     console.log('--------创建订单返回1混合支付-------');
                                     console.log(res1);
-                                  if (payTypeValue == 'POINT') {
-                                    wx.redirectTo({
-                                      url: '/pages/orderDetail/index?id=' + res1.orderId,
-                                    });
-                                    this.setData({ alreadyPay: false });
-                                  } else {
-                                    var payInfo = JSON.parse(res1.payInfo);
-                                    wx.requestPayment({
-                                      timeStamp: payInfo.timeStamp,
-                                      nonceStr: payInfo.nonceStr,
-                                      package: payInfo.package,
-                                      signType: payInfo.signType,
-                                      paySign: payInfo.paySign,
-                                      success: (res2) => {
+                                    if (payTypeValue == 'POINT') {
                                         wx.redirectTo({
-                                          url: '/pages/orderDetail/index?id=' + res1.orderId,
+                                            url: '/pages/orderDetail/index?id=' + res1.orderId,
                                         });
-                                        this.setData({ alreadyPay: false });
-                                      },
-                                      fail: (res2) => {
-                                        if (res2.errMsg == 'requestPayment:fail cancel') {
-                                          this.cancelPay();
-                                        }
-                                      }
-                                    });
-                                  }
+                                        this.setData({
+                                            alreadyPay: false
+                                        });
+                                    } else {
+                                        var payInfo = JSON.parse(res1.payInfo);
+                                        wx.requestPayment({
+                                            timeStamp: payInfo.timeStamp,
+                                            nonceStr: payInfo.nonceStr,
+                                            package: payInfo.package,
+                                            signType: payInfo.signType,
+                                            paySign: payInfo.paySign,
+                                            success: (res2) => {
+                                                wx.redirectTo({
+                                                    url: '/pages/orderDetail/index?id=' + res1.orderId,
+                                                });
+                                                this.setData({
+                                                    alreadyPay: false
+                                                });
+                                            },
+                                            fail: (res2) => {
+                                                if (res2.errMsg == 'requestPayment:fail cancel') {
+                                                    this.cancelPay();
+                                                }
+                                            }
+                                        });
+                                    }
                                 },
                                 error: err => {
                                     this.errorAlert(err);
@@ -341,12 +398,12 @@ Page({
                         package: payInfo.package,
                         signType: payInfo.signType,
                         paySign: payInfo.paySign,
-                        success:(res1)=>{
+                        success: (res1) => {
                             wx.redirectTo({
                                 url: '/pages/activities/my-collage/index?id=' + this.data.productId + '&activityId=' + this.data.activityId + '&progressId=' + res.progressId + '&activityOrderId=' + this.data.activityOrderId,
                             });
                         },
-                        fail:(res)=> {
+                        fail: (res) => {
                             if (res.errMsg == 'requestPayment:fail cancel') {
                                 this.cancelPay();
                             }
@@ -376,12 +433,12 @@ Page({
                     package: payInfo.package,
                     signType: payInfo.signType,
                     paySign: payInfo.paySign,
-                    success:(res2) => {
+                    success: (res2) => {
                         wx.redirectTo({
                             url: '/pages/orderDetail/index?id=' + res.orderId,
                         });
                     },
-                    fail:(res2) => {
+                    fail: (res2) => {
                         if (res2.errMsg == 'requestPayment:fail cancel') {
                             this.cancelPay();
                         }
@@ -400,7 +457,7 @@ Page({
             inviteCode: this.data.inviteCode,
             productId: this.data.productId,
             activityId: this.data.activityId,
-            skuId:this.data.skuId
+            skuId: this.data.skuId
         }).subscribe({
             next: res => {
                 console.log(res);
@@ -411,10 +468,12 @@ Page({
                     package: payInfo.package,
                     signType: payInfo.signType,
                     paySign: payInfo.paySign,
-                    success:(obj) => {
-                        wx.redirectTo({ url: '/pages/orderDetail/index?id=' + res.orderId });
+                    success: (obj) => {
+                        wx.redirectTo({
+                            url: '/pages/orderDetail/index?id=' + res.orderId
+                        });
                     },
-                    fail:(obj) => {
+                    fail: (obj) => {
                         if (obj.errMsg == 'requestPayment:fail cancel') {
                             this.cancelPay();
                         }
@@ -426,12 +485,19 @@ Page({
             },
             complete: () => wx.hideToast()
         })
+    },
+
+    inputShareInviteCode: function(e) {
+        this.setData({
+            inputShareInviteCode: e.detail.value
+        })
     }
 });
-function getObjById(arr,id){
-  for(var i=0;i<arr.length;i++){
-    if(arr[i].skuId == id){
-      return arr[i];
+
+function getObjById(arr, id) {
+    for (var i = 0; i < arr.length; i++) {
+        if (arr[i].skuId == id) {
+            return arr[i];
+        }
     }
-  }
 }

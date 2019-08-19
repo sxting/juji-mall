@@ -1,138 +1,137 @@
 <nav-bar navbar-data='{{nvabarData}}'></nav-bar>
 <view class="wrap" style="height:{{conHeight}}px">
-  <view class="toper">
-    <view class="bgg">
-      <view style="padding:30rpx;" class="userinfo ub ub-ac">
-        <image wx:if="{{avatar}}" src="{{avatar}}" class="headImg"></image>
-        <image wx:else src="../../images/user.png" class="headImg"></image>
-        <view class="">
-          <view style="font-size: 34rpx;color: #000000;">
-            <text>{{nickName}}</text>
-            <text wx:if="{{allowDistribute}}" class='juzhang' bindtap="toPage" data-page='/pages/juzhangGZ/index'>{{level}}</text>
-            <image wx:elif="{{member}}" class='hgVIP' src='../../images/hgVIP.png'></image>
-            <image wx:else class='hgVIP' src='../../images/hgVIP2.png'></image>
-          </view>
-          <view class="ub ub-ac" style="margin-top:10rpx;" wx:if="{{phoneNum}}">
-            <view class="phoneTxt">{{phoneNum}}</view>
-          </view>
-          <view style="margin-top:10rpx;" wx:else>
-            <button class="ub ub-ac bindBtn" open-type="getPhoneNumber" bindgetphonenumber="getUserPhoneNumber">
-              <view class="phoneTxt">绑定手机号</view>
-              <image style="width:12rpx;height:22rpx;" src="../../images/arrow-r.png"></image>
-            </button>
-          </view>
+    <view class="toper">
+        <view class="bgg">
+            <view style="padding:30rpx;" class="userinfo ub ub-ac">
+                <image wx:if="{{avatar}}" src="{{avatar}}" class="headImg"></image>
+                <image wx:else src="../../images/user.png" class="headImg"></image>
+                <view class="">
+                    <view style="font-size: 34rpx;color: #000000;">
+                        <text>{{nickName}}</text>
+                        <text wx:if="{{allowDistribute}}" class='juzhang' bindtap="toPage" data-page='/pages/juzhangGZ/index'>{{level}}</text>
+                        <image wx:elif="{{member}}" class='hgVIP' src='../../images/hgVIP.png'></image>
+                        <image wx:else class='hgVIP' src='../../images/hgVIP2.png'></image>
+                    </view>
+                    <view class="ub ub-ac" style="margin-top:10rpx;" wx:if="{{phoneNum}}">
+                        <view class="phoneTxt">{{phoneNum}}
+                            <text wx:if='{{ memberInviteCode }}'>({{ memberInviteCode }})</text>
+                        </view>
+                    </view>
+                    <view style="margin-top:10rpx;" wx:else>
+                        <button class="ub ub-ac bindBtn" open-type="getPhoneNumber" bindgetphonenumber="getUserPhoneNumber">
+                            <view class="phoneTxt">绑定手机号</view>
+                            <image style="width:12rpx;height:22rpx;" src="../../images/arrow-r.png"></image>
+                        </button>
+                    </view>
+                </view>
+            </view>
         </view>
-      </view>
-      <!-- <view class="qdBtn" bindtap="toJuzi">签到领桔子</view> -->
+
+        <view class="bgBar"></view>
+
+        <image src="../../images/bgy.png" class="bgy"></image>
+
+        <view style="height:140rpx;" class="taskCenter">
+            <view class="ub ub-ac ub-pj" style="padding:30rpx;" bindtap="toMemberTabBar" data-page='/pages/member/index'>
+                <view class="ub ub-ac">
+                    <image style="width:135rpx;height:90rpx;margin-right:20rpx;" src="../../images/huangguan1.png"></image>
+                    <view wx:if="{{!member}}">
+                        <view style="font-family: PingFangSC-Regular;font-size: 22rpx;color: #666;">开通会员，享受会员专享价</view>
+                        <view style="font-family: PingFangSC-Regular;font-size: 22rpx;color: #666;margin-top:12rpx;">更有每周福利和会员专属客服</view>
+                    </view>
+                    <view wx:else>
+                        <view style="font-family: PingFangSC-Regular;font-size: 22rpx;color: #666;">邀请6人成为会员，您可升级为桔长</view>
+                        <view style="font-family: PingFangSC-Regular;font-size: 22rpx;color: #666;margin-top:12rpx;">享受更高返利和桔长专属权益({{inviteMemberCount?inviteMemberCount:0}}/6)</view>
+                    </view>
+                </view>
+                <view class="ub ub-ac">
+                    <view style="font-size: 24rpx;color: #333333;font-weight:bold">
+                        <text wx:if="{{!member}}">立即开通</text>
+                        <button open-type='share' wx:else class='yaoqing'>邀请他人</button>
+                        <!-- <text wx:else>立即续费</text> -->
+                    </view>
+                    <image src="../../images/arrow-r.png" style="width:12rpx;height:22rpx;margin-left:10rpx;"></image>
+                </view>
+            </view>
+        </view>
+
+        <view style="margin-top:60rpx;" class="userBox {{(distributorRole == 'LEADER' && !member) ? 'rela-top' : ''}}">
+            <view class="ub ub-ac ub-pj" style="padding:30rpx;">
+                <view style="font-size: 30rpx;color: #333333;">我的订单</view>
+                <view class="ub ub-ac" bindtap="toPage" data-page="/pages/orderlist/index?index=0&status=ALL">
+                    <view style="font-size: 24rpx;color: #999999;">查看全部订单</view>
+                    <image src="../../images/arrow-right.png" style="width:12rpx;height:22rpx;margin-left:10rpx;"></image>
+                </view>
+            </view>
+            <view style="padding:0 30rpx;">
+                <view style="height:2rpx;background:#eeeeee;transform: scaleY(0.5);"></view>
+            </view>
+            <view class="ub ub-ac ub-pj" style="padding: 30rpx 40rpx;">
+                <view class="ub ub-ver ub-ac ub-pc" bindtap="toPage" data-page="/pages/orderlist/index?index=1&status=CREATED">
+                    <image style="width:47rpx;height:43rpx;" src="../../images/user_dfk.png"></image>
+                    <text class="orderBtnsText">待付款</text>
+                </view>
+                <view class="ub ub-ver ub-ac ub-pc" bindtap="toPage" data-page="/pages/orderlist/index?index=2&status=PAID">
+                    <image style="width:45rpx;height:42rpx;" src="../../images/user_dsy.png"></image>
+                    <text class="orderBtnsText">待使用</text>
+                </view>
+                <view class="ub ub-ver ub-ac ub-pc" bindtap="toPage" data-page="/pages/orderlist/index?index=3&status=CONSUME">
+                    <image style="width:49rpx;height:44rpx;" src="../../images/user_dpj.png"></image>
+                    <text class="orderBtnsText">待评价</text>
+                </view>
+            </view>
+        </view>
+
+        <view style="margin-top:20rpx;padding-bottom:50rpx;" class="userBox {{(distributorRole == 'LEADER' && !member) ? 'rela-top' : ''}}">
+            <view class="ub ub-ac ub-pj">
+                <view class="userGrid ub ub-ver ub-ac" bindtap="toPage" data-page="/pages/activities/myActivity/index?type=BARGAIN">
+                    <image class="userGridIcon" mode="aspectFit" src="../../images/icon_my1.png"></image>
+                    <view class="userGridText">我的砍价</view>
+                </view>
+                <view class="userGrid ub ub-ver ub-ac" bindtap="toPage" data-page="/pages/activities/myActivity/index?type=SPLICED">
+                    <image class="userGridIcon" mode="aspectFit" src="../../images/icon_my2.png"></image>
+                    <view class="userGridText">我的拼团</view>
+                </view>
+                <view class="userGrid ub ub-ver ub-ac" bindtap="toPage" data-page="/pages/juzi/index">
+                    <image class="userGridIcon" mode="aspectFit" src="../../images/icon_my7.png"></image>
+                    <view class="userGridText">我的桔子</view>
+                </view>
+            </view>
+            <view class="ub ub-ac ub-pj">
+                <view class="userGrid ub ub-ver ub-ac" bindtap="toPage" data-page="/pages/myCards/index">
+                    <image class="userGridIcon" mode="aspectFit" src="../../images/icon_my4.png"></image>
+                    <view class="userGridText">我的卡包</view>
+                </view>
+                <button class="userGrid ub ub-ver ub-ac" open-type='contact' session-from='weapp'>
+                    <image class="userGridIcon" mode="aspectFit" src="../../images/icon_my5.png"></image>
+                    <view class="userGridText">在线客服</view>
+                </button>
+                <view class="userGrid ub ub-ver ub-ac" bindtap="toPage" data-page="/pages/myComment/index">
+                    <image class="userGridIcon" mode="aspectFit" src="../../images/icon_my3.png"></image>
+                    <view class="userGridText">我的评价</view>
+                </view>
+            </view>
+        </view>
     </view>
-
-    <view class="bgBar"></view>
-
-    <image src="../../images/bgy.png" class="bgy"></image>
-
-    <view style="height:140rpx;" class="taskCenter">
-      <view class="ub ub-ac ub-pj" style="padding:30rpx;" bindtap="toMemberTabBar" data-page='/pages/member/index'>
-        <view class="ub ub-ac">
-          <image style="width:135rpx;height:90rpx;margin-right:20rpx;" src="../../images/huangguan1.png"></image>
-          <view wx:if="{{!member}}">
-            <view style="font-family: PingFangSC-Regular;font-size: 22rpx;color: #666;">开通会员，享受会员专享价</view>
-            <view style="font-family: PingFangSC-Regular;font-size: 22rpx;color: #666;margin-top:12rpx;">更有每周福利和会员专属客服</view>
-          </view>
-          <view wx:else>
-            <view style="font-family: PingFangSC-Regular;font-size: 22rpx;color: #666;">邀请6人成为会员，您可升级为桔长</view>
-            <view style="font-family: PingFangSC-Regular;font-size: 22rpx;color: #666;margin-top:12rpx;">享受更高返利和桔长专属权益({{inviteMemberCount?inviteMemberCount:0}}/6)</view>
-            <!-- <view style="font-family: PingFangSC-Regular;font-size: 22rpx;color: #666;">您已加入桔集会员{{memberDays}}天</view>
-            <view style="font-family: PingFangSC-Regular;font-size: 22rpx;color: #666;margin-top:12rpx;">会员有效期至{{memberExpireTime}}</view> -->
-          </view>
-        </view>
-        <view class="ub ub-ac">
-          <view style="font-size: 24rpx;color: #333333;font-weight:bold">
-            <text wx:if="{{!member}}">立即开通</text>
-            <button open-type='share' wx:else class='yaoqing'>邀请他人</button>
-            <!-- <text wx:else>立即续费</text> -->
-          </view>
-          <image src="../../images/arrow-r.png" style="width:12rpx;height:22rpx;margin-left:10rpx;"></image>
-        </view>
-      </view>
-    </view>
-
-    <view style="margin-top:60rpx;" class="userBox {{(distributorRole == 'LEADER' && !member) ? 'rela-top' : ''}}">
-      <view class="ub ub-ac ub-pj" style="padding:30rpx;">
-        <view style="font-size: 30rpx;color: #333333;">我的订单</view>
-        <view class="ub ub-ac" bindtap="toPage" data-page="/pages/orderlist/index?index=0&status=ALL">
-          <view style="font-size: 24rpx;color: #999999;">查看全部订单</view>
-          <image src="../../images/arrow-right.png" style="width:12rpx;height:22rpx;margin-left:10rpx;"></image>
-        </view>
-      </view>
-      <view style="padding:0 30rpx;">
-        <view style="height:2rpx;background:#eeeeee;transform: scaleY(0.5);"></view>
-      </view>
-      <view class="ub ub-ac ub-pj" style="padding: 30rpx 40rpx;">
-        <view class="ub ub-ver ub-ac ub-pc" bindtap="toPage" data-page="/pages/orderlist/index?index=1&status=CREATED">
-          <image style="width:47rpx;height:43rpx;" src="../../images/user_dfk.png"></image>
-          <text class="orderBtnsText">待付款</text>
-        </view>
-        <view class="ub ub-ver ub-ac ub-pc" bindtap="toPage" data-page="/pages/orderlist/index?index=2&status=PAID">
-          <image style="width:45rpx;height:42rpx;" src="../../images/user_dsy.png"></image>
-          <text class="orderBtnsText">待使用</text>
-        </view>
-        <view class="ub ub-ver ub-ac ub-pc" bindtap="toPage" data-page="/pages/orderlist/index?index=3&status=CONSUME">
-          <image style="width:49rpx;height:44rpx;" src="../../images/user_dpj.png"></image>
-          <text class="orderBtnsText">待评价</text>
-        </view>
-      </view>
-    </view>
-
-    <view style="margin-top:20rpx;padding-bottom:50rpx;" class="userBox {{(distributorRole == 'LEADER' && !member) ? 'rela-top' : ''}}">
-      <view class="ub ub-ac ub-pj">
-        <view class="userGrid ub ub-ver ub-ac" bindtap="toPage" data-page="/pages/activities/myActivity/index?type=BARGAIN">
-          <image class="userGridIcon" mode="aspectFit" src="../../images/icon_my1.png"></image>
-          <view class="userGridText">我的砍价</view>
-        </view>
-        <view class="userGrid ub ub-ver ub-ac" bindtap="toPage" data-page="/pages/activities/myActivity/index?type=SPLICED">
-          <image class="userGridIcon" mode="aspectFit" src="../../images/icon_my2.png"></image>
-          <view class="userGridText">我的拼团</view>
-        </view>
-        <view class="userGrid ub ub-ver ub-ac" bindtap="toPage" data-page="/pages/juzi/index">
-          <image class="userGridIcon" mode="aspectFit" src="../../images/icon_my7.png"></image>
-          <view class="userGridText">我的桔子</view>
-        </view>
-      </view>
-      <view class="ub ub-ac ub-pj">
-        <view class="userGrid ub ub-ver ub-ac" bindtap="toPage" data-page="/pages/myCards/index">
-          <image class="userGridIcon" mode="aspectFit" src="../../images/icon_my4.png"></image>
-          <view class="userGridText">我的卡包</view>
-        </view>
-        <button class="userGrid ub ub-ver ub-ac" open-type='contact' session-from='weapp'>
-          <image class="userGridIcon" mode="aspectFit" src="../../images/icon_my5.png"></image>
-          <view class="userGridText">在线客服</view>
-        </button>
-        <view class="userGrid ub ub-ver ub-ac" bindtap="toPage" data-page="/pages/myComment/index">
-          <image class="userGridIcon" mode="aspectFit" src="../../images/icon_my3.png"></image>
-          <view class="userGridText">我的评价</view>
-        </view>
-      </view>
-    </view>
-  </view>
 </view>
 
 <cover-view class="jcModalWrap" hidden="{{!showJcModal}}">
-  <cover-view class="jcModal">
-      <cover-image src="/images/shoper1.png" style="width:100%;height: 236rpx;border-top-left-radius: 20rpx;border-top-right-radius: 20rpx;"></cover-image>
-      <cover-view class="jcModalTit" style="margin-top:30rpx;margin-bottom: 20rpx;">商家申请入驻桔集</cover-view>
-      <cover-view class="jcModalText plr20">如果您是本地吃喝玩乐优质商家，</cover-view>
-      <cover-view class="jcModalText plr20">想入驻“桔集”平台，可拨打电话或</cover-view>
-      <cover-view class="jcModalText plr20">微信咨询</cover-view>
-      <cover-view class="jcCtrl ub ub-ac plr20" style="margin-top: 20rpx;">
-          <cover-image class="shoperIcon" style="width:32rpx;height:27rpx;" src="/images/shoper3.png"></cover-image>
-          <cover-view class="ub-f1 shopTxt">{{joinInfo.phone}}</cover-view>
-          <cover-view class="jcModalBtn" style="background:#ffdc00" bindtap="dialtoUs">拨打</cover-view>
-      </cover-view>
-      <cover-view class="jcCtrl ub ub-ac plr20 mt05">
-          <cover-image class="shoperIcon" style="width:36rpx;height:29rpx" src="/images/shoper2.png"></cover-image>
-          <cover-view class="ub-f1 shopTxt">{{joinInfo.wechat}}</cover-view>
-          <cover-view class="jcModalBtn" style="background:#FCBF0A" bindtap="copyUs">复制</cover-view>
-      </cover-view>
-  </cover-view>
-  <cover-image src="/images/newerGetClose.png" class="jcModalClose" bindtap="showJoinModal"></cover-image>
+    <cover-view class="jcModal">
+        <cover-image src="/images/shoper1.png" style="width:100%;height: 236rpx;border-top-left-radius: 20rpx;border-top-right-radius: 20rpx;"></cover-image>
+        <cover-view class="jcModalTit" style="margin-top:30rpx;margin-bottom: 20rpx;">商家申请入驻桔集</cover-view>
+        <cover-view class="jcModalText plr20">如果您是本地吃喝玩乐优质商家，</cover-view>
+        <cover-view class="jcModalText plr20">想入驻“桔集”平台，可拨打电话或</cover-view>
+        <cover-view class="jcModalText plr20">微信咨询</cover-view>
+        <cover-view class="jcCtrl ub ub-ac plr20" style="margin-top: 20rpx;">
+            <cover-image class="shoperIcon" style="width:32rpx;height:27rpx;" src="/images/shoper3.png"></cover-image>
+            <cover-view class="ub-f1 shopTxt">{{joinInfo.phone}}</cover-view>
+            <cover-view class="jcModalBtn" style="background:#ffdc00" bindtap="dialtoUs">拨打</cover-view>
+        </cover-view>
+        <cover-view class="jcCtrl ub ub-ac plr20 mt05">
+            <cover-image class="shoperIcon" style="width:36rpx;height:29rpx" src="/images/shoper2.png"></cover-image>
+            <cover-view class="ub-f1 shopTxt">{{joinInfo.wechat}}</cover-view>
+            <cover-view class="jcModalBtn" style="background:#FCBF0A" bindtap="copyUs">复制</cover-view>
+        </cover-view>
+    </cover-view>
+    <cover-image src="/images/newerGetClose.png" class="jcModalClose" bindtap="showJoinModal"></cover-image>
 </cover-view>

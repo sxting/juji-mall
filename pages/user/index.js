@@ -53,7 +53,7 @@ Page({
             return;
         }
         wx.switchTab({
-            url: '/pages/jujiGarden/gardenIndex/index',
+            url: '/pages/jujiGarden/member/index',
         })
     },
 
@@ -68,7 +68,8 @@ Page({
             level = '金牌服务商'
         }
         this.setData({
-            level: level
+            level: level,
+            memberInviteCode: wx.getStorageSync('memberInviteCode')
         })
         wx.getSystemInfo({
             success: (res) => {

@@ -38,7 +38,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 1,
+			"current": 3,
 			"list": [
 				{
 					"id": -1,
@@ -63,9 +63,9 @@
 				},
 				{
 					"id": 3,
-					"name": "会员专区",
-					"pathName": "pages/memberzq/index",
-					"query": "",
+					"name": "会员首页",
+					"pathName": "pages/jujiGarden/member/index",
+					"query": "sceneid=123",
 					"scene": null
 				},
 				{

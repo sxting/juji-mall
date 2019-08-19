@@ -5,7 +5,7 @@ Component({
     properties: {
         inviteCode: {
             type: String,
-            value: ''
+            value: '1'
         }
     },
     data: {
@@ -49,7 +49,7 @@ Component({
             var id = e.currentTarget.dataset.id;
             var storeid = e.currentTarget.dataset.storeid;
             wx.navigateTo({
-                url: '/pages/comDetail/index?buyMember=1&id=' + id + '&storeid=' + storeid+'&inviteCode='+this.data.inviteCode
+                url: '/pages/comDetail/index?buyMember=1&id=' + id + '&storeid=' + storeid +'&invitecode='+this.data.inviteCode
             });
         }
     }

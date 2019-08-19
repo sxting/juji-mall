@@ -1,0 +1,101 @@
+<wxs src='../../../utils/numFr.wxs' module='format' />
+<nav-bar navbar-data='{{ navbar }}' wx:if='{{ initialize }}' />
+<view class='wrap' style='height:{{ conHeight }}px' wx:if='{{ initialize }}'>
+
+    <!-- 未开通会员或不能分销展示的商品列表 -->
+    <member-products wx:if='{{ !member && !allowDistribute }}' invite-code='{{ shareInviteCode }}' />
+
+    <!-- 会员或允许分销并且绑定微信分账账号 -->
+    <view class='main1' wx:if='{{ (member || allowDistribute) && hasReceiver }}'>
+        <view class="toper">
+            <image class="udb topBg" src="/images/topBg.png" mode="scaleToFill"></image>
+            <view class="topCon" style="padding:30rpx;">
+                <view class="balance tx-c">{{ format.toFix(totalSettlementAmount) }}</view>
+                <view class="remark tx-c">累计提现金额(元)</view>
+                <view class="turnover ub ub-ac">
+                    <view class="ub-f1 div" data-page="/pages/jujiGarden/incomeData/index?index=1&status=1" bindtap="toPage">
+                        <view class="tx-c balance1">{{ format.toFix(todaySaleRebate) }}</view>
+                        <view class="tx-c remark">今日销售收入(元)</view>
+                    </view>
+                    <view class="line"></view>
+                    <view class="ub-f1 div l" data-page="/pages/jujiGarden/incomeData/index?index=1&status=1" bindtap="toPage">
+                        <view class="tx-c balance1">{{ format.toFix(todaySettlementAmount) }}</view>
+                        <view class="tx-c remark">今日提现金额(元)</view>
+                    </view>
+                </view>
+            </view>
+            <view class="qdBtn tx-c" bindtap="toPage" data-page="/pages/jujiGarden/withdrawRecord/index">提现明细</view>
+        </view>
+        <view class="userBox">
+            <view class="ub ub-ac ub-pj" style="padding: 0 10rpx;border-bottom:2rpx #eee solid">
+                <view class="ub ub-ver ub-ac ub-pc user" bindtap="toPage2" data-page="/pages/jujiGarden/myUser/index?role=LEADER">
+                    <text class="orderBtnsNum">{{ invitedPaidMemberCount }}</text>
+                    <text class="orderBtnsText" wx:if="{{allowDistribute}}">我的团队</text>
+                    <text class="orderBtnsText" wx:else>已邀会员</text>
+                </view>
+                <view class='line'></view>
+                <view class="ub ub-ver ub-ac ub-pc user" bindtap="toPage" data-page="/pages/jujiGarden/myUser/index?role=MEMBER">
+                    <text class="orderBtnsNum">{{ invitedUnPaidPersonCount }}</text>
+                    <text class="orderBtnsText">已邀桔粉</text>
+                </view>
+            </view>
+        </view>
+
+        <view style="margin-top:20rpx;" class="menu ub" wx:if='{{ allowDistribute }}'>
+            <view class="ub-f1 ub ub-ver ub-ac ub-pc" bindtap="toPage" data-page="/pages/jujiGarden/recommend/index">
+                <image src="/images/icon_tj.png" class='product-icon'></image>
+                <text class="itemTxt">商品推荐</text>
+            </view>
+            <view class="ub-f1 ub ub-ver ub-ac ub-pc r" bindtap="toPage" data-page="/pages/jujiGarden/recommendnew/index">
+                <image src="/images/icon_sc.png"></image>
+                <text class="itemTxt">邀新素材</text>
+            </view>
+        </view>
+
+        <view style="height:140rpx;" class="taskCenter" wx:if='{{ invitationText }}'>
+            <view class="ub ub-ac ub-pj" style="padding:30rpx;" data-page='/pages/member/index'>
+                <view class="ub ub-ac">
+                    <image style="width:135rpx;height:90rpx;margin-right:20rpx;" src="/images/huangguan1.png"></image>
+                    <view>
+                        <view style="font-family: PingFangSC-Regular;font-size: 22rpx;color: #666;">{{ invitationText.line1 }}</view>
+                        <view style="font-family: PingFangSC-Regular;font-size: 22rpx;color: #666;margin-top:12rpx;">{{ invitationText.line2 }}</view>
+                    </view>
+                </view>
+                <view class="ub ub-ac">
+                    <view style="font-size: 24rpx;color: #333333;font-weight:bold">
+                        <button open-type='share' class='yaoqing'>邀请他人</button>
+                    </view>
+                    <image src="/images/arrow-r.png" style="width:12rpx;height:22rpx;margin-left:10rpx;"></image>
+                </view>
+            </view>
+        </view>
+    </view>
+
+    <!-- 绑定微信分账账号 -->
+    <view class='band' wx:if='{{ (member || allowDistribute) && !hasReceiver }}'>
+        <view class="toperg">
+            <image class="udb topBgg" src="/images/ytop1.png" mode="scaleToFill"></image>
+            <view class='topert'>
+                <view class='f30'>请务必填写分账信息，邀请会员才能获得返佣</view>
+            </view>
+        </view>
+        <view class="band-form">
+            <view class="band-form-label">微信号</view>
+            <view class="band-form-inner">
+                <input placeholder='请打开微信“我”页面，复制微信号' value="{{wechatId}}" bindinput="inputWechatId"></input>
+            </view>
+            <view class='little-tip'>注意不是手机号</view>
+        </view>
+        <view class="band-form">
+            <view class="band-form-label">真实姓名</view>
+            <view class="band-form-inner">
+                <input placeholder='请填写您的微信实名认证姓名' value="{{name}}" bindinput="inputWechatName"></input>
+            </view>
+        </view>
+
+        <view class='f24 band-form'>请如实填写以上信息，推广获得的收入将自动提现到微信零钱</view>
+
+        <button class='band-btn' bindtap='submitWechatReceiver'>确定</button>
+    </view>
+
+</view>

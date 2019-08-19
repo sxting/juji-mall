@@ -23,6 +23,7 @@
     "pages/payresult/index",
     "pages/jujiGarden/userInfor/userInfor",
     "pages/jujiGarden/gardenIndex/index",
+    "pages/jujiGarden/member/index",
     "pages/jujiGarden/myUser/index",
     "pages/jujiGarden/withdrawRecord/index",
     "pages/jujiGarden/withdrawDetail/index",
@@ -75,7 +76,7 @@
       },
       {
         "text": "会员",
-        "pagePath": "pages/jujiGarden/gardenIndex/index",
+        "pagePath": "pages/jujiGarden/member/index",
         "iconPath": "images/juyuan.png",
         "selectedIconPath": "images/juyuan-select.png"
       },

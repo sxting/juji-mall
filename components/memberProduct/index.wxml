@@ -1,27 +1,28 @@
 <wxs src="../../utils/numFr.wxs" module="filter" />
 <view class="main">
-  <view class="productList">
-  <view class="pubuItem" wx:for="{{productList}}" wx:for-index='index' wx:key="unique" bindtap="toComDetail" data-id="{{item.productId}}" data-storeid="{{item.nearStore.id}}">
-      <image class="productImg plimg" lazy-load="true" src="https://upic.juniuo.com/file/picture/{{item.picId}}/resize_690_387/mode_filt/format_jpg/quality_70" mode="aspectFill"></image>
-      <view class="pro-name pubuname mt05" style="margin-top:8rpx">{{item.productName}}</view>
-      <view class="priceDiv2" style="margin-top:2rpx;padding-right:20rpx;">
-          <view class="disflex">
-            <view class="pubuprice2" wx:if="{{item.price}}"><text class="f18">￥</text>{{filter.toFix(item.price)}}</view>
-            <view class="pubuprice2" wx:if="{{item.point>0&&item.price>0}}">+</view>
-            <view class="pubuprice2" wx:if="{{item.point>0}}">{{item.point}}桔子</view>
-            <view class="originalprice">￥{{filter.toFix(item.originalPrice)}}</view>
-          </view>
-          <view class="disflex">
-            <view class="huiyuanjia" wx:if="{{item.distributor}}">
-              <text class="l">会员价</text> 
-              <text class="r">￥{{item.memberPrice?filter.toFix(item.memberPrice):0}}</text>
+    <view class="productList">
+        <view class="pubuItem" wx:for="{{productList}}" wx:for-index='index' wx:key="unique" bindtap="toComDetail" data-id="{{item.productId}}" data-storeid="{{item.nearStore.id}}">
+            <image class="productImg plimg" lazy-load="true" src="https://upic.juniuo.com/file/picture/{{item.picId}}/resize_690_387/mode_filt/format_jpg/quality_70" mode="aspectFill"></image>
+            <view class="pro-name pubuname mt05" style="margin-top:8rpx">{{item.productName}}</view>
+            <view class="priceDiv2" style="margin-top:2rpx;padding-right:20rpx;">
+                <view class="disflex">
+                    <view class="pubuprice2" wx:if="{{item.price}}">
+                        <text class="f18">￥</text>{{filter.toFix(item.price)}}</view>
+                    <view class="pubuprice2" wx:if="{{item.point>0&&item.price>0}}">+</view>
+                    <view class="pubuprice2" wx:if="{{item.point>0}}">{{item.point}}桔子</view>
+                    <view class="originalprice">￥{{filter.toFix(item.originalPrice)}}</view>
+                </view>
+                <view class="disflex">
+                    <view class="huiyuanjia" wx:if="{{item.distributor}}">
+                        <text class="l">会员价</text>
+                        <text class="r">￥{{item.memberPrice?filter.toFix(item.memberPrice):0}}</text>
+                    </view>
+                </view>
             </view>
-          </view>
-      </view>
-  </view>
-</view>
-  <view class="nodataDiv" wx:if="{{isShowNodata}}" style='width:750rpx;height:900rpx;box-sizing:border-box;text-align:center;'>
-      <image class="nodataImg" src="../../images/null6.png" mode="aspectFit" style="width:240rpx;height:169rpx;"></image>
-      <view class="nodataTxt">暂无相关商品</view>
-  </view>
+        </view>
+    </view>
+    <view class="nodataDiv" wx:if="{{isShowNodata}}" style='width:750rpx;height:900rpx;box-sizing:border-box;text-align:center;'>
+        <image class="nodataImg" src="../../images/null6.png" mode="aspectFit" style="width:240rpx;height:169rpx;"></image>
+        <view class="nodataTxt">暂无相关商品</view>
+    </view>
 </view>

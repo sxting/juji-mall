@@ -105,6 +105,14 @@
     <view style="padding:20rpx 0 30rpx 0;font-size: 24rpx;color: #999999;">你有{{pointBalance}}个桔子</view>
   </view>
 
+  <!--  wx:if="{{buyMember==1}}" -->
+    <view class="ub ub-ac ub-pj plr15 bgb" style="height:100rpx;border-top:1rpx #eee solid">
+        <view class="itemTit ub ub-ac">邀请码</view>
+        <view class="ub-f1 tx-r">
+            <input placeholder='请输入邀请码' type="number" value='{{}}' bindinput="" placeholder-class='placeholder' style="font-size:28rpx;color:#333;text-align:right"></input>
+        </view>
+    </view>
+
   <view class='usermsg plr15 bgb' wx:if="{{productInfo.voucherGenerateType == 'TSTC'}}">
     <view class="ub ub-ac ub-pj item">
       <view class="itemTit ub ub-ac">顾客信息</view>

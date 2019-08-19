@@ -118,6 +118,12 @@ Page({
             openId: wx.getStorageSync('openid')
         }).subscribe({
             next: res => {
+
+                var invitationText = res.invitationText
+                if (0 == Object.keys(invitationText).length) {
+                    invitationText = null
+                }
+
                 console.log(res)
                 this.setData({
                     nickName: res.nickName,
@@ -125,7 +131,9 @@ Page({
                     avatar: res.avatar,
                     inviteMemberCount: res.inviteMemberCount,
                     member: res.member,
-                    allowDistribute: res.allowDistribute == 1
+                    memberInviteCode: res.memberInviteCode,
+                    allowDistribute: res.allowDistribute == 1,
+                    invitationText: invitationText
                 });
             },
             complete: () => wx.hideToast()

@@ -203,8 +203,8 @@ Page({
 
                 var navbar = _this.navbar(res.title)
                 
-                var invitationText = res.invitationText
-                if (0 == Object.keys(res.invitationText).length) {
+                var invitationText = res.user.invitationText
+                if (0 == Object.keys(invitationText).length) {
                     invitationText = null
                 }
                 

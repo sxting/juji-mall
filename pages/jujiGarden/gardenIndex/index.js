@@ -17,11 +17,7 @@ var timeVal;
 
 Page({
     data: {
-        nvabarData: {
-            showCapsule: 0,
-            title: '会员',
-            isIndex: 1
-        },
+        nvabarData: { showCapsule: 1, title: '会员'},
         topValue: 0,
         juminNumList: [], //队员人数
         hadNumber: 0,

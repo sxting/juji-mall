@@ -21,6 +21,7 @@ Page({
      * 页面的初始数据
      */
     data: {
+        navbarData: { showCapsule: 1, title: '会员',isIndex: 1},
         initialize: false,
         conHeight: 400,
     },

@@ -6,20 +6,31 @@ var WxParse = require('../../wxParse/wxParse.js');
 
 Page({
     data: {
-        nvabarData: { showCapsule: 1, title: '种草'},
+        nvabarData: { showCapsule: 1, title: '种草' },
         tweetInfo: null,
-        content:{}
+        source: "",
+        content: {},
+        url: ''
     },
     onLoad: function(options) {
-        this.getData(options.id); //获取活动列表
+        this.getData(options.id);
     },
     getData: function(id) {
-        service.tweetDetail({tweetsId:id}).subscribe({
+        service.tweetDetail({ tweetsId: id }).subscribe({
             next: res => {
                 this.setData({
-                  tweetInfo:res,
-                  content:WxParse.wxParse('content', 'html', res.html, this)
+                    tweetInfo: res,
+                    source: res.source == 'RICH_TEXT' ? 'html' : 'url'
                 })
+                if(this.data.source=="html"){
+                    this.setData({
+                        content: WxParse.wxParse('content', 'html', res.html, this)
+                    })
+                }else{
+                    this.setData({
+                        url: res.url
+                    })
+                }
             },
             error: err => {},
             complete: () => wx.hideToast()

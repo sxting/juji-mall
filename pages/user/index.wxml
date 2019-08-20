@@ -14,7 +14,7 @@
                     </view>
                     <view class="ub ub-ac" style="margin-top:10rpx;" wx:if="{{phoneNum}}">
                         <view class="phoneTxt">{{phoneNum}}
-                            <text wx:if='{{ memberInviteCode }}'>({{ memberInviteCode }})</text>
+                            <text wx:if='{{ memberInviteCode }}' style="margin-left:12rpx">邀请码:{{ memberInviteCode }}</text>
                         </view>
                     </view>
                     <view style="margin-top:10rpx;" wx:else>

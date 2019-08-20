@@ -1,5 +1,5 @@
 <wxs src='../../../utils/numFr.wxs' module='format' />
-<nav-bar navbar-data='{{ navbar }}' wx:if='{{ initialize }}' />
+<nav-bar navbar-data='{{ navbarData }}' wx:if='{{ initialize }}' />
 <view class='wrap' style='height:{{ conHeight }}px' wx:if='{{ initialize }}'>
 
     <!-- 未开通会员或不能分销展示的商品列表 -->
@@ -63,7 +63,7 @@
                 </view>
                 <view class="ub ub-ac">
                     <view style="font-size: 24rpx;color: #333333;font-weight:bold">
-                        <button open-type='share' class='yaoqing'>邀请他人</button>
+                        <button open-type='share' class='yaoqing'>邀请</button>
                     </view>
                     <image src="/images/arrow-r.png" style="width:12rpx;height:22rpx;margin-left:10rpx;"></image>
                 </view>

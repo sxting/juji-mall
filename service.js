@@ -234,8 +234,6 @@ service.tweetDetail = (data) =>{
   return http.get(url, data);
 }
 
-
-
 module.exports = {
   service: service
 }

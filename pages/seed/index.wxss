@@ -17,3 +17,8 @@ page{background-color:#fff}
 .huiyuanjia{background-color:#fcbf0a;color:#000;font-size:16rpx;display:inline-block;padding-right:6rpx;height:26rpx;margin-top:8rpx;}
 .huiyuanjia .l{background-color:#444;line-height:26rpx;color:#fed901;font-size:16rpx;padding-left:8rpx;padding-right:8rpx;display:inline-block;height:100%;}
 .nodataDiv{padding-top:260rpx}
+
+.dis-wrap{display:flex;align-items:center;padding:0 12rpx;margin-bottom:6rpx;}
+.jc-sb{justify-content:space-between;}
+.from{font-size:22rpx;color:#999;}
+.dis{font-size:22rpx;color:#999;}

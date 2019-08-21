@@ -1,2 +1,1 @@
-<nav-bar navbar-data='{{nvabarData}}'></nav-bar>
-<web-view src="{{url}}" wx:if="{{source=='url'}}"></web-view>
+<web-view src="{{url}}" wx:if="{{url}}"></web-view>

@@ -20,6 +20,17 @@ Page({
         var index = e.currentTarget.dataset.index;
         console.log(index);
         this.setData({curTabIndex:index});
+
+        if(index==0){
+            this.setData({
+                isShowNodata:this.data.productList1.length==0
+            });
+        }
+        if(index==1){
+            this.setData({
+                isShowNodata:this.data.productList2.length==0
+            });
+        }
     },
     onShow: function() {
         this.setData({productList1:[],productList2:[],productList3:[]});

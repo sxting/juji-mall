@@ -1,5 +1,5 @@
 <import src="/wxParse/wxParse.wxml" />
-<!-- <nav-bar navbar-data='{{nvabarData}}' wx:if="{{source=='html'}}"></nav-bar> -->
+<nav-bar navbar-data='{{nvabarData}}'></nav-bar>
 <web-view src="{{url}}" wx:if="{{source=='url'}}"></web-view>
 <view class="main" wx:if="{{source=='html'}}">
     <view class="pubuItem" wx:if="{{tweetInfo}}">

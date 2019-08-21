@@ -9,19 +9,19 @@
     </view>
     <view class="productList" wx:if="{{curTabIndex==0}}">
         <view class="productItem" wx:for="{{productList1}}" wx:for-index='index' wx:key="unique" bindtap="toDetail" data-id="{{item.tweetsId}}">
-            <image class="productImg" lazy-load="true" src="https://upic.juniuo.com/file/picture/{{item.cover}}/resize_0_0/mode_filt/format_jpg/quality_70" mode="aspectFill"></image>
+            <image class="productImg" lazy-load="true" src="https://upic.juniuo.com/file/picture/{{item.cover}}/resize_750_300/mode_filt/format_jpg/quality_70" mode="aspectFill"></image>
             <view class="pro-name">{{item.title}}</view>
         </view>
     </view>
     <view class="productList" wx:if="{{curTabIndex==1}}">
         <view class="productItem" wx:for="{{productList2}}" wx:for-index='index' wx:key="unique" bindtap="toDetail" data-id="{{item.tweetsId}}">
-            <image class="productImg" lazy-load="true" src="https://upic.juniuo.com/file/picture/{{item.cover}}/resize_0_0/mode_filt/format_jpg/quality_70" mode="aspectFill"></image>
+            <image class="productImg" lazy-load="true" src="https://upic.juniuo.com/file/picture/{{item.cover}}/resize_750_300/mode_filt/format_jpg/quality_70" mode="aspectFill"></image>
             <view class="pro-name">{{item.title}}</view>
         </view>
     </view>
     <view class="productList" wx:if="{{curTabIndex==2}}">
         <view class="productItem" wx:for="{{productList3}}" wx:for-index='index' wx:key="unique" bindtap="toComDetail" data-id="{{item.productId}}">
-            <image class="productImg1" lazy-load="true" src="https://upic.juniuo.com/file/picture/{{item.picId}}/resize_0_0/mode_filt/format_jpg/quality_70" mode="aspectFill"></image>
+            <image class="productImg1" lazy-load="true" src="https://upic.juniuo.com/file/picture/{{item.picId}}/resize_750_420/mode_filt/format_jpg/quality_70" mode="aspectFill"></image>
             <view class="dis-wrap jc-sb">
                 <view class="from">{{item.merchantName}}</view>
                 <view class="dis">距你{{filter.toDis(item.nearDist)}}km</view>
@@ -54,4 +54,3 @@
         </view>
     </view>
 </view>
-<web-view src="https://mp.weixin.qq.com/s/4n0-dRBcKs803b0nr9C6Mw"></web-view>

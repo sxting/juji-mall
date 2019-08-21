@@ -18,10 +18,6 @@ Page({
     getData: function(id) {
         service.tweetDetail({ tweetsId: id }).subscribe({
             next: res => {
-                this.setData({
-                    tweetInfo: res,
-                    source: res.source == 'RICH_TEXT' ? 'html' : 'url'
-                })
                 if(this.data.source=="html"){
                     this.setData({
                         content: WxParse.wxParse('content', 'html', res.html, this)
@@ -31,6 +27,10 @@ Page({
                         url: res.url
                     })
                 }
+              this.setData({
+                tweetInfo: res,
+                source: res.source == 'RICH_TEXT' ? 'html' : 'url'
+              })
             },
             error: err => {},
             complete: () => wx.hideToast()

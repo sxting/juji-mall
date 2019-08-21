@@ -1,7 +1,9 @@
-<import src="/wxParse/wxParse.wxml" />
-<nav-bar navbar-data='{{nvabarData}}' wx:if="{{source=='html'}}"></nav-bar>
-<web-view src="{{url}}" wx:if="{{source=='url'}}"></web-view>
-<view class="main" wx:if="{{source=='html'}}">
+<!-- <import src="/wxParse/wxParse.wxml" /> -->
+<web-view src="{{url}}" wx:if="{{url}}"></web-view>
+
+<!-- <nav-bar navbar-data='{{nvabarData}}' wx:if="{{source=='html'}}"></nav-bar> -->
+<!-- <web-view src="{{url}}" wx:if="{{source=='url'}}"></web-view> -->
+<!-- <view class="main" wx:if="{{source=='html'}}">
     <view class="pubuItem" wx:if="{{tweetInfo}}">
         <image class="productImg plimg" lazy-load="true" src="https://upic.juniuo.com/file/picture/{{tweetInfo.cover}}/resize_0_0/mode_filt/format_jpg/quality_70" mode="widthFix"></image>
         <view class="pubuname">{{tweetInfo.title}}</view>
@@ -9,4 +11,4 @@
     <view class="content">
         <template is="wxParse" data="{{wxParseData:content.nodes}}" />
     </view>
-</view>
+</view> -->

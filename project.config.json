@@ -38,7 +38,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 3,
+			"current": 13,
 			"list": [
 				{
 					"id": -1,
@@ -129,6 +129,12 @@
 					"name": "我的用户",
 					"pathName": "pages/jujiGarden/myUser/index",
 					"query": "role=LEADER",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "种草",
+					"pathName": "pages/seed/index",
 					"scene": null
 				}
 			]

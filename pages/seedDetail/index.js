@@ -2,7 +2,7 @@ var util = require('../../utils/util.js');
 import { constant } from '../../utils/constant';
 import { errDialog, loading } from '../../utils/util';
 import { service } from '../../service.js';
-var WxParse = require('../../wxParse/wxParse.js');
+// var WxParse = require('../../wxParse/wxParse.js');
 
 Page({
     data: {
@@ -18,19 +18,21 @@ Page({
     getData: function(id) {
         service.tweetDetail({ tweetsId: id }).subscribe({
             next: res => {
-                if(this.data.source=="html"){
+                if (res.source =="RICH_TEXT"){
                     this.setData({
-                        content: WxParse.wxParse('content', 'html', res.html, this)
+                        // content: WxParse.wxParse('content', 'html', res.html, this),
+                      url: 'https://api.juniuo.com/juji/article.php?id=' + id
                     })
                 }else{
                     this.setData({
                         url: res.url
                     })
                 }
-              this.setData({
-                tweetInfo: res,
-                source: res.source == 'RICH_TEXT' ? 'html' : 'url'
-              })
+                console.log(this.data.url)
+                // this.setData({
+                //   tweetInfo: res,
+                //   source: res.source == 'RICH_TEXT' ? 'html' : 'url'
+                // })
             },
             error: err => {},
             complete: () => wx.hideToast()

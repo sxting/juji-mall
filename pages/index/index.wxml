@@ -89,7 +89,7 @@
             </view>
             <view class="productBox">
                 <view class="productDiv ub ub-ac" wx:for="{{secondList}}" wx:if="{{index<2}}" wx:key="unique" bindtap="toNextDetail" data-type="SEC_KILL" data-actid="{{item.activityId}}" data-id="{{item.productId}}" data-storeid="" wx:if="{{index<2}}">
-                    <image src="https://upic.juniuo.com/file/picture/{{item.cover}}/resize_0_0/mode_fill" lazy-load="true" mode="aspectFill" class="plimg"></image>
+                    <image src="https://upic.juniuo.com/file/picture/{{item.cover}}/resize_750_0/mode_fill" lazy-load="true" mode="aspectFill" class="plimg"></image>
                     <view class="yqgMark" wx:if="{{item.balanceStock==0}}"><image src="/images/yqg.png"></image></view>
                     <view class="ub-f1 ub ub-ver" style="height:180rpx">
                         <view class="pubuname" style="padding-right:0">{{item.productName}}</view>

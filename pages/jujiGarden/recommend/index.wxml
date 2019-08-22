@@ -13,7 +13,7 @@
     </view>
     <view class="imglist">
       <view class="imgWrap" wx:for="{{item.imageIds}}" wx:for-item='it' wx:key="unique">
-        <image src="{{constant.basePicUrl}}{{it}}/resize_0_0/mode_filt/format_jpg/quality_0" mode="aspectFill" bindtap="previewImage" data-src="{{constant.basePicUrl}}{{it}}/resize_0_0/mode_filt/format_jpg/quality_0"></image>
+        <image src="{{constant.basePicUrl}}{{it}}/resize_750_0/mode_filt/format_jpg/quality_0" mode="aspectFill" bindtap="previewImage" data-src="{{constant.basePicUrl}}{{it}}/resize_750_0/mode_filt/format_jpg/quality_0"></image>
       </view>
     </view>
     <view class="ctrl ub ub-ac plr15">

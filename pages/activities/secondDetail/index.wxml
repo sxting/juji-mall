@@ -126,7 +126,7 @@
             <view style="font-size: 30rpx;color: #333333;font-weight: bolder;">详细信息</view>
             <view style="margin-top:30rpx;" wx:for="{{description}}" wx:key="{{index}}">
                 <view wx:if="item.content.length>0" wx:for="{{item.content}}" wx:for-item="item2" wx:for-index="index2" wx:key="{{index2}}" class="conTxt">{{item2}}</view>
-                <image style="width:100%;height:{{despImgHeightValues[(index+1)*(index1+1)-1]}}rpx;margin-top:30rpx;" mode="widthFix" wx:for="{{item.picIds}}" wx:for-item="item1" wx:for-index="index1" wx:key="{{index1}}" src="https://upic.juniuo.com/file/picture/{{item1}}/resize_0_0/mode_fill" bindload="desImgLoad" lazy-load="true"></image>
+                <image style="width:100%;height:{{despImgHeightValues[(index+1)*(index1+1)-1]}}rpx;margin-top:30rpx;" mode="widthFix" wx:for="{{item.picIds}}" wx:for-item="item1" wx:for-index="index1" wx:key="{{index1}}" src="https://upic.juniuo.com/file/picture/{{item1}}/resize_750_0/mode_fill" bindload="desImgLoad" lazy-load="true"></image>
             </view>
         </view>
     </view>

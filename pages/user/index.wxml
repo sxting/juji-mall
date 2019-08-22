@@ -47,7 +47,7 @@
                 <view class="ub ub-ac">
                     <view style="font-size: 24rpx;color: #333333;font-weight:bold">
                         <text wx:if="{{!member}}">立即开通</text>
-                        <button open-type='share' wx:else class='yaoqing'>邀请他人</button>
+                        <button open-type='share' wx:else class='yaoqing'>邀请</button>
                     </view>
                     <image src="../../images/arrow-r.png" style="width:12rpx;height:22rpx;margin-left:10rpx;"></image>
                 </view>

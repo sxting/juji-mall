@@ -3,7 +3,7 @@
 <view class="main">
     <view class="orderInfo1 p10">
       <view class="ub ub-ac info">
-          <image class="goodImg udb" src="{{productOrderInfo.cover?'https://upic.juniuo.com/file/picture/'+productOrderInfo.cover+'/resize_0_0/mode_fill':''}}"></image>
+          <image class="goodImg udb" src="{{productOrderInfo.cover?'https://upic.juniuo.com/file/picture/'+productOrderInfo.cover+'/resize_750_0/mode_fill':''}}"></image>
           <view class="ub-f1 goodMsg">
               <view class="goodTit">{{productOrderInfo.productName}}</view>
               <view class="collage-num">2人团</view>

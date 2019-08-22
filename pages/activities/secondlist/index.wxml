@@ -11,7 +11,7 @@
   </view>
   <!-- 正在秒杀 -->
   <view wx:if="{{curIndex==1}}" class="productItem" wx:for='{{productList1}}' wx:key='item' data-productid='{{item.productId}}' data-activityid="{{item.activityId}}" data-status="{{item.activityStatus}}" catchtap='toDetail'>
-    <image class="productImg" src="{{item.cover?'https://upic.juniuo.com/file/picture/'+item.cover+'/resize_0_0/mode_fill':''}}"></image>
+    <image class="productImg" src="{{item.cover?'https://upic.juniuo.com/file/picture/'+item.cover+'/resize_750_0/mode_fill':''}}"></image>
     <view class="yqgMark" wx:if="{{item.balanceStock==0}}"><image src="/images/yqg.png"></image></view>
     <view class="time ub ub-ac plr15">
       <view class="b ub ub-pj ub-f1">
@@ -38,7 +38,7 @@
   </view>
   <!-- 即将开始 -->
   <view wx:if="{{curIndex==2}}" class="productItem" wx:for='{{productList2}}' wx:key='item' data-productid='{{item.productId}}' data-activityid="{{item.activityId}}" data-status="{{item.activityStatus}}" catchtap='toDetail'>
-    <image class="productImg" src="{{item.cover?'https://upic.juniuo.com/file/picture/'+item.cover+'/resize_0_0/mode_fill':''}}"></image>
+    <image class="productImg" src="{{item.cover?'https://upic.juniuo.com/file/picture/'+item.cover+'/resize_750_0/mode_fill':''}}"></image>
     <view class="time ub ub-ac plr15">
       <view class="restTime1 ub ub-ac ub-f1">
           <view class="txt">距开始还有</view>

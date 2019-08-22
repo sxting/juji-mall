@@ -33,11 +33,14 @@ Page({
         }
     },
     onShow: function() {
-        this.setData({productList1:[],productList2:[],productList3:[]});
-        this.setData({providerId: wx.getStorageSync('providerId')});
-        console.log("开始获取数据")
-        this.getData(); //获取列表
-        this.getNearList();
+        if(wx.getStorageSync('isEnterSeedDetail')==1){
+            wx.setStorageSync('isEnterSeedDetail',0);
+        }else{
+            this.setData({productList1:[],productList2:[],productList3:[]});
+            this.setData({providerId: wx.getStorageSync('providerId')});
+            this.getData(); //获取列表
+            this.getNearList();
+        }
     },
     onReachBottom: function() {
         if(this.curTabIndex==3){
@@ -114,7 +117,7 @@ Page({
     toComDetail:function(e){
         var id = e.currentTarget.dataset.id;
         wx.navigateTo({
-            url: '/pages/comDetail/index?id=' + id
+            url: '/pages/comDetail/index?source=seed&id=' + id
         });
     }
 });

@@ -28,15 +28,13 @@ Page({
                         url: res.url
                     })
                 }
-                console.log(this.data.url)
-                // this.setData({
-                //   tweetInfo: res,
-                //   source: res.source == 'RICH_TEXT' ? 'html' : 'url'
-                // })
             },
             error: err => {},
             complete: () => wx.hideToast()
         });
+    },
+    onUnload: function () {
+      wx.setStorageSync('isEnterSeedDetail',1);
     },
     toComDetailAndShare: function(e) {
         var id = e.currentTarget.dataset.id;

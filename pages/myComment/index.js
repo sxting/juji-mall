@@ -15,7 +15,7 @@ Page({
     previewImage: function(e){
       // console.log(e);
       var arr = [];
-      var url = constant.basePicUrl + e.currentTarget.dataset.url + '/resize_0_0/mode_fill';
+      var url = constant.basePicUrl + e.currentTarget.dataset.url + '/resize_750_0/mode_fill';
       arr.push(url);
       // console.log(arr);
       wx.previewImage({

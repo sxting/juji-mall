@@ -363,7 +363,7 @@ Page({
         var imgIndex = 0;
         for (var i = 0; i < imageIds.length; i++) {
             var imgId = imageIds[i];
-            var imgUrl = constant.basePicUrl + imageIds[i] + '/resize_0_0/mode_filt/format_jpg/quality_0';
+            var imgUrl = constant.basePicUrl + imageIds[i] + '/resize_750_0/mode_filt/format_jpg/quality_0';
             console.log(imgUrl)
             wx.downloadFile({
                 url: imgUrl,

@@ -60,6 +60,7 @@ Page({
         welfareGroup: {}, //“戳一下加入福利群”数据对象
         isShowSelect: false,
         shareType: 1,
+        source:'',
         member: wx.getStorageSync('distributorRole') == 'LEADER' || wx.getStorageSync('member')
     },
     onLoad: function(options) {
@@ -115,6 +116,11 @@ Page({
                 buyMember: options.buyMember
             })
         }
+        if (options.source) {
+            this.setData({
+                source: options.source
+            })
+        }
         if (options.id) {
             this.setData({
                 productId: options.id
@@ -154,6 +160,11 @@ Page({
                 ue: source
             });
         }
+    },
+    onUnload: function () {
+      if(this.data.source=='seed'){
+          wx.setStorageSync('isEnterSeedDetail',1);
+      }
     },
     showTips1: function() {
         errDialog("请先保存图片后将图片发给要分享的好友");
@@ -221,7 +232,7 @@ Page({
     },
     previewImage: function(e) {
         var arr = [];
-        var url = constant.basePicUrl + e.currentTarget.dataset.url + '/resize_0_0/mode_fill';
+        var url = constant.basePicUrl + e.currentTarget.dataset.url + '/resize_750_0/mode_fill';
         arr.push(url);
         wx.previewImage({
             urls: arr // 需要预览的图片http链接列表

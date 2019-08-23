@@ -75,8 +75,8 @@ Page({
     var obj = {
       providerId: this.data.providerId,
       type: '',
-      sortField: '',
-      sortOrder: '',
+      sortField: 'IDX',
+      sortOrder: 'ASC',
       pageNo: this.data.pageNo,
       pageSize: this.data.pageSize,
       isMember: 1,

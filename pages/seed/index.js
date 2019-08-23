@@ -87,7 +87,7 @@ Page({
         console.log("附近的商品")
         var obj = {
             providerId: this.data.providerId,
-            sortField: 'IDX',
+            sortField: 'DISTANCE',
             sortOrder: 'ASC',
             pageNo: this.data.pageNo,
             pageSize: 10,

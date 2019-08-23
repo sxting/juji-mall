@@ -888,7 +888,7 @@ Page({
     getNewProductList: function() {
         var obj = {
             providerId: this.data.providerId,
-            subject:"新品抢鲜",
+            subject:"新品尝鲜",
             sortField: 'IDX',
             sortOrder: 'ASC',
             pageNo: 1,

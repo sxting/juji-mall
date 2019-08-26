@@ -239,3 +239,10 @@
     margin: 0;
     background-color: #fff;
 }
+
+.tplid {
+  font-size: 20rpx;
+  color: #999;
+  text-align: center;
+  padding-top: 30rpx;
+}

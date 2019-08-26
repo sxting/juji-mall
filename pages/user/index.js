@@ -11,6 +11,7 @@ import {
 var app = getApp();
 Page({
     data: {
+        TPLID: constant.TPLID,
         nvabarData: {
             showCapsule: 0,
             title: '我 的',

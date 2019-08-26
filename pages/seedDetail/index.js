@@ -10,14 +10,30 @@ Page({
         tweetInfo: null,
         source: "",
         content: {},
-        url: ''
+        url: '',
+        id: '',
+        resData: {}
     },
     onLoad: function(options) {
+        this.setData({
+          id: options.id
+        })
+        console.log(options);
         this.getData(options.id);
+    },
+    onShareAppMessage: function (res) {
+      return {
+        title: this.data.resData.title,
+        path: '/pages/login/index?pagetype=8&id='+this.data.id,
+        imageUrl: constant.basePicUrl + this.data.resData.cover + '/resize_560_420/mode_filt'
+      }
     },
     getData: function(id) {
         service.tweetDetail({ tweetsId: id }).subscribe({
             next: res => {
+                this.setData({
+                  resData: res
+                })
                 if (res.source =="RICH_TEXT"){
                     this.setData({
                         // content: WxParse.wxParse('content', 'html', res.html, this),

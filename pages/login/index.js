@@ -195,6 +195,12 @@ Page({
             });
         }
 
+        if (this.data.pageType == 8) {
+          wx.reLaunch({
+            url: '/pages/seedDetail/index?id=' + this.data.pageData.id
+          });
+        }
+
     },
     getUserInfo: function(e) {
         if (e.detail.userInfo) {

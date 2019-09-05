@@ -799,13 +799,15 @@ radio {
 }
 
 .taskCenter {
-    position: absolute;
+    /* position: absolute; */
     margin-top: 20rpx;
-    left: 30rpx;
-    right: 30rpx;
+    /* left: 30rpx;
+    right: 30rpx; */
     background: #fff;
     box-shadow: 0 0 5rpx 0 rgba(228, 228, 228, 0.50);
     border-radius: 10rpx;
+    width: 690rpx;
+    margin-left: 30rpx;
 }
 
 .yaoqing {

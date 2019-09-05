@@ -319,6 +319,7 @@ Page({
                                 idNo: this.data.idNo,
                                 mobile: this.data.mobile,
                             };
+                          console.log(orderObj)
                             service.saveOrder(orderObj).subscribe({
                                 next: res1 => {
                                     console.log('--------创建订单返回1混合支付-------');

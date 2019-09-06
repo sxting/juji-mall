@@ -6,6 +6,10 @@ Component({
         inviteCode: {
             type: String,
             value: '1'
+        },
+        hasBuy: {
+            type: Number,
+            value: 0
         }
     },
     data: {
@@ -49,7 +53,7 @@ Component({
             var id = e.currentTarget.dataset.id;
             var storeid = e.currentTarget.dataset.storeid;
             wx.navigateTo({
-                url: '/pages/comDetail/index?buyMember=1&id=' + id + '&storeid=' + storeid +'&invitecode='+this.data.inviteCode
+                url: '/pages/comDetail/index?buyMember=1&id=' + id + '&storeid=' + storeid + '&invitecode=' + this.data.inviteCode + '&hasBuy=' + this.data.hasBuy
             });
         }
     }

@@ -212,23 +212,48 @@ Page({
         this.setData({ isShowSelect: false });
         var splicedRuleId = this.data.ruleMaps[this.data.curSkuId][0].splicedRuleId;
         console.log(splicedRuleId);
-        if (this.data.btnType == 'join') {
-            var activityorderid = this.data.resData.orderDigest.activityOrderId;
-            console.log("去参团");
-            wx.navigateTo({
-                url: '/pages/payOrder/index?paytype=5&orderType=SPLICED&id=' + productid + '&activityId=' + activityid + '&activityOrderId=' + activityorderid + '&splicedRuleId=' + splicedRuleId + '&skuId=' + this.data.curSkuId + '&smId=' + this.data.curSkuMajorId+'&inviteCode='+this.data.inviteCode
-            });
-        } else if(this.data.btnType=='joinElse'){
-            var activityorderid = this.data.activityElseOrderid;
-            wx.navigateTo({
-                url: '/pages/payOrder/index?paytype=5&orderType=SPLICED&id=' + productid + '&activityId=' + activityid + '&activityOrderId=' + activityorderid + '&splicedRuleId=' + splicedRuleId + '&skuId=' + this.data.curSkuId + '&smId=' + this.data.curSkuMajorId + '&inviteCode=' + this.data.inviteCode
-            });
-        } else {
-            console.log("去开团");
-            wx.navigateTo({
-                url: '/pages/payOrder/index?paytype=5&orderType=SPLICED&id=' + productid + '&activityId=' + activityid + '&splicedRuleId=' + splicedRuleId + '&skuId=' + this.data.curSkuId + '&smId=' + this.data.curSkuMajorId+'&inviteCode='+this.data.inviteCode
-            });
-        }
+        wx.getSetting({
+            success: (res) => {
+                if (res.authSetting['scope.userInfo']) {
+                    if (this.data.btnType == 'join') {
+                        var activityorderid = this.data.resData.orderDigest.activityOrderId;
+                        console.log("去参团");
+                        wx.navigateTo({
+                            url: '/pages/payOrder/index?paytype=5&orderType=SPLICED&id=' + productid + '&activityId=' + activityid + '&activityOrderId=' + activityorderid + '&splicedRuleId=' + splicedRuleId + '&skuId=' + this.data.curSkuId + '&smId=' + this.data.curSkuMajorId + '&inviteCode=' + this.data.inviteCode
+                        });
+                    } else if (this.data.btnType == 'joinElse') {
+                        var activityorderid = this.data.activityElseOrderid;
+                        wx.navigateTo({
+                            url: '/pages/payOrder/index?paytype=5&orderType=SPLICED&id=' + productid + '&activityId=' + activityid + '&activityOrderId=' + activityorderid + '&splicedRuleId=' + splicedRuleId + '&skuId=' + this.data.curSkuId + '&smId=' + this.data.curSkuMajorId + '&inviteCode=' + this.data.inviteCode
+                        });
+                    } else {
+                        console.log("去开团");
+                        wx.navigateTo({
+                            url: '/pages/payOrder/index?paytype=5&orderType=SPLICED&id=' + productid + '&activityId=' + activityid + '&splicedRuleId=' + splicedRuleId + '&skuId=' + this.data.curSkuId + '&smId=' + this.data.curSkuMajorId + '&inviteCode=' + this.data.inviteCode
+                        });
+                    } 
+                } else {
+                    if (this.data.btnType == 'join') {
+                        var activityorderid = this.data.resData.orderDigest.activityOrderId;
+                        console.log("去参团");
+                        wx.navigateTo({
+                            url: '/pages/authorize/index?pagetype=1&paytype=5&orderType=SPLICED&id=' + productid + '&activityId=' + activityid + '&activityOrderId=' + activityorderid + '&splicedRuleId=' + splicedRuleId + '&skuId=' + this.data.curSkuId + '&smId=' + this.data.curSkuMajorId + '&inviteCode=' + this.data.inviteCode
+                        });
+                    } else if (this.data.btnType == 'joinElse') {
+                        var activityorderid = this.data.activityElseOrderid;
+                        wx.navigateTo({
+                            url: '/pages/authorize/index?pagetype=1&paytype=5&orderType=SPLICED&id=' + productid + '&activityId=' + activityid + '&activityOrderId=' + activityorderid + '&splicedRuleId=' + splicedRuleId + '&skuId=' + this.data.curSkuId + '&smId=' + this.data.curSkuMajorId + '&inviteCode=' + this.data.inviteCode
+                        });
+                    } else {
+                        console.log("去开团");
+                        wx.navigateTo({
+                            url: '/pages/authorize/index?pagetype=1&paytype=5&orderType=SPLICED&id=' + productid + '&activityId=' + activityid + '&splicedRuleId=' + splicedRuleId + '&skuId=' + this.data.curSkuId + '&smId=' + this.data.curSkuMajorId + '&inviteCode=' + this.data.inviteCode
+                        });
+                    }
+                }
+            }
+        }); 
+        
     },
     joinElseCollage:function(e){
         this.setData({ btnType: 'joinElse' });

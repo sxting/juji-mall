@@ -1,10 +1,10 @@
 <wxs src="../../utils/numFr.wxs" module="filter" />
 <view class="main">
-    <view style="display:flex;justify-content: space-between;align-item:center;">
+    <!-- <view style="display:flex;justify-content: space-between;align-item:center;">
       <view class="mtitle">买好物·送会员</view>
     </view>
     
-    <view class="subtitle">购买以下商品赠送桔集会员一年</view>
+    <view class="subtitle">购买以下商品赠送桔集会员一年</view> -->
 
     <view class="productList">
         <view class="pubuItem" wx:for="{{productList}}" wx:for-index='index' wx:key="unique" bindtap="toComDetail" data-id="{{item.productId}}" data-storeid="{{item.nearStore.id}}">

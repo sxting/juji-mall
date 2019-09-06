@@ -24,7 +24,7 @@ Page({
         scene: '' //扫码进入
     },
     onLoad: function(options) {
-        console.log('---------授权页面----------');
+        console.log('---------登录页面----------');
         console.log(JSON.stringify(options));
         if (options.pagetype) {
             this.setData({
@@ -43,33 +43,25 @@ Page({
         this.setData({
             pageData: options
         });
-        // 小程序码进来的话
+       
         this.next();
     },
-    next: function() {
-        wx.getSetting({
-            success: (res) => {
-                console.log('userInfoStatus=' + res.authSetting['scope.userInfo']);
-                if (res.authSetting['scope.userInfo']) {
-                    if (this.data.pageType == 3) {
-                        this.getValueByscene(this.data.scene, 1);
-                    } else {
-                        // 正常用户先登录再进行下一步;
-                        this.preLogin1(this.data.pageData.invitecode, this.data.scene);
-                    }
-                } else {
-                    this.setData({
-                        showPageLoading: false
-                    });
-                    if (this.data.pageType == 3) {
-                        this.getValueByscene(this.data.scene, 2);
-                    }
-                }
-            }
-        });
+    onHide: function() {
+      this.setData({
+        showPageLoading: false
+      });
     },
-    // type=1是已经授权过
-    getValueByscene: function(scene, type) {
+    next: function() {
+        if (this.data.pageType == 3) {
+           // 小程序码进来的话
+            this.getValueByscene(this.data.scene);
+        } else {
+            // 正常用户先登录再进行下一步;
+            this.preLogin1(this.data.pageData.invitecode, this.data.scene);
+        }
+    },
+   
+    getValueByscene: function(scene) {
         wx.request({
             url: constant.apiUrl + '/qr/getBySceneId.json?sceneId=' + scene,
             method: 'GET',
@@ -78,8 +70,8 @@ Page({
             },
             success: (res) => {
                 console.log("解析小程序码2")
-              console.log(res.data);
-              if (res.data.data && res.data.data.productId == 'invitenew') {
+                console.log(res.data);
+                if (res.data.data && res.data.data.productId == 'invitenew') {
                     this.setData({
                         pageFromCode: 2
                     });
@@ -92,14 +84,11 @@ Page({
                     sharePersonOpenId: res.data.data.openId,
                     shareProductId: res.data.data.productId
                 });
-                if (type == 1) {
-                    // this.nextPage();
-                    this.preLogin1(this.data.pageData.invitecode, scene);
-                }
+                this.preLogin1(this.data.pageData.invitecode, scene);                
             }
         });
     },
-    // 已授权调
+
     preLogin1: function(inviteCode, scene) {
         var obj = {
             rawData: '',
@@ -110,19 +99,9 @@ Page({
             this.nextPage();
         });
     },
-    // 未授权调
-    preLogin2: function(rawData, inviteCode, scene) {
-        var obj = {
-            rawData: rawData,
-            inviteCode: inviteCode,
-            scene: scene
-        };
-        this.login(obj).then(() => {
-            this.nextPage();
-        });
-    },
+ 
     nextPage: function() {
-        console.log("走下一页");
+        console.log("登录成功走下一页");
         console.log('pageType====' + this.data.pageType);
         if (this.data.pageType == 0) {
             var referer = this.data.pageData.inner ? 1 : 4;
@@ -202,17 +181,7 @@ Page({
         }
 
     },
-    getUserInfo: function(e) {
-        if (e.detail.userInfo) {
-            wx.setStorageSync('rawData', e.detail.rawData);
-            var rawData = e.detail.rawData;
-            console.log('点击授权登录按钮');
-            console.log('pageType====' + this.data.pageType);
-            console.log(JSON.stringify(this.data.pageData));
-            var invitecode = this.data.pageData.invitecode ? this.data.pageData.invitecode : '';
-            this.preLogin2(rawData, invitecode, this.data.scene);
-        }
-    },
+ 
     login: function(obj) {
         return new Promise(function(resolve1, reject1) {
             wx.login({

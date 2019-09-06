@@ -825,3 +825,15 @@ radio {
     padding-left: 20rpx;
     padding-top: 20rpx;
 }
+
+.button {
+  width: 610rpx; 
+  height: 90rpx; 
+  line-height: 90rpx; 
+  margin: 40rpx auto 0; 
+  text-align: center; 
+  font-size: 28rpx; 
+  color: #A07446; 
+  border-radius: 50rpx;
+  background-color: #E9D2B0;
+}

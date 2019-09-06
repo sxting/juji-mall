@@ -206,7 +206,7 @@ Page({
         }
         if (this.data.paytype == 7) {
             this.toActivityPay3();
-        }
+        } 
     },
     showAlert: function(msg) {
         wx.showModal({

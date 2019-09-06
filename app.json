@@ -47,7 +47,8 @@
     "pages/seed/index",
     "pages/seedDetail/index",
     "pages/juzhangGZ/index",
-    "pages/jujiGarden/myUserH5/index"
+    "pages/jujiGarden/myUserH5/index",
+    "pages/authorize/index"
   ],
   "permission": {
     "scope.userLocation": {

@@ -5,7 +5,8 @@
     "backgroundColorBottom": "#FFFFFF",
     "usingComponents": {
         "nav-bar": "/components/navbar/index",
-        "member-products": "/components/memberProduct/index"
+        "member-products": "/components/memberProduct/index",
+        "member-open": "/components/memberOpen/index"
     },
     "enablePullDownRefresh": true
 }

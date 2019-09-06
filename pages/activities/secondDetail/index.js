@@ -222,10 +222,21 @@ Page({
         this.setData({ defaultSku:skuObj[0]});
     },
     okSelect:function(){
-        if(this.data.defaultSku.balanceStock==0){errDialog("此规格库存不足");return}
-        wx.navigateTo({
-            url: '/pages/payOrder/index?paytype=7&orderType=SEC_KILL&id=' + this.data.productId + '&activityId=' + this.data.activityId + '&splicedRuleId=' + this.data.defaultSku.secKillRuleId+'&skuId='+this.data.curSkuId+'&smId='+this.data.curSkuMajorId+'&inviteCode='+this.data.inviteCode
-        });
+        if(this.data.defaultSku.balanceStock==0){errDialog("此规格库存不足");return};
+
+        wx.getSetting({
+            success: (res) => {
+                if (res.authSetting['scope.userInfo']) {
+                    wx.navigateTo({
+                        url: '/pages/payOrder/index?paytype=7&orderType=SEC_KILL&id=' + this.data.productId + '&activityId=' + this.data.activityId + '&splicedRuleId=' + this.data.defaultSku.secKillRuleId + '&skuId=' + this.data.curSkuId + '&smId=' + this.data.curSkuMajorId + '&inviteCode=' + this.data.inviteCode
+                    }); 
+                } else {
+                    wx.navigateTo({
+                        url: '/pages/authorize/index?pagetype=1&paytype=7&orderType=SEC_KILL&id=' + this.data.productId + '&activityId=' + this.data.activityId + '&splicedRuleId=' + this.data.defaultSku.secKillRuleId + '&skuId=' + this.data.curSkuId + '&smId=' + this.data.curSkuMajorId + '&inviteCode=' + this.data.inviteCode
+                    });
+                }
+            }
+        }); 
     },
     toRemainMe: function(e) {
         let data = { encryptData: e.detail.encryptedData, iv: e.detail.iv }

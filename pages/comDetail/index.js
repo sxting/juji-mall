@@ -61,7 +61,8 @@ Page({
         isShowSelect: false,
         shareType: 1,
         source:'',
-        member: wx.getStorageSync('distributorRole') == 'LEADER' || wx.getStorageSync('member')
+        member: wx.getStorageSync('distributorRole') == 'LEADER' || wx.getStorageSync('member'),
+      hasBuy: false
     },
     onLoad: function(options) {
         const updateManager = wx.getUpdateManager();
@@ -77,9 +78,11 @@ Page({
             })
         })
         var shareType = wx.getStorageSync('shareType');
+        console.log(typeof options.hasBuy);
         this.setData({
             shareType: shareType == 1,
-            member: wx.getStorageSync('distributorRole') == 'LEADER' || wx.getStorageSync('member')
+            member: wx.getStorageSync('distributorRole') == 'LEADER' || wx.getStorageSync('member'),
+          hasBuy: options.hasBuy && options.hasBuy == 1 ? true : false
         })
 
         if (options.share) {
@@ -291,7 +294,27 @@ Page({
                     if (res.confirm) {
                         console.log('用户点击确定');
                         wx.reLaunch({
-                          url: '/pages/jujiGarden/member/index',
+                            url: '/pages/jujiGarden/member/index',
+                        })
+                    } else if (res.cancel) {
+                        console.log('用户点击取消')
+                    }
+                }
+            })
+            return;
+        }
+        console.log(this.data.hasBuy);
+        if (this.data.hasBuy) {
+            wx.showModal({
+                title: '提示',
+                content: '您已购买过会员商品，请至会员专区享受优惠',
+                cancelText: '取消',
+                confirmText: '确认',
+                success(res) {
+                    if (res.confirm) {
+                        console.log('用户点击确定');
+                        wx.navigateTo({
+                            url: '/pages/memberzq/index',
                         })
                     } else if (res.cancel) {
                         console.log('用户点击取消')
@@ -326,22 +349,46 @@ Page({
         var point = this.data.productInfo.point == null ? 0 : this.data.productInfo.point;
         var price = this.data.productInfo.price == null ? 0 : this.data.productInfo.price;
         var type = this.data.productInfo.type;
-        if (type == 'PRODUCT' && point > 0 && price > 0) {
-            if (price > 0 && this.data.pointBalance >= point) {
-                this.toCreateOrder();
-            } else {
-                this.toGetPoint();
+
+        wx.getSetting({
+            success: (res) => {
+                if (res.authSetting['scope.userInfo']) {
+                    if (type == 'PRODUCT' && point > 0 && price > 0) {
+                        if (price > 0 && this.data.pointBalance >= point) {
+                            this.toCreateOrder();
+                        } else {
+                            this.toGetPoint();
+                        }
+                    }
+                    if (type == 'PRODUCT' && point == 0 && price > 0) {
+                        this.toCreateOrderByRmb();
+                    }
+                    if (type == 'POINT') {
+                        this.toCreateOrderByPoint();
+                    }
+                    if (this.data.pointBalance < point || !this.data.pointBalance) {
+                        this.toGetPoint();
+                    }
+                } else {
+                    if (type == 'PRODUCT' && point > 0 && price > 0) {
+                        if (price > 0 && this.data.pointBalance >= point) {
+                            this.toCreateOrder2();
+                        } else {
+                            this.toGetPoint();
+                        }
+                    }
+                    if (type == 'PRODUCT' && point == 0 && price > 0) {
+                        this.toCreateOrderByRmb2();
+                    }
+                    if (type == 'POINT') {
+                        this.toCreateOrderByPoint2();
+                    }
+                    if (this.data.pointBalance < point || !this.data.pointBalance) {
+                        this.toGetPoint();
+                    }
+                }
             }
-        }
-        if (type == 'PRODUCT' && point == 0 && price > 0) {
-            this.toCreateOrderByRmb();
-        }
-        if (type == 'POINT') {
-            this.toCreateOrderByPoint();
-        }
-        if (this.data.pointBalance < point || !this.data.pointBalance) {
-            this.toGetPoint();
-        }
+        }); 
     },
 
     toPro: function(e) {
@@ -380,6 +427,15 @@ Page({
             url: '/pages/payOrder/index?paytype=1&id=' + this.data.productId + '&storeid=' + this.data.storeId + '&sceneid=' + this.data.sceneId + '&inviteCode=' + this.data.invitecode + '&skuId=' + this.data.curSkuId + '&smId=' + this.data.curSkuMajorId + '&buyMember=' + this.data.buyMember
         });
     },
+    toCreateOrder2: function () { //桔子和人民币组合订单
+        console.log("组合订单跳转前sceneId=" + this.data.sceneId);
+        wx.reportAnalytics('detail_ue', {
+            ue: '下单'
+        });
+        wx.navigateTo({
+            url: '/pages/authorize/index?pagetype=1&paytype=1&id=' + this.data.productId + '&storeid=' + this.data.storeId + '&sceneid=' + this.data.sceneId + '&inviteCode=' + this.data.invitecode + '&skuId=' + this.data.curSkuId + '&smId=' + this.data.curSkuMajorId + '&buyMember=' + this.data.buyMember
+        });
+    },
     toCreateOrderByPoint: function() { //只用桔子下单
         console.log("桔子单跳转前sceneId=" + this.data.sceneId);
         wx.reportAnalytics('detail_ue', {
@@ -387,6 +443,15 @@ Page({
         });
         wx.navigateTo({
             url: '/pages/payOrder/index?paytype=2&id=' + this.data.productId + '&storeid=' + this.data.storeId + '&sceneid=' + this.data.sceneId + '&inviteCode=' + this.data.invitecode + '&skuId=' + this.data.curSkuId + '&smId=' + this.data.curSkuMajorId + '&buyMember=' + this.data.buyMember
+        });
+    },
+    toCreateOrderByPoint2: function () { //只用桔子下单
+        console.log("桔子单跳转前sceneId=" + this.data.sceneId);
+        wx.reportAnalytics('detail_ue', {
+            ue: '下单'
+        });
+        wx.navigateTo({
+            url: '/pages/authorize/index?pagetype=1&paytype=2&id=' + this.data.productId + '&storeid=' + this.data.storeId + '&sceneid=' + this.data.sceneId + '&inviteCode=' + this.data.invitecode + '&skuId=' + this.data.curSkuId + '&smId=' + this.data.curSkuMajorId + '&buyMember=' + this.data.buyMember
         });
     },
     toCreateOrderByRmb: function() { //人民币优惠购买
@@ -398,6 +463,15 @@ Page({
             url: '/pages/payOrder/index?paytype=3&id=' + this.data.productId + '&storeid=' + this.data.storeId + '&sceneid=' + this.data.sceneId + '&inviteCode=' + this.data.invitecode + '&skuId=' + this.data.curSkuId + '&smId=' + this.data.curSkuMajorId + '&buyMember=' + this.data.buyMember
         });
     },
+    toCreateOrderByRmb2: function () { //人民币优惠购买
+        console.log("人民币单跳转前sceneId=" + this.data.sceneId);
+        wx.reportAnalytics('detail_ue', {
+            ue: '下单'
+        });
+        wx.navigateTo({
+            url: '/pages/authorize/index?pagetype=1&paytype=3&id=' + this.data.productId + '&storeid=' + this.data.storeId + '&sceneid=' + this.data.sceneId + '&inviteCode=' + this.data.invitecode + '&skuId=' + this.data.curSkuId + '&smId=' + this.data.curSkuMajorId + '&buyMember=' + this.data.buyMember
+        });
+    },
     toCreateOrderByOriPrice: function() { //原价购买
         console.log("跳转前sceneId=" + this.data.sceneId);
         wx.reportAnalytics('detail_ue', {
@@ -405,6 +479,15 @@ Page({
         });
         wx.navigateTo({
             url: '/pages/payOrder/index?paytype=4&id=' + this.data.productId + '&storeid=' + this.data.storeId + '&sceneid=' + this.data.sceneId + '&inviteCode=' + this.data.invitecode + '&skuId=' + this.data.curSkuId + '&smId=' + this.data.curSkuMajorId + '&buyMember=' + this.data.buyMember
+        });
+    },
+    toCreateOrderByOriPrice2: function () { //原价购买
+        console.log("跳转前sceneId=" + this.data.sceneId);
+        wx.reportAnalytics('detail_ue', {
+            ue: '下单'
+        });
+        wx.navigateTo({
+            url: '/pages/authorize/index?pagetype=1&paytype=4&id=' + this.data.productId + '&storeid=' + this.data.storeId + '&sceneid=' + this.data.sceneId + '&inviteCode=' + this.data.invitecode + '&skuId=' + this.data.curSkuId + '&smId=' + this.data.curSkuMajorId + '&buyMember=' + this.data.buyMember
         });
     },
     toGetPoint: function() { //跳转到任务页面赚桔子

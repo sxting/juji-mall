@@ -115,9 +115,20 @@ Page({
     toPayOrder:function(){
         var productId = this.data.productId;
         var activityId = this.data.activityId;
-        wx.navigateTo({
-            url: '/pages/payOrder/index?paytype=3&id='+productId+'&skuId='+this.data.curSkuId+'&smId='+this.data.curSkuMajorId + '&inviteCode=' + this.data.inviteCode,
-        });
+
+        wx.getSetting({
+            success: (res) => {
+                if (res.authSetting['scope.userInfo']) {
+                    wx.navigateTo({
+                        url: '/pages/payOrder/index?paytype=3&id=' + productId + '&skuId=' + this.data.curSkuId + '&smId=' + this.data.curSkuMajorId + '&inviteCode=' + this.data.inviteCode,
+                    });
+                } else {
+                    wx.navigateTo({
+                        url: '/pages/authorize/index?pagetype=1&paytype=3&id=' + productId + '&skuId=' + this.data.curSkuId + '&smId=' + this.data.curSkuMajorId + '&inviteCode=' + this.data.inviteCode,
+                    });
+                }
+            }
+        }); 
     },
     dirBuy:function(e){
         if(Object.keys(this.data.defaultSku).length>1){
@@ -131,9 +142,20 @@ Page({
         var productId = this.data.productId;
         var activityOrderId = this.data.activityOrderId;
         var activityId = this.data.activityId;
-        wx.navigateTo({
-            url: '/pages/payOrder/index?paytype=6&orderType=BARGAIN&id='+productId+'&activityOrderId='+activityOrderId+'&activityId='+activityId+'&skuId='+this.data.curSkuId+'&smId='+this.data.curSkuMajorId + '&inviteCode=' + this.data.inviteCode,
-        });
+
+        wx.getSetting({
+            success: (res) => {
+                if (res.authSetting['scope.userInfo']) {
+                    wx.navigateTo({
+                        url: '/pages/payOrder/index?paytype=6&orderType=BARGAIN&id=' + productId + '&activityOrderId=' + activityOrderId + '&activityId=' + activityId + '&skuId=' + this.data.curSkuId + '&smId=' + this.data.curSkuMajorId + '&inviteCode=' + this.data.inviteCode,
+                    });
+                } else {
+                    wx.navigateTo({
+                        url: '/pages/authorize/index?pagetype=1&paytype=6&orderType=BARGAIN&id=' + productId + '&activityOrderId=' + activityOrderId + '&activityId=' + activityId + '&skuId=' + this.data.curSkuId + '&smId=' + this.data.curSkuMajorId + '&inviteCode=' + this.data.inviteCode,
+                    });
+                }
+            }
+        }); 
     },
     // 发起砍价 
     startKanjia:function() {

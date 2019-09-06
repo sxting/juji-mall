@@ -77,9 +77,9 @@ Page({
                 'content-type': 'application/json'
             },
             success: (res) => {
-                console.log("解析小程序码")
-                console.log(JSON.stringify(res));
-                if (res.data.data.productId == 'invitenew') {
+                console.log("解析小程序码2")
+              console.log(res.data);
+              if (res.data.data && res.data.data.productId == 'invitenew') {
                     this.setData({
                         pageFromCode: 2
                     });

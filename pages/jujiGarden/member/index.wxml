@@ -95,7 +95,7 @@
               </view>
           </view>
 
-          <button class='button'>分享好友购以下爆品，可得约60元现金奖励</button> 
+          <button class='button'>好友购以下爆品，可得约60元会员返利</button> 
       </view>
       <member-open wx:if='{{ !member && !allowDistribute }}' />
       <!-- 未开通会员或不能分销展示的商品列表 -->

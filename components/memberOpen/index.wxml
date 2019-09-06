@@ -13,7 +13,7 @@
             <view class='rights-item'> 
                 <image src='../../images/hyzxj.png'></image> 
                 <view class='right'> 
-                    <view class='color1 font1'>购买会员享会员专区独有特惠商品购买权益</view>
+                    <view class='color1 font1'>享会员专区独有特惠商品购买权益</view>
                 </view> 
             </view> 
             <view class='rights-item'> 
@@ -25,19 +25,19 @@
             <view class='rights-item'> 
                 <image src='../../images/hyzsq.png'></image> 
                 <view class='right'> 
-                    <view class='color1 font1'>享平台针对会员不定期赠送礼券、商品机会</view> 
+                    <view class='color1 font1'>好友购买会员套餐，会员得近60元返利，直接至微信零钱，无需提现</view> 
                 </view> 
             </view> 
             <view class='rights-item'> 
                 <image src='../../images/zskf.png'></image> 
                 <view class='right'> 
-                    <view class='color1 font1'>分享好友购以下爆品，可得约60元现金奖励</view> 
+                    <view class='color1 font1'>享有好店首发免费品鉴机会权益</view> 
                 </view> 
             </view> 
             <view class='rights-item'> 
                 <image src='../../images/jinqian.png'></image> 
                 <view class='right'> 
-                    <view class='color1 font1'>邀请好友购买会员套餐，得平台近60元人民币奖励，直接微信官方分账至微信零钱、无需提现</view> 
+                    <view class='color1 font1'>享平台针对会员不定期赠送礼券、商品机会权益</view> 
                 </view> 
             </view> 
         </view> 

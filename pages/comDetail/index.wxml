@@ -70,7 +70,7 @@
                     </view> -->
                 </view>
                 <view class="ub ub-ac" style="font-size: 24rpx;color: #999999;">
-                    <image src="/images/soldCount.png" style="width:24rpx;height: 22rpx;margin-right:10rpx;"></image>已售{{productInfo.soldNum}}件
+                    <image src="/images/hot.png" style="width:24rpx;height: 30rpx;margin-right:6rpx;"></image>热度{{productInfo.soldNum}}
                 </view>
             </view>
 

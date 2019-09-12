@@ -227,7 +227,10 @@
         <button class="homeWrap toBg" bindtap="showShare">
             <image src="/images/fenxiang.png" style="width:48rpx;height:48rpx;"></image>
         </button>
-        <form bindsubmit="collectFormIds" report-submit="true" wx:if="{{productInfo.distributor&&member}}">
+        <form wx:if="{{productInfo.putAway == 0}}">
+            <view class="footerBtnWrap"><button class="noStock">已下架</button></view>
+        </form>
+        <form bindsubmit="collectFormIds" report-submit="true" wx:elif="{{productInfo.distributor&&member}}">
           <view class="proBtns ub ub-ac">
             <view class="ub-f1 ub ub-ver ub-ac ub-pc l" bindtap="toBuy">
               <text class="txt1">购买</text>

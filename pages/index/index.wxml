@@ -57,9 +57,9 @@
                         <cover-image class="icon_home" src="/images/icon_home4.png" mode="aspectFit"></cover-image>
                         <cover-view class="tx-c">优选好券</cover-view>
                     </cover-view>
-                    <cover-view class="menuitem ub ub-ver ub-ac ub-pc" bindtap="toTypePath" data-tit="特惠品鉴" data-page="/pages/niceShop/index">
+                    <cover-view class="menuitem ub ub-ver ub-ac ub-pc" bindtap="toTypePath" data-tit="大牌9.9元" data-page="/pages/niceShop/index">
                         <cover-image class="icon_home" src="/images/icon_home2.png" mode="aspectFit"></cover-image>
-                        <cover-view class="tx-c">特惠品鉴</cover-view>
+                        <cover-view class="tx-c">大牌9.9元</cover-view>
                     </cover-view>
                     <cover-view class="menuitem ub ub-ver ub-ac ub-pc" bindtap="toTypePath" data-tit="打卡潮店" data-page="/pages/niceShop/index">
                         <cover-image class="icon_home" src="/images/icon_home3.png" mode="aspectFit"></cover-image>

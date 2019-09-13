@@ -10,7 +10,6 @@ import {
     loading
 } from '../../utils/util';
 var app = getApp();
-
 Page({
     data: {
         nvabarData: {
@@ -61,6 +60,7 @@ Page({
         isShowSelect: false,
         shareType: 1,
         source:'',
+        isGetUserInfo:true,
         member: wx.getStorageSync('distributorRole') == 'LEADER' || wx.getStorageSync('member'),
       hasBuy: false
     },
@@ -517,6 +517,8 @@ Page({
         });
     },
     onShow: function() {
+        this.setData({isGetUserInfo:!!JSON.parse(wx.getStorageSync('userinfo')).nickName});
+        console.log("isGetUserInfo======"+this.data.isGetUserInfo);
         this.setData({
             isShowSelect: false
         });
@@ -677,56 +679,67 @@ Page({
         console.log(JSON.stringify(share))
         return share
     },
+    getUserInfo: function(e) {
+        if (e.detail.userInfo) {
+            console.log(e.detail);
+            wx.setStorageSync('rawData', e.detail.rawData);
+            this.showShareModal();
+            this.updateUserInfo(e.detail.userInfo);
+        }
+    },
+    updateUserInfo:function(obj){
+        service.updateUserInfo({
+            avatar:obj.avatarUrl,
+            nickName:obj.nickName
+        }).subscribe({
+            next: res => {
+                console.log("用户信息更新成功！");
+            },
+            error: err => console.log(err)
+        });
+    },
     showShareModal: function() {
         wx.reportAnalytics('detail_ue', {
             ue: '保存推广图片'
         });
         console.log('生成分享图片');
         console.log(constant.basePicUrl + this.data.productInfo.picId + '/resize_750_420/mode_filt/format_jpg/quality_70');
-        service.userInfo({
-            openId: wx.getStorageSync('openid')
-        }).subscribe({
-            next: res => {
-                this.setData({
-                    nickName: res.nickName,
-                    userImgUrl: res.avatar
-                });
-                wx.showLoading({
-                    title: '生成分享图片'
-                });
-                wx.downloadFile({
-                    url: constant.basePicUrl + this.data.productInfo.picId + '/resize_750_420/mode_filt/format_jpg/quality_70',
-                    success: (res) => {
-                        if (res.statusCode === 200) {
-                            this.setData({
-                                headImg: res.tempFilePath
-                            });
-                            console.log(this.data.userImgUrl);
-                            wx.downloadFile({
-                                url: this.data.userImgUrl,
-                                success: (obj) => {
-                                    if (obj.statusCode === 200) {
-                                        this.setData({
-                                            userImg: obj.tempFilePath
-                                        });
-                                        this.getQrCode();
-                                    } else {
-                                        wx.hideLoading();
-                                    }
-                                },
-                                fail: (err) => {
-                                    console.log('头像下载失败');
-                                }
-                            });
-                        } else {
-                            wx.hideLoading();
+        this.setData({
+            nickName: JSON.parse(wx.getStorageSync('rawData')).nickName,
+            userImgUrl: JSON.parse(wx.getStorageSync('rawData')).avatarUrl
+        });
+        wx.showLoading({
+            title: '生成分享图片'
+        });
+        wx.downloadFile({
+            url: constant.basePicUrl + this.data.productInfo.picId + '/resize_750_420/mode_filt/format_jpg/quality_70',
+            success: (res) => {
+                if (res.statusCode === 200) {
+                    this.setData({
+                        headImg: res.tempFilePath
+                    });
+                    console.log(this.data.userImgUrl);
+                    wx.downloadFile({
+                        url: this.data.userImgUrl,
+                        success: (obj) => {
+                            if (obj.statusCode === 200) {
+                                this.setData({
+                                    userImg: obj.tempFilePath
+                                });
+                                this.getQrCode();
+                            } else {
+                                wx.hideLoading();
+                            }
+                        },
+                        fail: (err) => {
+                            console.log('头像下载失败');
                         }
-                    }
-                });
-            },
-            // error: err => errDialog(err),
-            complete: () => {}
-        })
+                    });
+                } else {
+                    wx.hideLoading();
+                }
+            }
+        });
     },
     saveShareImage: function() {
         this.showShareModal();

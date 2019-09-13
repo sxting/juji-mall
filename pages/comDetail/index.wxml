@@ -319,7 +319,10 @@
             <button wx:if="{{shareType!=1}}" class="ub-f1 ub ub-ac ub-pc left ub-ver" bindtap="showTips1">
                 <image class="share" src="/images/share_friend.png" style="width:117rpx;height:118rpx"></image>
             </button>
-            <button class="ub-f1 ub ub-ac ub-pc right ub-ver" bindtap="showShareModal" data-type="1">
+            <button class="ub-f1 ub ub-ac ub-pc right ub-ver" wx:if="{{isGetUserInfo}}" bindtap="showShareModal" data-type="1">
+                <image class="share" src="/images/share_save.png" style="width:94rpx;height:118rpx"></image>
+            </button>
+            <button class="ub-f1 ub ub-ac ub-pc right ub-ver" wx:else open-type="getUserInfo" bindgetuserinfo="getUserInfo" data-type="1">
                 <image class="share" src="/images/share_save.png" style="width:94rpx;height:118rpx"></image>
             </button>
         </view>

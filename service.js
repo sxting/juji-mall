@@ -153,6 +153,12 @@ service.userInfo = (data) => {
   return http.get(apiUrl, data);
 }
 
+/*获取会员信息*/
+service.updateUserInfo = (data) => {
+  let apiUrl = api + '/user/updateUserInfo.json';
+  return http.post(apiUrl, data);
+}
+
 //采集小程序用户点击按钮事件的formId
 service.collectFormIds = (data) => {
   let apiUrl = api + '/user/collectFormIds.json';

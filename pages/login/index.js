@@ -90,14 +90,34 @@ Page({
     },
 
     preLogin1: function(inviteCode, scene) {
-        var obj = {
-            rawData: '',
-            inviteCode: inviteCode,
-            scene: scene
-        };
-        this.login(obj).then(() => {
-            this.nextPage();
-        });
+        let that = this;
+        
+        new Promise(function (resolve, reject) {
+            wx.getSetting({
+                success: (res) => {
+                    if (res.authSetting['scope.userInfo']) {
+                        wx.getUserInfo({
+                            success: function (res) {
+                                console.log(res);
+                                resolve(res.rawData);
+                            }
+                        })
+                    } else {
+                        resolve('');
+                    }
+                }
+            });
+        }).then(function (rawData) {
+            var obj = {
+                rawData: rawData,
+                inviteCode: inviteCode,
+                scene: scene
+            };
+
+            that.login(obj).then(() => {
+                that.nextPage();
+            });
+        })    
     },
  
     nextPage: function() {

@@ -38,7 +38,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 14,
+			"current": 15,
 			"list": [
 				{
 					"id": -1,
@@ -142,6 +142,13 @@
 					"id": -1,
 					"name": "授权页面",
 					"pathName": "pages/authorize/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "桔子换礼",
+					"pathName": "pages/juzihl/index",
 					"scene": null
 				}
 			]

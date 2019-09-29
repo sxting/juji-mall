@@ -1,0 +1,44 @@
+<wxs src="../../../utils/numFr.wxs" module="format" />
+<nav-bar navbar-data='{{nvabarData}}'></nav-bar>
+<view id="app" class="app" style="height:{{conHeight}}px">
+  <view class="main">
+
+    <view class="bg">
+    </view>
+
+      <view class="contentWrap">
+        <view class="content">
+          <view class="rechargeDiv ub ub-ac ub-pc">
+            <view class="remark {{showSelectCard?'font50':''}}">￥</view>
+            <view class="input ub ub-ac ub-f1">{{amount}}</view>
+          </view>
+        </view>
+      </view>
+
+        <view class="products">
+            <view class="products-title">请选择赠品：</view>
+            <view class="product-item" wx:for="{{products}}" wx:key="{{item}}" bindtap="selectProduct" data-item="{{item}}">
+                <view class="select" wx:if="{{selectProductId === item.productId}}"></view>
+                <view class="ub ub-ac info">
+                    <image class="goodImg udb" src="{{constant.basePicUrl}}{{item.picId}}/resize_460_360/mode_filt/format_jpg/quality_70"></image>
+                    <view class="ub-f1 goodMsg">
+                        <view class="goodTit">{{item.productName}}</view>
+                        <view class="goodAmount">
+                            市场价：<text>{{format.toFix(item.price)}}</text> 元
+                        </view>
+                    </view>
+                </view>
+                <view class="skubox" wx:if="{{item.productSkus.length > 1}}">
+                    <text class="selectTit">选择规格:</text>
+                    <text wx:for="{{item.productSkus}}" wx:key="unique" class="skuitem {{item.skuId==skuId?'on':''}} {{item.stock==0?'null':''}}" data-id="{{item.skuId}}" bindtap="selectSku">{{format.toEllipsised(item.skuName)}}</text>
+                </view>
+            </view>
+        </view>
+    
+
+    <view class="underBox">
+        <view class="jiesuanBtn" bindtap="toPay">支付</view>        
+    </view>
+
+  </view>
+</view>

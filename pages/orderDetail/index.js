@@ -51,32 +51,32 @@ Page({
     })
   },
   getData: function(orderId) {
-    service.orderInfo({orderId: orderId,lng:wx.getStorageSync('curLongitude'),lat:wx.getStorageSync('curLatitude')}).subscribe({
-      next: res => {
-        this.setData({orderInfo: res});
-        this.setData({preOrderStr:res.preOrderStr});
-        this.setData({storeInfo:res.orderItemList.length>0?res.orderItemList[0]:{}});
-        if(res.status=='PAID'){
-          if(!this.data.isTimeOpen&&res.vouchers.length>0){
-            console.log("获取核销码信息")
-            this.getListVoucher(res.vouchers[0].voucherCode);
-          }
-        }
-        this.setData({vouchers:res.vouchers});
-        if(res.status=='CONSUME'||res.status=='FINISH'){
-          console.log('已完成的订单');
-          clearInterval(timer);
-          this.setData({isTimeOpen:false});
-          console.log('关闭定时器');
-          console.log(timer);
-          if(!this.data.isTimeOpen&&res.vouchers.length>0){
-            this.getListVoucher(res.vouchers[0].voucherCode);
-          }
-        }
-      },
-      error: err => console.log(err),
-      complete: () => wx.hideToast()
-    })
+      service.orderInfo({ orderId: orderId, lng: wx.getStorageSync('curLongitude'), lat: wx.getStorageSync('curLatitude') }).subscribe({
+          next: res => {
+              this.setData({ orderInfo: res });
+              this.setData({ preOrderStr: res.preOrderStr });
+              this.setData({ storeInfo: res.orderItemList.length > 0 ? res.orderItemList[0] : {} });
+              if (res.status == 'PAID') {
+                  if (!this.data.isTimeOpen && res.vouchers.length > 0) {
+                      console.log("获取核销码信息")
+                      this.getListVoucher(res.vouchers[0].voucherCode);
+                  }
+              }
+              this.setData({ vouchers: res.vouchers });
+              if (res.status == 'CONSUME' || res.status == 'FINISH') {
+                  console.log('已完成的订单');
+                  clearInterval(timer);
+                  this.setData({ isTimeOpen: false });
+                  console.log('关闭定时器');
+                  console.log(timer);
+                  if (!this.data.isTimeOpen && res.vouchers.length > 0) {
+                      this.getListVoucher(res.vouchers[0].voucherCode);
+                  }
+              }
+          },
+          error: err => console.log(err),
+          complete: () => wx.hideToast()
+      })
   },
   copyBtn: function (e) {
     wx.setClipboardData({

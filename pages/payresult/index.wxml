@@ -4,6 +4,7 @@
     <view class="chengongimgwrap">
         <image src="/images/chenggong.png" class="chengongimg" style="width:108rpx;height:108rpx;"></image>
     </view>
+    <view class="zhifutip" wx:if="{{yiye}}">成功支付{{filter.toFix(yiyeInfo.actualAmount)}}元</view>
     <!-- 储值并支付 -->
     <view class="zhifutip" wx:if="{{type=='recommend'}}">成功支付{{prepayMoney}}元</view>
     <!-- 账户余额支付 -->
@@ -14,10 +15,12 @@
     <view class="zhifutip" wx:if="{{type=='account'&&wxPayMoney&&filter.toNum(wxPayMoney)>0}}">成功支付{{zhuheAmount}}元</view>
     <view class="zhifutip2" wx:if="{{point>0}}">本次支付获得{{point}}个桔子</view>
     <view class="completeBtnWrap2">
-        <view class="completeBtn2" bindtap="toCardList">查看卡包</view>
+        <view class="completeBtn2" wx:if="{{yiye}}" bindtap="goOrderDetail">查看赠品</view>
+        <view class="completeBtn2" wx:if="{{yiye}}" bindtap="goBack">返回</view>
+        <view class="completeBtn2" wx:if="{{!yiye}}" bindtap="toCardList">查看卡包</view>
     </view>
 </view>
-<view class="pay-detail-wrap">
+<view class="pay-detail-wrap" wx:if="{{!yiye}}">
     <!-- 微信支付 -->
     <view class="topRow" wx:if="{{type=='thirdpay'&&wxPayMoney&&filter.toNum(wxPayMoney)>0}}">微信支付{{wxPayMoney}}元</view>
     <!-- 组合支付 -->
@@ -66,7 +69,7 @@
         </view>
     </view>
 </view>
-<view class="goWrap" wx:if="{{merchantId!='101551164644688940'}}">
+<view class="goWrap" wx:if="{{merchantId!='101551164644688940' && !yiye}}">
     <view class="goText" style="top:60rpx;left:248rpx;" wx:if="{{point>0}}">{{point}}桔子给你</view>
     <view class="goText" style="top:60rpx;left:248rpx;" wx:else>桔美好生活</view>
     <view class="goText" style="top:120rpx;left:318rpx;" wx:if="{{point>0}}">吃喝玩乐随你~</view>

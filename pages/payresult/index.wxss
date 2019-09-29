@@ -96,6 +96,7 @@
   font-size: 30rpx;
   color: #6a3c12;
   box-sizing: border-box;
+  margin: 0 20rpx;
 }
 .shuiyinWrap{
   position: relative;

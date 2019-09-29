@@ -50,7 +50,7 @@ Page({
     var conHeight = app.globalData.screenHeight-app.globalData.barHeight-45;
     console.log("内容区高"+conHeight);
     this.setData({conHeight:conHeight})
-    console.log(options);
+    console.log(options);    
     let that = this;
     new Promise(function (resolve, reject) {
       // wx.showLoading({
@@ -536,72 +536,88 @@ Page({
 
   toResult() {
     if (this.data.amount != '' && this.data.amount != '请输入付款金额' && this.data.amount != 0 && this.data.storeId) {
+        let crossData = {
+            merchantId: this.data.merchantId,
+            storeId: this.data.storeId,
+            amount: this.data.amount * 100
+        }
+        service.crossIndustry(crossData).subscribe({
+            next: res => {
+                if(res.length > 0) {
+                   wx.navigateTo({
+                       url: '/pages/cross/products/index?amount=' + this.data.amount + '&products=' + JSON.stringify(res) + '&merchantId=' + this.data.merchantId + '&storeId=' + this.data.storeId,
+                   }) 
+                } else {
+                    if (this.data.seledAccount) {//如果用户勾选了余额支付
+                        //此处判断余额付款和组合付款的情况 余额付款直接跳转到结果页面 组合支付还要到当前页的另一层
+                        if (Number(this.data.amount) > this.data.balance) {//如果输入金额比用户余额多
+                            console.log('如果输入金额比用户余额多');
+                            if (this.data.recommendStatus == '0' || !this.data.recommendStatus) {//显示储值支付
+                                this.getPayment(Number(this.data.amount).toFixed(2));
+                                this.setData({
+                                    dAmount: Number(this.data.amount).toFixed(2),//保存一个接口传入需要用的amount
+                                    amount: Number(Number(this.data.amount) - this.data.balance).toFixed(2),
+                                    showBalanceWrap: false,
+                                    showFocus: false,
+                                    showSelectCard: true
+                                });
+                            } else if (this.data.recommendStatus == '1') {//只能微信支付 直接调用微信支付 不再显示中间推荐储值页
+                                //如果勾选了余额支付 在组合支付的情况下 无论储值支付是否开启 都直接微信支付
+                                this.setData({
+                                    accountpaystatus: true//显示支付loading
+                                });
+                                let orderObj = {};
+                                orderObj.choosenType = 'account';
+                                orderObj.orderPay = Number(this.data.amount);
+                                orderObj.pay = Number(Number(this.data.amount) - this.data.balance).toFixed(2);
+                                orderObj.givingMoney = 0;
+                                this.wxpay(orderObj);
+                            }
+                        } else {//如果用户余额充足，可以执行余额支付
+                            this.setData({
+                                accountpaystatus: true//显示支付loading
+                            });
+                            let orderObj = {};
+                            this.data.paytype ? orderObj.choosenType = this.data.paytype : orderObj;
+                            orderObj.orderPay = Number(this.data.amount);
+                            orderObj.pay = Number(this.data.amount);
+                            this.accountPay(orderObj);
+                        }
+                    } else {
+                        console.log('如果没有勾选余额支付');
+                        //如果没有勾选余额支付
+                        this.setData({
+                            amount: Number(this.data.amount).toFixed(2),
+                            dAmount: Number(this.data.amount).toFixed(2)
+                        });
+                        console.log(this.data.dAmount);
 
-      if (this.data.seledAccount) {//如果用户勾选了余额支付
-        //此处判断余额付款和组合付款的情况 余额付款直接跳转到结果页面 组合支付还要到当前页的另一层
-        if (Number(this.data.amount) > this.data.balance) {//如果输入金额比用户余额多
-            console.log('如果输入金额比用户余额多');
-          if (this.data.recommendStatus == '0' || !this.data.recommendStatus) {//显示储值支付
-            this.getPayment(Number(this.data.amount).toFixed(2));
-            this.setData({
-              dAmount: Number(this.data.amount).toFixed(2),//保存一个接口传入需要用的amount
-              amount: Number(Number(this.data.amount) - this.data.balance).toFixed(2),
-              showBalanceWrap: false,
-              showFocus: false,
-              showSelectCard: true
-            });
-          } else if (this.data.recommendStatus == '1') {//只能微信支付 直接调用微信支付 不再显示中间推荐储值页
-            //如果勾选了余额支付 在组合支付的情况下 无论储值支付是否开启 都直接微信支付
-            this.setData({
-              accountpaystatus: true//显示支付loading
-            });
-            let orderObj = {};
-            orderObj.choosenType = 'account';
-            orderObj.orderPay = Number(this.data.amount);
-            orderObj.pay = Number(Number(this.data.amount) - this.data.balance).toFixed(2);
-            orderObj.givingMoney = 0;
-            this.wxpay(orderObj);
-          }
-        } else {//如果用户余额充足，可以执行余额支付
-          this.setData({
-            accountpaystatus: true//显示支付loading
-          });
-          let orderObj = {};
-          this.data.paytype ? orderObj.choosenType = this.data.paytype : orderObj;
-          orderObj.orderPay = Number(this.data.amount);
-          orderObj.pay = Number(this.data.amount);
-          this.accountPay(orderObj);
-        }
-      } else {
-        console.log('如果没有勾选余额支付');
-        //如果没有勾选余额支付
-        this.setData({
-          amount: Number(this.data.amount).toFixed(2),
-          dAmount: Number(this.data.amount).toFixed(2)
-        });
-        console.log(this.data.dAmount);
-        
-        //判断是否优先储值支付
-        if (this.data.recommendStatus == '0' || !this.data.recommendStatus){//显示储值支付
-          this.getPayment(this.data.dAmount);
-          this.setData({
-            showBalanceWrap: false,
-            showFocus: false,
-            showSelectCard: true
-          });
-        } else if (this.data.recommendStatus == '1'){//只能微信支付 直接调用微信支付 不再显示中间推荐储值页
-          this.setData({
-            accountpaystatus: true//显示支付loading
-          });
-          let orderObj = {};
-          orderObj.choosenType = 'thirdpay';
-          orderObj.orderPay = Number(this.data.dAmount);
-          orderObj.pay = Number(this.data.dAmount);
-          orderObj.givingMoney = 0;
-          this.wxpay(orderObj);
-        }
-        
-      }
+                        //判断是否优先储值支付
+                        if (this.data.recommendStatus == '0' || !this.data.recommendStatus) {//显示储值支付
+                            this.getPayment(this.data.dAmount);
+                            this.setData({
+                                showBalanceWrap: false,
+                                showFocus: false,
+                                showSelectCard: true
+                            });
+                        } else if (this.data.recommendStatus == '1') {//只能微信支付 直接调用微信支付 不再显示中间推荐储值页
+                            this.setData({
+                                accountpaystatus: true//显示支付loading
+                            });
+                            let orderObj = {};
+                            orderObj.choosenType = 'thirdpay';
+                            orderObj.orderPay = Number(this.data.dAmount);
+                            orderObj.pay = Number(this.data.dAmount);
+                            orderObj.givingMoney = 0;
+                            this.wxpay(orderObj);
+                        }
+
+                    }
+                }
+            },
+            // error: err => errDialog(err),
+            complete: () => wx.hideToast()
+        })    
     }
   },
   // 余额支付

@@ -25,7 +25,9 @@ Page({
     aMoney:0, //储值金额 不算赠送
     zhuheAmount: 0,
     providerId: '',
-    merchantId:''
+    merchantId:'',
+     yiye: false,
+      yiyeInfo: {}
   },
 
   /**
@@ -49,62 +51,82 @@ Page({
           payUrl: constant.jujipayUrl
         });
       }
-      wx.request({
-        url: this.data.payUrl +'/customer/order/getOrdersDetail.json',
-        method: 'GET',
-        data: {
-          orderId: options.orderId
-        },
-        header: {
-          'content-type': 'application/json',
-          'Access-Token': wx.getStorageSync('accessToken')
-        },
-        success: (res) => {
-           console.log(res);
-           if(res.data.errorCode=='0'){
-             this.setData({
-               type: res.data.data.type,
-               zhuheAmount: res.data.data.wxPayMoney && res.data.data.wxPayMoney > 0 && res.data.data.prepayMoney > 0 ? (Number(res.data.data.prepayMoney) + Number(res.data.data.wxPayMoney)).toFixed(2) : res.data.data.prepayMoney,
-               aMoney: res.data.data.givingMoney ? (Number(res.data.data.addMoney) - Number(res.data.data.givingMoney)).toFixed(2) : res.data.data.addMoney,
-               givingMoney: res.data.data.givingMoney ? res.data.data.givingMoney:0,
-               preBalance: res.data.data.preBalance ? res.data.data.preBalance : 0,
-               balance: res.data.data.accountDto.balance,
-               point: res.data.data.point,
-               addMoney: res.data.data.addMoney?Number(res.data.data.addMoney):0,
-               prepayMoney: res.data.data.prepayMoney?Number(res.data.data.prepayMoney):0,
-               wxPayMoney: res.data.data.wxPayMoney?Number(res.data.data.wxPayMoney):0
-             });
-             this.setData({merchantId:res.data.data.accountDto.merchantId})
-             var obj = {
-                latitude: res.data.data.store.lat,
-               longitude: res.data.data.store.lng
-              }
-             this.setData({ providerId: res.data.data.agentId });
-            wx.request({
-              url: constant.apiUrl+'/recommend/hot.json',
+      if(options.from && options.from === 'yiye') {
+          this.setData({
+              yiye: true
+          })
+          service.crossOrderState({ orderId: options.orderId }).subscribe({
+              next: res => {
+                  if (res.status == 'PAID') {
+                      this.setData({
+                          yiyeInfo: res
+                      })
+                  }
+              },
+              error: err => console.log(err),
+              complete: () => wx.hideToast()
+          })
+      } else {
+          this.setData({
+              yiye: false
+          })
+          wx.request({
+              url: this.data.payUrl + '/customer/order/getOrdersDetail.json',
               method: 'GET',
               data: {
-                providerId: res.data.data.agentId,
-                merchantId: this.data.merchantId,
-                storeId: res.data.data.accountDto.storeId
+                  orderId: options.orderId
               },
-              success: (res2) => {
-                console.log(res2);
-                if (res2.data.errorCode == '200') {
-                    this.setData({
-                      recommendList: res2.data.data
-                    })
-                }
+              header: {
+                  'content-type': 'application/json',
+                  'Access-Token': wx.getStorageSync('accessToken')
+              },
+              success: (res) => {
+                  console.log(res);
+                  if (res.data.errorCode == '0') {
+                      this.setData({
+                          type: res.data.data.type,
+                          zhuheAmount: res.data.data.wxPayMoney && res.data.data.wxPayMoney > 0 && res.data.data.prepayMoney > 0 ? (Number(res.data.data.prepayMoney) + Number(res.data.data.wxPayMoney)).toFixed(2) : res.data.data.prepayMoney,
+                          aMoney: res.data.data.givingMoney ? (Number(res.data.data.addMoney) - Number(res.data.data.givingMoney)).toFixed(2) : res.data.data.addMoney,
+                          givingMoney: res.data.data.givingMoney ? res.data.data.givingMoney : 0,
+                          preBalance: res.data.data.preBalance ? res.data.data.preBalance : 0,
+                          balance: res.data.data.accountDto.balance,
+                          point: res.data.data.point,
+                          addMoney: res.data.data.addMoney ? Number(res.data.data.addMoney) : 0,
+                          prepayMoney: res.data.data.prepayMoney ? Number(res.data.data.prepayMoney) : 0,
+                          wxPayMoney: res.data.data.wxPayMoney ? Number(res.data.data.wxPayMoney) : 0
+                      });
+                      this.setData({ merchantId: res.data.data.accountDto.merchantId })
+                      var obj = {
+                          latitude: res.data.data.store.lat,
+                          longitude: res.data.data.store.lng
+                      }
+                      this.setData({ providerId: res.data.data.agentId });
+                      wx.request({
+                          url: constant.apiUrl + '/recommend/hot.json',
+                          method: 'GET',
+                          data: {
+                              providerId: res.data.data.agentId,
+                              merchantId: this.data.merchantId,
+                              storeId: res.data.data.accountDto.storeId
+                          },
+                          success: (res2) => {
+                              console.log(res2);
+                              if (res2.data.errorCode == '200') {
+                                  this.setData({
+                                      recommendList: res2.data.data
+                                  })
+                              }
+                          }
+                      })
+                  } else {
+                      wx.showModal({
+                          title: '错误: ' + res.data.errorCode,
+                          content: res.data.errorInfo,
+                      })
+                  }
               }
-            })
-           }else{
-             wx.showModal({
-               title: '错误: ' + res.data.errorCode,
-               content: res.data.errorInfo,
-             })
-           }
-        }
-      });
+          });
+      }
     }
   },
 
@@ -114,16 +136,6 @@ Page({
     });
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
   onShow: function () {
     // wx.setStorageSync('scene', '1011');//测试用
     let scene = wx.getStorageSync('scene');
@@ -158,5 +170,15 @@ Page({
     wx.makePhoneCall({
       phoneNumber: '4000011139'
     })
-  }
+  },
+
+    goOrderDetail() {
+        wx.navigateTo({
+            url: '/pages/orderDetail/index?id=' + this.data.yiyeInfo.productOrderId,
+        })
+    },
+
+    goBack() {
+        wx.navigateBack({ delta: 2 });
+    }
 })

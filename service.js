@@ -240,6 +240,24 @@ service.tweetDetail = (data) =>{
   return http.get(url, data);
 }
 
+// 商户是否是异业合作
+service.crossIndustry = (data) => {
+    let url = api + '/cross/crossIndustry.json';
+    return http.get(url, data);
+}
+
+// 异业合作支付 /cross/order/payment.json
+service.crossPayment = (data) => {
+    let url = api + '/cross/order/payment.json';
+    return http.get(url, data);
+}
+
+// 订单状态查询  /cross/order/state.json
+service.crossOrderState = (data) => {
+    let url = api + '/cross/order/state.json';
+    return http.get(url, data);
+}
+
 module.exports = {
   service: service
 }

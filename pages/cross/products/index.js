@@ -72,7 +72,7 @@ Page({
                 merchantId: this.data.merchantId,
                 storeId: this.data.storeId,
                 productId: this.data.selectProduct.productId,
-                amount: this.data.amount * 100,
+                amount: Number(this.data.amount * 100).toFixed(0),
                 skuId: this.data.skuId,
             };
             service.crossPayment(data).subscribe({

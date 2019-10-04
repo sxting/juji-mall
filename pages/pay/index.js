@@ -539,7 +539,7 @@ Page({
         let crossData = {
             merchantId: this.data.merchantId,
             storeId: this.data.storeId,
-            amount: this.data.amount * 100
+            amount: Number(this.data.amount*100).toFixed(0)
         }
         service.crossIndustry(crossData).subscribe({
             next: res => {

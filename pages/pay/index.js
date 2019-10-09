@@ -91,7 +91,9 @@ Page({
           content: '该二维码用于系统测试，请勿支付',
         });
         // reject('options.q不存在');
-        options.q = 'https://juji-dev.juniuo.com/qrm/212345678.htm';//测试用
+        // https://juji.juniuo.com/qrm/m911212651.htm
+        // https://juji-dev.juniuo.com/qrm/m911212651.htm
+          options.q = 'https://juji.juniuo.com/qrm/m911212651.htm';//测试用
         var link = decodeURIComponent(options.q);
         console.log(link);
         let arr = link.split('/qrm/');
@@ -539,7 +541,8 @@ Page({
         let crossData = {
             merchantId: this.data.merchantId,
             storeId: this.data.storeId,
-            amount: Number(this.data.amount*100).toFixed(0)
+            amount: Number(this.data.amount*100).toFixed(0),
+            qrcode: this.data.qrcode
         }
         service.crossIndustry(crossData).subscribe({
             next: res => {

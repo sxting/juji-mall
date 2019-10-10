@@ -144,7 +144,7 @@ Page({
             if (this.data.pageFromCode == 1) {
                 //商品扫码 
                 wx.reLaunch({
-                    url: '/pages/comDetail/index?referer=2&id=' + this.data.shareProductId + '&invitecode=' + this.data.pageData.invitecode
+                    url: '/pages/comDetail/index?referer=2&id=' + this.data.shareProductId + '&invitecode=' + this.data.pageData.invitecode + '&sceneid=' + this.data.scene
                 });
             } else {
                 //邀新扫码

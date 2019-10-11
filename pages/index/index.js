@@ -3,6 +3,7 @@ import { constant } from '../../utils/constant';
 import { service } from '../../service';
 import { errDialog, loading } from '../../utils/util';
 var app = getApp();
+var startPoint;
 Page({
     data: {
         nvabarData: {isIndex:1,showCapsule: 0,title: '桔 集'},
@@ -35,7 +36,13 @@ Page({
         locationStatus: true, //定位状态
         showJcModal:false,
         joinInfo:{phone:'17316191089',wechat:'juji1031'},
-        member: wx.getStorageSync('distributorRole') == 'LEADER' || wx.getStorageSync('member')
+        member: wx.getStorageSync('distributorRole') == 'LEADER' || wx.getStorageSync('member'),
+        innerVip: wx.getStorageSync('innerVip'),
+
+        juziTop: 360,
+        juziLeft: 0,
+        windowHeight: '',
+        windowWidth: ''
     },
     showJoinModal:function(){
         this.setData({showJcModal:!this.data.showJcModal});
@@ -71,8 +78,49 @@ Page({
     toTypePath:function(e){
         var targetUrl = e.currentTarget.dataset['page'];
         var tit = e.currentTarget.dataset.tit;
+        if (tit === '内购商品' && !this.data.innerVip) {
+            wx.showModal({
+                title: '温馨提示',
+                content: `您非VIP客户，请联系客服`,
+                showCancel: false,
+                confirmText: '确定',
+                confirmColor: '#333'
+            });
+            return;
+        }
         wx.reportAnalytics('home_ue', {ue: tit});
         wx.navigateTo({ url: targetUrl+'?subject='+tit})
+    },
+    juziMove(e) {
+        // var endPoint = e.touches[e.touches.length - 1]
+        // var translateX = endPoint.clientX - startPoint.clientX
+        // var translateY = endPoint.clientY - startPoint.clientY
+        // startPoint = endPoint
+        // var buttonTop = this.data.juziTop + translateY
+        // var buttonLeft = this.data.juziLeft + translateX
+        // //判断是移动否超出屏幕
+        // if (buttonLeft + 50 >= this.data.windowWidth) {
+        //     buttonLeft = this.data.windowWidth - 50;
+        // }
+        // if (buttonLeft <= 0) {
+        //     buttonLeft = 0;
+        // }
+        // if (buttonTop <= 0) {
+        //     buttonTop = 0
+        // }
+        // if (buttonTop + 50 >= this.data.windowHeight) {
+        //     buttonTop = this.data.windowHeight - 50;
+        // }
+        // this.setData({
+        //     juziTop: buttonTop,
+        //     juziLeft: buttonLeft
+        // })
+    },
+    juziStart(e) {
+        startPoint = e.touches[0]
+    },
+    juziEnd() {
+
     },
     isNewer: function() {
         service.isNewer().subscribe({
@@ -106,6 +154,21 @@ Page({
                     }
                 }
             })
+        })
+
+        var that = this;
+        wx.getSystemInfo({
+            success: function (res) {
+                console.log(res);
+                // 屏幕宽度、高度
+                console.log('height=' + res.windowHeight);
+                console.log('width=' + res.windowWidth);
+                // 高度,宽度 单位为px
+                that.setData({
+                    windowHeight: res.windowHeight,
+                    windowWidth: res.windowWidth
+                })
+            }
         })
 
         console.log(options);

@@ -244,7 +244,9 @@ Page({
                             wx.setStorageSync('memberExpireTime', res1.data.data.memberExpireTime);
                             wx.setStorageSync('nickName', res1.data.data.nickName);
                             wx.setStorageSync('avatar', res1.data.data.avatar);
-                            wx.setStorageSync('memberInviteCode', res1.data.data.memberInviteCode)
+                            wx.setStorageSync('memberInviteCode', res1.data.data.memberInviteCode);
+                            wx.setStorageSync('innerVip', res1.data.data.innerVip);
+
 
                             resolve2();
                         } else {

@@ -49,10 +49,14 @@
                         <cover-image class="icon_home" src="/images/icon_home6.png" mode="aspectFit"></cover-image>
                         <cover-view class="tx-c">会员专区</cover-view>
                     </cover-view>
-                    <cover-view class="menuitem ub ub-ver ub-ac ub-pc" bindtap="toPath" data-tit="桔子换礼" data-page="/pages/juzi/index">
+                    <cover-view class="menuitem ub ub-ver ub-ac ub-pc" bindtap="toTypePath" data-tit="内购商品" data-page="/pages/niceShop/index">
+                        <cover-image class="icon_home" src="/images/icon_home1.png" mode="aspectFit"></cover-image>
+                        <cover-view class="tx-c">内购商品</cover-view>
+                    </cover-view>
+                    <!-- <cover-view class="menuitem ub ub-ver ub-ac ub-pc" bindtap="toPath" data-tit="桔子换礼" data-page="/pages/juzi/index">
                         <cover-image class="icon_home" src="/images/icon_home1.png" mode="aspectFit"></cover-image>
                         <cover-view class="tx-c">桔子换礼</cover-view>
-                    </cover-view>
+                    </cover-view> -->
                     <cover-view class="menuitem ub ub-ver ub-ac ub-pc" bindtap="toTypePath" data-tit="优选好券" data-page="/pages/niceShop/index">
                         <cover-image class="icon_home" src="/images/icon_home4.png" mode="aspectFit"></cover-image>
                         <cover-view class="tx-c">优选好券</cover-view>
@@ -67,6 +71,10 @@
                     </cover-view>
                 </cover-view>
             </cover-view>
+        </view>
+        <!--  style="top:{{juziTop}}px;left:{{juziLeft}}px;" -->
+        <view class="juziqiu" bindtouchmove="juziMove" bindtouchstart="juziStart" bindtouchend="juziEnd" catchtap="toPath" data-tit="桔子换礼" data-page="/pages/juzi/index">
+            <view style="font-size: 26rpx;color: #333333;font-weight:bold;text-align:center;margin-top:24rpx;padding: 0 24rpx;">桔子换礼</view>
         </view>
         <!-- 桔子球 -->
         <!-- <view class="juziqiu" bindtap="onTapJuziqiu">

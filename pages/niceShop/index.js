@@ -3,7 +3,7 @@ import { constant } from '../../utils/constant';
 import { errDialog, loading } from '../../utils/util';
 import { service } from '../../service.js';
 
-var queryValue = {"大牌9.9元":"新品尝鲜", "优选好券":"好店礼券", "打卡潮店":"打卡潮店"}
+var queryValue = { "大牌9.9元": "新品尝鲜", "优选好券": "好店礼券", "打卡潮店": "打卡潮店", "内购商品": "innerVip"}
 
 Page({
     data: {

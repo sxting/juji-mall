@@ -1,3 +1,4 @@
+<wxs module="filter" src="../../utils/numFr.wxs"></wxs>
 <nav-bar navbar-data='{{nvabarData}}'></nav-bar>
 <view class="wrap" style="height:{{conHeight}}px">
     <view class="toper">

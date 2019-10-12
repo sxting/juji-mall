@@ -1,5 +1,5 @@
 var constant = {
-  TPLID: '1.2.14',//应用版本
+  TPLID: '1.2.15',//应用版本
   APPID: 'wxb03b0ab93bb60ecc',//小程序wxid
   apiUrl: 'https://c.juniuo.com/wxapp', //mall //shopping  /wxapp
 //   apiUrl: 'https://upic-test.juniuo.com',//测试环境

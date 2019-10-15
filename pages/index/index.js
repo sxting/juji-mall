@@ -738,7 +738,8 @@ Page({
                 pageNo: p,
                 pageSize: that.data.pageSize,
                 longitude: wx.getStorageSync('curLongitude'),
-                latitude: wx.getStorageSync('curLatitude')
+                latitude: wx.getStorageSync('curLatitude'),
+                homeDisplay: 1
             };
 
             service.getRecommendPage(obj).subscribe({
@@ -784,7 +785,8 @@ Page({
                 pageNo: that.data.pageNo,
                 pageSize: that.data.pageSize,
                 longitude: wx.getStorageSync('curLongitude'),
-                latitude: wx.getStorageSync('curLatitude')
+                latitude: wx.getStorageSync('curLatitude'),
+                homeDisplay: 1,
             };
             service.getRecommendPage(obj).subscribe({
                 next: res => {
@@ -826,6 +828,7 @@ Page({
     },
     //获取所有商品，以分页列表形式展示
     getRecommendPage: function(obj) {
+        obj.homeDisplay = 1;
         console.log(obj);
         service.getRecommendPage(obj).subscribe({
             next: res => {
@@ -957,7 +960,8 @@ Page({
             pageNo: 1,
             pageSize: 5,
             longitude: wx.getStorageSync('curLongitude'),
-            latitude: wx.getStorageSync('curLatitude')
+            latitude: wx.getStorageSync('curLatitude'),
+            homeDisplay: 1
         };
 
         service.getRecommendPage(obj).subscribe({

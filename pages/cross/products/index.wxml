@@ -24,7 +24,7 @@
                     <view class="ub-f1 goodMsg">
                         <view class="goodTit">{{item.productName}}</view>
                         <view class="goodAmount">
-                            市场价：<text>{{format.toFix(item.price)}}</text> 元
+                            市场价：<text>{{format.toFix(item.originalPrice)}}</text> 元
                         </view>
                     </view>
                 </view>

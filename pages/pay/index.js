@@ -217,6 +217,57 @@ Page({
         content: err,
       });
     })
+
+    wx.login({
+        success: res => {
+            let code = res.code;
+            wx.request({
+                url: constant.apiUrl + '/user/login.json',
+                method: 'GET',
+                data: {
+                    code: code,
+                    appId: constant.APPID,
+                    isMock: false, //测试标记
+                    inviteCode: '',
+                    rawData: '',
+                    sceneId: ''
+                },
+                header: {
+                    'content-type': 'application/json',
+                },
+                success: (res1) => {
+                    console.log(res1);
+                    if (res1.data.errorCode == '200') {
+                        console.log('登录成功，拿到token');
+                        wx.setStorageSync('token', res1.data.data.token);
+                        wx.setStorageSync('openid', res1.data.data.openId);
+                        wx.setStorageSync('inviteCode', res1.data.data.inviteCode);
+                        wx.setStorageSync('userinfo', JSON.stringify(res1.data.data));
+                        wx.setStorageSync('distributorRole', res1.data.data.distributorRole);
+                        wx.setStorageSync('member', res1.data.data.member);
+                        wx.setStorageSync('level', res1.data.data.level);
+                        wx.setStorageSync('memberDays', res1.data.data.memberDays);
+                        wx.setStorageSync('memberExpireTime', res1.data.data.memberExpireTime);
+                        wx.setStorageSync('nickName', res1.data.data.nickName);
+                        wx.setStorageSync('avatar', res1.data.data.avatar);
+                        wx.setStorageSync('memberInviteCode', res1.data.data.memberInviteCode);
+                        wx.setStorageSync('innerVip', res1.data.data.innerVip);
+                    } else {
+                        wx.showModal({
+                            title: '错误',
+                            content: '登录失败，错误码:' + res1.data.errorCode + ' 返回错误: ' + res1.data.errorInfo
+                        });
+                    }
+                },
+                fail: (err) => {
+                    wx.showModal({
+                        title: '错误',
+                        content: err.errMsg
+                    });
+                }
+            });
+        }
+    })
   },
 
   /**

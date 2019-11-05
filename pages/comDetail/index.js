@@ -169,6 +169,75 @@ Page({
           wx.setStorageSync('isEnterSeedDetail',1);
       }
     },
+    onPullDownRefresh: function() {
+        let that = this;
+        service.getItemInfo({
+            productId: this.data.productId,
+            storeId: this.data.storeId,
+            sceneId: this.data.sceneId
+        }).subscribe({
+            next: res => {
+                console.log(res);
+                var picsStrArr = res.product.picIds.split(',');
+                new Promise(function (resolve, reject) {
+                    let str = JSON.parse(res.product.note);
+                    resolve(str);
+                }).then(function (result) {
+                    that.setData({
+                        commentList: res.commentList,
+                        productInfo: res.product,
+                        description: JSON.parse(res.product.description),
+                        recommendList: res.recommendList,
+                        store: res.store,
+                        commentCount: res.commentCount,
+                        recommendCount: res.recommendList.length,
+                        note: result,
+                        showJoinClub: res.welfareGroup ? true : false,
+                        distributorRole: res.distributorRole,
+                        welfareGroup: res.welfareGroup,
+                        showPics: picsStrArr,
+                        isShowData: true,
+                        productSkus: res.product.productSkus,
+                        defaultSku: res.product.defaultSku,
+                        curSkuId: res.product.defaultSku.skuId,
+                        curSkuMajorId: res.product.defaultSku.id
+                    });
+                    if (that.data.share == 1) {
+                        that.showShare();
+                    }
+                }).catch(function (err) {
+                    that.setData({
+                        commentList: res.commentList,
+                        productInfo: res.product,
+                        description: JSON.parse(res.product.description),
+                        recommendList: res.recommendList,
+                        store: res.store,
+                        commentCount: res.commentCount,
+                        recommendCount: res.recommendList.length,
+                        showJoinClub: res.welfareGroup ? true : false,
+                        distributorRole: res.distributorRole,
+                        welfareGroup: res.welfareGroup,
+                        showPics: picsStrArr,
+                        isShowData: true,
+                        productSkus: res.product.productSkus,
+                        defaultSku: res.product.defaultSku,
+                        curSkuId: res.product.defaultSku.skuId,
+                        curSkuMajorId: res.product.defaultSku.id
+                    });
+                    if (that.data.share == 1) {
+                        that.showShare();
+                    }
+                })
+            },
+            error: err => errDialog(err),
+            complete: () => {
+                wx.hideToast();
+                setTimeout(() => {
+                    wx.stopPullDownRefresh()
+                }, 1000);
+            }
+        })
+    },
     showTips1: function() {
         errDialog("请先保存图片后将图片发给要分享的好友");
     },

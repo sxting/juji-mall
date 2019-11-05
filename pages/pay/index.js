@@ -590,16 +590,16 @@ Page({
   toResult() {
     if (this.data.amount != '' && this.data.amount != '请输入付款金额' && this.data.amount != 0 && this.data.storeId) {
         let crossData = {
-            merchantId: this.data.merchantId,
-            storeId: this.data.storeId,
+            merchantId: this.data.merchantId, // merchantId: '101565923778175117',
+            storeId: this.data.storeId, // storeId: '111565923870162898',
             amount: Number(this.data.amount*100).toFixed(0),
-            qrcode: this.data.qrcode
+            qrcode: this.data.qrcode  // qrcode: 'm817170178'
         }
         service.crossIndustry(crossData).subscribe({
             next: res => {
                 if(res.length > 0) {
                    wx.navigateTo({
-                       url: '/pages/cross/products/index?amount=' + this.data.amount + '&products=' + JSON.stringify(res) + '&merchantId=' + this.data.merchantId + '&storeId=' + this.data.storeId,
+                       url: '/pages/cross/products/index?amount=' + this.data.amount + '&merchantId=' + this.data.merchantId + '&storeId=' + this.data.storeId + '&qrcode=' + this.data.qrcode,
                    }) 
                 } else {
                     if (this.data.seledAccount) {//如果用户勾选了余额支付

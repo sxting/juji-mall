@@ -22,20 +22,40 @@ Page({
         selectProductId: '',
         skuId: '',
         alreadyPay: false,
+        qrcode: ''
     },
 
     onLoad: function (options) {
         var conHeight = app.globalData.screenHeight - app.globalData.barHeight - 45;
+        console.log(options);
         this.setData({ 
             conHeight: conHeight,
             amount: options.amount,
-            products: JSON.parse(options.products),
             merchantId: options.merchantId,
             storeId: options.storeId,
-            selectProduct: JSON.parse(options.products)[0],
-            selectProductId: JSON.parse(options.products)[0].productId,
-            skuId: JSON.parse(options.products)[0].defaultSku.skuId,
-        })
+            qrcode: options.qrcode
+        });
+
+        let crossData = {
+            merchantId: this.data.merchantId,
+            storeId: this.data.storeId,
+            amount: Number(this.data.amount * 100).toFixed(0),
+            qrcode: this.data.qrcode
+        }
+        service.crossIndustry(crossData).subscribe({
+            next: res => {
+                if (res.length > 0) {
+                    this.setData({
+                        products: res,
+                        selectProduct: res[0],
+                        selectProductId: res[0].productId,
+                        skuId: res[0].defaultSku.skuId,
+                    });
+                }
+            },
+            error: err => errDialog(err),
+            complete: () => wx.hideToast()
+        }) 
     },
 
     selectProduct(e) {

@@ -63,7 +63,8 @@ Page({
         console.log(item);
         this.setData({
             selectProduct: item,
-            selectProductId: item.productId
+            selectProductId: item.productId,
+            skuId: item.defaultSku.skuId
         })
     },
 
